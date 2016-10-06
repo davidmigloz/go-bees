@@ -1,8 +1,6 @@
+sudo: false
 language: android
-
-env:
-  matrix:
-    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+jdk: oraclejdk8
 
 android:
   components:
@@ -12,31 +10,20 @@ android:
     - android-24
     - extra-android-m2repository
     - extra-android-support
-
-    - android-22
-    - sys-img-armeabi-v7a-android-22
- 
-jdk: oraclejdk8
     
 licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+    - 'android-sdk-preview-license.*'
+    - 'android-sdk-license.*'
+    - 'google-gdk-license.*'
 
 before_script:
-    - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-    - emulator -avd test -no-audio -no-window &
-    - android-wait-for-emulator
-    - adb shell input keyevent 82
     - chmod +x gradlew
 
 script: 
-    - echo "Travis branch is $TRAVIS_BRANCH"
-    - "./gradlew build"
+    - ./gradlew clean build
 
-sudo: false
+
 
 cache:
   directories:
-    - $HOME/.m2
     - $HOME/.gradle
