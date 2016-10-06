@@ -1,0 +1,38 @@
+language: android
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-24.0.2
+    - android-24
+    - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-18
+    - extra-android-support
+ 
+jdk: oraclejdk8
+    
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
+before_script:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82
+  - chmod +x gradlew
+
+script: "./gradlew build"
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle
