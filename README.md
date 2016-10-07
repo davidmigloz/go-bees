@@ -4,3 +4,4 @@
 [![Build Status](https://travis-ci.org/davidmigloz/go-bees.svg?branch=master)](https://travis-ci.org/davidmigloz/go-bees)
 [![Coverage Status](https://coveralls.io/repos/github/davidmigloz/go-bees/badge.svg?branch=master)](https://coveralls.io/github/davidmigloz/go-bees?branch=master)
 [![Code Climate](https://codeclimate.com/github/davidmigloz/go-bees/badges/gpa.svg)](https://codeclimate.com/github/davidmigloz/go-bees)
+[![Documentation Status](https://readthedocs.org/projects/go-bees/badge/?version=latest)](http://go-bees.readthedocs.io/es/latest/?badge=latest)
