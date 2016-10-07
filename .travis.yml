@@ -6,23 +6,22 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-24.0.2
-    - android-24
-    - extra-android-m2repository
+    - build-tools-24.0.3
+    - android-24  
     - extra-android-support
+    - extra-android-m2repository
     
-licenses:
-    - 'android-sdk-preview-license.*'
-    - 'android-sdk-license.*'
-    - 'google-gdk-license.*'
+  licenses:
+    - '.+'
 
 before_script:
+    - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
+    - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
+    - echo yes | android update sdk --no-ui --all --filter android-24
     - chmod +x gradlew
 
 script: 
     - ./gradlew clean build
-
-
 
 cache:
   directories:
