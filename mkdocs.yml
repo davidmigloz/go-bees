@@ -25,6 +25,9 @@ markdown_extensions:
   - sane_lists
   - nl2br
   - footnotes
+  - toc:
+    permalink: True
+    separator: '⚓'
 
 # Doc pages
 pages:
