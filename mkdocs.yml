@@ -1,0 +1,49 @@
+# Project information
+site_name: Documentación GoBees 
+site_url: null
+site_description: Documentación del proyecto GoBees.
+site_author:
+
+# Repository
+repo_name: GitHub
+repo_url: https://github.com/davidmigloz/go-bees
+remote_branch: master
+
+# Site config
+site_favicon: null
+google_analytics: null
+copyright: The content of this site is licensed under the GNU GPLv3.
+theme_dir: null
+docs_dir: docs/md
+
+# Doc pages
+pages:
+- Home: 'index.md'
+- Documentación:
+    - 'Introducción': 'documentacion/1_Introduccion.md'
+    - 'Objetivos del proyecto': 'documentacion/2_ObjetivosDelProyecto.md'
+    - 'Conceptos teóricos': 'documentacion/3_ConceptosTeoricos.md'
+    - 'Técnicas y herramientas': 'documentacion/4_TecnicasHerramientas.md'
+    - 'Aspectos relevantes': 'documentacion/5_AspectosRelevantes.md'
+    - 'Trabajos relacionados': 'documentacion/6_TrabajosRelacionados.md'
+    - 'Conclusiones': 'documentacion/7_Conclusiones.md'
+- Anexos:
+    - 'Plan de proyecto': 'anexos/A_PlanProyecto.md'
+    - 'Requisitos': 'anexos/B_Requisitos.md'
+    - 'Diseño': 'anexos/C_Diseno.md'
+    - 'Manual del programador': 'anexos/D_Manual_programador.md'
+    - 'Manual de usuario': 'anexos/E_Manual_usuario.md'
+    
+# Extensions (http://pythonhosted.org/Markdown/extensions/)
+markdown_extensions:
+  - codehilite(css_class=code)
+  - fenced_code
+  - admonition
+  - smarty
+  - tables
+  - sane_lists
+  - nl2br
+  - footnotes
+  - toc:
+    permalink: '⚓'
+
