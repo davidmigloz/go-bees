@@ -1,9 +1,9 @@
-# Introducci髇
+# Introducci贸n
 
 # Estructura de directorios
 
 # Manual del programador
 
-# Compilaci髇, instalaci髇 y ejecuci髇 del proyecto
+# Compilaci贸n, instalaci贸n y ejecuci贸n del proyecto
 
 # Pruebas del sistema
