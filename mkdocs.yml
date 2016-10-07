@@ -18,13 +18,6 @@ docs_dir: docs/md
 
 # Extensions (http://pythonhosted.org/Markdown/extensions/)
 markdown_extensions:
-  - fenced_code
-  - admonition
-  - smarty
-  - tables
-  - sane_lists
-  - nl2br
-  - footnotes
   - toc:
     permalink: '⚓'
 
