@@ -5,3 +5,4 @@
 [![Coverage Status](https://coveralls.io/repos/github/davidmigloz/go-bees/badge.svg?branch=master)](https://coveralls.io/github/davidmigloz/go-bees?branch=master)
 [![Code Climate](https://codeclimate.com/github/davidmigloz/go-bees/badges/gpa.svg)](https://codeclimate.com/github/davidmigloz/go-bees)
 [![Documentation Status](https://readthedocs.org/projects/go-bees/badge/?version=latest)](http://go-bees.readthedocs.io/es/latest/?badge=latest)
+[![Dependency Status](https://www.versioneye.com/user/projects/57f7b19e823b88004e06ad33/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57f7b19e823b88004e06ad33)
