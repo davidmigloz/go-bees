@@ -17,9 +17,7 @@ theme_dir: null
 docs_dir: docs/md
 
 # Extensions (http://pythonhosted.org/Markdown/extensions/)
-markdown_extensions:
-  - toc:
-    permalink: '⚓'
+markdown_extensions: [toc,fenced_code]
 
 # Doc pages
 pages:
