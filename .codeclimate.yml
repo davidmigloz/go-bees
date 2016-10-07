@@ -15,5 +15,7 @@ ratings:
     - "**.java"
     
 exclude_paths: 
-    - docs/latex/*
-    - docs/img/*
+    - docs/latex/**
+    - docs/img/**
+    - gradle/**
+    - app/src/main/res/**
