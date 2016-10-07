@@ -37,7 +37,7 @@ pages:
     - 'Técnicas y herramientas': 'documentacion/4_TecnicasHerramientas.md'
     - 'Aspectos relevantes': 'documentacion/5_AspectosRelevantes.md'
     - 'Trabajos relacionados': 'documentacion/6_TrabajosRelacionados.md'
-    - 'Conclusiones': 'documentacion/7_Conclusiones.md'
+    - 'Conclusiones y líneas de trabajo futuras': 'documentacion/7_Conclusiones.md'
 - Anexos:
     - 'Plan de proyecto': 'anexos/A_PlanProyecto.md'
     - 'Requisitos': 'anexos/B_Requisitos.md'

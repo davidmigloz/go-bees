@@ -1,8 +1,6 @@
-# Trabajos relacionados
-
 {Este apartado sería parecido a un estado del arte de una tesis o tesina. En un trabajo final grado no parece obligada su presencia, aunque se puede dejar a juicio del tutor el incluir un pequeño resumen comentado de los trabajos y proyectos ya realizados en el campo del proyecto en curso. }
 
-## Artículos
+# Artículos
 
 1.	Jason Campbell, Lily Mummert, and Rahul Sukthankar, **Video Monitoring of Honey Bee Colonies at the Hive Entrance**, Visual observation analysis of animal insect behavior ICPR 8 (2008), 1–4.
 2.	Jennifer M Campbell, Douglas C Dahn, and Daniel A J Ryan, **Capacitance-based sensor for monitoring bees passing through a tunnel**, Measurement Science and Technology 16 (2005), no. 12, 2503–2510.
@@ -20,7 +18,7 @@
 14.	A. E. Lundie, **The flight activities of the honeybee**, United States Department of Agriculture 1328 (1925), 1–38.
 15.	Minh-Hà Pham-Delègue, Axel Decourtye, Laure Kaiser, and James Devillers, **Behavioural methods to assess the effects of pesticides on honey bees**, Apidologie 33 (2002), no. 5, 425– 432.
 
-## Proyectos
+# Proyectos
 
 - EyesOnHives: proyecto para monitorizar la actividad de una colmena (con hardware específico).
 http://www.keltronixinc.com/

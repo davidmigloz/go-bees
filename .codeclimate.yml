@@ -1,7 +1,19 @@
 engines:
-  fixme:
+  checkstyle: # https://docs.codeclimate.com/docs/checkstyle
     enabled: true
+    channel: "beta"
+  fixme: # https://docs.codeclimate.com/docs/fixme
+    enabled: true
+  markdownlint: # https://docs.codeclimate.com/docs/markdownlint
+    enabled: true
+  pmd: # https://docs.codeclimate.com/docs/pmd
+    enabled: true
+    channel: "beta"    
+    
 ratings:
-  paths: []
+  paths:
+    - "**.java"
+    
 exclude_paths: 
-    - docs/**
+    - docs/latex/*
+    - docs/img/*

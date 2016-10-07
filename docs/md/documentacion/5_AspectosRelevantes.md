@@ -1,5 +1,3 @@
-# Aspectos relevantes del desarrollo del proyecto
-
 {Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, comentados por los autores del mismo.
 
 Debe incluir desde la exposición del ciclo de vida utilizado, hasta los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
