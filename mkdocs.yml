@@ -16,6 +16,18 @@ copyright: The content of this site is licensed under the GNU GPLv3.
 theme_dir: null
 docs_dir: docs/md
 
+# Extensions (http://pythonhosted.org/Markdown/extensions/)
+markdown_extensions:
+  - fenced_code
+  - admonition
+  - smarty
+  - tables
+  - sane_lists
+  - nl2br
+  - footnotes
+  - toc:
+    permalink: '⚓'
+
 # Doc pages
 pages:
 - Home: 'index.md'
@@ -33,17 +45,4 @@ pages:
     - 'Diseño': 'anexos/C_Diseno.md'
     - 'Manual del programador': 'anexos/D_Manual_programador.md'
     - 'Manual de usuario': 'anexos/E_Manual_usuario.md'
-    
-# Extensions (http://pythonhosted.org/Markdown/extensions/)
-markdown_extensions:
-  - codehilite(css_class=code)
-  - fenced_code
-  - admonition
-  - smarty
-  - tables
-  - sane_lists
-  - nl2br
-  - footnotes
-  - toc:
-    permalink: '⚓'
 
