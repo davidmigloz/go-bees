@@ -57,7 +57,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 
 
 Se estimaron 8 horas de trabajo y se invirtieron finalmente 9,25 horas, completando todas las tareas.
 
-![Sprint 0](../../img/burndowns/sprint0.png)
+![Sprint 0](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint0.png)
 
 ### Sprint 1 (17/09/16 - 23/09/16)
 
@@ -69,7 +69,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 
 
 Se estimaron 7,25 horas de trabajo y se invirtieron finalmente 13,25 horas, completando todas las tareas.
 
-![Sprint 1](../../img/burndowns/sprint1.png)
+![Sprint 1](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint1.png)
 
 ### Sprint 2 (24/09/16 - 29/09/16)
 
@@ -81,7 +81,7 @@ Mientras se realizaba una de las tareas del sprint, se encontraron dos bugs rela
 
 Se estimaron 11,75 horas de trabajo y se invirtieron finalmente 33 horas, quedando dos tareas pendientes para terminar durante el siguiente sprint.
 
-![Sprint 2](../../img/burndowns/sprint2.png)
+![Sprint 2](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint2.png)
 
 ### Sprint 3 (30/09/16 - 06/10/16)
 
@@ -91,7 +91,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 
 
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 31 horas, quedando una tarea por terminar.
 
-![Sprint 3](../../img/burndowns/sprint3.png)
+![Sprint 3](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint3.png)
 
 
 
