@@ -93,6 +93,16 @@ Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 31 horas, quedan
 
 ![Sprint 3](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint3.png)
 
+### Sprint 4 (07/10/16 - 13/10/16)
+
+Los objetivos de este sprint fueron: investigar técnicas de preprocesado y postprocesado para mejorar los resultados de la fase de extracción del fondo. Seleccionar y parametrizar el algoritmo de extracción de fondo que provea los mejores resultados para nuestro problema. Continuar el curso de Android. Integrar los servicios de integración continua y documentación continua en el repositorio.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 4](https://github.com/davidmigloz/go-bees/milestone/5?closed=1).
+
+Se estimaron 37 horas de trabajo y se invirtieron finalmente 39,5 horas, completando todas las tareas.
+
+![Sprint 3](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint4.png)
+
 
 
 Estudio de viabilidad
