@@ -8,14 +8,33 @@ Visión artificial
 
 ### 1º Preprocesado
 
-Antes de aplicar los substracción del fondo, es recomendable realizar un preprocesado de los fotogramas para facilitar el procesado, minimizar el ruido y optimizar los resultados. En primer lugar, se convertirán los fotogramas a escala de grises. Y en segundo lugar, aplicaremos un desenfoque gausiano para minimizar el ruido provocado por la propia cámara y por la iluminación.
+Antes de aplicar el algoritmo de substracción del fondo, es recomendable realizar un preprocesado de los fotogramas para facilitar el procesado, minimizar el ruido y optimizar los resultados. A continuación se explican las técnicas utilizadas.
 
 #### Conversión de RGB a escala de grises
-asdf
+Los fotogramas captados por la cámara se devuelven en formato RGB. En este formato se poseen tres matrices, una por cada canal (Red-Green-Blue). La suma aditiva de los tres canales resulta en una imagen a color.
 
-#### Desenfoque gausiano
-asdf
+Sin embargo, el color no proporciona ninguna información relevante en nuestra tarea de identificación de abejas. Es por esto que se puede convertir los fotogramas de RGB a escala de grises. De esta manera, se trabajará solamente con una matriz de píxeles en lugar de tres. Simplificando en gran medida el número de operaciones a realizar y, por tanto, aumentado el rendimiento de nuestro algoritmo final.
 
+OpenCV utiliza la conversión colométrica a escala de grises. [^opencv:color_cvt] Esta técnica se basa en principios colométricos para ajustar la luminancia de la imagen a color y la imagen resultante. Resultando una imagen con la misma luminancia absoluta y la misma percepción de luminosidad. [^wiki:grayscale]
+
+Utiliza la siguiente fórmula para calcular la luminancia resultante:
+
+![](https://latex.codecogs.com/gif.latex?%5Clarge%20%5Ctext%7BRGB%5BA%5D%20to%20Gray%3A%7D%20%5Cquad%20Y%20%5Cleftarrow%200.299%20%5Ccdot%20R%20&plus;%200.587%20%5Ccdot%20G%20&plus;%200.114%20%5Ccdot%20B)
+
+`\text{RGB[A] to Gray:} \quad Y \leftarrow 0.299 \cdot R + 0.587 \cdot G + 0.114 \cdot B`
+
+La fórmula calcula la luminancia de una forma no lineal, sin necesidad de realizar una expansión gamma. Los coeficientes intentan imitar la percepción de intensidad medida por un humano tricromático. La visión humana es más sensible al color verde y menos al color azul. [^wiki:grayscale]
+
+#### Desenfoque Gaussiano
+Las imágenes captadas pueden contener ruido que puede dificultar su procesamiento. El ruido son variaciones aleatorias del brillo o el color en la imagen. Una técnica que permite reducirlo es el desenfoque.
+
+En nuestro caso vamos a utilizar desenfoque Gaussiano. Este es un filtro de paso bajo que reduce las componentes de alta frecuencia de la imagen utilizando para ello una convolución con una función Gaussiana. [^wiki:Gaussian]
+
+El kernel utilizado en la convolución es una muestra discreta de la función Gaussiana. En nuestro caso utilizamos un kernel 3x3 que se corresponde con: [^book:mastering_opencv]
+
+![](https://latex.codecogs.com/gif.latex?%5Clarge%20M%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%201%20%5C%5C%5B0.3em%5D%202%20%26%204%20%26%202%20%5C%5C%5B0.3em%5D%201%20%26%202%20%26%201%20%5C%5C%5B0.3em%5D%20%5Cend%7Bbmatrix%7D)
+
+`M = \begin{bmatrix} 1 & 2 & 1 \\[0.3em] 2 & 4 & 2 \\[0.3em] 1 & 2 & 1 \\[0.3em]`
 
 ### 2º Substracción del fondo
 
@@ -106,8 +125,19 @@ La implementación original de OpenCV implementa otros dos algoritmos más que n
 
 - `BackgroundSubtractorFGD` está disponible en la versión para CUDA. Utiliza la regla de decisión de Bayes para clasificar los elementos del fondo y los del primer plano atendiendo a sus vectores de características. [^art:li_foreground_2003]
 
-### 3º Thresholding
-asdf
+### Postprocesado
+
+Para mejorar los resultados de la extracción de fondo y preparar la imagen para la búsqueda de contornos se han aplicado las siguientes técnicas:
+
+#### Dilatación
+
+Se trata de una operación morfológica por la cual se expanden las regiones luminosas de una imagen. Esto se consigue mediante la sustitución de cada pixel por el más brillante de los vecinos considerados por el kernel. De esta manera se consiguen unir las regiones de abejas que podían haberse roto. [^book:mastering_opencv]
+
+#### Erosión
+
+Se trata de la operación contraria a la anterior, expande las regiones oscuras de la imagen. Para ello se coge el valor mínimo de los valores considerados por el kernel. [^book:mastering_opencv]
+
+La dilatación nos permite reconstruir las abejas, pero también aumenta su tamaño, aumentando el riesgo de solapamientos. Para evitar esto, se vuelve a reducir el tamaño de estas mediante una erosión.
 
 
 
@@ -129,3 +159,7 @@ asdf
 [^github:background_segm]: https://github.com/opencv/opencv/blob/master/modules/video/include/opencv2/video/background_segm.hpp
 [^github:bgfg_gaussmix2]: https://github.com/opencv/opencv/blob/master/modules/video/src/bgfg_gaussmix2.cpp
 [^opencv:mog2]: http://docs.opencv.org/3.1.0/d7/d7b/classcv_1_1BackgroundSubtractorMOG2.html
+[^opencv:color_cvt]: http://docs.opencv.org/3.1.0/de/d25/imgproc_color_conversions.html
+[^wiki:grayscale]: https://en.wikipedia.org/wiki/Grayscale
+[^wiki:Gaussian]: https://en.wikipedia.org/wiki/Gaussian_blur
+[^book:mastering_opencv]: https://www.packtpub.com/application-development/mastering-opencv-android-application-programming
