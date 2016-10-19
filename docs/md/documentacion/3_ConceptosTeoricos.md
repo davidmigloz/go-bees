@@ -28,7 +28,7 @@ La fórmula calcula la luminancia de una forma no lineal, sin necesidad de reali
 #### Desenfoque Gaussiano
 Las imágenes captadas pueden contener ruido que puede dificultar su procesamiento. El ruido son variaciones aleatorias del brillo o el color en la imagen. Una técnica que permite reducirlo es el desenfoque.
 
-En nuestro caso vamos a utilizar desenfoque Gaussiano. Este es un filtro de paso bajo que reduce las componentes de alta frecuencia de la imagen utilizando para ello una convolución con una función Gaussiana. [^wiki:Gaussian]
+En nuestro caso vamos a utilizar desenfoque Gaussiano. Este es un filtro de paso bajo que reduce las componentes de alta frecuencia de la imagen utilizando para ello una convolución con una función Gaussiana. [^wiki:Gaussian] Se diferencia del desenfoque promedio en que da más peso a los vecinos cercanos, siendo estos más influyentes en el resultado.
 
 El kernel utilizado en la convolución es una muestra discreta de la función Gaussiana. En nuestro caso utilizamos un kernel 3x3 que se corresponde con: [^book:mastering_opencv]
 
@@ -138,6 +138,32 @@ Se trata de una operación morfológica por la cual se expanden las regiones lum
 Se trata de la operación contraria a la anterior, expande las regiones oscuras de la imagen. Para ello se coge el valor mínimo de los valores considerados por el kernel. [^book:mastering_opencv]
 
 La dilatación nos permite reconstruir las abejas, pero también aumenta su tamaño, aumentando el riesgo de solapamientos. Para evitar esto, se vuelve a reducir el tamaño de estas mediante una erosión.
+
+### Búsqueda de contornos
+
+El último paso que realiza nuestro algoritmo de visión artificial es la búsqueda de los contornos de las abejas. Entendemos por contorno una línea curva que une todos los puntos continuos del borde de una región de un mismo color o intensidad.
+
+La salida de la fase anterior es una imagen binaria con los objetos en movimiento en blanco y el fondo en negro. Por lo tanto el objetivo de esta fase es detectar todas las regiones blancas que puedan corresponderse con una abeja.
+
+OpenCV provee la función `Imgproc.findContours()` para realizar esta tarea. Esta toma una imagen binaria y devuelve una lista con todos los contornos encontrados. Para entender la función se necesita comprender una serie de conceptos:
+
+- Jerarquía: los contornos pueden ser independientes unos de otros, o poseer una relación padre-hijo cuando un contorno está dentro de otro. En la jerarquía se especifican las relaciones entre contornos.
+
+- Modo de obtención del contorno: define cómo se van a obtener los contornos en cuestión de jerarquía.
+  + `RETR_LIST`: devuelve todos los contornos en una lista, sin ninguna información de jerarquía entre ellos.
+  + `RETR_EXTERNAL`: devuelve todos los contornos externos. Si algún contorno tiene contornos hijo, estos son ignorados.
+  + `RETR_CCOMP`: devuelve los contornos agrupados en dos niveles de jerarquía. Un primer nivel en el que se encuentran todos los contornos exteriores. Y un segundo nivel con los contornos correspondientes a agujeros en los primeros.
+  + `RETR_TREE`: devuelve todos los contornos creando un árbol completo con la jerarquía.
+
+- Método de aproximación de los contornos: define el método que utiliza la función para almacenar los contornos.
+  + `CHAIN_APPROX_NONE`: almacena todos los puntos del borde del contorno.
+  + `CHAIN_APPROX_SIMPLE`: almacena sólo los puntos relevantes del contorno. Por ejemplo, si el contorno es una línea no se necesita almacenar todos los puntos de esta, con el punto inicial y el final basta. Esto es lo que realiza este método, eliminar todos los puntos redundantes y comprimirlos para que ocupe menos espacio.
+  + `CV_CHAIN_APPROX_TC89_L1` y `CV_CHAIN_APPROX_TC89_KCOS`: aplican el algoritmo de aproximación de cadena de Teh-Chin, simplificando los polígonos que forman los contornos.
+  + `CV_CHAIN_CODE`: almacena los contornos utilizando el código de cadenas de Freeman.
+
+En nuestro caso, la configuración más adecuada es utilizar `RETR_EXTERNAL` y `CHAIN_APPROX_SIMPLE`. Ya que no nos interesa ningún contorno interno que pueda tener la abeja (y que en principio no debería tener) y tampoco nos es relevante el cómo se almacenan estos, sólo nos interesa el número.
+
+Para evitar posibles falsos positivos, establecemos un umbral mínimo y máximo en el área del contorno. De esta manera, evitamos que contornos diminutos o grandes generados por ruidos o por objetos del entorno (pájaros, roedores...) sean contados cómo abejas.
 
 
 
