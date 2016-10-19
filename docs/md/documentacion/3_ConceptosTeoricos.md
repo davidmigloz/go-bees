@@ -145,21 +145,21 @@ El último paso que realiza nuestro algoritmo de visión artificial es la búsqu
 
 La salida de la fase anterior es una imagen binaria con los objetos en movimiento en blanco y el fondo en negro. Por lo tanto el objetivo de esta fase es detectar todas las regiones blancas que puedan corresponderse con una abeja.
 
-OpenCV provee la función `Imgproc.findContours()` para realizar esta tarea. Esta toma una imagen binaria y devuelve una lista con todos los contornos encontrados. Para entender la función se necesita comprender una serie de conceptos:
+OpenCV provee la función `Imgproc.findContours()` para realizar esta tarea. Esta toma una imagen binaria y devuelve una lista con todos los contornos encontrados. Para entender la función se necesita comprender una serie de conceptos: [^opencv:contours]
 
 - Jerarquía: los contornos pueden ser independientes unos de otros, o poseer una relación padre-hijo cuando un contorno está dentro de otro. En la jerarquía se especifican las relaciones entre contornos.
 
-- Modo de obtención del contorno: define cómo se van a obtener los contornos en cuestión de jerarquía.
-  + `RETR_LIST`: devuelve todos los contornos en una lista, sin ninguna información de jerarquía entre ellos.
-  + `RETR_EXTERNAL`: devuelve todos los contornos externos. Si algún contorno tiene contornos hijo, estos son ignorados.
-  + `RETR_CCOMP`: devuelve los contornos agrupados en dos niveles de jerarquía. Un primer nivel en el que se encuentran todos los contornos exteriores. Y un segundo nivel con los contornos correspondientes a agujeros en los primeros.
-  + `RETR_TREE`: devuelve todos los contornos creando un árbol completo con la jerarquía.
+- Modo de obtención del contorno: define cómo se van a obtener los contornos en cuestión de jerarquía. [^opencv:find_contours]
+    + `RETR_LIST`: devuelve todos los contornos en una lista, sin ninguna información de jerarquía entre ellos.
+    + `RETR_EXTERNAL`: devuelve todos los contornos externos. Si algún contorno tiene contornos hijo, estos son ignorados.
+    + `RETR_CCOMP`: devuelve los contornos agrupados en dos niveles de jerarquía. Un primer nivel en el que se encuentran todos los contornos exteriores. Y un segundo nivel con los contornos correspondientes a agujeros en los primeros.
+    + `RETR_TREE`: devuelve todos los contornos creando un árbol completo con la jerarquía.
 
-- Método de aproximación de los contornos: define el método que utiliza la función para almacenar los contornos.
-  + `CHAIN_APPROX_NONE`: almacena todos los puntos del borde del contorno.
-  + `CHAIN_APPROX_SIMPLE`: almacena sólo los puntos relevantes del contorno. Por ejemplo, si el contorno es una línea no se necesita almacenar todos los puntos de esta, con el punto inicial y el final basta. Esto es lo que realiza este método, eliminar todos los puntos redundantes y comprimirlos para que ocupe menos espacio.
-  + `CV_CHAIN_APPROX_TC89_L1` y `CV_CHAIN_APPROX_TC89_KCOS`: aplican el algoritmo de aproximación de cadena de Teh-Chin, simplificando los polígonos que forman los contornos.
-  + `CV_CHAIN_CODE`: almacena los contornos utilizando el código de cadenas de Freeman.
+- Método de aproximación de los contornos: define el método que utiliza la función para almacenar los contornos. [^opencv:find_contours]
+    + `CHAIN_APPROX_NONE`: almacena todos los puntos del borde del contorno.
+    + `CHAIN_APPROX_SIMPLE`: almacena sólo los puntos relevantes del contorno. Por ejemplo, si el contorno es una línea no se necesita almacenar todos los puntos de esta, con el punto inicial y el final basta. Esto es lo que realiza este método, eliminar todos los puntos redundantes y comprimirlos para que ocupe menos espacio.
+    + `CV_CHAIN_APPROX_TC89_L1` y `CV_CHAIN_APPROX_TC89_KCOS`: aplican el algoritmo de aproximación de cadena de Teh-Chin, simplificando los polígonos que forman los contornos.
+    + `CV_CHAIN_CODE`: almacena los contornos utilizando el código de cadenas de Freeman.
 
 En nuestro caso, la configuración más adecuada es utilizar `RETR_EXTERNAL` y `CHAIN_APPROX_SIMPLE`. Ya que no nos interesa ningún contorno interno que pueda tener la abeja (y que en principio no debería tener) y tampoco nos es relevante el cómo se almacenan estos, sólo nos interesa el número.
 
@@ -189,3 +189,5 @@ Para evitar posibles falsos positivos, establecemos un umbral mínimo y máximo 
 [^wiki:grayscale]: https://en.wikipedia.org/wiki/Grayscale
 [^wiki:Gaussian]: https://en.wikipedia.org/wiki/Gaussian_blur
 [^book:mastering_opencv]: https://www.packtpub.com/application-development/mastering-opencv-android-application-programming
+[^opencv:find_contours]: docs.opencv.org/3.0-beta/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html
+[^opencv:contours]: http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_contours/py_table_of_contents_contours/py_table_of_contents_contours.html
