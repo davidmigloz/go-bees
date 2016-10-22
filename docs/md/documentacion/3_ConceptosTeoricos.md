@@ -112,6 +112,7 @@ Una vez parametrizado correctamente, vimos como este algoritmo era el que mejore
 Se trata de un método que se basa en el algoritmo de clasificación supervisada _K nearest neighbors_ (k-nn). El algoritmo fue propuesto en el artículo [^art:zivkovic_efficient_2006]. Y de acuerdo con sus conclusiones, es muy eficiente cuando el número de píxeles que se corresponden con el primer plano es bajo.
 
 La clase de OpenCV que lo implementa es `BackgroundSubtractorKNN`. Los parámetros más importantes son:
+
 - `history`: número de fotogramas recientes que afectan al modelo del fondo.
 - `dist2Threshold`: umbral de la distancia al cuadrado entre el píxel y la muestra para decidir si un píxel está cerca de esa muestra.
 - `detectShadows`: con un valor verdadero detecta las sombras (aumenta considerablemente el tiempo de procesado).
