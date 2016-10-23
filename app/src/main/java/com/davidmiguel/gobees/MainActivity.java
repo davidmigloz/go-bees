@@ -11,7 +11,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 public class MainActivity extends AppCompatActivity implements CvCameraViewListener2 {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        final Mat currentImage = inputFrame.rgba();
+        final Mat currentImage = inputFrame.gray();
         return currentImage;
     }
 }
