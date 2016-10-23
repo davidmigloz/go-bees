@@ -23,8 +23,10 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
 
     // Bees counter
     private BeesCounter bc;
-    // The camera view
+    // Camera view
     private CameraBridgeViewBase cameraView;
+    // Processed frame
+    private Mat processedFrame;
     // Num bees textview
     private TextView numBeesTV;
     // OpenCV loader callback
@@ -81,8 +83,9 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
     }
 
     @Override
-    public void onCameraViewStarted(int i, int i1) {
+    public void onCameraViewStarted(int width, int height) {
         bc = new ContourBeesCounter();
+        processedFrame = new Mat();
     }
 
     @Override
@@ -92,10 +95,11 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        final Mat frame = inputFrame.gray();
-        int numBees = bc.countBees(frame);
+        int numBees = bc.countBees(inputFrame.gray());
         setNumBees(numBees);
-        return bc.getProcessedFrame();
+        bc.getProcessedFrame().copyTo(processedFrame);
+        bc.getProcessedFrame().release();
+        return processedFrame;
     }
 
     private void setNumBees(final int n) {

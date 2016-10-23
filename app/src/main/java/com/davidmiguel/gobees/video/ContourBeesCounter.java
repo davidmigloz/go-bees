@@ -53,12 +53,11 @@ public class ContourBeesCounter implements BeesCounter {
     public int countBees(Mat frame) {
         long t0 = System.nanoTime();
         Mat r0 = blur.process(frame);
-        frame.release();
         Mat r1 = bs.process(r0);
-        r0.release();
         Mat r2 = morphology.process(r1);
-        r1.release();
         processedFrame = cf.process(r2);
+        r0.release();
+        r1.release();
         r2.release();
         Log.d(TAG, "countBees time: " + (System.nanoTime() - t0) / 1000000 );
         return cf.getNumBees();
