@@ -19,7 +19,7 @@ public class ContoursFinder implements VideoProcessor {
 
     private static final String TAG = "ContoursFinder";
 
-    private final static Scalar RED = new Scalar(0, 0, 255);
+    private final static Scalar RED = new Scalar(255, 0, 0);
     private final static Scalar GREEN = new Scalar(0, 255, 0);
     private static final double MIN_AREA = 15;
     private static final double MAX_AREA = 600;
@@ -35,6 +35,8 @@ public class ContoursFinder implements VideoProcessor {
      * minArea is initialized to 15 and maxArea to 600.
      */
     public ContoursFinder() {
+        contourList = new ArrayList<>();
+        hierarchy = new Mat();
         this.minArea = MIN_AREA;
         this.maxArea = MAX_AREA;
     }

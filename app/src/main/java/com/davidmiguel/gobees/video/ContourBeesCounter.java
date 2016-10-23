@@ -1,5 +1,7 @@
 package com.davidmiguel.gobees.video;
 
+import android.util.Log;
+
 import com.davidmiguel.gobees.video.processors.BackgroundSubtractor;
 import com.davidmiguel.gobees.video.processors.Blur;
 import com.davidmiguel.gobees.video.processors.ContoursFinder;
@@ -11,6 +13,8 @@ import org.opencv.core.Mat;
  * Counts the number of bees based on the area of detected moving contours.
  */
 public class ContourBeesCounter implements BeesCounter {
+
+    private static final String TAG = "ContourBeesCounter";
 
     private Blur blur;
     private BackgroundSubtractor bs;
@@ -47,7 +51,16 @@ public class ContourBeesCounter implements BeesCounter {
 
     @Override
     public int countBees(Mat frame) {
-        processedFrame = cf.process(morphology.process(bs.process(blur.process(frame))));
+        long t0 = System.nanoTime();
+        Mat r0 = blur.process(frame);
+        frame.release();
+        Mat r1 = bs.process(r0);
+        r0.release();
+        Mat r2 = morphology.process(r1);
+        r1.release();
+        processedFrame = cf.process(r2);
+        r2.release();
+        Log.d(TAG, "countBees time: " + (System.nanoTime() - t0) / 1000000 );
         return cf.getNumBees();
     }
 

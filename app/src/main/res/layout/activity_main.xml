@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     android:id="@+id/activity_camera"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:opencv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     tools:context="com.davidmiguel.gobees.MainActivity">
 
     <org.opencv.android.JavaCameraView
@@ -16,4 +15,12 @@
         opencv:camera_id="any"
         opencv:show_fps="true"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/num_bees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+
+</FrameLayout>

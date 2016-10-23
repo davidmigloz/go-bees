@@ -6,7 +6,7 @@ import org.opencv.core.Mat;
 /**
  * A BeeCounter has to count the number of bees present in a given frame.
  */
-interface BeesCounter {
+public interface BeesCounter {
 
     /**
      * Count the number of bees in a frame.
