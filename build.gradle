@@ -16,9 +16,28 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Versions of the dependencies
+ext {
+    // Sdk and tools
+    minSdkVersion = 19
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.0'
+
+    // App dependencies
+    openCVVersion = '3.1.0'
+    supportLibraryVersion = '25.0.0'
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    runnerVersion = '0.5'
+    rulesVersion = '0.5'
+    espressoVersion = '2.2.2'
 }
