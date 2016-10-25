@@ -41,9 +41,10 @@ before_script:
     - sudo make -j8 install
     - sudo ldconfig
     - cd ../..
-    - cp opencv/build/lib/libopencv_java310.so native/linux/x86_64/libopencv_java310.so
-    - export PATH=$PATH:$PWD/native/linux/x86_64/
-    - ln -s native/linux/x86_64/libopencv_java310.so native/linux/x86_64/libopencv_java310.so
+    - mkdir opencv_lib
+    - cp opencv/build/lib/libopencv_java310.so opencv_lib/libopencv_java310.so
+    - export PATH=$PATH:$PWD/opencv_lib/
+    - ln -s opencv_lib/libopencv_java310.so opencv_lib/libopencv_java310.dylib
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
