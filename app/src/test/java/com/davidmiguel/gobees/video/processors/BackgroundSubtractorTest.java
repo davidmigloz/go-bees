@@ -9,31 +9,33 @@ import org.junit.runner.RunWith;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.davidmiguel.gobees.TestUtils.assertMatEqual;
+import static com.davidmiguel.gobees.TestUtils.assertMatNotEqual;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.anyString;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 /**
- * Test for Blur class.
+ * Test for BackgroundSubtractor class.
  * The folder with the OpenCV binaries must be on PATH variable.
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Log.class})
-public class BlurTest {
+public class BackgroundSubtractorTest {
 
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
     private Mat source;
-    private Mat target;
-    private Mat result;
-    private Blur blur;
+    private Mat foreground;
+    private Mat black;
+    private BackgroundSubtractor bs;
 
     @Before
     public void setUp() throws Exception {
@@ -46,42 +48,43 @@ public class BlurTest {
                 put(3, 0, 127, 127, 127, 127);
             }
         };
-        target = new Mat(4, 4, CvType.CV_8U) {
-            {
-                put(0, 0, 177, 182, 182, 177);
-                put(1, 0, 182, 188, 188, 182);
-                put(2, 0, 182, 188, 188, 182);
-                put(3, 0, 177, 182, 182, 177);
-            }
-        };
-        blur = new Blur();
+        black = new Mat(4, 4, CvType.CV_8U, new Scalar(0));
+        bs = new BackgroundSubtractor();
     }
 
     @After
     public void tearDown() throws Exception {
         source.release();
-        target.release();
-        if(result != null) {
-            result.release();
+        black.release();
+        if (foreground != null) {
+            foreground.release();
         }
     }
 
     @Test
     public void processMat() throws Exception {
-        result = blur.process(source);
-        assertMatEqual(target, result);
+        // Input 50 equal frames
+        for (int i = 0; i < 100; i++) {
+            foreground = bs.process(source);
+        }
+        // Foreground must be all black (no moving elements)
+        assertMatEqual(black, foreground);
+        // Modify one pixel
+        source.put(2, 2, 0);
+        foreground = bs.process(source);
+        assertMatNotEqual(black, foreground);-
     }
 
     @Test
     public void processNullMat() throws Exception {
-        result = blur.process(null);
-        assertNull(result);
+        foreground = bs.process(null);
+        assertNull(foreground);
     }
 
     @Test
     public void processEmptyMat() throws Exception {
-        result = blur.process(new Mat());
-        assertNull(result);
+        foreground = bs.process(new Mat());
+        assertNull(foreground);
     }
 
     private void withStaticallyMockedLogApi() {
