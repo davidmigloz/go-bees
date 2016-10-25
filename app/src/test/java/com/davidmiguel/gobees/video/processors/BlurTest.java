@@ -21,6 +21,7 @@ public class BlurTest {
 
     private Mat source;
     private Mat target;
+    private Blur blur;
 
     @Before
     public void setUp() throws Exception {
@@ -32,7 +33,6 @@ public class BlurTest {
                 put(3, 0, 127, 127, 127, 127);
             }
         };
-
         target = new Mat(4, 4, CvType.CV_8U) {
             {
                 put(0, 0, 177, 182, 182, 177);
@@ -41,6 +41,7 @@ public class BlurTest {
                 put(3, 0, 177, 182, 182, 177);
             }
         };
+        blur = new Blur();
     }
 
     @After
@@ -50,9 +51,20 @@ public class BlurTest {
     }
 
     @Test
-    public void process() throws Exception {
-        Blur blur = new Blur();
+    public void processMat() throws Exception {
         Mat result = blur.process(source);
+        assertMatEqual(target, result);
+    }
+
+    @Test
+    public void processNullMat() throws Exception {
+        Mat result = blur.process(null);
+        assertMatEqual(target, result);
+    }
+
+    @Test
+    public void processEmptyMat() throws Exception {
+        Mat result = blur.process(new Mat());
         assertMatEqual(target, result);
     }
 }
