@@ -8,6 +8,7 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 import static com.davidmiguel.gobees.TestUtils.assertMatEqual;
+import static org.junit.Assert.assertNull;
 
 /**
  * Test for Blur class.
@@ -59,12 +60,12 @@ public class BlurTest {
     @Test
     public void processNullMat() throws Exception {
         Mat result = blur.process(null);
-        assertMatEqual(target, result);
+        assertNull(result);
     }
 
     @Test
     public void processEmptyMat() throws Exception {
         Mat result = blur.process(new Mat());
-        assertMatEqual(target, result);
+        assertNull(result);
     }
 }
