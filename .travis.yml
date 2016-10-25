@@ -37,7 +37,8 @@ before_script:
     - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF ..
     - make -j8
     - sudo make -j8 install
-    - ls -la /usr/local /usr/local/sbin /usr/local/bin   
+    - cd ../..
+    - ls -Rla /usr/local/opencv_*
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
