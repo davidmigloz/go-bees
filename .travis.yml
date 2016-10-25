@@ -34,14 +34,10 @@ before_script:
     - git checkout master
     - mkdir build
     - cd build
-    - cmake ..
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF ..
     - make -j8
     - sudo make -j8 install
-    - cd ../..
-    - mkdir -p native/linux/x86_64
-    - ls opencv/build/lib/
-    - cp opencv/build/lib/libopencv_java310.so native/linux/x86_64/libopencv_java310.so
-    - export PATH=$PATH:$PWD/native/linux/x86_64/
+    - ls -la /usr/local /usr/local/sbin /usr/local/bin   
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
