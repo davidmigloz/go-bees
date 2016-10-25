@@ -36,7 +36,7 @@ ext {
     openCVVersion = '3.1.0'
     supportLibraryVersion = '25.0.0'
     junitVersion = '4.12'
-    mockitoVersion = '1.10.19'
+    mockitoVersion = '2.0.2-beta'
     runnerVersion = '0.5'
     rulesVersion = '0.5'
     espressoVersion = '2.2.2'

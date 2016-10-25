@@ -1,6 +1,7 @@
 sudo: false
 language: android
 jdk: oraclejdk8
+compiler: gcc
 
 env:
   global:
@@ -21,7 +22,25 @@ android:
 licenses:
     - '.+'
 
+before_install:
+    - sudo apt-get update
+
+install:
+    - sudo apt-get install python-dev python-numpy
+  
 before_script:
+    - git clone https://github.com/Itseez/opencv.git
+    - cd opencv
+    - git checkout master
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make -j8
+    - sudo make -j8 install
+    - cd ../..
+    - mkdir -p native/linux/x86_64
+    - cp opencv/build/lib/libopencv_java248.so native/linux/x86_64/libopencv_java248.so
+    - export PATH=$PATH:$PWD/native/linux/x86_64/
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
