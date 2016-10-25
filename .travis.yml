@@ -38,7 +38,7 @@ before_script:
     - make -j8
     - sudo make -j8 install
     - cd ../..
-    - ls -Rla /usr/local/opencv_*
+    - ls -Rla /usr/local/bin/opencv_*
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
