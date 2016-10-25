@@ -43,7 +43,7 @@ before_script:
     - cd ../..
     - mkdir opencv_lib
     - cp opencv/build/lib/libopencv_java310.so opencv_lib/libopencv_java310.so
-    - export PATH=$PATH:$PWD/opencv_lib/
+    - export LD_LIBRARY_PATH = $LD_LIBRARY_PATH:/opencv_lib/
     - ln -s opencv_lib/libopencv_java310.so opencv_lib/libopencv_java310.dylib
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
