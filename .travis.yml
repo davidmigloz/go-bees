@@ -36,18 +36,15 @@ before_script:
     - cd opencv
     - mkdir build
     - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF ..
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF ..
     - export PATH=$PATH:/usr/local/lib/
     - make -j8
     - sudo make -j8 install
     - sudo ldconfig
-    - pkg-config --libs opencv
-    - pkg-config --cflags opencv
     - pkg-config --modversion opencv
+    - ls -la lib
+    - export PATH=$PATH:$PWD/lib/
     - cd ../..
-    - ls -la /usr/local/lib
-    - ls -la /usr/local/include/opencv
-    - ls /usr/local/include 
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
