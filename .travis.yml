@@ -37,7 +37,7 @@ before_script:
     - mkdir build
     - cd build
     - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF ..
-    - export LD_RUN_PATH=/usr/local/lib
+    - export PATH=$PATH:/usr/local/lib/
     - make -j8
     - sudo make -j8 install
     - sudo ldconfig
@@ -45,7 +45,9 @@ before_script:
     - pkg-config --cflags opencv
     - pkg-config --modversion opencv
     - cd ../..
-    - ls -Rla /usr/local/lib
+    - ls -la /usr/local/lib
+    - ls -la /usr/local/include/opencv
+    - ls /usr/local/include 
     - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
     - echo yes | android update sdk --no-ui --all --filter build-tools-24.0.3
     - echo yes | android update sdk --no-ui --all --filter android-24
