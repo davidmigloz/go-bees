@@ -25,7 +25,7 @@ licenses:
 before_install:
     - sudo apt-get update
     - chmod +x app/src/test/res/install_opencv.sh
-    - chmod +x app/src/test/res/install_opencv.sh
+    - chmod +x app/src/test/res/launch_emulator.sh
 
 install:
     - sudo apt-get install python-numpy
