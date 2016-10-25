@@ -72,7 +72,7 @@ public class BackgroundSubtractorTest {
         // Modify one pixel
         source.put(2, 2, 0);
         foreground = bs.process(source);
-        assertMatNotEqual(black, foreground);-
+        assertMatNotEqual(black, foreground);
     }
 
     @Test
