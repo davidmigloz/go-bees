@@ -13,12 +13,12 @@ android:
     - tools
     - platform-tools
     - build-tools-25.0.0
-    - android-25  
+    - android-25
     - extra-android-support
     - extra-android-m2repository
     - ${ANDROID_TARGET}
-    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}    
-    
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+
 licenses:
     - '.+'
 
@@ -27,7 +27,7 @@ before_install:
 
 install:
     - sudo apt-get install python-numpy
-  
+
 before_script:
     - wget https://github.com/opencv/opencv/archive/3.1.0.zip
     - unzip 3.1.0.zip >/dev/null
@@ -50,8 +50,8 @@ script:
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-- ./gradlew connectedCheck
-    
+    - ./gradlew connectedCheck
+
 after_success:
     - bash <(curl -s https://codecov.io/bash)
 
