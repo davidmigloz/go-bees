@@ -24,17 +24,33 @@ licenses:
 
 before_install:
     - sudo apt-get update
-    - chmod +x app/src/test/res/install_opencv.sh
-    - chmod +x app/src/test/res/launch_emulator.sh
 
 install:
     - sudo apt-get install python-numpy
   
 before_script:
-    - app/src/test/res/install_opencv.sh
+    - wget https://github.com/opencv/opencv/archive/3.1.0.zip
+    - unzip 3.1.0.zip >/dev/null
+    - mv opencv-3.1.0 opencv
+    - cd opencv
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF .. >/dev/null
+    - make -j8 >/dev/null
+    - sudo make -j8 install >/dev/null
+    - cd ../..
+    - mkdir opencv_lib
+    - cp opencv/build/lib/libopencv_java310.so opencv_lib/libopencv_java310.so
+    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
+    - chmod +x gradlew
 
 script:
-    - app/src/test/res/launch_emulator.sh
+    - ./gradlew build jacocoTestReport assembleAndroidTest
+    - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+    - emulator -avd test -no-audio -no-window &
+    - android-wait-for-emulator
+    - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+- ./gradlew connectedCheck
     
 after_success:
     - bash <(curl -s https://codecov.io/bash)
