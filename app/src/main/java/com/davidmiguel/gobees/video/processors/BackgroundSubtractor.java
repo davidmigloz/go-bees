@@ -44,7 +44,6 @@ public class BackgroundSubtractor implements VideoProcessor {
      */
     public BackgroundSubtractor(int history, double shadowThreshold) {
         mog = getMogInstance(history, shadowThreshold);
-
     }
 
     /**
