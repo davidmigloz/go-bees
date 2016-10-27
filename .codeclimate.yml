@@ -2,6 +2,9 @@ engines:
   checkstyle: # https://docs.codeclimate.com/docs/checkstyle
     enabled: true
     channel: "beta"
+    checks:
+        com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck:
+            enabled: false
   fixme: # https://docs.codeclimate.com/docs/fixme
     enabled: true
   markdownlint: # https://docs.codeclimate.com/docs/markdownlint

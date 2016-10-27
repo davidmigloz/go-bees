@@ -51,7 +51,7 @@ public class ContourBeesCounter implements BeesCounter {
 
     @Override
     public int countBees(Mat frame) {
-        long t0 = System.nanoTime();
+        final long t0 = System.nanoTime();
         Mat r0 = blur.process(frame);
         Mat r1 = bs.process(r0);
         Mat r2 = morphology.process(r1);

@@ -19,8 +19,8 @@ public class ContoursFinder implements VideoProcessor {
 
     private static final String TAG = "ContoursFinder";
 
-    private final static Scalar RED = new Scalar(255, 0, 0);
-    private final static Scalar GREEN = new Scalar(0, 255, 0);
+    private static final Scalar RED = new Scalar(255, 0, 0);
+    private static final Scalar GREEN = new Scalar(0, 255, 0);
     private static final double MIN_AREA = 15;
     private static final double MAX_AREA = 600;
 
@@ -63,7 +63,8 @@ public class ContoursFinder implements VideoProcessor {
         Mat tmp = frame.clone();
         // Finding outer contours
         contourList.clear();
-        Imgproc.findContours(tmp, contourList, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(tmp, contourList, hierarchy,
+                Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
         // Filter bees
         Mat contours = new Mat(tmp.rows(), tmp.cols(), CvType.CV_8UC3);
         tmp.release();

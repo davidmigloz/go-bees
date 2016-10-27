@@ -54,7 +54,8 @@ public class BackgroundSubtractor implements VideoProcessor {
      * @return instance of BackgroundSubtractorMOG2.
      */
     private BackgroundSubtractorMOG2 getMogInstance(int history, double shadowThreshold) {
-        BackgroundSubtractorMOG2 instance = Video.createBackgroundSubtractorMOG2(history, VAR_THRESHOLD, DETECT_SHADOWS);
+        BackgroundSubtractorMOG2 instance =
+                Video.createBackgroundSubtractorMOG2(history, VAR_THRESHOLD, DETECT_SHADOWS);
         instance.setBackgroundRatio(BACKGROUND_RATIO);
         instance.setVarInit(VAR_INIT);
         instance.setShadowThreshold(shadowThreshold);

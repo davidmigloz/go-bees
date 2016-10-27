@@ -35,19 +35,22 @@ public class ProcessorsTest {
     private Morphology morf;
     private ContoursFinder cf;
 
+    /**
+     * Create needed mats and instances.
+     */
     @Before
     public void setUp() throws Exception {
         // Image to test
         source = new Mat(4, 4, CvType.CV_8U) {
             {
-                put(0, 0, 0,   0,   0, 0);
+                put(0, 0, 0, 0, 0, 0);
                 put(1, 0, 0, 255, 255, 0);
                 put(2, 0, 0, 255, 255, 0);
-                put(3, 0, 0,   0,   0, 0);
+                put(3, 0, 0, 0, 0, 0);
             }
         };
         // Image with a circle with area=314 (simulating a bee)
-        sourceContours = new Mat(480,640,CvType.CV_8U,  new Scalar(0));
+        sourceContours = new Mat(480, 640, CvType.CV_8U, new Scalar(0));
         Imgproc.circle(sourceContours, new Point(200, 200), 10, new Scalar(255), -1);
         // Expected result for blur
         targetBlur = new Mat(4, 4, CvType.CV_8U) {
@@ -69,6 +72,9 @@ public class ProcessorsTest {
         cf = new ContoursFinder(16, 600);
     }
 
+    /**
+     * Release mats.
+     */
     @After
     public void tearDown() throws Exception {
         source.release();

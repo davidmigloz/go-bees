@@ -20,10 +20,13 @@ public class TestUtils {
     }
 
     private static boolean equals(Mat expected, Mat actual) {
-        if (expected.type() != actual.type() || expected.cols() != actual.cols() || expected.rows() != actual.rows()) {
-            throw new UnsupportedOperationException("Can not compare " + expected + " and " + actual);
+        if (expected.type() != actual.type() || expected.cols() != actual.cols()
+                || expected.rows() != actual.rows()) {
+            throw new UnsupportedOperationException(
+                    "Can not compare " + expected + " and " + actual);
         }else if (expected.depth() == CvType.CV_32F || expected.depth() == CvType.CV_64F) {
-            throw new UnsupportedOperationException("Floating-point mats must not be checked for exact match.");
+            throw new UnsupportedOperationException(
+                    "Floating-point mats must not be checked for exact match.");
         }
         // Subtract matrices
         Mat diff = new Mat();

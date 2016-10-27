@@ -21,6 +21,9 @@ public class Morphology implements VideoProcessor {
     private Mat kernel2;
     private Mat kernel3;
 
+    /**
+     * Default constructor. Initializes the kernels.
+     */
     public Morphology() {
         kernel1 = Imgproc.getStructuringElement(ELEMENT_SHAPE, new Size(1, 1));
         kernel2 = Imgproc.getStructuringElement(ELEMENT_SHAPE, new Size(2, 2));
