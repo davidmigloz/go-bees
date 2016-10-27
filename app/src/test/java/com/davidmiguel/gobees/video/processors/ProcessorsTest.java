@@ -69,6 +69,17 @@ public class ProcessorsTest {
         cf = new ContoursFinder(16, 600);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        source.release();
+        sourceContours.release();
+        black.release();
+        targetBlur.release();
+        if (result != null) {
+            result.release();
+        }
+    }
+
     @Test
     public void testBlur() throws Exception {
         result = blur.process(source);
@@ -106,8 +117,13 @@ public class ProcessorsTest {
         cf.process(sourceContours);
         num = cf.getNumBees();
         assertEquals(2, num);
-        // Add an object with area out of rage
+        // Add an object with area out of rage (max)
         Imgproc.circle(sourceContours, new Point(300, 300), 15, new Scalar(255), -1);
+        cf.process(sourceContours);
+        num = cf.getNumBees();
+        assertEquals(2, num);
+        // Add an object with area out of rage (min)
+        Imgproc.circle(sourceContours, new Point(50, 50), 2, new Scalar(255), -1);
         cf.process(sourceContours);
         num = cf.getNumBees();
         assertEquals(2, num);
@@ -121,6 +137,8 @@ public class ProcessorsTest {
         assertNull(result);
         result = morf.process(null);
         assertNull(result);
+        result = cf.process(null);
+        assertNull(result);
     }
 
     @Test
@@ -131,16 +149,7 @@ public class ProcessorsTest {
         assertNull(result);
         result = morf.process(new Mat());
         assertNull(result);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        source.release();
-        sourceContours.release();
-        black.release();
-        targetBlur.release();
-        if (result != null) {
-            result.release();
-        }
+        result = cf.process(new Mat());
+        assertNull(result);
     }
 }

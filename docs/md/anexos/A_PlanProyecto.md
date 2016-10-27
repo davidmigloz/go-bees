@@ -44,7 +44,6 @@ Comentar que la estimación se realizó mediante los story points que provee Zen
 | 21 | 2,5 días |
 | 40 | 1 semana |
 
-
 A continuación se describen los diferentes sprints que se han realizado.
 
 ### Sprint 0 (09/09/16 - 16/09/16)
@@ -101,9 +100,31 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 
 
 Se estimaron 37 horas de trabajo y se invirtieron finalmente 39,5 horas, completando todas las tareas.
 
-![Sprint 3](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint4.png)
+![Sprint 4](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint4.png)
 
+### Sprint 5 (14/10/16 - 20/10/16)
 
+Los objetivos de este sprint fueron: afinar la parametrización de los algoritmos implementados en el sprint anterior. Detectar contornos y contar los pertenecientes a abejas. Pensar algún método que pueda solventar el problema del solapamiento de abejas. Documentar sprint anterior. Continuar la formación en Android.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 5](https://github.com/davidmigloz/go-bees/milestone/6?closed=1).
+
+Se estimaron 27 horas de trabajo y se invirtieron finalmente 34 horas, completando todas las tareas.
+
+![Sprint 5](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint5.png)
+
+### Sprint 6 (21/10/16 - 27/10/16)
+
+Los objetivos de este sprint fueron: mudar el algoritmo de visión artificial desarrollado en la plataforma Java a Android. Comenzar a desarrollar una aplicación de testeo del algoritmo para conocer el error que comete. Investigar si es posible simular el entorno de trabajo filmando a una pantalla..
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 6](https://github.com/davidmigloz/go-bees/milestone/7?closed=1).
+
+Mientras se mudaba el algoritmo a Android se encontró un bug de OpenCV ([#55](https://github.com/davidmigloz/go-bees/issues/55)) que agotaba la memoria del móvil. Este se debía a una mala liberación de recursos por parte de OpenCV y resolvió liberándolos manualmente.
+
+La tarea que más se desvió de su estimación fue la de testeo de los algoritmos. Esto se debió a la dificultad añadida que supuso ejecutar los test unitarios con dependencias de OpenCV en Travis. Finalmente, se solventó instalando OpenCV en la máquina virtual de Travis (compilando desde el código fuente) e inicializando la librería de forma estática (ya que no se deseaba tener que arrancar un emulador para ejecutar los tests unitarios).
+
+Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 41 horas, completando todas las tareas.
+
+![Sprint 6](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint6.png)
 
 Estudio de viabilidad
 ---------------------

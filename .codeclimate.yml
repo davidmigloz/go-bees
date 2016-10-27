@@ -6,6 +6,15 @@ engines:
     enabled: true
   markdownlint: # https://docs.codeclimate.com/docs/markdownlint
     enabled: true
+    checks:
+        MD003:
+            enabled: false
+        MD009:
+            enabled: false
+        MD013:
+            enabled: false
+        MD022:
+            enabled: false
   pmd: # https://docs.codeclimate.com/docs/pmd
     enabled: true
     channel: "beta"    

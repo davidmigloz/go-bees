@@ -85,7 +85,6 @@ Tras probarlo vimos que tenía una eficiencia muy buena y se adaptaba a los camb
 
 El código fuente de este algoritmo está disponible en [^github:background_segm] (interfaz) y [^github:bgfg_gaussmix2] (implementación).
 
-
 La clase de OpenCV que lo implementa es `BackgroundSubtractorMOG2`. Posee los siguientes parámetros configurables: [^opencv:mog2]
 
 - `history`: número de fotogramas recientes que afectan al modelo del fondo. Se representa en la literatura como `T`. Por defecto, 500 fotogramas.
@@ -165,12 +164,6 @@ OpenCV provee la función `Imgproc.findContours()` para realizar esta tarea. Est
 En nuestro caso, la configuración más adecuada es utilizar `RETR_EXTERNAL` y `CHAIN_APPROX_SIMPLE`. Ya que no nos interesa ningún contorno interno que pueda tener la abeja (y que en principio no debería tener) y tampoco nos es relevante el cómo se almacenan estos, sólo nos interesa el número.
 
 Para evitar posibles falsos positivos, establecemos un umbral mínimo y máximo en el área del contorno. De esta manera, evitamos que contornos diminutos o grandes generados por ruidos o por objetos del entorno (pájaros, roedores...) sean contados cómo abejas.
-
-
-
-
-
-
 
 <!--- References -->
 
