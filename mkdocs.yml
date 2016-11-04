@@ -31,6 +31,7 @@ markdown_extensions:
 pages:
 - Home: 'index.md'
 - Documentación:
+    - 'Resumen': 'documentacion/0_Resumen.md'
     - 'Introducción': 'documentacion/1_Introduccion.md'
     - 'Objetivos del proyecto': 'documentacion/2_ObjetivosDelProyecto.md'
     - 'Conceptos teóricos': 'documentacion/3_ConceptosTeoricos.md'
