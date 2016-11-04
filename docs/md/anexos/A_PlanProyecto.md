@@ -114,7 +114,7 @@ Se estimaron 27 horas de trabajo y se invirtieron finalmente 34 horas, completan
 
 ### Sprint 6 (21/10/16 - 27/10/16)
 
-Los objetivos de este sprint fueron: mudar el algoritmo de visión artificial desarrollado en la plataforma Java a Android. Comenzar a desarrollar una aplicación de testeo del algoritmo para conocer el error que comete. Investigar si es posible simular el entorno de trabajo filmando a una pantalla..
+Los objetivos de este sprint fueron: mudar el algoritmo de visión artificial desarrollado en la plataforma Java a Android. Comenzar a desarrollar una aplicación de testeo del algoritmo para conocer el error que comete. Investigar si es posible simular el entorno de trabajo filmando a una pantalla.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 6](https://github.com/davidmigloz/go-bees/milestone/7?closed=1).
 
@@ -125,6 +125,16 @@ La tarea que más se desvió de su estimación fue la de testeo de los algoritmo
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 41 horas, completando todas las tareas.
 
 ![Sprint 6](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint6.png)
+
+### Sprint 7 (28/10/16 - 04/11/16)
+
+Los objetivos de este sprint fueron: estudiar patrón de arquitectura MVP (Model-View-Presenter) y pensar en cómo aplicarlo al proyecto. Diseñar la posible arquitectura de la aplicación. Estudiar el uso de inyección de dependencias en Android con Dagger 2. Documentar las secciones de Introducción y Objetivos.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 7](https://github.com/davidmigloz/go-bees/milestone/8?closed=1).
+
+Se estimaron 16 horas de trabajo y se invirtieron finalmente 23 horas, completando todas las tareas.
+
+![Sprint 7](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint7.png)
 
 Estudio de viabilidad
 ---------------------

@@ -1,6 +1,8 @@
 Objetivos del proyecto
 ======================
 
+A continuación se detallan los diferentes objetivos que han motivado la realización del proyecto.
+
 Objetivos generales
 -------------------
 
