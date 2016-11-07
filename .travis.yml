@@ -4,9 +4,8 @@ jdk: oraclejdk8
 compiler: gcc
 
 env:
-  global:
-    - ANDROID_TARGET=android-22
-    - ANDROID_ABI=armeabi-v7a
+  matrix:
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
 
 android:
   components:
@@ -29,6 +28,7 @@ install:
     - sudo apt-get install python-numpy
 
 before_script:
+    # Compile OpenCV and set it to path
     - wget https://github.com/opencv/opencv/archive/3.1.0.zip
     - unzip 3.1.0.zip >/dev/null
     - mv opencv-3.1.0 opencv
@@ -45,7 +45,13 @@ before_script:
     - chmod +x gradlew
 
 script:
-    - ./gradlew build jacocoTestReport assembleAndroidTest
+    # Compile and run unit tests
+    - ./gradlew build
+    # Run test coverage report
+    - ./gradlew jacocoTestDebugUnitTestReport
+    # Build test app
+    - ./gradlew assembleAndroidTest
+    # Create and lunch emulator
     - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator

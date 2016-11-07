@@ -1,6 +1,5 @@
 package com.davidmiguel.gobees.video;
 
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 /**

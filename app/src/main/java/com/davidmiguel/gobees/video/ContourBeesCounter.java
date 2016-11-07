@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.video;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.davidmiguel.gobees.video.processors.BackgroundSubtractor;
@@ -50,7 +51,7 @@ public class ContourBeesCounter implements BeesCounter {
     }
 
     @Override
-    public int countBees(Mat frame) {
+    public int countBees(@NonNull Mat frame) {
         final long t0 = System.nanoTime();
         Mat r0 = blur.process(frame);
         Mat r1 = bs.process(r0);

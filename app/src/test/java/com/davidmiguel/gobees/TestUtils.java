@@ -3,28 +3,56 @@ package com.davidmiguel.gobees;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+
+import java.io.File;
+import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
 /**
  * Utility testing methods.
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class TestUtils {
 
+    private static final String DIRECTORY_TEST = "./build/intermediates/classes/test/debug/";
+
+    /**
+     * Asserts that the matrices are equal.
+     *
+     * @param expected expected mat.
+     * @param actual   actual mat.
+     */
     public static void assertMatEqual(Mat expected, Mat actual) {
         assertTrue(equals(expected, actual));
     }
 
+    /**
+     * Asserts that the matrices are not equal.
+     *
+     * @param expected expected mat.
+     * @param actual   actual mat.
+     */
     public static void assertMatNotEqual(Mat expected, Mat actual) {
         assertTrue(!equals(expected, actual));
     }
 
+    /**
+     * Checks if two OpenCV Mats are equal.
+     * The matrices must be equal size and type.
+     * Floating-point mats are not supported.
+     *
+     * @param expected expected mat.
+     * @param actual   actual mat.
+     * @return true if they are equal.
+     */
     private static boolean equals(Mat expected, Mat actual) {
         if (expected.type() != actual.type() || expected.cols() != actual.cols()
                 || expected.rows() != actual.rows()) {
             throw new UnsupportedOperationException(
                     "Can not compare " + expected + " and " + actual);
-        }else if (expected.depth() == CvType.CV_32F || expected.depth() == CvType.CV_64F) {
+        } else if (expected.depth() == CvType.CV_32F || expected.depth() == CvType.CV_64F) {
             throw new UnsupportedOperationException(
                     "Floating-point mats must not be checked for exact match.");
         }
@@ -39,5 +67,54 @@ public class TestUtils {
         diff.release();
         // Check mistakes
         return 0 == mistakes;
+    }
+
+    /**
+     * Get a file from a path.
+     * Ex: TestUtils.getFileFromPath(this, "res/img/expected.txt");
+     *
+     * @param obj      actual instance of the class (this).
+     * @param fileName path to the file.
+     * @return file.
+     */
+    public static File getFileFromPath(Object obj, String fileName) {
+        ClassLoader classLoader = obj.getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        return new File(resource.getPath());
+    }
+
+    /**
+     * Load image from test directory into OpenCV mat.
+     * Ex: TestUtils.loadImage("res/img/frame.jpg", Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
+     *
+     * @param imgPath path to the image (relative from test directory).
+     * @param flags   CV_LOAD_IMAGE_ANYDEPTH, CV_LOAD_IMAGE_COLOR, CV_LOAD_IMAGE_GRAYSCALE.
+     * @return mat of the image.
+     */
+    public static Mat loadImage(String imgPath, int flags) {
+        return Imgcodecs.imread(DIRECTORY_TEST + imgPath, flags);
+    }
+
+    /**
+     * Load image from test directory into gray scale OpenCV mat.
+     * Ex: TestUtils.loadImage("res/img/frame.jpg");
+     *
+     * @param imgPath path to the image (relative from test directory).
+     * @return mat of the image in gray scale.
+     */
+    public static Mat loadGrayImage(String imgPath) {
+        return loadImage(imgPath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
+    }
+
+    /**
+     * Save mat to a jpg file.
+     * Ex: TestUtils.saveMatToFile(frame, "c14/001");
+     *
+     * @param mat     mat of the image.
+     * @param imgPath path where to save the image (relative from test resources directory
+     *                and the name without extension).
+     */
+    public static void saveMatToFile(Mat mat, String imgPath) {
+        Imgcodecs.imwrite(DIRECTORY_TEST + "res/" + imgPath + ".jpg", mat);
     }
 }

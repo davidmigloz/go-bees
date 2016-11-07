@@ -1,9 +1,10 @@
 package com.davidmiguel.gobees.video.processors;
 
+import com.davidmiguel.gobees.OpenCvBaseTest;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -19,10 +20,7 @@ import static org.junit.Assert.assertNull;
  * Test for Blur, BacakgroundSubtractor, Morphology and ContourFinder classes.
  * OpenCV 3.1.0 native lib must be on PATH environment variable.
  */
-public class ProcessorsTest {
-    static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-    }
+public class ProcessorsTest extends OpenCvBaseTest {
 
     private Mat source;
     private Mat sourceContours;
@@ -133,18 +131,6 @@ public class ProcessorsTest {
         cf.process(sourceContours);
         num = cf.getNumBees();
         assertEquals(2, num);
-    }
-
-    @Test
-    public void testNullMat() throws Exception {
-        result = blur.process(null);
-        assertNull(result);
-        result = bs.process(null);
-        assertNull(result);
-        result = morf.process(null);
-        assertNull(result);
-        result = cf.process(null);
-        assertNull(result);
     }
 
     @Test
