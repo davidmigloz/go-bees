@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.video.processors;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.opencv.core.Mat;
@@ -17,8 +18,8 @@ public class Blur implements VideoProcessor {
     private static final int KERNEL_SIZE = 3;
 
     @Override
-    public Mat process(Mat frame) {
-        if (frame == null || frame.empty()) {
+    public Mat process(@NonNull Mat frame) {
+        if (frame.empty()) {
             Log.e(TAG, "Invalid input frame.");
             return null;
         }
