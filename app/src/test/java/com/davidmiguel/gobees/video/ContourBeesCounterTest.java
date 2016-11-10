@@ -5,12 +5,14 @@ import android.annotation.SuppressLint;
 import com.davidmiguel.gobees.OpenCvBaseTest;
 import com.davidmiguel.gobees.TestUtils;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.opencv.core.Mat;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.DecimalFormat;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -23,15 +25,45 @@ import static junit.framework.Assert.assertTrue;
 public class ContourBeesCounterTest extends OpenCvBaseTest {
 
     private static final double MAX_ERROR_THRESHOLD = 0.1;
+    private static final int NUM_FRAMES_SKIP = 10;
+
+    private DecimalFormat df;
+
+    @Before
+    public void setUp() throws Exception {
+        df = new DecimalFormat("##0.00%");
+    }
 
     /**
-     * Case1: average fly activity, some flys, light shadows.
+     * Dataset c14: 100 frames, average fly activity, some flys, light shadows.
      */
     @Test
     public void case1() throws Exception {
-        BeesCounter bc = new ContourBeesCounter(50, 0.7, 30, 600);
+        BeesCounter bc = new ContourBeesCounter();
         double error = calculateRelativeError(bc, "c14");
-        System.out.println("Error c1: " + error);
+        System.out.println("Error case1: " + df.format(error));
+        assertTrue(error < MAX_ERROR_THRESHOLD);
+    }
+
+    /**
+     * Dataset c17: 200 frames, average fly activity, some flys, light shadows.
+     */
+    @Test
+    public void case2() throws Exception {
+        BeesCounter bc = new ContourBeesCounter(10, 0.7, 30, 800);
+        double error = calculateRelativeError(bc, "c17");
+        System.out.println("Error case2: " + df.format(error));
+        assertTrue(error < MAX_ERROR_THRESHOLD);
+    }
+
+    /**
+     * Dataset c5: 100 frames, high fly activity, not optimum recorded.
+     */
+    @Test
+    public void case3() throws Exception {
+        BeesCounter bc = new ContourBeesCounter(10, 0.7, 30, 2000);
+        double error = calculateRelativeError(bc, "c5");
+        System.out.println("Error case3: " + df.format(error));
         assertTrue(error < MAX_ERROR_THRESHOLD);
     }
 
@@ -46,13 +78,13 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @SuppressWarnings({"UnusedAssignment", "unused"})
     private double calculateRelativeError(BeesCounter bc, String dataset) throws Exception {
         int i = 1;
-        int expectedNumBeesTotal = 0;
-        int numBeesTotal = 0;
+        long absoluteError = 0;
+        long expectedNumBeesTotal = 0;
 
-        File expectedOutputs = TestUtils.getFileFromPath(this, "res/img/" + dataset + "/expected.txt");
+        File expectedOutputs = TestUtils.getFileFromPath(this, "res/img/" + dataset + "/numBees.txt");
         try (BufferedReader br = new BufferedReader(new FileReader(expectedOutputs))) {
-            // Process 10 frames to create background model
-            for (String line; i <= 10 && (line = br.readLine()) != null; i++) {
+            // Process NUM_FRAMES_SKIP frames to create background model
+            for (String line; i <= NUM_FRAMES_SKIP && (line = br.readLine()) != null; i++) {
                 bc.countBees(readFreame(i, dataset));
             }
             // Compare beesCounter output with the expected output
@@ -60,15 +92,17 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
             for (String line; (line = br.readLine()) != null; i++) {
                 // Get number of bees in the frame (expected and output)
                 expectedNumBeesTotal += expectedNumBees = Integer.parseInt(line);
-                numBeesTotal += numBees = bc.countBees(readFreame(i, dataset));
+                numBees = bc.countBees(readFreame(i, dataset));
+                // Calculate absolute error
+                absoluteError +=  Math.abs(expectedNumBees - numBees);
                 // If they are not equal -> save frame to revise
-                if (expectedNumBeesTotal != numBeesTotal) {
+                if (expectedNumBees != numBees) {
                     saveFrames(bc.getProcessedFrame(), i, expectedNumBees, numBees);
                 }
             }
         }
         // Calculate relative error
-        return Math.abs((expectedNumBeesTotal - numBeesTotal) / (double) expectedNumBeesTotal);
+        return absoluteError / (double) expectedNumBeesTotal;
     }
 
     /**
@@ -82,7 +116,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
      * @param numBees         output number of bees.
      */
     private void saveFrames(Mat frame, int id, int expectedNumBees, int numBees) {
-        TestUtils.saveMatToFile(frame, String.format("%03d_e%d_o%d", id, expectedNumBees, numBees));
+        TestUtils.saveMatToFile(frame, String.format("/img/%03d_e%d_o%d", id, expectedNumBees, numBees));
     }
 
     /**

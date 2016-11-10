@@ -15,7 +15,7 @@ public class BackgroundSubtractor implements VideoProcessor {
     private static final String TAG = "BackgroundSubtractor";
 
     // Number of frames to consider in the background model
-    private static final int    HISTORY = 50;
+    private static final int    HISTORY = 10;
     // Ratio of frames to add a pixel to the bg model if it keeps semi-constant
     private static final double BACKGROUND_RATIO = 0.04;
     // Threshold to decide whether a pixel belongs to the background model or not
@@ -31,7 +31,7 @@ public class BackgroundSubtractor implements VideoProcessor {
 
     /**
      * Default BackgroundSubtractor constructor.
-     * History is initialized to 50 and shadows threshold to 0.7.
+     * History is initialized to 10 and shadows threshold to 0.7.
      */
     public BackgroundSubtractor() {
         mog = getMogInstance(HISTORY, SHADOWS_THRESHOLD);

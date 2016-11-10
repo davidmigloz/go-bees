@@ -25,8 +25,8 @@ public class ContourBeesCounter implements BeesCounter {
 
     /**
      * Default ContourBeesCounter constructor.
-     * History is initialized to 50 and shadows threshold to 0.7.
-     * minArea is initialized to 15 and maxArea to 600.
+     * History is initialized to 10 and shadows threshold to 0.7.
+     * minArea is initialized to 15 and maxArea to 800.
      */
     public ContourBeesCounter() {
         blur = new Blur();

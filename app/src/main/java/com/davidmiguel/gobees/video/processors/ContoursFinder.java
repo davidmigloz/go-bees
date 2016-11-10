@@ -23,7 +23,7 @@ public class ContoursFinder implements VideoProcessor {
     private static final Scalar RED = new Scalar(255, 0, 0);
     private static final Scalar GREEN = new Scalar(0, 255, 0);
     private static final double MIN_AREA = 15;
-    private static final double MAX_AREA = 600;
+    private static final double MAX_AREA = 800;
 
     private List<MatOfPoint> contourList;
     private Mat hierarchy;
@@ -33,7 +33,7 @@ public class ContoursFinder implements VideoProcessor {
 
     /**
      * Default ContoursFinder constructor.
-     * minArea is initialized to 15 and maxArea to 600.
+     * minArea is initialized to 15 and maxArea to 800.
      */
     public ContoursFinder() {
         contourList = new ArrayList<>();
