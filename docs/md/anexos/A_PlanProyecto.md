@@ -136,6 +136,16 @@ Se estimaron 16 horas de trabajo y se invirtieron finalmente 23 horas, completan
 
 ![Sprint 7](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint7.png)
 
+### Sprint 8 (05/11/16 - 10/11/16)
+
+Los objetivos de este sprint fueron: diseñar el modelo de datos de la aplicación teniendo en cuenta el uso final de estos. Desarrollar una aplicación Java para realizar un conteo manual de un conjunto de frames. Utilizar los datos obtenidos mediante la aplicación de conteo para implementar un test que calcule el error que comete el algoritmo.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 8](https://github.com/davidmigloz/go-bees/milestone/9?closed=1).
+
+Se estimaron 46 horas de trabajo y se invirtieron finalmente 53 horas, completando todas las tareas.
+
+![Sprint 8](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint8.png)
+
 Estudio de viabilidad
 ---------------------
 
