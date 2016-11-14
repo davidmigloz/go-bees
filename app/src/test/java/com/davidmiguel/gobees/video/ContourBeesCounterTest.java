@@ -5,9 +5,13 @@ import android.annotation.SuppressLint;
 import com.davidmiguel.gobees.OpenCvBaseTest;
 import com.davidmiguel.gobees.TestUtils;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.opencv.core.Mat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,10 +28,18 @@ import static junit.framework.Assert.assertTrue;
 @SuppressLint("DefaultLocale")
 public class ContourBeesCounterTest extends OpenCvBaseTest {
 
+    private final Logger logger = LoggerFactory.getLogger(ContourBeesCounterTest.class);
+    private static final String LOGGER_PROP = "src/test/res/log4j.properties";
+
     private static final double MAX_ERROR_THRESHOLD = 0.1;
     private static final int NUM_FRAMES_SKIP = 10;
 
     private DecimalFormat df;
+
+    @BeforeClass
+    public static void setLogger() {
+        PropertyConfigurator.configure(LOGGER_PROP);
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -39,6 +51,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
      */
     @Test
     public void case1() throws Exception {
+        logger.debug("Case1:");
         BeesCounter bc = new ContourBeesCounter();
         double error = calculateRelativeError(bc, "c14");
         System.out.println("Error case1: " + df.format(error));
@@ -50,6 +63,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
      */
     @Test
     public void case2() throws Exception {
+        logger.debug("Case2:");
         BeesCounter bc = new ContourBeesCounter(10, 0.7, 30, 800);
         double error = calculateRelativeError(bc, "c17");
         System.out.println("Error case2: " + df.format(error));
@@ -61,6 +75,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
      */
     @Test
     public void case3() throws Exception {
+        logger.debug("Case3:");
         BeesCounter bc = new ContourBeesCounter(10, 0.7, 30, 2000);
         double error = calculateRelativeError(bc, "c5");
         System.out.println("Error case3: " + df.format(error));
@@ -78,7 +93,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @SuppressWarnings({"UnusedAssignment", "unused"})
     private double calculateRelativeError(BeesCounter bc, String dataset) throws Exception {
         int i = 1;
-        long absoluteError = 0;
+        long totalAbsoluteError = 0;
         long expectedNumBeesTotal = 0;
 
         File expectedOutputs = TestUtils.getFileFromPath(this, "res/img/" + dataset + "/numBees.txt");
@@ -93,8 +108,10 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
                 // Get number of bees in the frame (expected and output)
                 expectedNumBeesTotal += expectedNumBees = Integer.parseInt(line);
                 numBees = bc.countBees(readFreame(i, dataset));
-                // Calculate absolute error
-                absoluteError +=  Math.abs(expectedNumBees - numBees);
+                // Calculate and log absolute error
+                int absoluteError = expectedNumBees - numBees;
+                logger.debug("{}:{}", i, absoluteError);
+                totalAbsoluteError +=  Math.abs(absoluteError);
                 // If they are not equal -> save frame to revise
                 if (expectedNumBees != numBees) {
                     saveFrames(bc.getProcessedFrame(), i, expectedNumBees, numBees);
@@ -102,7 +119,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
             }
         }
         // Calculate relative error
-        return absoluteError / (double) expectedNumBeesTotal;
+        return totalAbsoluteError / (double) expectedNumBeesTotal;
     }
 
     /**

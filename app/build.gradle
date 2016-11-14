@@ -35,6 +35,12 @@ android {
     }
 }
 
+sourceSets {
+    test {
+        java.srcDirs = ['src/test/res']
+    }
+}
+
 dependencies {
     // App's dependencies, including test
     compile "com.android.support:appcompat-v7:25.0.0"
@@ -46,6 +52,9 @@ dependencies {
     // Dependencies for local unit tests
     testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-all:2.0.2-beta"
+    testCompile "org.slf4j:slf4j-api:1.7.21"
+    testCompile "org.slf4j:slf4j-log4j12:1.7.21"
+    testCompile "log4j:log4j:1.2.17"
 }
 
 /*
