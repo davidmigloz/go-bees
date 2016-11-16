@@ -12,6 +12,7 @@ import com.google.common.base.Objects;
 public class Apiary {
 
     private final int id;
+    private final String name;
     @Nullable
     private final String imageUrl;
     @Nullable
@@ -19,9 +20,10 @@ public class Apiary {
     @Nullable
     private final String notes;
 
-    public Apiary(int id, @Nullable String imageUrl,
-                  @Nullable Location location,  @Nullable String notes) {
+    public Apiary(int id, String name, @Nullable String imageUrl,
+                  @Nullable Location location, @Nullable String notes) {
         this.id = id;
+        this.name = name;
         this.imageUrl = imageUrl;
         this.location = location;
         this.notes = notes;
@@ -29,6 +31,10 @@ public class Apiary {
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Nullable
@@ -52,6 +58,7 @@ public class Apiary {
         if (o == null || getClass() != o.getClass()) return false;
         Apiary apiary = (Apiary) o;
         return id == apiary.id &&
+                Objects.equal(name, apiary.name) &&
                 Objects.equal(imageUrl, apiary.imageUrl) &&
                 Objects.equal(location, apiary.location) &&
                 Objects.equal(notes, apiary.notes);
@@ -59,6 +66,6 @@ public class Apiary {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, imageUrl, location, notes);
+        return Objects.hashCode(id, name, imageUrl, location, notes);
     }
 }

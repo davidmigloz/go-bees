@@ -11,19 +11,25 @@ import com.google.common.base.Objects;
 public class Hive {
 
     private final int id;
+    private final String name;
     @Nullable
     private final String imageUrl;
     @Nullable
     private final String notes;
 
-    public Hive(int id, String imageUrl, String notes) {
+    public Hive(int id, String name, @Nullable String imageUrl, @Nullable String notes) {
         this.id = id;
+        this.name = name;
         this.imageUrl = imageUrl;
         this.notes = notes;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Nullable
@@ -42,12 +48,13 @@ public class Hive {
         if (o == null || getClass() != o.getClass()) return false;
         Hive hive = (Hive) o;
         return id == hive.id &&
+                Objects.equal(name, hive.name) &&
                 Objects.equal(imageUrl, hive.imageUrl) &&
                 Objects.equal(notes, hive.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, imageUrl, notes);
+        return Objects.hashCode(id, name, imageUrl, notes);
     }
 }
