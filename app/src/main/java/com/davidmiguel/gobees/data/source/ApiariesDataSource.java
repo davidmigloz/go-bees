@@ -17,7 +17,7 @@ public interface ApiariesDataSource {
 
     void saveApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback);
 
-    void refreshApiaries(@NonNull TaskCallback callback);
+    void refreshApiaries();
 
     void deleteApiary(int apiaryId, @NonNull TaskCallback callback);
 

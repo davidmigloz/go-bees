@@ -45,7 +45,7 @@ public class ApiariesLocalDataSource implements ApiariesDataSource {
     }
 
     @Override
-    public void refreshApiaries(@NonNull TaskCallback callback) {
+    public void refreshApiaries() {
 
     }
 

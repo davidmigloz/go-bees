@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GoBees</string>
+    <string name="statistics_title">Statistics</string>
+    <string name="settings_title">Settings</string>
+    <string name="gobees_logo">GoBees logo</string>
+    <string name="no_apiaries">You have no apiaries!</string>
+    <string name="add_icon">Add</string>
+    <string name="home_icon">Home icon</string>
+    <string name="refresh">Refresh</string>
+    <string name="no_apiaries_add">Add a new apiary +</string>
+    <string name="loading_apiaries_error">Error while loading apiaries.</string>
 </resources>
