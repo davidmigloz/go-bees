@@ -21,6 +21,8 @@ public interface ApiariesDataSource {
 
     void deleteApiary(int apiaryId, @NonNull TaskCallback callback);
 
+    void deleteAllApiaries(@NonNull TaskCallback callback);
+
     interface GetApiariesCallback {
         void onApiariesLoaded(List<Apiary> apiaries);
 

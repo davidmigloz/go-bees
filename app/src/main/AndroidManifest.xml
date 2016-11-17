@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
+        <activity android:name="com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"/>

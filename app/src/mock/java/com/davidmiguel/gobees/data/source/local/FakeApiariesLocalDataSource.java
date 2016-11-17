@@ -47,6 +47,7 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
     @Override
     public void saveApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
         APIARIES_SERVICE_DATA.put(apiary.getId(), apiary);
+        callback.onSuccess();
     }
 
     @Override
@@ -58,6 +59,12 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
     @Override
     public void deleteApiary(int apiaryId, @NonNull TaskCallback callback) {
         APIARIES_SERVICE_DATA.remove(apiaryId);
+    }
+
+    @Override
+    public void deleteAllApiaries(@NonNull TaskCallback callback) {
+        APIARIES_SERVICE_DATA.clear();
+        callback.onSuccess();
     }
 
     @VisibleForTesting

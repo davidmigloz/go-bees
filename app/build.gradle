@@ -86,6 +86,26 @@ dependencies {
     testCompile 'org.slf4j:slf4j-api:1.7.21'
     testCompile 'org.slf4j:slf4j-log4j12:1.7.21'
     testCompile 'log4j:log4j:1.2.17'
+
+    // Android Testing Support Library's runner and rules
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+
+    // Dependencies for Android unit tests
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'org.mockito:mockito-core:1.10.19'
+
+    // Espresso UI Testing
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile 'com.android.support:support-annotations:25.0.1'
+    androidTestCompile 'com.android.support:support-v4:25.0.1'
+    androidTestCompile 'com.android.support:recyclerview-v7:25.0.1'
+    androidTestCompile 'com.android.support:appcompat-v7:25.0.1'
+    androidTestCompile 'com.android.support:design:25.0.1'
 }
 
 /*

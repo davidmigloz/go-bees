@@ -4,6 +4,7 @@ import android.location.Location;
 import android.support.annotation.Nullable;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 
 
 /**
@@ -50,6 +51,10 @@ public class Apiary {
     @Nullable
     public String getNotes() {
         return notes;
+    }
+
+    public boolean hasNoName() {
+        return Strings.isNullOrEmpty(name);
     }
 
     @Override

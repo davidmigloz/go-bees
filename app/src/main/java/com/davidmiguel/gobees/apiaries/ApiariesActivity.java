@@ -28,7 +28,7 @@ public class ApiariesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apiaries_act);
 
-        // Set up the toolbar.
+        // Set up the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();

@@ -1,7 +1,9 @@
 package com.davidmiguel.gobees.apiaries;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.ApiariesDataSource;
 import com.davidmiguel.gobees.data.source.cache.ApiariesRepository;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
+ * Listens to user actions from the UI AddEditApiaryFragment, retrieves the data and updates the
  * UI as required.
  */
 public class ApiariesPresenter implements ApiariesContract.Presenter {
@@ -28,7 +30,10 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
 
     @Override
     public void result(int requestCode, int resultCode) {
-
+        // If a task was successfully added, show snackbar
+        if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
+            apiariesView.showSuccessfullySavedMessage();
+        }
     }
 
     @Override
@@ -76,16 +81,16 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
 
     @Override
     public void addNewApiary() {
-
+        apiariesView.showAddApiary();
     }
 
     @Override
     public void openApiaryDetail(@NonNull Apiary requestedApiary) {
-
+        // TODO
     }
 
     @Override
     public void start() {
-
+        loadApiaries(false);
     }
 }

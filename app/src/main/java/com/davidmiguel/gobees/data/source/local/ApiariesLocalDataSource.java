@@ -53,4 +53,9 @@ public class ApiariesLocalDataSource implements ApiariesDataSource {
     public void deleteApiary(int apiaryId, @NonNull TaskCallback callback) {
 
     }
+
+    @Override
+    public void deleteAllApiaries(@NonNull TaskCallback callback) {
+
+    }
 }

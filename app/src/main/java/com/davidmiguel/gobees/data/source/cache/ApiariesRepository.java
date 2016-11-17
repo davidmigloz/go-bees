@@ -84,7 +84,13 @@ public class ApiariesRepository implements ApiariesDataSource {
 
     @Override
     public void saveApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
-
+        checkNotNull(apiary);
+        apiariesLocalDataSource.saveApiary(apiary, callback);
+        // Do in memory cache update to keep the app UI up to date
+        if (cachedApiaries == null) {
+            cachedApiaries = new LinkedHashMap<>();
+        }
+        cachedApiaries.put(apiary.getId(), apiary);
     }
 
     @Override
@@ -95,6 +101,16 @@ public class ApiariesRepository implements ApiariesDataSource {
     @Override
     public void deleteApiary(int apiaryId, @NonNull TaskCallback callback) {
 
+    }
+
+    @Override
+    public void deleteAllApiaries(@NonNull TaskCallback callback) {
+        apiariesLocalDataSource.deleteAllApiaries(callback);
+
+        if (cachedApiaries == null) {
+            cachedApiaries = new LinkedHashMap<>();
+        }
+        cachedApiaries.clear();
     }
 
     private void refreshCache(List<Apiary> apiaries) {
