@@ -97,6 +97,16 @@ public class ApiariesRepository implements ApiariesDataSource {
 
     }
 
+    @Override
+    public void deleteAllApiaries(@NonNull TaskCallback callback) {
+        apiariesLocalDataSource.deleteAllApiaries(callback);
+
+        if (cachedApiaries == null) {
+            cachedApiaries = new LinkedHashMap<>();
+        }
+        cachedApiaries.clear();
+    }
+
     private void refreshCache(List<Apiary> apiaries) {
         if (cachedApiaries == null) {
             cachedApiaries = new LinkedHashMap<>();

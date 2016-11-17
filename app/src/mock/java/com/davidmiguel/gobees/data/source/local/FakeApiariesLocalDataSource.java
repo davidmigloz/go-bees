@@ -60,6 +60,12 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
         APIARIES_SERVICE_DATA.remove(apiaryId);
     }
 
+    @Override
+    public void deleteAllApiaries(@NonNull TaskCallback callback) {
+        APIARIES_SERVICE_DATA.clear();
+        callback.onSuccess();
+    }
+
     @VisibleForTesting
     public void addTasks(Apiary... apiaries) {
         for (Apiary apiary : apiaries) {
