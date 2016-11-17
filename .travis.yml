@@ -46,7 +46,7 @@ before_script:
 
 script:
     # Compile and run unit tests
-    - ./gradlew build
+    - ./gradlew assembleDebug lint
     # Run test coverage report
     - ./gradlew jacocoTestDebugUnitTestReport
     # Build test app
@@ -56,7 +56,7 @@ script:
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-    - ./gradlew connectedCheck
+    - ./gradlew connectedMockDebugAndroidTest
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
