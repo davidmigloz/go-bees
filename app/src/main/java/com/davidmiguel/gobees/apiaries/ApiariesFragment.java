@@ -2,6 +2,7 @@ package com.davidmiguel.gobees.apiaries;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -207,7 +208,7 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
     }
 
     @Override
-    public void setPresenter(ApiariesContract.Presenter presenter) {
+    public void setPresenter(@NonNull ApiariesContract.Presenter presenter) {
         this.presenter = checkNotNull(presenter);
     }
 

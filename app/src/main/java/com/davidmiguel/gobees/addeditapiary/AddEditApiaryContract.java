@@ -12,6 +12,8 @@ public class AddEditApiaryContract {
 
         void showEmptyApiaryError();
 
+        void showSaveApiaryError();
+
         void showApiariesList();
 
         void setName(String name);
