@@ -27,6 +27,8 @@ public interface ApiariesContract {
         void showNoApiaries();
 
         void showSuccessfullySavedMessage();
+
+        boolean isActive();
     }
 
     interface Presenter extends BasePresenter {
