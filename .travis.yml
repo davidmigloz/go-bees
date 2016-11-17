@@ -48,15 +48,15 @@ script:
     # Compile and run unit tests
     - ./gradlew assembleDebug lint
     # Run test coverage report
-    - ./gradlew jacocoTestDebugUnitTestReport
+    - ./gradlew jacocoTestMockDebugUnitTestReport
     # Build test app
     - ./gradlew assembleAndroidTest
     # Create and lunch emulator
-    - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-    - emulator -avd test -no-audio -no-window &
-    - android-wait-for-emulator
-    - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-    - ./gradlew connectedMockDebugAndroidTest
+    #- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+    #- emulator -avd test -no-audio -no-window &
+    #- android-wait-for-emulator
+    #- adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+    #- ./gradlew connectedMockDebugAndroidTest
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
