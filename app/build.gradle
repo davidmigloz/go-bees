@@ -4,31 +4,60 @@ apply plugin: 'jacoco-android'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
+
     defaultConfig {
         applicationId "com.davidmiguel.gobees"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "0.1"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         debug {
             testCoverageEnabled true
+            minifyEnabled true
+            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
     }
 
+    // Mock: stubs out the service layer completely and returns a fake dataset
+    // Prod: production version
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+
+        }
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if(variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+
+    // android.jar methods return either null or zero, not throw exceptions
     testOptions {
-        // android.jar methods return either null or zero, not throw exceptions
         unitTests.returnDefaultValues = true
     }
 
+    // Always show the result of every unit test, even if it passes
     testOptions.unitTests.all {
-        // Always show the result of every unit test, even if it passes
         testLogging {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }

@@ -26,14 +26,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/noTasks"
+            android:id="@+id/no_apiaries"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/noTasksIcon"
+                android:id="@+id/no_apiaries_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
@@ -42,12 +42,21 @@
                 android:src="@drawable/ic_add_circle_outline"/>
 
             <TextView
-                android:id="@+id/noTasksMain"
+                android:id="@+id/no_apiaries_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/no_apiaries"
                 android:layout_marginBottom="@dimen/list_item_padding" />
+
+            <TextView
+                android:id="@+id/no_apiaries_add"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/touch_feedback"
+                android:gravity="center"
+                android:text="@string/no_apiaries_add" />
 
         </LinearLayout>
     </RelativeLayout>
