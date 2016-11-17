@@ -9,4 +9,6 @@
     <string name="refresh">Refresh</string>
     <string name="no_apiaries_add">Add a new apiary +</string>
     <string name="loading_apiaries_error">Error while loading apiaries.</string>
+    <string name="name_hint">Name</string>
+    <string name="notes_hint">Notes...</string>
 </resources>
