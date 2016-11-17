@@ -90,17 +90,7 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         if (newApiary.hasNoName()) {
             addeditapiaryView.showEmptyApiaryError();
         } else {
-            apiariesRepository.saveApiary(newApiary, new ApiariesDataSource.TaskCallback() {
-                @Override
-                public void onSuccess() {
-                    addeditapiaryView.showApiariesList();
-                }
-
-                @Override
-                public void onFailure() {
-
-                }
-            });
+            apiariesRepository.saveApiary(newApiary, this);
 
         }
     }

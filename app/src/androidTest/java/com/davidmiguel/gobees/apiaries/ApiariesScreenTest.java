@@ -1,12 +1,9 @@
 package com.davidmiguel.gobees.apiaries;
 
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,7 +26,7 @@ public class ApiariesScreenTest {
      */
     @Rule
     public ActivityTestRule<ApiariesActivity> apiariesActivityTestRule =
-            new ActivityTestRule<ApiariesActivity>(ApiariesActivity.class);
+            new ActivityTestRule<>(ApiariesActivity.class);
 
     @Test
     public void clickAddApiaryButton_opensAddApiaryUi() {

@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
 
@@ -124,9 +125,6 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
         // Listen menu options
         setHasOptionsMenu(true);
 
-        // Load data
-        presenter.loadApiaries(true);
-
         return root;
     }
 
@@ -175,12 +173,13 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
 
     @Override
     public void showAddApiary() {
-
+        Intent intent = new Intent(getContext(), AddEditApiaryActivity.class);
+        startActivityForResult(intent, AddEditApiaryActivity.REQUEST_ADD_APIARY);
     }
 
     @Override
     public void showApiaryDetail(int apiaryId) {
-
+        // TODO
     }
 
     @Override
@@ -199,7 +198,7 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
 
     @Override
     public void showSuccessfullySavedMessage() {
-
+        showMessage(getString(R.string.successfully_saved_apiary_message));
     }
 
     @Override

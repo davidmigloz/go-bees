@@ -47,6 +47,7 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
     @Override
     public void saveApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
         APIARIES_SERVICE_DATA.put(apiary.getId(), apiary);
+        callback.onSuccess();
     }
 
     @Override

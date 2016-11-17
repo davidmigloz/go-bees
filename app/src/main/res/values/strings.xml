@@ -15,4 +15,5 @@
     <string name="add_apiary">Add apiary</string>
     <string name="empty_apiary_message">Apiary name cannot be empty!</string>
     <string name="save_apiary_error_message">Error while saving apiary.</string>
+    <string name="successfully_saved_apiary_message">Apiary saved!</string>
 </resources>

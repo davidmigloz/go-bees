@@ -8,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.google.common.base.Strings;
 
 /**
  * Add / edit apiaries activity.
  */
 public class AddEditApiaryActivity extends AppCompatActivity {
+
+    public static final int REQUEST_ADD_APIARY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,13 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         // Get apiary id (if edit)
-        int apiaryId = Integer.parseInt(getIntent()
-                .getStringExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID));
+        String id = getIntent().getStringExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID);
+        int apiaryId;
+        if(Strings.isNullOrEmpty(id)) {
+            apiaryId = -1;
+        } else {
+            apiaryId = Integer.parseInt(id);
+        }
 
         // Add fragment to the activity and set title
         AddEditApiaryFragment addEditApiaryFragment =
