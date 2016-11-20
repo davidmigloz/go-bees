@@ -13,7 +13,7 @@ Antes de aplicar el algoritmo de substracción del fondo, es recomendable realiz
 #### Conversión de RGB a escala de grises
 Los fotogramas captados por la cámara se devuelven en formato RGB. En este formato se poseen tres matrices, una por cada canal (Red-Green-Blue). La suma aditiva de los tres canales resulta en una imagen a color.
 
-Sin embargo, el color no proporciona ninguna información relevante en nuestra tarea de identificación de abejas. Es por esto que se puede convertir los fotogramas de RGB a escala de grises. De esta manera, se trabajará solamente con una matriz de píxeles en lugar de tres. Simplificando en gran medida el número de operaciones a realizar y, por tanto, aumentado el rendimiento de nuestro algoritmo final.
+Sin embargo, el color no proporciona ninguna información relevante en nuestra tarea de identificación de abejas. Es por esto que se puede convertir los fotogramas de RGB a escala de grises. De esta manera, se trabajará solamente con una matriz de píxeles en lugar de tres. Simplificando, en gran medida, el número de operaciones a realizar y por tanto, aumentado el rendimiento de nuestro algoritmo final.
 
 OpenCV utiliza la conversión colométrica a escala de grises. [^opencv:color_cvt] Esta técnica se basa en principios colométricos para ajustar la luminancia de la imagen a color y la imagen resultante. Resultando una imagen con la misma luminancia absoluta y la misma percepción de luminosidad. [^wiki:grayscale]
 
@@ -23,12 +23,12 @@ Utiliza la siguiente fórmula para calcular la luminancia resultante:
 
 `\text{RGB[A] to Gray:} \quad Y \leftarrow 0.299 \cdot R + 0.587 \cdot G + 0.114 \cdot B`
 
-La fórmula calcula la luminancia de una forma no lineal, sin necesidad de realizar una expansión gamma. Los coeficientes intentan imitar la percepción de intensidad medida por un humano tricromático. La visión humana es más sensible al color verde y menos al color azul. [^wiki:grayscale]
+La fórmula calcula la luminancia de una forma no lineal, sin necesidad de realizar una expansión gamma. Los coeficientes intentan imitar la percepción de intensidad medida por un humano tricromático, siendo más sensible al color verde y menos al color azul. [^wiki:grayscale]
 
 #### Desenfoque Gaussiano
 Las imágenes captadas pueden contener ruido que puede dificultar su procesamiento. El ruido son variaciones aleatorias del brillo o el color en la imagen. Una técnica que permite reducirlo es el desenfoque.
 
-En nuestro caso vamos a utilizar desenfoque Gaussiano. Este es un filtro de paso bajo que reduce las componentes de alta frecuencia de la imagen utilizando para ello una convolución con una función Gaussiana. [^wiki:Gaussian] Se diferencia del desenfoque promedio en que da más peso a los vecinos cercanos, siendo estos más influyentes en el resultado.
+En nuestro caso vamos a utilizar desenfoque Gaussiano, un filtro de paso bajo que reduce las componentes de alta frecuencia de la imagen utilizando para ello una convolución con una función Gaussiana. [^wiki:Gaussian] Se diferencia del desenfoque promedio en que da más peso a los vecinos cercanos, siendo estos más influyentes en el resultado.
 
 El kernel utilizado en la convolución es una muestra discreta de la función Gaussiana. En nuestro caso utilizamos un kernel 3x3 que se corresponde con: [^book:mastering_opencv]
 
@@ -38,7 +38,7 @@ El kernel utilizado en la convolución es una muestra discreta de la función Ga
 
 ### 2º Substracción del fondo
 
-En un sistema de vigilancia resulta de gran interés el poder extraer los objetos en movimiento. Esto se conoce como extracción del fondo, en inglés _background subtraction_ o _foreground detection_. Entendemos por esto la clasificación de todos los píxeles de un determinado fotograma bien como fondo, o como primer plano. [^wiki:bs] En primer plano se engloban a todos los objetos en movimiento, mientras que en el fondo se encuentran todos los objetos estáticos junto con posibles sombras, cambios de iluminación u otros objetos en movimiento que no son de interés, como puede ser la rama de un árbol balanceándose por el viento. Se trata de un paso crítico, ya que algoritmos posteriores (detección y tracking) dependen en gran medida de los resultados de este.
+En un sistema de vigilancia resulta de gran interés el poder extraer los objetos en movimiento del resto de la imagen. Esto se conoce como extracción del fondo, en inglés _background subtraction_ o _foreground detection_, y se consiste en clasificar todos los píxeles de un determinado fotograma bien como fondo, o como primer plano. [^wiki:bs] En primer plano se engloban a todos los objetos en movimiento, mientras que en el fondo se encuentran todos los objetos estáticos junto con posibles sombras, cambios de iluminación u otros objetos en movimiento que no son de interés, como puede ser la rama de un árbol balanceándose por el viento. Se trata de un paso crítico, ya que algoritmos posteriores dependen en gran medida de los resultados de este.
 
 En nuestro proyecto, la toma de imágenes se realiza mediante una cámara estática. Esto facilita en parte la detección del fondo, ya que este se corresponderá con todos los píxeles estáticos. Sin embargo, como trabajamos en un entorno al aire libre, tenemos que lidiar también con cambios de iluminación, sombras, u otros objetos móviles que no son de nuestro interés (falsos positivos).
 
@@ -54,7 +54,7 @@ Para implementar este algoritmo con OpenCV, se hace uso de la función `Core.abs
 En  nuestro problema, al trabajar al aire libre nos es imposible utilizar este algoritmo. Ya que el modelo del fondo cambia constantemente.
 
 #### Substracción del fotograma anterior
-En este método el modelo del fondo se extrae del fotograma anterior. De tal manera que a cada nuevo fotograma se le substrae el anterior.
+En este método, el modelo del fondo se extrae del fotograma anterior. De tal manera que a cada nuevo fotograma se le substrae el anterior.
 
 De esta manera se mejora la respuesta a cambios en la escena, como los cambios de iluminación. Sin embargo, si un objeto en movimiento se queda estático en la imagen, este deja de ser detectado. [^book:opencv_java]
 
@@ -73,13 +73,13 @@ Donde  p_t es el nuevo valor del píxel, u_{t-1} es la media del fondo en el ins
 
 OpenCV provee la función `Imgproc.accumulateWeighted()` que implementa por nosotros la fórmula anterior. Haciendo uso de esta función y de la utilizada en la sección anterior podemos implementar este algoritmo.
 
-Tras probarlo vimos que tenía una eficiencia muy buena y se adaptaba a los cambios correctamente. Sin embargo, de vez en cuando se producían ruidos que daban lugar a falsos positivos.
+Tras probarlo, vimos que tenía una eficiencia muy buena y se adaptaba a los cambios correctamente. Sin embargo, de vez en cuando se producían ruidos que daban lugar a falsos positivos.
 
 #### BackgroundSubtractorMOG2
 
 `BackgroundSubtractorMOG2` es una mejora del algoritmo `BackgroundSubtractorMOG`. En la versión original de OpenCV se encuentran implementados ambos, sin embargo, en los wrappers para Android solo disponemos de la revisión.
 
-`BackgroundSubtractorMOG` está basado en el modelo Gaussian Mixture (GMM). Se trata de un modelo compuesto por la suma de varias distribuciones Gaussianas que, correctamente elegidas, permiten modelar cualquier distribución. [^coursera:gmm] El algoritmo de substracción del fondo fue propuesto en el artículo [^art:yao_improved_2014] y modela cada píxel del fondo como la mezcla de _K_ distribuciones Gaussianas. Los pesos de la mezcla representan las proporciones de tiempo que el color de ese píxel se ha mantenido en la escena. Siendo los colores de fondo más probables los que más permanecen y son más estáticos. [^opencv:bs_tutorial]
+`BackgroundSubtractorMOG` está basado en el modelo Gaussian Mixture (GMM). Se trata de un modelo compuesto por la suma de varias distribuciones Gaussianas que, correctamente elegidas, permiten modelar cualquier distribución. [^coursera:gmm] El algoritmo de substracción del fondo fue propuesto en el artículo [^art:yao_improved_2014] y modela cada píxel del fondo como la mezcla de _K_ distribuciones Gaussianas. Los pesos de la mezcla representan las proporciones de tiempo que el color de ese píxel se ha mantenido en la escena. Siendo los colores de fondo más probables los que más permanezcan y sean más estáticos. [^opencv:bs_tutorial]
 
 `BackgroundSubtractorMOG2` se basa en los mismos principios que su antecesor pero implementa una mejora sustancial. Es el propio algoritmo el que selecciona el número adecuado de distribuciones Gaussianas necesarias para modelar cada píxel. De esta manera, se mejora notablemente la adaptabilidad a variaciones en la escena. Fue propuesto en los artículos [^art:zivkovic_improved_2004] y [^art:zivkovic_efficient_2006].
 
@@ -105,7 +105,7 @@ De todos ellos, los parámetros más importantes a ajustar son `history` o `lear
 
 La parametrización correcta de este algoritmo es clave para su buen funcionamiento. Por ello, durante las pruebas se integró en nuestra aplicación de desarrollo, permitiendo variar todos estos parámetros en tiempo real. De esta manera. se pudo elegir le mejor configuración para nuestro problema concreto.
 
-Una vez parametrizado correctamente, vimos como este algoritmo era el que mejores resultados nos proporcionaba. Con un tiempo de ejecución en nuestro equipo de pruebas de entorno a 4ms/frame, mucho menor que el proporcionado por `BackgroundSubtractorKNN`, de entorno a 25ms/frame. El algoritmo detectaba correctamente las abejas, era resistente al ruido que afectaba al algoritmo de substracción de los fotogramas anteriores y además era capaz de diferenciar una abeja de su sombra. Por todos estos motivos, se seleccionó para la fase de substracción del fondo.
+Una vez parametrizado correctamente, vimos como este algoritmo era el que mejores resultados nos proporcionaba. Con un tiempo de ejecución en nuestro equipo de pruebas de entorno a 4ms/frame, mucho menor que el proporcionado por `BackgroundSubtractorKNN`, de entorno a 25ms/frame. El algoritmo detectaba correctamente las abejas, era resistente al ruido que afectaba al algoritmo de substracción de los fotogramas anteriores y, además, era capaz de diferenciar una abeja de su sombra. Por todos estos motivos, se seleccionó para la fase de substracción del fondo.
 
 #### BackgroundSubtractorKNN
 Se trata de un método que se basa en el algoritmo de clasificación supervisada _K nearest neighbors_ (k-nn). El algoritmo fue propuesto en el artículo [^art:zivkovic_efficient_2006]. Y de acuerdo con sus conclusiones, es muy eficiente cuando el número de píxeles que se corresponden con el primer plano es bajo.
@@ -143,19 +143,19 @@ La dilatación nos permite reconstruir las abejas, pero también aumenta su tama
 
 El último paso que realiza nuestro algoritmo de visión artificial es la búsqueda de los contornos de las abejas. Entendemos por contorno una línea curva que une todos los puntos continuos del borde de una región de un mismo color o intensidad.
 
-La salida de la fase anterior es una imagen binaria con los objetos en movimiento en blanco y el fondo en negro. Por lo tanto el objetivo de esta fase es detectar todas las regiones blancas que puedan corresponderse con una abeja.
+La salida de la fase anterior es una imagen binaria con los objetos en movimiento en blanco y el fondo en negro. Por lo tanto, el objetivo de esta fase es detectar todas las regiones blancas que puedan corresponderse con una abeja.
 
 OpenCV provee la función `Imgproc.findContours()` para realizar esta tarea. Esta toma una imagen binaria y devuelve una lista con todos los contornos encontrados. Para entender la función se necesita comprender una serie de conceptos: [^opencv:contours]
 
-- Jerarquía: los contornos pueden ser independientes unos de otros, o poseer una relación padre-hijo cuando un contorno está dentro de otro. En la jerarquía se especifican las relaciones entre contornos.
+- **Jerarquía**: los contornos pueden ser independientes unos de otros, o poseer una relación padre-hijo cuando un contorno está dentro de otro. En la jerarquía se especifican las relaciones entre contornos.
 
-- Modo de obtención del contorno: define cómo se van a obtener los contornos en cuestión de jerarquía. [^opencv:find_contours]
+- **Modo de obtención del contorno**: define cómo se van a obtener los contornos en cuestión de jerarquía. [^opencv:find_contours]
     + `RETR_LIST`: devuelve todos los contornos en una lista, sin ninguna información de jerarquía entre ellos.
     + `RETR_EXTERNAL`: devuelve todos los contornos externos. Si algún contorno tiene contornos hijo, estos son ignorados.
     + `RETR_CCOMP`: devuelve los contornos agrupados en dos niveles de jerarquía. Un primer nivel en el que se encuentran todos los contornos exteriores. Y un segundo nivel con los contornos correspondientes a agujeros en los primeros.
     + `RETR_TREE`: devuelve todos los contornos creando un árbol completo con la jerarquía.
 
-- Método de aproximación de los contornos: define el método que utiliza la función para almacenar los contornos. [^opencv:find_contours]
+- **Método de aproximación de los contornos**: define el método que utiliza la función para almacenar los contornos. [^opencv:find_contours]
     + `CHAIN_APPROX_NONE`: almacena todos los puntos del borde del contorno.
     + `CHAIN_APPROX_SIMPLE`: almacena sólo los puntos relevantes del contorno. Por ejemplo, si el contorno es una línea no se necesita almacenar todos los puntos de esta, con el punto inicial y el final basta. Esto es lo que realiza este método, eliminar todos los puntos redundantes y comprimirlos para que ocupe menos espacio.
     + `CV_CHAIN_APPROX_TC89_L1` y `CV_CHAIN_APPROX_TC89_KCOS`: aplican el algoritmo de aproximación de cadena de Teh-Chin, simplificando los polígonos que forman los contornos.
