@@ -16,12 +16,12 @@ Objetivos técnicos
 ------------------
 
 - Desarrollar un algoritmo de visión artificial con OpenCV que permita realizar el conteo de abejas en tiempo real.
-- Desarrollar una aplicación Android con suporte para API 19 y superiores.
-- Aplicar la arquitectura MVP (Model-View-Presenter) en el desarrollo de la aplicación.
+- Desarrollar una aplicación Android con soporte para API 19 y superiores.
+- Aplicar la arquitectura MVP (_Model-View-Presenter_) en el desarrollo de la aplicación.
 - Utilizar Gradle como herramienta para automatizar el proceso de construcción de software.
 - Utilizar Git como sistema de control de versiones distribuido junto con la plataforma GitHub.
 - Hacer uso de herramientas de integración continua como Travis, Codecov, Code Climate o VersionEye en el repositorio.
-- Aplicar la metodología ágil Scrum junto con TDD (Test Driven Development) en el desarrollo del software.
+- Aplicar la metodología ágil Scrum junto con TDD (_Test Driven Development_) en el desarrollo del software.
 - Realizar test unitarios, de integración y de interfaz.
 - Utilizar ZenHub como herramienta de gestión de proyectos.
 - Utilizar un sistema de documentación continua como Read the Docs.
@@ -33,7 +33,7 @@ Objetivos personales
 
 - Realizar una aportación a la modernización de la apicultura.
 - Abarcar el máximo número de conocimientos adquiridos durante la carrera.
-- Explorar otros conceptos y herramientas novedosas no vistos durante la carrera pero utilizados en el mercado laboral.
+- Explorar metodologías y herramientas novedosas utilizadas en el mercado laboral.
 - Adentrarme en el campo de la visión artificial.
 - Profundizar en el desarrollo de aplicaciones Android.
 - Mejorar la documentación disponible de OpenCV para Android.

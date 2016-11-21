@@ -146,6 +146,16 @@ Se estimaron 46 horas de trabajo y se invirtieron finalmente 53 horas, completan
 
 ![Sprint 8](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint8.png)
 
+### Sprint 9 (11/11/16 - 17/11/16)
+
+Los objetivos de este sprint fueron: implementar acceso a datos. Inyección de dependencias con los build variants de Gradle. Empezar a desarrollar las distintas actividades de la app.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en: [Sprint 9](https://github.com/davidmigloz/go-bees/milestone/10?closed=1).
+
+Se estimaron 23 horas de trabajo y se invirtieron finalmente 24,25 horas, completando todas las tareas.
+
+![Sprint 9](https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint9.png)
+
 Estudio de viabilidad
 ---------------------
 

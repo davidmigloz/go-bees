@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.davidmiguel.gobees.apiaries.ScrollChildSwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/apiariesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/apiariesLL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/apiaries_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/no_apiaries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/no_apiaries_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/add_icon"
+                android:src="@drawable/ic_add_circle_outline"/>
+
+            <TextView
+                android:id="@+id/no_apiaries_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_apiaries"
+                android:layout_marginBottom="@dimen/list_item_padding" />
+
+            <TextView
+                android:id="@+id/no_apiaries_add"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/touch_feedback"
+                android:gravity="center"
+                android:text="@string/no_apiaries_add" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</com.davidmiguel.gobees.apiaries.ScrollChildSwipeRefreshLayout>
+
