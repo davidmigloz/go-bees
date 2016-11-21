@@ -62,7 +62,8 @@ función Gaussiana. En nuestro caso utilizamos un kernel 3x3 que se
 corresponde con: [book:mastering_opencv]_
 
 .. math::
-   M = \begin{bmatrix}
+   M = 
+   \begin{bmatrix}
    1 & 2 & 1 \\[0.3em] 
    2 & 4 & 2 \\[0.3em] 
    1 & 2 & 1
