@@ -1,7 +1,8 @@
 Resumen
 =======
 
-{En este primer apartado se hace una breve presentación del tema que se aborda en el proyecto.}
+{En este primer apartado se hace una breve presentación del tema que se
+aborda en el proyecto.}
 
 **Descriptores:** {...}
 
