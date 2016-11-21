@@ -1,7 +1,14 @@
-# Introducción
+Requisitos
+==========
 
-# Objetivos generales
+Introducción
+------------
 
-# Catalogo de requisitos
+Objetivos generales
+-------------------
 
-# Especificación de requisitos
+Catalogo de requisitos
+----------------------
+
+Especificación de requisitos
+----------------------------

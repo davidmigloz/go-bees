@@ -42,14 +42,15 @@ Materiales adjuntos
 TODO
 
 <!--- References -->
-[^art:bees_decline]: <http://www.greenpeace.org/switzerland/Global/international/publications/agriculture/2013/BeesInDecline.pdf>
-[^art:ccd]: <https://agresearchmag.ars.usda.gov/AR/archive/2008/May/colony0508.pdf>
-[^art:campbell2008]: <http://homepages.inf.ed.ac.uk/rbf/VAIB08PAPERS/vaib9_mummert.pdf>
-[^art:lundie1925]: <https://archive.org/details/flightactivities1328lund>
-[^art:struye1994]: <https://hal.archives-ouvertes.fr/hal-00891170/document>
-[^art:campbell2005]: <http://stacks.iop.org/0957-0233/16/i=12/a=015>
-[^beebarcode]: <http://www.uprintlabels.com/barcode-labels-uses.html>
-[^art:decourtye_honeybee_2011]: <https://www.ncbi.nlm.nih.gov/pubmed/21267650>
-[^art:chiron2013a]: <http://link.springer.com/chapter/10.1007%2F978-3-642-41181-6_71>
-[^art:chiron2013]: <http://jivp.eurasipjournals.springeropen.com/articles/10.1186/1687-5281-2013-59>
-[^art:tashakkori2015]: <http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=7133029>
+
+[^art:bees_decline]: http://www.greenpeace.org/switzerland/Global/international/publications/agriculture/2013/BeesInDecline.pdf
+[^art:ccd]: https://agresearchmag.ars.usda.gov/AR/archive/2008/May/colony0508.pdf
+[^art:campbell2008]: http://homepages.inf.ed.ac.uk/rbf/VAIB08PAPERS/vaib9_mummert.pdf
+[^art:lundie1925]: https://archive.org/details/flightactivities1328lund
+[^art:struye1994]: https://hal.archives-ouvertes.fr/hal-00891170/document
+[^art:campbell2005]: http://stacks.iop.org/0957-0233/16/i=12/a=015
+[^beebarcode]: http://www.uprintlabels.com/barcode-labels-uses.html
+[^art:decourtye_honeybee_2011]: <https://www.ncbi.nlm.nih.gov/pubmed/21267650
+[^art:chiron2013a]: http://link.springer.com/chapter/10.1007%2F978-3-642-41181-6_71
+[^art:chiron2013]: http://jivp.eurasipjournals.springeropen.com/articles/10.1186/1687-5281-2013-59
+[^art:tashakkori2015]: http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=7133029

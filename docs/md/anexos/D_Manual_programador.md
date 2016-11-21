@@ -1,9 +1,17 @@
-# Introducción
+Manual del programador
+======================
 
-# Estructura de directorios
+Introducción
+------------
 
-# Manual del programador
+Estructura de directorios
+-------------------------
 
-# Compilación, instalación y ejecución del proyecto
+Manual del programador
+----------------------
 
-# Pruebas del sistema
+Compilación, instalación y ejecución del proyecto
+-------------------------------------------------
+
+Pruebas del sistema
+-------------------

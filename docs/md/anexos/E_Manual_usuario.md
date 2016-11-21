@@ -1,7 +1,14 @@
-# Introducción
+Manual de usuario
+=================
 
-# Requisitos de usuarios
+Introducción
+------------
 
-# Instalación
+Requisitos de usuarios
+----------------------
 
-# Manual del usuario
+Instalación
+-----------
+
+Manual del usuario
+------------------

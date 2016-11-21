@@ -1,8 +1,6 @@
 Conceptos teóricos
 ==================
 
-{En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.}
-
 Visión artificial
 -----------------
 

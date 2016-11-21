@@ -1,7 +1,14 @@
-# Introducción
+Diseño
+======
 
-# Diseño de datos
+Introducción
+------------
 
-# Diseño procedimental
+Diseño de datos
+---------------
 
-# Diseño arquitectónico
+Diseño procedimental
+--------------------
+
+Diseño arquitectónico
+---------------------
