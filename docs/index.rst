@@ -6,5 +6,5 @@ Bienvenido a la documentación de GoBees
 .. toctree::
    :glob:
 
-   documentacion/*
-   anexos/*
+   md/documentacion/*
+   md/anexos/*
