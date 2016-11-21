@@ -104,7 +104,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 8 horas de trabajo y se invirtieron finalmente 9,25 horas,
 completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint0.png
+.. figure:: ../../img/burndowns/sprint0.png
    :alt: Sprint 0
 
    Sprint 0
@@ -130,7 +130,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 7,25 horas de trabajo y se invirtieron finalmente 13,25
 horas, completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint1.png
+.. figure:: ../../img/burndowns/sprint1.png
    :alt: Sprint 1
 
    Sprint 1
@@ -159,7 +159,7 @@ Se estimaron 11,75 horas de trabajo y se invirtieron finalmente 33
 horas, quedando dos tareas pendientes para terminar durante el siguiente
 sprint.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint2.png
+.. figure:: ../../img/burndowns/sprint2.png
    :alt: Sprint 2
 
    Sprint 2
@@ -179,7 +179,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 31
 horas, quedando una tarea por terminar.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint3.png
+.. figure:: ../../img/burndowns/sprint3.png
    :alt: Sprint 3
 
    Sprint 3
@@ -201,7 +201,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 37 horas de trabajo y se invirtieron finalmente 39,5 horas,
 completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint4.png
+.. figure:: ../../img/burndowns/sprint4.png
    :alt: Sprint 4
 
    Sprint 4
@@ -222,7 +222,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 27 horas de trabajo y se invirtieron finalmente 34 horas,
 completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint5.png
+.. figure:: ../../img/burndowns/sprint5.png
    :alt: Sprint 5
 
    Sprint 5
@@ -256,7 +256,7 @@ tests unitarios).
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 41
 horas, completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint6.png
+.. figure:: ../../img/burndowns/sprint6.png
    :alt: Sprint 6
 
    Sprint 6
@@ -277,7 +277,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 16 horas de trabajo y se invirtieron finalmente 23 horas,
 completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint7.png
+.. figure:: ../../img/burndowns/sprint7.png
    :alt: Sprint 7
 
    Sprint 7
@@ -298,7 +298,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 46 horas de trabajo y se invirtieron finalmente 53 horas,
 completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint8.png
+.. figure:: ../../img/burndowns/sprint8.png
    :alt: Sprint 8
 
    Sprint 8
@@ -317,7 +317,7 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 23 horas de trabajo y se invirtieron finalmente 24,25
 horas, completando todas las tareas.
 
-.. figure:: https://raw.githubusercontent.com/davidmigloz/go-bees/master/docs/img/burndowns/sprint9.png
+.. figure:: ../../img/burndowns/sprint9.png
    :alt: Sprint 9
 
    Sprint 9
