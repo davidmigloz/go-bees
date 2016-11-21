@@ -39,7 +39,7 @@ templates_path = ['_templates']
 #
 source_suffix = ['.rst', '.md']
 source_parsers = {
-’.md’: CommonMarkParser,
+	'.md': CommonMarkParser,
 }
 
 # The encoding of source files.
