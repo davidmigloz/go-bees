@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class TestUtils {
 
-    private static final String DIRECTORY_TEST = "./build/intermediates/classes/test/debug/";
+    private static final String DIRECTORY_TEST = "./build/intermediates/classes/test/mock/debug/";
 
     /**
      * Asserts that the matrices are equal.

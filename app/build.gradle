@@ -122,9 +122,9 @@ configurations.compile.dependencies.each { compileDependency ->
 }
 
 /*
-Copy test resources directory (debug).
+Copy test resources directory (test/mock/debug).
 */
-task copyResDirectoryToDebugClasses(type: Copy) {
+task copyResDirectoryToTestMockDebugClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/mock/debug/res"
 }
@@ -133,5 +133,5 @@ task copyResDirectoryToDebugClasses(type: Copy) {
 Run copy test resources directory tasks before build.
 */
 afterEvaluate {
-    preBuild.dependsOn(copyResDirectoryToDebugClasses)
+    preBuild.dependsOn(copyResDirectoryToTestMockDebugClasses)
 }
