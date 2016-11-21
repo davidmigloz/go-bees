@@ -306,8 +306,8 @@ que no están disponibles a través de los wrappers de Android.
    del fondo y los del primer plano atendiendo a sus vectores de
    características. [art:li_foreground_2003]_
 
-Postprocesado
-~~~~~~~~~~~~~
+3º Postprocesado
+~~~~~~~~~~~~~~~~
 
 Para mejorar los resultados de la extracción de fondo y preparar la
 imagen para la búsqueda de contornos se han aplicado las siguientes
@@ -333,8 +333,8 @@ La dilatación nos permite reconstruir las abejas, pero también aumenta
 su tamaño, aumentando el riesgo de solapamientos. Para evitar esto, se
 vuelve a reducir el tamaño de estas mediante una erosión.
 
-Búsqueda de contornos
-~~~~~~~~~~~~~~~~~~~~~
+4º Búsqueda de contornos
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 El último paso que realiza nuestro algoritmo de visión artificial es la
 búsqueda de los contornos de las abejas. Entendemos por contorno una
