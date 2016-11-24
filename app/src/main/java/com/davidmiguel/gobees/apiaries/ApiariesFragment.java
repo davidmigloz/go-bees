@@ -37,18 +37,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class ApiariesFragment extends Fragment implements ApiariesContract.View {
 
     private ApiariesContract.Presenter presenter;
-    private ApiariesAdapter listAdapter;
-    private View noApiariesView;
-    private ImageView noApiariesIcon;
-    private TextView noApiarieskTextView;
-    private TextView noApiariesAddView;
-    private LinearLayout apiarieView;
     ApiaryItemListener itemListener = new ApiaryItemListener() {
         @Override
         public void onApiaryClick(Apiary clickedApiary) {
             presenter.openApiaryDetail(clickedApiary);
         }
     };
+    private ApiariesAdapter listAdapter;
+    private View noApiariesView;
+    private ImageView noApiariesIcon;
+    private TextView noApiarieskTextView;
+    private TextView noApiariesAddView;
+    private LinearLayout apiarieView;
 
     public ApiariesFragment() {
         // Requires empty public constructor
@@ -62,12 +62,6 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listAdapter = new ApiariesAdapter(new ArrayList<Apiary>(0), itemListener);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.start();
     }
 
     @Nullable
@@ -129,6 +123,12 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.apiaries_frag_menu, menu);
     }
@@ -155,7 +155,7 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
         }
         final SwipeRefreshLayout srl =
                 (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
-        // Make sure setRefreshing() is called after the layout is done with everything else.
+        // Make sure setRefreshing() is called after the layout is done with everything else
         srl.post(new Runnable() {
             @Override
             public void run() {
@@ -211,6 +211,13 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
         this.presenter = checkNotNull(presenter);
     }
 
+    /**
+     * Shows no apiaries views.
+     *
+     * @param mainText    text to show.
+     * @param iconRes     icon to show.
+     * @param showAddView whether show add view option or not.
+     */
     private void showNoApiariesViews(String mainText, int iconRes, boolean showAddView) {
         apiarieView.setVisibility(View.GONE);
         noApiariesView.setVisibility(View.VISIBLE);
@@ -220,6 +227,11 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
         noApiariesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
     }
 
+    /**
+     * Shows a snackbar with the given message.
+     *
+     * @param message message to show.
+     */
     @SuppressWarnings("ConstantConditions")
     private void showMessage(String message) {
         Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();

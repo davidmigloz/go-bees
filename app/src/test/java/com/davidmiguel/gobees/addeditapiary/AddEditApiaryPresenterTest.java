@@ -1,8 +1,8 @@
 package com.davidmiguel.gobees.addeditapiary;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource;
-import com.davidmiguel.gobees.data.source.cache.ApiariesRepository;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,29 +22,25 @@ import static org.mockito.Mockito.when;
 public class AddEditApiaryPresenterTest {
 
     @Mock
-    private ApiariesRepository apiariesRepository;
+    private GoBeesRepository apiariesRepository;
 
     @Mock
     private AddEditApiaryContract.View addeditapiaryView;
 
-    /**
-     * Mockito API to capture argument values and use them to perform further
-     * actions or assertions on them.
-     */
-    @Captor
-    private ArgumentCaptor<ApiariesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
-
-    @Captor
-    private ArgumentCaptor<ApiariesDataSource.TaskCallback> taskCallbackArgumentCaptor;
-
     private AddEditApiaryPresenter addEditApiaryPresenter;
+
+    @Captor
+    private ArgumentCaptor<GoBeesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
+
+    @Captor
+    private ArgumentCaptor<GoBeesDataSource.TaskCallback> taskCallbackArgumentCaptor;
 
     @Before
     public void setupMocksAndView() {
         // To inject the mocks in the test the initMocks method needs to be called
         MockitoAnnotations.initMocks(this);
 
-        // The presenter wont't update the view unless it's active.
+        // The presenter wont't update the view unless it's active
         when(addeditapiaryView.isActive()).thenReturn(true);
     }
 
@@ -52,7 +48,8 @@ public class AddEditApiaryPresenterTest {
     public void saveNewApiaryToRepository_showsSuccessMessage() {
         // Get a reference to the class under test
         addEditApiaryPresenter =
-                new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView, -1);
+                new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView,
+                        AddEditApiaryActivity.NEW_APIARY);
         // When the presenter is asked to save an apiary
         addEditApiaryPresenter.saveApiary("Apiary 1", "Some notes about it....");
         // Then an apiary is saved in the repository
@@ -67,7 +64,8 @@ public class AddEditApiaryPresenterTest {
     public void saveEmptyApiary_showsErrorUi() {
         // Get a reference to the class under test
         addEditApiaryPresenter =
-                new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView, -1);
+                new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView,
+                        AddEditApiaryActivity.NEW_APIARY);
         // When the presenter is asked to save an empty apiary
         addEditApiaryPresenter.saveApiary("", "");
         // Then an empty not error is shown in the UI
@@ -91,7 +89,8 @@ public class AddEditApiaryPresenterTest {
 
     @Test
     public void populateApiary_callsRepoAndUpdatesView() {
-        Apiary testApiary = new Apiary(1, "Apiary 1", null, null, "Some notes...");
+        Apiary testApiary = new Apiary(1, "Apiary 1", null, null, null, "Some notes...",
+                null, null, null);
         // Get a reference to the class under test
         addEditApiaryPresenter = new AddEditApiaryPresenter(
                 apiariesRepository, addeditapiaryView, testApiary.getId());

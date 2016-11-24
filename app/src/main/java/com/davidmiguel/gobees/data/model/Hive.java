@@ -1,35 +1,74 @@
 package com.davidmiguel.gobees.data.model;
 
-import android.location.Location;
 import android.support.annotation.Nullable;
 
 import com.google.common.base.Objects;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
 /**
  * Model class for a hive.
  */
-public class Hive {
+@SuppressWarnings("unused")
+public class Hive extends RealmObject {
 
-    private final int id;
-    private final String name;
-    @Nullable
-    private final String imageUrl;
-    @Nullable
-    private final String notes;
+    @PrimaryKey
+    private long id;
 
-    public Hive(int id, String name, @Nullable String imageUrl, @Nullable String notes) {
+    /**
+     * Hive name.
+     */
+    @Required
+    private String name;
+
+    /**
+     * Hive image url.
+     */
+    @Nullable
+    private String imageUrl;
+
+    /**
+     * Hive notes.
+     */
+    @Nullable
+    private String notes;
+
+    /**
+     * List of records of the hive.
+     */
+    @Nullable
+    private RealmList<Record> records;
+
+    public Hive() {
+        // Needed by Realm
+    }
+
+    public Hive(long id, String name, @Nullable String imageUrl,
+                @Nullable String notes, @Nullable RealmList<Record> records) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.notes = notes;
+        this.records = records;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Nullable
@@ -37,9 +76,26 @@ public class Hive {
         return imageUrl;
     }
 
+    public void setImageUrl(@Nullable String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     @Nullable
     public String getNotes() {
         return notes;
+    }
+
+    public void setNotes(@Nullable String notes) {
+        this.notes = notes;
+    }
+
+    @Nullable
+    public RealmList<Record> getRecords() {
+        return records;
+    }
+
+    public void setRecords(@Nullable RealmList<Record> records) {
+        this.records = records;
     }
 
     @Override
@@ -50,11 +106,12 @@ public class Hive {
         return id == hive.id &&
                 Objects.equal(name, hive.name) &&
                 Objects.equal(imageUrl, hive.imageUrl) &&
-                Objects.equal(notes, hive.notes);
+                Objects.equal(notes, hive.notes) &&
+                Objects.equal(records, hive.records);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, imageUrl, notes);
+        return Objects.hashCode(id, name, imageUrl, notes, records);
     }
 }

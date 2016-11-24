@@ -5,10 +5,9 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource;
-import com.davidmiguel.gobees.data.source.cache.ApiariesRepository;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,12 +16,15 @@ import java.util.List;
  */
 public class ApiariesPresenter implements ApiariesContract.Presenter {
 
-    private ApiariesRepository apiariesRepository;
+    private GoBeesRepository apiariesRepository;
     private ApiariesContract.View apiariesView;
 
+    /**
+     * Force update the first time.
+     */
     private boolean firstLoad = true;
 
-    public ApiariesPresenter(ApiariesRepository apiariesRepository, ApiariesContract.View apiariesView) {
+    public ApiariesPresenter(GoBeesRepository apiariesRepository, ApiariesContract.View apiariesView) {
         this.apiariesRepository = apiariesRepository;
         this.apiariesView = apiariesView;
         this.apiariesView.setPresenter(this);
@@ -34,6 +36,7 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
         if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
             apiariesView.showSuccessfullySavedMessage();
         }
+        // TODO show error message if it fails
     }
 
     @Override
@@ -48,7 +51,7 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
             apiariesRepository.refreshApiaries();
         }
         // Get apiaires
-        apiariesRepository.getApiaries(new ApiariesDataSource.GetApiariesCallback() {
+        apiariesRepository.getApiaries(new GoBeesDataSource.GetApiariesCallback() {
 
             @Override
             public void onApiariesLoaded(List<Apiary> apiaries) {

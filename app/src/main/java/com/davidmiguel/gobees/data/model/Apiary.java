@@ -1,41 +1,106 @@
 package com.davidmiguel.gobees.data.model;
 
-import android.location.Location;
 import android.support.annotation.Nullable;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
 
 /**
  * Model class for an Apiary.
  */
-public class Apiary {
+@SuppressWarnings("unused")
+public class Apiary extends RealmObject {
 
-    private final int id;
-    private final String name;
-    @Nullable
-    private final String imageUrl;
-    @Nullable
-    private final Location location;
-    @Nullable
-    private final String notes;
+    @PrimaryKey
+    private long id;
 
-    public Apiary(int id, String name, @Nullable String imageUrl,
-                  @Nullable Location location, @Nullable String notes) {
+    /**
+     * Apiary name.
+     */
+    @Required
+    private String name;
+
+    /**
+     * Apiary image url.
+     */
+    @Nullable
+    private String imageUrl;
+
+    /**
+     * Apiary location longitude.
+     */
+    @Nullable
+    private Double locationLong;
+
+    /**
+     * Apiary location latitude.
+     */
+    @Nullable
+    private Double locationLat;
+
+    /**
+     * Apiary notes.
+     */
+    @Nullable
+    private String notes;
+
+    /**
+     * List of hives of the apiary.
+     */
+    @Nullable
+    private RealmList<Hive> hives;
+
+    /**
+     * List of meteorological data from days.
+     */
+    @Nullable
+    private RealmList<MeteoDay> meteoDays;
+
+    /**
+     * List of meteorological data from specific moments in time.
+     */
+    @Nullable
+    private RealmList<MeteoDetail> meteoDetails;
+
+    public Apiary() {
+        // Needed by Realm
+    }
+
+    public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLong,
+                  @Nullable Double locationLat, @Nullable String notes,
+                  @Nullable RealmList<Hive> hives, @Nullable RealmList<MeteoDay> meteoDays,
+                  @Nullable RealmList<MeteoDetail> meteoDetails) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
-        this.location = location;
+        this.locationLong = locationLong;
+        this.locationLat = locationLat;
         this.notes = notes;
+        this.hives = hives;
+        this.meteoDays = meteoDays;
+        this.meteoDetails = meteoDetails;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Nullable
@@ -43,9 +108,26 @@ public class Apiary {
         return imageUrl;
     }
 
+    public void setImageUrl(@Nullable String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     @Nullable
-    public Location getLocation() {
-        return location;
+    public Double getLocationLong() {
+        return locationLong;
+    }
+
+    public void setLocationLong(@Nullable Double locationLong) {
+        this.locationLong = locationLong;
+    }
+
+    @Nullable
+    public Double getLocationLat() {
+        return locationLat;
+    }
+
+    public void setLocationLat(@Nullable Double locationLat) {
+        this.locationLat = locationLat;
     }
 
     @Nullable
@@ -53,7 +135,38 @@ public class Apiary {
         return notes;
     }
 
-    public boolean hasNoName() {
+    public void setNotes(@Nullable String notes) {
+        this.notes = notes;
+    }
+
+    @Nullable
+    public RealmList<Hive> getHives() {
+        return hives;
+    }
+
+    public void setHives(@Nullable RealmList<Hive> hives) {
+        this.hives = hives;
+    }
+
+    @Nullable
+    public RealmList<MeteoDay> getMeteoDays() {
+        return meteoDays;
+    }
+
+    public void setMeteoDays(@Nullable RealmList<MeteoDay> meteoDays) {
+        this.meteoDays = meteoDays;
+    }
+
+    @Nullable
+    public RealmList<MeteoDetail> getMeteoDetails() {
+        return meteoDetails;
+    }
+
+    public void setMeteoDetails(@Nullable RealmList<MeteoDetail> meteoDetails) {
+        this.meteoDetails = meteoDetails;
+    }
+
+    public boolean isValidApiary() {
         return Strings.isNullOrEmpty(name);
     }
 
@@ -65,12 +178,16 @@ public class Apiary {
         return id == apiary.id &&
                 Objects.equal(name, apiary.name) &&
                 Objects.equal(imageUrl, apiary.imageUrl) &&
-                Objects.equal(location, apiary.location) &&
-                Objects.equal(notes, apiary.notes);
+                Objects.equal(locationLong, apiary.locationLong) &&
+                Objects.equal(locationLat, apiary.locationLat) &&
+                Objects.equal(notes, apiary.notes) &&
+                Objects.equal(hives, apiary.hives) &&
+                Objects.equal(meteoDays, apiary.meteoDays) &&
+                Objects.equal(meteoDetails, apiary.meteoDetails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, imageUrl, location, notes);
+        return Objects.hashCode(id, name, imageUrl, locationLong, locationLat, notes, hives, meteoDays, meteoDetails);
     }
 }
