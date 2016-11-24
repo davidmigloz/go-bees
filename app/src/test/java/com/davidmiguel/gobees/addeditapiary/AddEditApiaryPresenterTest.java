@@ -1,8 +1,8 @@
 package com.davidmiguel.gobees.addeditapiary;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource;
-import com.davidmiguel.gobees.data.source.cache.ApiariesRepository;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class AddEditApiaryPresenterTest {
 
     @Mock
-    private ApiariesRepository apiariesRepository;
+    private GoBeesRepository apiariesRepository;
 
     @Mock
     private AddEditApiaryContract.View addeditapiaryView;
@@ -32,10 +32,10 @@ public class AddEditApiaryPresenterTest {
      * actions or assertions on them.
      */
     @Captor
-    private ArgumentCaptor<ApiariesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
+    private ArgumentCaptor<GoBeesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
 
     @Captor
-    private ArgumentCaptor<ApiariesDataSource.TaskCallback> taskCallbackArgumentCaptor;
+    private ArgumentCaptor<GoBeesDataSource.TaskCallback> taskCallbackArgumentCaptor;
 
     private AddEditApiaryPresenter addEditApiaryPresenter;
 

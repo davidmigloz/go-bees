@@ -72,6 +72,21 @@ public class Apiary extends RealmObject {
         // Needed by Realm
     }
 
+    public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLong,
+                  @Nullable Double locationLat, @Nullable String notes,
+                  @Nullable RealmList<Hive> hives, @Nullable RealmList<MeteoDay> meteoDays,
+                  @Nullable RealmList<MeteoDetail> meteoDetails) {
+        this.id = id;
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.locationLong = locationLong;
+        this.locationLat = locationLat;
+        this.notes = notes;
+        this.hives = hives;
+        this.meteoDays = meteoDays;
+        this.meteoDetails = meteoDetails;
+    }
+
     public long getId() {
         return id;
     }
@@ -151,7 +166,7 @@ public class Apiary extends RealmObject {
         this.meteoDetails = meteoDetails;
     }
 
-    public boolean hasNoName() {
+    public boolean isValidApiary() {
         return Strings.isNullOrEmpty(name);
     }
 

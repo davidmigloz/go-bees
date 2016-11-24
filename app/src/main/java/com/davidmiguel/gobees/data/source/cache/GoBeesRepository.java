@@ -3,7 +3,7 @@ package com.davidmiguel.gobees.data.source.cache;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,16 +18,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * In this version, there's just a local data source.
  */
 @SuppressWarnings("WeakerAccess")
-public class ApiariesRepository implements ApiariesDataSource {
+public class GoBeesRepository implements GoBeesDataSource {
 
-    private static ApiariesRepository INSTANCE = null;
+    private static GoBeesRepository INSTANCE = null;
 
-    private final ApiariesDataSource apiariesLocalDataSource;
+    /**
+     * Local database.
+     */
+    private final GoBeesDataSource goBeesDataSource;
 
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    Map<Integer, Apiary> cachedApiaries;
+    Map<Long, Apiary> cachedApiaries;
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
@@ -35,19 +38,29 @@ public class ApiariesRepository implements ApiariesDataSource {
      */
     boolean cacheIsDirty = false;
 
-    private ApiariesRepository(ApiariesDataSource apiariesLocalDataSource) {
-        this.apiariesLocalDataSource = apiariesLocalDataSource;
+    private GoBeesRepository(GoBeesDataSource goBeesDataSource) {
+        this.goBeesDataSource = goBeesDataSource;
     }
 
-    public static ApiariesRepository getInstance(ApiariesDataSource apiariesLocalDataSource) {
+    public static GoBeesRepository getInstance(GoBeesDataSource apiariesLocalDataSource) {
         if (INSTANCE == null) {
-            INSTANCE = new ApiariesRepository(apiariesLocalDataSource);
+            INSTANCE = new GoBeesRepository(apiariesLocalDataSource);
         }
         return INSTANCE;
     }
 
     public static void destroyInstance() {
         INSTANCE = null;
+    }
+
+    @Override
+    public void openDb() {
+        goBeesDataSource.openDb();
+    }
+
+    @Override
+    public void closeDb() {
+        goBeesDataSource.closeDb();
     }
 
     @Override
@@ -60,32 +73,43 @@ public class ApiariesRepository implements ApiariesDataSource {
             return;
         }
 
-        // Query the local storage if available. If not, query the network
-        apiariesLocalDataSource.getApiaries(new GetApiariesCallback() {
-
+        // Query the local storage if available. [If not, query the network]
+        goBeesDataSource.getApiaries(new GetApiariesCallback() {
             @Override
             public void onApiariesLoaded(List<Apiary> apiaries) {
                 refreshCache(apiaries);
-                callback.onApiariesLoaded(new ArrayList<>(cachedApiaries.values()));
+                callback.onApiariesLoaded(apiaries);
             }
 
             @Override
             public void onDataNotAvailable() {
                 // TODO get from network
                 // If cacheIsDirty synchronize all data from network
+                callback.onDataNotAvailable();
             }
         });
     }
 
     @Override
-    public void getApiary(int apiaryId, @NonNull GetApiaryCallback callback) {
+    public void getApiary(long apiaryId, @NonNull final GetApiaryCallback callback) {
+        checkNotNull(callback);
 
+        // Respond immediately with cache if available and not dirty
+        if (cachedApiaries != null && !cacheIsDirty) {
+            callback.onApiaryLoaded(cachedApiaries.get(apiaryId));
+            return;
+        }
+
+        // Query the local storage if available. [If not, query the network]
+        goBeesDataSource.getApiary(apiaryId, callback);
     }
 
     @Override
     public void saveApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
         checkNotNull(apiary);
-        apiariesLocalDataSource.saveApiary(apiary, callback);
+        checkNotNull(callback);
+        // Save apiary
+        goBeesDataSource.saveApiary(apiary, callback);
         // Do in memory cache update to keep the app UI up to date
         if (cachedApiaries == null) {
             cachedApiaries = new LinkedHashMap<>();
@@ -99,20 +123,40 @@ public class ApiariesRepository implements ApiariesDataSource {
     }
 
     @Override
-    public void deleteApiary(int apiaryId, @NonNull TaskCallback callback) {
-
+    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
+        checkNotNull(callback);
+        // Delete apiary
+        goBeesDataSource.deleteApiary(apiaryId, callback);
+        // Do in memory cache update to keep the app UI up to date
+        if (cachedApiaries == null) {
+            cachedApiaries = new LinkedHashMap<>();
+        }
+        cachedApiaries.remove(apiaryId);
     }
 
     @Override
     public void deleteAllApiaries(@NonNull TaskCallback callback) {
-        apiariesLocalDataSource.deleteAllApiaries(callback);
-
+        checkNotNull(callback);
+        // Delete all apiaries
+        goBeesDataSource.deleteAllApiaries(callback);
+        // Do in memory cache update to keep the app UI up to date
         if (cachedApiaries == null) {
             cachedApiaries = new LinkedHashMap<>();
         }
         cachedApiaries.clear();
     }
 
+    @Override
+    public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
+        checkNotNull(callback);
+        // Get next id
+        goBeesDataSource.getNextApiaryId(callback);
+    }
+
+    /**
+     * Refresh cache with the given list of apiaries.
+     * @param apiaries updated list of apiaries.
+     */
     private void refreshCache(List<Apiary> apiaries) {
         if (cachedApiaries == null) {
             cachedApiaries = new LinkedHashMap<>();

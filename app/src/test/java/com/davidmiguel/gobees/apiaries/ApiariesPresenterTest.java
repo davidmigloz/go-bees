@@ -1,8 +1,8 @@
 package com.davidmiguel.gobees.apiaries;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource.GetApiariesCallback;
-import com.davidmiguel.gobees.data.source.cache.ApiariesRepository;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class ApiariesPresenterTest {
     private static List<Apiary> APIARIES;
 
     @Mock
-    private ApiariesRepository apiariesRepository;
+    private GoBeesRepository apiariesRepository;
 
     @Mock
     private ApiariesContract.View apiariesView;

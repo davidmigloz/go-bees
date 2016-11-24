@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.ApiariesDataSource;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.google.common.collect.Lists;
 
 import java.util.LinkedHashMap;
@@ -13,24 +13,34 @@ import java.util.Map;
 /**
  * Implementation of a local data source with static access to the data for easy testing.
  */
-public class FakeApiariesLocalDataSource implements ApiariesDataSource {
+public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
-    private static FakeApiariesLocalDataSource INSTANCE = null;
+    private static FakeGoBeesLocalDataSource INSTANCE = null;
 
-    private static final Map<Integer, Apiary> APIARIES_SERVICE_DATA = new LinkedHashMap<>();
+    private static final Map<Long, Apiary> APIARIES_SERVICE_DATA = new LinkedHashMap<>();
 
-    private FakeApiariesLocalDataSource() {
+    private FakeGoBeesLocalDataSource() {
         // Add fake data
-        APIARIES_SERVICE_DATA.put(1, new Apiary(1, "Apiary 1", null, null, null));
-        APIARIES_SERVICE_DATA.put(2, new Apiary(2, "Apiary 2", null, null, null));
-        APIARIES_SERVICE_DATA.put(3, new Apiary(3, "Apiary 3", null, null, null));
+        APIARIES_SERVICE_DATA.put((long) 1, new Apiary(1, "Apiary 1", null, null, null, null, null, null, null));
+        APIARIES_SERVICE_DATA.put((long) 2, new Apiary(2, "Apiary 2", null, null, null, null, null, null, null));
+        APIARIES_SERVICE_DATA.put((long) 3, new Apiary(3, "Apiary 3", null, null, null, null, null, null, null));
     }
 
-    public static FakeApiariesLocalDataSource getInstance() {
+    public static FakeGoBeesLocalDataSource getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new FakeApiariesLocalDataSource();
+            INSTANCE = new FakeGoBeesLocalDataSource();
         }
         return INSTANCE;
+    }
+
+    @Override
+    public void openDb() {
+
+    }
+
+    @Override
+    public void closeDb() {
+
     }
 
     @Override
@@ -39,7 +49,7 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
     }
 
     @Override
-    public void getApiary(int apiaryId, @NonNull GetApiaryCallback callback) {
+    public void getApiary(long apiaryId, @NonNull GetApiaryCallback callback) {
         Apiary task = APIARIES_SERVICE_DATA.get(apiaryId);
         callback.onApiaryLoaded(task);
     }
@@ -57,7 +67,7 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
     }
 
     @Override
-    public void deleteApiary(int apiaryId, @NonNull TaskCallback callback) {
+    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
         APIARIES_SERVICE_DATA.remove(apiaryId);
     }
 
@@ -65,6 +75,11 @@ public class FakeApiariesLocalDataSource implements ApiariesDataSource {
     public void deleteAllApiaries(@NonNull TaskCallback callback) {
         APIARIES_SERVICE_DATA.clear();
         callback.onSuccess();
+    }
+
+    @Override
+    public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
+
     }
 
     @VisibleForTesting

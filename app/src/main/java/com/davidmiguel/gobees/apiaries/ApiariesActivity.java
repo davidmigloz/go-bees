@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.ActivityUtils;
 
 /**
@@ -21,7 +22,7 @@ public class ApiariesActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
-    private ApiariesPresenter apiariesPresenter;
+    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,10 @@ public class ApiariesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         // Set up the navigation drawer.
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -53,9 +56,18 @@ public class ApiariesActivity extends AppCompatActivity {
                     getSupportFragmentManager(), apiariesFragment, R.id.contentFrame);
         }
 
+        // Init db
+        goBeesRepository = Injection.provideApiariesRepository(getApplicationContext());
+        goBeesRepository.openDb();
         // Create the presenter
-        apiariesPresenter = new ApiariesPresenter(
-                Injection.provideApiariesRepository(getApplicationContext()), apiariesFragment);
+        new ApiariesPresenter(goBeesRepository, apiariesFragment);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Close database
+        goBeesRepository.closeDb();
     }
 
     @Override

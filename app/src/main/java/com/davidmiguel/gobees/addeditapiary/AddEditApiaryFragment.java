@@ -37,6 +37,19 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         return new AddEditApiaryFragment();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.addeditapiary_frag, container, false);
+        nameTextView = (TextView) root.findViewById(R.id.add_apiary_name);
+        notesTextView = (TextView) root.findViewById(R.id.add_apiary_notes);
+
+        setHasOptionsMenu(true);
+        setRetainInstance(true);
+        return root;
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -52,19 +65,6 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                         notesTextView.getText().toString());
             }
         });
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.addeditapiary_frag, container, false);
-        nameTextView = (TextView) root.findViewById(R.id.add_apiary_name);
-        notesTextView = (TextView) root.findViewById(R.id.add_apiary_notes);
-
-        setHasOptionsMenu(true);
-        setRetainInstance(true);
-        return root;
     }
 
     @Override

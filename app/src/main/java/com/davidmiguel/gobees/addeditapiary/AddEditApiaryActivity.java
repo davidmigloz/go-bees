@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.google.common.base.Strings;
 
@@ -17,6 +18,8 @@ public class AddEditApiaryActivity extends AppCompatActivity {
 
     public static final int REQUEST_ADD_APIARY = 1;
 
+    private GoBeesRepository goBeesRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +29,15 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
 
         // Get apiary id (if edit)
         String id = getIntent().getStringExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID);
         int apiaryId;
-        if(Strings.isNullOrEmpty(id)) {
+        if (Strings.isNullOrEmpty(id)) {
             apiaryId = -1;
         } else {
             apiaryId = Integer.parseInt(id);
@@ -46,22 +51,34 @@ public class AddEditApiaryActivity extends AppCompatActivity {
             addEditApiaryFragment = AddEditApiaryFragment.newInstance();
             if (getIntent().hasExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID)) {
                 // If edit -> set edit title
-                actionBar.setTitle(R.string.edit_apiary);
+                if (actionBar != null) {
+                    actionBar.setTitle(R.string.edit_apiary);
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId + "");
                 addEditApiaryFragment.setArguments(bundle);
             } else {
                 // If new -> set add title
-                actionBar.setTitle(R.string.add_apiary);
+                if (actionBar != null) {
+                    actionBar.setTitle(R.string.add_apiary);
+                }
             }
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     addEditApiaryFragment, R.id.contentFrame);
         }
 
+        // Init db
+        goBeesRepository = Injection.provideApiariesRepository(getApplicationContext());
+        goBeesRepository.openDb();
         // Create the presenter
-        new AddEditApiaryPresenter(
-                Injection.provideApiariesRepository(getApplicationContext()),
-                addEditApiaryFragment, apiaryId);
+        new AddEditApiaryPresenter(goBeesRepository, addEditApiaryFragment, apiaryId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Close database
+        goBeesRepository.closeDb();
     }
 
     @Override
