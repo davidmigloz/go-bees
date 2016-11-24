@@ -167,7 +167,7 @@ public class Apiary extends RealmObject {
     }
 
     public boolean isValidApiary() {
-        return Strings.isNullOrEmpty(name);
+        return !Strings.isNullOrEmpty(name);
     }
 
     @Override

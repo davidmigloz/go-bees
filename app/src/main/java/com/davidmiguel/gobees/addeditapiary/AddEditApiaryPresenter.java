@@ -94,9 +94,9 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
                         new Apiary(apiaryId, name, null, null, null, notes, null, null, null);
                 // Save it if it is correct
                 if (newApiary.isValidApiary()) {
-                    addeditapiaryView.showEmptyApiaryError();
-                } else {
                     apiariesRepository.saveApiary(newApiary, listener);
+                } else {
+                    addeditapiaryView.showEmptyApiaryError();
                 }
             }
         });

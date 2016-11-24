@@ -1,7 +1,9 @@
 package com.davidmiguel.gobees.addeditapiary;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextApiaryIdCallback;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 import org.junit.Before;
@@ -30,10 +32,13 @@ public class AddEditApiaryPresenterTest {
     private AddEditApiaryPresenter addEditApiaryPresenter;
 
     @Captor
-    private ArgumentCaptor<GoBeesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
+    private ArgumentCaptor<GetApiaryCallback> getApiaryCallbackArgumentCaptor;
 
     @Captor
-    private ArgumentCaptor<GoBeesDataSource.TaskCallback> taskCallbackArgumentCaptor;
+    private ArgumentCaptor<GetNextApiaryIdCallback> getNextApiaryIdCallbackArgumentCaptor;
+
+    @Captor
+    private ArgumentCaptor<TaskCallback> taskCallbackArgumentCaptor;
 
     @Before
     public void setupMocksAndView() {
@@ -52,7 +57,10 @@ public class AddEditApiaryPresenterTest {
                         AddEditApiaryActivity.NEW_APIARY);
         // When the presenter is asked to save an apiary
         addEditApiaryPresenter.saveApiary("Apiary 1", "Some notes about it....");
-        // Then an apiary is saved in the repository
+        // Then a new id is requested
+        verify(apiariesRepository).getNextApiaryId(getNextApiaryIdCallbackArgumentCaptor.capture());
+        getNextApiaryIdCallbackArgumentCaptor.getValue().onNextApiaryIdLoaded(1);
+        // And the apiary is saved in the repository
         verify(apiariesRepository)
                 .saveApiary(any(Apiary.class), taskCallbackArgumentCaptor.capture());
         taskCallbackArgumentCaptor.getValue().onSuccess();
@@ -68,6 +76,9 @@ public class AddEditApiaryPresenterTest {
                         AddEditApiaryActivity.NEW_APIARY);
         // When the presenter is asked to save an empty apiary
         addEditApiaryPresenter.saveApiary("", "");
+        // Then a new id is requested
+        verify(apiariesRepository).getNextApiaryId(getNextApiaryIdCallbackArgumentCaptor.capture());
+        getNextApiaryIdCallbackArgumentCaptor.getValue().onNextApiaryIdLoaded(1);
         // Then an empty not error is shown in the UI
         verify(addeditapiaryView).showEmptyApiaryError();
     }
