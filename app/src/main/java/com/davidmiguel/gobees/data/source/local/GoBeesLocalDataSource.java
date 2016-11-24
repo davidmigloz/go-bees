@@ -119,6 +119,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
-        callback.onNextApiaryIdLoaded(realm.where(Apiary.class).max("id").longValue() + 1);
+        Number nextId = realm.where(Apiary.class).max("id");
+        callback.onNextApiaryIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
     }
 }
