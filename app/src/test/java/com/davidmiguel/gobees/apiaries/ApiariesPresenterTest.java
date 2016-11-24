@@ -33,14 +33,10 @@ public class ApiariesPresenterTest {
     @Mock
     private ApiariesContract.View apiariesView;
 
-    /**
-     * Mockito API to capture argument values and use them to perform further
-     * actions or assertions on them.
-     */
+    private ApiariesPresenter apiariesPresenter;
+
     @Captor
     private ArgumentCaptor<GetApiariesCallback> getApiariesCallbackCaptor;
-
-    private ApiariesPresenter apiariesPresenter;
 
     @Before
     public void setupApiariesPresenter() {
@@ -50,14 +46,14 @@ public class ApiariesPresenterTest {
         // Get a reference to the class under test
         apiariesPresenter = new ApiariesPresenter(apiariesRepository, apiariesView);
 
-        // The presenter won't update the view unless it's active.
+        // The presenter won't update the view unless it's active
         when(apiariesView.isActive()).thenReturn(true);
 
         // We start the apiaries to 3
         APIARIES = Lists.newArrayList(
-                new Apiary(1, "Apiary 1", null, null, null),
-                new Apiary(2, "Apiary 2", null, null, null),
-                new Apiary(3, "Apiary 3", null, null, null));
+                new Apiary(1, "Apiary 1", null, null, null, null, null, null, null),
+                new Apiary(2, "Apiary 2", null, null, null, null, null, null, null),
+                new Apiary(3, "Apiary 3", null, null, null, null, null, null, null));
     }
 
     @SuppressWarnings("unchecked")

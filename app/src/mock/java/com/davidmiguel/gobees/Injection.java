@@ -1,12 +1,7 @@
 package com.davidmiguel.gobees;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.data.source.local.FakeGoBeesLocalDataSource;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Enables injection of mock implementations for GoBeesDataSource at compile time.
@@ -15,8 +10,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class Injection {
 
-    public static GoBeesRepository provideApiariesRepository(@NonNull Context context) {
-        checkNotNull(context);
+    public static GoBeesRepository provideApiariesRepository() {
         return GoBeesRepository.getInstance(FakeGoBeesLocalDataSource.getInstance());
     }
 }

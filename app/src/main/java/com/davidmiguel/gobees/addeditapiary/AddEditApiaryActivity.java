@@ -17,6 +17,7 @@ import com.google.common.base.Strings;
 public class AddEditApiaryActivity extends AppCompatActivity {
 
     public static final int REQUEST_ADD_APIARY = 1;
+    public static final int NEW_APIARY = -1;
 
     private GoBeesRepository goBeesRepository;
 
@@ -36,9 +37,9 @@ public class AddEditApiaryActivity extends AppCompatActivity {
 
         // Get apiary id (if edit)
         String id = getIntent().getStringExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID);
-        int apiaryId;
+        long apiaryId;
         if (Strings.isNullOrEmpty(id)) {
-            apiaryId = -1;
+            apiaryId = NEW_APIARY;
         } else {
             apiaryId = Integer.parseInt(id);
         }
@@ -68,7 +69,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         }
 
         // Init db
-        goBeesRepository = Injection.provideApiariesRepository(getApplicationContext());
+        goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
         // Create the presenter
         new AddEditApiaryPresenter(goBeesRepository, addEditApiaryFragment, apiaryId);

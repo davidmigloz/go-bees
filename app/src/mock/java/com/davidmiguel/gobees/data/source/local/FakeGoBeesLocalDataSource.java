@@ -21,9 +21,9 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     private FakeGoBeesLocalDataSource() {
         // Add fake data
-        APIARIES_SERVICE_DATA.put((long) 1, new Apiary(1, "Apiary 1", null, null, null, null, null, null, null));
-        APIARIES_SERVICE_DATA.put((long) 2, new Apiary(2, "Apiary 2", null, null, null, null, null, null, null));
-        APIARIES_SERVICE_DATA.put((long) 3, new Apiary(3, "Apiary 3", null, null, null, null, null, null, null));
+        APIARIES_SERVICE_DATA.put(1L, new Apiary(1, "Apiary 1", null, null, null, null, null, null, null));
+        APIARIES_SERVICE_DATA.put(2L, new Apiary(2, "Apiary 2", null, null, null, null, null, null, null));
+        APIARIES_SERVICE_DATA.put(3L, new Apiary(3, "Apiary 3", null, null, null, null, null, null, null));
     }
 
     public static FakeGoBeesLocalDataSource getInstance() {

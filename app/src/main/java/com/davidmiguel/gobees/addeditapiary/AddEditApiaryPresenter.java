@@ -16,11 +16,11 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     private GoBeesRepository apiariesRepository;
     private AddEditApiaryContract.View addeditapiaryView;
 
-    private int apiaryId;
+    private long apiaryId;
 
     public AddEditApiaryPresenter(GoBeesRepository apiariesRepository,
                                   AddEditApiaryContract.View addeditapiaryView,
-                                  int apiaryId) {
+                                  long apiaryId) {
         this.apiariesRepository = apiariesRepository;
         this.addeditapiaryView = addeditapiaryView;
         this.apiaryId = apiaryId;
@@ -81,7 +81,7 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     }
 
     private boolean isNewApiary() {
-        return apiaryId == -1;
+        return apiaryId == AddEditApiaryActivity.NEW_APIARY;
     }
 
     private void createApiary(final String name, final String notes, final TaskCallback listener) {
