@@ -7,21 +7,21 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 /**
- * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
+ * Listens to user actions from the UI AddEditApiaryFragment, retrieves the data and updates the
  * UI as required.
  */
 public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         GetApiaryCallback, TaskCallback {
 
-    private GoBeesRepository apiariesRepository;
+    private GoBeesRepository goBeesRepository;
     private AddEditApiaryContract.View addeditapiaryView;
 
     private long apiaryId;
 
-    public AddEditApiaryPresenter(GoBeesRepository apiariesRepository,
+    public AddEditApiaryPresenter(GoBeesRepository goBeesRepository,
                                   AddEditApiaryContract.View addeditapiaryView,
                                   long apiaryId) {
-        this.apiariesRepository = apiariesRepository;
+        this.goBeesRepository = goBeesRepository;
         this.addeditapiaryView = addeditapiaryView;
         this.apiaryId = apiaryId;
         addeditapiaryView.setPresenter(this);
@@ -41,7 +41,7 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         if (isNewApiary()) {
             throw new RuntimeException("populateApiary() was called but apiary is new.");
         }
-        apiariesRepository.getApiary(apiaryId, this);
+        goBeesRepository.getApiary(apiaryId, this);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
 
     private void createApiary(final String name, final String notes, final TaskCallback listener) {
         // Get next id
-        apiariesRepository.getNextApiaryId(new GoBeesDataSource.GetNextApiaryIdCallback() {
+        goBeesRepository.getNextApiaryId(new GoBeesDataSource.GetNextApiaryIdCallback() {
             @Override
             public void onNextApiaryIdLoaded(long apiaryId) {
                 // Create apiary
@@ -94,7 +94,7 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
                         new Apiary(apiaryId, name, null, null, null, notes, null, null, null);
                 // Save it if it is correct
                 if (newApiary.isValidApiary()) {
-                    apiariesRepository.saveApiary(newApiary, listener);
+                    goBeesRepository.saveApiary(newApiary, listener);
                 } else {
                     addeditapiaryView.showEmptyApiaryError();
                 }
@@ -109,6 +109,6 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         // Create new apiary with the modifications
         Apiary editedApiary =
                 new Apiary(apiaryId, name, null, null, null, notes, null, null, null);
-        apiariesRepository.saveApiary(editedApiary, this);
+        goBeesRepository.saveApiary(editedApiary, this);
     }
 }

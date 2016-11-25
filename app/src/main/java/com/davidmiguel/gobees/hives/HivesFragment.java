@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.apiaries;
+package com.davidmiguel.gobees.hives;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,11 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
-import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
-import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.hives.HivesActivity;
-import com.davidmiguel.gobees.hives.HivesFragment;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
 
@@ -38,71 +34,74 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Display a list of apiaries.
+ * Display a list of hives.
  */
-public class ApiariesFragment extends Fragment
-        implements ApiariesContract.View, ApiaryItemListener {
+public class HivesFragment extends Fragment
+        implements HivesContract.View, HivesAdapter.HiveItemListener {
 
-    private ApiariesContract.Presenter presenter;
-    private ApiariesAdapter listAdapter;
-    private View noApiariesView;
-    private ImageView noApiariesIcon;
-    private TextView noApiarieskTextView;
-    private TextView noApiariesAddView;
-    private LinearLayout apiarieView;
+    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
 
-    public ApiariesFragment() {
+    private HivesContract.Presenter presenter;
+    private HivesAdapter listAdapter;
+    private View noHivesView;
+    private ImageView noHivesIcon;
+    private TextView noHivesTextView;
+    private TextView noHivesAddView;
+    private LinearLayout hivesView;
+
+    public HivesFragment() {
         // Requires empty public constructor
     }
 
-    public static ApiariesFragment newInstance() {
-        return new ApiariesFragment();
+    public static HivesFragment newInstance() {
+        return new HivesFragment();
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new ApiariesAdapter(new ArrayList<Apiary>(0), this);
+        listAdapter = new HivesAdapter(new ArrayList<Hive>(0), this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.apiaries_frag, container, false);
+        View root = inflater.inflate(R.layout.hives_frag, container, false);
 
-        // Set up apiaries list view
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.apiaries_list);
+        // Set up hives list view
+        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.hives_list);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(listAdapter);
-        apiarieView = (LinearLayout) root.findViewById(R.id.apiariesLL);
+        hivesView = (LinearLayout) root.findViewById(R.id.hivesLL);
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(listAdapter,
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
                 ItemTouchHelper.LEFT);
-        ItemTouchHelper apiaryTouchHelper = new ItemTouchHelper(callback);
-        apiaryTouchHelper.attachToRecyclerView(recyclerView);
+        ItemTouchHelper hiveTouchHelper = new ItemTouchHelper(callback);
+        hiveTouchHelper.attachToRecyclerView(recyclerView);
 
         // Set up  no apiaries view
-        noApiariesView = root.findViewById(R.id.no_apiaries);
-        noApiariesIcon = (ImageView) root.findViewById(R.id.no_apiaries_icon);
-        noApiarieskTextView = (TextView) root.findViewById(R.id.no_apiaries_text);
-        noApiariesAddView = (TextView) root.findViewById(R.id.no_apiaries_add);
-        noApiariesAddView.setOnClickListener(new View.OnClickListener() {
+        noHivesView = root.findViewById(R.id.no_hives);
+        noHivesIcon = (ImageView) root.findViewById(R.id.no_hives_icon);
+        noHivesTextView = (TextView) root.findViewById(R.id.no_hives_text);
+        noHivesAddView = (TextView) root.findViewById(R.id.no_hives_add);
+        noHivesAddView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddEditApiary();
+                showAddEditHive();
             }
         });
 
         // Set up floating action button
         FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_apiary);
+                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setImageResource(R.drawable.ic_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addEditApiary();
+                presenter.addEditHive();
             }
         });
 
@@ -120,7 +119,7 @@ public class ApiariesFragment extends Fragment
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.loadApiaries(false);
+                presenter.loadHives(false);
             }
         });
 
@@ -138,14 +137,14 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.apiaries_frag_menu, menu);
+        inflater.inflate(R.menu.hives_frag_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_refresh:
-                presenter.loadApiaries(true);
+                presenter.loadHives(true);
                 break;
         }
         return true;
@@ -173,34 +172,31 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void showApiaries(@NonNull List<Apiary> apiaries) {
-        listAdapter.replaceData(apiaries);
-        apiarieView.setVisibility(View.VISIBLE);
-        noApiariesView.setVisibility(View.GONE);
+    public void showHives(@NonNull List<Hive> hives) {
+        listAdapter.replaceData(hives);
+        hivesView.setVisibility(View.VISIBLE);
+        noHivesView.setVisibility(View.GONE);
     }
 
     @Override
-    public void showAddEditApiary() {
-        Intent intent = new Intent(getContext(), AddEditApiaryActivity.class);
-        startActivityForResult(intent, AddEditApiaryActivity.REQUEST_ADD_APIARY);
+    public void showAddEditHive() {
+        // TODO
     }
 
     @Override
-    public void showApiaryDetail(long apiaryId) {
-        Intent intent = new Intent(getActivity(), HivesActivity.class);
-        intent.putExtra(HivesFragment.ARGUMENT_APIARY_ID, apiaryId);
-        getActivity().startActivity(intent);
+    public void showHiveDetail(long hiveId) {
+        // TODO
     }
 
     @Override
-    public void showLoadingApiariesError() {
-        showMessage(getString(R.string.loading_apiaries_error));
+    public void showLoadingHivesError() {
+        showMessage(getString(R.string.loading_hives_error));
     }
 
     @Override
-    public void showNoApiaries() {
-        showNoApiariesViews(
-                getResources().getString(R.string.no_apiaries),
+    public void showNoHives() {
+        showNoHivesViews(
+                getResources().getString(R.string.no_hives),
                 R.drawable.ic_add_circle_outline,
                 false
         );
@@ -208,7 +204,12 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void showSuccessfullySavedMessage() {
-        showMessage(getString(R.string.successfully_saved_apiary_message));
+        showMessage(getString(R.string.successfully_saved_hive_message));
+    }
+
+    @Override
+    public void setPresenter(@NonNull HivesContract.Presenter presenter) {
+        this.presenter = checkNotNull(presenter);
     }
 
     @Override
@@ -217,34 +218,29 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void setPresenter(@NonNull ApiariesContract.Presenter presenter) {
-        this.presenter = checkNotNull(presenter);
+    public void onHiveClick(Hive clickedHive) {
+        presenter.openHiveDetail(clickedHive);
     }
 
     @Override
-    public void onApiaryClick(Apiary clickedApiary) {
-        presenter.openApiaryDetail(clickedApiary);
-    }
-
-    @Override
-    public void onApiaryDelete(Apiary clickedApiary) {
-        // TODO delete apiary
+    public void onHiveDelete(Hive clickedHive) {
+        // TODO delete hive
     }
 
     /**
-     * Shows no apiaries views.
+     * Shows no hives views.
      *
      * @param mainText    text to show.
      * @param iconRes     icon to show.
      * @param showAddView whether show add view option or not.
      */
-    private void showNoApiariesViews(String mainText, int iconRes, boolean showAddView) {
-        apiarieView.setVisibility(View.GONE);
-        noApiariesView.setVisibility(View.VISIBLE);
+    private void showNoHivesViews(String mainText, int iconRes, boolean showAddView) {
+        hivesView.setVisibility(View.GONE);
+        noHivesView.setVisibility(View.VISIBLE);
         // Set details
-        noApiarieskTextView.setText(mainText);
-        noApiariesIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
-        noApiariesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
+        noHivesTextView.setText(mainText);
+        noHivesIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
+        noHivesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
     }
 
     /**

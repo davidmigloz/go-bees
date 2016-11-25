@@ -3,6 +3,7 @@ package com.davidmiguel.gobees.data.source.local;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
 import java.util.ArrayList;
@@ -120,5 +121,22 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
         Number nextId = realm.where(Apiary.class).max("id");
         callback.onNextApiaryIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
+        try {
+            Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+            callback.onHivesLoaded(new ArrayList<>(apiary.getHives()));
+        } catch (Exception e) {
+            callback.onDataNotAvailable();
+        }
+    }
+
+    @Override
+    public void refreshHives(long apiaryId) {
+        // Not required because the GoBeesRepository handles the logic of refreshing the
+        // data from all the available data sources
     }
 }

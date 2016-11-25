@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- https://www.materialpalette.com/amber/blue-grey -->
     <color name="colorPrimary">#FFC107</color>
     <color name="colorPrimaryDark">#FFA000</color>
     <color name="colorAccent">#607D8B</color>
+    <color name="colorPrimaryLight">#FFECB3</color>
+    <color name="colorBackground">#DDE3E6</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorIcons">#212121</color>
+    <color name="colorDivider">#BDBDBD</color>
 
     <drawable name="touchFeedback">#CFD8DC</drawable>
 </resources>

@@ -3,6 +3,7 @@ package com.davidmiguel.gobees.data.source;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
 
 import java.util.List;
 
@@ -69,6 +70,19 @@ public interface GoBeesDataSource {
      */
     void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback);
 
+    /**
+     * Gets all hives.
+     * Note: don't modify the Hive objects.
+     * @param apiaryId apiary id.
+     * @param callback GetHivesCallback.
+     */
+    void getHives(long apiaryId, @NonNull GetHivesCallback callback);
+
+    /**
+     * Force to update hives cache.
+     */
+    void refreshHives(long apiaryId);
+
     interface GetApiariesCallback {
         void onApiariesLoaded(List<Apiary> apiaries);
 
@@ -83,6 +97,12 @@ public interface GoBeesDataSource {
 
     interface GetNextApiaryIdCallback {
         void onNextApiaryIdLoaded(long apiaryId);
+    }
+
+    interface GetHivesCallback {
+        void onHivesLoaded(List<Hive> hives);
+
+        void onDataNotAvailable();
     }
 
     interface TaskCallback {

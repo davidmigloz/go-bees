@@ -36,13 +36,8 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         }
 
         // Get apiary id (if edit)
-        String id = getIntent().getStringExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID);
-        long apiaryId;
-        if (Strings.isNullOrEmpty(id)) {
-            apiaryId = NEW_APIARY;
-        } else {
-            apiaryId = Integer.parseInt(id);
-        }
+        long apiaryId = getIntent()
+                .getLongExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, NEW_APIARY);
 
         // Add fragment to the activity and set title
         AddEditApiaryFragment addEditApiaryFragment =
@@ -71,6 +66,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
+
         // Create the presenter
         new AddEditApiaryPresenter(goBeesRepository, addEditApiaryFragment, apiaryId);
     }
