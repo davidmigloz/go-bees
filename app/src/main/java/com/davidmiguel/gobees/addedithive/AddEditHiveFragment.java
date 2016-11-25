@@ -10,6 +10,8 @@ import com.davidmiguel.gobees.addeditapiary.AddEditApiaryFragment;
  */
 public class AddEditHiveFragment extends Fragment implements AddEditHiveContract.View {
 
+    public static final String ARGUMENT_EDIT_HIVE_ID = "EDIT_HIVE_ID";
+
     public AddEditHiveFragment() {
         // Requires empty public constructor
     }

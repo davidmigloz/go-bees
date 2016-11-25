@@ -98,6 +98,11 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
+        // TODO
+    }
+
+    @Override
     public void refreshHives(long apiaryId) {
         // Not required because the TasksRepository handles the logic of refreshing the
         // tasks from all the available data sources

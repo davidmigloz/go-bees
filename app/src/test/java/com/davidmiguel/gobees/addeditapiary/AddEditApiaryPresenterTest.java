@@ -1,6 +1,7 @@
 package com.davidmiguel.gobees.addeditapiary;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextApiaryIdCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
@@ -79,7 +80,7 @@ public class AddEditApiaryPresenterTest {
         // Then a new id is requested
         verify(apiariesRepository).getNextApiaryId(getNextApiaryIdCallbackArgumentCaptor.capture());
         getNextApiaryIdCallbackArgumentCaptor.getValue().onNextApiaryIdLoaded(1);
-        // Then an empty not error is shown in the UI
+        // Then an empty apiary error is shown in the UI
         verify(addeditapiaryView).showEmptyApiaryError();
     }
 
@@ -100,8 +101,7 @@ public class AddEditApiaryPresenterTest {
 
     @Test
     public void populateApiary_callsRepoAndUpdatesView() {
-        Apiary testApiary = new Apiary(1, "Apiary 1", null, null, null, "Some notes...",
-                null, null, null);
+        Apiary testApiary = ApiaryMother.newDefaultApiary();
         // Get a reference to the class under test
         addEditApiaryPresenter = new AddEditApiaryPresenter(
                 apiariesRepository, addeditapiaryView, testApiary.getId());

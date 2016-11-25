@@ -170,6 +170,11 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
+    public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
+        // TODO
+    }
+
+    @Override
     public void refreshHives(long apiaryId) {
         cacheIsDirty = true;
     }

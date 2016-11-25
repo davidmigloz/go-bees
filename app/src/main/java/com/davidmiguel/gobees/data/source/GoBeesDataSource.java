@@ -79,6 +79,14 @@ public interface GoBeesDataSource {
     void getHives(long apiaryId, @NonNull GetHivesCallback callback);
 
     /**
+     * Gets hive with given id.
+     * Note: don't modify the Hive object.
+     * @param hiveId hive id.
+     * @param callback GetHiveCallback
+     */
+    void getHive(long hiveId, @NonNull GetHiveCallback callback);
+
+    /**
      * Force to update hives cache.
      */
     void refreshHives(long apiaryId);
@@ -116,6 +124,12 @@ public interface GoBeesDataSource {
 
     interface GetHivesCallback {
         void onHivesLoaded(List<Hive> hives);
+
+        void onDataNotAvailable();
+    }
+
+    interface GetHiveCallback {
+        void onHiveLoaded(Hive hive);
 
         void onDataNotAvailable();
     }

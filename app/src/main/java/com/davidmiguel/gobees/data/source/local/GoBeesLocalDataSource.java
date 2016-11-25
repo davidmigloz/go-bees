@@ -135,6 +135,11 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
+        // TODO
+    }
+
+    @Override
     public void refreshHives(long apiaryId) {
         // Not required because the GoBeesRepository handles the logic of refreshing the
         // data from all the available data sources
