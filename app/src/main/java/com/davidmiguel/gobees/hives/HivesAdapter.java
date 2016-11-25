@@ -88,6 +88,7 @@ public class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder>
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             card = (CardView) itemView.findViewById(R.id.card);
             hiveName = (TextView) itemView.findViewById(R.id.hive_name);
             background = card.getBackground();

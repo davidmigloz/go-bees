@@ -36,7 +36,7 @@ public class ApiaryMother {
 
     private ApiaryMother() {
         // Default values
-        Random r = new Random(System.currentTimeMillis());
+        Random r = new Random(System.nanoTime());
         id = r.nextInt(MAX_ID);
         name = NAME_PREFIX + " " + id;
         List<Hive> generatedHives = generateHives(NUM_HIVES);

@@ -89,7 +89,7 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
 
     @Override
     public void openApiaryDetail(@NonNull Apiary requestedApiary) {
-        // TODO
+        apiariesView.showApiaryDetail(requestedApiary.getId());
     }
 
     @Override

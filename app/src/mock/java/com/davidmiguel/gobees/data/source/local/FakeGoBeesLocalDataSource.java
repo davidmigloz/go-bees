@@ -86,7 +86,7 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
-        Long nextId = Collections.max(APIARIES_SERVICE_DATA.keySet());
+        Long nextId = Collections.max(APIARIES_SERVICE_DATA.keySet()) + 1;
         callback.onNextApiaryIdLoaded(nextId);
     }
 

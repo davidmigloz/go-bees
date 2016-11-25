@@ -16,6 +16,8 @@ import com.google.common.base.Strings;
  */
 public class HivesActivity extends AppCompatActivity {
 
+    public static final int NO_APIARY = -1;
+
     private GoBeesRepository goBeesRepository;
 
     @Override
@@ -34,12 +36,9 @@ public class HivesActivity extends AppCompatActivity {
         }
 
         // Get apiary id
-        String id = getIntent().getStringExtra(HivesFragment.ARGUMENT_APIARY_ID);
-        long apiaryId;
-        if (Strings.isNullOrEmpty(id)) {
+        long apiaryId = getIntent().getLongExtra(HivesFragment.ARGUMENT_APIARY_ID, NO_APIARY);
+        if (apiaryId == NO_APIARY) {
             throw new IllegalArgumentException("No apiary id passed!");
-        } else {
-            apiaryId = Integer.parseInt(id);
         }
 
         // Add fragment to the activity

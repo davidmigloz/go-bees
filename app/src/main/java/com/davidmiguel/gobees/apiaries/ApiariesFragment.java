@@ -27,6 +27,8 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.hives.HivesActivity;
+import com.davidmiguel.gobees.hives.HivesFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
 
@@ -184,8 +186,10 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void showApiaryDetail(int apiaryId) {
-        // TODO
+    public void showApiaryDetail(long apiaryId) {
+        Intent intent = new Intent(getActivity(), HivesActivity.class);
+        intent.putExtra(HivesFragment.ARGUMENT_APIARY_ID, apiaryId);
+        getActivity().startActivity(intent);
     }
 
     @Override

@@ -36,7 +36,7 @@ public interface ApiariesContract {
          * Opens activity to show the details of the given apiary.
          * @param apiaryId apiary to show.
          */
-        void showApiaryDetail(int apiaryId);
+        void showApiaryDetail(long apiaryId);
 
         /**
          * Shows loading apiaries error message.

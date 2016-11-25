@@ -89,6 +89,7 @@ public class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHo
 
         ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             card = (CardView) itemView.findViewById(R.id.card);
             apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
             background = card.getBackground();
