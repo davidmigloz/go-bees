@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:orientation="vertical"
-        android:background="#DDE3E6">
+        android:background="@color/colorBackground">
 
         <LinearLayout
             android:id="@+id/apiariesLL"

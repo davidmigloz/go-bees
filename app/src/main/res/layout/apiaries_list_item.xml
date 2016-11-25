@@ -40,9 +40,11 @@
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@id/apiary_image"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colorPrimaryText"
             android:layout_marginEnd="24dp"/>
 
         <ImageView
+            android:id="@+id/more_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentEnd="true"
@@ -50,7 +52,8 @@
             android:layout_gravity="center"
             android:adjustViewBounds="false"
             android:contentDescription="@string/more_icon"
-            android:src="@drawable/ic_more_vert"/>
+            android:src="@drawable/ic_more_vert"
+            android:tint="@color/colorIcons"/>
 
         <ImageView
             android:id="@+id/hive_icon"
@@ -63,7 +66,7 @@
             android:adjustViewBounds="false"
             android:contentDescription="@string/home_icon"
             android:src="@drawable/ic_home"
-            android:tint="#A2A1A4"/>
+            android:tint="@color/colorSecondaryText"/>
 
         <TextView
             android:id="@+id/num_hives"
@@ -76,10 +79,10 @@
             android:paddingBottom="2dp"
             android:text="12"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#A2A1A4"/>
+            android:textColor="@color/colorSecondaryText"/>
 
         <ImageView
-            android:id="@+id/weather"
+            android:id="@+id/weather_icon"
             android:layout_width="20dp"
             android:layout_height="24dp"
             android:layout_alignParentBottom="true"
@@ -89,7 +92,7 @@
             android:adjustViewBounds="false"
             android:contentDescription="@string/weather_icon"
             android:src="@drawable/ic_filter_drama"
-            android:tint="#A2A1A4"/>
+            android:tint="@color/colorSecondaryText"/>
 
         <TextView
             android:id="@+id/temp"
@@ -97,12 +100,12 @@
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="4dp"
-            android:layout_toEndOf="@id/weather"
+            android:layout_toEndOf="@id/weather_icon"
             android:gravity="bottom"
             android:paddingBottom="2dp"
             android:text="10ºC"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#A2A1A4"/>
+            android:textColor="@color/colorSecondaryText"/>
 
         <ImageView
             android:id="@+id/enter_icon"
