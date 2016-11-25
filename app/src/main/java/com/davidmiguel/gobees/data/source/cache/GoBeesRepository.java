@@ -174,6 +174,16 @@ public class GoBeesRepository implements GoBeesDataSource {
         cacheIsDirty = true;
     }
 
+    @Override
+    public void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
+        // TODO
+    }
+
+    @Override
+    public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
+        // TODO
+    }
+
     /**
      * Refresh cache with the given list of apiaries.
      * @param apiaries updated list of apiaries.

@@ -5,6 +5,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.ApiaryMother;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.google.common.collect.Lists;
 
@@ -100,6 +101,16 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
     public void refreshHives(long apiaryId) {
         // Not required because the TasksRepository handles the logic of refreshing the
         // tasks from all the available data sources
+    }
+
+    @Override
+    public void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
+        // TODO
+    }
+
+    @Override
+    public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
+        // TODO
     }
 
     @VisibleForTesting

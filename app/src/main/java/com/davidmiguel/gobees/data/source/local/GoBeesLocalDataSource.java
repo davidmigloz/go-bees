@@ -139,4 +139,14 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         // Not required because the GoBeesRepository handles the logic of refreshing the
         // data from all the available data sources
     }
+
+    @Override
+    public void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
+        // TODO
+    }
+
+    @Override
+    public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
+        // TODO
+    }
 }

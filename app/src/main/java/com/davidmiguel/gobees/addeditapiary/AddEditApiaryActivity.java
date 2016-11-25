@@ -12,7 +12,7 @@ import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.google.common.base.Strings;
 
 /**
- * Add / edit apiaries activity.
+ * Add / edit apiary activity.
  */
 public class AddEditApiaryActivity extends AppCompatActivity {
 

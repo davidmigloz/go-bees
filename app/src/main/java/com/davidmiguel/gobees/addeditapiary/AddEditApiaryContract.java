@@ -51,7 +51,7 @@ public interface AddEditApiaryContract {
         void saveApiary(String name, String notes);
 
         /**
-         * Fill apiary data (the apiary must already exists in the repository).
+         * Fill apiary data (the apiary must already exist in the repository).
          */
         void populateApiary();
     }
