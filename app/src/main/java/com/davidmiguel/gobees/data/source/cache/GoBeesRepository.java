@@ -3,6 +3,7 @@ package com.davidmiguel.gobees.data.source.cache;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public class GoBeesRepository implements GoBeesDataSource {
             return;
         }
 
-        // Query the local storage if available. [If not, query the network]
+        // Query the local storage if available
         goBeesDataSource.getApiary(apiaryId, callback);
     }
 
@@ -153,14 +154,24 @@ public class GoBeesRepository implements GoBeesDataSource {
         goBeesDataSource.getNextApiaryId(callback);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
+        checkNotNull(callback);
 
+        // Respond immediately with cache if available and not dirty
+        if (!cacheIsDirty && cachedApiaries != null && cachedApiaries.containsKey(apiaryId)) {
+            callback.onHivesLoaded(new ArrayList<>(cachedApiaries.get(apiaryId).getHives()));
+            return;
+        }
+
+        // Query the local storage if available
+        goBeesDataSource.getHives(apiaryId, callback);
     }
 
     @Override
     public void refreshHives(long apiaryId) {
-
+        cacheIsDirty = true;
     }
 
     /**

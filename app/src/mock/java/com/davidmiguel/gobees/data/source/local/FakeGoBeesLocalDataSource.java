@@ -4,9 +4,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.google.common.collect.Lists;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,10 +22,15 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
     private static final Map<Long, Apiary> APIARIES_SERVICE_DATA = new LinkedHashMap<>();
 
     private FakeGoBeesLocalDataSource() {
+        // Create apiaries
+        Apiary apiary1 = ApiaryMother.newDefaultApiary();
+        Apiary apiary2 = ApiaryMother.newDefaultApiary();
+        Apiary apiary3 = ApiaryMother.newDefaultApiary();
+
         // Add fake data
-        APIARIES_SERVICE_DATA.put(1L, new Apiary(1, "Apiary 1", null, null, null, null, null, null, null));
-        APIARIES_SERVICE_DATA.put(2L, new Apiary(2, "Apiary 2", null, null, null, null, null, null, null));
-        APIARIES_SERVICE_DATA.put(3L, new Apiary(3, "Apiary 3", null, null, null, null, null, null, null));
+        APIARIES_SERVICE_DATA.put(apiary1.getId(), apiary1);
+        APIARIES_SERVICE_DATA.put(apiary2.getId(), apiary2);
+        APIARIES_SERVICE_DATA.put(apiary3.getId(), apiary3);
     }
 
     public static FakeGoBeesLocalDataSource getInstance() {
@@ -79,17 +86,20 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
-
+        Long nextId = Collections.max(APIARIES_SERVICE_DATA.keySet());
+        callback.onNextApiaryIdLoaded(nextId);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
-
+        callback.onHivesLoaded(Lists.newArrayList(APIARIES_SERVICE_DATA.get(apiaryId).getHives()));
     }
 
     @Override
     public void refreshHives(long apiaryId) {
-
+        // Not required because the TasksRepository handles the logic of refreshing the
+        // tasks from all the available data sources
     }
 
     @VisibleForTesting

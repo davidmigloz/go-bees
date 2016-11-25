@@ -1,5 +1,7 @@
 package com.davidmiguel.gobees.data.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import io.realm.RealmList;
@@ -12,6 +14,7 @@ public class ApiaryMother {
 
     private static final String NAME_PREFIX = "Apiary";
     private static final int MAX_ID = 1000;
+    private static final int NUM_HIVES = 3;
 
     private long id;
 
@@ -36,6 +39,8 @@ public class ApiaryMother {
         Random r = new Random(System.currentTimeMillis());
         id = r.nextInt(MAX_ID);
         name = NAME_PREFIX + " " + id;
+        List<Hive> generatedHives = generateHives(NUM_HIVES);
+        hives = new RealmList<>(generatedHives.toArray(new Hive[generatedHives.size()]));
     }
 
     private static ApiaryMother newApiary() {
@@ -57,6 +62,18 @@ public class ApiaryMother {
                 locationLat, notes, hives, meteoDays, meteoDetails);
     }
 
+    private List<Hive> generateHives(int num) {
+        List<Hive> hives = new ArrayList<>(num);
+        for (int i = 0; i < num; i++) {
+            hives.add(HiveMother.newDefaultHive());
+        }
+        return hives;
+    }
+
+    /**
+     * Generate random apiary with 3 hives.
+     * @return apiary.
+     */
     public static Apiary newDefaultApiary() {
         return ApiaryMother.newApiary().build();
     }
