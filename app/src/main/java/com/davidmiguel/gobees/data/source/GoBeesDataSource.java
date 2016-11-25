@@ -79,9 +79,32 @@ public interface GoBeesDataSource {
     void getHives(long apiaryId, @NonNull GetHivesCallback callback);
 
     /**
+     * Gets hive with given id.
+     * Note: don't modify the Hive object.
+     * @param hiveId hive id.
+     * @param callback GetHiveCallback
+     */
+    void getHive(long hiveId, @NonNull GetHiveCallback callback);
+
+    /**
      * Force to update hives cache.
      */
     void refreshHives(long apiaryId);
+
+    /**
+     * Saves given hive. If it already exists, is updated.
+     * Note: hive must be a new unmanaged object (don't modify managed objects).
+     * @param hive hive unmanaged object.
+     * @param callback TaskCallback.
+     */
+    void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback);
+
+    /**
+     * Returns the next hive id.
+     * (Realm does not support auto-increment at the moment).
+     * @param callback GetNextHiveIdCallback.
+     */
+    void getNextHiveId(@NonNull GetNextHiveIdCallback callback);
 
     interface GetApiariesCallback {
         void onApiariesLoaded(List<Apiary> apiaries);
@@ -103,6 +126,16 @@ public interface GoBeesDataSource {
         void onHivesLoaded(List<Hive> hives);
 
         void onDataNotAvailable();
+    }
+
+    interface GetHiveCallback {
+        void onHiveLoaded(Hive hive);
+
+        void onDataNotAvailable();
+    }
+
+    interface GetNextHiveIdCallback {
+        void onNextHiveIdLoaded(long hiveId);
     }
 
     interface TaskCallback {

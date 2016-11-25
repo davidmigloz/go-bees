@@ -74,7 +74,6 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         } catch (Exception e) {
             callback.onFailure();
         }
-
     }
 
     @Override
@@ -135,8 +134,40 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
+        try {
+            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            callback.onHiveLoaded(hive);
+        } catch (Exception e) {
+            callback.onDataNotAvailable();
+        }
+    }
+
+    @Override
     public void refreshHives(long apiaryId) {
         // Not required because the GoBeesRepository handles the logic of refreshing the
         // data from all the available data sources
+    }
+
+    @Override
+    public void saveHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Save hive
+                    realm.copyToRealmOrUpdate(hive);
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @Override
+    public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
+        Number nextId = realm.where(Hive.class).max("id");
+        callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
     }
 }

@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.addeditapiary;
+package com.davidmiguel.gobees.addedithive;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,37 +13,38 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.addeditapiary.AddEditApiaryFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Display add apiary form.
+ * Display add hive form.
  */
-public class AddEditApiaryFragment extends Fragment implements AddEditApiaryContract.View {
+public class AddEditHiveFragment extends Fragment implements AddEditHiveContract.View {
 
-    public static final String ARGUMENT_EDIT_APIARY_ID = "EDIT_APIARY_ID";
+    public static final String ARGUMENT_EDIT_HIVE_ID = "EDIT_HIVE_ID";
 
-    private AddEditApiaryContract.Presenter presenter;
+    private AddEditHiveContract.Presenter presenter;
 
     private TextView nameTextView;
 
     private TextView notesTextView;
 
-    public AddEditApiaryFragment() {
+    public AddEditHiveFragment() {
         // Requires empty public constructor
     }
 
-    public static AddEditApiaryFragment newInstance() {
-        return new AddEditApiaryFragment();
+    public static AddEditHiveFragment newInstance() {
+        return new AddEditHiveFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.addeditapiary_frag, container, false);
-        nameTextView = (TextView) root.findViewById(R.id.add_apiary_name);
-        notesTextView = (TextView) root.findViewById(R.id.add_apiary_notes);
+        View root = inflater.inflate(R.layout.addedithive_frag, container, false);
+        nameTextView = (TextView) root.findViewById(R.id.add_hive_name);
+        notesTextView = (TextView) root.findViewById(R.id.add_hive_notes);
 
         setHasOptionsMenu(true);
         setRetainInstance(true);
@@ -56,12 +57,12 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
         // Configure floating action button
         FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_apiary);
+                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.saveApiary(nameTextView.getText().toString(),
+                presenter.saveHive(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }
         });
@@ -74,17 +75,17 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     }
 
     @Override
-    public void showEmptyApiaryError() {
-        showMessage(nameTextView, getString(R.string.empty_apiary_message));
+    public void showEmptyHiveError() {
+        showMessage(nameTextView, getString(R.string.empty_hive_message));
     }
 
     @Override
-    public void showSaveApiaryError() {
-        showMessage(getView(), getString(R.string.save_apiary_error_message));
+    public void showSaveHiveError() {
+        showMessage(getView(), getString(R.string.save_hive_error_message));
     }
 
     @Override
-    public void showApiariesList() {
+    public void showHivesList() {
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
     }
@@ -100,13 +101,13 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     }
 
     @Override
-    public boolean isActive() {
-        return isAdded();
+    public void setPresenter(@NonNull AddEditHiveContract.Presenter presenter) {
+        this.presenter = checkNotNull(presenter);
     }
 
     @Override
-    public void setPresenter(@NonNull AddEditApiaryContract.Presenter presenter) {
-        this.presenter = checkNotNull(presenter);
+    public boolean isActive() {
+        return isAdded();
     }
 
     /**

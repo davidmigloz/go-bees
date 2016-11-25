@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
@@ -180,7 +181,8 @@ public class HivesFragment extends Fragment
 
     @Override
     public void showAddEditHive() {
-        // TODO
+        Intent intent = new Intent(getContext(), AddEditHiveActivity.class);
+        startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
     }
 
     @Override

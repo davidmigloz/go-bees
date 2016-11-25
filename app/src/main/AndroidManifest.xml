@@ -29,6 +29,7 @@
         </activity>
         <activity android:name=".addeditapiary.AddEditApiaryActivity" />
         <activity android:name=".hives.HivesActivity" />
+        <activity android:name=".addedithive.AddEditHiveActivity" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"/>
