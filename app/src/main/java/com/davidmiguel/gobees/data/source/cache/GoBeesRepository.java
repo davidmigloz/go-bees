@@ -153,6 +153,16 @@ public class GoBeesRepository implements GoBeesDataSource {
         goBeesDataSource.getNextApiaryId(callback);
     }
 
+    @Override
+    public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
+
+    }
+
+    @Override
+    public void refreshHives(long apiaryId) {
+
+    }
+
     /**
      * Refresh cache with the given list of apiaries.
      * @param apiaries updated list of apiaries.

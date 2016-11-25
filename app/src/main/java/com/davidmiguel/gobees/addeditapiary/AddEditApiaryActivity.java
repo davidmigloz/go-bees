@@ -71,6 +71,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
+
         // Create the presenter
         new AddEditApiaryPresenter(goBeesRepository, addEditApiaryFragment, apiaryId);
     }

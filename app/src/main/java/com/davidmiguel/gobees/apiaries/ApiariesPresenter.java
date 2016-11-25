@@ -32,7 +32,7 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
 
     @Override
     public void result(int requestCode, int resultCode) {
-        // If a task was successfully added, show snackbar
+        // If a apiary was successfully added, show snackbar
         if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
             apiariesView.showSuccessfullySavedMessage();
         }

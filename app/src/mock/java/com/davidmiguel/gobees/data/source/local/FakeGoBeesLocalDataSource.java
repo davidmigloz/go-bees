@@ -82,6 +82,16 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     }
 
+    @Override
+    public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
+
+    }
+
+    @Override
+    public void refreshHives(long apiaryId) {
+
+    }
+
     @VisibleForTesting
     public void addTasks(Apiary... apiaries) {
         for (Apiary apiary : apiaries) {

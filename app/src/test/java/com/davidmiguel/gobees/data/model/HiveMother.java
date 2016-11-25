@@ -5,11 +5,12 @@ import java.util.Random;
 import io.realm.RealmList;
 
 /**
- * Mother class for apiaries.
+ * Mother class for hives.
+ * Using Object Mother, Test Data Builder and Builder patter.
  */
 public class HiveMother {
 
-    private static final String NAME_PREFIX = "Apiary";
+    private static final String NAME_PREFIX = "Hive";
     private static final int MAX_ID = 1000;
 
     private long id;
@@ -18,17 +19,9 @@ public class HiveMother {
 
     private String imageUrl;
 
-    private Double locationLong;
-
-        private Double locationLat;
-
     private String notes;
 
-    private RealmList<Hive> hives;
-
-    private RealmList<MeteoDay> meteoDays;
-
-    private RealmList<MeteoDetail> meteoDetails;
+    private RealmList<Record> records;
 
     private HiveMother() {
         // Default values
@@ -37,26 +30,25 @@ public class HiveMother {
         name = NAME_PREFIX + " " + id;
     }
 
-    protected static HiveMother newApiary() {
+    private static HiveMother newHive() {
         return new HiveMother();
     }
 
-    protected HiveMother withName(String name) {
+    public static Hive newDefaultHive() {
+        return HiveMother.newHive().build();
+    }
+
+    private HiveMother withName(String name) {
         this.name = name;
         return this;
     }
 
-    protected HiveMother withNotes(String notes) {
+    private HiveMother withNotes(String notes) {
         this.notes = notes;
         return this;
     }
 
-    private Apiary build() {
-        return new Apiary(id, name, imageUrl, locationLong,
-                locationLat, notes, hives, meteoDays, meteoDetails);
-    }
-
-    public static Apiary newDefaultApiary() {
-        return HiveMother.newApiary().build();
+    private Hive build() {
+        return new Hive(id, name, imageUrl, notes, records);
     }
 }

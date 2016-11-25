@@ -59,6 +59,7 @@ public class ApiariesActivity extends AppCompatActivity {
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
+
         // Create the presenter
         new ApiariesPresenter(goBeesRepository, apiariesFragment);
     }

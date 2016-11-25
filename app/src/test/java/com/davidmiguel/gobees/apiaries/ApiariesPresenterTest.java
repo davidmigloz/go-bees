@@ -1,6 +1,7 @@
 package com.davidmiguel.gobees.apiaries;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.google.common.collect.Lists;
@@ -28,7 +29,7 @@ public class ApiariesPresenterTest {
     private static List<Apiary> APIARIES;
 
     @Mock
-    private GoBeesRepository apiariesRepository;
+    private GoBeesRepository goBeesRepository;
 
     @Mock
     private ApiariesContract.View apiariesView;
@@ -44,16 +45,16 @@ public class ApiariesPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        apiariesPresenter = new ApiariesPresenter(apiariesRepository, apiariesView);
+        apiariesPresenter = new ApiariesPresenter(goBeesRepository, apiariesView);
 
         // The presenter won't update the view unless it's active
         when(apiariesView.isActive()).thenReturn(true);
 
-        // We start the apiaries to 3
+        // Create 3 apiaries
         APIARIES = Lists.newArrayList(
-                new Apiary(1, "Apiary 1", null, null, null, null, null, null, null),
-                new Apiary(2, "Apiary 2", null, null, null, null, null, null, null),
-                new Apiary(3, "Apiary 3", null, null, null, null, null, null, null));
+                ApiaryMother.newDefaultApiary(),
+                ApiaryMother.newDefaultApiary(),
+                ApiaryMother.newDefaultApiary());
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +65,7 @@ public class ApiariesPresenterTest {
         apiariesPresenter.loadApiaries(true);
 
         // Callback is captured and invoked with stubbed apiaries
-        verify(apiariesRepository).getApiaries(getApiariesCallbackCaptor.capture());
+        verify(goBeesRepository).getApiaries(getApiariesCallbackCaptor.capture());
         getApiariesCallbackCaptor.getValue().onApiariesLoaded(APIARIES);
 
         // Then progress indicator is shown
@@ -74,6 +75,7 @@ public class ApiariesPresenterTest {
         inOrder.verify(apiariesView).setLoadingIndicator(false);
         ArgumentCaptor<List> showApiariesArgumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(apiariesView).showApiaries(showApiariesArgumentCaptor.capture());
+        // Assert that the number of apairies shown is the expected
         assertTrue(showApiariesArgumentCaptor.getValue().size() == APIARIES.size());
     }
 }

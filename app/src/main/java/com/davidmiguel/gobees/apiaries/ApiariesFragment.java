@@ -78,8 +78,8 @@ public class ApiariesFragment extends Fragment
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(listAdapter,
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
                 ItemTouchHelper.LEFT);
-        ItemTouchHelper supermarketTouchHelper = new ItemTouchHelper(callback);
-        supermarketTouchHelper.attachToRecyclerView(recyclerView);
+        ItemTouchHelper apiaryTouchHelper = new ItemTouchHelper(callback);
+        apiaryTouchHelper.attachToRecyclerView(recyclerView);
 
         // Set up  no apiaries view
         noApiariesView = root.findViewById(R.id.no_apiaries);
@@ -217,6 +217,16 @@ public class ApiariesFragment extends Fragment
         this.presenter = checkNotNull(presenter);
     }
 
+    @Override
+    public void onApiaryClick(Apiary clickedApiary) {
+        presenter.openApiaryDetail(clickedApiary);
+    }
+
+    @Override
+    public void onApiaryDelete(Apiary clickedApiary) {
+        // TODO delete apiary
+    }
+
     /**
      * Shows no apiaries views.
      *
@@ -241,15 +251,5 @@ public class ApiariesFragment extends Fragment
     @SuppressWarnings("ConstantConditions")
     private void showMessage(String message) {
         Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onApiaryClick(Apiary clickedApiary) {
-        presenter.openApiaryDetail(clickedApiary);
-    }
-
-    @Override
-    public void onApiaryDelete(Apiary clickedApiary) {
-
     }
 }

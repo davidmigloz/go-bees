@@ -21,7 +21,7 @@ public class HivesContract {
          * Displays or hide loading indicator.
          * @param active true or false.
          */
-        void setLoadingIndicator(boolean active);
+        void setLoadingIndicator(final boolean active);
 
         /**
          * Shows list of hives.
@@ -38,7 +38,7 @@ public class HivesContract {
          * Opens activity to show the details of the given hive.
          * @param hiveId hive to show.
          */
-        void showHiveDetail(int hiveId);
+        void showHiveDetail(long hiveId);
 
         /**
          * Shows loading hives error message.
@@ -67,10 +67,9 @@ public class HivesContract {
 
         /**
          * Load hives from repository.
-         * @param apiaryId hives's apiary.
          * @param forceUpdate force cache update.
          */
-        void loadHives(int apiaryId, boolean forceUpdate);
+        void loadHives(boolean forceUpdate);
 
         /**
          * Orders to open activity to add or edit a hive.

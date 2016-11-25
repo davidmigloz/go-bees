@@ -19,7 +19,7 @@ public interface ApiariesContract {
          * Displays or hide loading indicator.
          * @param active true or false.
          */
-        void setLoadingIndicator(boolean active);
+        void setLoadingIndicator(final boolean active);
 
         /**
          * Shows list of apiaries.

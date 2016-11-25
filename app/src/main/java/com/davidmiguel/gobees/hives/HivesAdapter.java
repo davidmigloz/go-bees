@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.apiaries;
+package com.davidmiguel.gobees.hives;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.ItemTouchHelperAdapter;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
@@ -22,85 +22,84 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Apiaries list adapter.
+ * Hives list adapter.
  */
-public class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder>
+public class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder>
         implements ItemTouchHelperAdapter {
 
-    private List<Apiary> apiaries;
-    private ApiaryItemListener listener;
+    private List<Hive> hives;
+    private HivesAdapter.HiveItemListener listener;
 
-    public ApiariesAdapter(List<Apiary> apiaries, ApiaryItemListener listener) {
-        this.apiaries = checkNotNull(apiaries);
+    public HivesAdapter(List<Hive> hives, HivesAdapter.HiveItemListener listener) {
+        this.hives = checkNotNull(hives);
         this.listener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.apiaries_list_item, parent, false);
-        return new ViewHolder(view);
+                .inflate(R.layout.hives_list_item, parent, false);
+        return new HivesAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(apiaries.get(position));
+        holder.bind(hives.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return apiaries == null ? 0 : apiaries.size();
+        return hives == null ? 0 : hives.size();
     }
 
-    public void replaceData(List<Apiary> apiaries) {
-        this.apiaries = checkNotNull(apiaries);
+    public void replaceData(List<Hive> hives) {
+        this.hives = checkNotNull(hives);
         notifyDataSetChanged();
     }
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(apiaries, fromPosition, toPosition);
+        Collections.swap(hives, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
     @Override
     public void onItemDismiss(int position) {
-        Apiary apiary = apiaries.get(position);
-        listener.onApiaryDelete(apiary);
-        apiaries.remove(position);
+        Hive hive = hives.get(position);
+        listener.onHiveDelete(hive);
+        hives.remove(position);
         notifyItemRemoved(position);
-        // TODO remove apairy
+        // TODO remove hive
     }
 
+    public interface HiveItemListener {
+        void onHiveClick(Hive clickedHive);
 
-    public interface ApiaryItemListener {
-        void onApiaryClick(Apiary clickedApiary);
-
-        void onApiaryDelete(Apiary clickedApiary);
+        void onHiveDelete(Hive clickedHive);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
-            implements BaseViewHolder<Apiary>, View.OnClickListener, ItemTouchHelperViewHolder {
+            implements BaseViewHolder<Hive>, View.OnClickListener, ItemTouchHelperViewHolder {
 
         private CardView card;
-        private TextView apiaryName;
+        private TextView hiveName;
         private Drawable background;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             card = (CardView) itemView.findViewById(R.id.card);
-            apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
+            hiveName = (TextView) itemView.findViewById(R.id.hive_name);
             background = card.getBackground();
         }
 
-        public void bind(@NonNull Apiary apiary) {
-            apiaryName.setText(apiary.getName());
+        public void bind(@NonNull Hive hive) {
+            hiveName.setText(hive.getName());
         }
 
         @Override
         public void onClick(View view) {
-            listener.onApiaryClick(apiaries.get(getAdapterPosition()));
+            listener.onHiveClick(hives.get(getAdapterPosition()));
         }
 
         @Override
