@@ -25,12 +25,12 @@ public interface ApiariesContract {
          * Shows list of apiaries.
          * @param apiaries apiaries to show (list cannot be empty).
          */
-        void showApiaries(List<Apiary> apiaries);
+        void showApiaries(@NonNull List<Apiary> apiaries);
 
         /**
          * Opens activity to add or edit an apiary.
          */
-        void showAddApiary();
+        void showAddEditApiary();
 
         /**
          * Opens activity to show the details of the given apiary.
@@ -49,7 +49,7 @@ public interface ApiariesContract {
         void showNoApiaries();
 
         /**
-         * Shows successfully saved message-
+         * Shows successfully saved message.
          */
         void showSuccessfullySavedMessage();
     }
@@ -57,7 +57,7 @@ public interface ApiariesContract {
     interface Presenter extends BasePresenter {
 
         /**
-         * Shows a snackbar showing whether a task was successfully added or not.
+         * Shows a snackbar showing whether an apiary was successfully added or not.
          * @param requestCode request code from the intent.
          * @param resultCode result code from the intent.
          */
@@ -70,9 +70,9 @@ public interface ApiariesContract {
         void loadApiaries(boolean forceUpdate);
 
         /**
-         * Opens activity to add or edit an apiary.
+         * Orders to open activity to add or edit an apiary.
          */
-        void addNewApiary();
+        void addEditApiary();
 
         /**
          * Opens activity to show the details of the given apiary.

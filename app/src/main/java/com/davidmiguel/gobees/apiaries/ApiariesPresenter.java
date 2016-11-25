@@ -11,12 +11,12 @@ import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import java.util.List;
 
 /**
- * Listens to user actions from the UI AddEditApiaryFragment, retrieves the data and updates the
+ * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
  * UI as required.
  */
 public class ApiariesPresenter implements ApiariesContract.Presenter {
 
-    private GoBeesRepository apiariesRepository;
+    private GoBeesRepository goBeesRepository;
     private ApiariesContract.View apiariesView;
 
     /**
@@ -24,8 +24,8 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
      */
     private boolean firstLoad = true;
 
-    public ApiariesPresenter(GoBeesRepository apiariesRepository, ApiariesContract.View apiariesView) {
-        this.apiariesRepository = apiariesRepository;
+    public ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View apiariesView) {
+        this.goBeesRepository = goBeesRepository;
         this.apiariesView = apiariesView;
         this.apiariesView.setPresenter(this);
     }
@@ -48,10 +48,10 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
         apiariesView.setLoadingIndicator(true);
         // Refresh data if needed
         if (forceUpdate) {
-            apiariesRepository.refreshApiaries();
+            goBeesRepository.refreshApiaries();
         }
         // Get apiaires
-        apiariesRepository.getApiaries(new GoBeesDataSource.GetApiariesCallback() {
+        goBeesRepository.getApiaries(new GoBeesDataSource.GetApiariesCallback() {
 
             @Override
             public void onApiariesLoaded(List<Apiary> apiaries) {
@@ -83,8 +83,8 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
     }
 
     @Override
-    public void addNewApiary() {
-        apiariesView.showAddApiary();
+    public void addEditApiary() {
+        apiariesView.showAddEditApiary();
     }
 
     @Override

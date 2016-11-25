@@ -89,7 +89,7 @@ public class ApiariesFragment extends Fragment
         noApiariesAddView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddApiary();
+                showAddEditApiary();
             }
         });
 
@@ -100,7 +100,7 @@ public class ApiariesFragment extends Fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addNewApiary();
+                presenter.addEditApiary();
             }
         });
 
@@ -171,14 +171,14 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void showApiaries(List<Apiary> apiaries) {
+    public void showApiaries(@NonNull List<Apiary> apiaries) {
         listAdapter.replaceData(apiaries);
         apiarieView.setVisibility(View.VISIBLE);
         noApiariesView.setVisibility(View.GONE);
     }
 
     @Override
-    public void showAddApiary() {
+    public void showAddEditApiary() {
         Intent intent = new Intent(getContext(), AddEditApiaryActivity.class);
         startActivityForResult(intent, AddEditApiaryActivity.REQUEST_ADD_APIARY);
     }
