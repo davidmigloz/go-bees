@@ -109,6 +109,11 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         this.presenter = checkNotNull(presenter);
     }
 
+    /**
+     * Shows a snackbar with the given message.
+     * @param view view.
+     * @param message message to show.
+     */
     @SuppressWarnings("ConstantConditions")
     private void showMessage(View view, String message) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();

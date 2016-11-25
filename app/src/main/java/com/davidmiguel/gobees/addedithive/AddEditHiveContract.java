@@ -19,7 +19,7 @@ public class AddEditHiveContract {
         /**
          * Shows save error message.
          */
-        void showSaveApiaryError();
+        void showSaveHiveError();
 
         /**
          * Goes back to hives activity.

@@ -3,6 +3,7 @@ package com.davidmiguel.gobees.data.model;
 import android.support.annotation.Nullable;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -96,6 +97,10 @@ public class Hive extends RealmObject {
 
     public void setRecords(@Nullable RealmList<Record> records) {
         this.records = records;
+    }
+
+    public boolean isValidHive() {
+        return !Strings.isNullOrEmpty(name);
     }
 
     @Override
