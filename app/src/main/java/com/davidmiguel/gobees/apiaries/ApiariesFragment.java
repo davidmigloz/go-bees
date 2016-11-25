@@ -27,6 +27,7 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;

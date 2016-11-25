@@ -19,4 +19,5 @@
     <string name="more_icon">More...</string>
     <string name="enter_icon">Enter...</string>
     <string name="weather_icon">Weather icon</string>
+    <string name="last_revision_icon">Last revision icon</string>
 </resources>
