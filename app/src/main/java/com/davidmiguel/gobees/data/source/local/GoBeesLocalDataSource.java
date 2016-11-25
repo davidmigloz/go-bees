@@ -1,15 +1,14 @@
 package com.davidmiguel.gobees.data.source.local;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Concrete implementation of a data source as a Realm db.
@@ -44,7 +43,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getApiaries(@NonNull GetApiariesCallback callback) {
         try {
             RealmResults<Apiary> apiaries = realm.where(Apiary.class).findAll();
-            callback.onApiariesLoaded(apiaries);
+            callback.onApiariesLoaded(new ArrayList<>(apiaries));
         } catch (Exception e) {
             callback.onDataNotAvailable();
         }

@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#DDE3E6">
 
         <LinearLayout
             android:id="@+id/apiariesLL"
@@ -19,10 +20,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/apiaries_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:padding="16dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -46,8 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/no_apiaries"
-                android:layout_marginBottom="@dimen/list_item_padding" />
+                android:layout_marginBottom="@dimen/list_item_padding"
+                android:text="@string/no_apiaries"/>
 
             <TextView
                 android:id="@+id/no_apiaries_add"
@@ -56,7 +58,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/touch_feedback"
                 android:gravity="center"
-                android:text="@string/no_apiaries_add" />
+                android:text="@string/no_apiaries_add"/>
 
         </LinearLayout>
     </RelativeLayout>

@@ -10,6 +10,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,13 +21,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
-import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
+import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +37,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Display a list of apiaries.
  */
-public class ApiariesFragment extends Fragment implements ApiariesContract.View {
+public class ApiariesFragment extends Fragment
+        implements ApiariesContract.View, ApiaryItemListener {
 
     private ApiariesContract.Presenter presenter;
-    ApiaryItemListener itemListener = new ApiaryItemListener() {
-        @Override
-        public void onApiaryClick(Apiary clickedApiary) {
-            presenter.openApiaryDetail(clickedApiary);
-        }
-    };
     private ApiariesAdapter listAdapter;
     private View noApiariesView;
     private ImageView noApiariesIcon;
@@ -61,7 +59,7 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new ApiariesAdapter(new ArrayList<Apiary>(0), itemListener);
+        listAdapter = new ApiariesAdapter(new ArrayList<Apiary>(0), this);
     }
 
     @Nullable
@@ -70,12 +68,19 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.apiaries_frag, container, false);
 
-        // Set up tasks view
-        ListView listView = (ListView) root.findViewById(R.id.apiaries_list);
-        listView.setAdapter(listAdapter);
+        // Set up apiaries list view
+        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.apiaries_list);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(listAdapter);
         apiarieView = (LinearLayout) root.findViewById(R.id.apiariesLL);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(listAdapter,
+                ItemTouchHelper.UP | ItemTouchHelper.DOWN,
+                ItemTouchHelper.LEFT);
+        ItemTouchHelper supermarketTouchHelper = new ItemTouchHelper(callback);
+        supermarketTouchHelper.attachToRecyclerView(recyclerView);
 
-        // Set up  no tasks view
+        // Set up  no apiaries view
         noApiariesView = root.findViewById(R.id.no_apiaries);
         noApiariesIcon = (ImageView) root.findViewById(R.id.no_apiaries_icon);
         noApiarieskTextView = (TextView) root.findViewById(R.id.no_apiaries_text);
@@ -108,7 +113,7 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
         );
 
         // Set the scrolling view in the custom SwipeRefreshLayout
-        swipeRefreshLayout.setScrollUpChild(listView);
+        swipeRefreshLayout.setScrollUpChild(recyclerView);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -235,5 +240,15 @@ public class ApiariesFragment extends Fragment implements ApiariesContract.View 
     @SuppressWarnings("ConstantConditions")
     private void showMessage(String message) {
         Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onApiaryClick(Apiary clickedApiary) {
+        presenter.openApiaryDetail(clickedApiary);
+    }
+
+    @Override
+    public void onApiaryDelete(Apiary clickedApiary) {
+
     }
 }
