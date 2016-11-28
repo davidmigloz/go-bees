@@ -33,7 +33,7 @@
             android:parentActivityName=".apiaries.ApiariesActivity" />
         <activity android:name=".addedithive.AddEditHiveActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".premonitoring.PreMonitoringActivity"
             android:screenOrientation="landscape"/>
     </application>
 
