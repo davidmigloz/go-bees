@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 25
@@ -9,8 +10,8 @@ android {
         applicationId "com.davidmiguel.gobees"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 1
-        versionName "0.1"
+        versionCode 2
+        versionName "0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -79,6 +80,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.1'
     compile 'com.github.davidmigloz:opencv-android-gradle-repo:3.1.0'
     compile 'com.google.guava:guava:20.0'
+    compile 'com.makeramen:roundedimageview:2.2.1'
 
     // Dependencies for local unit tests
     testCompile 'junit:junit:4.12'

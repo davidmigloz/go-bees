@@ -14,30 +14,70 @@ import java.util.List;
 public interface ApiariesContract {
 
     interface View extends BaseView<Presenter> {
-        void setLoadingIndicator(boolean active);
 
-        void showApiaries(List<Apiary> apiaries);
+        /**
+         * Displays or hide loading indicator.
+         * @param active true or false.
+         */
+        void setLoadingIndicator(final boolean active);
 
-        void showAddApiary();
+        /**
+         * Shows list of apiaries.
+         * @param apiaries apiaries to show (list cannot be empty).
+         */
+        void showApiaries(@NonNull List<Apiary> apiaries);
 
-        void showApiaryDetail(int apiaryId);
+        /**
+         * Opens activity to add or edit an apiary.
+         */
+        void showAddEditApiary();
 
+        /**
+         * Opens activity to show the details of the given apiary.
+         * @param apiaryId apiary to show.
+         */
+        void showApiaryDetail(long apiaryId);
+
+        /**
+         * Shows loading apiaries error message.
+         */
         void showLoadingApiariesError();
 
+        /**
+         * Makes visible the no apiaries view.
+         */
         void showNoApiaries();
 
+        /**
+         * Shows successfully saved message.
+         */
         void showSuccessfullySavedMessage();
-
-        boolean isActive();
     }
 
     interface Presenter extends BasePresenter {
+
+        /**
+         * Shows a snackbar showing whether an apiary was successfully added or not.
+         * @param requestCode request code from the intent.
+         * @param resultCode result code from the intent.
+         */
         void result(int requestCode, int resultCode);
 
+        /**
+         * Load apiaries from repository.
+         * @param forceUpdate force cache update.
+         */
         void loadApiaries(boolean forceUpdate);
 
-        void addNewApiary();
+        /**
+         * Orders to open activity to add or edit an apiary.
+         */
+        void addEditApiary();
 
+        /**
+         * Opens activity to show the details of the given apiary.
+         * @param requestedApiary apiary to show.
+         */
         void openApiaryDetail(@NonNull Apiary requestedApiary);
     }
 }

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.davidmiguel.gobees.MainActivity">
+    tools:context="com.davidmiguel.gobees.premonitoring.PreMonitoringActivity">
 
     <org.opencv.android.JavaCameraView
         android:id="@+id/camera_view"

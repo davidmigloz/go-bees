@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees;
+package com.davidmiguel.gobees.premonitoring;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
 
@@ -17,9 +18,12 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
-public class MainActivity extends AppCompatActivity implements CvCameraViewListener2 {
+/**
+ * TODO refactor to MPV.
+ */
+public class PreMonitoringActivity extends AppCompatActivity implements CvCameraViewListener2 {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "PreMonitoringActivity";
 
     // Bees counter
     private BeesCounter bc;
