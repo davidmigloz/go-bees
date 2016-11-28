@@ -11,6 +11,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -207,6 +208,14 @@ public class HivesFragment extends Fragment
     @Override
     public void showSuccessfullySavedMessage() {
         showMessage(getString(R.string.successfully_saved_hive_message));
+    }
+
+    @Override
+    public void showTitle(@NonNull String title) {
+        ActionBar ab = ((HivesActivity) getActivity()).getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(title);
+        }
     }
 
     @Override

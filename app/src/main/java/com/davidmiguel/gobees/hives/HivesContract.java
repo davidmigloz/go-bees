@@ -54,6 +54,12 @@ public class HivesContract {
          * Shows successfully saved message.
          */
         void showSuccessfullySavedMessage();
+
+        /**
+         * Sets the title in the action bar.
+         * @param title title.
+         */
+        void showTitle(@NonNull String title);
     }
 
     interface Presenter extends BasePresenter {

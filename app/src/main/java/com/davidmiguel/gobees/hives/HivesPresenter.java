@@ -9,6 +9,7 @@ import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.google.common.collect.Collections2;
 
 import java.util.List;
 
@@ -55,10 +56,10 @@ public class HivesPresenter implements HivesContract.Presenter {
         if (forceUpdate) {
             goBeesRepository.refreshHives(apiaryId);
         }
-        // Get apiaires
-        goBeesRepository.getHives(apiaryId, new GoBeesDataSource.GetHivesCallback() {
+        // Get apiary
+        goBeesRepository.getApiary(apiaryId, new GoBeesDataSource.GetApiaryCallback() {
             @Override
-            public void onHivesLoaded(List<Hive> hives) {
+            public void onApiaryLoaded(Apiary apiary) {
                 // The view may not be able to handle UI updates anymore
                 if (!hivesView.isActive()) {
                     return;
@@ -66,12 +67,14 @@ public class HivesPresenter implements HivesContract.Presenter {
                 // Hide progress indicator
                 hivesView.setLoadingIndicator(false);
                 // Process hives
-                if (hives.isEmpty()) {
+                if (apiary.getHives() == null || apiary.getHives().isEmpty()) {
                     // Show a message indicating there are no hives
                     hivesView.showNoHives();
                 } else {
+                    // Set apiary name as title
+                    hivesView.showTitle(apiary.getName());
                     // Show the list of hives
-                    hivesView.showHives(hives);
+                    hivesView.showHives(apiary.getHives());
                 }
             }
 
