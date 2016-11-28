@@ -13,10 +13,8 @@ import android.widget.TextView;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
-import com.davidmiguel.gobees.utils.ItemTouchHelperAdapter;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
 
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -24,13 +22,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Apiaries list adapter.
  */
-public class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder>
-        implements ItemTouchHelperAdapter {
+class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
 
     private List<Apiary> apiaries;
     private ApiaryItemListener listener;
 
-    public ApiariesAdapter(List<Apiary> apiaries, ApiaryItemListener listener) {
+    ApiariesAdapter(List<Apiary> apiaries, ApiaryItemListener listener) {
         this.apiaries = checkNotNull(apiaries);
         this.listener = listener;
     }
@@ -52,29 +49,12 @@ public class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHo
         return apiaries == null ? 0 : apiaries.size();
     }
 
-    public void replaceData(List<Apiary> apiaries) {
+    void replaceData(List<Apiary> apiaries) {
         this.apiaries = checkNotNull(apiaries);
         notifyDataSetChanged();
     }
 
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(apiaries, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-        Apiary apiary = apiaries.get(position);
-        listener.onApiaryDelete(apiary);
-        apiaries.remove(position);
-        notifyItemRemoved(position);
-        // TODO remove apairy
-    }
-
-
-    public interface ApiaryItemListener {
+    interface ApiaryItemListener {
         void onApiaryClick(Apiary clickedApiary);
 
         void onApiaryDelete(Apiary clickedApiary);

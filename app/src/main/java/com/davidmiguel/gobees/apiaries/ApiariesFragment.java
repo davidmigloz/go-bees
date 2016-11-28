@@ -12,7 +12,6 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +29,6 @@ import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.hives.HivesActivity;
 import com.davidmiguel.gobees.hives.HivesFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
-import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,11 +75,6 @@ public class ApiariesFragment extends Fragment
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(listAdapter);
         apiarieView = (LinearLayout) root.findViewById(R.id.apiariesLL);
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(listAdapter,
-                ItemTouchHelper.UP | ItemTouchHelper.DOWN,
-                ItemTouchHelper.LEFT);
-        ItemTouchHelper apiaryTouchHelper = new ItemTouchHelper(callback);
-        apiaryTouchHelper.attachToRecyclerView(recyclerView);
 
         // Set up  no apiaries view
         noApiariesView = root.findViewById(R.id.no_apiaries);

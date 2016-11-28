@@ -7,12 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +27,6 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
-import com.davidmiguel.gobees.utils.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +53,12 @@ public class HivesFragment extends Fragment
         // Requires empty public constructor
     }
 
-    public static HivesFragment newInstance() {
-        return new HivesFragment();
+    public static HivesFragment newInstance(long apiaryId) {
+        Bundle bundle = new Bundle();
+        bundle.putString(HivesFragment.ARGUMENT_APIARY_ID, apiaryId + "");
+        HivesFragment hivesFragment = new HivesFragment();
+        hivesFragment.setArguments(bundle);
+        return hivesFragment;
     }
 
 
@@ -77,11 +80,6 @@ public class HivesFragment extends Fragment
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(listAdapter);
         hivesView = (LinearLayout) root.findViewById(R.id.hivesLL);
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(listAdapter,
-                ItemTouchHelper.UP | ItemTouchHelper.DOWN,
-                ItemTouchHelper.LEFT);
-        ItemTouchHelper hiveTouchHelper = new ItemTouchHelper(callback);
-        hiveTouchHelper.attachToRecyclerView(recyclerView);
 
         // Set up  no apiaries view
         noHivesView = root.findViewById(R.id.no_hives);
@@ -98,7 +96,6 @@ public class HivesFragment extends Fragment
         // Set up floating action button
         FloatingActionButton fab =
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
-        fab.setImageResource(R.drawable.ic_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +141,9 @@ public class HivesFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(getActivity());
+                return true;
             case R.id.menu_refresh:
                 presenter.loadHives(true);
                 break;
