@@ -9,7 +9,6 @@ import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.ActivityUtils;
-import com.google.common.base.Strings;
 
 /**
  * Hives activity.
@@ -47,10 +46,7 @@ public class HivesActivity extends AppCompatActivity {
                         .findFragmentById(R.id.contentFrame);
         if (hivesFragment == null) {
             // Create the fragment
-            hivesFragment = HivesFragment.newInstance();
-            Bundle bundle = new Bundle();
-            bundle.putString(HivesFragment.ARGUMENT_APIARY_ID, apiaryId + "");
-            hivesFragment.setArguments(bundle);
+            hivesFragment = HivesFragment.newInstance(apiaryId);
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     hivesFragment, R.id.contentFrame);
         }

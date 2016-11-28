@@ -13,10 +13,8 @@ import android.widget.TextView;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
-import com.davidmiguel.gobees.utils.ItemTouchHelperAdapter;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
 
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -24,13 +22,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Hives list adapter.
  */
-public class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder>
-        implements ItemTouchHelperAdapter {
+class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
 
     private List<Hive> hives;
     private HivesAdapter.HiveItemListener listener;
 
-    public HivesAdapter(List<Hive> hives, HivesAdapter.HiveItemListener listener) {
+    HivesAdapter(List<Hive> hives, HivesAdapter.HiveItemListener listener) {
         this.hives = checkNotNull(hives);
         this.listener = listener;
     }
@@ -52,28 +49,12 @@ public class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder>
         return hives == null ? 0 : hives.size();
     }
 
-    public void replaceData(List<Hive> hives) {
+    void replaceData(List<Hive> hives) {
         this.hives = checkNotNull(hives);
         notifyDataSetChanged();
     }
 
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(hives, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-        Hive hive = hives.get(position);
-        listener.onHiveDelete(hive);
-        hives.remove(position);
-        notifyItemRemoved(position);
-        // TODO remove hive
-    }
-
-    public interface HiveItemListener {
+    interface HiveItemListener {
         void onHiveClick(Hive clickedHive);
 
         void onHiveDelete(Hive clickedHive);
@@ -86,7 +67,7 @@ public class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder>
         private TextView hiveName;
         private Drawable background;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             card = (CardView) itemView.findViewById(R.id.card);

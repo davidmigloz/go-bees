@@ -28,7 +28,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".addeditapiary.AddEditApiaryActivity" />
-        <activity android:name=".hives.HivesActivity" />
+        <activity
+            android:name=".hives.HivesActivity"
+            android:parentActivityName=".apiaries.ApiariesActivity" />
         <activity android:name=".addedithive.AddEditHiveActivity" />
         <activity
             android:name=".MainActivity"
