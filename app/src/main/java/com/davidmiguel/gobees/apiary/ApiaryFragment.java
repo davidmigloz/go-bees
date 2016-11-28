@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.hives;
+package com.davidmiguel.gobees.apiary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,43 +37,43 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Display a list of hives.
  */
-public class HivesFragment extends Fragment
-        implements HivesContract.View, HivesAdapter.HiveItemListener {
+public class ApiaryFragment extends Fragment
+        implements ApiaryContract.View, ApiaryAdapter.HiveItemListener {
 
     public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
 
-    private HivesContract.Presenter presenter;
-    private HivesAdapter listAdapter;
+    private ApiaryContract.Presenter presenter;
+    private ApiaryAdapter listAdapter;
     private View noHivesView;
     private ImageView noHivesIcon;
     private TextView noHivesTextView;
     private TextView noHivesAddView;
     private LinearLayout hivesView;
 
-    public HivesFragment() {
+    public ApiaryFragment() {
         // Requires empty public constructor
     }
 
-    public static HivesFragment newInstance(long apiaryId) {
+    public static ApiaryFragment newInstance(long apiaryId) {
         Bundle bundle = new Bundle();
-        bundle.putString(HivesFragment.ARGUMENT_APIARY_ID, apiaryId + "");
-        HivesFragment hivesFragment = new HivesFragment();
-        hivesFragment.setArguments(bundle);
-        return hivesFragment;
+        bundle.putString(ApiaryFragment.ARGUMENT_APIARY_ID, apiaryId + "");
+        ApiaryFragment apiaryFragment = new ApiaryFragment();
+        apiaryFragment.setArguments(bundle);
+        return apiaryFragment;
     }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new HivesAdapter(new ArrayList<Hive>(0), this);
+        listAdapter = new ApiaryAdapter(new ArrayList<Hive>(0), this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.hives_frag, container, false);
+        View root = inflater.inflate(R.layout.apiary_frag, container, false);
 
         // Set up hives list view
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.hives_list);
@@ -212,14 +212,14 @@ public class HivesFragment extends Fragment
 
     @Override
     public void showTitle(@NonNull String title) {
-        ActionBar ab = ((HivesActivity) getActivity()).getSupportActionBar();
+        ActionBar ab = ((ApiaryActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
             ab.setTitle(title);
         }
     }
 
     @Override
-    public void setPresenter(@NonNull HivesContract.Presenter presenter) {
+    public void setPresenter(@NonNull ApiaryContract.Presenter presenter) {
         this.presenter = checkNotNull(presenter);
     }
 

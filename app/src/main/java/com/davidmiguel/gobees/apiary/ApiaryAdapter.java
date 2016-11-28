@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.hives;
+package com.davidmiguel.gobees.apiary;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -22,12 +22,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Hives list adapter.
  */
-class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
+class ApiaryAdapter extends RecyclerView.Adapter<ApiaryAdapter.ViewHolder> {
 
     private List<Hive> hives;
-    private HivesAdapter.HiveItemListener listener;
+    private ApiaryAdapter.HiveItemListener listener;
 
-    HivesAdapter(List<Hive> hives, HivesAdapter.HiveItemListener listener) {
+    ApiaryAdapter(List<Hive> hives, ApiaryAdapter.HiveItemListener listener) {
         this.hives = checkNotNull(hives);
         this.listener = listener;
     }
@@ -35,8 +35,8 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.hives_list_item, parent, false);
-        return new HivesAdapter.ViewHolder(view);
+                .inflate(R.layout.apiary_list_item, parent, false);
+        return new ApiaryAdapter.ViewHolder(view);
     }
 
     @Override

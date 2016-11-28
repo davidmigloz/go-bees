@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.hives;
+package com.davidmiguel.gobees.apiary;
 
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.HiveMother;
@@ -23,9 +23,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Unit tests for the implementation of HivesPresenter.
+ * Unit tests for the implementation of ApiaryPresenter.
  */
-public class HivesPresenterTest {
+public class ApiaryPresenterTest {
 
     private static final long APIARY_ID = 1;
     private static List<Hive> HIVES;
@@ -34,9 +34,9 @@ public class HivesPresenterTest {
     private GoBeesRepository goBeesRepository;
 
     @Mock
-    private HivesContract.View hivesView;
+    private ApiaryContract.View hivesView;
 
-    private HivesPresenter hivesPresenter;
+    private ApiaryPresenter apiaryPresenter;
 
     @Captor
     private ArgumentCaptor<GoBeesDataSource.GetHivesCallback> getHivesCallbackCaptor;
@@ -47,7 +47,7 @@ public class HivesPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        hivesPresenter = new HivesPresenter(goBeesRepository, hivesView, APIARY_ID);
+        apiaryPresenter = new ApiaryPresenter(goBeesRepository, hivesView, APIARY_ID);
 
         // The presenter won't update the view unless it's active
         when(hivesView.isActive()).thenReturn(true);
@@ -62,9 +62,9 @@ public class HivesPresenterTest {
     @SuppressWarnings("unchecked")
     @Test
     public void loadAllApiariesFromRepositoryAndLoadIntoView() {
-        // Given an initialized HivesPresenter with initialized apiaries
+        // Given an initialized ApiaryPresenter with initialized apiaries
         // When loading of hives of apiary 1 is requested
-        hivesPresenter.loadHives(true);
+        apiaryPresenter.loadHives(true);
 
         // Callback is captured and invoked with stubbed hives
         verify(goBeesRepository).getHives(anyLong(), getHivesCallbackCaptor.capture());

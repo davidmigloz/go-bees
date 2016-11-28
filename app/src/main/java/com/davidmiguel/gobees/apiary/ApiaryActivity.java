@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.hives;
+package com.davidmiguel.gobees.apiary;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,7 +13,7 @@ import com.davidmiguel.gobees.utils.ActivityUtils;
 /**
  * Hives activity.
  */
-public class HivesActivity extends AppCompatActivity {
+public class ApiaryActivity extends AppCompatActivity {
 
     public static final int NO_APIARY = -1;
 
@@ -22,7 +22,7 @@ public class HivesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hives_act);
+        setContentView(R.layout.apiary_act);
 
         // Set up the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -35,20 +35,20 @@ public class HivesActivity extends AppCompatActivity {
         }
 
         // Get apiary id
-        long apiaryId = getIntent().getLongExtra(HivesFragment.ARGUMENT_APIARY_ID, NO_APIARY);
+        long apiaryId = getIntent().getLongExtra(ApiaryFragment.ARGUMENT_APIARY_ID, NO_APIARY);
         if (apiaryId == NO_APIARY) {
             throw new IllegalArgumentException("No apiary id passed!");
         }
 
         // Add fragment to the activity
-        HivesFragment hivesFragment =
-                (HivesFragment) getSupportFragmentManager()
+        ApiaryFragment apiaryFragment =
+                (ApiaryFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.contentFrame);
-        if (hivesFragment == null) {
+        if (apiaryFragment == null) {
             // Create the fragment
-            hivesFragment = HivesFragment.newInstance(apiaryId);
+            apiaryFragment = ApiaryFragment.newInstance(apiaryId);
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    hivesFragment, R.id.contentFrame);
+                    apiaryFragment, R.id.contentFrame);
         }
 
         // Init db
@@ -56,7 +56,7 @@ public class HivesActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new HivesPresenter(goBeesRepository, hivesFragment, apiaryId);
+        new ApiaryPresenter(goBeesRepository, apiaryFragment, apiaryId);
     }
 
     @Override

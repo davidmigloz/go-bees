@@ -1,9 +1,7 @@
-package com.davidmiguel.gobees.hives;
+package com.davidmiguel.gobees.apiary;
 
 import android.support.annotation.NonNull;
 
-import com.davidmiguel.gobees.apiaries.ApiariesContract;
-import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
@@ -13,9 +11,9 @@ import java.util.List;
 /**
  * This specifies the contract between the view and the presenter.
  */
-public class HivesContract {
+public class ApiaryContract {
 
-    interface View extends BaseView<HivesContract.Presenter> {
+    interface View extends BaseView<ApiaryContract.Presenter> {
 
         /**
          * Displays or hide loading indicator.
