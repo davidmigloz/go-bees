@@ -35,16 +35,27 @@ public class ApiaryMother {
     private RealmList<MeteoDetail> meteoDetails;
 
     private ApiaryMother() {
-        // Default values
+        setValues(NUM_HIVES);
+    }
+
+    private ApiaryMother(int numHives) {
+        setValues(numHives);
+    }
+
+    private void setValues(int numHives) {
         Random r = new Random(System.nanoTime());
         id = r.nextInt(MAX_ID);
         name = NAME_PREFIX + " " + id;
-        List<Hive> generatedHives = generateHives(NUM_HIVES);
+        List<Hive> generatedHives = generateHives(numHives);
         hives = new RealmList<>(generatedHives.toArray(new Hive[generatedHives.size()]));
     }
 
     private static ApiaryMother newApiary() {
         return new ApiaryMother();
+    }
+
+    private static ApiaryMother newApiary(int numHives) {
+        return new ApiaryMother(numHives);
     }
 
     private ApiaryMother withName(String name) {
@@ -76,5 +87,14 @@ public class ApiaryMother {
      */
     public static Apiary newDefaultApiary() {
         return ApiaryMother.newApiary().build();
+    }
+
+    /**
+     * Generate random apiary with numHives.
+     * @param numHives number of hives to generate.
+     * @return apiary.
+     */
+    public static Apiary newDefaultApiary(int numHives) {
+        return ApiaryMother.newApiary(numHives).build();
     }
 }

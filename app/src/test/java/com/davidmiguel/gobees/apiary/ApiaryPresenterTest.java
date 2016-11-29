@@ -1,10 +1,9 @@
 package com.davidmiguel.gobees.apiary;
 
-import com.davidmiguel.gobees.data.model.Hive;
-import com.davidmiguel.gobees.data.model.HiveMother;
+import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.google.common.collect.Lists;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +27,8 @@ import static org.mockito.Mockito.when;
 public class ApiaryPresenterTest {
 
     private static final long APIARY_ID = 1;
-    private static List<Hive> HIVES;
+    private static final int NUM_BEES = 5;
+    private static Apiary APIARY;
 
     @Mock
     private GoBeesRepository goBeesRepository;
@@ -40,6 +40,9 @@ public class ApiaryPresenterTest {
 
     @Captor
     private ArgumentCaptor<GoBeesDataSource.GetHivesCallback> getHivesCallbackCaptor;
+
+    @Captor
+    private ArgumentCaptor<GoBeesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
 
     @Before
     public void setupHivesPresenter() {
@@ -53,13 +56,10 @@ public class ApiaryPresenterTest {
         when(hivesView.isActive()).thenReturn(true);
 
         // Create 3 hives
-        HIVES = Lists.newArrayList(
-                HiveMother.newDefaultHive(),
-                HiveMother.newDefaultHive(),
-                HiveMother.newDefaultHive());
+        APIARY = ApiaryMother.newDefaultApiary(NUM_BEES);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     @Test
     public void loadAllApiariesFromRepositoryAndLoadIntoView() {
         // Given an initialized ApiaryPresenter with initialized apiaries
@@ -67,8 +67,8 @@ public class ApiaryPresenterTest {
         apiaryPresenter.loadHives(true);
 
         // Callback is captured and invoked with stubbed hives
-        verify(goBeesRepository).getHives(anyLong(), getHivesCallbackCaptor.capture());
-        getHivesCallbackCaptor.getValue().onHivesLoaded(HIVES);
+        verify(goBeesRepository).getApiary(anyLong(), getApiaryCallbackArgumentCaptor.capture());
+        getApiaryCallbackArgumentCaptor.getValue().onApiaryLoaded(APIARY);
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(hivesView);
@@ -78,6 +78,6 @@ public class ApiaryPresenterTest {
         ArgumentCaptor<List> showHivesArgumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(hivesView).showHives(showHivesArgumentCaptor.capture());
         // Assert that the number of hives shown is the expected
-        assertTrue(showHivesArgumentCaptor.getValue().size() == HIVES.size());
+        assertTrue(showHivesArgumentCaptor.getValue().size() == APIARY.getHives().size());
     }
 }
