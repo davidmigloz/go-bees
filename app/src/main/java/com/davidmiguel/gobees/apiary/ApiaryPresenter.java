@@ -1,25 +1,22 @@
-package com.davidmiguel.gobees.hives;
+package com.davidmiguel.gobees.apiary;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
-import com.davidmiguel.gobees.apiaries.ApiariesContract;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
-import java.util.List;
-
 /**
- * Listens to user actions from the UI HivesFragment, retrieves the data and updates the
+ * Listens to user actions from the UI ApiaryHivesFragment, retrieves the data and updates the
  * UI as required.
  */
-public class HivesPresenter implements HivesContract.Presenter {
+public class ApiaryPresenter implements ApiaryContract.Presenter {
 
     private GoBeesRepository goBeesRepository;
-    private HivesContract.View hivesView;
+    private ApiaryContract.View apiaryView;
 
     /**
      * Force update the first time.
@@ -27,11 +24,11 @@ public class HivesPresenter implements HivesContract.Presenter {
     private boolean firstLoad = true;
     private long apiaryId;
 
-    public HivesPresenter(GoBeesRepository goBeesRepository, HivesContract.View hivesView,
-                          long apiaryId) {
+    public ApiaryPresenter(GoBeesRepository goBeesRepository, ApiaryContract.View apiaryView,
+                           long apiaryId) {
         this.goBeesRepository = goBeesRepository;
-        this.hivesView = hivesView;
-        this.hivesView.setPresenter(this);
+        this.apiaryView = apiaryView;
+        this.apiaryView.setPresenter(this);
         this.apiaryId = apiaryId;
     }
 
@@ -39,7 +36,7 @@ public class HivesPresenter implements HivesContract.Presenter {
     public void result(int requestCode, int resultCode) {
         // If a hive was successfully added, show snackbar
         if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
-            hivesView.showSuccessfullySavedMessage();
+            apiaryView.showSuccessfullySavedMessage();
         }
         // TODO show error message if it fails
     }
@@ -50,45 +47,47 @@ public class HivesPresenter implements HivesContract.Presenter {
         forceUpdate = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
-        hivesView.setLoadingIndicator(true);
+        apiaryView.setLoadingIndicator(true);
         // Refresh data if needed
         if (forceUpdate) {
             goBeesRepository.refreshHives(apiaryId);
         }
-        // Get apiaires
-        goBeesRepository.getHives(apiaryId, new GoBeesDataSource.GetHivesCallback() {
+        // Get apiary
+        goBeesRepository.getApiary(apiaryId, new GoBeesDataSource.GetApiaryCallback() {
             @Override
-            public void onHivesLoaded(List<Hive> hives) {
+            public void onApiaryLoaded(Apiary apiary) {
                 // The view may not be able to handle UI updates anymore
-                if (!hivesView.isActive()) {
+                if (!apiaryView.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                hivesView.setLoadingIndicator(false);
+                apiaryView.setLoadingIndicator(false);
                 // Process hives
-                if (hives.isEmpty()) {
+                if (apiary.getHives() == null || apiary.getHives().isEmpty()) {
                     // Show a message indicating there are no hives
-                    hivesView.showNoHives();
+                    apiaryView.showNoHives();
                 } else {
+                    // Set apiary name as title
+                    apiaryView.showTitle(apiary.getName());
                     // Show the list of hives
-                    hivesView.showHives(hives);
+                    apiaryView.showHives(apiary.getHives());
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
                 // The view may not be able to handle UI updates anymore
-                if (!hivesView.isActive()) {
+                if (!apiaryView.isActive()) {
                     return;
                 }
-                hivesView.showLoadingHivesError();
+                apiaryView.showLoadingHivesError();
             }
         });
     }
 
     @Override
     public void addEditHive() {
-        hivesView.showAddEditHive();
+        apiaryView.showAddEditHive();
     }
 
     @Override

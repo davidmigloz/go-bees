@@ -28,4 +28,6 @@
     <string name="weather_icon">Weather icon</string>
     <string name="last_revision_icon">Last revision icon</string>
     <string name="hives">Hives</string>
+    <string name="hives_tab">Hives</string>
+    <string name="info_tab">Info</string>
 </resources>

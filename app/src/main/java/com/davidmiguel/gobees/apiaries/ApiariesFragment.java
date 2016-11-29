@@ -25,9 +25,9 @@ import android.widget.TextView;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
+import com.davidmiguel.gobees.apiary.ApiaryHivesFragment;
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.hives.HivesActivity;
-import com.davidmiguel.gobees.hives.HivesFragment;
+import com.davidmiguel.gobees.apiary.ApiaryActivity;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -180,8 +180,8 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void showApiaryDetail(long apiaryId) {
-        Intent intent = new Intent(getActivity(), HivesActivity.class);
-        intent.putExtra(HivesFragment.ARGUMENT_APIARY_ID, apiaryId);
+        Intent intent = new Intent(getActivity(), ApiaryActivity.class);
+        intent.putExtra(ApiaryHivesFragment.ARGUMENT_APIARY_ID, apiaryId);
         getActivity().startActivity(intent);
     }
 
