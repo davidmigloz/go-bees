@@ -10,7 +10,6 @@
         android:id="@+id/apiariesContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground"
         android:clickable="true"
         android:orientation="vertical">
 
