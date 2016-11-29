@@ -10,7 +10,7 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 /**
- * Listens to user actions from the UI ApiaryFragment, retrieves the data and updates the
+ * Listens to user actions from the UI ApiaryHivesFragment, retrieves the data and updates the
  * UI as required.
  */
 public class ApiaryPresenter implements ApiaryContract.Presenter {

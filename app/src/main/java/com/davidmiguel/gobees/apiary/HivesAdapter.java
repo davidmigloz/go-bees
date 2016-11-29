@@ -22,12 +22,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Hives list adapter.
  */
-class ApiaryAdapter extends RecyclerView.Adapter<ApiaryAdapter.ViewHolder> {
+class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
 
     private List<Hive> hives;
-    private ApiaryAdapter.HiveItemListener listener;
+    private HivesAdapter.HiveItemListener listener;
 
-    ApiaryAdapter(List<Hive> hives, ApiaryAdapter.HiveItemListener listener) {
+    HivesAdapter(List<Hive> hives, HivesAdapter.HiveItemListener listener) {
         this.hives = checkNotNull(hives);
         this.listener = listener;
     }
@@ -36,7 +36,7 @@ class ApiaryAdapter extends RecyclerView.Adapter<ApiaryAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.apiary_list_item, parent, false);
-        return new ApiaryAdapter.ViewHolder(view);
+        return new HivesAdapter.ViewHolder(view);
     }
 
     @Override
