@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="@string/pref_weather_cat_key"
+        android:title="@string/pref_weather_cat_label">
+        <ListPreference
+            android:defaultValue="@string/pref_temp_units_metric"
+            android:entries="@array/pref_temp_units_options"
+            android:entryValues="@array/pref_temp_units_values"
+            android:key="@string/pref_temp_units_key"
+            android:title="@string/pref_temp_units_label"/>
+    </PreferenceCategory>
+</PreferenceScreen>
