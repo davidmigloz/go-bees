@@ -107,8 +107,6 @@ completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint0.png
    :alt: Sprint 0
 
-   Sprint 0
-
 Sprint 1 (17/09/16 - 23/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -132,8 +130,6 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint1.png
    :alt: Sprint 1
-
-   Sprint 1
 
 Sprint 2 (24/09/16 - 29/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -162,8 +158,6 @@ sprint.
 .. figure:: ../../img/burndowns/sprint2.png
    :alt: Sprint 2
 
-   Sprint 2
-
 Sprint 3 (30/09/16 - 06/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -181,8 +175,6 @@ horas, quedando una tarea por terminar.
 
 .. figure:: ../../img/burndowns/sprint3.png
    :alt: Sprint 3
-
-   Sprint 3
 
 Sprint 4 (07/10/16 - 13/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -204,8 +196,6 @@ completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint4.png
    :alt: Sprint 4
 
-   Sprint 4
-
 Sprint 5 (14/10/16 - 20/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -224,8 +214,6 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint5.png
    :alt: Sprint 5
-
-   Sprint 5
 
 Sprint 6 (21/10/16 - 27/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -259,8 +247,6 @@ horas, completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint6.png
    :alt: Sprint 6
 
-   Sprint 6
-
 Sprint 7 (28/10/16 - 04/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -279,8 +265,6 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint7.png
    :alt: Sprint 7
-
-   Sprint 7
 
 Sprint 8 (05/11/16 - 10/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -301,8 +285,6 @@ completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint8.png
    :alt: Sprint 8
 
-   Sprint 8
-
 Sprint 9 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -320,8 +302,23 @@ horas, completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint9.png
    :alt: Sprint 9
 
-   Sprint 9
+Sprint 10 (11/11/16 - 17/11/16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Los objetivos de este sprint fueron: continuar desarrollando las actividades 
+principales de la app. Corregir documentación escrita hasta el momento. 
+Documentar Técnicas y herramientas y Aspectos relevantes.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint
+10 <https://github.com/davidmigloz/go-bees/milestone/11?closed=1>`__.
+
+Se estimaron 33,75 horas de trabajo y se invirtieron finalmente 39,25
+horas, completando todas las tareas.
+
+.. figure:: ../../img/burndowns/sprint10.png
+   :alt: Sprint 10
+   
 Estudio de viabilidad
 ---------------------
 
