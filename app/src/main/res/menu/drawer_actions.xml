@@ -3,10 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/settings_navigation_menu_item"
+        android:orderInCategory="2"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_title"/>
-    <item
-        android:id="@+id/statistics_navigation_menu_item"
-        android:icon="@drawable/ic_statistics"
-        android:title="@string/statistics_title"/>
 </menu>

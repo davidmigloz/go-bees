@@ -30,4 +30,27 @@
     <string name="hives">Hives</string>
     <string name="hives_tab">Hives</string>
     <string name="info_tab">Info</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings -->
+
+    <!-- Toolbar title in settings [CHAR LIMIT=30] -->
+    <string name="settings_toolbar_title">Settings</string>
+    <!-- Label for weather cathergory [CHAR LIMIT=30] -->
+    <string name="pref_weather_cat_label">Weather</string>
+    <!-- Key name for weather cathergory in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_weather_cat_key">weather</string>
+    <!-- Label for the temperature units preference [CHAR LIMIT=30] -->
+    <string name="pref_temp_units_label">Temperature Units</string>
+    <!-- Label for metric option in temperature unit preference [CHAR LIMIT=25] -->
+    <string name="pref_temp_units_label_metric">Metric</string>
+    <!-- Label for imperial option in temperature unit preference [CHAR LIMIT=25] -->
+    <string name="pref_temp_units_label_imperial">Imperial</string>
+    <!-- Key name for temperature unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_temp_units_key" translatable="false">units</string>
+    <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->
+    <string name="pref_temp_units_metric" translatable="false">metric</string>
+    <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
+    <string name="pref_temp_units_imperial" translatable="false">imperial</string>
+
 </resources>
