@@ -1,4 +1,9 @@
-package com.davidmiguel.gobees.data.model;
+package com.davidmiguel.gobees.data.model.mothers;
+
+import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.MeteoDay;
+import com.davidmiguel.gobees.data.model.MeteoDetail;
 
 import java.util.ArrayList;
 import java.util.List;

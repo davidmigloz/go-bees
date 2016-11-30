@@ -1,7 +1,7 @@
 package com.davidmiguel.gobees.addedithive;
 
 import com.davidmiguel.gobees.data.model.Hive;
-import com.davidmiguel.gobees.data.model.HiveMother;
+import com.davidmiguel.gobees.data.model.mothers.HiveMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 

@@ -11,7 +11,8 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 
 /**
- * Created by davidmigloz on 29/11/2016.
+ * Display apiary info.
+ * TODO
  */
 public class ApiaryInfoFragment extends Fragment implements BaseTabFragment {
 

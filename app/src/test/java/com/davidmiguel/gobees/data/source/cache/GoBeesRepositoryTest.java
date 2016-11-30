@@ -1,11 +1,10 @@
 package com.davidmiguel.gobees.data.source.cache;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.model.ApiaryMother;
+import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
 import com.google.common.collect.Lists;
 

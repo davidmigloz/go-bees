@@ -102,21 +102,4 @@ public class Hive extends RealmObject {
     public boolean isValidHive() {
         return !Strings.isNullOrEmpty(name);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Hive hive = (Hive) o;
-        return id == hive.id &&
-                Objects.equal(name, hive.name) &&
-                Objects.equal(imageUrl, hive.imageUrl) &&
-                Objects.equal(notes, hive.notes) &&
-                Objects.equal(records, hive.records);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, name, imageUrl, notes, records);
-    }
 }

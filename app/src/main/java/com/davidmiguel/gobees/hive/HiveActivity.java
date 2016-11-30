@@ -1,9 +1,21 @@
 package com.davidmiguel.gobees.hive;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by davidmigloz on 30/11/2016.
+ * Hive activity.
  */
 public class HiveActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.model.ApiaryMother;
+import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.google.common.collect.Lists;

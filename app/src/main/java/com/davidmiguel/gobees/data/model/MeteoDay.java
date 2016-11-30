@@ -209,29 +209,4 @@ public class MeteoDay extends RealmObject {
     public void setWindDegrees(double windDegrees) {
         this.windDegrees = windDegrees;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MeteoDay meteoDay = (MeteoDay) o;
-        return id == meteoDay.id &&
-                Double.compare(meteoDay.temperature, temperature) == 0 &&
-                Double.compare(meteoDay.temperatureMin, temperatureMin) == 0 &&
-                Double.compare(meteoDay.temperatureMax, temperatureMax) == 0 &&
-                clouds == meteoDay.clouds &&
-                Double.compare(meteoDay.rain, rain) == 0 &&
-                Double.compare(meteoDay.snow, snow) == 0 &&
-                humidity == meteoDay.humidity &&
-                Double.compare(meteoDay.windSpeed, windSpeed) == 0 &&
-                Double.compare(meteoDay.windDegrees, windDegrees) == 0 &&
-                Objects.equal(timestamp, meteoDay.timestamp) &&
-                Objects.equal(icon, meteoDay.icon) &&
-                Objects.equal(description, meteoDay.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, timestamp, icon, description, temperature, temperatureMin, temperatureMax, clouds, rain, snow, humidity, windSpeed, windDegrees);
-    }
 }

@@ -169,25 +169,4 @@ public class Apiary extends RealmObject {
     public boolean isValidApiary() {
         return !Strings.isNullOrEmpty(name);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Apiary apiary = (Apiary) o;
-        return id == apiary.id &&
-                Objects.equal(name, apiary.name) &&
-                Objects.equal(imageUrl, apiary.imageUrl) &&
-                Objects.equal(locationLong, apiary.locationLong) &&
-                Objects.equal(locationLat, apiary.locationLat) &&
-                Objects.equal(notes, apiary.notes) &&
-                Objects.equal(hives, apiary.hives) &&
-                Objects.equal(meteoDays, apiary.meteoDays) &&
-                Objects.equal(meteoDetails, apiary.meteoDetails);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, name, imageUrl, locationLong, locationLat, notes, hives, meteoDays, meteoDetails);
-    }
 }

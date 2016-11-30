@@ -9,16 +9,12 @@ import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.model.ApiaryMother;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
-
 /**
- * Hives activity.
+ * Apiary activity.
  */
 public class ApiaryActivity extends AppCompatActivity {
 

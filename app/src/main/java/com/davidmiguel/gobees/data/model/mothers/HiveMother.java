@@ -1,4 +1,7 @@
-package com.davidmiguel.gobees.data.model;
+package com.davidmiguel.gobees.data.model.mothers;
+
+import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Record;
 
 import java.util.Random;
 
