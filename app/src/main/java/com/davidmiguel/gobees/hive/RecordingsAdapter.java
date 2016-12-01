@@ -1,8 +1,10 @@
 package com.davidmiguel.gobees.hive;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +17,9 @@ import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -24,10 +28,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolder> {
 
+    private Resources resources;
     private List<Recording> recordings;
     private RecordingItemListener listener;
 
-    RecordingsAdapter(List<Recording> recordings, RecordingItemListener listener) {
+    RecordingsAdapter(Resources resources, List<Recording> recordings, RecordingItemListener listener) {
+        this.resources = resources;
         this.recordings = checkNotNull(recordings);
         this.listener = listener;
     }
@@ -67,16 +73,21 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         private TextView recordingDate;
         private Drawable background;
 
+        private SimpleDateFormat formatter;
+
         ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             card = (CardView) itemView.findViewById(R.id.card);
             recordingDate = (TextView) itemView.findViewById(R.id.recording_date);
             background = card.getBackground();
+
+            formatter = new SimpleDateFormat(
+                    resources.getString(R.string.hive_recordings_date_format), Locale.getDefault());
         }
 
         public void bind(@NonNull Recording recording) {
-            recordingDate.setText(recording.getDate().toString());
+            recordingDate.setText(formatter.format(recording.getDate()));
         }
 
         @Override

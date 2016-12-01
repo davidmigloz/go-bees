@@ -27,6 +27,8 @@ import android.widget.TextView;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.hive.HiveActivity;
+import com.davidmiguel.gobees.hive.HiveRecordingsFragment;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 
@@ -190,7 +192,9 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public void showHiveDetail(long hiveId) {
-        // TODO
+        Intent intent = new Intent(getActivity(), HiveActivity.class);
+        intent.putExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, hiveId);
+        getActivity().startActivity(intent);
     }
 
     @Override

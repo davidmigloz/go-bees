@@ -16,8 +16,6 @@
     <string name="settings_title">Settings</string>
 
 
-
-
     <string name="add_icon">Add</string>
     <string name="home_icon">Home icon</string>
     <string name="refresh">Refresh</string>
@@ -83,6 +81,8 @@
     <string name="no_recordings">You have no recordings!</string>
     <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_recording_message">Recording saved!</string>
+    <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
+    <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
 
     <!--++++++++++-->
     <!-- Settings -->

@@ -34,6 +34,9 @@
             android:parentActivityName=".apiaries.ApiariesActivity"/>
         <activity android:name=".addedithive.AddEditHiveActivity"/>
         <activity
+            android:name=".hive.HiveActivity"
+            android:parentActivityName=".apiary.ApiaryActivity"/>
+        <activity
             android:name=".premonitoring.PreMonitoringActivity"
             android:screenOrientation="landscape"/>
         <activity
