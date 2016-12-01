@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Recording;
 
 import java.util.List;
 
@@ -87,6 +88,13 @@ public interface GoBeesDataSource {
     void getHive(long hiveId, @NonNull GetHiveCallback callback);
 
     /**
+     * Returns a hive with all its recordings.
+     * @param hiveId hive id.
+     * @param callback GetHiveCallback.
+     */
+    void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback);
+
+    /**
      * Force to update hives cache.
      */
     void refreshHives(long apiaryId);
@@ -105,6 +113,11 @@ public interface GoBeesDataSource {
      * @param callback GetNextHiveIdCallback.
      */
     void getNextHiveId(@NonNull GetNextHiveIdCallback callback);
+
+    /**
+     * Force to update recordings cache.
+     */
+    void refreshRecordings(long hiveId);
 
     interface GetApiariesCallback {
         void onApiariesLoaded(List<Apiary> apiaries);

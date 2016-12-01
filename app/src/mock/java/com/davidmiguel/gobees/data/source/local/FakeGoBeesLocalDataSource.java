@@ -4,14 +4,20 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.model.ApiaryMother;
+import com.davidmiguel.gobees.data.model.Recording;
+import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.mothers.HiveMother;
+import com.davidmiguel.gobees.data.model.mothers.RecordingMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Implementation of a local data source with static access to the data for easy testing.
@@ -22,16 +28,30 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     private static final Map<Long, Apiary> APIARIES_SERVICE_DATA = new LinkedHashMap<>();
 
+    private static final List<Recording> RECORDINGS = new ArrayList<>();
+
+    private Random r;
+
     private FakeGoBeesLocalDataSource() {
+        r = new Random(System.currentTimeMillis());
+
         // Create apiaries
         Apiary apiary1 = ApiaryMother.newDefaultApiary();
         Apiary apiary2 = ApiaryMother.newDefaultApiary();
         Apiary apiary3 = ApiaryMother.newDefaultApiary();
 
+        // Create recordings
+        Recording recording1 = RecordingMother.newDefaultRecording(200);
+        Recording recording2 = RecordingMother.newDefaultRecording(100);
+        Recording recording3 = RecordingMother.newDefaultRecording(50);
+
         // Add fake data
         APIARIES_SERVICE_DATA.put(apiary1.getId(), apiary1);
         APIARIES_SERVICE_DATA.put(apiary2.getId(), apiary2);
         APIARIES_SERVICE_DATA.put(apiary3.getId(), apiary3);
+        RECORDINGS.add(recording1);
+        RECORDINGS.add(recording2);
+        RECORDINGS.add(recording3);
     }
 
     public static FakeGoBeesLocalDataSource getInstance() {
@@ -103,6 +123,14 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
+        Hive hive = HiveMother.newDefaultHive();
+        hive.setId(hiveId);
+        hive.setRecordings(RECORDINGS);
+        callback.onHiveLoaded(hive);
+    }
+
+    @Override
     public void refreshHives(long apiaryId) {
         // Not required because the TasksRepository handles the logic of refreshing the
         // tasks from all the available data sources
@@ -115,6 +143,11 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
+        callback.onNextHiveIdLoaded(r.nextLong());
+    }
+
+    @Override
+    public void refreshRecordings(long hiveId) {
         // TODO
     }
 

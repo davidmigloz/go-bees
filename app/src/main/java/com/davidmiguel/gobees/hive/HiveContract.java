@@ -1,52 +1,56 @@
-package com.davidmiguel.gobees.apiary;
+package com.davidmiguel.gobees.hive;
 
 import android.support.annotation.NonNull;
 
-import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
  */
-interface ApiaryContract {
+public interface HiveContract {
 
-    interface View extends BaseView<ApiaryContract.Presenter> {
+    interface View extends BaseView<HiveContract.Presenter> {
 
         /**
          * Displays or hide loading indicator.
+         *
          * @param active true or false.
          */
         void setLoadingIndicator(final boolean active);
 
         /**
-         * Shows list of hives.
-         * @param hives hives to show (list cannot be empty).
+         * Shows list of recordings.
+         *
+         * @param recordings recordings to show (list cannot be empty).
          */
-        void showHives(@NonNull List<Hive> hives);
+        void showRecordings(@NonNull List<Recording> recordings);
 
         /**
-         * Opens activity to add or edit a hive.
+         * Opens activity to record a hive.
          */
-        void showAddEditHive();
+        void startNewRecording();
 
         /**
-         * Opens activity to show the details of the given hive.
-         * @param hiveId hive to show.
+         * Opens activity to show the details of the given recording.
+         *
+         * @param date recording date.
          */
-        void showHiveDetail(long hiveId);
+        void showRecordingDetail(Date date);
 
         /**
-         * Shows loading hives error message.
+         * Shows loading recordings error message.
          */
-        void showLoadingHivesError();
+        void showLoadingRecordingsError();
 
         /**
-         * Makes visible the no hives view.
+         * Makes visible the no recordings view.
          */
-        void showNoHives();
+        void showNoRecordings();
 
         /**
          * Shows successfully saved message.
@@ -55,6 +59,7 @@ interface ApiaryContract {
 
         /**
          * Sets the title in the action bar.
+         *
          * @param title title.
          */
         void showTitle(@NonNull String title);
@@ -64,26 +69,29 @@ interface ApiaryContract {
 
         /**
          * Shows a snackbar showing whether a hive was successfully added or not.
+         *
          * @param requestCode request code from the intent.
-         * @param resultCode result code from the intent.
+         * @param resultCode  result code from the intent.
          */
         void result(int requestCode, int resultCode);
 
         /**
-         * Load hives from repository.
+         * Load recordings from repository.
+         *
          * @param forceUpdate force cache update.
          */
-        void loadHives(boolean forceUpdate);
+        void loadRecordings(boolean forceUpdate);
 
         /**
-         * Orders to open activity to add or edit a hive.
+         * Orders to open activity to record a hive.
          */
-        void addEditHive();
+        void startNewRecording();
 
         /**
          * Opens activity to show the details of the given hive.
-         * @param requestedHive hive to show.
+         *
+         * @param recording recording.
          */
-        void openHiveDetail(@NonNull Hive requestedHive);
+        void openRecordingsDetail(@NonNull Recording recording);
     }
 }

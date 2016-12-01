@@ -1,4 +1,7 @@
-package com.davidmiguel.gobees.data.model;
+package com.davidmiguel.gobees.data.model.mothers;
+
+import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Record;
 
 import java.util.Random;
 
@@ -34,6 +37,10 @@ public class HiveMother {
         return new HiveMother();
     }
 
+    /**
+     * Generate a hive.
+     * @return hive.
+     */
     public static Hive newDefaultHive() {
         return HiveMother.newHive().build();
     }

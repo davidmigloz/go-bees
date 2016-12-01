@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.apiary;
+package com.davidmiguel.gobees.hive;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,13 +11,13 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 
 /**
- * Display apiary info.
- * TODO
+ * Display hive info.
+ * // TODO
  */
-public class ApiaryInfoFragment extends Fragment implements BaseTabFragment {
+public class HiveInfoFragment extends Fragment implements BaseTabFragment {
 
-    public static ApiaryInfoFragment newInstance() {
-        return new ApiaryInfoFragment();
+    public static HiveInfoFragment newInstance() {
+        return new HiveInfoFragment();
     }
 
     @Override
@@ -36,6 +36,6 @@ public class ApiaryInfoFragment extends Fragment implements BaseTabFragment {
 
     @Override
     public int getTabName() {
-        return R.string.apiary_info_tab;
+        return R.string.hive_info_tab;
     }
 }

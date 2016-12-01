@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.apiary;
+package com.davidmiguel.gobees.hive;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,18 +15,18 @@ import com.davidmiguel.gobees.utils.TabsFragmentPagerAdapter;
 import com.google.common.collect.Lists;
 
 /**
- * Apiary activity.
+ * Hive activity.
  */
-public class ApiaryActivity extends AppCompatActivity {
+public class HiveActivity extends AppCompatActivity {
 
-    public static final int NO_APIARY = -1;
+    public static final int NO_HIVE = -1;
 
     private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.apiary_act);
+        setContentView(R.layout.hive_act);
 
         // Set up the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -37,27 +37,27 @@ public class ApiaryActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
         }
 
-        // Create hives fragment
-        ApiaryHivesFragment apiaryHivesFragment = ApiaryHivesFragment.newInstance();
+        // Create recordings fragment
+        HiveRecordingsFragment hiveRecordingsFragment = HiveRecordingsFragment.newInstance();
 
-        // Create apiary info fragment
-        ApiaryInfoFragment apiaryInfoFragment = ApiaryInfoFragment.newInstance();
+        // Create hive info fragment
+        HiveInfoFragment hiveInfoFragment = HiveInfoFragment.newInstance();
 
         // Set up tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         TabsFragmentPagerAdapter adapter = new TabsFragmentPagerAdapter(
                 getSupportFragmentManager(),
-                ApiaryActivity.this,
-                Lists.<BaseTabFragment>newArrayList(apiaryHivesFragment, apiaryInfoFragment)
+                HiveActivity.this,
+                Lists.<BaseTabFragment>newArrayList(hiveRecordingsFragment, hiveInfoFragment)
         );
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // Get apiary id
-        long apiaryId = getIntent().getLongExtra(ApiaryHivesFragment.ARGUMENT_APIARY_ID, NO_APIARY);
-        if (apiaryId == NO_APIARY) {
-            throw new IllegalArgumentException("No apiary id passed!");
+        // Get hive id
+        long hiveId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, NO_HIVE);
+        if (hiveId == NO_HIVE) {
+            throw new IllegalArgumentException("No hive id passed!");
         }
 
         // Init db
@@ -65,7 +65,7 @@ public class ApiaryActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new ApiaryPresenter(goBeesRepository, apiaryHivesFragment, apiaryId);
+        new HivePresenter(goBeesRepository, hiveRecordingsFragment, hiveId);
     }
 
     @Override

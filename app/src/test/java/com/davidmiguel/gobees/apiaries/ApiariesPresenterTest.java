@@ -1,7 +1,7 @@
 package com.davidmiguel.gobees.apiaries;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.model.ApiaryMother;
+import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.google.common.collect.Lists;

@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.apiary;
+package com.davidmiguel.gobees.hive;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,80 +26,79 @@ import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
-import com.davidmiguel.gobees.data.model.Hive;
-import com.davidmiguel.gobees.hive.HiveActivity;
-import com.davidmiguel.gobees.hive.HiveRecordingsFragment;
+import com.davidmiguel.gobees.data.model.Recording;
+import com.davidmiguel.gobees.premonitoring.PreMonitoringActivity;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Display a list of hives.
+ * Dispaly a list of recordings.
  */
-public class ApiaryHivesFragment extends Fragment
-        implements BaseTabFragment, ApiaryContract.View, HivesAdapter.HiveItemListener {
+public class HiveRecordingsFragment extends Fragment
+        implements BaseTabFragment, HiveContract.View, RecordingsAdapter.RecordingItemListener {
 
-    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
+    public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
 
-    private ApiaryContract.Presenter presenter;
-    private HivesAdapter listAdapter;
-    private View noHivesView;
-    private ImageView noHivesIcon;
-    private TextView noHivesTextView;
-    private TextView noHivesAddView;
+    private HiveContract.Presenter presenter;
+    private RecordingsAdapter listAdapter;
+    private View noRecordingsView;
+    private ImageView noRecordingsIcon;
+    private TextView noRecordingsTextView;
+    private TextView noRecordingsAddView;
     private LinearLayout hivesView;
 
-    public ApiaryHivesFragment() {
+    public HiveRecordingsFragment() {
         // Requires empty public constructor
     }
 
-    public static ApiaryHivesFragment newInstance() {
-        return new ApiaryHivesFragment();
+    public static HiveRecordingsFragment newInstance() {
+        return new HiveRecordingsFragment();
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new HivesAdapter(new ArrayList<Hive>(0), this);
+        listAdapter = new RecordingsAdapter(getResources(), new ArrayList<Recording>(0), this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.apiary_hives_frag, container, false);
+        View root = inflater.inflate(R.layout.hive_recordings_frag, container, false);
 
-        // Set up hives list view
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.hives_list);
+        // Set up recordings list view
+        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recordings_list);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(listAdapter);
-        hivesView = (LinearLayout) root.findViewById(R.id.hivesLL);
+        hivesView = (LinearLayout) root.findViewById(R.id.recordingsLL);
 
-        // Set up  no apiaries view
-        noHivesView = root.findViewById(R.id.no_hives);
-        noHivesIcon = (ImageView) root.findViewById(R.id.no_hives_icon);
-        noHivesTextView = (TextView) root.findViewById(R.id.no_hives_text);
-        noHivesAddView = (TextView) root.findViewById(R.id.no_hives_add);
-        noHivesAddView.setOnClickListener(new View.OnClickListener() {
+        // Set up  no recordings view
+        noRecordingsView = root.findViewById(R.id.no_recordings);
+        noRecordingsIcon = (ImageView) root.findViewById(R.id.no_recordings_icon);
+        noRecordingsTextView = (TextView) root.findViewById(R.id.no_recordings_text);
+        noRecordingsAddView = (TextView) root.findViewById(R.id.no_recordings_add);
+        noRecordingsAddView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddEditHive();
+                startNewRecording();
             }
         });
 
         // Set up floating action button
         FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
+                (FloatingActionButton) getActivity().findViewById(R.id.fab_new_recording);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addEditHive();
+                presenter.startNewRecording();
             }
         });
 
@@ -117,7 +116,7 @@ public class ApiaryHivesFragment extends Fragment
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.loadHives(false);
+                presenter.loadRecordings(false);
             }
         });
 
@@ -135,7 +134,7 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.apiary_frag_menu, menu);
+        inflater.inflate(R.menu.hive_frag_menu, menu);
     }
 
     @Override
@@ -145,7 +144,7 @@ public class ApiaryHivesFragment extends Fragment
                 NavUtils.navigateUpFromSameTask(getActivity());
                 return true;
             case R.id.menu_refresh:
-                presenter.loadHives(true);
+                presenter.loadRecordings(true);
                 break;
         }
         return true;
@@ -154,11 +153,6 @@ public class ApiaryHivesFragment extends Fragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         presenter.result(requestCode, resultCode);
-    }
-
-    @Override
-    public int getTabName() {
-        return R.string.apiary_hives_tab;
     }
 
     @Override
@@ -178,34 +172,32 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void showHives(@NonNull List<Hive> hives) {
-        listAdapter.replaceData(hives);
+    public void showRecordings(@NonNull List<Recording> recordings) {
+        listAdapter.replaceData(recordings);
         hivesView.setVisibility(View.VISIBLE);
-        noHivesView.setVisibility(View.GONE);
+        noRecordingsView.setVisibility(View.GONE);
     }
 
     @Override
-    public void showAddEditHive() {
-        Intent intent = new Intent(getContext(), AddEditHiveActivity.class);
+    public void startNewRecording() {
+        Intent intent = new Intent(getContext(), PreMonitoringActivity.class);
         startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
     }
 
     @Override
-    public void showHiveDetail(long hiveId) {
-        Intent intent = new Intent(getActivity(), HiveActivity.class);
-        intent.putExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, hiveId);
-        getActivity().startActivity(intent);
+    public void showRecordingDetail(Date date) {
+        // TODO
     }
 
     @Override
-    public void showLoadingHivesError() {
-        showMessage(getString(R.string.loading_hives_error));
+    public void showLoadingRecordingsError() {
+        showMessage(getString(R.string.loading_recordings_error));
     }
 
     @Override
-    public void showNoHives() {
-        showNoHivesViews(
-                getResources().getString(R.string.no_hives),
+    public void showNoRecordings() {
+        showNoRecordingsViews(
+                getResources().getString(R.string.no_recordings),
                 R.drawable.ic_add_circle_outline,
                 false
         );
@@ -213,19 +205,19 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public void showSuccessfullySavedMessage() {
-        showMessage(getString(R.string.successfully_saved_hive_message));
+        showMessage(getString(R.string.successfully_saved_recording_message));
     }
 
     @Override
     public void showTitle(@NonNull String title) {
-        ActionBar ab = ((ApiaryActivity) getActivity()).getSupportActionBar();
+        ActionBar ab = ((HiveActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
             ab.setTitle(title);
         }
     }
 
     @Override
-    public void setPresenter(@NonNull ApiaryContract.Presenter presenter) {
+    public void setPresenter(@NonNull HiveContract.Presenter presenter) {
         this.presenter = checkNotNull(presenter);
     }
 
@@ -235,29 +227,34 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void onHiveClick(Hive clickedHive) {
-        presenter.openHiveDetail(clickedHive);
+    public int getTabName() {
+        return R.string.hive_recordings_tab;
     }
 
     @Override
-    public void onHiveDelete(Hive clickedHive) {
-        // TODO delete hive
+    public void onRecordingClick(Recording clickedRecording) {
+        presenter.openRecordingsDetail(clickedRecording);
+    }
+
+    @Override
+    public void onRecordingDelete(Recording clickedRecording) {
+        // TODO delete recording
     }
 
     /**
-     * Shows no hives views.
+     * Shows no recordings views.
      *
      * @param mainText    text to show.
      * @param iconRes     icon to show.
      * @param showAddView whether show add view option or not.
      */
-    private void showNoHivesViews(String mainText, int iconRes, boolean showAddView) {
+    private void showNoRecordingsViews(String mainText, int iconRes, boolean showAddView) {
         hivesView.setVisibility(View.GONE);
-        noHivesView.setVisibility(View.VISIBLE);
+        noRecordingsView.setVisibility(View.VISIBLE);
         // Set details
-        noHivesTextView.setText(mainText);
-        noHivesIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
-        noHivesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
+        noRecordingsTextView.setText(mainText);
+        noRecordingsIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
+        noRecordingsAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
     }
 
     /**

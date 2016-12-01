@@ -1,4 +1,9 @@
-package com.davidmiguel.gobees.data.model;
+package com.davidmiguel.gobees.data.model.mothers;
+
+import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.MeteoDay;
+import com.davidmiguel.gobees.data.model.MeteoDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +15,7 @@ import io.realm.RealmList;
  * Mother class for apiaries.
  * Using Object Mother, Test Data Builder and Builder patter.
  */
+@SuppressWarnings("unused")
 public class ApiaryMother {
 
     private static final String NAME_PREFIX = "Apiary";
@@ -17,21 +23,13 @@ public class ApiaryMother {
     private static final int NUM_HIVES = 3;
 
     private long id;
-
     private String name;
-
     private String imageUrl;
-
     private Double locationLong;
-
-        private Double locationLat;
-
+    private Double locationLat;
     private String notes;
-
     private RealmList<Hive> hives;
-
     private RealmList<MeteoDay> meteoDays;
-
     private RealmList<MeteoDetail> meteoDetails;
 
     private ApiaryMother() {
@@ -42,20 +40,39 @@ public class ApiaryMother {
         setValues(numHives);
     }
 
-    private void setValues(int numHives) {
-        Random r = new Random(System.nanoTime());
-        id = r.nextInt(MAX_ID);
-        name = NAME_PREFIX + " " + id;
-        List<Hive> generatedHives = generateHives(numHives);
-        hives = new RealmList<>(generatedHives.toArray(new Hive[generatedHives.size()]));
-    }
-
     private static ApiaryMother newApiary() {
         return new ApiaryMother();
     }
 
     private static ApiaryMother newApiary(int numHives) {
         return new ApiaryMother(numHives);
+    }
+
+    /**
+     * Generate random apiary with 3 hives.
+     *
+     * @return apiary.
+     */
+    public static Apiary newDefaultApiary() {
+        return ApiaryMother.newApiary().build();
+    }
+
+    /**
+     * Generate random apiary with numHives.
+     *
+     * @param numHives number of hives to generate.
+     * @return apiary.
+     */
+    public static Apiary newDefaultApiary(int numHives) {
+        return ApiaryMother.newApiary(numHives).build();
+    }
+
+    private void setValues(int numHives) {
+        Random r = new Random(System.nanoTime());
+        id = r.nextInt(MAX_ID);
+        name = NAME_PREFIX + " " + id;
+        List<Hive> generatedHives = generateHives(numHives);
+        hives = new RealmList<>(generatedHives.toArray(new Hive[generatedHives.size()]));
     }
 
     private ApiaryMother withName(String name) {
@@ -79,22 +96,5 @@ public class ApiaryMother {
             hives.add(HiveMother.newDefaultHive());
         }
         return hives;
-    }
-
-    /**
-     * Generate random apiary with 3 hives.
-     * @return apiary.
-     */
-    public static Apiary newDefaultApiary() {
-        return ApiaryMother.newApiary().build();
-    }
-
-    /**
-     * Generate random apiary with numHives.
-     * @param numHives number of hives to generate.
-     * @return apiary.
-     */
-    public static Apiary newDefaultApiary(int numHives) {
-        return ApiaryMother.newApiary(numHives).build();
     }
 }

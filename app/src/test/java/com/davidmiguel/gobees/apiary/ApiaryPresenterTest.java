@@ -1,7 +1,7 @@
 package com.davidmiguel.gobees.apiary;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.data.model.ApiaryMother;
+import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
@@ -61,8 +61,8 @@ public class ApiaryPresenterTest {
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     @Test
-    public void loadAllApiariesFromRepositoryAndLoadIntoView() {
-        // Given an initialized ApiaryPresenter with initialized apiaries
+    public void loadHives_showHivesIntoView() {
+        // Given an initialized ApiaryPresenter
         // When loading of hives of apiary 1 is requested
         apiaryPresenter.loadHives(true);
 

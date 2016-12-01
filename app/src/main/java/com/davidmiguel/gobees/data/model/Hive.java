@@ -5,8 +5,11 @@ import android.support.annotation.Nullable;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 
+import java.util.List;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -42,6 +45,14 @@ public class Hive extends RealmObject {
      */
     @Nullable
     private RealmList<Record> records;
+
+    /**
+     * List of recordings. It's used to display the records grouped according to some criteria,
+     * e.g. grouped by day.
+     * A recording is not stored in the db, just the records.
+     */
+    @Ignore
+    private List<Recording> recordings;
 
     public Hive() {
         // Needed by Realm
@@ -103,20 +114,11 @@ public class Hive extends RealmObject {
         return !Strings.isNullOrEmpty(name);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Hive hive = (Hive) o;
-        return id == hive.id &&
-                Objects.equal(name, hive.name) &&
-                Objects.equal(imageUrl, hive.imageUrl) &&
-                Objects.equal(notes, hive.notes) &&
-                Objects.equal(records, hive.records);
+    public List<Recording> getRecordings() {
+        return recordings;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, name, imageUrl, notes, records);
+    public void setRecordings(List<Recording> recordings) {
+        this.recordings = recordings;
     }
 }
