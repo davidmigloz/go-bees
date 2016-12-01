@@ -16,22 +16,13 @@ import com.davidmiguel.gobees.utils.BaseTabFragment;
  */
 public class ApiaryInfoFragment extends Fragment implements BaseTabFragment {
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-
-    private int mPage;
-
     public static ApiaryInfoFragment newInstance() {
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, 2);
-        ApiaryInfoFragment fragment = new ApiaryInfoFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new ApiaryInfoFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
     }
 
     @Override
@@ -39,12 +30,12 @@ public class ApiaryInfoFragment extends Fragment implements BaseTabFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.apiary_info_frag, container, false);
         TextView textView = (TextView) view;
-        textView.setText("Fragment #" + mPage);
+        textView.setText("Fragment #INFO");
         return view;
     }
 
     @Override
     public int getTabName() {
-        return R.string.info_tab;
+        return R.string.apiary_info_tab;
     }
 }

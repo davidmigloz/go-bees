@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 
 /**
@@ -15,23 +17,25 @@ import com.davidmiguel.gobees.utils.BaseTabFragment;
 public class HiveInfoFragment extends Fragment implements BaseTabFragment {
 
     public static HiveInfoFragment newInstance() {
-        return null;
+        return new HiveInfoFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return null;
+        View view = inflater.inflate(R.layout.apiary_info_frag, container, false);
+        TextView textView = (TextView) view;
+        textView.setText("Fragment #INFO");
+        return view;
     }
 
     @Override
     public int getTabName() {
-        return 0;
+        return R.string.hive_info_tab;
     }
 }

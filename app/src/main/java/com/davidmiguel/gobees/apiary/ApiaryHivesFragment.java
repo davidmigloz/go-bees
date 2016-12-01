@@ -133,7 +133,7 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.hives_frag_menu, menu);
+        inflater.inflate(R.menu.apiary_frag_menu, menu);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public int getTabName() {
-        return R.string.hives_tab;
+        return R.string.apiary_hives_tab;
     }
 
     @Override

@@ -114,6 +114,11 @@ public interface GoBeesDataSource {
      */
     void getRecordings(long hiveId, @NonNull GetRecordingsCallback callback);
 
+    /**
+     * Force to update recordings cache.
+     */
+    void refreshRecordings(long hiveId);
+
     interface GetApiariesCallback {
         void onApiariesLoaded(List<Apiary> apiaries);
 

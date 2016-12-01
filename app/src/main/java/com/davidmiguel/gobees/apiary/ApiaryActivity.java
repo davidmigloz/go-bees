@@ -11,6 +11,7 @@ import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
+import com.davidmiguel.gobees.utils.TabsFragmentPagerAdapter;
 import com.google.common.collect.Lists;
 
 /**
@@ -34,7 +35,6 @@ public class ApiaryActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.hives);
         }
 
         // Create hives fragment
@@ -59,9 +59,6 @@ public class ApiaryActivity extends AppCompatActivity {
         if (apiaryId == NO_APIARY) {
             throw new IllegalArgumentException("No apiary id passed!");
         }
-
-        // Add fragment to the activity
-
 
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();

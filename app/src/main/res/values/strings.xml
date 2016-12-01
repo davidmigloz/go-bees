@@ -1,18 +1,31 @@
 <resources>
-    <string name="app_name">GoBees</string>
+
+    <!--+++++++++++-->
+    <!-- Generals  -->
+    <!--+++++++++++-->
+
+    <!-- App name [CHAR LIMIT=NONE] -->
+    <string name="app_name" translatable="false">GoBees</string>
+
+    <!--+++++++++++++++-->
+    <!-- drawerLayout  -->
+    <!--+++++++++++++++-->
+
+    <string name="gobees_logo">GoBees logo</string>
     <string name="statistics_title">Statistics</string>
     <string name="settings_title">Settings</string>
-    <string name="gobees_logo">GoBees logo</string>
-    <string name="no_apiaries">You have no apiaries!</string>
-    <string name="no_hives">You have no hives!</string>
+
+
+
+
     <string name="add_icon">Add</string>
     <string name="home_icon">Home icon</string>
     <string name="refresh">Refresh</string>
     <string name="no_apiaries_add">Add a new apiary +</string>
-    <string name="loading_apiaries_error">Error while loading apiaries.</string>
-    <string name="loading_hives_error">Error while loading hives.</string>
+
+
     <string name="name_hint">Name</string>
-    <string name="notes_hint">Notes...</string>
+    <string name="notes_hint">Notes…</string>
     <string name="edit_apiary">Edit apiary</string>
     <string name="edit_hive">Edit hive</string>
     <string name="add_apiary">Add apiary</string>
@@ -21,18 +34,59 @@
     <string name="empty_hive_message">Hive name cannot be empty!</string>
     <string name="save_apiary_error_message">Error while saving apiary.</string>
     <string name="save_hive_error_message">Error while saving hive.</string>
-    <string name="successfully_saved_apiary_message">Apiary saved!</string>
-    <string name="successfully_saved_hive_message">Hive saved!</string>
-    <string name="more_icon">More...</string>
-    <string name="enter_icon">Enter...</string>
+
+
+    <string name="more_icon">More…</string>
+    <string name="enter_icon">Enter…</string>
     <string name="weather_icon">Weather icon</string>
     <string name="last_revision_icon">Last revision icon</string>
     <string name="hives">Hives</string>
-    <string name="hives_tab">Hives</string>
-    <string name="info_tab">Info</string>
-    <string name="title_activity_settings">Settings</string>
 
+    <!--++++++++++-->
+    <!-- Apiaries -->
+    <!--++++++++++-->
+
+    <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
+    <string name="loading_apiaries_error">Error while loading apiaries.</string>
+    <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
+    <string name="no_apiaries">You have no apiaries!</string>
+    <!-- Msg shown when an apiary is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_apiary_message">Apiary saved!</string>
+
+
+    <!--++++++++-->
+    <!-- Apiary -->
+    <!--++++++++-->
+
+    <!-- Apiary hives tab name [CHAR LIMIT=30] -->
+    <string name="apiary_hives_tab">Hives</string>
+    <!-- Apiary info tab name [CHAR LIMIT=30] -->
+    <string name="apiary_info_tab">Info</string>
+    <!-- Error msg shown when it's not posible to load hives [CHAR LIMIT=100] -->
+    <string name="loading_hives_error">Error while loading hives.</string>
+    <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
+    <string name="no_hives">You have no hives!</string>
+    <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_hive_message">Hive saved!</string>
+
+    <!--++++++-->
+    <!-- Hive -->
+    <!--++++++-->
+
+    <!-- Hive recordings tab name [CHAR LIMIT=20] -->
+    <string name="hive_recordings_tab">Recordings</string>
+    <!-- Hive info tab name [CHAR LIMIT=20] -->
+    <string name="hive_info_tab">Info</string>
+    <!-- Error msg shown when it's not posible to load recordings [CHAR LIMIT=100] -->
+    <string name="loading_recordings_error">Error while loading hives.</string>
+    <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->
+    <string name="no_recordings">You have no recordings!</string>
+    <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_recording_message">Recording saved!</string>
+
+    <!--++++++++++-->
     <!-- Settings -->
+    <!--++++++++++-->
 
     <!-- Toolbar title in settings [CHAR LIMIT=30] -->
     <string name="settings_toolbar_title">Settings</string>

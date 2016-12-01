@@ -23,6 +23,8 @@ import org.opencv.core.Mat;
  */
 public class PreMonitoringActivity extends AppCompatActivity implements CvCameraViewListener2 {
 
+    public static final int REQUEST_RECORD_HIVE = 1;
+
     private static final String TAG = "PreMonitoringActivity";
 
     // Bees counter

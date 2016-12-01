@@ -90,8 +90,8 @@ public interface HiveContract {
         /**
          * Opens activity to show the details of the given hive.
          *
-         * @param date recording date.
+         * @param recording recording.
          */
-        void openRecordingsDetail(@NonNull Date date);
+        void openRecordingsDetail(@NonNull Recording recording);
     }
 }

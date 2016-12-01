@@ -215,6 +215,11 @@ public class GoBeesRepository implements GoBeesDataSource {
         // TODO
     }
 
+    @Override
+    public void refreshRecordings(long hiveId) {
+        // TODO
+    }
+
     /**
      * Refresh cache with the given list of apiaries.
      * @param apiaries updated list of apiaries.
