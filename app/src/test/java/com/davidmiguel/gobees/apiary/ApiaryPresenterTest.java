@@ -61,8 +61,8 @@ public class ApiaryPresenterTest {
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     @Test
-    public void loadAllApiariesFromRepositoryAndLoadIntoView() {
-        // Given an initialized ApiaryPresenter with initialized apiaries
+    public void loadHives_showHivesIntoView() {
+        // Given an initialized ApiaryPresenter
         // When loading of hives of apiary 1 is requested
         apiaryPresenter.loadHives(true);
 

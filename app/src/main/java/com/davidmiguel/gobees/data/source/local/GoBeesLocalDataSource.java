@@ -170,4 +170,9 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         Number nextId = realm.where(Hive.class).max("id");
         callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
     }
+
+    @Override
+    public void getRecordings(long hiveId, @NonNull GetRecordingsCallback callback) {
+        // TODO
+    }
 }

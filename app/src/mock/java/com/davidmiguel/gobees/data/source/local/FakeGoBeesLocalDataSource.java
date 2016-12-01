@@ -118,6 +118,11 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
         // TODO
     }
 
+    @Override
+    public void getRecordings(long hiveId, @NonNull GetRecordingsCallback callback) {
+        // TODO
+    }
+
     @VisibleForTesting
     public void addTasks(Apiary... apiaries) {
         for (Apiary apiary : apiaries) {

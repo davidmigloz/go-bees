@@ -2,6 +2,8 @@ package com.davidmiguel.gobees.hive;
 
 import android.support.annotation.NonNull;
 
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,12 @@ import java.util.Date;
  * UI as required.
  */
 public class HivePresenter implements HiveContract.Presenter {
+
+    public HivePresenter(GoBeesRepository goBeesRepository, HiveContract.View hiveView,
+                         long hiveId) {
+
+    }
+
     @Override
     public void result(int requestCode, int resultCode) {
 

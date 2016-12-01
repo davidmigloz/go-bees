@@ -14,6 +14,9 @@ public class Recording {
      */
     private Date date;
 
+    /**
+     * List of all records of that date.
+     */
     private List<Record> records;
 
     public Recording(Date date, List<Record> records) {

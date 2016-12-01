@@ -37,6 +37,10 @@ public class HiveMother {
         return new HiveMother();
     }
 
+    /**
+     * Generate a hive.
+     * @return hive.
+     */
     public static Hive newDefaultHive() {
         return HiveMother.newHive().build();
     }
