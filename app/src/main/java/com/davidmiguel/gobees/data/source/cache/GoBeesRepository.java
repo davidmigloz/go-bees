@@ -174,7 +174,7 @@ public class GoBeesRepository implements GoBeesDataSource {
         checkNotNull(callback);
 
         // Respond immediately with cache if available and not dirty
-        // TODO add apiaryId
+        // TODO add to cache
 //        if (cachedApiaries != null && !cacheIsDirty) {
 //            callback.onHiveLoaded(cachedApiaries.get(apiaryId));
 //            return;
@@ -182,6 +182,17 @@ public class GoBeesRepository implements GoBeesDataSource {
 
         // Query the local storage if available
         goBeesDataSource.getHive(hiveId, callback);
+    }
+
+    @Override
+    public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
+        checkNotNull(callback);
+
+        // Respond immediately with cache if available and not dirty
+        // TODO add to cache
+
+        // Query the local storage if available
+        goBeesDataSource.getHiveWithRecordings(hiveId, callback);
     }
 
     @Override
@@ -208,11 +219,6 @@ public class GoBeesRepository implements GoBeesDataSource {
         checkNotNull(callback);
         // Get next id
         goBeesDataSource.getNextHiveId(callback);
-    }
-
-    @Override
-    public void getRecordings(long hiveId, @NonNull GetRecordingsCallback callback) {
-        // TODO
     }
 
     @Override

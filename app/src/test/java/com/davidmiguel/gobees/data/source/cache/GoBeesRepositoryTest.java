@@ -5,6 +5,8 @@ import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
 import com.google.common.collect.Lists;
 
@@ -21,6 +23,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
@@ -31,6 +34,8 @@ public class GoBeesRepositoryTest {
 
     private static final long APIARY_ID = 1;
 
+    private static final long HIVE_ID = 1;
+
     private static List<Apiary> APIARIES;
 
     private GoBeesRepository goBeesRepository;
@@ -39,13 +44,16 @@ public class GoBeesRepositoryTest {
     private GoBeesLocalDataSource goBeesLocalDataSource;
 
     @Mock
-    private GoBeesLocalDataSource.GetApiariesCallback getApiariesCallback;
+    private GetApiariesCallback getApiariesCallback;
 
     @Mock
-    private GoBeesLocalDataSource.GetApiaryCallback getApiaryCallback;
+    private GetApiaryCallback getApiaryCallback;
 
     @Mock
-    private GoBeesLocalDataSource.TaskCallback taskCallback;
+    private GetHiveCallback getHiveCallback;
+
+    @Mock
+    private TaskCallback taskCallback;
 
     @Captor
     private ArgumentCaptor<GetApiariesCallback> apiariesCallbackArgumentCaptor;
@@ -173,6 +181,15 @@ public class GoBeesRepositoryTest {
         verify(goBeesLocalDataSource).deleteAllApiaries(taskCallback);
 
         assertThat(goBeesRepository.cachedApiaries.size(), is(0));
+    }
+
+    @Test
+    public void getHiveWithRecordings_requestsAllHivesWithRecordingsFromLocalDataSource() {
+        // When apiaries are requested from the tasks repository
+        goBeesRepository.getHiveWithRecordings(HIVE_ID, getHiveCallback);
+
+        // Then apiaries are loaded from the local data source
+        verify(goBeesLocalDataSource).getHiveWithRecordings(anyLong(), any(GetHiveCallback.class));
     }
 
     /**

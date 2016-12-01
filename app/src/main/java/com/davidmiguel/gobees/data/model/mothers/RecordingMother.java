@@ -2,6 +2,7 @@ package com.davidmiguel.gobees.data.model.mothers;
 
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
+import com.davidmiguel.gobees.utils.DateTimeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,8 +76,7 @@ public class RecordingMother {
     }
 
     private Date generateRandomDate(Random r) {
-        Date today = new Date();
-        return new Date(today.getTime() - ((1000 * 60 * 60 * 24) * r.nextInt(100)));
+        return new Date(DateTimeUtil.getActualDate().getTime() - ((1000 * 60 * 60 * 24) * r.nextInt(100)));
     }
 
     private Date sumTimeToDate(Date date, int days, int hours, int min, int sec) {

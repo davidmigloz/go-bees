@@ -88,6 +88,13 @@ public interface GoBeesDataSource {
     void getHive(long hiveId, @NonNull GetHiveCallback callback);
 
     /**
+     * Returns a hive with all its recordings.
+     * @param hiveId hive id.
+     * @param callback GetHiveCallback.
+     */
+    void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback);
+
+    /**
      * Force to update hives cache.
      */
     void refreshHives(long apiaryId);
@@ -106,13 +113,6 @@ public interface GoBeesDataSource {
      * @param callback GetNextHiveIdCallback.
      */
     void getNextHiveId(@NonNull GetNextHiveIdCallback callback);
-
-    /**
-     * Returns all recordings of the given hive.
-     * @param hiveId hive id.
-     * @param callback GetRecordingsCallback.
-     */
-    void getRecordings(long hiveId, @NonNull GetRecordingsCallback callback);
 
     /**
      * Force to update recordings cache.
@@ -149,12 +149,6 @@ public interface GoBeesDataSource {
 
     interface GetNextHiveIdCallback {
         void onNextHiveIdLoaded(long hiveId);
-    }
-
-    interface GetRecordingsCallback {
-        void onRecordingsLoaded(List<Recording> recordings);
-
-        void onDataNotAvailable();
     }
 
     interface TaskCallback {

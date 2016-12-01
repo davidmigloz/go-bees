@@ -1,8 +1,9 @@
 package com.davidmiguel.gobees.hive;
 
-import com.davidmiguel.gobees.data.model.Recording;
+import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.mothers.HiveMother;
 import com.davidmiguel.gobees.data.model.mothers.RecordingMother;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.google.common.collect.Lists;
 
@@ -27,8 +28,7 @@ import static org.mockito.Mockito.when;
  */
 public class HivePresenterTest {
 
-    private static final long HIVE_ID = 1;
-    private static List<Recording> RECORDINGS;
+    private static Hive HIVE;
 
     @Mock
     private GoBeesRepository goBeesRepository;
@@ -39,24 +39,25 @@ public class HivePresenterTest {
     private HivePresenter hivePresenter;
 
     @Captor
-    private ArgumentCaptor<GoBeesDataSource.GetRecordingsCallback> getRecordingsCallbackArgumentCaptor;
+    private ArgumentCaptor<GetHiveCallback> getHiveCallbackArgumentCaptor;
 
     @Before
     public void setupHivesPresenter() {
         // To inject the mocks in the test the initMocks method needs to be called
         MockitoAnnotations.initMocks(this);
 
+        // Create a hive
+        HIVE = HiveMother.newDefaultHive();
+        HIVE.setRecordings(Lists.newArrayList(
+                RecordingMother.newDefaultRecording(),
+                RecordingMother.newDefaultRecording(),
+                RecordingMother.newDefaultRecording()));
+
         // Get a reference to the class under test
-        hivePresenter = new HivePresenter(goBeesRepository, hiveView, HIVE_ID);
+        hivePresenter = new HivePresenter(goBeesRepository, hiveView, HIVE.getId());
 
         // The presenter won't update the view unless it's active
         when(hiveView.isActive()).thenReturn(true);
-
-        // Create a hive
-        RECORDINGS = Lists.newArrayList(
-                RecordingMother.newDefaultRecording(),
-                RecordingMother.newDefaultRecording(),
-                RecordingMother.newDefaultRecording());
     }
 
     @SuppressWarnings("unchecked")
@@ -67,8 +68,8 @@ public class HivePresenterTest {
         hivePresenter.loadRecordings(true);
 
         // Callback is captured and invoked with stubbed hives
-        verify(goBeesRepository).getRecordings(anyLong(), getRecordingsCallbackArgumentCaptor.capture());
-        getRecordingsCallbackArgumentCaptor.getValue().onRecordingsLoaded(RECORDINGS);
+        verify(goBeesRepository).getHiveWithRecordings(anyLong(), getHiveCallbackArgumentCaptor.capture());
+        getHiveCallbackArgumentCaptor.getValue().onHiveLoaded(HIVE);
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(hiveView);
@@ -78,6 +79,6 @@ public class HivePresenterTest {
         ArgumentCaptor<List> showRecordingsArgumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(hiveView).showRecordings(showRecordingsArgumentCaptor.capture());
         // Assert that the number of hives shown is the expected
-        assertTrue(showRecordingsArgumentCaptor.getValue().size() == RECORDINGS.size());
+        assertTrue(showRecordingsArgumentCaptor.getValue().size() == HIVE.getRecordings().size());
     }
 }

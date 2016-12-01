@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
@@ -56,9 +57,10 @@ public class HivePresenter implements HiveContract.Presenter {
             goBeesRepository.refreshRecordings(hiveId);
         }
         // Get recordings
-        goBeesRepository.getRecordings(hiveId, new GoBeesDataSource.GetRecordingsCallback() {
+        goBeesRepository.getHiveWithRecordings(hiveId, new GoBeesDataSource.GetHiveCallback() {
+
             @Override
-            public void onRecordingsLoaded(List<Recording> recordings) {
+            public void onHiveLoaded(Hive hive) {
                 // The view may not be able to handle UI updates anymore
                 if (!hiveView.isActive()) {
                     return;
@@ -66,15 +68,14 @@ public class HivePresenter implements HiveContract.Presenter {
                 // Hide progress indicator
                 hiveView.setLoadingIndicator(false);
                 // Process recordings
-                if (recordings.isEmpty()) {
+                if (hive.getRecordings().isEmpty()) {
                     // Show a message indicating there are no recordings
                     hiveView.showNoRecordings();
                 } else {
                     // Set hive name as title
-                    // TODO get name
-                    hiveView.showTitle("Hive");
+                    hiveView.showTitle(hive.getName());
                     // Show the list of recordings
-                    hiveView.showRecordings(recordings);
+                    hiveView.showRecordings(hive.getRecordings());
                 }
             }
 
