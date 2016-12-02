@@ -1,90 +1,101 @@
 Trabajos relacionados
 =====================
 
-{Este apartado sería parecido a un estado del arte de una tesis o
-tesina. En un trabajo final grado no parece obligada su presencia,
-aunque se puede dejar a juicio del tutor el incluir un pequeño resumen
-comentado de los trabajos y proyectos ya realizados en el campo del
-proyecto en curso. }
+Como se comentó en la introducción, los intentos de automatizar el
+proceso de monitorización de la actividad de una colmena se remontan
+hasta principios del siglo pasado. Sin embargo, no es hasta 2008 cuando
+se introduce la visión artificial en este campo. A continuación, se
+exponen los artículos científicos relacionados publicados hasta la
+fecha, así como proyectos con objetivos similares.
 
-Artículos
----------
+Artículos científicos
+---------------------
 
-1.  Jason Campbell, Lily Mummert, and Rahul Sukthankar, **Video
-    Monitoring of Honey Bee Colonies at the Hive Entrance**, Visual
-    observation analysis of animal insect behavior ICPR 8 (2008), 1–4.
-2.  Jennifer M Campbell, Douglas C Dahn, and Daniel A J Ryan,
-    **Capacitance-based sensor for monitoring bees passing through a
-    tunnel**, Measurement Science and Technology 16 (2005), no. 12,
-    2503–2510.
-3.  Guillaume Chiron, Petra Gomez-Krämer, and Michel Ménard, **Detecting
-    and tracking honeybees in 3D at the beehive entrance using stereo
-    vision**, EURASIP Journal on Image and Video Processing 2013 (2013),
-    no. 1, 59.
-4.  Guillaume Chiron, Petra Gomez-Krämer, Michel Ménard, and Fabrice
-    Requier, **3D tracking of honeybees enhanced by environmental
-    context**, Lecture Notes in Computer Science (including subseries
-    Lecture Notes in Artificial Intelligence and Lecture Notes in
-    Bioinformatics), vol. 8156 LNCS, Springer Berlin Heidelberg, 2013,
-    pp. 702–711.
-5.  V. Estivill-Castro, D. Lattin, F. Suraweera, and V. Vithanage,
-    **Tracking bees - a 3D, outdoor small object environment**,
-    Proceedings 2003 International Conference on Image Processing (Cat.
-    No.03CH37429) 3 (2003), 1021–1024.
-6.  Hidetoshi Ikeno, **Development of a new method to track multiple
-    honey bees with complex behaviors on a flat laboratory arena**, PloS
-    one 9 (2014), no. 1, e84656.
-7.  David Joel Kale, **Automated Beehive Surveillance Using Computer
-    Vision**, Ph.D. thesis, Appalachian State University, 2015, p. 58.
-8.  Alexander Rau, **Realtime Honey Bee Waggle Dance Decoding System**,
-    (2014), 50.
-9.  Joaquin Salas and Pablo Vera, **Counting the Bumblebees Entering and
-    Leaving a Beehive**, Proceedings of Workshop on Visual Observation
-    and Analysis of Animal and Insect Behavior (VAIB) (2012).
-10. M H Struye, H J Mortier, G Arnold, C Miniggio, and R Borneck,
-    **Microprocessor-controlled monitoring of honeybee flight activity
-    at the hive entrance**, Apidologie 25 (1994), no. 4, 384– 395.
-11. Rahman Tashakkori and Ahmad Ghadiri, **Image processing for honey
-    bee hive health monitoring**, SoutheastCon 2015 (Fort Lauderdale,
-    FL), IEEE, apr 2015, pp. 1–7.
-12. Gang Jun Tu, Mikkel Kragh Hansen, Per Kryger, and Peter Ahrendt,
-    **Automatic behaviour analysis system for honeybees using computer
-    vision**, Computers and Electronics in Agriculture 122 (2016),
-    10–18.
-13. J. K. Kaplan, **Colony Collapse Disorder - A Complex Buzz**,
-    Agricultural Research (2008), no. June, 8–11.
-14. A. E. Lundie, **The flight activities of the honeybee**, United
-    States Department of Agriculture 1328 (1925), 1–38.
-15. Minh-Hà Pham-Delègue, Axel Decourtye, Laure Kaiser, and James
-    Devillers, **Behavioural methods to assess the effects of pesticides
-    on honey bees**, Apidologie 33 (2002), no. 5, 425– 432.
+Video Monitoring of Honey Bee Colonies at the Hive Entrance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Se trata del primer artículo publicado sobre el tema (año 2008). Los
+autores fueron Jason Campbell, Lily Mummert y Rahul Sukthankar. En él
+proponen un método de visión artificial para monitorizar las entradas y
+salidas de abejas en una colmena. Se describen los desafíos técnicos que
+supuso y la solución a la que llegaron finalmente.
+
+Detecting and tracking honeybees in 3D at the beehive entrance using stereo vision
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En 2013, Guillaume Chiron, Petra Gomez-Krämer y Ménard Michel publicaron
+un artículo en donde proponían un método para la monitorización de
+abejas a la entrada de una colmena basado en un sistema de tiempo real
+con visión estereoscópica, gracias al cual podían obtener una
+representación en tres dimensiones de las trayectorias de las abejas.
+
+Image Processing for Honey Bee hive Health Monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+El último artículo publicado data del año 2015 por Rahman Tashakkori y
+Ahmad Ghadiri. En él, mejoran el método propuesto por Campbell et al. y
+desarrollan otro que permite estimar el número de abejas que habrá en un
+instante de tiempo dado.
 
 Proyectos
 ---------
 
--  EyesOnHives: proyecto para monitorizar la actividad de una colmena
-   (con hardware específico). http://www.keltronixinc.com/
+EyesOnHives
+~~~~~~~~~~~
 
--  BeeHive: tracking abejas con Raspberry.
-   https://github.com/guyver2/beehive
-   https://www.raspberrypi.org/forums/viewtopic.php?t=109316 (hilo
-   interesante)
+EyesOnHives es el principal competidor del proyecto. Se trata de un
+producto comercial cuyo fin es la monitorización del estado de salud de
+las colmenas mediante su actividad de vuelo. Integra un *hardware*
+específico que se encarga de la captación de imágenes y una plataforma
+en la nube que las procesa y permite el acceso a los datos.
 
--  HiveTool: colección de herramientas hardware y software opensource
-   para monitorizar abejas. Entre ellas beeCounter. http://hivetool.org/
-   http://hivetool.org/w/index.php?title=Bee\_Counter
-   http://hivetool.org/w/index.php?title=Bee\_counter\_software
-   (algoritmo) http://hivetool.org/hardware/counters/
+-  Web del proyecto: http://www.keltronixinc.com
 
--  Bee Tracking: a video based bee tracking software. (muy bueno)
-   http://sonic.net/\ :sub:`goddard/home/bees/bees.html
-   http://sonic.net/`\ goddard/home/track\_feb2015/track\_feb2015.html
-   (algoritmo)
+HiveTool
+~~~~~~~~
 
--  BeeCounter: IR counter for bees
-   http://gizmodo.com/5945925/digital-beehive-counter-accurately-tracks-your-colonys-collapse
-   http://fabacademy.org/archives/2013/students/rees.john/final-project/
+Se trata de un proyecto *OpenSource* que ofrece un conjunto de
+herramientas para monitorizar distintos parámetros de una colmena. Una
+de estas herramientas es "Bee Counter", un contador de abejas por visión
+artificial desarrollado sobre una Raspberry Pi.
 
--  The Hive Project: instrument beehives in order to detect signs of
-   impending colony collapse. http://hive.honeybeegardens.net/
-   http://www.instructables.com/id/The-Electric-Hive/
+-  Web del proyecto: http://hivetool.org/
+
+Fortalezas y debilidades del proyecto
+-------------------------------------
+
+Las principales fortalezas del proyecto son:
+
+-  No se necesita adquirir ningún *hardware* específico como en el resto
+   de proyectos, simplemente se necesita un *smartphone* con Android.
+   Esto hace el proyecto mucho más accesible a los potenciales usuarios.
+-  La instalación es muy sencilla. Únicamente se requiere un trípode.
+-  El procesamiento de las imágenes se realiza en local no en un
+   servidor. Considerando que los colmenares suelen estar en medio del
+   monte, no podemos requerir una conexión *wifi* como necesita
+   EyesOnHives y el envío de vídeo mediante tecnologías 3G/4G supone un
+   coste económico muy elevado.
+-  No requiere estar conectado a la red eléctrica. El *smartphone*
+   cuenta con su propia batería. El consumo de la aplicación no es muy
+   elevado al estar la pantalla apagada durante la monitorización. Aun
+   así, se pueden utilizar *powerbanks* en caso de ser necesarios.
+-  El *smartphone* tiene integradas varias tecnologías de transmisión de
+   información. Lo da la posibilidad de crear una plataforma que
+   centralice la recogida de datos de varios dispositivos sin importar
+   su localización.
+-  Relacionado con el punto anterior, el *smartphone* nos permite estar
+   conectados a internet, posibilitándonos ampliar la información que
+   maneja nuestra aplicación. Por ejemplo, podemos acceder a la
+   información meteorológica en tiempo real.
+-  El GPS del *smartphone* nos permite localizar geográficamente la
+   monitorización y, por tanto, la información meteorológica. Además,
+   puede ser de utilidad en caso de robo.
+
+Las principales debilidades son:
+
+-  Actualmente solo se encuentra disponible para Android. Aunque en una
+   segunda fase del proyecto se creará una plataforma en la nube que
+   centralice todos los datos y una aplicación web que permita acceder a
+   ellos.
+-  Como la cámara varia en gran medida dependiendo del *smartphone*
+   utilizado, se pueden encontrar problemas en este sentido.
