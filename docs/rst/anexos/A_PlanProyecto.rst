@@ -43,19 +43,19 @@ metodología al tratarse de un proyecto educativo (no éramos un equipo de
 en líneas generales una filosofía ágil:
 
 -  Se aplicó una estrategia de desarrollo incremental a través de
-   iteraciones (sprints) y revisiones.
--  La duración media de los sprints fue de una semana.
--  Al finalizar cada sprint se entregaba una parte del producto
+   iteraciones (*sprints*) y revisiones.
+-  La duración media de los *sprints* fue de una semana.
+-  Al finalizar cada *sprint* se entregaba una parte del producto
    operativa (incremento).
--  Se realizaban reuniones de revisión al finalizar cada sprint y al
-   mismo tiempo de planificación del nuevo sprint.
--  En la planificación del sprint se generaba una pila de tareas a
+-  Se realizaban reuniones de revisión al finalizar cada *sprint* y al
+   mismo tiempo de planificación del nuevo *sprint*.
+-  En la planificación del *sprint* se generaba una pila de tareas a
    realizar.
--  Estas tareas se estimaban y priorizaban en un tablero canvas.
+-  Estas tareas se estimaban y priorizaban en un tablero *canvas*.
 -  Para monitorizar el progreso del proyecto se utilizó gráficos
-   burndown.
+   *burndown*.
 
-Comentar que la estimación se realizó mediante los story points que
+Comentar que la estimación se realizó mediante los *story points* que
 provee ZenHub y, a su vez, se les asignó una estimación temporal (cota
 superior) que se recoge en la siguiente tabla:
 
@@ -79,16 +79,16 @@ superior) que se recoge en la siguiente tabla:
 | 40             | 1 semana              |
 +----------------+-----------------------+
 
-A continuación se describen los diferentes sprints que se han realizado.
+A continuación se describen los diferentes *sprints* que se han realizado.
 
 Sprint 0 (09/09/16 - 16/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La reunión de planificación de este sprint marcó el comienzo del
-proyecto. En una reunión previa se había plateado la idea del proyecto
+La reunión de planificación de este *sprint* marcó el comienzo del
+proyecto. En una reunión previa se había planeado la idea del proyecto
 al tutor y este la había aceptado. En esta nueva reunión se profundizó
 en la idea, se formó el equipo del proyecto y se plantearon los
-objetivos del primer sprint.
+objetivos del primer *sprint*.
 
 Los objetivos fueron: profundizar y formalizar los objetivos del
 proyecto, investigar el estado del arte en algoritmos de detección y
@@ -98,137 +98,130 @@ proyecto y la comunicación del equipo y, por último, realizar un esquema
 rápido de la aplicación que se deseaba desarrollar.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-0 <https://github.com/davidmigloz/go-bees/milestone/1?closed=1>`__.
+`Sprint 0 <https://github.com/davidmigloz/go-bees/milestone/1?closed=1>`__.
 
 Se estimaron 8 horas de trabajo y se invirtieron finalmente 9,25 horas,
 completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint0.png
-   :alt: Sprint 0
+   :alt: Sprint 0.
 
 Sprint 1 (17/09/16 - 23/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: tomar contacto con OpenCV para
-Android, realizar un curso online de iniciación a Android, investigar
+Los objetivos de este **sprint** fueron: tomar contacto con OpenCV para
+Android, realizar un curso *online* de iniciación a Android, investigar
 qué algoritmos de detección y tracking estaban disponibles en OpenCV
 para Android y empezar a trabajar en la documentación.
 
-En este sprint se tuvo la suerte de hablar sobre el proyecto con Rafael
+En este *sprint* se tuvo la suerte de hablar sobre el proyecto con Rafael
 Saracchini, investigador en temas de visión artificial en el Instituto
 Tecnológico de Castilla y León. Rafael nos propuso una serie de
 algoritmos que nos podían ser útiles y otros que no funcionarían bajo
 nuestros requisitos.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-1 <https://github.com/davidmigloz/go-bees/milestone/2?closed=1>`__.
+`Sprint 1 <https://github.com/davidmigloz/go-bees/milestone/2?closed=1>`__.
 
 Se estimaron 7,25 horas de trabajo y se invirtieron finalmente 13,25
 horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint1.png
-   :alt: Sprint 1
+   :alt: Sprint 1.
 
 Sprint 2 (24/09/16 - 29/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: investigar cómo implementar con
-OpenCV los algoritmos descritos en el sprint anterior, continuar la
+Los objetivos de este *sprint* fueron: investigar cómo implementar con
+OpenCV los algoritmos descritos en el *sprint* anterior, continuar la
 formación en Android y OpenCV y realizar grabaciones en el colmenar para
 tener un conjunto de vídeos con los que realizar pruebas.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-2 <https://github.com/davidmigloz/go-bees/milestone/3?closed=1>`__.
+`Sprint 2 <https://github.com/davidmigloz/go-bees/milestone/3?closed=1>`__.
 
-Mientras se realizaba una de las tareas del sprint, se encontraron dos
-bugs relacionados con OpenCV y Android
+Mientras se realizaba una de las tareas del *sprint*, se encontraron dos
+*bugs* relacionados con OpenCV y Android
 (`#26 <https://github.com/davidmigloz/go-bees/issues/26>`__ y
 `#27 <https://github.com/davidmigloz/go-bees/issues/27>`__) que nos
 impidieron continuar el desarrollo. El investigar su origen y buscar
 soluciones supuso una gran cantidad de horas y no se lograron resolver
-hasta el siguiente sprint.
+hasta el siguiente *sprint*.
 
 Se estimaron 11,75 horas de trabajo y se invirtieron finalmente 33
 horas, quedando dos tareas pendientes para terminar durante el siguiente
-sprint.
+*sprint*.
 
 .. figure:: ../../img/burndowns/sprint2.png
-   :alt: Sprint 2
+   :alt: Sprint 2.
 
 Sprint 3 (30/09/16 - 06/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: intentar resolver los bugs
-descubiertos en el sprint anterior, o si esto fuese imposible, buscar
+Los objetivos de este *sprint* fueron: intentar resolver los bugs
+descubiertos en el *sprint* anterior, o si esto fuese imposible, buscar
 una vía alternativa para continuar el proyecto y continuar investigando
 las implementaciones de los algoritmos de extracción de fondo en OpenCV.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-3 <https://github.com/davidmigloz/go-bees/milestone/4?closed=1>`__.
+`Sprint 3 <https://github.com/davidmigloz/go-bees/milestone/4?closed=1>`__.
 
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 31
 horas, quedando una tarea por terminar.
 
 .. figure:: ../../img/burndowns/sprint3.png
-   :alt: Sprint 3
+   :alt: Sprint 3.
 
 Sprint 4 (07/10/16 - 13/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: investigar técnicas de preprocesado
-y postprocesado para mejorar los resultados de la fase de extracción del
+Los objetivos de este *sprint* fueron: investigar técnicas de preprocesado
+y potprocesado para mejorar los resultados de la fase de extracción del
 fondo. Seleccionar y parametrizar el algoritmo de extracción de fondo
 que provea los mejores resultados para nuestro problema. Continuar el
 curso de Android. Integrar los servicios de integración continua y
 documentación continua en el repositorio.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-4 <https://github.com/davidmigloz/go-bees/milestone/5?closed=1>`__.
+`Sprint 4 <https://github.com/davidmigloz/go-bees/milestone/5?closed=1>`__.
 
 Se estimaron 37 horas de trabajo y se invirtieron finalmente 39,5 horas,
 completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint4.png
-   :alt: Sprint 4
+   :alt: Sprint 4.
 
 Sprint 5 (14/10/16 - 20/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: afinar la parametrización de los
-algoritmos implementados en el sprint anterior. Detectar contornos y
+Los objetivos de este *sprint* fueron: afinar la parametrización de los
+algoritmos implementados en el *sprint* anterior. Detectar contornos y
 contar los pertenecientes a abejas. Pensar algún método que pueda
-solventar el problema del solapamiento de abejas. Documentar sprint
+solventar el problema del solapamiento de abejas. Documentar *sprint*
 anterior. Continuar la formación en Android.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-5 <https://github.com/davidmigloz/go-bees/milestone/6?closed=1>`__.
+`Sprint 5 <https://github.com/davidmigloz/go-bees/milestone/6?closed=1>`__.
 
 Se estimaron 27 horas de trabajo y se invirtieron finalmente 34 horas,
 completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint5.png
-   :alt: Sprint 5
+   :alt: Sprint 5.
 
 Sprint 6 (21/10/16 - 27/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: mudar el algoritmo de visión
+Los objetivos de este *sprint* fueron: mudar el algoritmo de visión
 artificial desarrollado en la plataforma Java a Android. Comenzar a
 desarrollar una aplicación de testeo del algoritmo para conocer el error
 que comete. Investigar si es posible simular el entorno de trabajo
 filmando a una pantalla.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-6 <https://github.com/davidmigloz/go-bees/milestone/7?closed=1>`__.
+`Sprint 6 <https://github.com/davidmigloz/go-bees/milestone/7?closed=1>`__.
 
-Mientras se mudaba el algoritmo a Android se encontró un bug de OpenCV
+Mientras se mudaba el algoritmo a Android se encontró un *bug* de OpenCV
 (`#55 <https://github.com/davidmigloz/go-bees/issues/55>`__) que agotaba
 la memoria del móvil. Este se debía a una mala liberación de recursos
 por parte de OpenCV y resolvió liberándolos manualmente.
@@ -245,79 +238,75 @@ Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 41
 horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint6.png
-   :alt: Sprint 6
+   :alt: Sprint 6.
 
 Sprint 7 (28/10/16 - 04/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: estudiar patrón de arquitectura MVP
-(Model-View-Presenter) y pensar en cómo aplicarlo al proyecto. Diseñar
+Los objetivos de este *sprint* fueron: estudiar patrón de arquitectura MVP
+(*Model-View-Presenter*) y pensar en cómo aplicarlo al proyecto. Diseñar
 la posible arquitectura de la aplicación. Estudiar el uso de inyección
 de dependencias en Android con Dagger 2. Documentar las secciones de
 Introducción y Objetivos.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-7 <https://github.com/davidmigloz/go-bees/milestone/8?closed=1>`__.
+`Sprint 7 <https://github.com/davidmigloz/go-bees/milestone/8?closed=1>`__.
 
 Se estimaron 16 horas de trabajo y se invirtieron finalmente 23 horas,
 completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint7.png
-   :alt: Sprint 7
+   :alt: Sprint 7.
 
 Sprint 8 (05/11/16 - 10/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: diseñar el modelo de datos de la
+Los objetivos de este *sprint* fueron: diseñar el modelo de datos de la
 aplicación teniendo en cuenta el uso final de estos. Desarrollar una
 aplicación Java para realizar un conteo manual de un conjunto de frames.
 Utilizar los datos obtenidos mediante la aplicación de conteo para
 implementar un test que calcule el error que comete el algoritmo.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-8 <https://github.com/davidmigloz/go-bees/milestone/9?closed=1>`__.
+`Sprint 8 <https://github.com/davidmigloz/go-bees/milestone/9?closed=1>`__.
 
 Se estimaron 46 horas de trabajo y se invirtieron finalmente 53 horas,
 completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint8.png
-   :alt: Sprint 8
+   :alt: Sprint 8.
 
 Sprint 9 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: implementar acceso a datos.
-Inyección de dependencias con los build variants de Gradle. Empezar a
+Los objetivos de este *sprint* fueron: implementar acceso a datos.
+Inyección de dependencias con los *build variants* de Gradle. Empezar a
 desarrollar las distintas actividades de la app.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-9 <https://github.com/davidmigloz/go-bees/milestone/10?closed=1>`__.
+`Sprint 9 <https://github.com/davidmigloz/go-bees/milestone/10?closed=1>`__.
 
 Se estimaron 23 horas de trabajo y se invirtieron finalmente 24,25
 horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint9.png
-   :alt: Sprint 9
+   :alt: Sprint 9.
 
 Sprint 10 (11/11/16 - 17/11/16)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Los objetivos de este sprint fueron: continuar desarrollando las actividades 
+Los objetivos de este *sprint* fueron: continuar desarrollando las actividades 
 principales de la app. Corregir documentación escrita hasta el momento. 
 Documentar Técnicas y herramientas y Aspectos relevantes.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
-`Sprint
-10 <https://github.com/davidmigloz/go-bees/milestone/11?closed=1>`__.
+`Sprint 10 <https://github.com/davidmigloz/go-bees/milestone/11?closed=1>`__.
 
 Se estimaron 33,75 horas de trabajo y se invirtieron finalmente 39,25
 horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint10.png
-   :alt: Sprint 10
+   :alt: Sprint 10.
    
 Estudio de viabilidad
 ---------------------

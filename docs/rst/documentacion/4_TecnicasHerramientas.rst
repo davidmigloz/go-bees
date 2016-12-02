@@ -29,7 +29,7 @@ Gitflow
 
 `Gitflow <http://nvie.com/posts/a-successful-git-branching-model/>`__ es
 un flujo de trabajo con Git que define un modelo estricto de ramas
-diseñado entorno a los lanzamientos de proyecto. En la rama *main* se
+diseñado en torno a los lanzamientos de proyecto. En la rama *main* se
 hospeda la última versión estable del proyecto. La rama *develop*
 contiene los últimos desarrollos realizados para el siguiente
 lanzamiento. Por cada característica que se vaya a implementar se crea

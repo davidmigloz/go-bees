@@ -4,16 +4,16 @@ Introducción
 Las abejas son una pieza clave en nuestro ecosistema. La producción de
 alimentos a nivel mundial y la biodiversidad de nuestro planeta dependen
 en gran medida de ellas. Son las encargadas de polinizar el 70% de los
-cultivos de comida, que suponen un 90% de la alimentación humana. [art:bees_decline]_
+cultivos de comida, que suponen un 90% de la alimentación humana [art:bees_decline]_.
 Sin embargo, la población mundial de abejas está disminuyendo a pasos
-agigantados en los últimos años. Debido, entre otras causas, al uso
+agigantados en los últimos años debido, entre otras causas, al uso
 extendido de plaguicidas tóxicos, parásitos como la varroa o la
-expansión del avispón asiático. [art:ccd]_
+expansión del avispón asiático [art:ccd]_.
 
 Actualmente los apicultores inspeccionan sus colmenares de forma manual.
 Uno de los indicadores que más información les proporciona es la
 actividad de vuelo de la colmena (número de abejas en vuelo a la entrada
-de la colmena en un determinado instante). [art:campbell2008]_ Este dato, junto con
+de la colmena en un determinado instante) [art:campbell2008]_. Este dato, junto con
 información previa de la colmena y conocimiento de las condiciones
 locales, permite conocer al apicultor el estado de la colmena con
 bastante seguridad, pudiendo determinar si esta necesita o no una
@@ -23,11 +23,11 @@ La actividad de vuelo de una colmena varía dependiendo de múltiples
 factores, tanto externos como internos a la colmena. Entre ellos se
 encuentran la propia población de la colmena, las condiciones
 meteorológicas, la presencia de enfermedades, parásitos o depredadores,
-la exposición a tóxicos, la presencia de fuentes de néctar, etc. A pesar
-de los numerosos factores que influyen en este dato, es de gran ayuda
-para la toma de decisiones por parte del apicultor. Ya que este posee
-información sobre la mayoría de los factores necesarios para su
-interpretación.
+la exposición a tóxicos, la presencia de fuentes de néctar, etc. A pesar 
+de los numerosos factores que influyen en actividad de vuelo, su 
+conocimiento es de gran ayuda para la toma de decisiones por parte del 
+apicultor. Ya que este posee información sobre la mayoría de los 
+factores necesarios para su interpretación.
 
 La captación prolongada de la actividad de vuelo de forma manual es muy
 costosa, tediosa y puede introducir una tasa de error elevada. Es por
@@ -37,8 +37,8 @@ principios del siglo XX, donde se desarrollaron contadores por contacto
 eléctrico [art:lundie1925]_. Otros métodos posteriores se basan en sensores de
 infrarrojos [art:struye1994]_, sensores capacitivos [art:campbell2005]_, códigos de barras [beebarcode]_ o
 incluso en microchips acoplados a las abejas [art:decourtye_honeybee_2011]_. En los últimos años,
-se han desarrollado numerosos métodos basados en visión artificial.
-[art:campbell2008]_ [art:chiron2013a]_ [art:chiron2013]_ [art:tashakkori2015]_
+se han desarrollado numerosos métodos basados en visión artificial
+[art:campbell2008]_ [art:chiron2013a]_ [art:chiron2013]_ [art:tashakkori2015]_.
 
 Los métodos basados en contacto, sensores de infrarrojos o capacitivos
 tienen el inconveniente de que es necesario realizar modificaciones en
@@ -48,13 +48,12 @@ los convierten en métodos poco prácticos fuera del campo investigador.
 Por el contrario, la visión artificial aporta un gran potencial. Ya que
 evita tener que realizar ningún tipo de modificación ni en el entorno,
 ni en las abejas. Además, abre la puerta a la monitorización de nuevos
-parámetros como la detección de enjambrazón o la detección de amenazas
-(avispones, abejaruco, etc.).
+parámetros como la detección de enjambrazón (división de la colmena y salida de un enjambre) o la detección de amenazas (avispones, abejaruco, etc.).
 
 Todos los métodos basados en visión artificial propuestos hasta la fecha
 utilizan hardware específico con un coste elevado. En este trabajo se
 propone un método de monitorización de la actividad de vuelo de una
-colmena mediante la cámara de un smartphone con Android.
+colmena mediante la cámara de un *smartphone* con Android.
 
 El método propuesto podría revolucionar el campo de la monitorización de
 colmenas, ya que lo hace accesible al gran público. Ya no es necesario
