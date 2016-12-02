@@ -308,6 +308,23 @@ horas, completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint10.png
    :alt: Sprint 10.
    
+Sprint 11 (26/11/16 - 01/12/16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: implementar la vista detalle de una colmena 
+con sus grabaciones, pestañas en las vistas de colmenar y colmena y la sección de 
+ajustes. Corregir los errores en la documentación indicados por los tutores. 
+Continuar la formación en Android.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 11 <https://github.com/davidmigloz/go-bees/milestone/12?closed=1>`__.
+
+Se estimaron 25,75 horas de trabajo y se invirtieron finalmente 34
+horas, completando todas las tareas.
+
+.. figure:: ../../img/burndowns/sprint11.png
+   :alt: Sprint 11.
+   
 Estudio de viabilidad
 ---------------------
 
