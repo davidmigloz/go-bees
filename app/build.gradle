@@ -95,7 +95,7 @@ dependencies {
 
     // Dependencies for Android unit tests
     androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'org.mockito:mockito-core:2.2.22'
+    androidTestCompile 'org.mockito:mockito-core:2.2.26'
 
     // Espresso UI Testing
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
