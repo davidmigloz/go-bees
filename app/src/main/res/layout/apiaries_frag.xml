@@ -23,7 +23,8 @@
                 android:id="@+id/apiaries_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"/>
+                android:clipToPadding="false"
+                android:paddingBottom="16dp"/>
         </LinearLayout>
 
         <LinearLayout

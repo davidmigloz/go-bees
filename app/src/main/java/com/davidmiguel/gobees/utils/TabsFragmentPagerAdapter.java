@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.davidmiguel.gobees.utils.BaseTabFragment;
-
 import java.util.List;
 
 /**

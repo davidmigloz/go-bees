@@ -110,7 +110,7 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
-        // TODO
+        callback.onHiveLoaded(HiveMother.newDefaultHive());
     }
 
     @Override
@@ -129,7 +129,7 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
-        // TODO
+        callback.onSuccess();
     }
 
     @Override
@@ -139,7 +139,8 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void refreshRecordings(long hiveId) {
-        // TODO
+        // Not required because the TasksRepository handles the logic of refreshing the
+        // tasks from all the available data sources
     }
 
     @VisibleForTesting

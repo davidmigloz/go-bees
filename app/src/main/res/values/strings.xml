@@ -7,9 +7,9 @@
     <!-- App name [CHAR LIMIT=NONE] -->
     <string name="app_name" translatable="false">GoBees</string>
 
-    <!--+++++++-->
-    <!-- Icons -->
-    <!--+++++++-->
+    <!--+++++++++++++++-->
+    <!-- General Icons -->
+    <!--+++++++++++++++-->
 
     <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
     <string name="more_icon">More…</string>
@@ -46,7 +46,7 @@
 
 
     <string name="weather_icon">Weather icon</string>
-    <string name="last_revision_icon">Last revision icon</string>
+
     <string name="hives">Hives</string>
 
     <!--++++++++++-->
@@ -75,6 +75,8 @@
     <string name="no_hives">You have no hives!</string>
     <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_hive_message">Hive saved!</string>
+    <!-- Description of last revision icon ic_cached [CHAR LIMIT=100] -->
+    <string name="last_revision_icon">Last revision icon</string>
 
     <!--++++++-->
     <!-- Hive -->

@@ -20,7 +20,7 @@ public class ApiaryMother {
 
     private static final String NAME_PREFIX = "Apiary";
     private static final int MAX_ID = 1000;
-    private static final int NUM_HIVES = 3;
+    private static final int NUM_HIVES = 6;
 
     private long id;
     private String name;
