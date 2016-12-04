@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
-import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.mothers.HiveMother;
 import com.davidmiguel.gobees.data.model.mothers.RecordingMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
@@ -24,34 +24,25 @@ import java.util.Random;
  */
 public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
-    private static FakeGoBeesLocalDataSource INSTANCE = null;
-
     private static final Map<Long, Apiary> APIARIES_SERVICE_DATA = new LinkedHashMap<>();
-
     private static final List<Recording> RECORDINGS = new ArrayList<>();
+    private static FakeGoBeesLocalDataSource INSTANCE = null;
 
     private Random r;
 
     private FakeGoBeesLocalDataSource() {
         r = new Random(System.currentTimeMillis());
 
-        // Create apiaries
-        Apiary apiary1 = ApiaryMother.newDefaultApiary();
-        Apiary apiary2 = ApiaryMother.newDefaultApiary();
-        Apiary apiary3 = ApiaryMother.newDefaultApiary();
-
         // Create recordings
-        Recording recording1 = RecordingMother.newDefaultRecording(200);
-        Recording recording2 = RecordingMother.newDefaultRecording(100);
-        Recording recording3 = RecordingMother.newDefaultRecording(50);
+        for (int i = 0; i < 5; i++) {
+            RECORDINGS.add(RecordingMother.newDefaultRecording(50));
+        }
 
         // Add fake data
-        APIARIES_SERVICE_DATA.put(apiary1.getId(), apiary1);
-        APIARIES_SERVICE_DATA.put(apiary2.getId(), apiary2);
-        APIARIES_SERVICE_DATA.put(apiary3.getId(), apiary3);
-        RECORDINGS.add(recording1);
-        RECORDINGS.add(recording2);
-        RECORDINGS.add(recording3);
+        for (int i = 0; i < 5; i++) {
+            Apiary a = ApiaryMother.newDefaultApiary();
+            APIARIES_SERVICE_DATA.put(a.getId(), a);
+        }
     }
 
     public static FakeGoBeesLocalDataSource getInstance() {

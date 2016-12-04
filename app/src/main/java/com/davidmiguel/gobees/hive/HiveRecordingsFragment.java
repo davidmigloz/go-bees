@@ -64,7 +64,7 @@ public class HiveRecordingsFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new RecordingsAdapter(getResources(), new ArrayList<Recording>(0), this);
+        listAdapter = new RecordingsAdapter(getContext(), new ArrayList<Recording>(0), this);
     }
 
     @Nullable

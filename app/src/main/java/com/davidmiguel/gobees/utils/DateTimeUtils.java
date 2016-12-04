@@ -8,10 +8,14 @@ import java.util.GregorianCalendar;
  * Java Date utils.
  */
 @SuppressWarnings("WeakerAccess")
-public class DateTimeUtil {
+public class DateTimeUtils {
+
+    private static final long ONE_HOUR_IN_MS = 3600000;
+    private static final long ONE_MIN_IN_MS = 60000;
+    private static final long ONE_SEC_IN_MS = 1000;
 
     /**
-     * Get actual date with hours, min, sec and milisec set to 0.
+     * Get actual date with hours, min, sec and millisec set to 0.
      *
      * @return trimmed date.
      */
@@ -56,7 +60,7 @@ public class DateTimeUtil {
     public static Date addDays(Date date, int numDays) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.set(Calendar.DATE, c.get(Calendar.DATE) + numDays);
+        c.add(Calendar.DATE, numDays);
         return c.getTime();
     }
 
@@ -68,5 +72,21 @@ public class DateTimeUtil {
      */
     public static Date getNextDay(Date date) {
         return addDays(getDateOnly(date), 1);
+    }
+
+    /**
+     * Sum time to given date.
+     *
+     * @param date  actual date.
+     * @param hours hours to add.
+     * @param mins  mins to add.
+     * @param secs  secs to add.
+     * @return new date.
+     */
+    public static Date sumTimeToDate(Date date, int hours, int mins, int secs) {
+        long hoursToAddInMs = hours * ONE_HOUR_IN_MS;
+        long minsToAddInMs = mins * ONE_MIN_IN_MS;
+        long secsToAddInMs = secs * ONE_SEC_IN_MS;
+        return new Date(date.getTime() + hoursToAddInMs + minsToAddInMs + secsToAddInMs);
     }
 }

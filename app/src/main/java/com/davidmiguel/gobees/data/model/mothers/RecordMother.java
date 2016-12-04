@@ -13,7 +13,8 @@ import java.util.Random;
 public class RecordMother {
 
     private static final int MAX_ID = 10000;
-    private static final int MAX_NUM_BEES = 30;
+    private static final int MIN_NUM_BEES = 5;
+    private static final int MAX_NUM_BEES = 35;
 
     private long id;
     private Date timestamp;
@@ -50,7 +51,7 @@ public class RecordMother {
         Random r = new Random(System.nanoTime());
         id = r.nextInt(MAX_ID);
         timestamp = new Date(Math.abs(System.currentTimeMillis() - r.nextLong()));
-        numBees = r.nextInt(MAX_NUM_BEES);
+        numBees = r.nextInt((MAX_NUM_BEES - MIN_NUM_BEES) + 1) + MIN_NUM_BEES;
     }
 
     private RecordMother withTimestamp(Date timestamp) {

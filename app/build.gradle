@@ -81,6 +81,8 @@ dependencies {
     compile 'com.github.davidmigloz:opencv-android-gradle-repo:3.1.0'
     compile 'com.google.guava:guava:20.0'
     compile 'com.makeramen:roundedimageview:2.2.1'
+    compile 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 
     // Dependencies for local unit tests
     testCompile 'junit:junit:4.12'

@@ -7,7 +7,7 @@ import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.utils.DateTimeUtil;
+import com.davidmiguel.gobees.utils.DateTimeUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -161,19 +161,19 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             Date nextDay = new Date(0); // Next day to the recording
             RealmResults<Record> filteredRecords;
             List<Recording> recordings = new ArrayList<>();
-            while(true){
+            while (true) {
                 // Get all records greather than last recordings
                 records = records.where().greaterThanOrEqualTo("timestamp", nextDay).findAll();
                 if (records.isEmpty()) {
                     break;
                 }
                 // Get range of days to filter
-                day = DateTimeUtil.getDateOnly(records.first().getTimestamp());
-                nextDay = DateTimeUtil.getNextDay(day);
+                day = DateTimeUtils.getDateOnly(records.first().getTimestamp());
+                nextDay = DateTimeUtils.getNextDay(day);
                 // Filter records of that date and create recording
                 filteredRecords = records.where()
                         .greaterThanOrEqualTo("timestamp", day)
-                        .lessThan("timestamp", DateTimeUtil.getNextDay(nextDay))
+                        .lessThan("timestamp", DateTimeUtils.getNextDay(nextDay))
                         .findAll();
                 // Create recording
                 recordings.add(new Recording(day, new ArrayList<>(filteredRecords)));

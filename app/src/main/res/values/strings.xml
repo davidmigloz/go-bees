@@ -7,6 +7,17 @@
     <!-- App name [CHAR LIMIT=NONE] -->
     <string name="app_name" translatable="false">GoBees</string>
 
+    <!--+++++++-->
+    <!-- Icons -->
+    <!--+++++++-->
+
+    <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
+    <string name="more_icon">More…</string>
+    <!-- Description of enter icon ic_chevron_right [CHAR LIMIT=100] -->
+    <string name="enter_icon">Enter…</string>
+    <!-- Description of date icon ic_event [CHAR LIMIT=25] -->
+    <string name="date_icon">Date</string>
+
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->
     <!--+++++++++++++++-->
@@ -34,8 +45,6 @@
     <string name="save_hive_error_message">Error while saving hive.</string>
 
 
-    <string name="more_icon">More…</string>
-    <string name="enter_icon">Enter…</string>
     <string name="weather_icon">Weather icon</string>
     <string name="last_revision_icon">Last revision icon</string>
     <string name="hives">Hives</string>
@@ -83,6 +92,7 @@
     <string name="successfully_saved_recording_message">Recording saved!</string>
     <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
     <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
+
 
     <!--++++++++++-->
     <!-- Settings -->
