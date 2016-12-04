@@ -2,9 +2,10 @@ package com.davidmiguel.gobees.data.model.mothers;
 
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
-import com.davidmiguel.gobees.utils.DateTimeUtil;
+import com.davidmiguel.gobees.utils.DateTimeUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -70,16 +71,13 @@ public class RecordingMother {
         List<Record> records = new ArrayList<>(numRecords);
         for (int i = 0; i < numRecords; i++) {
             records.add(RecordMother.newDefaultRecord(
-                    sumTimeToDate(recordingDate, 0, 0, MIN_INTERVAL_RECORDS, 0)));
+                    DateTimeUtils.sumTimeToDate(recordingDate, 0, i * MIN_INTERVAL_RECORDS, 0)));
         }
+        Collections.sort(records);
         return records;
     }
 
     private Date generateRandomDate(Random r) {
-        return new Date(DateTimeUtil.getActualDate().getTime() - ((1000 * 60 * 60 * 24) * r.nextInt(100)));
-    }
-
-    private Date sumTimeToDate(Date date, int days, int hours, int min, int sec) {
-        return new Date(date.getTime() - ((1000 * (60 * sec) * (60 * min) * (24 * hours)) * days));
+        return new Date(DateTimeUtils.getActualDate().getTime() - ((1000 * 60 * 60 * 24) * r.nextInt(100)));
     }
 }
