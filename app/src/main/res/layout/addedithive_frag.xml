@@ -17,7 +17,7 @@
             android:id="@+id/add_hive_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name_hint"
+            android:hint="@string/hive_name_hint"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:gravity="top"
-            android:hint="@string/notes_hint"/>
+            android:hint="@string/hive_notes_hint"/>
 
     </LinearLayout>
 </ScrollView>

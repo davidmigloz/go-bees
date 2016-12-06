@@ -154,7 +154,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
          */
         private LineData styleChartLines(List<Entry> entries) {
             // Get primary dark color
-            int color = ContextCompat.getColor(context, R.color.colorPrimaryDark);
+            int color = ContextCompat.getColor(context, R.color.colorAccent);
             // Set styles
             LineDataSet lineDataSet = new LineDataSet(entries, "Recording");
             lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
@@ -164,8 +164,10 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             lineDataSet.setLineWidth(1.8f);
             lineDataSet.setColor(color);
             lineDataSet.setDrawFilled(true);
-            lineDataSet.setFillColor(color);
+//            lineDataSet.setFillColor(color);
             lineDataSet.setFillAlpha(255);
+            Drawable drawable = ContextCompat.getDrawable(context, R.drawable.fade_green);
+            lineDataSet.setFillDrawable(drawable);
             return new LineData(lineDataSet);
         }
 
@@ -197,7 +199,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             YAxis yAxis = lineChart.getAxisLeft();
             yAxis.setAxisMaximum(40);
             yAxis.setAxisMinimum(0);
-            yAxis.setEnabled(false);
+            yAxis.setDrawGridLines(true);
             lineChart.getAxisRight().setEnabled(false);
             // Add data
             lineChart.setData(data);

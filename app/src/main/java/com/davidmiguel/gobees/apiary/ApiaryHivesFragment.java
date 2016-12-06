@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,9 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
@@ -48,9 +45,6 @@ public class ApiaryHivesFragment extends Fragment
     private ApiaryContract.Presenter presenter;
     private HivesAdapter listAdapter;
     private View noHivesView;
-    private ImageView noHivesIcon;
-    private TextView noHivesTextView;
-    private TextView noHivesAddView;
     private LinearLayout hivesView;
 
     public ApiaryHivesFragment() {
@@ -83,15 +77,6 @@ public class ApiaryHivesFragment extends Fragment
 
         // Set up  no apiaries view
         noHivesView = root.findViewById(R.id.no_hives);
-        noHivesIcon = (ImageView) root.findViewById(R.id.no_hives_icon);
-        noHivesTextView = (TextView) root.findViewById(R.id.no_hives_text);
-        noHivesAddView = (TextView) root.findViewById(R.id.no_hives_add);
-        noHivesAddView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddEditHive();
-            }
-        });
 
         // Set up floating action button
         FloatingActionButton fab =
@@ -204,11 +189,7 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public void showNoHives() {
-        showNoHivesViews(
-                getResources().getString(R.string.no_hives),
-                R.drawable.ic_add_circle_outline,
-                false
-        );
+        showNoHivesViews();
     }
 
     @Override
@@ -246,18 +227,10 @@ public class ApiaryHivesFragment extends Fragment
 
     /**
      * Shows no hives views.
-     *
-     * @param mainText    text to show.
-     * @param iconRes     icon to show.
-     * @param showAddView whether show add view option or not.
      */
-    private void showNoHivesViews(String mainText, int iconRes, boolean showAddView) {
+    private void showNoHivesViews() {
         hivesView.setVisibility(View.GONE);
         noHivesView.setVisibility(View.VISIBLE);
-        // Set details
-        noHivesTextView.setText(mainText);
-        noHivesIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
-        noHivesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
     }
 
     /**

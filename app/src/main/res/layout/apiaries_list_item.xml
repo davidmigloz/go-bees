@@ -65,8 +65,8 @@
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@id/apiary_image"
             android:adjustViewBounds="false"
-            android:contentDescription="@string/home_icon"
-            android:src="@drawable/ic_home"
+            android:contentDescription="@string/num_hives"
+            android:src="@drawable/ic_hive"
             android:tint="@color/colorSecondaryText"/>
 
         <TextView

@@ -6,9 +6,7 @@ import android.support.annotation.VisibleForTesting;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
-import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.model.mothers.HiveMother;
-import com.davidmiguel.gobees.data.model.mothers.RecordingMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.google.common.collect.Lists;
 
@@ -17,6 +15,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**
@@ -33,16 +32,16 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
     private FakeGoBeesLocalDataSource() {
         r = new Random(System.currentTimeMillis());
 
-        // Create recordings
-        for (int i = 0; i < 5; i++) {
-            RECORDINGS.add(RecordingMother.newDefaultRecording(50));
-        }
-
-        // Add fake data
-        for (int i = 0; i < 5; i++) {
-            Apiary a = ApiaryMother.newDefaultApiary();
-            APIARIES_SERVICE_DATA.put(a.getId(), a);
-        }
+//        // Create recordings
+//        for (int i = 0; i < 5; i++) {
+//            RECORDINGS.add(RecordingMother.newDefaultRecording(50));
+//        }
+//
+//        // Add fake data
+//        for (int i = 0; i < 5; i++) {
+//            Apiary a = ApiaryMother.newDefaultApiary();
+//            APIARIES_SERVICE_DATA.put(a.getId(), a);
+//        }
     }
 
     public static FakeGoBeesLocalDataSource getInstance() {
@@ -98,7 +97,10 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
-        Long nextId = Collections.max(APIARIES_SERVICE_DATA.keySet()) + 1;
+        Long nextId = 0L;
+        try {
+            nextId = Collections.max(APIARIES_SERVICE_DATA.keySet()) + 1;
+        } catch (NoSuchElementException ignored) {}
         callback.onNextApiaryIdLoaded(nextId);
     }
 
