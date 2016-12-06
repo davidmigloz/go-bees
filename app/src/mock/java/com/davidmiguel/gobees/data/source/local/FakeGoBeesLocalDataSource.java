@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,6 +138,11 @@ public class FakeGoBeesLocalDataSource implements GoBeesDataSource {
     @Override
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
         callback.onNextHiveIdLoaded(r.nextLong());
+    }
+
+    @Override
+    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        // TODO
     }
 
     @Override

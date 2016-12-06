@@ -30,6 +30,11 @@ public class Recording {
         this.meteo = meteo;
     }
 
+    public Recording(Date date, List<Record> records) {
+        this.date = date;
+        this.records = records;
+    }
+
     public Date getDate() {
         return date;
     }

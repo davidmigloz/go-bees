@@ -7,6 +7,7 @@ import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -219,6 +220,11 @@ public class GoBeesRepository implements GoBeesDataSource {
         checkNotNull(callback);
         // Get next id
         goBeesDataSource.getNextHiveId(callback);
+    }
+
+    @Override
+    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        // TODO
     }
 
     @Override

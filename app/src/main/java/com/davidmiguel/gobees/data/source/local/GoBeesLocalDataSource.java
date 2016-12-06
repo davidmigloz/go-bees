@@ -216,6 +216,11 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        // TODO
+    }
+
+    @Override
     public void refreshRecordings(long hiveId) {
         // TODO
     }

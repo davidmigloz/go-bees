@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Recording;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -125,6 +127,16 @@ public interface GoBeesDataSource {
     void getNextHiveId(@NonNull GetNextHiveIdCallback callback);
 
     /**
+     * Get recording with records of given period.
+     *
+     * @param hiveId   hive id.
+     * @param start    start of the period (00:00 of that date).
+     * @param end      end of the period (23:59 of that date).
+     * @param callback GetRecordingCallback.
+     */
+    void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
+
+    /**
      * Force to update recordings cache.
      */
     void refreshRecordings(long hiveId);
@@ -159,6 +171,12 @@ public interface GoBeesDataSource {
 
     interface GetNextHiveIdCallback {
         void onNextHiveIdLoaded(long hiveId);
+    }
+
+    interface GetRecordingCallback {
+        void onRecordingLoaded(Recording recording);
+
+        void onDataNotAvailable();
     }
 
     interface TaskCallback {

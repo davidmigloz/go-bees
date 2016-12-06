@@ -27,7 +27,7 @@ public interface RecordingContract {
          *
          * @param recording recording.
          */
-        public void showRecordings(@NonNull Recording recording);
+        public void showRecording(@NonNull Recording recording);
 
     }
 
