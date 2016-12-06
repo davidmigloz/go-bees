@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,9 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
@@ -48,9 +45,6 @@ public class HiveRecordingsFragment extends Fragment
     private HiveContract.Presenter presenter;
     private RecordingsAdapter listAdapter;
     private View noRecordingsView;
-    private ImageView noRecordingsIcon;
-    private TextView noRecordingsTextView;
-    private TextView noRecordingsAddView;
     private LinearLayout hivesView;
 
     public HiveRecordingsFragment() {
@@ -82,15 +76,6 @@ public class HiveRecordingsFragment extends Fragment
 
         // Set up  no recordings view
         noRecordingsView = root.findViewById(R.id.no_recordings);
-        noRecordingsIcon = (ImageView) root.findViewById(R.id.no_recordings_icon);
-        noRecordingsTextView = (TextView) root.findViewById(R.id.no_recordings_text);
-        noRecordingsAddView = (TextView) root.findViewById(R.id.no_recordings_add);
-        noRecordingsAddView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startNewRecording();
-            }
-        });
 
         // Set up floating action button
         FloatingActionButton fab =
@@ -196,11 +181,7 @@ public class HiveRecordingsFragment extends Fragment
 
     @Override
     public void showNoRecordings() {
-        showNoRecordingsViews(
-                getResources().getString(R.string.no_recordings),
-                R.drawable.ic_add_circle_outline,
-                false
-        );
+        showNoRecordingsViews();
     }
 
     @Override
@@ -243,18 +224,10 @@ public class HiveRecordingsFragment extends Fragment
 
     /**
      * Shows no recordings views.
-     *
-     * @param mainText    text to show.
-     * @param iconRes     icon to show.
-     * @param showAddView whether show add view option or not.
      */
-    private void showNoRecordingsViews(String mainText, int iconRes, boolean showAddView) {
+    private void showNoRecordingsViews() {
         hivesView.setVisibility(View.GONE);
         noRecordingsView.setVisibility(View.VISIBLE);
-        // Set details
-        noRecordingsTextView.setText(mainText);
-        noRecordingsIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
-        noRecordingsAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
     }
 
     /**
