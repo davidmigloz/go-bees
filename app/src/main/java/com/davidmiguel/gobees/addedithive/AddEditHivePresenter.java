@@ -16,13 +16,15 @@ public class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     private GoBeesRepository goBeesRepository;
     private AddEditHiveContract.View addEditHiveView;
 
+    private long apiaryId;
     private long hiveId;
 
     public AddEditHivePresenter(GoBeesRepository goBeesRepository,
                                 AddEditHiveContract.View addEditHiveView,
-                                  long hiveId) {
+                                long apiaryId, long hiveId) {
         this.goBeesRepository = goBeesRepository;
         this.addEditHiveView = addEditHiveView;
+        this.apiaryId = apiaryId;
         this.hiveId = hiveId;
         addEditHiveView.setPresenter(this);
     }
@@ -93,7 +95,7 @@ public class AddEditHivePresenter implements AddEditHiveContract.Presenter,
                 Hive newHive = new Hive(hiveId, name, null, notes, null);
                 // Save it if it is correct
                 if (newHive.isValidHive()) {
-                    goBeesRepository.saveHive(newHive, listener);
+                    goBeesRepository.saveHive(apiaryId, newHive, listener);
                 } else {
                     addEditHiveView.showEmptyHiveError();
                 }
@@ -107,6 +109,6 @@ public class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         }
         // Create new hive with the modifications
         Hive editedHive = new Hive(hiveId, name, null, notes, null);
-        goBeesRepository.saveHive(editedHive, this);
+        goBeesRepository.saveHive(apiaryId, editedHive, this);
     }
 }

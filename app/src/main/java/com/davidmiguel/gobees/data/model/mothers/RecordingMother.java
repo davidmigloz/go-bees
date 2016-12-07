@@ -50,7 +50,7 @@ public class RecordingMother {
     /**
      * Generate random recording with numRecords.
      *
-     * @param numRecords number of records to generate.
+     * @param numRecords number of records to generateData.
      * @return recording.
      */
     public static Recording newDefaultRecording(int numRecords) {

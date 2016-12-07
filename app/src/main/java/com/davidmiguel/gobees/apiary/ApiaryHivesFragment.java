@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
+import com.davidmiguel.gobees.addedithive.AddEditHiveFragment;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.hive.HiveActivity;
 import com.davidmiguel.gobees.hive.HiveRecordingsFragment;
@@ -170,8 +171,9 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void showAddEditHive() {
+    public void showAddEditHive(long apiaryId) {
         Intent intent = new Intent(getContext(), AddEditHiveActivity.class);
+        intent.putExtra(AddEditHiveFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId);
         startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
     }
 

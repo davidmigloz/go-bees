@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class AddEditHiveFragment extends Fragment implements AddEditHiveContract.View {
 
+    public static final String ARGUMENT_EDIT_APIARY_ID = "EDIT_APAIRY_ID";
     public static final String ARGUMENT_EDIT_HIVE_ID = "EDIT_HIVE_ID";
 
     private AddEditHiveContract.Presenter presenter;

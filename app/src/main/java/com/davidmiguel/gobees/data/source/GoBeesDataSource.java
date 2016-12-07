@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
 
 import java.util.Date;
@@ -23,6 +24,11 @@ public interface GoBeesDataSource {
      * Closes database.
      */
     void closeDb();
+
+    /**
+     * Clean database.
+     */
+    void deleteAll();
 
     /**
      * Gets all apiaries.
@@ -113,10 +119,11 @@ public interface GoBeesDataSource {
      * Saves given hive. If it already exists, is updated.
      * Note: hive must be a new unmanaged object (don't modify managed objects).
      *
+     * @param apiaryId apiary id.
      * @param hive     hive unmanaged object.
      * @param callback TaskCallback.
      */
-    void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback);
+    void saveHive(long apiaryId, @NonNull Hive hive, @NonNull TaskCallback callback);
 
     /**
      * Returns the next hive id.
@@ -125,6 +132,16 @@ public interface GoBeesDataSource {
      * @param callback GetNextHiveIdCallback.
      */
     void getNextHiveId(@NonNull GetNextHiveIdCallback callback);
+
+    /**
+     * Saves given record. If it already exists, is updated.
+     * Note: record must be a new unmanaged object (don't modify managed objects).
+     *
+     * @param hiveId hive id.
+     * @param record record unmanaged object.
+     * @param callback TaskCallback.
+     */
+    void saveRecord(long hiveId, @NonNull Record record, @NonNull TaskCallback callback);
 
     /**
      * Get recording with records of given period.

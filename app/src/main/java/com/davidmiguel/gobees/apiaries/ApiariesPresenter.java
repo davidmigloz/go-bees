@@ -7,6 +7,7 @@ import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.local.DataGenerator;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
  * UI as required.
  */
-public class ApiariesPresenter implements ApiariesContract.Presenter {
+class ApiariesPresenter implements ApiariesContract.Presenter {
 
     private GoBeesRepository goBeesRepository;
     private ApiariesContract.View apiariesView;
@@ -24,7 +25,7 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
      */
     private boolean firstLoad = true;
 
-    public ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View apiariesView) {
+    ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View apiariesView) {
         this.goBeesRepository = goBeesRepository;
         this.apiariesView = apiariesView;
         this.apiariesView.setPresenter(this);
@@ -36,7 +37,6 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
         if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
             apiariesView.showSuccessfullySavedMessage();
         }
-        // TODO show error message if it fails
     }
 
     @Override
@@ -90,6 +90,20 @@ public class ApiariesPresenter implements ApiariesContract.Presenter {
     @Override
     public void openApiaryDetail(@NonNull Apiary requestedApiary) {
         apiariesView.showApiaryDetail(requestedApiary.getId());
+    }
+
+    // TODO eliminar generar y eliminar datos
+    @Override
+    public void generateData() {
+        DataGenerator dataGenerator = new DataGenerator(goBeesRepository);
+        dataGenerator.generateData(3);
+        loadApiaries(false);
+    }
+
+    @Override
+    public void deleteData() {
+        goBeesRepository.deleteAll();
+        loadApiaries(false);
     }
 
     @Override

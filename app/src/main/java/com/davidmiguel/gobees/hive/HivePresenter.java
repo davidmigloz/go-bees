@@ -67,13 +67,13 @@ public class HivePresenter implements HiveContract.Presenter {
                 }
                 // Hide progress indicator
                 hiveView.setLoadingIndicator(false);
+                // Set hive name as title
+                hiveView.showTitle(hive.getName());
                 // Process recordings
                 if (hive.getRecordings().isEmpty()) {
                     // Show a message indicating there are no recordings
                     hiveView.showNoRecordings();
                 } else {
-                    // Set hive name as title
-                    hiveView.showTitle(hive.getName());
                     // Show the list of recordings
                     hiveView.showRecordings(hive.getRecordings());
                 }

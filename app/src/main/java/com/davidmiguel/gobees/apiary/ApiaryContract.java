@@ -29,8 +29,9 @@ interface ApiaryContract {
 
         /**
          * Opens activity to add or edit a hive.
+         * @param apiaryId apiary id.
          */
-        void showAddEditHive();
+        void showAddEditHive(long apiaryId);
 
         /**
          * Opens activity to show the details of the given hive.

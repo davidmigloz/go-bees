@@ -47,15 +47,30 @@ public class RecordMother {
         return RecordMother.newRecord().withTimestamp(timestamp).build();
     }
 
+    /**
+     * Generate a record with the given data.
+     *
+     * @param timestamp timestamp.
+     * @param numBees number of bees.
+     * @return record.
+     */
+    public static Record newDefaultRecord(Date timestamp, int numBees) {
+        return RecordMother.newRecord()
+                .withTimestamp(timestamp)
+                .withNumBees(numBees)
+                .build();
+    }
+
     private void setValues() {
         Random r = new Random(System.nanoTime());
-        id = r.nextInt(MAX_ID);
         timestamp = new Date(Math.abs(System.currentTimeMillis() - r.nextLong()));
+        id = timestamp.getTime();
         numBees = r.nextInt((MAX_NUM_BEES - MIN_NUM_BEES) + 1) + MIN_NUM_BEES;
     }
 
     private RecordMother withTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+        this.id = timestamp.getTime();
         return this;
     }
 

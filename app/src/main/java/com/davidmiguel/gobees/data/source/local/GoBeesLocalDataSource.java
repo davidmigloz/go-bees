@@ -46,6 +46,16 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void deleteAll() {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
+    }
+
+    @Override
     public void getApiaries(@NonNull GetApiariesCallback callback) {
         try {
             RealmResults<Apiary> apiaries = realm.where(Apiary.class).findAll();
@@ -194,13 +204,16 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void saveHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+    public void saveHive(final long apiaryId, @NonNull final Hive hive, @NonNull TaskCallback callback) {
         try {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     // Save hive
                     realm.copyToRealmOrUpdate(hive);
+                    // Add to apiary
+                    Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+                    apiary.addHive(hive);
                 }
             });
             callback.onSuccess();
@@ -213,6 +226,25 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
         Number nextId = realm.where(Hive.class).max("id");
         callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
+    }
+
+    @Override
+    public void saveRecord(final long hiveId, @NonNull final Record record, @NonNull TaskCallback callback) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Save record
+                    realm.copyToRealmOrUpdate(record);
+                    // Add to hive
+                    Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+                    hive.addRecord(record);
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
     }
 
     @Override

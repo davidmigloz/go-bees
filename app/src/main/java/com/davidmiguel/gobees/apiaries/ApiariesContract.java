@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * This specifies the contract between the view and the presenter.
  */
-public interface ApiariesContract {
+interface ApiariesContract {
 
     interface View extends BaseView<Presenter> {
 
@@ -79,5 +79,9 @@ public interface ApiariesContract {
          * @param requestedApiary apiary to show.
          */
         void openApiaryDetail(@NonNull Apiary requestedApiary);
+
+        // TODO eliminar generar y eliminar datos
+        void generateData();
+        void deleteData();
     }
 }

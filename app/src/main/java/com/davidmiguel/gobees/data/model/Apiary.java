@@ -1,8 +1,8 @@
 package com.davidmiguel.gobees.data.model;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 
 import io.realm.RealmList;
@@ -164,6 +164,12 @@ public class Apiary extends RealmObject {
 
     public void setMeteoDetails(@Nullable RealmList<MeteoDetail> meteoDetails) {
         this.meteoDetails = meteoDetails;
+    }
+
+    public void addHive(@NonNull Hive hive){
+        if (hives != null) {
+            hives.add(hive);
+        }
     }
 
     public boolean isValidApiary() {

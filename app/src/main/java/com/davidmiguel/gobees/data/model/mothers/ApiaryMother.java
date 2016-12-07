@@ -60,7 +60,7 @@ public class ApiaryMother {
     /**
      * Generate random apiary with numHives.
      *
-     * @param numHives number of hives to generate.
+     * @param numHives number of hives to generateData.
      * @return apiary.
      */
     public static Apiary newDefaultApiary(int numHives) {

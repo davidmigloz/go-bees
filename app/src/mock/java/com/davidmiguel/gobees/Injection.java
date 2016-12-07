@@ -1,7 +1,7 @@
 package com.davidmiguel.gobees;
 
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.data.source.local.FakeGoBeesLocalDataSource;
+import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
 
 /**
  * Enables injection of mock implementations for GoBeesDataSource at compile time.
@@ -11,6 +11,6 @@ import com.davidmiguel.gobees.data.source.local.FakeGoBeesLocalDataSource;
 public class Injection {
 
     public static GoBeesRepository provideApiariesRepository() {
-        return GoBeesRepository.getInstance(FakeGoBeesLocalDataSource.getInstance());
+        return GoBeesRepository.getInstance(GoBeesLocalDataSource.getInstance());
     }
 }
