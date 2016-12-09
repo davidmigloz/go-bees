@@ -1,17 +1,31 @@
 package com.davidmiguel.gobees.addeditapiary;
 
+import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 /**
  * Listens to user actions from the UI AddEditApiaryFragment, retrieves the data and updates the
  * UI as required.
  */
 class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
-        GetApiaryCallback, TaskCallback {
+        GetApiaryCallback, TaskCallback, ConnectionCallbacks, OnConnectionFailedListener,
+        ResultCallback<LocationSettingsResult>, LocationListener {
 
     private GoBeesRepository goBeesRepository;
     private AddEditApiaryContract.View addeditapiaryView;
@@ -110,5 +124,55 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         Apiary editedApiary =
                 new Apiary(apiaryId, name, null, null, null, notes, null, null, null);
         goBeesRepository.saveApiary(editedApiary, this);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+        final Status status = locationSettingsResult.getStatus();
+        //final LocationSettingsStates = locationSettingsResult.getLocationSettingsStates();
+        switch (status.getStatusCode()) {
+            case LocationSettingsStatusCodes.SUCCESS:
+                // All location settings are satisfied. The client can
+                // initialize location requests here.
+                break;
+            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                // Location settings are not satisfied, but this can be fixed
+                // by showing the user a dialog.
+//                try {
+//                    // Show the dialog by calling startResolutionForResult(),
+//                    // and check the result in onActivityResult().
+//                    status.startResolutionForResult(
+//                            OuterClass.this,
+//                            REQUEST_CHECK_SETTINGS);
+//                } catch (SendIntentException e) {
+//                    // Ignore the error.
+//                }
+                break;
+            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                // Location settings are not satisfied. However, we have no way
+                // to fix the settings so we won't show the dialog.
+                break;
+        }
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
 }
