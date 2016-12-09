@@ -10,7 +10,7 @@ import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
  * Listens to user actions from the UI AddEditApiaryFragment, retrieves the data and updates the
  * UI as required.
  */
-public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
+class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         GetApiaryCallback, TaskCallback {
 
     private GoBeesRepository goBeesRepository;
@@ -18,9 +18,9 @@ public class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
 
     private long apiaryId;
 
-    public AddEditApiaryPresenter(GoBeesRepository goBeesRepository,
-                                  AddEditApiaryContract.View addeditapiaryView,
-                                  long apiaryId) {
+    AddEditApiaryPresenter(GoBeesRepository goBeesRepository,
+                           AddEditApiaryContract.View addeditapiaryView,
+                           long apiaryId) {
         this.goBeesRepository = goBeesRepository;
         this.addeditapiaryView = addeditapiaryView;
         this.apiaryId = apiaryId;

@@ -1,6 +1,6 @@
 package com.davidmiguel.gobees.video.processors;
 
-import com.davidmiguel.gobees.OpenCvBaseTest;
+import com.davidmiguel.gobees.video.OpenCvBaseTest;
 
 import org.junit.After;
 import org.junit.Before;

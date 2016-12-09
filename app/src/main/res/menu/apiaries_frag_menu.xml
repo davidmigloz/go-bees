@@ -6,4 +6,12 @@
         android:id="@+id/menu_refresh"
         android:title="@string/refresh"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_generate"
+        android:title="Generate data"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_delete"
+        android:title="Delete data"
+        app:showAsAction="never" />
 </menu>

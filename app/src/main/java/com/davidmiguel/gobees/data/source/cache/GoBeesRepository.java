@@ -4,9 +4,11 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +64,12 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void closeDb() {
         goBeesDataSource.closeDb();
+    }
+
+    @Override
+    public void deleteAll() {
+        cachedApiaries.clear();
+        goBeesDataSource.deleteAll();
     }
 
     @Override
@@ -201,11 +209,11 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void saveHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
+    public void saveHive(long apiaryId, @NonNull Hive hive, @NonNull TaskCallback callback) {
         checkNotNull(hive);
         checkNotNull(callback);
         // Save hive
-        goBeesDataSource.saveHive(hive, callback);
+        goBeesDataSource.saveHive(apiaryId, hive, callback);
         // Do in memory cache update to keep the app UI up to date
         if (cachedApiaries == null) {
             cachedApiaries = new LinkedHashMap<>();
@@ -222,12 +230,27 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
+    public void saveRecord(long hiveId, @NonNull Record record, @NonNull TaskCallback callback) {
+        checkNotNull(callback);
+        // Save record
+        goBeesDataSource.saveRecord(hiveId, record, callback);
+    }
+
+    @Override
+    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        checkNotNull(callback);
+        // Save record
+        goBeesDataSource.getRecording(hiveId, start, end, callback);
+    }
+
+    @Override
     public void refreshRecordings(long hiveId) {
         // TODO
     }
 
     /**
      * Refresh cache with the given list of apiaries.
+     *
      * @param apiaries updated list of apiaries.
      */
     private void refreshCache(List<Apiary> apiaries) {

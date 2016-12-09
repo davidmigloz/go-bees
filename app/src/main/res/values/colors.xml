@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- https://www.materialpalette.com/amber/blue-grey -->
+    <!--  -->
     <color name="colorPrimary">#FFC107</color>
     <color name="colorPrimaryDark">#FFA000</color>
     <color name="colorAccent">#607D8B</color>
@@ -10,6 +10,19 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorIcons">#212121</color>
     <color name="colorDivider">#BDBDBD</color>
+
+    <!-- Temp chart -->
+    <color name="colorLineTempChart">#FFC107</color>
+    <color name="colorFillTempChart">#FFECB3</color>
+    <color name="colorTempIcon">#d50000</color>
+    <!-- Rain chart -->
+    <color name="colorLineRainChart">#2979ff</color>
+    <color name="colorFillRainChart">#bbdefb</color>
+    <color name="colorRainIcon">#01579b</color>
+    <!-- Wind chart -->
+    <color name="colorLineWindChart">#43a047</color>
+    <color name="colorFillWindChart">#b9f6ca</color>
+    <color name="colorWindIcon">#2196f3</color>
 
     <drawable name="touchFeedback">#CFD8DC</drawable>
 </resources>

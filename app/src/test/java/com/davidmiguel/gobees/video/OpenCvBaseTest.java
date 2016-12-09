@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees;
+package com.davidmiguel.gobees.video;
 
 import org.opencv.core.Core;
 

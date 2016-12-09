@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.addeditapiary.AddEditApiaryFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -22,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class AddEditHiveFragment extends Fragment implements AddEditHiveContract.View {
 
+    public static final String ARGUMENT_EDIT_APIARY_ID = "EDIT_APAIRY_ID";
     public static final String ARGUMENT_EDIT_HIVE_ID = "EDIT_HIVE_ID";
 
     private AddEditHiveContract.Presenter presenter;

@@ -40,8 +40,8 @@
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="false"
-                android:contentDescription="@string/gobees_logo"
-                android:src="@drawable/gobees_bee"/>
+                android:contentDescription="@string/apiary_logo"
+                android:src="@drawable/apiary_alone"/>
 
             <TextView
                 android:id="@+id/no_apiaries_text"

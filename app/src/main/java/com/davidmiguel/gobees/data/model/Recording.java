@@ -19,6 +19,17 @@ public class Recording {
      */
     private List<Record> records;
 
+    /**
+     * List of meteorological records.
+     */
+    private List<MeteoDetail> meteo;
+
+    public Recording(Date date, List<Record> records, List<MeteoDetail> meteo) {
+        this.date = date;
+        this.records = records;
+        this.meteo = meteo;
+    }
+
     public Recording(Date date, List<Record> records) {
         this.date = date;
         this.records = records;
@@ -28,15 +39,11 @@ public class Recording {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public List<Record> getRecords() {
         return records;
     }
 
-    public void setRecords(List<Record> records) {
-        this.records = records;
+    public List<MeteoDetail> getMeteo() {
+        return meteo;
     }
 }

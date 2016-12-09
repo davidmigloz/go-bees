@@ -10,6 +10,12 @@
     <string name="gobees_logo">GoBees logo</string>
     <!-- Refresh menu option [CHAR LIMIT=25] -->
     <string name="refresh">Refresh</string>
+    <!-- Temperature [CHAR LIMIT=30] -->
+    <string name="temperature">Temperature</string>
+    <!-- Rain [CHAR LIMIT=30] -->
+    <string name="rain">Rain</string>
+    <!-- Wind [CHAR LIMIT=30] -->
+    <string name="wind">Wind</string>
 
     <!--+++++++++++++++-->
     <!-- General Icons -->
@@ -23,6 +29,8 @@
     <string name="date_icon">Date</string>
     <!-- Description of weather icon [CHAR LIMIT=25] -->
     <string name="weather_icon">Weather icon</string>
+    <!-- Description of chart line [CHAR LIMIT=25] -->
+    <string name="chart_line">Chart line</string>
 
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->
@@ -60,6 +68,8 @@
     <string name="empty_apiary_message">Apiary name cannot be empty!</string>
     <!-- Error msg shown when it's not possible to save the apiary [CHAR LIMIT=100] -->
     <string name="save_apiary_error_message">Error while saving apiary.</string>
+    <!-- Description of apiary logo [CHAR LIMIT=100] -->
+    <string name="apiary_logo">Apiary logo</string>
 
     <!--++++++++-->
     <!-- Apiary -->
@@ -106,7 +116,7 @@
     <!-- Hive info tab name [CHAR LIMIT=20] -->
     <string name="hive_info_tab">Info</string>
     <!-- Error msg shown when it's not possible to load recordings [CHAR LIMIT=100] -->
-    <string name="loading_recordings_error">Error while loading hives.</string>
+    <string name="loading_recordings_error">Error while loading recordings.</string>
     <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->
     <string name="no_recordings">You have no recordings!</string>
     <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
@@ -114,6 +124,15 @@
     <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
     <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
 
+    <!--+++++++++++-->
+    <!-- Recording -->
+    <!--+++++++++++-->
+    <!-- Error msg shown when it's not possible to load a recording [CHAR LIMIT=100] -->
+    <string name="loading_recording_error">Error while loading recording.</string>
+    <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
+    <string name="recording_date_format">EEE d MMM, yyyy</string>
+    <!-- Number of bees [CHAR LIMIT=30] -->
+    <string name="num_bees">Nº bees</string>
 
     <!--++++++++++-->
     <!-- Settings -->

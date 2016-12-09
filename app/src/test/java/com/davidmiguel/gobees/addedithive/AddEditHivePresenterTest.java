@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,6 +22,8 @@ import static org.mockito.Mockito.when;
  * Unit tests for the implementation of AddEditHivePresenter.
  */
 public class AddEditHivePresenterTest {
+
+    private static final int APIARY_ID = 1;
 
     @Mock
     private GoBeesRepository apiariesRepository;
@@ -52,7 +55,7 @@ public class AddEditHivePresenterTest {
     public void saveNewHiveToRepository_showsSuccessMessage() {
         // Get a reference to the class under test
         addEditHivePresenter =
-                new AddEditHivePresenter(apiariesRepository, addEditHiveView,
+                new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID,
                         AddEditHiveActivity.NEW_HIVE);
         // When the presenter is asked to save a hive
         addEditHivePresenter.saveHive("Hive 1", "Some notes about it....");
@@ -61,7 +64,7 @@ public class AddEditHivePresenterTest {
         getNextHiveIdCallbackArgumentCaptor.getValue().onNextHiveIdLoaded(1);
         // And the hive is saved in the repository
         verify(apiariesRepository)
-                .saveHive(any(Hive.class), taskCallbackArgumentCaptor.capture());
+                .saveHive(anyLong(), any(Hive.class), taskCallbackArgumentCaptor.capture());
         taskCallbackArgumentCaptor.getValue().onSuccess();
         // And the view updated
         verify(addEditHiveView).showHivesList();
@@ -71,7 +74,7 @@ public class AddEditHivePresenterTest {
     public void saveEmptyApiary_showsErrorUi() {
         // Get a reference to the class under test
         addEditHivePresenter =
-                new AddEditHivePresenter(apiariesRepository, addEditHiveView,
+                new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID,
                         AddEditHiveActivity.NEW_HIVE);
         // When the presenter is asked to save an empty hive
         addEditHivePresenter.saveHive("", "");
@@ -86,12 +89,12 @@ public class AddEditHivePresenterTest {
     public void saveExistingApiaryToRepository_showsSuccessMessageUi() {
         // Get a reference to the class under test for hive with id=1
         addEditHivePresenter =
-                new AddEditHivePresenter(apiariesRepository, addEditHiveView, 1);
+                new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID, 1);
         // When the presenter is asked to save a hive
         addEditHivePresenter.saveHive("Apiary 1", "Some more notes about it....");
         // Then a hive is saved in the repository
         verify(apiariesRepository)
-                .saveHive(any(Hive.class), taskCallbackArgumentCaptor.capture());
+                .saveHive(anyLong(), any(Hive.class), taskCallbackArgumentCaptor.capture());
         taskCallbackArgumentCaptor.getValue().onSuccess();
         // And the view updated
         verify(addEditHiveView).showHivesList();
@@ -102,7 +105,7 @@ public class AddEditHivePresenterTest {
         Hive testHive = HiveMother.newDefaultHive();
         // Get a reference to the class under test
         addEditHivePresenter = new AddEditHivePresenter(
-                apiariesRepository, addEditHiveView, testHive.getId());
+                apiariesRepository, addEditHiveView, APIARY_ID, testHive.getId());
         // When the presenter is asked to populate an existing hive
         addEditHivePresenter.populateHive();
         // Then the repository is queried and the view updated

@@ -2,7 +2,6 @@ package com.davidmiguel.gobees.video;
 
 import android.annotation.SuppressLint;
 
-import com.davidmiguel.gobees.OpenCvBaseTest;
 import com.davidmiguel.gobees.TestUtils;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -28,12 +27,10 @@ import static junit.framework.Assert.assertTrue;
 @SuppressLint("DefaultLocale")
 public class ContourBeesCounterTest extends OpenCvBaseTest {
 
-    private final Logger logger = LoggerFactory.getLogger(ContourBeesCounterTest.class);
     private static final String LOGGER_PROP = "src/test/res/log4j.properties";
-
     private static final double MAX_ERROR_THRESHOLD = 0.1;
     private static final int NUM_FRAMES_SKIP = 10;
-
+    private final Logger logger = LoggerFactory.getLogger(ContourBeesCounterTest.class);
     private DecimalFormat df;
 
     @BeforeClass
@@ -111,7 +108,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
                 // Calculate and log absolute error
                 int absoluteError = expectedNumBees - numBees;
                 logger.debug("{}:{}", i, absoluteError);
-                totalAbsoluteError +=  Math.abs(absoluteError);
+                totalAbsoluteError += Math.abs(absoluteError);
                 // If they are not equal -> save frame to revise
                 if (expectedNumBees != numBees) {
                     saveFrames(bc.getProcessedFrame(), i, expectedNumBees, numBees);

@@ -46,6 +46,16 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void deleteAll() {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
+    }
+
+    @Override
     public void getApiaries(@NonNull GetApiariesCallback callback) {
         try {
             RealmResults<Apiary> apiaries = realm.where(Apiary.class).findAll();
@@ -148,12 +158,15 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
         try {
             // Get hive
             Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            if (hive == null || hive.getRecords() == null) {
+                callback.onDataNotAvailable();
+                return;
+            }
             // Get records
             RealmResults<Record> records = hive.getRecords().where().findAll().sort("timestamp");
             // Clasify records by date into recordings
@@ -194,13 +207,16 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void saveHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+    public void saveHive(final long apiaryId, @NonNull final Hive hive, @NonNull TaskCallback callback) {
         try {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     // Save hive
                     realm.copyToRealmOrUpdate(hive);
+                    // Add to apiary
+                    Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+                    apiary.addHive(hive);
                 }
             });
             callback.onSuccess();
@@ -216,7 +232,47 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void saveRecord(final long hiveId, @NonNull final Record record, @NonNull TaskCallback callback) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Save record
+                    realm.copyToRealmOrUpdate(record);
+                    // Add to hive
+                    Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+                    hive.addRecord(record);
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @Override
+    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        // Get hive
+        Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+        if (hive == null || hive.getRecords() == null) {
+            callback.onDataNotAvailable();
+            return;
+        }
+        // Get records
+        RealmResults<Record> records = hive.getRecords()
+                .where()
+                .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(start, 0, 0, 0, 0))
+                .lessThan("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
+                .findAll()
+                .sort("timestamp");
+        // Create recording
+        Recording recording = new Recording(start, new ArrayList<>(records));
+        callback.onRecordingLoaded(recording);
+    }
+
+    @Override
     public void refreshRecordings(long hiveId) {
-        // TODO
+        // Not required because the GoBeesRepository handles the logic of refreshing the
+        // data from all the available data sources
     }
 }

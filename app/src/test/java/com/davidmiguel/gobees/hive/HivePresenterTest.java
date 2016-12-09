@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * nit tests for the implementation of HivePresenter.
+ * Unit tests for the implementation of HivePresenter.
  */
 public class HivePresenterTest {
 

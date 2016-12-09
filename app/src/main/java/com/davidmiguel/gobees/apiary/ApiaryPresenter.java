@@ -13,7 +13,7 @@ import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
  * Listens to user actions from the UI ApiaryHivesFragment, retrieves the data and updates the
  * UI as required.
  */
-public class ApiaryPresenter implements ApiaryContract.Presenter {
+class ApiaryPresenter implements ApiaryContract.Presenter {
 
     private GoBeesRepository goBeesRepository;
     private ApiaryContract.View apiaryView;
@@ -24,8 +24,8 @@ public class ApiaryPresenter implements ApiaryContract.Presenter {
     private boolean firstLoad = true;
     private long apiaryId;
 
-    public ApiaryPresenter(GoBeesRepository goBeesRepository, ApiaryContract.View apiaryView,
-                           long apiaryId) {
+    ApiaryPresenter(GoBeesRepository goBeesRepository, ApiaryContract.View apiaryView,
+                    long apiaryId) {
         this.goBeesRepository = goBeesRepository;
         this.apiaryView = apiaryView;
         this.apiaryView.setPresenter(this);
@@ -62,13 +62,13 @@ public class ApiaryPresenter implements ApiaryContract.Presenter {
                 }
                 // Hide progress indicator
                 apiaryView.setLoadingIndicator(false);
+                // Set apiary name as title
+                apiaryView.showTitle(apiary.getName());
                 // Process hives
                 if (apiary.getHives() == null || apiary.getHives().isEmpty()) {
                     // Show a message indicating there are no hives
                     apiaryView.showNoHives();
                 } else {
-                    // Set apiary name as title
-                    apiaryView.showTitle(apiary.getName());
                     // Show the list of hives
                     apiaryView.showHives(apiary.getHives());
                 }
@@ -87,7 +87,7 @@ public class ApiaryPresenter implements ApiaryContract.Presenter {
 
     @Override
     public void addEditHive() {
-        apiaryView.showAddEditHive();
+        apiaryView.showAddEditHive(apiaryId);
     }
 
     @Override

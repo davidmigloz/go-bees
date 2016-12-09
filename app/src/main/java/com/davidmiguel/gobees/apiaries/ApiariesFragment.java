@@ -125,6 +125,13 @@ public class ApiariesFragment extends Fragment
             case R.id.menu_refresh:
                 presenter.loadApiaries(true);
                 break;
+            // TODO eliminar generar y eliminar datos
+            case R.id.menu_generate:
+                presenter.generateData();
+                break;
+            case R.id.menu_delete:
+                presenter.deleteData();
+                break;
         }
         return true;
     }

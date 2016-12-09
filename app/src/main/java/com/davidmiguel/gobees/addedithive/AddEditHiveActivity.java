@@ -16,6 +16,7 @@ import com.davidmiguel.gobees.utils.ActivityUtils;
 public class AddEditHiveActivity extends AppCompatActivity {
 
     public static final int REQUEST_ADD_HIVE = 1;
+    public static final int NO_APIARY = -1;
     public static final int NEW_HIVE = -1;
 
     private GoBeesRepository goBeesRepository;
@@ -34,9 +35,17 @@ public class AddEditHiveActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
         }
 
+        // Get apiary
+        long apiaryId = getIntent()
+                .getLongExtra(AddEditHiveFragment.ARGUMENT_EDIT_APIARY_ID, NO_APIARY);
+        if (apiaryId == NO_APIARY) {
+            throw new IllegalArgumentException("No apiary id passed!");
+        }
+
         // Get hive id (if edit)
         long hiveId = getIntent()
                 .getLongExtra(AddEditHiveFragment.ARGUMENT_EDIT_HIVE_ID, NEW_HIVE);
+
 
         // Add fragment to the activity and set title
         AddEditHiveFragment addEditHiveFragment =
@@ -67,7 +76,7 @@ public class AddEditHiveActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new AddEditHivePresenter(goBeesRepository, addEditHiveFragment, hiveId);
+        new AddEditHivePresenter(goBeesRepository, addEditHiveFragment, apiaryId, hiveId);
     }
 
     @Override
