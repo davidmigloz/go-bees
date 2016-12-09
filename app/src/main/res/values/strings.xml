@@ -62,6 +62,8 @@
     <string name="add_apiary">Add apiary</string>
     <!-- Apiary name input [CHAR LIMIT=50] -->
     <string name="apiary_name_hint">Name</string>
+    <!-- Apiary location input [CHAR LIMIT=50] -->
+    <string name="apiary_location_hint">Location</string>
     <!-- Apiary notes input [CHAR LIMIT=50] -->
     <string name="apiary_notes_hint">Notes…</string>
     <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->

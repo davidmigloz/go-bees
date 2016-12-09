@@ -21,6 +21,34 @@
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/add_apiary_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/location_icon"
+                android:hint="@string/apiary_location_hint"
+                android:inputType="none"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <ImageView
+                android:id="@+id/location_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/date_icon"
+                android:src="@drawable/ic_my_location"
+                android:tint="@color/colorAccent"/>
+
+        </RelativeLayout>
+
         <EditText
             android:id="@+id/add_apiary_notes"
             android:layout_width="match_parent"
