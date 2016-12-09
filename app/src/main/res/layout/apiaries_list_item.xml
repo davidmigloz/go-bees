@@ -78,7 +78,6 @@
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@id/hive_icon"
             android:gravity="bottom"
-            android:text="12"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorSecondaryText"/>
 
