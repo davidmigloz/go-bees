@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * This specifies the contract between the view and the presenter.
  */
-public interface HiveContract {
+interface HiveContract {
 
     interface View extends BaseView<HiveContract.Presenter> {
 
@@ -38,9 +38,10 @@ public interface HiveContract {
         /**
          * Opens activity to show the details of the given recording.
          *
-         * @param date recording date.
+         * @param hiveId hive id.
+         * @param date   recording date.
          */
-        void showRecordingDetail(Date date);
+        void showRecordingDetail(long hiveId, Date date);
 
         /**
          * Shows loading recordings error message.

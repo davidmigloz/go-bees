@@ -18,6 +18,7 @@ import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.HourAxisValueFormatter;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
+import com.davidmiguel.gobees.utils.StringUtils;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -101,8 +102,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         public void bind(@NonNull final Recording recording) {
             // Title
             String date = formatter.format(recording.getDate());
-            date = date.substring(0, 1).toUpperCase() + date.substring(1); // Capitalize
-            recordingDate.setText(date);
+            recordingDate.setText(StringUtils.capitalize(date));
 
             // Chart
             if (recording.getRecords() != null && !recording.getRecords().isEmpty()) {
@@ -200,6 +200,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             yAxis.setAxisMaximum(40);
             yAxis.setAxisMinimum(0);
             yAxis.setDrawGridLines(true);
+            xAxis.setDrawAxisLine(false);
             lineChart.getAxisRight().setEnabled(false);
             // Add data
             lineChart.setData(data);

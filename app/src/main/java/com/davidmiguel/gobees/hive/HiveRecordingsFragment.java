@@ -25,6 +25,8 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.premonitoring.PreMonitoringActivity;
+import com.davidmiguel.gobees.recording.RecordingActivity;
+import com.davidmiguel.gobees.recording.RecordingFragment;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 
@@ -170,8 +172,12 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void showRecordingDetail(Date date) {
-        // TODO
+    public void showRecordingDetail(long hiveId, Date date) {
+        Intent intent = new Intent(getActivity(), RecordingActivity.class);
+        intent.putExtra(RecordingFragment.ARGUMENT_HIVE_ID, hiveId);
+        intent.putExtra(RecordingFragment.ARGUMENT_START_DATE, date.getTime());
+        intent.putExtra(RecordingFragment.ARGUMENT_END_DATE, date.getTime());
+        getActivity().startActivity(intent);
     }
 
     @Override

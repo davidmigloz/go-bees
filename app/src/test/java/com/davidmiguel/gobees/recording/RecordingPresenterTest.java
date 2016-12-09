@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Date;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
@@ -61,7 +62,7 @@ public class RecordingPresenterTest {
         presenter.start();
 
         // Callback is captured and invoked with stubbed recording
-        verify(goBeesRepository).getRecording(anyLong(), DATE, DATE,
+        verify(goBeesRepository).getRecording(anyLong(), any(Date.class), any(Date.class),
                 getRecordingCallbackArgumentCaptor.capture());
         getRecordingCallbackArgumentCaptor.getValue().onRecordingLoaded(RECORDING);
 

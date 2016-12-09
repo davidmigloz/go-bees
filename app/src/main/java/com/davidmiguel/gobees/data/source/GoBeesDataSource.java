@@ -103,7 +103,7 @@ public interface GoBeesDataSource {
     void getHive(long hiveId, @NonNull GetHiveCallback callback);
 
     /**
-     * Returns a hive with all its recordings.
+     * Returns a hive with all its recordings (but no meteo data).
      *
      * @param hiveId   hive id.
      * @param callback GetHiveCallback.
@@ -137,8 +137,8 @@ public interface GoBeesDataSource {
      * Saves given record. If it already exists, is updated.
      * Note: record must be a new unmanaged object (don't modify managed objects).
      *
-     * @param hiveId hive id.
-     * @param record record unmanaged object.
+     * @param hiveId   hive id.
+     * @param record   record unmanaged object.
      * @param callback TaskCallback.
      */
     void saveRecord(long hiveId, @NonNull Record record, @NonNull TaskCallback callback);

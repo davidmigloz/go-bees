@@ -10,7 +10,7 @@ import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
  * Listens to user actions from the UI AddEditHiveFragment, retrieves the data and updates the
  * UI as required.
  */
-public class AddEditHivePresenter implements AddEditHiveContract.Presenter,
+class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         GetHiveCallback, TaskCallback {
 
     private GoBeesRepository goBeesRepository;
@@ -19,9 +19,9 @@ public class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     private long apiaryId;
     private long hiveId;
 
-    public AddEditHivePresenter(GoBeesRepository goBeesRepository,
-                                AddEditHiveContract.View addEditHiveView,
-                                long apiaryId, long hiveId) {
+    AddEditHivePresenter(GoBeesRepository goBeesRepository,
+                         AddEditHiveContract.View addEditHiveView,
+                         long apiaryId, long hiveId) {
         this.goBeesRepository = goBeesRepository;
         this.addEditHiveView = addEditHiveView;
         this.apiaryId = apiaryId;

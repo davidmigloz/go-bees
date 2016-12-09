@@ -1,6 +1,5 @@
 package com.davidmiguel.gobees.addedithive;
 
-import com.davidmiguel.gobees.addeditapiary.AddEditApiaryContract;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 

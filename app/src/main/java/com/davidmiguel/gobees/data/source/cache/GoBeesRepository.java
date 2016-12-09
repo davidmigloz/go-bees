@@ -238,7 +238,9 @@ public class GoBeesRepository implements GoBeesDataSource {
 
     @Override
     public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
-        // TODO
+        checkNotNull(callback);
+        // Save record
+        goBeesDataSource.getRecording(hiveId, start, end, callback);
     }
 
     @Override
@@ -248,6 +250,7 @@ public class GoBeesRepository implements GoBeesDataSource {
 
     /**
      * Refresh cache with the given list of apiaries.
+     *
      * @param apiaries updated list of apiaries.
      */
     private void refreshCache(List<Apiary> apiaries) {

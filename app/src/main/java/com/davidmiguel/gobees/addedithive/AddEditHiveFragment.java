@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.addeditapiary.AddEditApiaryFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

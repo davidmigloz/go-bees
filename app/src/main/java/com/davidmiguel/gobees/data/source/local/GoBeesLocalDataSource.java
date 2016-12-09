@@ -158,12 +158,15 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
         try {
             // Get hive
             Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            if (hive == null || hive.getRecords() == null) {
+                callback.onDataNotAvailable();
+                return;
+            }
             // Get records
             RealmResults<Record> records = hive.getRecords().where().findAll().sort("timestamp");
             // Clasify records by date into recordings
@@ -249,11 +252,27 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
-        // TODO
+        // Get hive
+        Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+        if (hive == null || hive.getRecords() == null) {
+            callback.onDataNotAvailable();
+            return;
+        }
+        // Get records
+        RealmResults<Record> records = hive.getRecords()
+                .where()
+                .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(start, 0, 0, 0, 0))
+                .lessThan("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
+                .findAll()
+                .sort("timestamp");
+        // Create recording
+        Recording recording = new Recording(start, new ArrayList<>(records));
+        callback.onRecordingLoaded(recording);
     }
 
     @Override
     public void refreshRecordings(long hiveId) {
-        // TODO
+        // Not required because the GoBeesRepository handles the logic of refreshing the
+        // data from all the available data sources
     }
 }

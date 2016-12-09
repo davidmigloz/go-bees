@@ -96,7 +96,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     @Override
     public void generateData() {
         DataGenerator dataGenerator = new DataGenerator(goBeesRepository);
-        dataGenerator.generateData(3);
+        dataGenerator.generateData(1);
         loadApiaries(false);
     }
 
