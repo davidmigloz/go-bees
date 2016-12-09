@@ -13,6 +13,7 @@ import java.util.Random;
 
 /**
  * Generate sample data.
+ * // TODO remove in production version.
  */
 public class DataGenerator implements GoBeesDataSource.TaskCallback {
 
