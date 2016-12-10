@@ -15,6 +15,7 @@ android:
     - android-25
     - extra-android-support
     - extra-android-m2repository
+    - extra-google-google_play_services
     - ${ANDROID_TARGET}
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 
