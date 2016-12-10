@@ -325,6 +325,23 @@ horas, completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint11.png
    :alt: Sprint 11.
    
+Sprint 12 (02/12/16 - 09/12/16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: implementar las partes de visualización de 
+los datos recogidos por la app (gráficos de actividad de vuelo, temperatura, 
+precipitaciones, vientes, etc.) Documentar trabajos relacionados. Empezar a 
+desarrollar la web del producto.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 12 <https://github.com/davidmigloz/go-bees/milestone/13?closed=1>`__.
+
+Se estimaron 36,25 horas de trabajo y se invirtieron finalmente 50,75
+horas, completando todas las tareas.
+
+.. figure:: ../../img/burndowns/sprint12.png
+   :alt: Sprint 12.
+   
 Estudio de viabilidad
 ---------------------
 
