@@ -62,10 +62,16 @@
     <string name="add_apiary">Add apiary</string>
     <!-- Apiary name input [CHAR LIMIT=50] -->
     <string name="apiary_name_hint">Name</string>
+    <!-- Apiary location input [CHAR LIMIT=50] -->
+    <string name="apiary_location_hint">Location</string>
     <!-- Apiary notes input [CHAR LIMIT=50] -->
     <string name="apiary_notes_hint">Notes…</string>
+    <!-- Msg shown when we're searching for gps [CHAR LIMIT=100] -->
+    <string name="searching_gps_message">Searching for GPS…</string>
     <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
     <string name="empty_apiary_message">Apiary name cannot be empty!</string>
+    <!-- Error msg shown when we cannot connect to GPS [CHAR LIMIT=100] -->
+    <string name="gps_error_message">Unable to connect to GPS!</string>
     <!-- Error msg shown when it's not possible to save the apiary [CHAR LIMIT=100] -->
     <string name="save_apiary_error_message">Error while saving apiary.</string>
     <!-- Description of apiary logo [CHAR LIMIT=100] -->
