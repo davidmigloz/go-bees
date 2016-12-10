@@ -64,6 +64,24 @@ artificial desarrollado sobre una Raspberry Pi.
 Fortalezas y debilidades del proyecto
 -------------------------------------
 
++--------------------------+-----------+---------------+------------+
+|                          | GoBees    | EyesOnHives   | HiveTool   |
++==========================+===========+===============+============+
+| Hardware específico      | NO        | SI            | SI         |
++--------------------------+-----------+---------------+------------+
+| Instalación sencilla     | SI        | SI            | NO         |
++--------------------------+-----------+---------------+------------+
+| Procesamiento en local   | SI        | Parcial       | SI         |
++--------------------------+-----------+---------------+------------+
+| Requiere wifi            | NO        | SI            | NO         |
++--------------------------+-----------+---------------+------------+
+| Requiere red eléctrica   | NO        | SI            | NO         |
++--------------------------+-----------+---------------+------------+
+| Localización GPS         | SI        | NO            | NO         |
++--------------------------+-----------+---------------+------------+
+| Plataformas              | Android   | Web App       | Linux      |
++--------------------------+-----------+---------------+------------+
+
 Las principales fortalezas del proyecto son:
 
 -  No se necesita adquirir ningún *hardware* específico como en el resto
