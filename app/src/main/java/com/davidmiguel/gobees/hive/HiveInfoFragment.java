@@ -11,7 +11,7 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 
 /**
- * Display hive info.
+ * Displays hive info.
  * // TODO
  */
 public class HiveInfoFragment extends Fragment implements BaseTabFragment {

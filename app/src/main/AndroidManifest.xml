@@ -48,7 +48,7 @@
             android:name=".recording.RecordingActivity"
             android:parentActivityName=".hive.HiveActivity"/>
         <activity
-            android:name=".premonitoring.PreMonitoringActivity"
+            android:name=".monitoring.MonitoringActivity"
             android:parentActivityName=".hive.HiveActivity"
             android:screenOrientation="landscape"/>
         <activity

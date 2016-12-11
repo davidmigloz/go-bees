@@ -24,7 +24,8 @@ import android.widget.LinearLayout;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Recording;
-import com.davidmiguel.gobees.premonitoring.PreMonitoringActivity;
+import com.davidmiguel.gobees.monitoring.MonitoringActivity;
+import com.davidmiguel.gobees.monitoring.MonitoringFragment;
 import com.davidmiguel.gobees.recording.RecordingActivity;
 import com.davidmiguel.gobees.recording.RecordingFragment;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
@@ -166,8 +167,9 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void startNewRecording() {
-        Intent intent = new Intent(getContext(), PreMonitoringActivity.class);
+    public void startNewRecording(long hiveId) {
+        Intent intent = new Intent(getContext(), MonitoringActivity.class);
+        intent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, hiveId);
         startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
     }
 

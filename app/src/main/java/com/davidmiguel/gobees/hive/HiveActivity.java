@@ -28,6 +28,12 @@ public class HiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hive_act);
 
+        // Get hive id
+        long hiveId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, NO_HIVE);
+        if (hiveId == NO_HIVE) {
+            throw new IllegalArgumentException("No hive id passed!");
+        }
+
         // Set up the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,12 +59,6 @@ public class HiveActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        // Get hive id
-        long hiveId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, NO_HIVE);
-        if (hiveId == NO_HIVE) {
-            throw new IllegalArgumentException("No hive id passed!");
-        }
 
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();

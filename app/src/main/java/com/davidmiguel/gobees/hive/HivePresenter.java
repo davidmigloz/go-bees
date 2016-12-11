@@ -7,7 +7,7 @@ import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.premonitoring.PreMonitoringActivity;
+import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 
 /**
  * Listens to user actions from the UI HiveRecordingsFragment, retrieves the data and updates the
@@ -35,7 +35,7 @@ class HivePresenter implements HiveContract.Presenter {
     @Override
     public void result(int requestCode, int resultCode) {
         // If a hive was successfully added, show snackbar
-        if (PreMonitoringActivity.REQUEST_RECORD_HIVE == requestCode && Activity.RESULT_OK == resultCode) {
+        if (MonitoringActivity.REQUEST_RECORD_HIVE == requestCode && Activity.RESULT_OK == resultCode) {
             hiveView.showSuccessfullySavedMessage();
         }
     }
@@ -87,7 +87,7 @@ class HivePresenter implements HiveContract.Presenter {
 
     @Override
     public void startNewRecording() {
-        hiveView.startNewRecording();
+        hiveView.startNewRecording(hiveId);
     }
 
     @Override
