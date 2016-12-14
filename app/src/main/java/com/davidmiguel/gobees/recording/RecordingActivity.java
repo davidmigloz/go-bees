@@ -36,9 +36,6 @@ public class RecordingActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
         }
 
-        // Create recording fragment
-
-
         // Get hive id
         long hiveId = getIntent().getLongExtra(RecordingFragment.ARGUMENT_HIVE_ID, NO_HIVE);
         if (hiveId == NO_HIVE) {

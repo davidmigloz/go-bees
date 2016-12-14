@@ -24,5 +24,11 @@
     <color name="colorFillWindChart">#b9f6ca</color>
     <color name="colorWindIcon">#2196f3</color>
 
+    <!--- Camera -->
+    <color name="colorCameraControlsBg">#80000000</color>
+    <color name="colorCameraControlsIcons">#ffffff</color>
+    <color name="colorCameraSettingsBg">#80000000</color>
+    <color name="colorCameraSettingsFrameBg">#ffffff</color>
+
     <drawable name="touchFeedback">#CFD8DC</drawable>
 </resources>

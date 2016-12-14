@@ -23,7 +23,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
+        addPreferencesFromResource(R.xml.general_settings);
 
 
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
