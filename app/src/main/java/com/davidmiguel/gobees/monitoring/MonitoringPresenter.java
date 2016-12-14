@@ -17,22 +17,35 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
 
     private GoBeesRepository goBeesRepository;
     private MonitoringContract.View view;
+    private MonitoringContract.SettingsView settingsView;
 
     private long hiveId;
     private BeesCounter bc;
     private Mat processedFrame;
 
     MonitoringPresenter(GoBeesRepository goBeesRepository, MonitoringContract.View view,
-                        long hiveId) {
+                        MonitoringContract.SettingsView settingsView, long hiveId) {
         this.goBeesRepository = goBeesRepository;
         this.view = view;
         this.view.setPresenter(this);
+        this.settingsView = settingsView;
+        this.settingsView.setPresenter(this);
         this.hiveId = hiveId;
     }
 
     @Override
     public void onOpenCvConnected() {
         view.enableCameraView();
+    }
+
+    @Override
+    public void openSettings() {
+        settingsView.showSettings();
+    }
+
+    @Override
+    public void closeSettings() {
+        settingsView.hideSettings();
     }
 
     @Override

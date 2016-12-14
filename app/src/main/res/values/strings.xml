@@ -140,6 +140,82 @@
     <!-- Number of bees [CHAR LIMIT=30] -->
     <string name="num_bees">Nº bees</string>
 
+    <!--++++++++++++-->
+    <!-- Monitoring -->
+    <!--++++++++++++-->
+
+    <!--++++++++++++++++++++-->
+    <!-- Monitoring Settings-->
+    <!--++++++++++++++++++++-->
+
+    <!-- Label for bees category [CHAR LIMIT=30] -->
+    <string name="pref_bees_cat_label">Bees</string>
+    <!-- Key name for bees category in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_bees_cat_key">bees</string>
+
+    <!-- Label for the blob size preference [CHAR LIMIT=30] -->
+    <string name="pref_blob_size_label">Blob size</string>
+    <!-- Label for blob size small [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_small">Small</string>
+    <!-- Label for blob size normal [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_normal">Normal</string>
+    <!-- Label for blob size big [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_big">Big</string>
+    <!-- Key name for blob size preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_key" translatable="false">blob_size</string>
+    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_small" translatable="false">small</string>
+    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_normal" translatable="false">normal</string>
+    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_big" translatable="false">big</string>
+
+    <!-- Label for the min area preference [CHAR LIMIT=30] -->
+    <string name="pref_min_area_label">Min. area bee</string>
+    <!-- Key name for min area preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_min_area_key" translatable="false">min_area</string>
+    <!-- Min value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_min">0</integer>
+    <!-- Max value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_max">399</integer>
+    <!-- Default value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_default">15</integer>
+
+
+    <!-- Label for the max area preference [CHAR LIMIT=30] -->
+    <string name="pref_max_area_label">Max. area bee</string>
+    <!-- Key name for max area preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_max_area_key" translatable="false">max_area</string>
+    <!-- Min value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_min">400</integer>
+    <!-- Max value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_max">1500</integer>
+    <!-- Default value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_default">800</integer>
+
+    <!-- Label for camera category [CHAR LIMIT=30] -->
+    <string name="pref_camera_cat_label">Camera</string>
+    <!-- Key name for camera category in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_camera_cat_key">camera</string>
+
+    <!-- Label for the zoom preference [CHAR LIMIT=30] -->
+    <string name="pref_zoom_label">Zoom</string>
+    <!-- Label for zoom x1 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1">x1.0</string>
+    <!-- Label for zoom x1.5 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1_5">x1.5</string>
+    <!-- Label for zoom x2.0 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x2">x2.0</string>
+    <!-- Key name for zoom preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_key" translatable="false">zoom</string>
+    <!-- Value in SharedPreferences for zoom x1 [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_x1" translatable="false">1.0</string>
+    <!-- Value in SharedPreferences for zoom x1.5 [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_x1_5" translatable="false">1.5</string>
+    <!-- Value in SharedPreferences for zoom x2 [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_x2" translatable="false">.0</string>
+
+
     <!--++++++++++-->
     <!-- Settings -->
     <!--++++++++++-->

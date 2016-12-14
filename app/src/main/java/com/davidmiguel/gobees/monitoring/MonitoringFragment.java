@@ -8,9 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -24,7 +32,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Displays a feed from the camera processed by the CV algorithm.
  */
-public class MonitoringFragment extends Fragment implements MonitoringContract.View {
+public class MonitoringFragment extends Fragment implements MonitoringContract.View,
+        BackClickHelperFragment {
 
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
 
@@ -33,6 +42,8 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     private BaseLoaderCallback loaderCallback;
     private CameraBridgeViewBase cameraView;
     private TextView numBeesTV;
+    private ImageView settingsIcon;
+    private RelativeLayout settingsLayout;
 
 
     public MonitoringFragment() {
@@ -70,6 +81,14 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         cameraView.setCameraIndex(0);
         cameraView.setMaxFrameSize(640, 480);
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
+        settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
+        settingsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.openSettings();
+            }
+        });
+        settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
 
         return root;
     }
@@ -125,5 +144,14 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
                 numBeesTV.setText(Integer.toString(numBees));
             }
         });
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if(settingsLayout.getVisibility() == View.VISIBLE) {
+            presenter.closeSettings();
+            return false;
+        }
+        return true;
     }
 }

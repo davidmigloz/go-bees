@@ -61,7 +61,7 @@ public class ApiariesActivity extends AppCompatActivity {
         }
 
         // Set default preferences values
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(this, R.xml.general_settings, false);
 
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();

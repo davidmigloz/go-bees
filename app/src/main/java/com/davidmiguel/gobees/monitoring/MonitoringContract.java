@@ -17,12 +17,22 @@ interface MonitoringContract {
         void enableCameraView();
 
         void setNumBees(int numBees);
+    }
 
+    interface SettingsView extends BaseView<MonitoringContract.Presenter> {
+
+        void showSettings();
+
+        void hideSettings();
     }
 
     interface Presenter extends BasePresenter {
 
         void onOpenCvConnected();
+
+        void openSettings();
+
+        void closeSettings();
 
     }
 }
