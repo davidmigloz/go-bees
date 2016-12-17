@@ -148,7 +148,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public boolean onBackPressed() {
-        if(settingsLayout.getVisibility() == View.VISIBLE) {
+        if (settingsLayout.getVisibility() == View.VISIBLE) {
             presenter.closeSettings();
             return false;
         }

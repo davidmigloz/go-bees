@@ -69,7 +69,7 @@ public class MonitoringActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (monitoringFragment != null) {
             boolean defaultAction = monitoringFragment.onBackPressed();
-            if(!defaultAction) {
+            if (!defaultAction) {
                 return;
             }
         }
