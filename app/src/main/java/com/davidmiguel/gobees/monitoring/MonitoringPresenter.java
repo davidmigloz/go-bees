@@ -6,7 +6,6 @@ import com.davidmiguel.gobees.video.ContourBeesCounter;
 
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
 /**
@@ -49,14 +48,35 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
+    public void updateAlgoBlobSize(BeesCounter.BlobSize size) {
+        bc.updateBlobSize(size);
+    }
+
+    @Override
+    public void updateAlgoMinArea(double value) {
+        bc.updateMinArea(value);
+    }
+
+    @Override
+    public void updateAlgoMaxArea(double value) {
+        bc.updateMaxArea(value);
+    }
+
+    @Override
+    public void updateAlgoZoom(double value) {
+        // TODO
+    }
+
+    @Override
     public void start() {
         view.initOpenCV(this);
     }
 
     @Override
     public void onCameraViewStarted(int width, int height) {
-        bc = new ContourBeesCounter();
         processedFrame = new Mat();
+        bc = new ContourBeesCounter();
+        settingsView.initSettings();
     }
 
     @Override

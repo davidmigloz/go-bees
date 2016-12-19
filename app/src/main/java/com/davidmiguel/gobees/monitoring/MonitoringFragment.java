@@ -8,11 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,7 +37,6 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     private BaseLoaderCallback loaderCallback;
     private CameraBridgeViewBase cameraView;
     private TextView numBeesTV;
-    private ImageView settingsIcon;
     private RelativeLayout settingsLayout;
 
 
@@ -81,7 +75,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         cameraView.setCameraIndex(0);
         cameraView.setMaxFrameSize(640, 480);
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
-        settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
+        ImageView settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
