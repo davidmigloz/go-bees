@@ -341,6 +341,21 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint12.png
    :alt: Sprint 12.
+
+Sprint 13 (10/12/16 - 14/12/16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: agregar opción de localización GPS al 
+añadir colmenar. Incluir una tabla comparativa en la sección Trabajos relacionados.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 13 <https://github.com/davidmigloz/go-bees/milestone/14?closed=1>`__.
+
+Se estimaron 26,25 horas de trabajo y se invirtieron finalmente 14,25
+horas, completando todas las tareas.
+
+.. figure:: ../../img/burndowns/sprint13.png
+   :alt: Sprint 13.
    
 Estudio de viabilidad
 ---------------------
