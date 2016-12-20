@@ -1,31 +1,242 @@
 <resources>
-    <string name="app_name">GoBees</string>
-    <string name="statistics_title">Statistics</string>
-    <string name="settings_title">Settings</string>
+
+    <!--+++++++++++-->
+    <!-- Generals  -->
+    <!--+++++++++++-->
+
+    <!-- App name [CHAR LIMIT=NONE] -->
+    <string name="app_name" translatable="false">GoBees</string>
+    <!-- GoBees logo [CHAR LIMIT=NONE] -->
     <string name="gobees_logo">GoBees logo</string>
-    <string name="no_apiaries">You have no apiaries!</string>
-    <string name="no_hives">You have no hives!</string>
-    <string name="add_icon">Add</string>
-    <string name="home_icon">Home icon</string>
+    <!-- Refresh menu option [CHAR LIMIT=25] -->
     <string name="refresh">Refresh</string>
-    <string name="no_apiaries_add">Add a new apiary +</string>
-    <string name="loading_apiaries_error">Error while loading apiaries.</string>
-    <string name="loading_hives_error">Error while loading hives.</string>
-    <string name="name_hint">Name</string>
-    <string name="notes_hint">Notes...</string>
-    <string name="edit_apiary">Edit apiary</string>
-    <string name="edit_hive">Edit hive</string>
-    <string name="add_apiary">Add apiary</string>
-    <string name="add_hive">Add hive</string>
-    <string name="empty_apiary_message">Apiary name cannot be empty!</string>
-    <string name="empty_hive_message">Hive name cannot be empty!</string>
-    <string name="save_apiary_error_message">Error while saving apiary.</string>
-    <string name="save_hive_error_message">Error while saving hive.</string>
-    <string name="successfully_saved_apiary_message">Apiary saved!</string>
-    <string name="successfully_saved_hive_message">Hive saved!</string>
-    <string name="more_icon">More...</string>
-    <string name="enter_icon">Enter...</string>
+    <!-- Temperature [CHAR LIMIT=30] -->
+    <string name="temperature">Temperature</string>
+    <!-- Rain [CHAR LIMIT=30] -->
+    <string name="rain">Rain</string>
+    <!-- Wind [CHAR LIMIT=30] -->
+    <string name="wind">Wind</string>
+
+    <!--+++++++++++++++-->
+    <!-- General Icons -->
+    <!--+++++++++++++++-->
+
+    <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
+    <string name="more_icon">More…</string>
+    <!-- Description of enter icon ic_chevron_right [CHAR LIMIT=100] -->
+    <string name="enter_icon">Enter…</string>
+    <!-- Description of date icon ic_event [CHAR LIMIT=25] -->
+    <string name="date_icon">Date</string>
+    <!-- Description of weather icon [CHAR LIMIT=25] -->
     <string name="weather_icon">Weather icon</string>
+    <!-- Description of chart line [CHAR LIMIT=25] -->
+    <string name="chart_line">Chart line</string>
+
+    <!--+++++++++++++++-->
+    <!-- drawerLayout  -->
+    <!--+++++++++++++++-->
+
+    <!-- Settings [CHAR LIMIT=30] -->
+    <string name="settings_title">Settings</string>
+
+    <!--++++++++++-->
+    <!-- Apiaries -->
+    <!--++++++++++-->
+
+    <!-- Description of number of hives icon[CHAR LIMIT=100] -->
+    <string name="num_hives">Number of hives</string>
+    <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
+    <string name="loading_apiaries_error">Error while loading apiaries.</string>
+    <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
+    <string name="no_apiaries">You have no apiaries!</string>
+    <!-- Msg shown when an apiary is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_apiary_message">Apiary saved!</string>
+
+    <!--++++++++++++-->
+    <!-- Add apiary -->
+    <!--++++++++++++-->
+
+    <!-- Edit apiary action bar title [CHAR LIMIT=50] -->
+    <string name="edit_apiary">Edit apiary</string>
+    <!-- Add apiary action bar title [CHAR LIMIT=50] -->
+    <string name="add_apiary">Add apiary</string>
+    <!-- Apiary name input [CHAR LIMIT=50] -->
+    <string name="apiary_name_hint">Name</string>
+    <!-- Apiary location input [CHAR LIMIT=50] -->
+    <string name="apiary_location_hint">Location</string>
+    <!-- Apiary notes input [CHAR LIMIT=50] -->
+    <string name="apiary_notes_hint">Notes…</string>
+    <!-- Msg shown when we're searching for gps [CHAR LIMIT=100] -->
+    <string name="searching_gps_message">Searching for GPS…</string>
+    <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
+    <string name="empty_apiary_message">Apiary name cannot be empty!</string>
+    <!-- Error msg shown when we cannot connect to GPS [CHAR LIMIT=100] -->
+    <string name="gps_error_message">Unable to connect to GPS!</string>
+    <!-- Error msg shown when it's not possible to save the apiary [CHAR LIMIT=100] -->
+    <string name="save_apiary_error_message">Error while saving apiary.</string>
+    <!-- Description of apiary logo [CHAR LIMIT=100] -->
+    <string name="apiary_logo">Apiary logo</string>
+
+    <!--++++++++-->
+    <!-- Apiary -->
+    <!--++++++++-->
+
+    <!-- Apiary hives tab name [CHAR LIMIT=30] -->
+    <string name="apiary_hives_tab">Hives</string>
+    <!-- Apiary info tab name [CHAR LIMIT=30] -->
+    <string name="apiary_info_tab">Info</string>
+    <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
+    <string name="loading_hives_error">Error while loading hives.</string>
+    <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
+    <string name="no_hives">You have no hives!</string>
+    <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_hive_message">Hive saved!</string>
+    <!-- Description of last revision icon ic_cached [CHAR LIMIT=100] -->
     <string name="last_revision_icon">Last revision icon</string>
-    <string name="hives">Hives</string>
+    <!-- Description of hive logo [CHAR LIMIT=100] -->
+    <string name="hive_logo">Hive logo</string>
+
+    <!--++++++++++-->
+    <!-- Add hive -->
+    <!--++++++++++-->
+
+    <!-- Edit hive action bar title [CHAR LIMIT=50] -->
+    <string name="edit_hive">Edit hive</string>
+    <!-- Add hive action bar title [CHAR LIMIT=50] -->
+    <string name="add_hive">Add hive</string>
+    <!-- Hive name input [CHAR LIMIT=50] -->
+    <string name="hive_name_hint">Name</string>
+    <!-- Hive notes input [CHAR LIMIT=50] -->
+    <string name="hive_notes_hint">Notes…</string>
+    <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
+    <string name="empty_hive_message">Hive name cannot be empty!</string>
+    <!-- Error msg shown when it's not possible to save the hive [CHAR LIMIT=100] -->
+    <string name="save_hive_error_message">Error while saving hive.</string>
+
+    <!--++++++-->
+    <!-- Hive -->
+    <!--++++++-->
+
+    <!-- Hive recordings tab name [CHAR LIMIT=20] -->
+    <string name="hive_recordings_tab">Recordings</string>
+    <!-- Hive info tab name [CHAR LIMIT=20] -->
+    <string name="hive_info_tab">Info</string>
+    <!-- Error msg shown when it's not possible to load recordings [CHAR LIMIT=100] -->
+    <string name="loading_recordings_error">Error while loading recordings.</string>
+    <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->
+    <string name="no_recordings">You have no recordings!</string>
+    <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_recording_message">Recording saved!</string>
+    <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
+    <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
+
+    <!--+++++++++++-->
+    <!-- Recording -->
+    <!--+++++++++++-->
+    <!-- Error msg shown when it's not possible to load a recording [CHAR LIMIT=100] -->
+    <string name="loading_recording_error">Error while loading recording.</string>
+    <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
+    <string name="recording_date_format">EEE d MMM, yyyy</string>
+    <!-- Number of bees [CHAR LIMIT=30] -->
+    <string name="num_bees">Nº bees</string>
+
+    <!--++++++++++++-->
+    <!-- Monitoring -->
+    <!--++++++++++++-->
+
+    <!--++++++++++++++++++++-->
+    <!-- Monitoring Settings-->
+    <!--++++++++++++++++++++-->
+
+    <!-- Label for bees category [CHAR LIMIT=30] -->
+    <string name="pref_bees_cat_label">Bees</string>
+    <!-- Key name for bees category in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_bees_cat_key">bees</string>
+
+    <!-- Label for the blob size preference [CHAR LIMIT=30] -->
+    <string name="pref_blob_size_label">Blob size</string>
+    <!-- Label for blob size small [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_small">Small</string>
+    <!-- Label for blob size normal [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_normal">Normal</string>
+    <!-- Label for blob size big [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_big">Big</string>
+    <!-- Key name for blob size preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_key" translatable="false">blob_size</string>
+    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_small" translatable="false">small</string>
+    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_normal" translatable="false">normal</string>
+    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <string name="pref_blob_size_big" translatable="false">big</string>
+
+    <!-- Label for the min area preference [CHAR LIMIT=30] -->
+    <string name="pref_min_area_label">Min. area bee</string>
+    <!-- Key name for min area preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_min_area_key" translatable="false">min_area</string>
+    <!-- Min value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_min">0</integer>
+    <!-- Max value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_max">399</integer>
+    <!-- Default value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_default">15</integer>
+
+
+    <!-- Label for the max area preference [CHAR LIMIT=30] -->
+    <string name="pref_max_area_label">Max. area bee</string>
+    <!-- Key name for max area preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_max_area_key" translatable="false">max_area</string>
+    <!-- Min value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_min">400</integer>
+    <!-- Max value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_max">1500</integer>
+    <!-- Default value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_default">800</integer>
+
+    <!-- Label for camera category [CHAR LIMIT=30] -->
+    <string name="pref_camera_cat_label">Camera</string>
+    <!-- Key name for camera category in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_camera_cat_key">camera</string>
+
+    <!-- Label for the zoom preference [CHAR LIMIT=30] -->
+    <string name="pref_zoom_label">Zoom</string>
+    <!-- Label for zoom x1 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1">x1.0</string>
+    <!-- Label for zoom x1.5 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1_5">x1.5</string>
+    <!-- Label for zoom x2.0 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x2">x2.0</string>
+    <!-- Key name for zoom preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_key" translatable="false">zoom</string>
+    <!-- Value in SharedPreferences for zoom x1 [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_x1" translatable="false">1.0</string>
+    <!-- Value in SharedPreferences for zoom x1.5 [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_x1_5" translatable="false">1.5</string>
+    <!-- Value in SharedPreferences for zoom x2 [CHAR LIMIT=NONE] -->
+    <string name="pref_zoom_x2" translatable="false">.0</string>
+
+
+    <!--++++++++++-->
+    <!-- Settings -->
+    <!--++++++++++-->
+
+    <!-- Toolbar title in settings [CHAR LIMIT=30] -->
+    <string name="settings_toolbar_title">Settings</string>
+    <!-- Label for weather category [CHAR LIMIT=30] -->
+    <string name="pref_weather_cat_label">Weather</string>
+    <!-- Key name for weather category in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_weather_cat_key">weather</string>
+    <!-- Label for the temperature units preference [CHAR LIMIT=30] -->
+    <string name="pref_temp_units_label">Temperature Units</string>
+    <!-- Label for metric option in temperature unit preference [CHAR LIMIT=25] -->
+    <string name="pref_temp_units_label_metric">Metric</string>
+    <!-- Label for imperial option in temperature unit preference [CHAR LIMIT=25] -->
+    <string name="pref_temp_units_label_imperial">Imperial</string>
+    <!-- Key name for temperature unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_temp_units_key" translatable="false">units</string>
+    <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->
+    <string name="pref_temp_units_metric" translatable="false">metric</string>
+    <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
+    <string name="pref_temp_units_imperial" translatable="false">imperial</string>
+
 </resources>

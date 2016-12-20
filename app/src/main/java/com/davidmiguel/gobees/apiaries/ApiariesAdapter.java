@@ -65,6 +65,7 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
 
         private CardView card;
         private TextView apiaryName;
+        private TextView numHives;
         private Drawable background;
 
         ViewHolder(View itemView) {
@@ -72,11 +73,15 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
             itemView.setOnClickListener(this);
             card = (CardView) itemView.findViewById(R.id.card);
             apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
+            numHives = (TextView) itemView.findViewById(R.id.num_hives);
             background = card.getBackground();
         }
 
         public void bind(@NonNull Apiary apiary) {
             apiaryName.setText(apiary.getName());
+            if(apiary.getHives() != null) {
+                numHives.setText(Integer.toString(apiary.getHives().size()));
+            }
         }
 
         @Override

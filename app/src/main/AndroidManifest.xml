@@ -3,6 +3,7 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature
@@ -13,28 +14,46 @@
         android:required="false"/>
 
     <application
+        android:name=".GoBeesApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".GoBeesApp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.davidmiguel.gobees.apiaries.ApiariesActivity"
+            android:name=".apiaries.ApiariesActivity"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.OverlapSystemBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".addeditapiary.AddEditApiaryActivity" />
         <activity
-            android:name=".hives.HivesActivity"
-            android:parentActivityName=".apiaries.ApiariesActivity" />
-        <activity android:name=".addedithive.AddEditHiveActivity" />
+            android:name=".addeditapiary.AddEditApiaryActivity"
+            android:parentActivityName=".apiaries.ApiariesActivity"/>
         <activity
-            android:name=".premonitoring.PreMonitoringActivity"
+            android:name=".apiary.ApiaryActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".apiaries.ApiariesActivity"/>
+        <activity
+            android:name=".addedithive.AddEditHiveActivity"
+            android:parentActivityName=".apiary.ApiaryActivity"/>
+        <activity
+            android:name=".hive.HiveActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".apiary.ApiaryActivity"/>
+        <activity
+            android:name=".recording.RecordingActivity"
+            android:parentActivityName=".hive.HiveActivity"/>
+        <activity
+            android:name=".monitoring.MonitoringActivity"
+            android:parentActivityName=".hive.HiveActivity"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:parentActivityName=".apiaries.ApiariesActivity"/>
     </application>
 
 </manifest>

@@ -4,9 +4,14 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Record;
+import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.utils.DateTimeUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -38,6 +43,16 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     @Override
     public void closeDb() {
         realm.close();
+    }
+
+    @Override
+    public void deleteAll() {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
     }
 
     @Override
@@ -144,19 +159,64 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
+        try {
+            // Get hive
+            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            if (hive == null || hive.getRecords() == null) {
+                callback.onDataNotAvailable();
+                return;
+            }
+            // Get records
+            RealmResults<Record> records = hive.getRecords().where().findAll().sort("timestamp");
+            // Clasify records by date into recordings
+            Date day;                   // Actual date of the recording
+            Date nextDay = new Date(0); // Next day to the recording
+            RealmResults<Record> filteredRecords;
+            List<Recording> recordings = new ArrayList<>();
+            while (true) {
+                // Get all records greather than last recordings
+                records = records.where().greaterThanOrEqualTo("timestamp", nextDay).findAll();
+                if (records.isEmpty()) {
+                    break;
+                }
+                // Get range of days to filter
+                day = DateTimeUtils.getDateOnly(records.first().getTimestamp());
+                nextDay = DateTimeUtils.getNextDay(day);
+                // Filter records of that date and create recording
+                filteredRecords = records.where()
+                        .greaterThanOrEqualTo("timestamp", day)
+                        .lessThan("timestamp", DateTimeUtils.getNextDay(nextDay))
+                        .findAll();
+                // Create recording
+                recordings.add(new Recording(day, new ArrayList<>(filteredRecords)));
+            }
+            // Set recordings to hive
+            hive.setRecordings(recordings);
+            // Return hive
+            callback.onHiveLoaded(hive);
+        } catch (Exception e) {
+            callback.onDataNotAvailable();
+        }
+    }
+
+    @Override
     public void refreshHives(long apiaryId) {
         // Not required because the GoBeesRepository handles the logic of refreshing the
         // data from all the available data sources
     }
 
     @Override
-    public void saveHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+    public void saveHive(final long apiaryId, @NonNull final Hive hive, @NonNull TaskCallback callback) {
         try {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     // Save hive
                     realm.copyToRealmOrUpdate(hive);
+                    // Add to apiary
+                    Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+                    apiary.addHive(hive);
                 }
             });
             callback.onSuccess();
@@ -169,5 +229,50 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
         Number nextId = realm.where(Hive.class).max("id");
         callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
+    }
+
+    @Override
+    public void saveRecord(final long hiveId, @NonNull final Record record, @NonNull TaskCallback callback) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Save record
+                    realm.copyToRealmOrUpdate(record);
+                    // Add to hive
+                    Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+                    hive.addRecord(record);
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @Override
+    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        // Get hive
+        Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+        if (hive == null || hive.getRecords() == null) {
+            callback.onDataNotAvailable();
+            return;
+        }
+        // Get records
+        RealmResults<Record> records = hive.getRecords()
+                .where()
+                .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(start, 0, 0, 0, 0))
+                .lessThan("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
+                .findAll()
+                .sort("timestamp");
+        // Create recording
+        Recording recording = new Recording(start, new ArrayList<>(records));
+        callback.onRecordingLoaded(recording);
+    }
+
+    @Override
+    public void refreshRecordings(long hiveId) {
+        // Not required because the GoBeesRepository handles the logic of refreshing the
+        // data from all the available data sources
     }
 }

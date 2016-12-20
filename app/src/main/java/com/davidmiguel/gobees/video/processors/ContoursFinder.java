@@ -94,4 +94,22 @@ public class ContoursFinder implements VideoProcessor {
     public int getNumBees() {
         return numBees;
     }
+
+    /**
+     * Set min area. Smaller areas are not consider to be a bee.
+     *
+     * @param minArea min area.
+     */
+    public void setMinArea(double minArea) {
+        this.minArea = minArea;
+    }
+
+    /**
+     * Set max area. Greater areas are not consider to be a bee.
+     *
+     * @param maxArea max area.
+     */
+    public void setMaxArea(double maxArea) {
+        this.maxArea = maxArea;
+    }
 }

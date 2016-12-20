@@ -36,7 +36,8 @@
             <FrameLayout
                 android:id="@+id/contentFrame"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"/>
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_add_apiary"

@@ -1,6 +1,6 @@
 package com.davidmiguel.gobees.data.model;
 
-import com.google.common.base.Objects;
+import android.support.annotation.NonNull;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ import io.realm.annotations.Required;
  * Model class for a record.
  */
 @SuppressWarnings("unused")
-public class Record extends RealmObject {
+public class Record extends RealmObject implements Comparable<Record> {
 
     @PrimaryKey
     private long id;
@@ -55,17 +55,7 @@ public class Record extends RealmObject {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Record record = (Record) o;
-        return id == record.id &&
-                numBees == record.numBees &&
-                Objects.equal(timestamp, record.timestamp);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id, timestamp, numBees);
+    public int compareTo(@NonNull Record r) {
+        return this.getTimestamp().compareTo(r.getTimestamp());
     }
 }

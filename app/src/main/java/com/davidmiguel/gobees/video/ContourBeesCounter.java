@@ -43,7 +43,7 @@ public class ContourBeesCounter implements BeesCounter {
      * @param minArea         the min area to consider a contour a bee.
      * @param maxArea         the max area to consider a contour a bee.
      */
-    public ContourBeesCounter(int history, double shadowThreshold, double minArea, double maxArea) {
+    ContourBeesCounter(int history, double shadowThreshold, double minArea, double maxArea) {
         blur = new Blur();
         bs = new BackgroundSubtractor(history, shadowThreshold);
         morphology = new Morphology();
@@ -60,12 +60,40 @@ public class ContourBeesCounter implements BeesCounter {
         r0.release();
         r1.release();
         r2.release();
-        Log.d(TAG, "countBees time: " + (System.nanoTime() - t0) / 1000000 );
+        Log.d(TAG, "countBees time: " + (System.nanoTime() - t0) / 1000000);
         return cf.getNumBees();
     }
 
     @Override
     public Mat getProcessedFrame() {
         return processedFrame;
+    }
+
+    @Override
+    public void updateBlobSize(BlobSize size) {
+        switch (size) {
+            case SMALL:
+                morphology.setDilateKernel(2);
+                morphology.setErodeKernel(3);
+                break;
+            case NORMAL:
+                morphology.setDilateKernel(3);
+                morphology.setErodeKernel(3);
+                break;
+            case BIG:
+            default:
+                morphology.setDilateKernel(3);
+                morphology.setErodeKernel(2);
+        }
+    }
+
+    @Override
+    public void updateMinArea(Double minArea) {
+        cf.setMinArea(minArea);
+    }
+
+    @Override
+    public void updateMaxArea(Double maxArea) {
+        cf.setMaxArea(maxArea);
     }
 }

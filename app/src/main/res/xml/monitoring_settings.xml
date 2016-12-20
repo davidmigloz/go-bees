@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="@string/pref_bees_cat_key"
+        android:title="@string/pref_bees_cat_label">
+
+        <ListPreference
+            android:defaultValue="@string/pref_blob_size_normal"
+            android:entries="@array/pref_blob_size_options"
+            android:entryValues="@array/pref_blob_size_values"
+            android:key="@string/pref_blob_size_key"
+            android:title="@string/pref_blob_size_label"/>
+
+        <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
+            app:vnt_maxValue="@integer/pref_min_area_max"
+            app:vnt_minValue="@integer/pref_min_area_min"
+            app:vnt_setWrapSelectorWheel="true"
+            android:defaultValue="@integer/pref_min_area_default"
+            android:key="@string/pref_min_area_key"
+            android:title="@string/pref_min_area_label"/>
+
+        <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
+            app:vnt_maxValue="@integer/pref_max_area_max"
+            app:vnt_minValue="@integer/pref_max_area_min"
+            app:vnt_setWrapSelectorWheel="true"
+            android:defaultValue="@integer/pref_max_area_default"
+            android:key="@string/pref_max_area_key"
+            android:title="@string/pref_max_area_label"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_camera_cat_key"
+        android:title="@string/pref_camera_cat_label">
+
+        <ListPreference
+            android:defaultValue="@string/pref_zoom_x1"
+            android:entries="@array/pref_zoom_options"
+            android:entryValues="@array/pref_zoom_values"
+            android:key="@string/pref_zoom_key"
+            android:title="@string/pref_zoom_label"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

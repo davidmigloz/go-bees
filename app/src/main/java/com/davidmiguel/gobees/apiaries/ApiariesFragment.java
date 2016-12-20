@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,16 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
+import com.davidmiguel.gobees.apiary.ApiaryActivity;
+import com.davidmiguel.gobees.apiary.ApiaryHivesFragment;
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.hives.HivesActivity;
-import com.davidmiguel.gobees.hives.HivesFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -44,10 +41,7 @@ public class ApiariesFragment extends Fragment
     private ApiariesContract.Presenter presenter;
     private ApiariesAdapter listAdapter;
     private View noApiariesView;
-    private ImageView noApiariesIcon;
-    private TextView noApiarieskTextView;
-    private TextView noApiariesAddView;
-    private LinearLayout apiarieView;
+    private LinearLayout apiariesView;
 
     public ApiariesFragment() {
         // Requires empty public constructor
@@ -74,19 +68,10 @@ public class ApiariesFragment extends Fragment
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(listAdapter);
-        apiarieView = (LinearLayout) root.findViewById(R.id.apiariesLL);
+        apiariesView = (LinearLayout) root.findViewById(R.id.apiariesLL);
 
         // Set up  no apiaries view
         noApiariesView = root.findViewById(R.id.no_apiaries);
-        noApiariesIcon = (ImageView) root.findViewById(R.id.no_apiaries_icon);
-        noApiarieskTextView = (TextView) root.findViewById(R.id.no_apiaries_text);
-        noApiariesAddView = (TextView) root.findViewById(R.id.no_apiaries_add);
-        noApiariesAddView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddEditApiary();
-            }
-        });
 
         // Set up floating action button
         FloatingActionButton fab =
@@ -140,6 +125,13 @@ public class ApiariesFragment extends Fragment
             case R.id.menu_refresh:
                 presenter.loadApiaries(true);
                 break;
+            // TODO eliminar generar y eliminar datos
+            case R.id.menu_generate:
+                presenter.generateData();
+                break;
+            case R.id.menu_delete:
+                presenter.deleteData();
+                break;
         }
         return true;
     }
@@ -168,7 +160,7 @@ public class ApiariesFragment extends Fragment
     @Override
     public void showApiaries(@NonNull List<Apiary> apiaries) {
         listAdapter.replaceData(apiaries);
-        apiarieView.setVisibility(View.VISIBLE);
+        apiariesView.setVisibility(View.VISIBLE);
         noApiariesView.setVisibility(View.GONE);
     }
 
@@ -180,8 +172,8 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void showApiaryDetail(long apiaryId) {
-        Intent intent = new Intent(getActivity(), HivesActivity.class);
-        intent.putExtra(HivesFragment.ARGUMENT_APIARY_ID, apiaryId);
+        Intent intent = new Intent(getActivity(), ApiaryActivity.class);
+        intent.putExtra(ApiaryHivesFragment.ARGUMENT_APIARY_ID, apiaryId);
         getActivity().startActivity(intent);
     }
 
@@ -192,11 +184,7 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void showNoApiaries() {
-        showNoApiariesViews(
-                getResources().getString(R.string.no_apiaries),
-                R.drawable.ic_add_circle_outline,
-                false
-        );
+        showNoApiariesViews();
     }
 
     @Override
@@ -226,18 +214,10 @@ public class ApiariesFragment extends Fragment
 
     /**
      * Shows no apiaries views.
-     *
-     * @param mainText    text to show.
-     * @param iconRes     icon to show.
-     * @param showAddView whether show add view option or not.
      */
-    private void showNoApiariesViews(String mainText, int iconRes, boolean showAddView) {
-        apiarieView.setVisibility(View.GONE);
+    private void showNoApiariesViews() {
+        apiariesView.setVisibility(View.GONE);
         noApiariesView.setVisibility(View.VISIBLE);
-        // Set details
-        noApiarieskTextView.setText(mainText);
-        noApiariesIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(), iconRes, null));
-        noApiariesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
     }
 
     /**

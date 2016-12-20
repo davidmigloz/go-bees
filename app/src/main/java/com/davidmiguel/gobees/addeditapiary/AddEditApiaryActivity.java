@@ -9,7 +9,6 @@ import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.ActivityUtils;
-import com.google.common.base.Strings;
 
 /**
  * Add / edit apiary activity.

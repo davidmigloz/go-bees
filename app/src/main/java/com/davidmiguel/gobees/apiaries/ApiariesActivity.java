@@ -1,6 +1,9 @@
 package com.davidmiguel.gobees.apiaries;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +16,7 @@ import android.view.MenuItem;
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.settings.SettingsActivity;
 import com.davidmiguel.gobees.utils.ActivityUtils;
 
 /**
@@ -43,7 +47,7 @@ public class ApiariesActivity extends AppCompatActivity {
         drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
-            setupDrawerContent(navigationView);
+            setupDrawerContent(navigationView, this);
         }
 
         // Add fragment to the activity
@@ -55,6 +59,9 @@ public class ApiariesActivity extends AppCompatActivity {
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(), apiariesFragment, R.id.contentFrame);
         }
+
+        // Set default preferences values
+        PreferenceManager.setDefaultValues(this, R.xml.general_settings, false);
 
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
@@ -85,17 +92,15 @@ public class ApiariesActivity extends AppCompatActivity {
     /**
      * Set the actions to be carried out from the drawerLayout.
      */
-    private void setupDrawerContent(NavigationView navigationView) {
+    private void setupDrawerContent(NavigationView navigationView, final Context context) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.settings_navigation_menu_item:
-                                // TODO
-                                break;
-                            case R.id.statistics_navigation_menu_item:
-                                // TODO
+                                Intent intent = new Intent(context, SettingsActivity.class);
+                                startActivity(intent);
                                 break;
                             default:
                                 break;
