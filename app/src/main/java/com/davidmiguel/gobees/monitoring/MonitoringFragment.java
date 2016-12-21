@@ -16,9 +16,7 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
@@ -35,7 +33,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     private MonitoringContract.Presenter presenter;
 
     private BaseLoaderCallback loaderCallback;
-    private CameraBridgeViewBase cameraView;
+    private CameraView cameraView;
     private TextView numBeesTV;
     private RelativeLayout settingsLayout;
 
@@ -71,9 +69,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         // Don't switch off screen
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // Configure view
-        cameraView = (JavaCameraView) root.findViewById(R.id.camera_view);
-        cameraView.setCameraIndex(0);
-        cameraView.setMaxFrameSize(640, 480);
+        cameraView = (CameraView) root.findViewById(R.id.camera_view);
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
         ImageView settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +124,11 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     @Override
     public void enableCameraView() {
         cameraView.enableView();
+    }
+
+    @Override
+    public void updateAlgoZoom(int ratio) {
+        cameraView.setZoom(ratio);
     }
 
     @Override

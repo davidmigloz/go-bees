@@ -26,6 +26,13 @@ interface MonitoringContract {
         void enableCameraView();
 
         /**
+         * Update zoom parameter in the algorithm.
+         *
+         * @param ratio zoom (100 = x1, 200 = x2…).
+         */
+        void updateAlgoZoom(int ratio);
+
+        /**
          * Sets the number of bees on the screen.
          *
          * @param numBees number of bees.
@@ -64,9 +71,16 @@ interface MonitoringContract {
         void openSettings();
 
         /**
-         * Close settings view.
+         * Closes settings view.
          */
         void closeSettings();
+
+        /**
+         * Shows the output of the algorithm or the raw camera frame.
+         *
+         * @param status on/off.
+         */
+        void showAlgoOutput(boolean status);
 
         /**
          * Update blob size parameter in the algorithm.
@@ -92,8 +106,8 @@ interface MonitoringContract {
         /**
          * Update zoom parameter in the algorithm.
          *
-         * @param value zoom.
+         * @param ratio zoom (100 = x1, 200 = x2…).
          */
-        void updateAlgoZoom(double value);
+        void updateAlgoZoom(int ratio);
     }
 }

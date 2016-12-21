@@ -5,6 +5,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.TwoStatePreference;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_min_area_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_max_area_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_zoom_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_show_algo_output_key)));
     }
 
     @Override
@@ -139,6 +141,9 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             if (preference instanceof VNTNumberPickerPreference) {
                 value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getInt(preference.getKey(), Integer.parseInt(preference.getSummary().toString()));
+            } else if (preference instanceof TwoStatePreference) {
+                value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
+                        .getBoolean(preference.getKey(), true);
             } else {
                 value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), "");
@@ -156,7 +161,11 @@ public class MonitoringSettingsFragment extends PreferenceFragment
      * @param value      new value.
      */
     void updateAlgorithm(Preference preference, Object value) {
-        if (preference.getKey().equals(getString(R.string.pref_blob_size_key))) {
+        if (preference.getKey().equals(getString(R.string.pref_show_algo_output_key))) {
+            // Show algo output
+            Boolean val = (Boolean) value;
+            presenter.showAlgoOutput(val);
+        } else if (preference.getKey().equals(getString(R.string.pref_blob_size_key))) {
             // Update blob size
             String val = (String) value;
             BeesCounter.BlobSize size = BeesCounter.BlobSize.NORMAL;
@@ -176,7 +185,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             presenter.updateAlgoMaxArea((Double.valueOf((Integer) value)));
         } else if (preference.getKey().equals(getString(R.string.pref_zoom_key))) {
             // Update zoom
-            presenter.updateAlgoZoom((Double.parseDouble((String) value)));
+            presenter.updateAlgoZoom((Integer.parseInt((String) value)));
         }
     }
 
@@ -200,7 +209,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             preference.setSummary(Integer.toString((Integer) value));
         } else {
             // For other preferences, set the summary to the value's simple string representation
-            preference.setSummary((Integer) value);
+            preference.setSummary(value.toString());
         }
     }
 }

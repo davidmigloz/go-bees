@@ -21,6 +21,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     private long hiveId;
     private BeesCounter bc;
     private Mat processedFrame;
+    private boolean showAlgoOutput;
 
     MonitoringPresenter(GoBeesRepository goBeesRepository, MonitoringContract.View view,
                         MonitoringContract.SettingsView settingsView, long hiveId) {
@@ -48,6 +49,11 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
+    public void showAlgoOutput(boolean status) {
+        showAlgoOutput = status;
+    }
+
+    @Override
     public void updateAlgoBlobSize(BeesCounter.BlobSize size) {
         bc.updateBlobSize(size);
     }
@@ -63,8 +69,8 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
-    public void updateAlgoZoom(double value) {
-        // TODO
+    public void updateAlgoZoom(int ratio) {
+        view.updateAlgoZoom(ratio);
     }
 
     @Override
@@ -81,7 +87,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
 
     @Override
     public void onCameraViewStopped() {
-
+        // No action needed
     }
 
     @Override
@@ -90,6 +96,6 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
         view.setNumBees(numBees);
         bc.getProcessedFrame().copyTo(processedFrame);
         bc.getProcessedFrame().release();
-        return processedFrame;
+        return showAlgoOutput ? processedFrame : inputFrame.rgba();
     }
 }

@@ -153,6 +153,13 @@
     <!-- Key name for bees category in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_bees_cat_key">bees</string>
 
+    <!-- Label for the show algorithm output preference [CHAR LIMIT=30] -->
+    <string name="pref_show_algo_output_label">Show algorithm output</string>
+    <!-- Key name for show algorithm output preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_show_algo_output_key" translatable="false">show_algo_output</string>
+    <!-- Default value for show algorithm output preference [CHAR LIMIT=NONE] -->
+    <string name="pref_show_algo_output_default" translatable="false">true</string>
+
     <!-- Label for the blob size preference [CHAR LIMIT=30] -->
     <string name="pref_blob_size_label">Blob size</string>
     <!-- Label for blob size small [CHAR LIMIT=25] -->
@@ -209,11 +216,11 @@
     <!-- Key name for zoom preference in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_zoom_key" translatable="false">zoom</string>
     <!-- Value in SharedPreferences for zoom x1 [CHAR LIMIT=NONE] -->
-    <string name="pref_zoom_x1" translatable="false">1.0</string>
+    <string name="pref_zoom_x1" translatable="false">100</string>
     <!-- Value in SharedPreferences for zoom x1.5 [CHAR LIMIT=NONE] -->
-    <string name="pref_zoom_x1_5" translatable="false">1.5</string>
+    <string name="pref_zoom_x1_5" translatable="false">150</string>
     <!-- Value in SharedPreferences for zoom x2 [CHAR LIMIT=NONE] -->
-    <string name="pref_zoom_x2" translatable="false">.0</string>
+    <string name="pref_zoom_x2" translatable="false">200</string>
 
 
     <!--++++++++++-->
