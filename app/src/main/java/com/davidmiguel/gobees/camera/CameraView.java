@@ -1,4 +1,4 @@
-package com.davidmiguel.gobees.monitoring;
+package com.davidmiguel.gobees.camera;
 
 import android.content.Context;
 import android.hardware.Camera;

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.camera.CameraView;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;
