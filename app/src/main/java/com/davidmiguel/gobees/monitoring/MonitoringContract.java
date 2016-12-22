@@ -38,6 +38,16 @@ interface MonitoringContract {
          * @param numBees number of bees.
          */
         void setNumBees(int numBees);
+
+        /**
+         * Starts recording service.
+         */
+        void startRecordingService();
+
+        /**
+         * Hides the camera preview view and stops its logic.
+         */
+        void stopCameraPreview();
     }
 
     interface SettingsView extends BaseView<MonitoringContract.Presenter> {
@@ -69,6 +79,11 @@ interface MonitoringContract {
          * Opens settings view.
          */
         void openSettings();
+
+        /**
+         * Start recording.
+         */
+        void startRecording();
 
         /**
          * Closes settings view.

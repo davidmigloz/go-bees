@@ -44,6 +44,12 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
+    public void startRecording() {
+        view.stopCameraPreview();
+        view.startRecordingService();
+    }
+
+    @Override
     public void closeSettings() {
         settingsView.hideSettings();
     }
@@ -81,7 +87,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     @Override
     public void onCameraViewStarted(int width, int height) {
         processedFrame = new Mat();
-        bc = new ContourBeesCounter();
+        bc = ContourBeesCounter.getInstance();
         settingsView.initSettings();
     }
 

@@ -15,7 +15,7 @@ public interface ICameraAccess {
     /**
      * Callback when a frame is captured.
      *
-     * @param CameraFrame frame.
+     * @param cameraFrame frame.
      */
-    void onPreviewFrame(CameraFrame CameraFrame);
+    void onPreviewFrame(CameraFrame cameraFrame);
 }

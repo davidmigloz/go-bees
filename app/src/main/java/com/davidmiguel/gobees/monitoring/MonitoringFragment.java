@@ -1,9 +1,15 @@
 package com.davidmiguel.gobees.monitoring;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +21,7 @@ import android.widget.TextView;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.camera.CameraView;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
+import com.davidmiguel.gobees.monitoring.MonitoringService.MonitoringBinder;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
@@ -37,6 +44,11 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     private CameraView cameraView;
     private TextView numBeesTV;
     private RelativeLayout settingsLayout;
+    private ImageView recordIcon;
+
+    private MonitoringService mService;
+    private ServiceConnection mConnection;
+    private boolean mBound = false;
 
 
     public MonitoringFragment() {
@@ -67,11 +79,16 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
                 }
             }
         };
+
         // Don't switch off screen
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         // Configure view
         cameraView = (CameraView) root.findViewById(R.id.camera_view);
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
+        settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
+
+        // Configure icons
         ImageView settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +96,29 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
                 presenter.openSettings();
             }
         });
-        settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
+        recordIcon = (ImageView) root.findViewById(R.id.record_icon);
+        recordIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.startRecording();
+            }
+        });
 
+        // Configure service connection
+        mConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder service) {
+                MonitoringBinder binder = (MonitoringBinder) service;
+                mService = binder.getService();
+                mBound = true;
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+                mService = null;
+                mBound = false;
+            }
+        };
         return root;
     }
 
@@ -100,8 +138,13 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public void onDestroy() {
+        // Disable camera view
         if (cameraView != null) {
             cameraView.disableView();
+        }
+        // Unbind service
+        if (mService != null) {
+            getActivity().unbindService(mConnection);
         }
         super.onDestroy();
     }
@@ -140,6 +183,26 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
                 numBeesTV.setText(Integer.toString(numBees));
             }
         });
+    }
+
+    @Override
+    public void startRecordingService() {
+        // Start and bind to service
+        Intent intent = new Intent(getActivity(), MonitoringService.class);
+        intent.setAction(MonitoringService.START_ACTION);
+        getActivity().startService(intent);
+        getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        // Record botton -> red color
+        recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));
+    }
+
+    @Override
+    public void stopCameraPreview() {
+        if (cameraView != null) {
+            cameraView.disableView();
+            cameraView.setVisibility(View.GONE);
+            loaderCallback = null;
+        }
     }
 
     @Override
