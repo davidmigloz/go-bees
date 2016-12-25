@@ -186,13 +186,14 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
-    public void startRecordingService() {
+    public void startRecordingService(MonitoringSettings ms) {
         // Start and bind to service
         Intent intent = new Intent(getActivity(), MonitoringService.class);
         intent.setAction(MonitoringService.START_ACTION);
+        intent.putExtra(MonitoringService.ARGUMENT_MON_SETTINGS, ms);
         getActivity().startService(intent);
         getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        // Record botton -> red color
+        // Record button -> red color
         recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));
     }
 

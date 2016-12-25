@@ -5,26 +5,29 @@ import android.os.HandlerThread;
 import android.util.Log;
 
 /**
- * Camera handler thread.
+ * AndroidCamera handler thread.
  */
 class CameraHandlerThread extends HandlerThread {
     private static final String TAG = CameraHandlerThread.class.getSimpleName();
 
     private Handler mHandler;
-    private HardwareCamera owner;
+    private AndroidCameraImpl owner;
 
-    CameraHandlerThread(HardwareCamera owner) {
+    CameraHandlerThread(AndroidCameraImpl owner) {
         super("CameraHandlerThread");
         this.owner = owner;
         start();
         mHandler = new Handler(getLooper());
     }
 
+    /**
+     * Starts
+     */
     void openCamera() {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                owner.oldConnectCamera();
+                owner.initCamera();
                 notifyCameraOpened();
             }
         });
@@ -32,7 +35,7 @@ class CameraHandlerThread extends HandlerThread {
         try {
             wait();
         } catch (InterruptedException e) {
-            Log.w(TAG, "wait was interrupted");
+            Log.d(TAG, "Thread was interrupted.");
         }
     }
 

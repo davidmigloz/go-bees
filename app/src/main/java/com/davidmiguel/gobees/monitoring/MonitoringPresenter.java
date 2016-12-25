@@ -46,7 +46,9 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     @Override
     public void startRecording() {
         view.stopCameraPreview();
-        view.startRecordingService();
+        // Get settings
+        MonitoringSettings ms = settingsView.getMonitoringSettings();
+        view.startRecordingService(ms);
     }
 
     @Override

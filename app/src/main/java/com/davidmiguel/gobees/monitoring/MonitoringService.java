@@ -12,9 +12,10 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.camera.AndroidCamera;
+import com.davidmiguel.gobees.camera.AndroidCameraImpl;
+import com.davidmiguel.gobees.camera.AndroidCameraListener;
 import com.davidmiguel.gobees.camera.CameraFrame;
-import com.davidmiguel.gobees.camera.ICameraAccess;
-import com.davidmiguel.gobees.camera.HardwareCamera;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
 
@@ -27,49 +28,56 @@ import org.opencv.android.OpenCVLoader;
  * It reads the camera feed and run the bee counter algorithm in background.
  */
 @SuppressWarnings("deprecation")
-public class MonitoringService extends Service implements ICameraAccess {
+public class MonitoringService extends Service implements AndroidCameraListener {
 
     private static final String TAG = MonitoringService.class.getSimpleName();
+    public static final String ARGUMENT_MON_SETTINGS = "MONITORING_SETTINGS";
     public static int NOTIFICATION_ID = 101;
     public static String START_ACTION = "start_action";
     public static String STOP_ACTION = "stop_action";
 
     private final IBinder mBinder = new MonitoringBinder();
-    private HardwareCamera hardwareCamera;
+    private AndroidCamera androidCamera;
     private BeesCounter bc;
     private boolean openCVLoaded = false;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        // Configure OpenCV callback
-        BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
-            @Override
-            public void onManagerConnected(final int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS:
-                        openCVLoaded = true;
-                        bc = ContourBeesCounter.getInstance();
-                        hardwareCamera = new HardwareCamera(MonitoringService.this,
-                                MonitoringService.this, Camera.CameraInfo.CAMERA_FACING_FRONT);
-                        if (!hardwareCamera.isConnected()) {
-                            hardwareCamera.connect();
-                        }
-                        break;
-                    default:
-                        super.onManagerConnected(status);
-                        break;
-                }
-            }
-        };
-        // Init openCV
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, this, loaderCallback);
-    }
+    private MonitoringSettings monitoringSettings;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(START_ACTION)) {
             Log.i(TAG, "Received Start Foreground Intent ");
+            // Get monitoring config
+            monitoringSettings = (MonitoringSettings) intent.getSerializableExtra(ARGUMENT_MON_SETTINGS);
+            // Configure OpenCV callback
+            BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
+                @Override
+                public void onManagerConnected(final int status) {
+                    switch (status) {
+                        case LoaderCallbackInterface.SUCCESS:
+                            openCVLoaded = true;
+                            // Config bee counter
+                            bc = ContourBeesCounter.getInstance();
+                            bc.updateBlobSize(monitoringSettings.getBlobSize());
+                            bc.updateMinArea(monitoringSettings.getMinArea());
+                            bc.updateMaxArea(monitoringSettings.getMaxArea());
+                            // Config camera
+                            androidCamera = new AndroidCameraImpl(MonitoringService.this,
+                                    Camera.CameraInfo.CAMERA_FACING_BACK,
+                                    monitoringSettings.getMaxFrameWidth(),
+                                    monitoringSettings.getMaxFrameHeight(),
+                                    monitoringSettings.getZoomRatio());
+                            if (!androidCamera.isConnected()) {
+                                androidCamera.connect();
+                            }
+                            break;
+                        default:
+                            super.onManagerConnected(status);
+                            break;
+                    }
+                }
+            };
+            // Init openCV
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, this, loaderCallback);
             // Config notification
             // Intent to the monitoring activity
             Intent monitoringIntent = new Intent(this, MonitoringActivity.class);
@@ -107,9 +115,9 @@ public class MonitoringService extends Service implements ICameraAccess {
     public void onDestroy() {
         super.onDestroy();
         // Release camera
-        if (hardwareCamera != null && hardwareCamera.isConnected()) {
-            hardwareCamera.release();
-            hardwareCamera = null;
+        if (androidCamera != null && androidCamera.isConnected()) {
+            androidCamera.release();
+            androidCamera = null;
         }
     }
 
@@ -122,6 +130,11 @@ public class MonitoringService extends Service implements ICameraAccess {
     @Override
     public boolean isOpenCVLoaded() {
         return openCVLoaded;
+    }
+
+    @Override
+    public void onCameraStarted(int width, int height) {
+
     }
 
     @Override

@@ -1,16 +1,13 @@
 package com.davidmiguel.gobees.camera;
 
-import android.graphics.Bitmap;
-
-import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
 /**
- * Model a camera frame.
+ * Models a camera frame.
  * Based on JavaCameraFrame from OpenCV.
  */
-public class CameraFrame implements ICameraFrame {
+public class CameraFrame {
 
     private Mat mYuvFrameData;
     private Mat mRgba;
@@ -18,20 +15,52 @@ public class CameraFrame implements ICameraFrame {
     private int mHeight;
     private boolean mRgbaConverted;
 
-    public CameraFrame(Mat Yuv420sp, int width, int height) {
+    /**
+     * CameraFrame constructor.
+     *
+     * @param frame  frame Mat where to store the frame data.
+     * @param width  frame width.
+     * @param height frame height.
+     */
+    CameraFrame(Mat frame, int width, int height) {
         super();
         mWidth = width;
         mHeight = height;
-        mYuvFrameData = Yuv420sp;
+        mYuvFrameData = frame;
         mRgba = new Mat();
     }
 
-    @Override
+    /**
+     * Stores the frame data from a byte array.
+     *
+     * @param frameData byte array with the data.
+     */
+    synchronized void putFrameData(byte[] frameData) {
+        mYuvFrameData.put(0, 0, frameData);
+        invalidate();
+    }
+
+    /**
+     * Returns single channel gray scale Mat with the frame.
+     *
+     * @return gray Mat.
+     */
     public Mat gray() {
         return mYuvFrameData.submat(0, mHeight, 0, mWidth);
     }
 
-    @Override
+    /**
+     * Invalidates cached mat.
+     */
+    private void invalidate() {
+        mRgbaConverted = false;
+    }
+
+    /**
+     * Returns RGBA Mat with the frame.
+     *
+     * @return RGBA Mat.
+     */
     public Mat rgba() {
         if (!mRgbaConverted) {
             Imgproc.cvtColor(mYuvFrameData, mRgba, Imgproc.COLOR_YUV2BGR_NV12, 4);
@@ -40,16 +69,10 @@ public class CameraFrame implements ICameraFrame {
         return mRgba;
     }
 
-    public synchronized void put(byte[] frame) {
-        mYuvFrameData.put(0, 0, frame);
-        invalidate();
-    }
-
+    /**
+     * Deallocates frame data.
+     */
     public void release() {
         mRgba.release();
-    }
-
-    public void invalidate() {
-        mRgbaConverted = false;
     }
 }

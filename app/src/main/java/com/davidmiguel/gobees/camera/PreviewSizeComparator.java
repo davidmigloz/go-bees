@@ -5,10 +5,10 @@ import android.hardware.Camera;
 import java.util.Comparator;
 
 /**
- * Comparator for preview sizes.
+ * Comparator for camera preview sizes.
  */
 @SuppressWarnings("deprecation")
-class PreviewSizeComparer implements Comparator<Camera.Size> {
+class PreviewSizeComparator implements Comparator<Camera.Size> {
     @Override
     public int compare(Camera.Size arg0, Camera.Size arg1) {
         // Check nulls

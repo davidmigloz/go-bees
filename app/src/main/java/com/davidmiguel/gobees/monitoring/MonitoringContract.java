@@ -41,8 +41,10 @@ interface MonitoringContract {
 
         /**
          * Starts recording service.
+         *
+         * @param ms monitoring settings.
          */
-        void startRecordingService();
+        void startRecordingService(MonitoringSettings ms);
 
         /**
          * Hides the camera preview view and stops its logic.
@@ -66,6 +68,12 @@ interface MonitoringContract {
          * Hides settings view.
          */
         void hideSettings();
+
+        /**
+         * Get monitoring settings.
+         * @return monitoring settings.
+         */
+        MonitoringSettings getMonitoringSettings();
     }
 
     interface Presenter extends BasePresenter {
