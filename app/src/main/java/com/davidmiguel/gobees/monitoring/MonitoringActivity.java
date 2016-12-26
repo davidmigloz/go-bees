@@ -11,6 +11,7 @@ import com.davidmiguel.gobees.utils.ActivityUtils;
  */
 public class MonitoringActivity extends AppCompatActivity {
 
+    public static final int REQUEST_MONITORING = 1;
     public static final int NO_HIVE = -1;
 
     private MonitoringFragment monitoringFragment;

@@ -69,6 +69,14 @@ interface HiveContract {
     interface Presenter extends BasePresenter {
 
         /**
+         * Shows a snackbar showing whether a hive was successfully added or not.
+         *
+         * @param requestCode request code from the intent.
+         * @param resultCode  result code from the intent.
+         */
+        void result(int requestCode, int resultCode);
+
+        /**
          * Load recordings from repository.
          *
          * @param forceUpdate force cache update.

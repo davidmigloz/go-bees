@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 import com.davidmiguel.gobees.monitoring.MonitoringFragment;
@@ -139,6 +138,11 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        presenter.result(requestCode, resultCode);
+    }
+
+    @Override
     public void setLoadingIndicator(final boolean active) {
         if (getView() == null) {
             return;
@@ -165,7 +169,7 @@ public class HiveRecordingsFragment extends Fragment
     public void startNewRecording(long hiveId) {
         Intent intent = new Intent(getContext(), MonitoringActivity.class);
         intent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, hiveId);
-        getActivity().startActivity(intent);
+        startActivityForResult(intent, MonitoringActivity.REQUEST_MONITORING);
     }
 
     @Override

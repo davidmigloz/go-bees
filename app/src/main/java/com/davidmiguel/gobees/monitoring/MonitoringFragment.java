@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.monitoring;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -204,6 +205,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         stopIntent.setAction(MonitoringService.STOP_ACTION);
         getActivity().startService(stopIntent);
         // Finish activity
+        getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
     }
 
@@ -224,7 +226,8 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         // Hide controls
         numBeesTV.setVisibility(View.GONE);
         settingsIcon.setVisibility(View.GONE);
-        // Record button -> red color
+        // Show red stop button
+        recordIcon.setImageResource(R.drawable.ic_stop);
         recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));
         // Stop listener
         recordIcon.setOnClickListener(new View.OnClickListener() {

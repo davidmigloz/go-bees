@@ -33,6 +33,16 @@ class HivePresenter implements HiveContract.Presenter {
     }
 
     @Override
+    public void result(int requestCode, int resultCode) {
+        // If a recording was successfully saved, show snackbar
+        if (MonitoringActivity.REQUEST_MONITORING == requestCode && Activity.RESULT_OK == resultCode) {
+            // Refresh recordings
+            loadRecordings(true);
+            // Show message
+            hiveView.showSuccessfullySavedMessage();
+        }
+    }
+    @Override
     public void loadRecordings(boolean forceUpdate) {
         // Force update the first time
         forceUpdate = forceUpdate || firstLoad;
