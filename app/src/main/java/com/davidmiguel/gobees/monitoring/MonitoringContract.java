@@ -12,7 +12,6 @@ import org.opencv.android.CameraBridgeViewBase;
 interface MonitoringContract {
 
     interface View extends BaseView<MonitoringContract.Presenter> {
-
         /**
          * Inits OpenCV lib.
          *
@@ -47,13 +46,23 @@ interface MonitoringContract {
         void startRecordingService(MonitoringSettings ms);
 
         /**
-         * Hides the camera preview view and stops its logic.
+         * Stop recording service.
          */
-        void stopCameraPreview();
+        void stopRecordingService();
+
+
+        /**
+         * Binds to the recording service.
+         */
+        void bindRecordingService();
+
+        /**
+         * Shows a view to notice that the monitoring service is running.
+         */
+        void showMonitoringView();
     }
 
     interface SettingsView extends BaseView<MonitoringContract.Presenter> {
-
         /**
          * Inits settings and set the values stored in settings.
          */
@@ -71,6 +80,7 @@ interface MonitoringContract {
 
         /**
          * Get monitoring settings.
+         *
          * @return monitoring settings.
          */
         MonitoringSettings getMonitoringSettings();
@@ -92,6 +102,11 @@ interface MonitoringContract {
          * Start recording.
          */
         void startRecording();
+
+        /**
+         * Stop recording.
+         */
+        void stopRecording();
 
         /**
          * Closes settings view.
@@ -132,5 +147,12 @@ interface MonitoringContract {
          * @param ratio zoom (100 = x1, 200 = x2…).
          */
         void updateAlgoZoom(int ratio);
+
+        /**
+         * Start presenter logic. It should be called by the view when it is prepared.
+         *
+         * @param serviceRunning whether the monitoring service is running.
+         */
+        void start(boolean serviceRunning);
     }
 }

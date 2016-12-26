@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,11 +45,12 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     private CameraView cameraView;
     private TextView numBeesTV;
     private RelativeLayout settingsLayout;
+    private ImageView settingsIcon;
     private ImageView recordIcon;
+    private Chronometer chronometer;
 
     private MonitoringService mService;
     private ServiceConnection mConnection;
-    private boolean mBound = false;
 
 
     public MonitoringFragment() {
@@ -87,9 +89,10 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         cameraView = (CameraView) root.findViewById(R.id.camera_view);
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
         settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
+        chronometer = (Chronometer) root.findViewById(R.id.chronometer);
 
         // Configure icons
-        ImageView settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
+        settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,13 +113,14 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
             public void onServiceConnected(ComponentName componentName, IBinder service) {
                 MonitoringBinder binder = (MonitoringBinder) service;
                 mService = binder.getService();
-                mBound = true;
+                // Set chronometer
+                chronometer.setBase(mService.getStartTime());
+                chronometer.start();
             }
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
                 mService = null;
-                mBound = false;
             }
         };
         return root;
@@ -125,7 +129,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        presenter.start(MonitoringService.isRunning());
     }
 
     @Override
@@ -187,23 +191,49 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public void startRecordingService(MonitoringSettings ms) {
-        // Start and bind to service
         Intent intent = new Intent(getActivity(), MonitoringService.class);
         intent.setAction(MonitoringService.START_ACTION);
         intent.putExtra(MonitoringService.ARGUMENT_MON_SETTINGS, ms);
         getActivity().startService(intent);
-        getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        // Record button -> red color
-        recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));
     }
 
     @Override
-    public void stopCameraPreview() {
+    public void stopRecordingService() {
+        // Stop service
+        Intent stopIntent = new Intent(getActivity(), MonitoringService.class);
+        stopIntent.setAction(MonitoringService.STOP_ACTION);
+        getActivity().startService(stopIntent);
+        // Finish activity
+        getActivity().finish();
+    }
+
+    @Override
+    public void bindRecordingService() {
+        Intent intent = new Intent(getActivity(), MonitoringService.class);
+        getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    public void showMonitoringView() {
+        // Hide camera view
         if (cameraView != null) {
             cameraView.disableView();
             cameraView.setVisibility(View.GONE);
             loaderCallback = null;
         }
+        // Hide controls
+        numBeesTV.setVisibility(View.GONE);
+        settingsIcon.setVisibility(View.GONE);
+        // Record button -> red color
+        recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));
+        // Stop listener
+        recordIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Stop recording service
+                presenter.stopRecording();
+            }
+        });
     }
 
     @Override

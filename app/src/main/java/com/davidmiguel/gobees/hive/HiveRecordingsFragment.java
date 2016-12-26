@@ -139,11 +139,6 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.result(requestCode, resultCode);
-    }
-
-    @Override
     public void setLoadingIndicator(final boolean active) {
         if (getView() == null) {
             return;
@@ -170,7 +165,7 @@ public class HiveRecordingsFragment extends Fragment
     public void startNewRecording(long hiveId) {
         Intent intent = new Intent(getContext(), MonitoringActivity.class);
         intent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, hiveId);
-        startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
+        getActivity().startActivity(intent);
     }
 
     @Override

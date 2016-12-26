@@ -1,6 +1,5 @@
 package com.davidmiguel.gobees.monitoring;
 
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
 
@@ -14,7 +13,6 @@ import org.opencv.core.Mat;
  */
 class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewListener2 {
 
-    private GoBeesRepository goBeesRepository;
     private MonitoringContract.View view;
     private MonitoringContract.SettingsView settingsView;
 
@@ -23,9 +21,8 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     private Mat processedFrame;
     private boolean showAlgoOutput;
 
-    MonitoringPresenter(GoBeesRepository goBeesRepository, MonitoringContract.View view,
-                        MonitoringContract.SettingsView settingsView, long hiveId) {
-        this.goBeesRepository = goBeesRepository;
+    MonitoringPresenter(MonitoringContract.View view, MonitoringContract.SettingsView settingsView,
+                        long hiveId) {
         this.view = view;
         this.view.setPresenter(this);
         this.settingsView = settingsView;
@@ -45,10 +42,20 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
 
     @Override
     public void startRecording() {
-        view.stopCameraPreview();
-        // Get settings
+        // Show monitoring view
+        view.showMonitoringView();
+        // Get settings and set hive id
         MonitoringSettings ms = settingsView.getMonitoringSettings();
+        ms.setHiveId(hiveId);
+        // Start recording service
         view.startRecordingService(ms);
+        // Bind to service
+        view.bindRecordingService();
+    }
+
+    @Override
+    public void stopRecording() {
+        view.stopRecordingService();
     }
 
     @Override
@@ -82,8 +89,20 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
+    public void start(boolean serviceRunning) {
+        if (serviceRunning) {
+            // Bind to service (that is already running)
+            view.bindRecordingService();
+            view.showMonitoringView();
+        } else {
+            // Start camera view
+            view.initOpenCV(this);
+        }
+    }
+
+    @Override
     public void start() {
-        view.initOpenCV(this);
+        // Not needed
     }
 
     @Override

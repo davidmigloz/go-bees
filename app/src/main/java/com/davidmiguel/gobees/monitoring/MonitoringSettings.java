@@ -10,6 +10,11 @@ import java.io.Serializable;
 class MonitoringSettings implements Serializable {
 
     /**
+     * Hive id.
+     */
+    private long hiveId;
+
+    /**
      * Blob blobSize. This causes regions within an image get "thicker" or "thinner".
      */
     private BeesCounter.BlobSize blobSize;
@@ -39,7 +44,15 @@ class MonitoringSettings implements Serializable {
      */
     private int zoomRatio;
 
-    public BeesCounter.BlobSize getBlobSize() {
+    long getHiveId() {
+        return hiveId;
+    }
+
+    void setHiveId(long hiveId) {
+        this.hiveId = hiveId;
+    }
+
+    BeesCounter.BlobSize getBlobSize() {
         return blobSize;
     }
 
@@ -47,7 +60,7 @@ class MonitoringSettings implements Serializable {
         this.blobSize = blobSize;
     }
 
-    public double getMinArea() {
+    double getMinArea() {
         return minArea;
     }
 
@@ -55,7 +68,7 @@ class MonitoringSettings implements Serializable {
         this.minArea = minArea;
     }
 
-    public double getMaxArea() {
+    double getMaxArea() {
         return maxArea;
     }
 
@@ -63,7 +76,7 @@ class MonitoringSettings implements Serializable {
         this.maxArea = maxArea;
     }
 
-    public int getMaxFrameWidth() {
+    int getMaxFrameWidth() {
         return maxFrameWidth;
     }
 
@@ -71,7 +84,7 @@ class MonitoringSettings implements Serializable {
         this.maxFrameWidth = maxFrameWidth;
     }
 
-    public int getMaxFrameHeight() {
+    int getMaxFrameHeight() {
         return maxFrameHeight;
     }
 
@@ -79,7 +92,7 @@ class MonitoringSettings implements Serializable {
         this.maxFrameHeight = maxFrameHeight;
     }
 
-    public int getZoomRatio() {
+    int getZoomRatio() {
         return zoomRatio;
     }
 

@@ -6,7 +6,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context="com.davidmiguel.gobees.monitoring.MonitoringActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="false"
+            android:contentDescription="@string/gobees_logo"
+            android:src="@drawable/gobees_bee"/>
+
+        <TextView
+            android:id="@+id/monitoring_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/monitoring_text"
+            android:textAlignment="center"
+            android:textColor="@color/colorCameraControlsIcons"/>
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colorCameraControlsIcons"/>
+    </LinearLayout>
+
 
     <com.davidmiguel.gobees.camera.CameraView
         android:id="@+id/camera_view"
@@ -18,16 +54,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/num_bees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"/>
 
         <LinearLayout
             android:layout_width="88dp"
@@ -48,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:adjustViewBounds="false"
-                    android:contentDescription="@string/more_icon"
+                    android:contentDescription="@string/settings_icon"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_settings"
                     android:tint="@color/colorCameraControlsIcons"/>
@@ -65,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="88dp"
                     android:adjustViewBounds="false"
-                    android:contentDescription="@string/more_icon"
+                    android:contentDescription="@string/start_record_icon"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_fiber_manual_record"
                     android:tint="@color/colorCameraControlsIcons"/>
@@ -77,21 +103,20 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/switch_off_screen_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:adjustViewBounds="false"
-                    android:contentDescription="@string/more_icon"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_power_settings_new"
-                    android:tint="@color/colorCameraControlsIcons"/>
+                <TextView
+                    android:id="@+id/num_bees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/num_bees_default"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorCameraControlsIcons"
+                    android:textSize="20sp"/>
             </LinearLayout>
 
         </LinearLayout>
 
     </RelativeLayout>
-
 
 
 </FrameLayout>
