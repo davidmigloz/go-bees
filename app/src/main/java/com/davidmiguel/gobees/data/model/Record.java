@@ -38,6 +38,10 @@ public class Record extends RealmObject implements Comparable<Record> {
         this.numBees = numBees;
     }
 
+    public Record(Date timestamp, int numBees) {
+        this(-1, timestamp, numBees);
+    }
+
     public long getId() {
         return id;
     }

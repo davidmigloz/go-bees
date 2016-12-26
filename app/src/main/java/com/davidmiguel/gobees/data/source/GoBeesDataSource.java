@@ -144,6 +144,15 @@ public interface GoBeesDataSource {
     void saveRecord(long hiveId, @NonNull Record record, @NonNull TaskCallback callback);
 
     /**
+     * Saves given list of records.
+     * Note: record must be a new unmanaged object (don't modify managed objects).
+     *
+     * @param records  list of record unmanaged objects.
+     * @param callback TaskCallback.
+     */
+    void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull TaskCallback callback);
+
+    /**
      * Get recording with records of given period.
      *
      * @param hiveId   hive id.

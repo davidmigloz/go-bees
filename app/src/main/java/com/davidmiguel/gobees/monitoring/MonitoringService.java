@@ -10,13 +10,16 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
+import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.camera.AndroidCamera;
 import com.davidmiguel.gobees.camera.AndroidCameraImpl;
 import com.davidmiguel.gobees.camera.AndroidCameraListener;
 import com.davidmiguel.gobees.camera.CameraFrame;
+import com.davidmiguel.gobees.data.model.Record;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
 
@@ -24,7 +27,9 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Monitoring service.
@@ -34,13 +39,13 @@ import java.util.Date;
 public class MonitoringService extends Service implements AndroidCameraListener {
 
     public static final String ARGUMENT_MON_SETTINGS = "MONITORING_SETTINGS";
-    private static final String TAG = MonitoringService.class.getSimpleName();
     public static String START_ACTION = "start_action";
     public static String STOP_ACTION = "stop_action";
     public static int NOTIFICATION_ID = 101;
     private static MonitoringService INSTANCE = null;
-
     private final IBinder mBinder = new MonitoringBinder();
+    private GoBeesRepository goBeesRepository;
+    private List<Record> records;
     private AndroidCamera androidCamera;
     private BeesCounter bc;
     private MonitoringSettings monitoringSettings;
@@ -60,6 +65,11 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
+        // Init record list
+        records = new ArrayList<>();
+        // Init db
+        goBeesRepository = Injection.provideApiariesRepository();
+        goBeesRepository.openDb();
     }
 
     @Override
@@ -80,8 +90,18 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
             // STOP action
         } else if (intent.getAction().equals(STOP_ACTION)) {
-            stopForeground(true);
-            stopSelf();
+            // Save records
+            goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new GoBeesDataSource.TaskCallback() {
+                @Override
+                public void onSuccess() {
+                    stopService();
+                }
+
+                @Override
+                public void onFailure() {
+                    stopService();
+                }
+            });
         }
         return START_STICKY;
     }
@@ -95,6 +115,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             androidCamera.release();
             androidCamera = null;
         }
+        // Close database
+        goBeesRepository.closeDb();
     }
 
     @Nullable
@@ -118,8 +140,11 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
     @Override
     public void onPreviewFrame(CameraFrame cameraFrame) {
+        // Process frame
         int numBees = bc.countBees(cameraFrame.gray());
-        Log.i(TAG, "onPreviewFrame called! Bees: " + numBees);
+        bc.getProcessedFrame().release();
+        // Save record
+        records.add(new Record(new Date(), numBees));
     }
 
     /**
@@ -201,6 +226,14 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         if (!androidCamera.isConnected()) {
             androidCamera.connect();
         }
+    }
+
+    /**
+     * Stop service.
+     */
+    private void stopService() {
+        stopForeground(true);
+        stopSelf();
     }
 
     /**
