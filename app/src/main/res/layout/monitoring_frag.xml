@@ -47,6 +47,7 @@
     <com.davidmiguel.gobees.camera.CameraView
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
+        android:layout_marginEnd="24dp"
         android:layout_height="match_parent"
         opencv:camera_id="any"
         opencv:show_fps="false"/>
