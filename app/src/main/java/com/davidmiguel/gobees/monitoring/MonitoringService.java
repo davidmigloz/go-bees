@@ -90,6 +90,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
             // STOP action
         } else if (intent.getAction().equals(STOP_ACTION)) {
+            // Save final record (to know the ending of the recording)
+            records.add(new Record(new Date(), -1));
             // Save records
             goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new GoBeesDataSource.TaskCallback() {
                 @Override
@@ -136,6 +138,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         Date now = new Date();
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         startTime = now.getTime() - elapsedRealtimeOffset;
+        // Save initial record (to know the beginning of the recording)
+        records.add(new Record(new Date(), -1));
     }
 
     @Override
