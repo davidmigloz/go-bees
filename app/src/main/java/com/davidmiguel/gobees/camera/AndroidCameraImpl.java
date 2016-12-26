@@ -1,6 +1,5 @@
 package com.davidmiguel.gobees.camera;
 
-import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -12,6 +11,8 @@ import org.opencv.core.Mat;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Implementation of the Android camera that retrieves the frames in OpenCV Mat format.
@@ -33,14 +34,16 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     private final AndroidCameraListener user;
     private final CameraHandlerThread mThread;
     private final int cameraIndex;
-    private Camera mCamera;
+    private android.hardware.Camera mCamera;
     private int mMaxFrameWidth;
     private int mMaxFrameHeight;
     private int mZoomRatio;
+    private long delay;
+    private long period;
+    private TakePhotoTask takePhotoTask;
+    private Timer timer;
     private CameraFrame mCameraFrame;
     private SurfaceTexture texture = new SurfaceTexture(0);
-
-    private byte[] mBuffer;
 
     /**
      * AndroidCameraImpl constructor.
@@ -59,16 +62,17 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         this.mMaxFrameWidth = maxFrameWidth;
         this.mMaxFrameHeight = maxFrameHeight;
         this.mZoomRatio = zoomRatio;
+        this.delay = 1000;
+        this.period = 1000;
         this.mThread = new CameraHandlerThread(this);
+        this.takePhotoTask = new TakePhotoTask();
+        this.timer = new Timer();
     }
 
     @Override
-    public void onPreviewFrame(byte[] frame, Camera camera) {
+    public void onPreviewFrame(byte[] frame, android.hardware.Camera camera) {
         mCameraFrame.putFrameData(frame);
         user.onPreviewFrame(mCameraFrame);
-        if (mCamera != null) {
-            mCamera.addCallbackBuffer(mBuffer);
-        }
     }
 
     @Override
@@ -85,6 +89,10 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     @Override
     public void release() {
         synchronized (this) {
+            // Stop task
+            timer.cancel();
+            timer = null;
+            takePhotoTask = null;
             // Release thread
             mThread.interrupt();
             // Release camera
@@ -114,6 +122,13 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         return mCamera != null;
     }
 
+    @Override
+    public void updateFrameRate(long delay, long period) {
+        this.delay = delay;
+        this.period = period;
+        timer.scheduleAtFixedRate(takePhotoTask, delay, delay);
+    }
+
     /**
      * Starts capturing and converting preview frames.
      */
@@ -128,10 +143,6 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         Camera.Parameters params = mCamera.getParameters();
         int mFrameWidth = params.getPreviewSize().width;
         int mFrameHeight = params.getPreviewSize().height;
-        // Create frame data buffer
-        int frameSize = mFrameWidth * mFrameHeight
-                * ImageFormat.getBitsPerPixel(params.getPreviewFormat()) / 8;
-        this.mBuffer = new byte[frameSize];
         // Create frame mat
         Mat mFrame = new Mat(mFrameHeight + (mFrameHeight / 2), mFrameWidth, CvType.CV_8UC1);
         mCameraFrame = new CameraFrame(mFrame, mFrameWidth, mFrameHeight);
@@ -145,9 +156,8 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         // Set camera callbacks and start capturing
         try {
             mCamera.setPreviewTexture(texture);
-            mCamera.addCallbackBuffer(mBuffer);
-            mCamera.setPreviewCallbackWithBuffer(this);
             mCamera.startPreview();
+            timer.scheduleAtFixedRate(takePhotoTask, delay, period);
         } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
@@ -264,5 +274,13 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
             params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
         }
         camera.setParameters(params);
+    }
+
+    // Timer task for continuous triggering of preview callbacks
+    private class TakePhotoTask extends TimerTask {
+        @Override
+        public void run() {
+            mCamera.setOneShotPreviewCallback(AndroidCameraImpl.this);
+        }
     }
 }

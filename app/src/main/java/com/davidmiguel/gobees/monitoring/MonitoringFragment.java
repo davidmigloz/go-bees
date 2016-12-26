@@ -22,8 +22,8 @@ import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.camera.CameraView;
-import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 import com.davidmiguel.gobees.monitoring.MonitoringService.MonitoringBinder;
+import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
@@ -104,7 +104,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         recordIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.startRecording();
+                presenter.startMonitoring();
             }
         });
 
@@ -192,6 +192,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public void startRecordingService(MonitoringSettings ms) {
+        // Start service
         Intent intent = new Intent(getActivity(), MonitoringService.class);
         intent.setAction(MonitoringService.START_ACTION);
         intent.putExtra(MonitoringService.ARGUMENT_MON_SETTINGS, ms);
@@ -216,7 +217,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
-    public void showMonitoringView() {
+    public void hideCameraView() {
         // Hide camera view
         if (cameraView != null) {
             cameraView.disableView();
@@ -226,6 +227,12 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         // Hide controls
         numBeesTV.setVisibility(View.GONE);
         settingsIcon.setVisibility(View.GONE);
+        recordIcon.setOnClickListener(null);
+
+    }
+
+    @Override
+    public void showMonitoringView() {
         // Show red stop button
         recordIcon.setImageResource(R.drawable.ic_stop);
         recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));

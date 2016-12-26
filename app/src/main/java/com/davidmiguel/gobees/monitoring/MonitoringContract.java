@@ -57,7 +57,12 @@ interface MonitoringContract {
         void bindRecordingService();
 
         /**
-         * Shows a view to notice that the monitoring service is running.
+         * Hides the camera preview.
+         */
+        void hideCameraView();
+
+        /**
+         * Hides count down and shows monitoring view.
          */
         void showMonitoringView();
     }
@@ -99,9 +104,9 @@ interface MonitoringContract {
         void openSettings();
 
         /**
-         * Start recording.
+         * Starts the monitoring.
          */
-        void startRecording();
+        void startMonitoring();
 
         /**
          * Stop recording.

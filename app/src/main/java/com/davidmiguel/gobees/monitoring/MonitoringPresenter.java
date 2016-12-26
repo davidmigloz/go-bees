@@ -41,12 +41,14 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
-    public void startRecording() {
-        // Show monitoring view
-        view.showMonitoringView();
+    public void startMonitoring() {
         // Get settings and set hive id
         MonitoringSettings ms = settingsView.getMonitoringSettings();
         ms.setHiveId(hiveId);
+        // Hide camera view
+        view.hideCameraView();
+        // Show monitoring view
+        view.showMonitoringView();
         // Start recording service
         view.startRecordingService(ms);
         // Bind to service
@@ -93,7 +95,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
         if (serviceRunning) {
             // Bind to service (that is already running)
             view.bindRecordingService();
-            view.showMonitoringView();
+            view.hideCameraView();
         } else {
             // Start camera view
             view.initOpenCV(this);

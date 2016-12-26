@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Binder;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -90,6 +91,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
             // STOP action
         } else if (intent.getAction().equals(STOP_ACTION)) {
+            // Release camera
+            androidCamera.release();
             // Save final record (to know the ending of the recording)
             records.add(new Record(new Date(), -1));
             // Save records
