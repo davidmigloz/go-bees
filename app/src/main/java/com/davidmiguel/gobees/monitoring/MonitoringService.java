@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Binder;
-import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -28,9 +27,8 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Monitoring service.
@@ -40,13 +38,16 @@ import java.util.List;
 public class MonitoringService extends Service implements AndroidCameraListener {
 
     public static final String ARGUMENT_MON_SETTINGS = "MONITORING_SETTINGS";
-    public static String START_ACTION = "start_action";
-    public static String STOP_ACTION = "stop_action";
-    public static int NOTIFICATION_ID = 101;
+    public static final String START_ACTION = "start_action";
+    public static final String STOP_ACTION = "stop_action";
+
+    private static final int NOTIFICATION_ID = 101;
+    private static final int T_5_SECONDS = 5000;
+
     private static MonitoringService INSTANCE = null;
     private final IBinder mBinder = new MonitoringBinder();
     private GoBeesRepository goBeesRepository;
-    private List<Record> records;
+    private LinkedList<Record> records;
     private AndroidCamera androidCamera;
     private BeesCounter bc;
     private MonitoringSettings monitoringSettings;
@@ -67,7 +68,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         super.onCreate();
         INSTANCE = this;
         // Init record list
-        records = new ArrayList<>();
+        records = new LinkedList<>();
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
@@ -89,12 +90,12 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             // Start service in foreground
             startForeground(NOTIFICATION_ID, n);
 
-            // STOP action
+        // STOP action
         } else if (intent.getAction().equals(STOP_ACTION)) {
             // Release camera
             androidCamera.release();
-            // Save final record (to know the ending of the recording)
-            records.add(new Record(new Date(), -1));
+            // Clean records
+            cleanRecords();
             // Save records
             goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new GoBeesDataSource.TaskCallback() {
                 @Override
@@ -141,8 +142,6 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         Date now = new Date();
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         startTime = now.getTime() - elapsedRealtimeOffset;
-        // Save initial record (to know the beginning of the recording)
-        records.add(new Record(new Date(), -1));
     }
 
     @Override
@@ -241,6 +240,28 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private void stopService() {
         stopForeground(true);
         stopSelf();
+    }
+
+    /**
+     * Delete first and last records that usually contain noise and add two special records
+     * at the beginning and ending to know the limits of the recording.
+     */
+    private void cleanRecords() {
+        long initTime = records.getFirst().getTimestamp().getTime();
+        long endTime = records.getLast().getTimestamp().getTime();
+        // Delete first seconds
+        while (records.size() > 0 && records.getFirst().getTimestamp().getTime() - initTime < T_5_SECONDS) {
+            records.removeFirst();
+        }
+        // Delete last seconds
+        while (records.size() > 0 && endTime - records.getLast().getTimestamp().getTime() < T_5_SECONDS) {
+            records.removeLast();
+        }
+        // Save initial and last record (to know the beginning and ending of the recording)
+        if (records.size() > 0) {
+            records.getFirst().setNumBees(-1);
+            records.getLast().setNumBees(-1);
+        }
     }
 
     /**

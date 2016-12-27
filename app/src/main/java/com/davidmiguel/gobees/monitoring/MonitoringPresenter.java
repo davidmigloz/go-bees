@@ -96,6 +96,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
             // Bind to service (that is already running)
             view.bindRecordingService();
             view.hideCameraView();
+            view.showMonitoringView();
         } else {
             // Start camera view
             view.initOpenCV(this);

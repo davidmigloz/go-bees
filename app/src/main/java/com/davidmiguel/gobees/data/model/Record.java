@@ -58,6 +58,10 @@ public class Record extends RealmObject implements Comparable<Record> {
         return numBees;
     }
 
+    public void setNumBees(int numBees) {
+        this.numBees = numBees;
+    }
+
     @Override
     public int compareTo(@NonNull Record r) {
         return this.getTimestamp().compareTo(r.getTimestamp());
