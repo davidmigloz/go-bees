@@ -48,14 +48,13 @@ public class ApiaryHivesFragment extends Fragment
     private View noHivesView;
     private LinearLayout hivesView;
 
-    public ApiaryHivesFragment() {
-        // Requires empty public constructor
+    public static ApiaryHivesFragment newInstance(long apiaryId) {
+        Bundle arguments = new Bundle();
+        arguments.putLong(ARGUMENT_APIARY_ID, apiaryId);
+        ApiaryHivesFragment fragment = new ApiaryHivesFragment();
+        fragment.setArguments(arguments);
+        return fragment;
     }
-
-    public static ApiaryHivesFragment newInstance() {
-        return new ApiaryHivesFragment();
-    }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

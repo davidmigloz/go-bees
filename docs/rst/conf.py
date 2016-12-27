@@ -236,11 +236,11 @@ htmlhelp_basename = 'GoBeesDoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-     # The paper size ('letterpaper' or 'a4paper').
+     # The paper blobSize ('letterpaper' or 'a4paper').
      #
      # 'papersize': 'letterpaper',
 
-     # The font size ('10pt', '11pt' or '12pt').
+     # The font blobSize ('10pt', '11pt' or '12pt').
      #
      # 'pointsize': '10pt',
 

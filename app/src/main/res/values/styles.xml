@@ -12,6 +12,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Full screen theme -->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="Base.AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
 </resources>

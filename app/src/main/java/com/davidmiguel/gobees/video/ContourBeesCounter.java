@@ -16,6 +16,7 @@ import org.opencv.core.Mat;
 public class ContourBeesCounter implements BeesCounter {
 
     private static final String TAG = "ContourBeesCounter";
+    private static ContourBeesCounter INSTANCE;
 
     private Blur blur;
     private BackgroundSubtractor bs;
@@ -28,26 +29,18 @@ public class ContourBeesCounter implements BeesCounter {
      * History is initialized to 10 and shadows threshold to 0.7.
      * minArea is initialized to 15 and maxArea to 800.
      */
-    public ContourBeesCounter() {
+    private ContourBeesCounter() {
         blur = new Blur();
         bs = new BackgroundSubtractor();
         morphology = new Morphology();
         cf = new ContoursFinder();
     }
 
-    /**
-     * ContourBeesCounter constructor.
-     *
-     * @param history         the number of frames to consider in the background model.
-     * @param shadowThreshold the threshold to consider a pixel as shadow or not.
-     * @param minArea         the min area to consider a contour a bee.
-     * @param maxArea         the max area to consider a contour a bee.
-     */
-    ContourBeesCounter(int history, double shadowThreshold, double minArea, double maxArea) {
-        blur = new Blur();
-        bs = new BackgroundSubtractor(history, shadowThreshold);
-        morphology = new Morphology();
-        cf = new ContoursFinder(minArea, maxArea);
+    public static ContourBeesCounter getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ContourBeesCounter();
+        }
+        return INSTANCE;
     }
 
     @Override

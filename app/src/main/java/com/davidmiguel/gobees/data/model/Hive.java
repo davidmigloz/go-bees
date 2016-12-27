@@ -122,9 +122,15 @@ public class Hive extends RealmObject {
         this.recordings = recordings;
     }
 
-    public void addRecord(@NonNull Record record){
+    public void addRecord(@NonNull Record record) {
         if (records != null) {
             records.add(record);
+        }
+    }
+
+    public void addRecords(@NonNull List<Record> recordsList) {
+        if (records != null) {
+            records.addAll(recordsList);
         }
     }
 }

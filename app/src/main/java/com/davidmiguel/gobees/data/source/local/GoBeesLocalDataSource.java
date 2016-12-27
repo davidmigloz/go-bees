@@ -251,6 +251,36 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void saveRecords(final long hiveId, @NonNull final List<Record> records,
+                            @NonNull TaskCallback callback) {
+        try {
+            // Get first id
+            Number n = realm.where(Record.class).max("id");
+            long nextId = n != null ? n.longValue() + 1 : 0;
+            // Set ids
+            for (Record r : records) {
+                r.setId(nextId++);
+            }
+            // Save records
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Save records
+                    for (Record r : records) {
+                        realm.copyToRealmOrUpdate(r);
+                    }
+                    // Add to hive
+                    Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+                    hive.addRecords(records);
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @Override
     public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
         // Get hive
         Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();

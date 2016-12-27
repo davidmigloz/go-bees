@@ -49,7 +49,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @Test
     public void case1() throws Exception {
         logger.debug("Case1:");
-        BeesCounter bc = new ContourBeesCounter();
+        BeesCounter bc = ContourBeesCounter.getInstance();
         double error = calculateRelativeError(bc, "c14");
         System.out.println("Error case1: " + df.format(error));
         assertTrue(error < MAX_ERROR_THRESHOLD);
@@ -61,7 +61,9 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @Test
     public void case2() throws Exception {
         logger.debug("Case2:");
-        BeesCounter bc = new ContourBeesCounter(10, 0.7, 30, 800);
+        BeesCounter bc = ContourBeesCounter.getInstance();
+        bc.updateMinArea(30.0);
+        bc.updateMaxArea(800.0);
         double error = calculateRelativeError(bc, "c17");
         System.out.println("Error case2: " + df.format(error));
         assertTrue(error < MAX_ERROR_THRESHOLD);
@@ -73,7 +75,9 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @Test
     public void case3() throws Exception {
         logger.debug("Case3:");
-        BeesCounter bc = new ContourBeesCounter(10, 0.7, 30, 2000);
+        BeesCounter bc = ContourBeesCounter.getInstance();
+        bc.updateMinArea(30.0);
+        bc.updateMaxArea(2000.0);
         double error = calculateRelativeError(bc, "c5");
         System.out.println("Error case3: " + df.format(error));
         assertTrue(error < MAX_ERROR_THRESHOLD);
