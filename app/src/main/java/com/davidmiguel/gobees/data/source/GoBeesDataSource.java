@@ -64,10 +64,10 @@ public interface GoBeesDataSource {
     /**
      * Delete apiary.
      *
-     * @param apiary   apiary to delete.
+     * @param apiaryId apiary id.
      * @param callback TaskCallback.
      */
-    void deleteApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback);
+    void deleteApiary(long apiaryId, @NonNull TaskCallback callback);
 
     /**
      * Delete all apiaries.

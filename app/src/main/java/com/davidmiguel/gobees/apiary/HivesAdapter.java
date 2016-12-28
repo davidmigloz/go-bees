@@ -28,8 +28,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
 
-    private MenuInflater menuInflater;
     private List<Hive> hives;
+    private MenuInflater menuInflater;
     private HivesAdapter.HiveItemListener listener;
 
     HivesAdapter(MenuInflater menuInflater, List<Hive> hives,

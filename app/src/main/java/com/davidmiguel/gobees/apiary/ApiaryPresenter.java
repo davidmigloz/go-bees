@@ -100,7 +100,7 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
         // Show progress indicator
         view.setLoadingIndicator(true);
         // Delete hive
-        goBeesRepository.deleteHive(hive, new GoBeesDataSource.TaskCallback() {
+        goBeesRepository.deleteHive(apiaryId, hive, new GoBeesDataSource.TaskCallback() {
             @Override
             public void onSuccess() {
                 // The view may not be able to handle UI updates anymore

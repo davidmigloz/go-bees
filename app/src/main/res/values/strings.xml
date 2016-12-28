@@ -57,10 +57,6 @@
     <string name="no_apiaries">You have no apiaries!</string>
     <!-- Msg shown when an apiary is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_apiary_message">Apiary saved!</string>
-    <!-- Msg shown when a apiary is deleted [CHAR LIMIT=100] -->
-    <string name="successfully_deleted_apiary_message">Apiary deleted!</string>
-    <!-- Msg shown when an error occurs when deleting apiary [CHAR LIMIT=100] -->
-    <string name="deleted_apiary_error_message">Error while deleting apiary.</string>
 
     <!--++++++++++++-->
     <!-- Add apiary -->

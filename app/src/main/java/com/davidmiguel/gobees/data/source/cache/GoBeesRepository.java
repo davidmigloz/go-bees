@@ -133,10 +133,15 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
+    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
         checkNotNull(callback);
         // Delete apiary
-        goBeesDataSource.deleteApiary(apiary, callback);
+        goBeesDataSource.deleteApiary(apiaryId, callback);
+        // Do in memory cache update to keep the app UI up to date
+        if (cachedApiaries == null) {
+            cachedApiaries = new LinkedHashMap<>();
+        }
+        cachedApiaries.remove(apiaryId);
     }
 
     @Override
