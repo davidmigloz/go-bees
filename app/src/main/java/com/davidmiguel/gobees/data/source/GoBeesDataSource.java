@@ -126,6 +126,14 @@ public interface GoBeesDataSource {
     void saveHive(long apiaryId, @NonNull Hive hive, @NonNull TaskCallback callback);
 
     /**
+     * Deletes given hive.
+     *
+     * @param hive     hive to delete.
+     * @param callback TaskCallback.
+     */
+    void deleteHive(@NonNull Hive hive, @NonNull TaskCallback callback);
+
+    /**
      * Returns the next hive id.
      * (Realm does not support auto-increment at the moment).
      *
@@ -153,7 +161,7 @@ public interface GoBeesDataSource {
     void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull TaskCallback callback);
 
     /**
-     * Get recording with records of given period.
+     * Gets recording with records of given period.
      *
      * @param hiveId   hive id.
      * @param start    start of the period (00:00 of that date).
@@ -161,6 +169,15 @@ public interface GoBeesDataSource {
      * @param callback GetRecordingCallback.
      */
     void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
+
+    /**
+     * Deletes the records contained in the given recording.
+     *
+     * @param hiveId    hive id.
+     * @param recording recording to delete.
+     * @param callback  TaskCallback.
+     */
+    void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback);
 
     /**
      * Force to update recordings cache.

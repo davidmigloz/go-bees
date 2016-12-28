@@ -16,6 +16,10 @@
     <string name="rain">Rain</string>
     <!-- Wind [CHAR LIMIT=30] -->
     <string name="wind">Wind</string>
+    <!-- Edit action [CHAR LIMIT=30] -->
+    <string name="edit">Edit</string>
+    <!-- Delete action [CHAR LIMIT=30] -->
+    <string name="delete">Delete</string>
 
     <!--+++++++++++++++-->
     <!-- General Icons -->
@@ -93,6 +97,10 @@
     <string name="no_hives">You have no hives!</string>
     <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_hive_message">Hive saved!</string>
+    <!-- Msg shown when a hive is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_hive_message">Hive deleted!</string>
+    <!-- Msg shown when an error occurs when deleting hive [CHAR LIMIT=100] -->
+    <string name="deleted_hive_error_message">Error while deleting hive.</string>
     <!-- Description of last revision icon ic_cached [CHAR LIMIT=100] -->
     <string name="last_revision_icon">Last revision icon</string>
     <!-- Description of hive logo [CHAR LIMIT=100] -->
@@ -129,6 +137,10 @@
     <string name="no_recordings">You have no recordings!</string>
     <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_recording_message">Recording saved!</string>
+    <!-- Msg shown when a recordings is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_recording_message">Recording deleted!</string>
+    <!-- Msg shown when an error occurs when deleting recordings [CHAR LIMIT=100] -->
+    <string name="deleted_recording_error_message">Error while deleting recording.</string>
     <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
     <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
 

@@ -59,7 +59,7 @@ public class ApiaryHivesFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new HivesAdapter(new ArrayList<Hive>(0), this);
+        listAdapter = new HivesAdapter(getActivity().getMenuInflater(), new ArrayList<Hive>(0), this);
     }
 
     @Nullable
@@ -199,6 +199,16 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
+    public void showSuccessfullyDeletedMessage() {
+        showMessage(getString(R.string.successfully_deleted_hive_message));
+    }
+
+    @Override
+    public void showDeletedErrorMessage() {
+        showMessage(getString(R.string.deleted_hive_error_message));
+    }
+
+    @Override
     public void showTitle(@NonNull String title) {
         ActionBar ab = ((ApiaryActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
@@ -223,7 +233,12 @@ public class ApiaryHivesFragment extends Fragment
 
     @Override
     public void onHiveDelete(Hive clickedHive) {
-        // TODO delete hive
+        presenter.deleteHive(clickedHive);
+    }
+
+    @Override
+    public void onOpenMenuClick(View view) {
+        getActivity().openContextMenu(view);
     }
 
     /**

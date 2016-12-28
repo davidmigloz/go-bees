@@ -59,6 +59,16 @@ interface HiveContract {
         void showSuccessfullySavedMessage();
 
         /**
+         * Shows successfully deleted message.
+         */
+        void showSuccessfullyDeletedMessage();
+
+        /**
+         * Shows error while deleting recording message.
+         */
+        void showDeletedErrorMessage();
+
+        /**
          * Sets the title in the action bar.
          *
          * @param title title.
@@ -94,5 +104,12 @@ interface HiveContract {
          * @param recording recording.
          */
         void openRecordingsDetail(@NonNull Recording recording);
+
+        /**
+         * Deletes given recording.
+         *
+         * @param recording recording to delete.
+         */
+        void deleteRecording(@NonNull Recording recording);
     }
 }

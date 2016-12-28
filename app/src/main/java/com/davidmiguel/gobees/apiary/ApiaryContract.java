@@ -55,6 +55,16 @@ interface ApiaryContract {
         void showSuccessfullySavedMessage();
 
         /**
+         * Shows successfully deleted message.
+         */
+        void showSuccessfullyDeletedMessage();
+
+        /**
+         * Shows error while deleting hive message.
+         */
+        void showDeletedErrorMessage();
+
+        /**
          * Sets the title in the action bar.
          * @param title title.
          */
@@ -86,5 +96,12 @@ interface ApiaryContract {
          * @param requestedHive hive to show.
          */
         void openHiveDetail(@NonNull Hive requestedHive);
+
+        /**
+         * Deletes given hive.
+         *
+         * @param hive hive to delete.
+         */
+        void deleteHive(@NonNull Hive hive);
     }
 }

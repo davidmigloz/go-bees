@@ -226,6 +226,24 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void deleteHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+        if (hive.getRecords() == null) {
+            callback.onFailure();
+            return;
+        }
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                // Delete records of the hive
+                hive.getRecords().where().findAll().deleteAllFromRealm();
+                // Delete hive
+                hive.deleteFromRealm();
+            }
+        });
+        callback.onSuccess();
+    }
+
+    @Override
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
         Number nextId = realm.where(Hive.class).max("id");
         callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
@@ -292,12 +310,36 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         RealmResults<Record> records = hive.getRecords()
                 .where()
                 .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(start, 0, 0, 0, 0))
-                .lessThan("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
+                .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
                 .findAll()
                 .sort("timestamp");
         // Create recording
         Recording recording = new Recording(start, new ArrayList<>(records));
         callback.onRecordingLoaded(recording);
+    }
+
+    @Override
+    public void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback) {
+        // Get hive
+        Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+        if (hive == null || hive.getRecords() == null) {
+            callback.onFailure();
+            return;
+        }
+        // Get records to delete
+        final RealmResults<Record> records = hive.getRecords()
+                .where()
+                .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
+                .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
+                .findAll();
+        // Delete records
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                records.deleteAllFromRealm();
+            }
+        });
+        callback.onSuccess();
     }
 
     @Override
