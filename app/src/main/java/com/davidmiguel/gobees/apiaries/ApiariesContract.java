@@ -31,8 +31,10 @@ interface ApiariesContract {
 
         /**
          * Opens activity to add or edit an apiary.
+         *
+         * @param apiaryId apiary id (or -1 for creating a new one).
          */
-        void showAddEditApiary();
+        void showAddEditApiary(long apiaryId);
 
         /**
          * Opens activity to show the details of the given apiary.
@@ -86,8 +88,10 @@ interface ApiariesContract {
 
         /**
          * Orders to open activity to add or edit an apiary.
+         *
+         * @param apiaryId apiary id (or -1 for creating a new one).
          */
-        void addEditApiary();
+        void addEditApiary(long apiaryId);
 
         /**
          * Opens activity to show the details of the given apiary.

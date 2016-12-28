@@ -83,8 +83,8 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     }
 
     @Override
-    public void addEditApiary() {
-        view.showAddEditApiary();
+    public void addEditApiary(long apiaryId) {
+        view.showAddEditApiary(apiaryId);
     }
 
     @Override

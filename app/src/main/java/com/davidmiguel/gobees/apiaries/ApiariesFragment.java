@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
+import com.davidmiguel.gobees.addeditapiary.AddEditApiaryFragment;
 import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
 import com.davidmiguel.gobees.apiary.ApiaryActivity;
 import com.davidmiguel.gobees.apiary.ApiaryHivesFragment;
@@ -80,7 +81,7 @@ public class ApiariesFragment extends Fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addEditApiary();
+                presenter.addEditApiary(AddEditApiaryActivity.NEW_APIARY);
             }
         });
 
@@ -165,8 +166,11 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void showAddEditApiary() {
+    public void showAddEditApiary(long apiaryId) {
         Intent intent = new Intent(getContext(), AddEditApiaryActivity.class);
+        if(apiaryId != AddEditApiaryActivity.NEW_APIARY) {
+            intent.putExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId);
+        }
         startActivityForResult(intent, AddEditApiaryActivity.REQUEST_ADD_APIARY);
     }
 
@@ -213,13 +217,18 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void onApiaryClick(Apiary clickedApiary) {
-        presenter.openApiaryDetail(clickedApiary);
+    public void onApiaryClick(Apiary apiary) {
+        presenter.openApiaryDetail(apiary);
     }
 
     @Override
-    public void onApiaryDelete(Apiary clickedApiary) {
-        presenter.deleteApiary(clickedApiary);
+    public void onApiaryDelete(Apiary apiary) {
+        presenter.deleteApiary(apiary);
+    }
+
+    @Override
+    public void onApiaryEdit(Apiary apiary) {
+        presenter.addEditApiary(apiary.getId());
     }
 
     @Override

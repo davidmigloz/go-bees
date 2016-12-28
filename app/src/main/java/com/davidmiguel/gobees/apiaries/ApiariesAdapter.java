@@ -61,9 +61,11 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
     }
 
     interface ApiaryItemListener {
-        void onApiaryClick(Apiary clickedApiary);
+        void onApiaryClick(Apiary apiary);
 
-        void onApiaryDelete(Apiary clickedApiary);
+        void onApiaryDelete(Apiary apiary);
+
+        void onApiaryEdit(Apiary apiary);
 
         void onOpenMenuClick(View view);
     }
@@ -132,7 +134,7 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.menu_edit:
-                    // TODO
+                    listener.onApiaryEdit(apiaries.get(getAdapterPosition()));
                     return true;
                 case R.id.menu_delete:
                     listener.onApiaryDelete(apiaries.get(getAdapterPosition()));

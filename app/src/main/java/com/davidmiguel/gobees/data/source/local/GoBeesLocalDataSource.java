@@ -119,7 +119,6 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
-            e.printStackTrace();
             callback.onFailure();
         }
     }
