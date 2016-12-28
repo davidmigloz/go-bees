@@ -18,24 +18,24 @@ import java.util.List;
 class ApiariesPresenter implements ApiariesContract.Presenter {
 
     private GoBeesRepository goBeesRepository;
-    private ApiariesContract.View apiariesView;
+    private ApiariesContract.View view;
 
     /**
      * Force update the first time.
      */
     private boolean firstLoad = true;
 
-    ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View apiariesView) {
+    ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View view) {
         this.goBeesRepository = goBeesRepository;
-        this.apiariesView = apiariesView;
-        this.apiariesView.setPresenter(this);
+        this.view = view;
+        this.view.setPresenter(this);
     }
 
     @Override
     public void result(int requestCode, int resultCode) {
         // If a apiary was successfully added, show snackbar
         if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
-            apiariesView.showSuccessfullySavedMessage();
+            view.showSuccessfullySavedMessage();
         }
     }
 
@@ -45,7 +45,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         forceUpdate = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
-        apiariesView.setLoadingIndicator(true);
+        view.setLoadingIndicator(true);
         // Refresh data if needed
         if (forceUpdate) {
             goBeesRepository.refreshApiaries();
@@ -56,40 +56,72 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
             @Override
             public void onApiariesLoaded(List<Apiary> apiaries) {
                 // The view may not be able to handle UI updates anymore
-                if (!apiariesView.isActive()) {
+                if (!view.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                apiariesView.setLoadingIndicator(false);
+                view.setLoadingIndicator(false);
                 // Process apiaries
                 if (apiaries.isEmpty()) {
                     // Show a message indicating there are no apiaries
-                    apiariesView.showNoApiaries();
+                    view.showNoApiaries();
                 } else {
                     // Show the list of apiaries
-                    apiariesView.showApiaries(apiaries);
+                    view.showApiaries(apiaries);
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
                 // The view may not be able to handle UI updates anymore
-                if (!apiariesView.isActive()) {
+                if (!view.isActive()) {
                     return;
                 }
-                apiariesView.showLoadingApiariesError();
+                view.showLoadingApiariesError();
             }
         });
     }
 
     @Override
     public void addEditApiary() {
-        apiariesView.showAddEditApiary();
+        view.showAddEditApiary();
     }
 
     @Override
     public void openApiaryDetail(@NonNull Apiary requestedApiary) {
-        apiariesView.showApiaryDetail(requestedApiary.getId());
+        view.showApiaryDetail(requestedApiary.getId());
+    }
+
+    @Override
+    public void deleteApiary(@NonNull Apiary apiary) {
+        // Show progress indicator
+        view.setLoadingIndicator(true);
+        // Delete apiary
+        goBeesRepository.deleteApiary(apiary, new GoBeesDataSource.TaskCallback() {
+            @Override
+            public void onSuccess() {
+                // The view may not be able to handle UI updates anymore
+                if (!view.isActive()) {
+                    return;
+                }
+                // Refresh recordings
+                loadApiaries(true);
+                // Show success message
+                view.showSuccessfullyDeletedMessage();
+            }
+
+            @Override
+            public void onFailure() {
+                // The view may not be able to handle UI updates anymore
+                if (!view.isActive()) {
+                    return;
+                }
+                // Hide progress indicator
+                view.setLoadingIndicator(false);
+                // Show error
+                view.showDeletedErrorMessage();
+            }
+        });
     }
 
     // TODO eliminar generar y eliminar datos

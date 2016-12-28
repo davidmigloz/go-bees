@@ -54,7 +54,7 @@ public class ApiariesFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new ApiariesAdapter(new ArrayList<Apiary>(0), this);
+        listAdapter = new ApiariesAdapter(getActivity().getMenuInflater(), new ArrayList<Apiary>(0), this);
     }
 
     @Nullable
@@ -193,6 +193,16 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
+    public void showSuccessfullyDeletedMessage() {
+        showMessage(getString(R.string.successfully_deleted_apiary_message));
+    }
+
+    @Override
+    public void showDeletedErrorMessage() {
+        showMessage(getString(R.string.deleted_apiary_error_message));
+    }
+
+    @Override
     public boolean isActive() {
         return isAdded();
     }
@@ -209,7 +219,12 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void onApiaryDelete(Apiary clickedApiary) {
-        // TODO delete apiary
+        presenter.deleteApiary(clickedApiary);
+    }
+
+    @Override
+    public void onOpenMenuClick(View view) {
+        getActivity().openContextMenu(view);
     }
 
     /**

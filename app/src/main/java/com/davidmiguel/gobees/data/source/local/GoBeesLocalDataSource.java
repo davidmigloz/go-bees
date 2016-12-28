@@ -98,12 +98,21 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
+    public void deleteApiary(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
         try {
-            final Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
+                    if (apiary.getHives() != null) {
+                        for (Hive hive : apiary.getHives()) {
+                            // Delete records of the hives
+                            if (hive.getRecords() != null) {
+                                hive.getRecords().where().findAll().deleteAllFromRealm();
+                            }
+                            // Delete hives
+                            hive.deleteFromRealm();
+                        }
+                    }
                     // Delete apiary
                     apiary.deleteFromRealm();
                 }
@@ -227,20 +236,22 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void deleteHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
-        if (hive.getRecords() == null) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Delete records of the hive
+                    if (hive.getRecords() != null) {
+                        hive.getRecords().where().findAll().deleteAllFromRealm();
+                    }
+                    // Delete hive
+                    hive.deleteFromRealm();
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
             callback.onFailure();
-            return;
         }
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                // Delete records of the hive
-                hive.getRecords().where().findAll().deleteAllFromRealm();
-                // Delete hive
-                hive.deleteFromRealm();
-            }
-        });
-        callback.onSuccess();
     }
 
     @Override
@@ -320,26 +331,33 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback) {
-        // Get hive
-        Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
-        if (hive == null || hive.getRecords() == null) {
-            callback.onFailure();
-            return;
-        }
-        // Get records to delete
-        final RealmResults<Record> records = hive.getRecords()
-                .where()
-                .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
-                .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
-                .findAll();
-        // Delete records
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                records.deleteAllFromRealm();
+        try {
+            // Get hive
+            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            if (hive == null) {
+                callback.onFailure();
+                return;
             }
-        });
-        callback.onSuccess();
+            if (hive.getRecords() != null) {
+                // Get records to delete
+                final RealmResults<Record> records;
+                records = hive.getRecords()
+                        .where()
+                        .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
+                        .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
+                        .findAll();
+                // Delete records
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        records.deleteAllFromRealm();
+                    }
+                });
+            }
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
     }
 
     @Override
