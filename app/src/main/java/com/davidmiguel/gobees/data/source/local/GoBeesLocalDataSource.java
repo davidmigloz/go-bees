@@ -104,14 +104,14 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 @Override
                 public void execute(Realm realm) {
                     if (apiary.getHives() != null) {
+                        // Delete records of the hives
                         for (Hive hive : apiary.getHives()) {
-                            // Delete records of the hives
                             if (hive.getRecords() != null) {
                                 hive.getRecords().where().findAll().deleteAllFromRealm();
                             }
-                            // Delete hives
-                            hive.deleteFromRealm();
                         }
+                        // Delete hives
+                        apiary.getHives().where().findAll().deleteAllFromRealm();
                     }
                     // Delete apiary
                     apiary.deleteFromRealm();
@@ -119,6 +119,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            e.printStackTrace();
             callback.onFailure();
         }
     }
