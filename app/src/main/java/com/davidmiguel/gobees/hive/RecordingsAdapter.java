@@ -164,7 +164,6 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             lineDataSet.setLineWidth(1.8f);
             lineDataSet.setColor(color);
             lineDataSet.setDrawFilled(true);
-//            lineDataSet.setFillColor(color);
             lineDataSet.setFillAlpha(255);
             Drawable drawable = ContextCompat.getDrawable(context, R.drawable.fade_green);
             lineDataSet.setFillDrawable(drawable);

@@ -6,6 +6,11 @@
         android:key="@string/pref_bees_cat_key"
         android:title="@string/pref_bees_cat_label">
 
+        <SwitchPreference
+            android:defaultValue="@string/pref_show_algo_output_default"
+            android:key="@string/pref_show_algo_output_key"
+            android:title="@string/pref_show_algo_output_label"/>
+
         <ListPreference
             android:defaultValue="@string/pref_blob_size_normal"
             android:entries="@array/pref_blob_size_options"
@@ -14,20 +19,20 @@
             android:title="@string/pref_blob_size_label"/>
 
         <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
-            app:vnt_maxValue="@integer/pref_min_area_max"
-            app:vnt_minValue="@integer/pref_min_area_min"
-            app:vnt_setWrapSelectorWheel="true"
             android:defaultValue="@integer/pref_min_area_default"
             android:key="@string/pref_min_area_key"
-            android:title="@string/pref_min_area_label"/>
+            android:title="@string/pref_min_area_label"
+            app:vnt_maxValue="@integer/pref_min_area_max"
+            app:vnt_minValue="@integer/pref_min_area_min"
+            app:vnt_setWrapSelectorWheel="true"/>
 
         <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
-            app:vnt_maxValue="@integer/pref_max_area_max"
-            app:vnt_minValue="@integer/pref_max_area_min"
-            app:vnt_setWrapSelectorWheel="true"
             android:defaultValue="@integer/pref_max_area_default"
             android:key="@string/pref_max_area_key"
-            android:title="@string/pref_max_area_label"/>
+            android:title="@string/pref_max_area_label"
+            app:vnt_maxValue="@integer/pref_max_area_max"
+            app:vnt_minValue="@integer/pref_max_area_min"
+            app:vnt_setWrapSelectorWheel="true"/>
 
     </PreferenceCategory>
 

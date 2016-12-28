@@ -1,24 +1,32 @@
 package com.davidmiguel.gobees.monitoring;
 
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.camera.CameraView;
+import com.davidmiguel.gobees.monitoring.MonitoringService.MonitoringBinder;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
@@ -35,9 +43,15 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     private MonitoringContract.Presenter presenter;
 
     private BaseLoaderCallback loaderCallback;
-    private CameraBridgeViewBase cameraView;
+    private CameraView cameraView;
     private TextView numBeesTV;
     private RelativeLayout settingsLayout;
+    private ImageView settingsIcon;
+    private ImageView recordIcon;
+    private Chronometer chronometer;
+
+    private MonitoringService mService;
+    private ServiceConnection mConnection;
 
 
     public MonitoringFragment() {
@@ -68,29 +82,55 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
                 }
             }
         };
+
         // Don't switch off screen
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         // Configure view
-        cameraView = (JavaCameraView) root.findViewById(R.id.camera_view);
-        cameraView.setCameraIndex(0);
-        cameraView.setMaxFrameSize(640, 480);
+        cameraView = (CameraView) root.findViewById(R.id.camera_view);
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
-        ImageView settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
+        settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
+        chronometer = (Chronometer) root.findViewById(R.id.chronometer);
+
+        // Configure icons
+        settingsIcon = (ImageView) root.findViewById(R.id.settings_icon);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.openSettings();
             }
         });
-        settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
+        recordIcon = (ImageView) root.findViewById(R.id.record_icon);
+        recordIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.startMonitoring();
+            }
+        });
 
+        // Configure service connection
+        mConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder service) {
+                MonitoringBinder binder = (MonitoringBinder) service;
+                mService = binder.getService();
+                // Set chronometer
+                chronometer.setBase(mService.getStartTime());
+                chronometer.start();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+                mService = null;
+            }
+        };
         return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        presenter.start(MonitoringService.isRunning());
     }
 
     @Override
@@ -103,8 +143,13 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public void onDestroy() {
+        // Disable camera view
         if (cameraView != null) {
             cameraView.disableView();
+        }
+        // Unbind service
+        if (mService != null) {
+            getActivity().unbindService(mConnection);
         }
         super.onDestroy();
     }
@@ -131,11 +176,72 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
+    public void updateAlgoZoom(int ratio) {
+        cameraView.setZoom(ratio);
+    }
+
+    @Override
     public void setNumBees(final int numBees) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 numBeesTV.setText(Integer.toString(numBees));
+            }
+        });
+    }
+
+    @Override
+    public void startRecordingService(MonitoringSettings ms) {
+        // Start service
+        Intent intent = new Intent(getActivity(), MonitoringService.class);
+        intent.setAction(MonitoringService.START_ACTION);
+        intent.putExtra(MonitoringService.ARGUMENT_MON_SETTINGS, ms);
+        getActivity().startService(intent);
+    }
+
+    @Override
+    public void stopRecordingService() {
+        // Stop service
+        Intent stopIntent = new Intent(getActivity(), MonitoringService.class);
+        stopIntent.setAction(MonitoringService.STOP_ACTION);
+        getActivity().startService(stopIntent);
+        // Finish activity
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
+    }
+
+    @Override
+    public void bindRecordingService() {
+        Intent intent = new Intent(getActivity(), MonitoringService.class);
+        getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    public void hideCameraView() {
+        // Hide camera view
+        if (cameraView != null) {
+            cameraView.disableView();
+            cameraView.setVisibility(View.GONE);
+            loaderCallback = null;
+        }
+        // Hide controls
+        numBeesTV.setVisibility(View.GONE);
+        settingsIcon.setVisibility(View.GONE);
+        recordIcon.setOnClickListener(null);
+
+    }
+
+    @Override
+    public void showMonitoringView() {
+        // Show red stop button
+        recordIcon.setImageResource(R.drawable.ic_stop);
+        recordIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorRecordIcon));
+        // Stop listener
+        recordIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Stop recording service
+                presenter.stopRecording();
             }
         });
     }

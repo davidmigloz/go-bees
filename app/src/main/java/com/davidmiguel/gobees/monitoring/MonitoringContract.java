@@ -12,7 +12,6 @@ import org.opencv.android.CameraBridgeViewBase;
 interface MonitoringContract {
 
     interface View extends BaseView<MonitoringContract.Presenter> {
-
         /**
          * Inits OpenCV lib.
          *
@@ -26,15 +25,49 @@ interface MonitoringContract {
         void enableCameraView();
 
         /**
+         * Update zoom parameter in the algorithm.
+         *
+         * @param ratio zoom (100 = x1, 200 = x2…).
+         */
+        void updateAlgoZoom(int ratio);
+
+        /**
          * Sets the number of bees on the screen.
          *
          * @param numBees number of bees.
          */
         void setNumBees(int numBees);
+
+        /**
+         * Starts recording service.
+         *
+         * @param ms monitoring settings.
+         */
+        void startRecordingService(MonitoringSettings ms);
+
+        /**
+         * Stop recording service.
+         */
+        void stopRecordingService();
+
+
+        /**
+         * Binds to the recording service.
+         */
+        void bindRecordingService();
+
+        /**
+         * Hides the camera preview.
+         */
+        void hideCameraView();
+
+        /**
+         * Hides count down and shows monitoring view.
+         */
+        void showMonitoringView();
     }
 
     interface SettingsView extends BaseView<MonitoringContract.Presenter> {
-
         /**
          * Inits settings and set the values stored in settings.
          */
@@ -49,6 +82,13 @@ interface MonitoringContract {
          * Hides settings view.
          */
         void hideSettings();
+
+        /**
+         * Get monitoring settings.
+         *
+         * @return monitoring settings.
+         */
+        MonitoringSettings getMonitoringSettings();
     }
 
     interface Presenter extends BasePresenter {
@@ -64,9 +104,26 @@ interface MonitoringContract {
         void openSettings();
 
         /**
-         * Close settings view.
+         * Starts the monitoring.
+         */
+        void startMonitoring();
+
+        /**
+         * Stop recording.
+         */
+        void stopRecording();
+
+        /**
+         * Closes settings view.
          */
         void closeSettings();
+
+        /**
+         * Shows the output of the algorithm or the raw camera frame.
+         *
+         * @param status on/off.
+         */
+        void showAlgoOutput(boolean status);
 
         /**
          * Update blob size parameter in the algorithm.
@@ -92,8 +149,15 @@ interface MonitoringContract {
         /**
          * Update zoom parameter in the algorithm.
          *
-         * @param value zoom.
+         * @param ratio zoom (100 = x1, 200 = x2…).
          */
-        void updateAlgoZoom(double value);
+        void updateAlgoZoom(int ratio);
+
+        /**
+         * Start presenter logic. It should be called by the view when it is prepared.
+         *
+         * @param serviceRunning whether the monitoring service is running.
+         */
+        void start(boolean serviceRunning);
     }
 }

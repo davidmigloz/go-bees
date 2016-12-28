@@ -5,6 +5,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.TwoStatePreference;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,6 @@ public class MonitoringSettingsFragment extends PreferenceFragment
         implements MonitoringContract.SettingsView, Preference.OnPreferenceChangeListener {
 
     private MonitoringContract.Presenter presenter;
-
     private RelativeLayout settingsLayout;
 
     public MonitoringSettingsFragment() {
@@ -68,6 +68,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_min_area_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_max_area_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_zoom_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_show_algo_output_key)));
     }
 
     @Override
@@ -97,6 +98,18 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             }
         });
         settingsLayout.startAnimation(fadeOut);
+    }
+
+    @Override
+    public MonitoringSettings getMonitoringSettings() {
+        MonitoringSettings monitoringSettings = new MonitoringSettings();
+        monitoringSettings.setBlobSize(getBlobSize());
+        monitoringSettings.setMinArea(getMinArea());
+        monitoringSettings.setMaxArea(getMaxArea());
+        monitoringSettings.setZoomRatio(getZoomRatio());
+        monitoringSettings.setMaxFrameWidth(640);
+        monitoringSettings.setMaxFrameHeight(480);
+        return monitoringSettings;
     }
 
     @Override
@@ -139,6 +152,9 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             if (preference instanceof VNTNumberPickerPreference) {
                 value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getInt(preference.getKey(), Integer.parseInt(preference.getSummary().toString()));
+            } else if (preference instanceof TwoStatePreference) {
+                value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
+                        .getBoolean(preference.getKey(), true);
             } else {
                 value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), "");
@@ -155,19 +171,15 @@ public class MonitoringSettingsFragment extends PreferenceFragment
      * @param preference parameter to update.
      * @param value      new value.
      */
-    void updateAlgorithm(Preference preference, Object value) {
-        if (preference.getKey().equals(getString(R.string.pref_blob_size_key))) {
+    private void updateAlgorithm(Preference preference, Object value) {
+        if (preference.getKey().equals(getString(R.string.pref_show_algo_output_key))) {
+            // Show algo output
+            Boolean val = (Boolean) value;
+            presenter.showAlgoOutput(val);
+        } else if (preference.getKey().equals(getString(R.string.pref_blob_size_key))) {
             // Update blob size
             String val = (String) value;
-            BeesCounter.BlobSize size = BeesCounter.BlobSize.NORMAL;
-            if (val.equals(getString(R.string.pref_blob_size_small))) {
-                size = BeesCounter.BlobSize.SMALL;
-            } else if (val.equals(getString(R.string.pref_blob_size_normal))) {
-                size = BeesCounter.BlobSize.NORMAL;
-            } else if (val.equals(getString(R.string.pref_blob_size_big))) {
-                size = BeesCounter.BlobSize.BIG;
-            }
-            presenter.updateAlgoBlobSize(size);
+            presenter.updateAlgoBlobSize(getBlobSize(val));
         } else if (preference.getKey().equals(getString(R.string.pref_min_area_key))) {
             // Update min area
             presenter.updateAlgoMinArea(Double.valueOf((Integer) value));
@@ -176,7 +188,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             presenter.updateAlgoMaxArea((Double.valueOf((Integer) value)));
         } else if (preference.getKey().equals(getString(R.string.pref_zoom_key))) {
             // Update zoom
-            presenter.updateAlgoZoom((Double.parseDouble((String) value)));
+            presenter.updateAlgoZoom((Integer.parseInt((String) value)));
         }
     }
 
@@ -186,7 +198,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
      * @param preference preference to update summary.
      * @param value      new value.
      */
-    void updateSummary(Preference preference, Object value) {
+    private void updateSummary(Preference preference, Object value) {
         if (preference instanceof ListPreference) {
             // For list preferences, look up the correct display value in
             // the preference's 'entries' list (since they have separate labels/values)
@@ -200,7 +212,77 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             preference.setSummary(Integer.toString((Integer) value));
         } else {
             // For other preferences, set the summary to the value's simple string representation
-            preference.setSummary((Integer) value);
+            preference.setSummary(value.toString());
         }
+    }
+
+    /**
+     * Get blob size (This causes regions within an image get "thicker" or "thinner").
+     *
+     * @return blob size.
+     */
+    private BeesCounter.BlobSize getBlobSize() {
+        // Get value
+        String value = PreferenceManager.getDefaultSharedPreferences(getActivity())
+                .getString(getString(R.string.pref_blob_size_key),
+                        getString(R.string.pref_blob_size_normal));
+        // Convert value
+        return getBlobSize(value);
+
+    }
+
+    /**
+     * Get blob size from string.
+     *
+     * @param val string with the value.
+     * @return BlobSize,
+     */
+    private BeesCounter.BlobSize getBlobSize(String val) {
+        BeesCounter.BlobSize size = BeesCounter.BlobSize.NORMAL;
+        if (val.equals(getString(R.string.pref_blob_size_small))) {
+            size = BeesCounter.BlobSize.SMALL;
+        } else if (val.equals(getString(R.string.pref_blob_size_normal))) {
+            size = BeesCounter.BlobSize.NORMAL;
+        } else if (val.equals(getString(R.string.pref_blob_size_big))) {
+            size = BeesCounter.BlobSize.BIG;
+        }
+        return size;
+    }
+
+    /**
+     * Get min area. Smaller areas are not consider to be a bee.
+     *
+     * @return min area.
+     */
+    private double getMinArea() {
+        // Get value
+        return PreferenceManager.getDefaultSharedPreferences(getActivity())
+                .getInt(getString(R.string.pref_min_area_key),
+                        getActivity().getResources().getInteger(R.integer.pref_min_area_default));
+    }
+
+    /**
+     * Get max area. Greater areas are not consider to be a bee.
+     *
+     * @return max area.
+     */
+    private double getMaxArea() {
+        // Get value
+        return PreferenceManager.getDefaultSharedPreferences(getActivity())
+                .getInt(getString(R.string.pref_max_area_key),
+                        getActivity().getResources().getInteger(R.integer.pref_max_area_default));
+    }
+
+    /**
+     * Get zoom ratio (100 = x1, 200 = x2…).
+     *
+     * @return zoom ratio.
+     */
+    private int getZoomRatio() {
+        // Get value
+        String value = PreferenceManager.getDefaultSharedPreferences(getActivity())
+                .getString(getString(R.string.pref_zoom_key), getString(R.string.pref_zoom_x1));
+        // Convert
+        return Integer.parseInt(value);
     }
 }

@@ -10,8 +10,8 @@ android {
         applicationId "com.davidmiguel.gobees"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 3
-        versionName "v0.3"
+        versionCode 4
+        versionName "v0.4"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -98,7 +98,7 @@ dependencies {
 
     // Dependencies for Android unit tests
     androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'org.mockito:mockito-core:2.2.26'
+    androidTestCompile 'org.mockito:mockito-core:2.3.0'
 
     // Espresso UI Testing
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'

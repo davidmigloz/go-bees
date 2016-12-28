@@ -37,8 +37,14 @@ public class ApiaryActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
         }
 
+        // Get apiary id
+        long apiaryId = getIntent().getLongExtra(ApiaryHivesFragment.ARGUMENT_APIARY_ID, NO_APIARY);
+        if (apiaryId == NO_APIARY) {
+            throw new IllegalArgumentException("No apiary id passed!");
+        }
+
         // Create hives fragment
-        ApiaryHivesFragment apiaryHivesFragment = ApiaryHivesFragment.newInstance();
+        ApiaryHivesFragment apiaryHivesFragment = ApiaryHivesFragment.newInstance(apiaryId);
 
         // Create apiary info fragment
         ApiaryInfoFragment apiaryInfoFragment = ApiaryInfoFragment.newInstance();
@@ -53,12 +59,6 @@ public class ApiaryActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        // Get apiary id
-        long apiaryId = getIntent().getLongExtra(ApiaryHivesFragment.ARGUMENT_APIARY_ID, NO_APIARY);
-        if (apiaryId == NO_APIARY) {
-            throw new IllegalArgumentException("No apiary id passed!");
-        }
 
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();

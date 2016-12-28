@@ -1,6 +1,5 @@
 package com.davidmiguel.gobees.monitoring;
 
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
 
@@ -14,17 +13,16 @@ import org.opencv.core.Mat;
  */
 class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewListener2 {
 
-    private GoBeesRepository goBeesRepository;
     private MonitoringContract.View view;
     private MonitoringContract.SettingsView settingsView;
 
     private long hiveId;
     private BeesCounter bc;
     private Mat processedFrame;
+    private boolean showAlgoOutput;
 
-    MonitoringPresenter(GoBeesRepository goBeesRepository, MonitoringContract.View view,
-                        MonitoringContract.SettingsView settingsView, long hiveId) {
-        this.goBeesRepository = goBeesRepository;
+    MonitoringPresenter(MonitoringContract.View view, MonitoringContract.SettingsView settingsView,
+                        long hiveId) {
         this.view = view;
         this.view.setPresenter(this);
         this.settingsView = settingsView;
@@ -43,8 +41,33 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
+    public void startMonitoring() {
+        // Get settings and set hive id
+        MonitoringSettings ms = settingsView.getMonitoringSettings();
+        ms.setHiveId(hiveId);
+        // Hide camera view
+        view.hideCameraView();
+        // Show monitoring view
+        view.showMonitoringView();
+        // Start recording service
+        view.startRecordingService(ms);
+        // Bind to service
+        view.bindRecordingService();
+    }
+
+    @Override
+    public void stopRecording() {
+        view.stopRecordingService();
+    }
+
+    @Override
     public void closeSettings() {
         settingsView.hideSettings();
+    }
+
+    @Override
+    public void showAlgoOutput(boolean status) {
+        showAlgoOutput = status;
     }
 
     @Override
@@ -63,25 +86,38 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     }
 
     @Override
-    public void updateAlgoZoom(double value) {
-        // TODO
+    public void updateAlgoZoom(int ratio) {
+        view.updateAlgoZoom(ratio);
+    }
+
+    @Override
+    public void start(boolean serviceRunning) {
+        if (serviceRunning) {
+            // Bind to service (that is already running)
+            view.bindRecordingService();
+            view.hideCameraView();
+            view.showMonitoringView();
+        } else {
+            // Start camera view
+            view.initOpenCV(this);
+        }
     }
 
     @Override
     public void start() {
-        view.initOpenCV(this);
+        // Not needed
     }
 
     @Override
     public void onCameraViewStarted(int width, int height) {
         processedFrame = new Mat();
-        bc = new ContourBeesCounter();
+        bc = ContourBeesCounter.getInstance();
         settingsView.initSettings();
     }
 
     @Override
     public void onCameraViewStopped() {
-
+        // No action needed
     }
 
     @Override
@@ -90,6 +126,6 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
         view.setNumBees(numBees);
         bc.getProcessedFrame().copyTo(processedFrame);
         bc.getProcessedFrame().release();
-        return processedFrame;
+        return showAlgoOutput ? processedFrame : inputFrame.rgba();
     }
 }

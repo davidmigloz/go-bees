@@ -237,6 +237,13 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
+    public void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull TaskCallback callback) {
+        checkNotNull(callback);
+        // Save record
+        goBeesDataSource.saveRecords(hiveId, records, callback);
+    }
+
+    @Override
     public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
         checkNotNull(callback);
         // Save record

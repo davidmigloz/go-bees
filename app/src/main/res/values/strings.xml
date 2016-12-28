@@ -31,6 +31,8 @@
     <string name="weather_icon">Weather icon</string>
     <!-- Description of chart line [CHAR LIMIT=25] -->
     <string name="chart_line">Chart line</string>
+    <!-- Description of settings icon [CHAR LIMIT=100] -->
+    <string name="settings_icon">Settings icon</string>
 
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->
@@ -144,6 +146,16 @@
     <!-- Monitoring -->
     <!--++++++++++++-->
 
+    <!-- Description of start record icon [CHAR LIMIT=100] -->
+    <string name="start_record_icon">Start record icon</string>
+    <!-- Text shown when the monitoring service is running [CHAR LIMIT=150] -->
+    <string name="monitoring_text">Monitoring…\n You can switch off the screen.</string>
+    <!-- Default number of bees [CHAR LIMIT=4] -->
+    <string name="num_bees_default">0</string>
+    <!-- Monitoring notification text [CHAR LIMIT=100] -->
+    <string name="monitoring_notification_text">Monitoring hive…</string>
+
+
     <!--++++++++++++++++++++-->
     <!-- Monitoring Settings-->
     <!--++++++++++++++++++++-->
@@ -153,21 +165,28 @@
     <!-- Key name for bees category in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_bees_cat_key">bees</string>
 
-    <!-- Label for the blob size preference [CHAR LIMIT=30] -->
-    <string name="pref_blob_size_label">Blob size</string>
-    <!-- Label for blob size small [CHAR LIMIT=25] -->
+    <!-- Label for the show algorithm output preference [CHAR LIMIT=30] -->
+    <string name="pref_show_algo_output_label">Show algorithm output</string>
+    <!-- Key name for show algorithm output preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_show_algo_output_key" translatable="false">show_algo_output</string>
+    <!-- Default value for show algorithm output preference [CHAR LIMIT=NONE] -->
+    <string name="pref_show_algo_output_default" translatable="false">true</string>
+
+    <!-- Label for the blob blobSize preference [CHAR LIMIT=30] -->
+    <string name="pref_blob_size_label">Blob blobSize</string>
+    <!-- Label for blob blobSize small [CHAR LIMIT=25] -->
     <string name="pref_blob_size_label_small">Small</string>
-    <!-- Label for blob size normal [CHAR LIMIT=25] -->
+    <!-- Label for blob blobSize normal [CHAR LIMIT=25] -->
     <string name="pref_blob_size_label_normal">Normal</string>
-    <!-- Label for blob size big [CHAR LIMIT=25] -->
+    <!-- Label for blob blobSize big [CHAR LIMIT=25] -->
     <string name="pref_blob_size_label_big">Big</string>
-    <!-- Key name for blob size preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <!-- Key name for blob blobSize preference in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_blob_size_key" translatable="false">blob_size</string>
-    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <!-- Value in SharedPreferences for small blob blobSize [CHAR LIMIT=NONE] -->
     <string name="pref_blob_size_small" translatable="false">small</string>
-    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <!-- Value in SharedPreferences for small blob blobSize [CHAR LIMIT=NONE] -->
     <string name="pref_blob_size_normal" translatable="false">normal</string>
-    <!-- Value in SharedPreferences for small blob size [CHAR LIMIT=NONE] -->
+    <!-- Value in SharedPreferences for small blob blobSize [CHAR LIMIT=NONE] -->
     <string name="pref_blob_size_big" translatable="false">big</string>
 
     <!-- Label for the min area preference [CHAR LIMIT=30] -->
@@ -209,11 +228,11 @@
     <!-- Key name for zoom preference in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_zoom_key" translatable="false">zoom</string>
     <!-- Value in SharedPreferences for zoom x1 [CHAR LIMIT=NONE] -->
-    <string name="pref_zoom_x1" translatable="false">1.0</string>
+    <string name="pref_zoom_x1" translatable="false">100</string>
     <!-- Value in SharedPreferences for zoom x1.5 [CHAR LIMIT=NONE] -->
-    <string name="pref_zoom_x1_5" translatable="false">1.5</string>
+    <string name="pref_zoom_x1_5" translatable="false">150</string>
     <!-- Value in SharedPreferences for zoom x2 [CHAR LIMIT=NONE] -->
-    <string name="pref_zoom_x2" translatable="false">.0</string>
+    <string name="pref_zoom_x2" translatable="false">200</string>
 
 
     <!--++++++++++-->

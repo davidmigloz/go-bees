@@ -284,10 +284,16 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         long firstTimestamp = recordsList.get(0).getTimestamp().getTime() / 1000;
         Record[] records = recordsList.toArray(new Record[recordsList.size()]);
         List<Entry> entries = new ArrayList<>();
+        int maxNumBees = 0;
         for (Record record : records) {
             // Convert timestamp to seconds and relative to first timestamp
             long timestamp = (record.getTimestamp().getTime() / 1000 - firstTimestamp);
-            entries.add(new Entry(timestamp, record.getNumBees()));
+            int numBees = record.getNumBees();
+            entries.add(new Entry(timestamp, numBees));
+            // Get max num of bees
+            if (numBees > maxNumBees) {
+                maxNumBees = numBees;
+            }
         }
         // Style char lines (type, color, etc.)
         LineDataSet lineDataSet = new LineDataSet(entries, getString(R.string.num_bees));
@@ -322,12 +328,12 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         xAxis.setTextColor(Color.BLACK);
         // Y axis setup
         YAxis leftAxis = beesChart.getAxisLeft();
-        leftAxis.setAxisMaximum(40);
+        leftAxis.setAxisMaximum(maxNumBees > 40 ? maxNumBees + 2 : 40);
         leftAxis.setAxisMinimum(0);
         leftAxis.setDrawGridLines(true);
         leftAxis.setDrawAxisLine(false);
         YAxis rightAxis = beesChart.getAxisRight();
-        rightAxis.setAxisMaximum(40);
+        rightAxis.setAxisMaximum(maxNumBees > 40 ? maxNumBees + 2 : 40);
         rightAxis.setAxisMinimum(0);
         rightAxis.setDrawGridLines(true);
         rightAxis.setDrawAxisLine(false);
