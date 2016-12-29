@@ -159,9 +159,6 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.menu_edit:
-                    // TODO
-                    return true;
                 case R.id.menu_delete:
                     listener.onRecordingDelete(recordings.get(getAdapterPosition()));
                     return true;

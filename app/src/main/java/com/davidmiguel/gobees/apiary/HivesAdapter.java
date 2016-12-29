@@ -62,9 +62,11 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
     }
 
     interface HiveItemListener {
-        void onHiveClick(Hive clickedHive);
+        void onHiveClick(Hive hive);
 
-        void onHiveDelete(Hive clickedHive);
+        void onHiveDelete(Hive hive);
+
+        void onHiveEdit(Hive hive);
 
         void onOpenMenuClick(View view);
     }
@@ -128,7 +130,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.menu_edit:
-                    // TODO
+                    listener.onHiveEdit(hives.get(getAdapterPosition()));
                     return true;
                 case R.id.menu_delete:
                     listener.onHiveDelete(hives.get(getAdapterPosition()));

@@ -86,8 +86,8 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
     }
 
     @Override
-    public void addEditHive() {
-        view.showAddEditHive(apiaryId);
+    public void addEditHive(long hiveId) {
+        view.showAddEditHive(apiaryId, hiveId);
     }
 
     @Override

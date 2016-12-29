@@ -97,7 +97,7 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
 
     @Override
     public void setNotes(String notes) {
-        nameTextView.setText(notes);
+        notesTextView.setText(notes);
     }
 
     @Override
@@ -112,7 +112,8 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
 
     /**
      * Shows a snackbar with the given message.
-     * @param view view.
+     *
+     * @param view    view.
      * @param message message to show.
      */
     @SuppressWarnings("ConstantConditions")

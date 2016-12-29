@@ -14,19 +14,19 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         GetHiveCallback, TaskCallback {
 
     private GoBeesRepository goBeesRepository;
-    private AddEditHiveContract.View addEditHiveView;
+    private AddEditHiveContract.View view;
 
     private long apiaryId;
     private long hiveId;
 
     AddEditHivePresenter(GoBeesRepository goBeesRepository,
-                         AddEditHiveContract.View addEditHiveView,
+                         AddEditHiveContract.View view,
                          long apiaryId, long hiveId) {
         this.goBeesRepository = goBeesRepository;
-        this.addEditHiveView = addEditHiveView;
+        this.view = view;
         this.apiaryId = apiaryId;
         this.hiveId = hiveId;
-        addEditHiveView.setPresenter(this);
+        view.setPresenter(this);
     }
 
     @Override
@@ -56,30 +56,30 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     @Override
     public void onHiveLoaded(Hive hive) {
         // Show hive data on view
-        if (addEditHiveView.isActive()) {
-            addEditHiveView.setName(hive.getName());
-            addEditHiveView.setNotes(hive.getNotes());
+        if (view.isActive()) {
+            view.setName(hive.getName());
+            view.setNotes(hive.getNotes());
         }
     }
 
     @Override
     public void onDataNotAvailable() {
         // Show error message
-        if (addEditHiveView.isActive()) {
-            addEditHiveView.showEmptyHiveError();
+        if (view.isActive()) {
+            view.showEmptyHiveError();
         }
     }
 
     @Override
     public void onSuccess() {
         // Apiary saved successfully -> go back to apiaries activity
-        addEditHiveView.showHivesList();
+        view.showHivesList();
     }
 
     @Override
     public void onFailure() {
         // Error saving apiaries
-        addEditHiveView.showSaveHiveError();
+        view.showSaveHiveError();
     }
 
     private boolean isNewHive() {
@@ -97,7 +97,7 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
                 if (newHive.isValidHive()) {
                     goBeesRepository.saveHive(apiaryId, newHive, listener);
                 } else {
-                    addEditHiveView.showEmptyHiveError();
+                    view.showEmptyHiveError();
                 }
             }
         });

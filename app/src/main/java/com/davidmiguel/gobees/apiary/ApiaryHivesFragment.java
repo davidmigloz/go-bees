@@ -84,7 +84,7 @@ public class ApiaryHivesFragment extends Fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addEditHive();
+                presenter.addEditHive(AddEditHiveActivity.NEW_HIVE);
             }
         });
 
@@ -170,9 +170,12 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void showAddEditHive(long apiaryId) {
+    public void showAddEditHive(long apiaryId, long hiveId) {
         Intent intent = new Intent(getContext(), AddEditHiveActivity.class);
         intent.putExtra(AddEditHiveFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId);
+        if (hiveId != AddEditHiveActivity.NEW_HIVE) {
+            intent.putExtra(AddEditHiveFragment.ARGUMENT_EDIT_HIVE_ID, hiveId);
+        }
         startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
     }
 
@@ -227,13 +230,18 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void onHiveClick(Hive clickedHive) {
-        presenter.openHiveDetail(clickedHive);
+    public void onHiveClick(Hive hive) {
+        presenter.openHiveDetail(hive);
     }
 
     @Override
-    public void onHiveDelete(Hive clickedHive) {
-        presenter.deleteHive(clickedHive);
+    public void onHiveDelete(Hive hive) {
+        presenter.deleteHive(hive);
+    }
+
+    @Override
+    public void onHiveEdit(Hive hive) {
+        presenter.addEditHive(hive.getId());
     }
 
     @Override
