@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Record;
+import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 
 import java.util.ArrayList;
@@ -132,15 +133,10 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
+    public void deleteApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
         checkNotNull(callback);
         // Delete apiary
-        goBeesDataSource.deleteApiary(apiaryId, callback);
-        // Do in memory cache update to keep the app UI up to date
-        if (cachedApiaries == null) {
-            cachedApiaries = new LinkedHashMap<>();
-        }
-        cachedApiaries.remove(apiaryId);
+        goBeesDataSource.deleteApiary(apiary, callback);
     }
 
     @Override
@@ -223,6 +219,13 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
+    public void deleteHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
+        checkNotNull(callback);
+        // Delete hive
+        goBeesDataSource.deleteHive(hive, callback);
+    }
+
+    @Override
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
         checkNotNull(callback);
         // Get next id
@@ -248,6 +251,13 @@ public class GoBeesRepository implements GoBeesDataSource {
         checkNotNull(callback);
         // Save record
         goBeesDataSource.getRecording(hiveId, start, end, callback);
+    }
+
+    @Override
+    public void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback) {
+        checkNotNull(callback);
+        // Delete recording
+        goBeesDataSource.deleteRecording(hiveId, recording, callback);
     }
 
     @Override

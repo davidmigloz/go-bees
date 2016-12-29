@@ -60,7 +60,8 @@ public class HiveRecordingsFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new RecordingsAdapter(getContext(), new ArrayList<Recording>(0), this);
+        listAdapter = new RecordingsAdapter(getContext(), getActivity().getMenuInflater(),
+                new ArrayList<Recording>(0), this);
     }
 
     @Nullable
@@ -197,6 +198,16 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
+    public void showSuccessfullyDeletedMessage() {
+        showMessage(getString(R.string.successfully_deleted_recording_message));
+    }
+
+    @Override
+    public void showDeletedErrorMessage() {
+        showMessage(getString(R.string.deleted_recording_error_message));
+    }
+
+    @Override
     public void showTitle(@NonNull String title) {
         ActionBar ab = ((HiveActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
@@ -226,7 +237,12 @@ public class HiveRecordingsFragment extends Fragment
 
     @Override
     public void onRecordingDelete(Recording clickedRecording) {
-        // TODO delete recording
+        presenter.deleteRecording(clickedRecording);
+    }
+
+    @Override
+    public void onOpenMenuClick(View view) {
+        getActivity().openContextMenu(view);
     }
 
     /**

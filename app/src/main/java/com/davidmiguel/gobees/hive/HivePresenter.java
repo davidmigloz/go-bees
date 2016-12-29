@@ -16,7 +16,7 @@ import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 class HivePresenter implements HiveContract.Presenter {
 
     private GoBeesRepository goBeesRepository;
-    private HiveContract.View hiveView;
+    private HiveContract.View view;
 
     /**
      * Force update the first time.
@@ -24,11 +24,11 @@ class HivePresenter implements HiveContract.Presenter {
     private boolean firstLoad = true;
     private long hiveId;
 
-    HivePresenter(GoBeesRepository goBeesRepository, HiveContract.View hiveView,
+    HivePresenter(GoBeesRepository goBeesRepository, HiveContract.View view,
                   long hiveId) {
         this.goBeesRepository = goBeesRepository;
-        this.hiveView = hiveView;
-        this.hiveView.setPresenter(this);
+        this.view = view;
+        this.view.setPresenter(this);
         this.hiveId = hiveId;
     }
 
@@ -39,16 +39,17 @@ class HivePresenter implements HiveContract.Presenter {
             // Refresh recordings
             loadRecordings(true);
             // Show message
-            hiveView.showSuccessfullySavedMessage();
+            view.showSuccessfullySavedMessage();
         }
     }
+
     @Override
     public void loadRecordings(boolean forceUpdate) {
         // Force update the first time
         forceUpdate = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
-        hiveView.setLoadingIndicator(true);
+        view.setLoadingIndicator(true);
         // Refresh data if needed
         if (forceUpdate) {
             goBeesRepository.refreshRecordings(hiveId);
@@ -59,42 +60,77 @@ class HivePresenter implements HiveContract.Presenter {
             @Override
             public void onHiveLoaded(Hive hive) {
                 // The view may not be able to handle UI updates anymore
-                if (!hiveView.isActive()) {
+                if (!view.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                hiveView.setLoadingIndicator(false);
+                view.setLoadingIndicator(false);
                 // Set hive name as title
-                hiveView.showTitle(hive.getName());
+                view.showTitle(hive.getName());
                 // Process recordings
                 if (hive.getRecordings().isEmpty()) {
                     // Show a message indicating there are no recordings
-                    hiveView.showNoRecordings();
+                    view.showNoRecordings();
                 } else {
                     // Show the list of recordings
-                    hiveView.showRecordings(hive.getRecordings());
+                    view.showRecordings(hive.getRecordings());
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
                 // The view may not be able to handle UI updates anymore
-                if (!hiveView.isActive()) {
+                if (!view.isActive()) {
                     return;
                 }
-                hiveView.showLoadingRecordingsError();
+                // Hide progress indicator
+                view.setLoadingIndicator(false);
+                // Show error
+                view.showLoadingRecordingsError();
             }
         });
     }
 
     @Override
     public void startNewRecording() {
-        hiveView.startNewRecording(hiveId);
+        view.startNewRecording(hiveId);
     }
 
     @Override
     public void openRecordingsDetail(@NonNull Recording recording) {
-        hiveView.showRecordingDetail(hiveId, recording.getDate());
+        view.showRecordingDetail(hiveId, recording.getDate());
+    }
+
+    @Override
+    public void deleteRecording(@NonNull Recording recording) {
+        // Show progress indicator
+        view.setLoadingIndicator(true);
+        // Delete recording
+        goBeesRepository.deleteRecording(hiveId, recording, new GoBeesDataSource.TaskCallback() {
+            @Override
+            public void onSuccess() {
+                // The view may not be able to handle UI updates anymore
+                if (!view.isActive()) {
+                    return;
+                }
+                // Refresh recordings
+                loadRecordings(true);
+                // Show success message
+                view.showSuccessfullyDeletedMessage();
+            }
+
+            @Override
+            public void onFailure() {
+                // The view may not be able to handle UI updates anymore
+                if (!view.isActive()) {
+                    return;
+                }
+                // Hide progress indicator
+                view.setLoadingIndicator(false);
+                // Show error
+                view.showDeletedErrorMessage();
+            }
+        });
     }
 
     @Override

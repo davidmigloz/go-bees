@@ -98,12 +98,21 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
+    public void deleteApiary(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
         try {
-            final Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
+                    if (apiary.getHives() != null) {
+                        // Delete records of the hives
+                        for (Hive hive : apiary.getHives()) {
+                            if (hive.getRecords() != null) {
+                                hive.getRecords().where().findAll().deleteAllFromRealm();
+                            }
+                        }
+                        // Delete hives
+                        apiary.getHives().where().findAll().deleteAllFromRealm();
+                    }
                     // Delete apiary
                     apiary.deleteFromRealm();
                 }
@@ -226,6 +235,26 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public void deleteHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Delete records of the hive
+                    if (hive.getRecords() != null) {
+                        hive.getRecords().where().findAll().deleteAllFromRealm();
+                    }
+                    // Delete hive
+                    hive.deleteFromRealm();
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @Override
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
         Number nextId = realm.where(Hive.class).max("id");
         callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
@@ -292,12 +321,43 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         RealmResults<Record> records = hive.getRecords()
                 .where()
                 .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(start, 0, 0, 0, 0))
-                .lessThan("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
+                .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
                 .findAll()
                 .sort("timestamp");
         // Create recording
         Recording recording = new Recording(start, new ArrayList<>(records));
         callback.onRecordingLoaded(recording);
+    }
+
+    @Override
+    public void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback) {
+        try {
+            // Get hive
+            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            if (hive == null) {
+                callback.onFailure();
+                return;
+            }
+            if (hive.getRecords() != null) {
+                // Get records to delete
+                final RealmResults<Record> records;
+                records = hive.getRecords()
+                        .where()
+                        .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
+                        .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
+                        .findAll();
+                // Delete records
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        records.deleteAllFromRealm();
+                    }
+                });
+            }
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
     }
 
     @Override
