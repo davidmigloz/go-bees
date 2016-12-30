@@ -33,6 +33,11 @@ android {
         }
     }
 
+    buildTypes.each {
+        // OpenWeatherMap key (stored in [USER_HOME]/.gradle/gradle.properties)
+        it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', OpenWeatherMapApiKey
+    }
+
     // Mock: stubs out the service layer completely and returns a fake dataset
     // Prod: production version
     productFlavors {
