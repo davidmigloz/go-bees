@@ -28,6 +28,7 @@ public class ApiaryMother {
     private Double locationLat;
     private String notes;
     private RealmList<Hive> hives;
+    private MeteoRecord currentWeather;
     private RealmList<MeteoRecord> meteoRecords;
 
     private ApiaryMother() {
@@ -85,7 +86,7 @@ public class ApiaryMother {
 
     private Apiary build() {
         return new Apiary(id, name, imageUrl, locationLong,
-                locationLat, notes, hives, meteoRecords);
+                locationLat, notes, hives, currentWeather, meteoRecords);
     }
 
     private List<Hive> generateHives(int num) {

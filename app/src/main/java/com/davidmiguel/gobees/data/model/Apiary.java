@@ -57,7 +57,13 @@ public class Apiary extends RealmObject {
     private RealmList<Hive> hives;
 
     /**
-     * List of meteorological data from days.
+     * Current weather in the apiary.
+     */
+    @Nullable
+    private MeteoRecord currentWeather;
+
+    /**
+     * List of meteorological data from recordings.
      */
     @Nullable
     private RealmList<MeteoRecord> meteoRecords;
@@ -68,7 +74,8 @@ public class Apiary extends RealmObject {
 
     public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLong,
                   @Nullable Double locationLat, @Nullable String notes,
-                  @Nullable RealmList<Hive> hives, @Nullable RealmList<MeteoRecord> meteoRecords) {
+                  @Nullable RealmList<Hive> hives, @Nullable MeteoRecord currentWeather,
+                  @Nullable RealmList<MeteoRecord> meteoRecords) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -76,6 +83,7 @@ public class Apiary extends RealmObject {
         this.locationLat = locationLat;
         this.notes = notes;
         this.hives = hives;
+        this.currentWeather = currentWeather;
         this.meteoRecords = meteoRecords;
     }
 
@@ -138,6 +146,15 @@ public class Apiary extends RealmObject {
 
     public void setHives(@Nullable RealmList<Hive> hives) {
         this.hives = hives;
+    }
+
+    @Nullable
+    public MeteoRecord getCurrentWeather() {
+        return currentWeather;
+    }
+
+    public void setCurrentWeather(@Nullable MeteoRecord currentWeather) {
+        this.currentWeather = currentWeather;
     }
 
     @Nullable

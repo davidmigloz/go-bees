@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Utility functions to handle OpenWeatherMap JSON data.
  */
-public class OpenWeatherMapUtils {
+class OpenWeatherMapUtils {
 
     /* Result code */
     private static final String OWM_MESSAGE_CODE = "cod";
@@ -50,7 +50,7 @@ public class OpenWeatherMapUtils {
     private static final String OWM_SNOW = "snow";
     private static final String OWM_SNOW_3H = "3h";
 
-    public static MeteoRecord parseCurrentWeatherJson(String weatherJson) throws JSONException {
+    static MeteoRecord parseCurrentWeatherJson(String weatherJson) throws JSONException {
         // Get JSON
         JSONObject jsonObject = new JSONObject(weatherJson);
 

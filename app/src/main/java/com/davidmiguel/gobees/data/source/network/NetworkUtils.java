@@ -14,7 +14,7 @@ import java.util.Scanner;
 /**
  * These utilities will be used to communicate with the weather servers.
  */
-public class NetworkUtils {
+class NetworkUtils {
 
     /* Current weather API (http://openweathermap.org/current) */
     private static final String CURRENT_WEATHER_URL =
@@ -36,7 +36,7 @@ public class NetworkUtils {
      * @param longitude the longitude of the location.
      * @return url to use to query the weather server.
      */
-    public static URL getCurrentWeatherUrl(double latitude, double longitude) {
+    static URL getCurrentWeatherUrl(double latitude, double longitude) {
         Uri weatherQueryUri = Uri.parse(CURRENT_WEATHER_URL).buildUpon()
                 .appendQueryParameter(LAT_PARAM, String.valueOf(latitude))
                 .appendQueryParameter(LON_PARAM, String.valueOf(longitude))
@@ -54,11 +54,15 @@ public class NetworkUtils {
     /**
      * This method returns the entire result from the HTTP response.
      *
-     * @param url The URL to fetch the HTTP response from.
-     * @return The contents of the HTTP response, null if no response.
-     * @throws IOException Related to network and stream reading.
+     * @param url URL to fetch the HTTP response from.
+     * @return contents of the HTTP response, null if no response.
+     * @throws IOException related to network and stream reading.
      */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+    static String getResponseFromHttpUrl(URL url) throws IOException {
+        if (url == null) {
+            return null;
+        }
+        // Make the call to the api
         HttpURLConnection urlConnection = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
