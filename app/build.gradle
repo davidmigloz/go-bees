@@ -96,6 +96,7 @@ dependencies {
     testCompile 'org.slf4j:slf4j-api:1.7.21'
     testCompile 'org.slf4j:slf4j-log4j12:1.7.21'
     testCompile 'log4j:log4j:1.2.17'
+    testCompile 'org.json:json:20160810'
 
     // Android Testing Support Library's runner and rules
     androidTestCompile 'com.android.support.test:runner:0.5'

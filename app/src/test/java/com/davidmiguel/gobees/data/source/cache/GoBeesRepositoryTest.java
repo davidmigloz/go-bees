@@ -155,10 +155,10 @@ public class GoBeesRepositoryTest {
         assertThat(goBeesRepository.cachedApiaries.containsKey(apiary.getId()), is(true));
 
         // When deleted
-        goBeesRepository.deleteApiary(apiary.getId(), taskCallback);
+        goBeesRepository.deleteApiary(apiary, taskCallback);
 
         // Verify the data source were called
-        verify(goBeesLocalDataSource).deleteApiary(apiary.getId(), taskCallback);
+        verify(goBeesLocalDataSource).deleteApiary(apiary, taskCallback);
 
         // Verify it's removed from repository
         assertThat(goBeesRepository.cachedApiaries.containsKey(apiary.getId()), is(false));

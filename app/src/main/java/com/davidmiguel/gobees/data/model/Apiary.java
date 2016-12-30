@@ -60,13 +60,7 @@ public class Apiary extends RealmObject {
      * List of meteorological data from days.
      */
     @Nullable
-    private RealmList<MeteoDay> meteoDays;
-
-    /**
-     * List of meteorological data from specific moments in time.
-     */
-    @Nullable
-    private RealmList<MeteoDetail> meteoDetails;
+    private RealmList<MeteoRecord> meteoRecords;
 
     public Apiary() {
         // Needed by Realm
@@ -74,8 +68,7 @@ public class Apiary extends RealmObject {
 
     public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLong,
                   @Nullable Double locationLat, @Nullable String notes,
-                  @Nullable RealmList<Hive> hives, @Nullable RealmList<MeteoDay> meteoDays,
-                  @Nullable RealmList<MeteoDetail> meteoDetails) {
+                  @Nullable RealmList<Hive> hives, @Nullable RealmList<MeteoRecord> meteoRecords) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -83,8 +76,7 @@ public class Apiary extends RealmObject {
         this.locationLat = locationLat;
         this.notes = notes;
         this.hives = hives;
-        this.meteoDays = meteoDays;
-        this.meteoDetails = meteoDetails;
+        this.meteoRecords = meteoRecords;
     }
 
     public long getId() {
@@ -149,21 +141,12 @@ public class Apiary extends RealmObject {
     }
 
     @Nullable
-    public RealmList<MeteoDay> getMeteoDays() {
-        return meteoDays;
+    public RealmList<MeteoRecord> getMeteoRecords() {
+        return meteoRecords;
     }
 
-    public void setMeteoDays(@Nullable RealmList<MeteoDay> meteoDays) {
-        this.meteoDays = meteoDays;
-    }
-
-    @Nullable
-    public RealmList<MeteoDetail> getMeteoDetails() {
-        return meteoDetails;
-    }
-
-    public void setMeteoDetails(@Nullable RealmList<MeteoDetail> meteoDetails) {
-        this.meteoDetails = meteoDetails;
+    public void setMeteoRecords(@Nullable RealmList<MeteoRecord> meteoRecords) {
+        this.meteoRecords = meteoRecords;
     }
 
     public void addHive(@NonNull Hive hive){
