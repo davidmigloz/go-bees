@@ -90,9 +90,9 @@
             android:layout_marginBottom="16dp"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toEndOf="@id/num_hives"
-            android:adjustViewBounds="false"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/weather_icon"
-            android:src="@drawable/ic_filter_drama"
+            android:src="@drawable/ic_weather_day_clear_sky"
             android:tint="@color/colorSecondaryText"
             android:visibility="gone"/>
 
@@ -103,6 +103,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="4dp"
+            android:text="@string/default_temperature"
             android:layout_toEndOf="@id/weather_icon"
             android:gravity="bottom"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"

@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.apiaries;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
+import com.davidmiguel.gobees.utils.WeatherUtils;
 
 import java.util.List;
 
@@ -28,11 +30,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
 
+    private final Context context;
     private MenuInflater menuInflater;
     private List<Apiary> apiaries;
     private ApiaryItemListener listener;
 
-    ApiariesAdapter(MenuInflater menuInflater, List<Apiary> apiaries, ApiaryItemListener listener) {
+    ApiariesAdapter(Context context, MenuInflater menuInflater, List<Apiary> apiaries, ApiaryItemListener listener) {
+        this.context = context;
         this.menuInflater = menuInflater;
         this.apiaries = checkNotNull(apiaries);
         this.listener = listener;
@@ -93,7 +97,7 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
             card = (CardView) itemView.findViewById(R.id.card);
             apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
             numHives = (TextView) itemView.findViewById(R.id.num_hives);
-            moreIcon = (ImageView) itemView.findViewById(R.id.weather_icon);
+            weatherIcon = (ImageView) itemView.findViewById(R.id.weather_icon);
             temp = (TextView) itemView.findViewById(R.id.temp);
             moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
 
@@ -115,14 +119,16 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
             // Set apiary name
             apiaryName.setText(apiary.getName());
             // Set number of hives
-            if(apiary.getHives() != null) {
+            if (apiary.getHives() != null) {
                 numHives.setText(Integer.toString(apiary.getHives().size()));
             }
-            if(apiary.getCurrentWeather() != null) {
+            if (apiary.getCurrentWeather() != null) {
                 // Set weather icon
-                // TODO
+                String iconId = apiary.getCurrentWeather().getWeatherConditionIcon();
+                weatherIcon.setImageResource(WeatherUtils.getWeatherIconResourceId(iconId));
                 // Set temperature
-                temp.setText(Double.toString(apiary.getCurrentWeather().getTemperature()) + "ºC");
+                double temperature = apiary.getCurrentWeather().getTemperature();
+                temp.setText(WeatherUtils.formatTemperature(context, temperature));
                 // Show
                 weatherIcon.setVisibility(View.VISIBLE);
                 temp.setVisibility(View.VISIBLE);

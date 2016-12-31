@@ -1,4 +1,5 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <!--+++++++++++-->
     <!-- Generals  -->
@@ -20,6 +21,10 @@
     <string name="edit">Edit</string>
     <!-- Delete action [CHAR LIMIT=30] -->
     <string name="delete">Delete</string>
+    <!-- Format temperature in Celsius unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
+    <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
 
     <!--+++++++++++++++-->
     <!-- General Icons -->
@@ -53,6 +58,8 @@
     <string name="num_hives">Number of hives</string>
     <!-- Default value number of bees [CHAR LIMIT=NONE] -->
     <string name="default_num_hives" translatable="false">0</string>
+    <!-- Default value temperature [CHAR LIMIT=NONE] -->
+    <string name="default_temperature" translatable="false">10\u00B0C</string>
     <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
     <string name="loading_apiaries_error">Error while loading apiaries.</string>
     <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
@@ -270,9 +277,9 @@
     <!-- Label for the temperature units preference [CHAR LIMIT=30] -->
     <string name="pref_temp_units_label">Temperature Units</string>
     <!-- Label for metric option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_temp_units_label_metric">Metric</string>
+    <string name="pref_temp_units_label_metric">Metric (\u00B0C)</string>
     <!-- Label for imperial option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_temp_units_label_imperial">Imperial</string>
+    <string name="pref_temp_units_label_imperial">Imperial (\u00B0F)</string>
     <!-- Key name for temperature unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_temp_units_key" translatable="false">units</string>
     <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->

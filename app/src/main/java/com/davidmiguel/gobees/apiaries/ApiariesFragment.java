@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
@@ -55,7 +56,7 @@ public class ApiariesFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new ApiariesAdapter(getActivity().getMenuInflater(), new ArrayList<Apiary>(0), this);
+        listAdapter = new ApiariesAdapter(getContext(), getActivity().getMenuInflater(), new ArrayList<Apiary>(0), this);
     }
 
     @Nullable
@@ -213,12 +214,14 @@ public class ApiariesFragment extends Fragment
 
     @Override
     public void showSuccessfullyWeatherUpdatedMessage() {
-        showMessage(getString(R.string.successfully_updated_weather_message));
+        Toast.makeText(getActivity(), getString(R.string.successfully_updated_weather_message),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showWeatherUpdateErrorMessage() {
-        showMessage(getString(R.string.weather_update_error_message));
+        Toast.makeText(getActivity(), getString(R.string.weather_update_error_message),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
