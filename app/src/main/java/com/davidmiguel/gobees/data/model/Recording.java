@@ -22,9 +22,9 @@ public class Recording {
     /**
      * List of meteorological records.
      */
-    private List<MeteoDetail> meteo;
+    private List<MeteoRecord> meteo;
 
-    public Recording(Date date, List<Record> records, List<MeteoDetail> meteo) {
+    public Recording(Date date, List<Record> records, List<MeteoRecord> meteo) {
         this.date = date;
         this.records = records;
         this.meteo = meteo;
@@ -43,7 +43,7 @@ public class Recording {
         return records;
     }
 
-    public List<MeteoDetail> getMeteo() {
+    public List<MeteoRecord> getMeteo() {
         return meteo;
     }
 }

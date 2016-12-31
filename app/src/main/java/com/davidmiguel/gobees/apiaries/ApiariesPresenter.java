@@ -9,13 +9,19 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.data.source.local.DataGenerator;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import io.realm.Realm;
 
 /**
  * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
  * UI as required.
  */
 class ApiariesPresenter implements ApiariesContract.Presenter {
+
+    private static final int MIN_UPDATE_WEATHER = 15;
 
     private GoBeesRepository goBeesRepository;
     private ApiariesContract.View view;
@@ -68,6 +74,8 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
                 } else {
                     // Show the list of apiaries
                     view.showApiaries(apiaries);
+                    // Check whether current weather is up to date
+                    checkCurrentWeather(apiaries);
                 }
             }
 
@@ -141,5 +149,48 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     @Override
     public void start() {
         loadApiaries(false);
+    }
+
+    /**
+     * Checks whether current weather is up to date (less than 15min old).
+     * If not, orders to update the current weather in all apiaries.
+     *
+     * @param apiaries list of apiaries.
+     */
+    private void checkCurrentWeather(List<Apiary> apiaries) {
+        List<Apiary> apiariesToUpdate = new ArrayList<>();
+        Date now = new Date();
+        // Check dates
+        for (Apiary apiary : apiaries) {
+            if(apiary.hasLocation()) {
+                if (apiary.getCurrentWeather() != null) {
+                    // Check time
+                    Date weatherDate = apiary.getCurrentWeather().getTimestamp();
+                    long minFromLastUpdate = (now.getTime() - weatherDate.getTime()) / 60000;
+                    if(minFromLastUpdate >= MIN_UPDATE_WEATHER) {
+                        apiariesToUpdate.add(apiary);
+                    }
+                } else {
+                    apiariesToUpdate.add(apiary);
+                }
+
+            }
+        }
+        // Update weather if needed
+        if(apiariesToUpdate.size() > 0) {
+            goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate, new GoBeesDataSource.TaskCallback() {
+                @Override
+                public void onSuccess() {
+                    view.notifyApiariesUpdated();
+                    view.showSuccessfullyWeatherUpdatedMessage();
+                }
+
+                @Override
+                public void onFailure() {
+                    view.showWeatherUpdateErrorMessage();
+                }
+            });
+        }
+
     }
 }

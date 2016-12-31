@@ -8,6 +8,7 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
+import com.davidmiguel.gobees.data.source.network.WeatherDataSource;
 import com.google.common.collect.Lists;
 
 import org.junit.After;
@@ -44,6 +45,9 @@ public class GoBeesRepositoryTest {
     private GoBeesLocalDataSource goBeesLocalDataSource;
 
     @Mock
+    private WeatherDataSource weatherDataSource;
+
+    @Mock
     private GetApiariesCallback getApiariesCallback;
 
     @Mock
@@ -67,7 +71,7 @@ public class GoBeesRepositoryTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        goBeesRepository = GoBeesRepository.getInstance(goBeesLocalDataSource);
+        goBeesRepository = GoBeesRepository.getInstance(goBeesLocalDataSource, weatherDataSource);
 
         // We start the apiaries to 3
         APIARIES = Lists.newArrayList(
@@ -155,10 +159,10 @@ public class GoBeesRepositoryTest {
         assertThat(goBeesRepository.cachedApiaries.containsKey(apiary.getId()), is(true));
 
         // When deleted
-        goBeesRepository.deleteApiary(apiary.getId(), taskCallback);
+        goBeesRepository.deleteApiary(apiary, taskCallback);
 
         // Verify the data source were called
-        verify(goBeesLocalDataSource).deleteApiary(apiary.getId(), taskCallback);
+        verify(goBeesLocalDataSource).deleteApiary(apiary, taskCallback);
 
         // Verify it's removed from repository
         assertThat(goBeesRepository.cachedApiaries.containsKey(apiary.getId()), is(false));

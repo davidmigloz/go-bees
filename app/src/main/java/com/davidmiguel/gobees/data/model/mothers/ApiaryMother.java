@@ -2,8 +2,7 @@ package com.davidmiguel.gobees.data.model.mothers;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
-import com.davidmiguel.gobees.data.model.MeteoDay;
-import com.davidmiguel.gobees.data.model.MeteoDetail;
+import com.davidmiguel.gobees.data.model.MeteoRecord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,8 @@ public class ApiaryMother {
     private Double locationLat;
     private String notes;
     private RealmList<Hive> hives;
-    private RealmList<MeteoDay> meteoDays;
-    private RealmList<MeteoDetail> meteoDetails;
+    private MeteoRecord currentWeather;
+    private RealmList<MeteoRecord> meteoRecords;
 
     private ApiaryMother() {
         setValues(NUM_HIVES);
@@ -87,7 +86,7 @@ public class ApiaryMother {
 
     private Apiary build() {
         return new Apiary(id, name, imageUrl, locationLong,
-                locationLat, notes, hives, meteoDays, meteoDetails);
+                locationLat, notes, hives, currentWeather, meteoRecords);
     }
 
     private List<Hive> generateHives(int num) {

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.MeteoRecord;
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
@@ -59,7 +60,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getApiaries(@NonNull GetApiariesCallback callback) {
         try {
             RealmResults<Apiary> apiaries = realm.where(Apiary.class).findAll();
-            callback.onApiariesLoaded(new ArrayList<>(apiaries));
+            callback.onApiariesLoaded(realm.copyFromRealm(apiaries));
         } catch (Exception e) {
             callback.onDataNotAvailable();
         }
@@ -69,7 +70,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getApiary(long apiaryId, @NonNull GetApiaryCallback callback) {
         try {
             Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
-            callback.onApiaryLoaded(apiary);
+            callback.onApiaryLoaded(realm.copyFromRealm(apiary));
         } catch (Exception e) {
             callback.onDataNotAvailable();
         }
@@ -151,7 +152,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
         try {
             Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
-            callback.onHivesLoaded(new ArrayList<>(apiary.getHives()));
+            callback.onHivesLoaded(realm.copyFromRealm(apiary.getHives()));
         } catch (Exception e) {
             callback.onDataNotAvailable();
         }
@@ -161,7 +162,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
         try {
             Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
-            callback.onHiveLoaded(hive);
+            callback.onHiveLoaded(realm.copyFromRealm(hive));
         } catch (Exception e) {
             callback.onDataNotAvailable();
         }
@@ -354,6 +355,44 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     }
                 });
             }
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public void updateApiariesCurrentWeather(final List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback) {
+        try {
+            // Save meteo records
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Get next id
+                    Number n = realm.where(MeteoRecord.class).max("id");
+                    long nextId = (n != null ? n.longValue() + 1 : 0);
+                    // Save records
+                    for (Apiary apiary : apiariesToUpdate) {
+                        MeteoRecord meteoRecord = apiary.getCurrentWeather();
+                        meteoRecord.setId(nextId++);
+                        realm.copyToRealmOrUpdate(meteoRecord);
+                    }
+                }
+            });
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Save apiaries with current weather updated
+                    for (Apiary apiary : apiariesToUpdate) {
+                        Apiary requestedApiary = realm.where(Apiary.class)
+                                .equalTo("id", apiary.getId()).findFirst();
+                        MeteoRecord meteoRecord = realm.where(MeteoRecord.class)
+                                .equalTo("id", apiary.getCurrentWeather().getId()).findFirst();
+                        requestedApiary.setCurrentWeather(meteoRecord);
+                    }
+                }
+            });
             callback.onSuccess();
         } catch (Exception e) {
             callback.onFailure();
