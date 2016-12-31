@@ -94,7 +94,7 @@
                     android:adjustViewBounds="false"
                     android:contentDescription="@string/start_record_icon"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_fiber_manual_record"
+                    android:src="@drawable/ic_start_recording"
                     android:tint="@color/colorCameraControlsIcons"/>
             </LinearLayout>
 

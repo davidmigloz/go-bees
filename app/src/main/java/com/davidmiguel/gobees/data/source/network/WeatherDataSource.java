@@ -60,7 +60,7 @@ public class WeatherDataSource {
                 data.setMeteoRecord(meteoRecord);
                 return data;
             } catch (IOException | JSONException e) {
-                return null;
+                return data;
             }
         }
 

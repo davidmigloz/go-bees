@@ -45,7 +45,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:adjustViewBounds="false"
-                android:contentDescription="@string/date_icon"
+                android:contentDescription="@string/gps_location_icon"
                 android:src="@drawable/ic_my_location"
                 android:tint="@color/colorAccent"/>
 

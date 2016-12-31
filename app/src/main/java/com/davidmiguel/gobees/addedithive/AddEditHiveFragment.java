@@ -58,7 +58,6 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
         // Configure floating action button
         FloatingActionButton fab =
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
-        fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -66,7 +66,7 @@
             android:layout_toEndOf="@id/hive_image"
             android:adjustViewBounds="false"
             android:contentDescription="@string/last_revision_icon"
-            android:src="@drawable/ic_cached"
+            android:src="@drawable/ic_last_revision"
             android:tint="@color/colorSecondaryText"/>
 
         <TextView
@@ -95,7 +95,7 @@
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/enter_icon"
-            android:src="@drawable/ic_chevron_right"
+            android:src="@drawable/ic_enter"
             android:tint="@color/colorAccent"/>
 
     </RelativeLayout>

@@ -25,7 +25,7 @@
             android:layout_marginTop="18dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/date_icon"
-            android:src="@drawable/ic_event"
+            android:src="@drawable/ic_date"
             android:tint="@color/colorAccent"/>
 
         <TextView

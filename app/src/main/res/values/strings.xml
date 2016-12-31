@@ -32,9 +32,9 @@
 
     <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
     <string name="more_icon">More…</string>
-    <!-- Description of enter icon ic_chevron_right [CHAR LIMIT=100] -->
+    <!-- Description of enter icon ic_enter [CHAR LIMIT=100] -->
     <string name="enter_icon">Enter…</string>
-    <!-- Description of date icon ic_event [CHAR LIMIT=25] -->
+    <!-- Description of date icon ic_date [CHAR LIMIT=25] -->
     <string name="date_icon">Date</string>
     <!-- Description of weather icon [CHAR LIMIT=25] -->
     <string name="weather_icon">Weather icon</string>
@@ -42,6 +42,8 @@
     <string name="chart_line">Chart line</string>
     <!-- Description of settings icon [CHAR LIMIT=100] -->
     <string name="settings_icon">Settings icon</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="gps_location_icon">Get GPS location</string>
 
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->

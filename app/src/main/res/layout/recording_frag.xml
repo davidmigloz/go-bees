@@ -70,7 +70,7 @@
                             android:layout_marginStart="16dp"
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/chart_line"
-                            android:src="@drawable/ic_show_chart"
+                            android:src="@drawable/ic_chart_line"
                             android:tint="@color/colorAccent"/>
 
                         <TextView
@@ -91,7 +91,7 @@
                             android:layout_marginEnd="16dp"
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/wind"
-                            android:src="@drawable/ic_wind"
+                            android:src="@drawable/ic_chart_wind"
                             android:tint="@color/colorWindIcon"/>
 
                         <ImageView
@@ -103,7 +103,7 @@
                             android:layout_toStartOf="@id/wind_icon"
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/rain"
-                            android:src="@drawable/ic_rain"
+                            android:src="@drawable/ic_chart_rain"
                             android:tint="@color/colorRainIcon"/>
 
                         <ImageView
@@ -115,7 +115,7 @@
                             android:layout_toStartOf="@id/rain_icon"
                             android:adjustViewBounds="false"
                             android:contentDescription="@string/temperature"
-                            android:src="@drawable/ic_temperature"
+                            android:src="@drawable/ic_chart_temperature"
                             android:tint="@color/colorTempIcon"/>
 
                     </RelativeLayout>
