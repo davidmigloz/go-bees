@@ -61,7 +61,7 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.saveHive(nameTextView.getText().toString(),
+                presenter.save(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }
         });

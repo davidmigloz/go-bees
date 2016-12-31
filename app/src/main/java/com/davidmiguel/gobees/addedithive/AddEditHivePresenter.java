@@ -18,6 +18,7 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
 
     private long apiaryId;
     private long hiveId;
+    private Hive hive;
 
     AddEditHivePresenter(GoBeesRepository goBeesRepository,
                          AddEditHiveContract.View view,
@@ -30,9 +31,9 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     }
 
     @Override
-    public void saveHive(String name, String notes) {
+    public void save(String name, String notes) {
         if (isNewHive()) {
-            createHive(name, notes, this);
+            createHive(name, notes);
         } else {
             updateHive(name, notes);
         }
@@ -50,11 +51,14 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     public void start() {
         if (!isNewHive()) {
             populateHive();
+        } else {
+            hive = new Hive();
         }
     }
 
     @Override
     public void onHiveLoaded(Hive hive) {
+        this.hive = hive;
         // Show hive data on view
         if (view.isActive()) {
             view.setName(hive.getName());
@@ -82,33 +86,63 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         view.showSaveHiveError();
     }
 
+    /**
+     * Checks whether a hive is new or not.
+     *
+     * @return true/false.
+     */
     private boolean isNewHive() {
         return hiveId == AddEditHiveActivity.NEW_HIVE;
     }
 
-    private void createHive(final String name, final String notes, final TaskCallback listener) {
+    /**
+     * Create an save a new hive.
+     *
+     * @param name  hive name.
+     * @param notes hive notes.
+     */
+    private void createHive(final String name, final String notes) {
         // Get next id
         goBeesRepository.getNextHiveId(new GetNextHiveIdCallback() {
             @Override
             public void onNextHiveIdLoaded(long hiveId) {
-                // Create hive
-                Hive newHive = new Hive(hiveId, name, null, notes, null);
-                // Save it if it is correct
-                if (newHive.isValidHive()) {
-                    goBeesRepository.saveHive(apiaryId, newHive, listener);
-                } else {
-                    view.showEmptyHiveError();
-                }
+                saveHive(hiveId, name, notes);
             }
         });
     }
 
+    /**
+     * Update and save a hive.
+     *
+     * @param name  hive name
+     * @param notes hive notes
+     */
     private void updateHive(String name, String notes) {
         if (isNewHive()) {
             throw new RuntimeException("updateHive() was called but hive is new.");
         }
-        // Create new hive with the modifications
-        Hive editedHive = new Hive(hiveId, name, null, notes, null);
-        goBeesRepository.saveHive(apiaryId, editedHive, this);
+        saveHive(hiveId, name, notes);
+    }
+
+    /**
+     * aves (or update) the hive.
+     *
+     * @param hiveId hive id.
+     * @param name   hive name.
+     * @param notes  hive notes.
+     */
+    private void saveHive(long hiveId, String name, String notes) {
+        // Set id
+        hive.setId(hiveId);
+        // Set name
+        hive.setName(name);
+        // Set notes
+        hive.setNotes(notes);
+        // Save it if it is correct
+        if (hive.isValidHive()) {
+            goBeesRepository.saveHive(apiaryId, hive, this);
+        } else {
+            view.showEmptyHiveError();
+        }
     }
 }

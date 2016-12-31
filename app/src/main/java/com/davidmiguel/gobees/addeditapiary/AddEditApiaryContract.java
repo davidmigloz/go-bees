@@ -75,7 +75,7 @@ interface AddEditApiaryContract {
          * @param name  apiary name.
          * @param notes apiary notes.
          */
-        void saveApiary(String name, String notes);
+        void save(String name, String notes);
 
         /**
          * Fill apiary data (the apiary must already exist in the repository).

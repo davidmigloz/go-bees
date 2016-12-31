@@ -229,7 +229,13 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     realm.copyToRealmOrUpdate(hive);
                     // Add to apiary
                     Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
-                    apiary.addHive(hive);
+                    if (apiary.getHives() != null) {
+                        Hive h = apiary.getHives().where().equalTo("id", hive.getId()).findFirst();
+                        if (h == null) {
+                            // New hive
+                            apiary.addHive(hive);
+                        }
+                    }
                 }
             });
             callback.onSuccess();

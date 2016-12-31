@@ -75,7 +75,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.saveApiary(nameTextView.getText().toString(),
+                presenter.save(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }
         });

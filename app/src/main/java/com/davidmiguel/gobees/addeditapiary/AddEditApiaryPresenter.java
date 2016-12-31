@@ -30,6 +30,7 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     private LocationService locationService;
 
     private long apiaryId;
+    private Apiary apiary;
     private Location apiaryLocation;
 
     AddEditApiaryPresenter(GoBeesRepository goBeesRepository,
@@ -42,9 +43,9 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     }
 
     @Override
-    public void saveApiary(String name, String notes) {
+    public void save(String name, String notes) {
         if (isNewApiary()) {
-            createApiary(name, notes, this);
+            createApiary(name, notes);
         } else {
             updateApiary(name, notes);
         }
@@ -61,14 +62,14 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     @Override
     public void toogleLocation(Context context) {
         if (locationService == null) {
-            // Conect GPS service
+            // Connect GPS service
             // TODO check permissions
             locationService = new LocationService(context, this, this);
             locationService.connect();
             view.setLocationIcon(true);
             view.showSearchingGpsMsg();
         } else {
-            // Disconect GPS service
+            // Disconnect GPS service
             stopLocation();
         }
 
@@ -88,11 +89,15 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     public void start() {
         if (!isNewApiary()) {
             populateApiary();
+        } else {
+            apiary = new Apiary();
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onApiaryLoaded(Apiary apiary) {
+        this.apiary = apiary;
         // Show apiary data on view
         if (view.isActive()) {
             // Set name
@@ -100,7 +105,7 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
             // Set notes
             view.setNotes(apiary.getNotes());
             // Set location
-            if (apiary.getLocationLat() != null && apiary.getLocationLong() != null) {
+            if (apiary.hasLocation()) {
                 apiaryLocation = new Location("");
                 apiaryLocation.setLatitude(apiary.getLocationLat());
                 apiaryLocation.setLongitude(apiary.getLocationLong());
@@ -176,34 +181,15 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     /**
      * Create an save a new apiary.
      *
-     * @param name     apiary name.
-     * @param notes    apiary notes.
-     * @param listener TaskCallback.
+     * @param name  apiary name.
+     * @param notes apiary notes.
      */
-    private void createApiary(final String name, final String notes, final TaskCallback listener) {
+    private void createApiary(final String name, final String notes) {
         // Get next id
         goBeesRepository.getNextApiaryId(new GoBeesDataSource.GetNextApiaryIdCallback() {
             @Override
             public void onNextApiaryIdLoaded(long apiaryId) {
-                // Create apiary
-                Apiary newApiary = new Apiary();
-                // Set id
-                newApiary.setId(apiaryId);
-                // Set name
-                newApiary.setName(name);
-                // Set location
-                if (apiaryLocation != null) {
-                    newApiary.setLocationLat(apiaryLocation.getLatitude());
-                    newApiary.setLocationLong(apiaryLocation.getLongitude());
-                }
-                // Set notes
-                newApiary.setNotes(notes);
-                // Save it if it is correct
-                if (newApiary.isValidApiary()) {
-                    goBeesRepository.saveApiary(newApiary, listener);
-                } else {
-                    view.showEmptyApiaryError();
-                }
+                saveApiary(apiaryId, name, notes);
             }
         });
     }
@@ -218,21 +204,34 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         if (isNewApiary()) {
             throw new RuntimeException("updateApiary() was called but apiary is new.");
         }
-        // TODO refactor createApiary() and updateApiary() (almost same code)
-        // Create new apiary with the modifications
-        Apiary editedApiary = new Apiary();
+        saveApiary(apiaryId, name, notes);
+    }
+
+    /**
+     * Saves (or update) the apiary.
+     *
+     * @param apiaryId apiary id.
+     * @param name     apiary name.
+     * @param notes    apiary notes.
+     */
+    private void saveApiary(long apiaryId, String name, String notes) {
         // Set id
-        editedApiary.setId(apiaryId);
+        apiary.setId(apiaryId);
         // Set name
-        editedApiary.setName(name);
+        apiary.setName(name);
         // Set location
         if (apiaryLocation != null) {
-            editedApiary.setLocationLat(apiaryLocation.getLatitude());
-            editedApiary.setLocationLong(apiaryLocation.getLongitude());
+            apiary.setLocationLat(apiaryLocation.getLatitude());
+            apiary.setLocationLong(apiaryLocation.getLongitude());
         }
         // Set notes
-        editedApiary.setNotes(notes);
-        goBeesRepository.saveApiary(editedApiary, this);
+        apiary.setNotes(notes);
+        // Save it if it is correct
+        if (apiary.isValidApiary()) {
+            goBeesRepository.saveApiary(apiary, this);
+        } else {
+            view.showEmptyApiaryError();
+        }
     }
 
     /**

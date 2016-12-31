@@ -3,6 +3,7 @@ package com.davidmiguel.gobees.data.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 
 import java.util.List;
@@ -132,5 +133,22 @@ public class Hive extends RealmObject {
         if (records != null) {
             records.addAll(recordsList);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Hive hive = (Hive) o;
+        return id == hive.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

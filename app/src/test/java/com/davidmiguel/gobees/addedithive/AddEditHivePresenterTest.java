@@ -58,7 +58,7 @@ public class AddEditHivePresenterTest {
                 new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID,
                         AddEditHiveActivity.NEW_HIVE);
         // When the presenter is asked to save a hive
-        addEditHivePresenter.saveHive("Hive 1", "Some notes about it....");
+        addEditHivePresenter.save("Hive 1", "Some notes about it....");
         // Then a new id is requested
         verify(apiariesRepository).getNextHiveId(getNextHiveIdCallbackArgumentCaptor.capture());
         getNextHiveIdCallbackArgumentCaptor.getValue().onNextHiveIdLoaded(1);
@@ -77,7 +77,7 @@ public class AddEditHivePresenterTest {
                 new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID,
                         AddEditHiveActivity.NEW_HIVE);
         // When the presenter is asked to save an empty hive
-        addEditHivePresenter.saveHive("", "");
+        addEditHivePresenter.save("", "");
         // Then a new id is requested
         verify(apiariesRepository).getNextHiveId(getNextHiveIdCallbackArgumentCaptor.capture());
         getNextHiveIdCallbackArgumentCaptor.getValue().onNextHiveIdLoaded(1);
@@ -91,7 +91,7 @@ public class AddEditHivePresenterTest {
         addEditHivePresenter =
                 new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID, 1);
         // When the presenter is asked to save a hive
-        addEditHivePresenter.saveHive("Apiary 1", "Some more notes about it....");
+        addEditHivePresenter.save("Apiary 1", "Some more notes about it....");
         // Then a hive is saved in the repository
         verify(apiariesRepository)
                 .saveHive(anyLong(), any(Hive.class), taskCallbackArgumentCaptor.capture());
