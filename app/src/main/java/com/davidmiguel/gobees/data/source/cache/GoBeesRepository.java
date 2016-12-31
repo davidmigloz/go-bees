@@ -145,10 +145,10 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback) {
+    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
         checkNotNull(callback);
         // Delete apiary
-        goBeesDataSource.deleteApiary(apiary, callback);
+        goBeesDataSource.deleteApiary(apiaryId, callback);
     }
 
     @Override
@@ -231,10 +231,10 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteHive(@NonNull Hive hive, @NonNull TaskCallback callback) {
+    public void deleteHive(long hiveId, @NonNull TaskCallback callback) {
         checkNotNull(callback);
         // Delete hive
-        goBeesDataSource.deleteHive(hive, callback);
+        goBeesDataSource.deleteHive(hiveId, callback);
     }
 
     @Override

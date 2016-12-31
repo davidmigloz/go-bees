@@ -105,7 +105,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         // Show progress indicator
         view.setLoadingIndicator(true);
         // Delete apiary
-        goBeesRepository.deleteApiary(apiary, new GoBeesDataSource.TaskCallback() {
+        goBeesRepository.deleteApiary(apiary.getId(), new GoBeesDataSource.TaskCallback() {
             @Override
             public void onSuccess() {
                 // The view may not be able to handle UI updates anymore
@@ -162,12 +162,12 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         Date now = new Date();
         // Check dates
         for (Apiary apiary : apiaries) {
-            if(apiary.hasLocation()) {
+            if (apiary.hasLocation()) {
                 if (apiary.getCurrentWeather() != null) {
                     // Check time
                     Date weatherDate = apiary.getCurrentWeather().getTimestamp();
                     long minFromLastUpdate = (now.getTime() - weatherDate.getTime()) / 60000;
-                    if(minFromLastUpdate >= MIN_UPDATE_WEATHER) {
+                    if (minFromLastUpdate >= MIN_UPDATE_WEATHER) {
                         apiariesToUpdate.add(apiary);
                     }
                 } else {
@@ -177,7 +177,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
             }
         }
         // Update weather if needed
-        if(apiariesToUpdate.size() > 0) {
+        if (apiariesToUpdate.size() > 0) {
             goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate, new GoBeesDataSource.TaskCallback() {
                 @Override
                 public void onSuccess() {

@@ -64,10 +64,10 @@ public interface GoBeesDataSource {
     /**
      * Delete apiary.
      *
-     * @param apiary   apiary to delete.
+     * @param apiaryId apiary id.
      * @param callback TaskCallback.
      */
-    void deleteApiary(@NonNull Apiary apiary, @NonNull TaskCallback callback);
+    void deleteApiary(long apiaryId, @NonNull TaskCallback callback);
 
     /**
      * Delete all apiaries.
@@ -128,10 +128,10 @@ public interface GoBeesDataSource {
     /**
      * Deletes given hive.
      *
-     * @param hive     hive to delete.
+     * @param hiveId   hive id.
      * @param callback TaskCallback.
      */
-    void deleteHive(@NonNull Hive hive, @NonNull TaskCallback callback);
+    void deleteHive(long hiveId, @NonNull TaskCallback callback);
 
     /**
      * Returns the next hive id.
@@ -183,7 +183,7 @@ public interface GoBeesDataSource {
      * Updates the current weather of the apiaries in the list.
      *
      * @param apiariesToUpdate apiaries to update weather.
-     * @param callback TaskCallback.
+     * @param callback         TaskCallback.
      */
     void updateApiariesCurrentWeather(List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback);
 

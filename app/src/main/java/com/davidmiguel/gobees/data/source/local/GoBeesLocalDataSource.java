@@ -99,8 +99,11 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteApiary(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
+    public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
         try {
+            // Get apiary
+            final Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+            // Delete
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
@@ -236,8 +239,9 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteHive(@NonNull final Hive hive, @NonNull TaskCallback callback) {
+    public void deleteHive(long hiveId, @NonNull TaskCallback callback) {
         try {
+            final Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
