@@ -58,6 +58,8 @@
 
     <!-- Description of number of hives icon[CHAR LIMIT=100] -->
     <string name="num_hives">Number of hives</string>
+    <!-- Default apiary name [CHAR LIMIT=100] -->
+    <string name="default_apiary_name">My apiary</string>
     <!-- Default value number of bees [CHAR LIMIT=NONE] -->
     <string name="default_num_hives" translatable="false">0</string>
     <!-- Default value temperature [CHAR LIMIT=NONE] -->
@@ -110,6 +112,10 @@
     <string name="apiary_hives_tab">Hives</string>
     <!-- Apiary info tab name [CHAR LIMIT=30] -->
     <string name="apiary_info_tab">Info</string>
+    <!-- Default hive name [CHAR LIMIT=100] -->
+    <string name="default_hive_name">My hive</string>
+    <!-- Default last revision value [CHAR LIMIT=100] -->
+    <string name="default_last_revision">10 days ago</string>
     <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
     <string name="loading_hives_error">Error while loading hives.</string>
     <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
@@ -150,6 +156,8 @@
     <string name="hive_recordings_tab">Recordings</string>
     <!-- Hive info tab name [CHAR LIMIT=20] -->
     <string name="hive_info_tab">Info</string>
+    <!-- Default recording date [CHAR LIMIT=100] -->
+    <string name="default_recording_date">Wen. 18 jan., 2017</string>
     <!-- Error msg shown when it's not possible to load recordings [CHAR LIMIT=100] -->
     <string name="loading_recordings_error">Error while loading recordings.</string>
     <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->

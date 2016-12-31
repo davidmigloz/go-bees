@@ -40,6 +40,9 @@
             android:layout_marginTop="24dp"
             android:layout_toEndOf="@id/apiary_image"
             android:layout_toStartOf="@+id/more_icon"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/default_apiary_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryText"/>
 
@@ -103,9 +106,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="4dp"
-            android:text="@string/default_temperature"
             android:layout_toEndOf="@id/weather_icon"
             android:gravity="bottom"
+            android:text="@string/default_temperature"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorSecondaryText"
             android:visibility="gone"/>
