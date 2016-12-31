@@ -33,16 +33,16 @@ public class Apiary extends RealmObject {
     private String imageUrl;
 
     /**
-     * Apiary location longitude.
-     */
-    @Nullable
-    private Double locationLong;
-
-    /**
      * Apiary location latitude.
      */
     @Nullable
     private Double locationLat;
+
+    /**
+     * Apiary location longitude.
+     */
+    @Nullable
+    private Double locationLong;
 
     /**
      * Apiary notes.
@@ -72,15 +72,15 @@ public class Apiary extends RealmObject {
         // Needed by Realm
     }
 
-    public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLong,
-                  @Nullable Double locationLat, @Nullable String notes,
+    public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLat,
+                  @Nullable Double locationLong, @Nullable String notes,
                   @Nullable RealmList<Hive> hives, @Nullable MeteoRecord currentWeather,
                   @Nullable RealmList<MeteoRecord> meteoRecords) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
-        this.locationLong = locationLong;
         this.locationLat = locationLat;
+        this.locationLong = locationLong;
         this.notes = notes;
         this.hives = hives;
         this.currentWeather = currentWeather;
@@ -113,21 +113,21 @@ public class Apiary extends RealmObject {
     }
 
     @Nullable
-    public Double getLocationLong() {
-        return locationLong;
-    }
-
-    public void setLocationLong(@Nullable Double locationLong) {
-        this.locationLong = locationLong;
-    }
-
-    @Nullable
     public Double getLocationLat() {
         return locationLat;
     }
 
     public void setLocationLat(@Nullable Double locationLat) {
         this.locationLat = locationLat;
+    }
+
+    @Nullable
+    public Double getLocationLong() {
+        return locationLong;
+    }
+
+    public void setLocationLong(@Nullable Double locationLong) {
+        this.locationLong = locationLong;
     }
 
     @Nullable
@@ -174,5 +174,9 @@ public class Apiary extends RealmObject {
 
     public boolean isValidApiary() {
         return !Strings.isNullOrEmpty(name);
+    }
+
+    public boolean hasLocation() {
+        return locationLat != null && locationLong != null;
     }
 }

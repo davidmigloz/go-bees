@@ -79,6 +79,8 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
         private CardView card;
         private TextView apiaryName;
         private TextView numHives;
+        private ImageView weatherIcon;
+        private TextView temp;
         private ImageView moreIcon;
 
         private Drawable background;
@@ -91,6 +93,8 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
             card = (CardView) itemView.findViewById(R.id.card);
             apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
             numHives = (TextView) itemView.findViewById(R.id.num_hives);
+            moreIcon = (ImageView) itemView.findViewById(R.id.weather_icon);
+            temp = (TextView) itemView.findViewById(R.id.temp);
             moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
 
             // Set listeners
@@ -108,9 +112,20 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
         }
 
         public void bind(@NonNull Apiary apiary) {
+            // Set apiary name
             apiaryName.setText(apiary.getName());
+            // Set number of hives
             if(apiary.getHives() != null) {
                 numHives.setText(Integer.toString(apiary.getHives().size()));
+            }
+            if(apiary.getCurrentWeather() != null) {
+                // Set weather icon
+                // TODO
+                // Set temperature
+                temp.setText(Double.toString(apiary.getCurrentWeather().getTemperature()) + "ºC");
+                // Show
+                weatherIcon.setVisibility(View.VISIBLE);
+                temp.setVisibility(View.VISIBLE);
             }
         }
 

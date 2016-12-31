@@ -51,6 +51,8 @@
 
     <!-- Description of number of hives icon[CHAR LIMIT=100] -->
     <string name="num_hives">Number of hives</string>
+    <!-- Default value number of bees [CHAR LIMIT=NONE] -->
+    <string name="default_num_hives" translatable="false">0</string>
     <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
     <string name="loading_apiaries_error">Error while loading apiaries.</string>
     <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
@@ -61,6 +63,10 @@
     <string name="successfully_deleted_apiary_message">Apiary deleted!</string>
     <!-- Msg shown when an error occurs when deleting apiary [CHAR LIMIT=100] -->
     <string name="deleted_apiary_error_message">Error while deleting apiary.</string>
+    <!-- Msg shown when current weather is updated [CHAR LIMIT=100] -->
+    <string name="successfully_updated_weather_message">Current weather updated!</string>
+    <!-- Msg shown when an error occurs when updating weather [CHAR LIMIT=100] -->
+    <string name="weather_update_error_message">Error while updating current weather.</string>
 
     <!--++++++++++++-->
     <!-- Add apiary -->

@@ -166,9 +166,14 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
+    public void notifyApiariesUpdated() {
+        listAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void showAddEditApiary(long apiaryId) {
         Intent intent = new Intent(getContext(), AddEditApiaryActivity.class);
-        if(apiaryId != AddEditApiaryActivity.NEW_APIARY) {
+        if (apiaryId != AddEditApiaryActivity.NEW_APIARY) {
             intent.putExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId);
         }
         startActivityForResult(intent, AddEditApiaryActivity.REQUEST_ADD_APIARY);
@@ -204,6 +209,16 @@ public class ApiariesFragment extends Fragment
     @Override
     public void showDeletedErrorMessage() {
         showMessage(getString(R.string.deleted_apiary_error_message));
+    }
+
+    @Override
+    public void showSuccessfullyWeatherUpdatedMessage() {
+        showMessage(getString(R.string.successfully_updated_weather_message));
+    }
+
+    @Override
+    public void showWeatherUpdateErrorMessage() {
+        showMessage(getString(R.string.weather_update_error_message));
     }
 
     @Override

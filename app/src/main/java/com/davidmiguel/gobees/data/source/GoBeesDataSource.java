@@ -180,6 +180,14 @@ public interface GoBeesDataSource {
     void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback);
 
     /**
+     * Updates the current weather of the apiaries in the list.
+     *
+     * @param apiariesToUpdate apiaries to update weather.
+     * @param callback TaskCallback.
+     */
+    void updateApiariesCurrentWeather(List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback);
+
+    /**
      * Force to update recordings cache.
      */
     void refreshRecordings(long hiveId);
