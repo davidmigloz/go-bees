@@ -94,7 +94,7 @@
             android:contentDescription="@string/weather_icon"
             android:src="@drawable/ic_weather_day_clear_sky"
             android:tint="@color/colorSecondaryText"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/temp"
@@ -108,7 +108,7 @@
             android:gravity="bottom"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorSecondaryText"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/enter_icon"
