@@ -90,6 +90,7 @@ public class AddEditHivePresenterTest {
         // Get a reference to the class under test for hive with id=1
         addEditHivePresenter =
                 new AddEditHivePresenter(apiariesRepository, addEditHiveView, APIARY_ID, 1);
+        addEditHivePresenter.onHiveLoaded(HiveMother.newDefaultHive());
         // When the presenter is asked to save a hive
         addEditHivePresenter.save("Apiary 1", "Some more notes about it....");
         // Then a hive is saved in the repository

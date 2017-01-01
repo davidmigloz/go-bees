@@ -89,6 +89,7 @@ public class AddEditApiaryPresenterTest {
         // Get a reference to the class under test for apiary with id=1
         addEditApiaryPresenter =
                 new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView, 1);
+        addEditApiaryPresenter.onApiaryLoaded(ApiaryMother.newDefaultApiary());
         // When the presenter is asked to save an apiary
         addEditApiaryPresenter.save("Apiary 1", "Some more notes about it....");
         // Then an apiary is saved in the repository

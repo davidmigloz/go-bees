@@ -39,6 +39,9 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
         this.goBeesRepository = goBeesRepository;
         this.view = view;
         this.apiaryId = apiaryId;
+        if (isNewApiary()) {
+            apiary = new Apiary();
+        }
         view.setPresenter(this);
     }
 
@@ -89,8 +92,6 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     public void start() {
         if (!isNewApiary()) {
             populateApiary();
-        } else {
-            apiary = new Apiary();
         }
     }
 

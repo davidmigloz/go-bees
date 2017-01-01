@@ -27,6 +27,9 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         this.view = view;
         this.apiaryId = apiaryId;
         this.hiveId = hiveId;
+        if (isNewHive()) {
+            hive = new Hive();
+        }
         view.setPresenter(this);
     }
 
@@ -51,8 +54,6 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     public void start() {
         if (!isNewHive()) {
             populateHive();
-        } else {
-            hive = new Hive();
         }
     }
 
