@@ -1,6 +1,8 @@
 package com.davidmiguel.gobees.addeditapiary;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
     public static final int REQUEST_ADD_APIARY = 1;
     public static final int NEW_APIARY = -1;
 
+    private Fragment addEditApiaryFragment;
     private GoBeesRepository goBeesRepository;
 
     @Override
@@ -39,9 +42,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
                 .getLongExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, NEW_APIARY);
 
         // Add fragment to the activity and set title
-        AddEditApiaryFragment addEditApiaryFragment =
-                (AddEditApiaryFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.contentFrame);
+        addEditApiaryFragment = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (addEditApiaryFragment == null) {
             addEditApiaryFragment = AddEditApiaryFragment.newInstance();
             if (getIntent().hasExtra(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID)) {
@@ -67,7 +68,8 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new AddEditApiaryPresenter(goBeesRepository, addEditApiaryFragment, apiaryId);
+        new AddEditApiaryPresenter(goBeesRepository,
+                (AddEditApiaryContract.View) addEditApiaryFragment, apiaryId);
     }
 
     @Override
@@ -81,5 +83,13 @@ public class AddEditApiaryActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (addEditApiaryFragment != null) {
+            addEditApiaryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

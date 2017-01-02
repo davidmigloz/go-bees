@@ -65,6 +65,13 @@ interface AddEditApiaryContract {
          * Shows save error message.
          */
         void showSaveApiaryError();
+
+        /**
+         * Checks whether ACCESS_FINE_LOCATION permission is granted. If not, asks for it.
+         *
+         * @return if the permission is granted.
+         */
+        boolean checkLocationPermission();
     }
 
     interface Presenter extends BasePresenter {

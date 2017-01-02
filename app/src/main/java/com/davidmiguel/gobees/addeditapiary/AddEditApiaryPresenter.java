@@ -64,18 +64,18 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
 
     @Override
     public void toogleLocation(Context context) {
-        if (locationService == null) {
-            // Connect GPS service
-            // TODO check permissions
-            locationService = new LocationService(context, this, this);
-            locationService.connect();
-            view.setLocationIcon(true);
-            view.showSearchingGpsMsg();
-        } else {
-            // Disconnect GPS service
-            stopLocation();
+        if (view.checkLocationPermission()) {
+            if (locationService == null) {
+                // Connect GPS service
+                locationService = new LocationService(context, this, this);
+                locationService.connect();
+                view.setLocationIcon(true);
+                view.showSearchingGpsMsg();
+            } else {
+                // Disconnect GPS service
+                stopLocation();
+            }
         }
-
     }
 
     @Override

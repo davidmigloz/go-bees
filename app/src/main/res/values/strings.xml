@@ -103,6 +103,17 @@
     <string name="save_apiary_error_message">Error while saving apiary.</string>
     <!-- Description of apiary logo [CHAR LIMIT=100] -->
     <string name="apiary_logo">Apiary logo</string>
+    <!-- Title when user doesn't grant location permission [CHAR LIMIT=100] -->
+    <string name="permission_request_title">Are you sure?</string>
+    <!-- Body when user doesn't grant location permission [CHAR LIMIT=500] -->
+    <string name="permission_request_body">Precise location permission is needed if you want to
+        receive weather information or locate your apiaries in a map. Do you want to authorize it?</string>
+    <!-- Ok button when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_ok_button">ALLOW</string>
+    <!-- No button when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_no_button">DENY</string>
+    <!-- Message when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_denied">The app does not have permissions to use this feature.</string>
 
     <!--++++++++-->
     <!-- Apiary -->

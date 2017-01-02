@@ -89,6 +89,7 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.vanniktech:vntnumberpickerpreference:1.0.0'
+    compile 'rebus:permission-utils:1.0.6'
 
     // Dependencies for local unit tests
     testCompile 'junit:junit:4.12'
