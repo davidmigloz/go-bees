@@ -163,7 +163,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         if (PermissionUtils.isGranted(getActivity(), PermissionEnum.ACCESS_FINE_LOCATION)) {
             return true;
         }
-        // Ask permission
+        // Ask for permission
         PermissionManager.with(getActivity())
                 .permission(PermissionEnum.ACCESS_FINE_LOCATION)
                 .askagain(true)
@@ -172,15 +172,15 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                     public void showRequestPermission(final UserResponse response) {
                         new AlertDialog.Builder(getActivity())
                                 .setTitle(getString(R.string.permission_request_title))
-                                .setMessage(getString(R.string.permission_request_body))
-                                .setPositiveButton(getString(R.string.permission_request_ok_button),
+                                .setMessage(getString(R.string.location_permission_request_body))
+                                .setPositiveButton(getString(R.string.permission_request_allow_button),
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 response.result(true);
                                             }
                                         })
-                                .setNegativeButton(getString(R.string.permission_request_no_button),
+                                .setNegativeButton(getString(R.string.permission_request_deny_button),
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -195,7 +195,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                     @Override
                     public void result(boolean allPermissionsGranted) {
                         if (allPermissionsGranted) {
-                            // Launch the featuer
+                            // Launch the feature
                             presenter.toogleLocation(getContext());
                         } else {
                             // Warn the user that it's not possible to use the feature
@@ -209,6 +209,12 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionManager.handleResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
     public boolean isActive() {
         return isAdded();
     }
@@ -216,12 +222,6 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     @Override
     public void setPresenter(@NonNull AddEditApiaryContract.Presenter presenter) {
         this.presenter = checkNotNull(presenter);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        PermissionManager.handleResult(requestCode, permissions, grantResults);
     }
 
     /**

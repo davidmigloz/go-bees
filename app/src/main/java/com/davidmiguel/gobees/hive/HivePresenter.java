@@ -93,7 +93,9 @@ class HivePresenter implements HiveContract.Presenter {
 
     @Override
     public void startNewRecording() {
-        view.startNewRecording(hiveId);
+        if (view.checkCameraPermission()) {
+            view.startNewRecording(hiveId);
+        }
     }
 
     @Override

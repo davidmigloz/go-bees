@@ -74,6 +74,13 @@ interface HiveContract {
          * @param title title.
          */
         void showTitle(@NonNull String title);
+
+        /**
+         * Checks whether ACCESS_FINE_LOCATION permission is granted. If not, asks for it.
+         *
+         * @return if the permission is granted.
+         */
+        boolean checkCameraPermission();
     }
 
     interface Presenter extends BasePresenter {

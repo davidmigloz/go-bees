@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.hive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Recording;
@@ -33,6 +36,12 @@ import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import rebus.permissionutils.AskagainCallback;
+import rebus.permissionutils.PermissionEnum;
+import rebus.permissionutils.PermissionManager;
+import rebus.permissionutils.PermissionUtils;
+import rebus.permissionutils.SimpleCallback;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -213,6 +222,63 @@ public class HiveRecordingsFragment extends Fragment
         if (ab != null) {
             ab.setTitle(title);
         }
+    }
+
+    @Override
+    public boolean checkCameraPermission() {
+        // Check camera permission
+        if (PermissionUtils.isGranted(getActivity(), PermissionEnum.CAMERA)) {
+            return true;
+        }
+        // Ask for permission
+        PermissionManager.with(getActivity())
+                .permission(PermissionEnum.CAMERA)
+                .askagain(true)
+                .askagainCallback(new AskagainCallback() {
+                    @Override
+                    public void showRequestPermission(final UserResponse response) {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle(getString(R.string.permission_request_title))
+                                .setMessage(getString(R.string.camera_permission_request_body))
+                                .setPositiveButton(getString(R.string.permission_request_allow_button),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                response.result(true);
+                                            }
+                                        })
+                                .setNegativeButton(getString(R.string.permission_request_deny_button),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                response.result(false);
+                                            }
+                                        })
+                                .setCancelable(false)
+                                .show();
+                    }
+                })
+                .callback(new SimpleCallback() {
+                    @Override
+                    public void result(boolean allPermissionsGranted) {
+                        if (allPermissionsGranted) {
+                            // Launch the feature
+                            presenter.startNewRecording();
+                        } else {
+                            // Warn the user that it's not possible to use the feature
+                            Toast.makeText(getActivity(), getString(R.string.permission_request_denied),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .ask();
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionManager.handleResult(requestCode, permissions, grantResults);
     }
 
     @Override

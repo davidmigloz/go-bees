@@ -25,6 +25,14 @@
     <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
     <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
     <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
+    <!-- Title when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_title">Permission denied</string>
+    <!-- Allow button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_allow_button">ALLOW</string>
+    <!-- Deny button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_deny_button">DENY</string>
+    <!-- Message when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_denied">The app does not have permissions to use this feature.</string>
 
     <!--+++++++++++++++-->
     <!-- General Icons -->
@@ -103,17 +111,11 @@
     <string name="save_apiary_error_message">Error while saving apiary.</string>
     <!-- Description of apiary logo [CHAR LIMIT=100] -->
     <string name="apiary_logo">Apiary logo</string>
-    <!-- Title when user doesn't grant location permission [CHAR LIMIT=100] -->
-    <string name="permission_request_title">Are you sure?</string>
     <!-- Body when user doesn't grant location permission [CHAR LIMIT=500] -->
-    <string name="permission_request_body">Precise location permission is needed if you want to
-        receive weather information or locate your apiaries in a map. Do you want to authorize it?</string>
-    <!-- Ok button when user doesn't grant location permission [CHAR LIMIT=30] -->
-    <string name="permission_request_ok_button">ALLOW</string>
-    <!-- No button when user doesn't grant location permission [CHAR LIMIT=30] -->
-    <string name="permission_request_no_button">DENY</string>
-    <!-- Message when user doesn't grant location permission [CHAR LIMIT=30] -->
-    <string name="permission_request_denied">The app does not have permissions to use this feature.</string>
+    <string name="location_permission_request_body">
+        Without this permission the app is unable to receive weather information or to locate
+        your apiaries in a map. Are you sure you want to deny this permission?
+    </string>
 
     <!--++++++++-->
     <!-- Apiary -->
@@ -181,6 +183,11 @@
     <string name="deleted_recording_error_message">Error while deleting recording.</string>
     <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
     <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
+    <!-- Body when user doesn't grant camera permission [CHAR LIMIT=500] -->
+    <string name="camera_permission_request_body">
+        Without this permission the app is unable to monitor the flight activity of your hive.
+        Are you sure you want to deny this permission?
+    </string>
 
     <!--+++++++++++-->
     <!-- Recording -->
