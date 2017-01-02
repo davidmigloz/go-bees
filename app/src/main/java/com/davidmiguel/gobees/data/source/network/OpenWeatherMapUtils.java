@@ -94,43 +94,55 @@ class OpenWeatherMapUtils {
         if (jsonObject.has(OWM_WEATHER)) {
             JSONArray jsonWeatherArray = jsonObject.getJSONArray(OWM_WEATHER);
             JSONObject jsonWeatherObject = jsonWeatherArray.getJSONObject(0);
-            weatherCondition = jsonWeatherObject.getInt(OWM_WEATHER_ID);
-            weatherConditionIcon = jsonWeatherObject.getString(OWM_WEATHER_ICON);
+            weatherCondition = jsonWeatherObject.has(OWM_WEATHER_ID) ?
+                    jsonWeatherObject.getInt(OWM_WEATHER_ID) : -1;
+            weatherConditionIcon = jsonWeatherObject.has(OWM_WEATHER_ICON) ?
+                    jsonWeatherObject.getString(OWM_WEATHER_ICON) : "";
         }
 
         // Get main info
         if (jsonObject.has(OWM_MAIN)) {
             JSONObject jsonMainObject = jsonObject.getJSONObject(OWM_MAIN);
-            temperature = jsonMainObject.getDouble(OWM_MAIN_TEMPERATURE);
-            temperatureMin = jsonMainObject.getDouble(OWM_MAIN_TEMPERATURE_MIN);
-            temperatureMax = jsonMainObject.getDouble(OWM_MAIN_TEMPERATURE_MAX);
-            pressure = jsonMainObject.getInt(OWM_MAIN_PRESSURE);
-            humidity = jsonMainObject.getInt(OWM_MAIN_HUMIDITY);
+            temperature = jsonMainObject.has(OWM_MAIN_TEMPERATURE) ?
+                    jsonMainObject.getDouble(OWM_MAIN_TEMPERATURE) : 0;
+            temperatureMin = jsonMainObject.has(OWM_MAIN_TEMPERATURE_MIN) ?
+                    jsonMainObject.getDouble(OWM_MAIN_TEMPERATURE_MIN) : 0;
+            temperatureMax = jsonMainObject.has(OWM_MAIN_TEMPERATURE_MAX) ?
+                    jsonMainObject.getDouble(OWM_MAIN_TEMPERATURE_MAX) : 0;
+            pressure = jsonMainObject.has(OWM_MAIN_PRESSURE) ?
+                    jsonMainObject.getInt(OWM_MAIN_PRESSURE) : 0;
+            humidity = jsonMainObject.has(OWM_MAIN_HUMIDITY) ?
+                    jsonMainObject.getInt(OWM_MAIN_HUMIDITY) : 0;
         }
 
         // Get wind
         if (jsonObject.has(OWM_WIND)) {
             JSONObject jsonWindObject = jsonObject.getJSONObject(OWM_WIND);
-            windSpeed = jsonWindObject.getDouble(OWM_WIND_SPEED);
-            windDegrees = jsonWindObject.getDouble(OWM_WIND_DIRECTION);
+            windSpeed = jsonWindObject.has(OWM_WIND_SPEED) ?
+                    jsonWindObject.getDouble(OWM_WIND_SPEED) : 0;
+            windDegrees = jsonWindObject.has(OWM_WIND_DIRECTION) ?
+                    jsonWindObject.getDouble(OWM_WIND_DIRECTION) : 0;
         }
 
         // Get clouds
         if (jsonObject.has(OWM_CLOUDS)) {
             JSONObject jsonCloudsObject = jsonObject.getJSONObject(OWM_CLOUDS);
-            clouds = jsonCloudsObject.getInt(OWM_CLOUDS_CLOUDINESS);
+            clouds = jsonCloudsObject.has(OWM_CLOUDS_CLOUDINESS) ?
+                    jsonCloudsObject.getInt(OWM_CLOUDS_CLOUDINESS) : 0;
         }
 
         // Get rain
         if (jsonObject.has(OWM_RAIN)) {
             JSONObject jsonRainObject = jsonObject.getJSONObject(OWM_RAIN);
-            rain = jsonRainObject.getDouble(OWM_RAIN_3H);
+            rain = jsonRainObject.has(OWM_RAIN_3H) ?
+                    jsonRainObject.getDouble(OWM_RAIN_3H) : 0;
         }
 
         // Get snow
         if (jsonObject.has(OWM_SNOW)) {
             JSONObject jsonSnowObject = jsonObject.getJSONObject(OWM_SNOW);
-            snow = jsonSnowObject.getDouble(OWM_SNOW_3H);
+            snow = jsonSnowObject.has(OWM_SNOW_3H) ?
+                    jsonSnowObject.getDouble(OWM_SNOW_3H) : 0;
         }
 
         return new MeteoRecord(timestamp, cityName, weatherCondition, weatherConditionIcon,

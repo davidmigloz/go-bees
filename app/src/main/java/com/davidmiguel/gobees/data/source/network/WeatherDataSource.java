@@ -1,6 +1,7 @@
 package com.davidmiguel.gobees.data.source.network;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.davidmiguel.gobees.data.model.MeteoRecord;
 
