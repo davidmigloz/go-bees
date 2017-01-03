@@ -18,7 +18,7 @@ import com.davidmiguel.gobees.camera.AndroidCameraImpl;
 import com.davidmiguel.gobees.camera.AndroidCameraListener;
 import com.davidmiguel.gobees.camera.CameraFrame;
 import com.davidmiguel.gobees.data.model.Record;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.SaveRecordingCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
@@ -46,6 +46,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
     private static MonitoringService INSTANCE = null;
     private final IBinder mBinder = new MonitoringBinder();
+    private SaveRecordingCallback callback;
     private GoBeesRepository goBeesRepository;
     private LinkedList<Record> records;
     private AndroidCamera androidCamera;
@@ -90,22 +91,30 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             // Start service in foreground
             startForeground(NOTIFICATION_ID, n);
 
-        // STOP action
+            // STOP action
         } else if (intent.getAction().equals(STOP_ACTION)) {
             // Release camera
             androidCamera.release();
             // Clean records
             cleanRecords();
             // Save records
-            goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new GoBeesDataSource.TaskCallback() {
+            goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new SaveRecordingCallback() {
+                @Override
+                public void onRecordingTooShort() {
+                    stopService();
+                    callback.onRecordingTooShort();
+                }
+
                 @Override
                 public void onSuccess() {
                     stopService();
+                    callback.onSuccess();
                 }
 
                 @Override
                 public void onFailure() {
                     stopService();
+                    callback.onFailure();
                 }
             });
         }
@@ -269,7 +278,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      * runs in the same process as its clients, we don't need to deal with IPC.
      */
     public class MonitoringBinder extends Binder {
-        MonitoringService getService() {
+        MonitoringService getService(SaveRecordingCallback c) {
+            callback = c;
             // Return this INSTANCE of MonitoringService so clients can call public methods
             return MonitoringService.this;
         }

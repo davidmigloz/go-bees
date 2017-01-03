@@ -177,6 +177,10 @@
     <string name="no_recordings">You have no recordings!</string>
     <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_recording_message">Recording saved!</string>
+    <!-- Msg shown when an error occurs when saving a recording [CHAR LIMIT=100] -->
+    <string name="save_recording_error_message">Error while saving recording.</string>
+    <!-- Msg shown when a recording is too short [CHAR LIMIT=100] -->
+    <string name="recording_too_short_error_message">Error: Recording too short!</string>
     <!-- Msg shown when a recordings is deleted [CHAR LIMIT=100] -->
     <string name="successfully_deleted_recording_message">Recording deleted!</string>
     <!-- Msg shown when an error occurs when deleting recordings [CHAR LIMIT=100] -->
@@ -194,6 +198,8 @@
     <!--+++++++++++-->
     <!-- Error msg shown when it's not possible to load a recording [CHAR LIMIT=100] -->
     <string name="loading_recording_error">Error while loading recording.</string>
+    <!-- Error msg shown when there are no records [CHAR LIMIT=100] -->
+    <string name="no_records_error">Error: No records found.</string>
     <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
     <string name="recording_date_format">EEE d MMM, yyyy</string>
     <!-- Number of bees [CHAR LIMIT=30] -->

@@ -52,6 +52,9 @@ public class HiveRecordingsFragment extends Fragment
         implements BaseTabFragment, HiveContract.View, RecordingsAdapter.RecordingItemListener {
 
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
+    public static final String ARGUMENT_MONITORING_ERROR = "MONITORING_ERROR";
+    public static final int ERROR_SAVING_RECORDING = 0;
+    public static final int ERROR_RECORDING_TOO_SHORT = 2;
 
     private HiveContract.Presenter presenter;
     private RecordingsAdapter listAdapter;
@@ -149,7 +152,7 @@ public class HiveRecordingsFragment extends Fragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.result(requestCode, resultCode);
+        presenter.result(requestCode, resultCode, data);
     }
 
     @Override
@@ -204,6 +207,16 @@ public class HiveRecordingsFragment extends Fragment
     @Override
     public void showSuccessfullySavedMessage() {
         showMessage(getString(R.string.successfully_saved_recording_message));
+    }
+
+    @Override
+    public void showSaveErrorMessage() {
+        showMessage(getString(R.string.save_recording_error_message));
+    }
+
+    @Override
+    public void showRecordingTooShortErrorMessage() {
+        showMessage(getString(R.string.recording_too_short_error_message));
     }
 
     @Override

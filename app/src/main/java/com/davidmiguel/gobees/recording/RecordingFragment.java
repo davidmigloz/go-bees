@@ -194,7 +194,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
 
     @Override
     public void showNoRecords() {
-        // TODO
+        showMessage(getString(R.string.no_records_error));
     }
 
     @Override

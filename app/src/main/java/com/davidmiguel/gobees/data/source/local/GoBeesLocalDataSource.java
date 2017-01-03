@@ -292,7 +292,12 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void saveRecords(final long hiveId, @NonNull final List<Record> records,
-                            @NonNull TaskCallback callback) {
+                            @NonNull SaveRecordingCallback callback) {
+        if (records.size() < 10) {
+            // Recording too short
+            callback.onRecordingTooShort();
+            return;
+        }
         try {
             // Get first id
             Number n = realm.where(Record.class).max("id");
@@ -312,8 +317,6 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     // Add to hive
                     Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
                     hive.addRecords(records);
-                    // TODO remove
-                    RealmResults<Record> recordsAfter = realm.where(Record.class).findAll();
                 }
             });
             callback.onSuccess();

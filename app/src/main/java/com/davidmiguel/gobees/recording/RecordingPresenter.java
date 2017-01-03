@@ -47,7 +47,7 @@ class RecordingPresenter implements RecordingContract.Presenter {
 
     @Override
     public void deleteRecording() {
-        // TODO
+        //  TODO
     }
 
     @Override

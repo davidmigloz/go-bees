@@ -156,9 +156,9 @@ public interface GoBeesDataSource {
      * Note: record must be a new unmanaged object (don't modify managed objects).
      *
      * @param records  list of record unmanaged objects.
-     * @param callback TaskCallback.
+     * @param callback SaveRecordingCallback.
      */
-    void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull TaskCallback callback);
+    void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull SaveRecordingCallback callback);
 
     /**
      * Gets recording with records of given period.
@@ -228,6 +228,10 @@ public interface GoBeesDataSource {
         void onRecordingLoaded(Recording recording);
 
         void onDataNotAvailable();
+    }
+
+    interface SaveRecordingCallback extends TaskCallback {
+        void onRecordingTooShort();
     }
 
     interface TaskCallback {

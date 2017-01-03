@@ -1,6 +1,7 @@
 package com.davidmiguel.gobees.hive;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Hive;
@@ -33,13 +34,29 @@ class HivePresenter implements HiveContract.Presenter {
     }
 
     @Override
-    public void result(int requestCode, int resultCode) {
+    public void result(int requestCode, int resultCode, Intent data) {
         // If a recording was successfully saved, show snackbar
-        if (MonitoringActivity.REQUEST_MONITORING == requestCode && Activity.RESULT_OK == resultCode) {
-            // Refresh recordings
-            loadRecordings(true);
-            // Show message
-            view.showSuccessfullySavedMessage();
+        if (MonitoringActivity.REQUEST_MONITORING == requestCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                // Refresh recordings
+                loadRecordings(true);
+                // Show message
+                view.showSuccessfullySavedMessage();
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // Get error type
+                int error = data.getIntExtra(HiveRecordingsFragment.ARGUMENT_MONITORING_ERROR, -1);
+                // Show error message
+                switch (error) {
+                    case HiveRecordingsFragment.ERROR_RECORDING_TOO_SHORT:
+                        view.showRecordingTooShortErrorMessage();
+                        break;
+                    case HiveRecordingsFragment.ERROR_SAVING_RECORDING:
+                        view.showSaveErrorMessage();
+                        break;
+                    default:
+                        view.showSaveErrorMessage();
+                }
+            }
         }
     }
 

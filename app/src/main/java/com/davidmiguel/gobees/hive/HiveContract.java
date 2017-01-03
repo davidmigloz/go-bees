@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.hive;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Recording;
@@ -59,6 +60,16 @@ interface HiveContract {
         void showSuccessfullySavedMessage();
 
         /**
+         * Shows error while saving message.
+         */
+        void showSaveErrorMessage();
+
+        /**
+         * Shows recording too short error message.
+         */
+        void showRecordingTooShortErrorMessage();
+
+        /**
          * Shows successfully deleted message.
          */
         void showSuccessfullyDeletedMessage();
@@ -90,8 +101,9 @@ interface HiveContract {
          *
          * @param requestCode request code from the intent.
          * @param resultCode  result code from the intent.
+         * @param data        intent data.
          */
-        void result(int requestCode, int resultCode);
+        void result(int requestCode, int resultCode, Intent data);
 
         /**
          * Load recordings from repository.
