@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
  */
 public class HiveActivity extends AppCompatActivity {
 
+    public static final int NO_APIARY = -1;
     public static final int NO_HIVE = -1;
 
     private Fragment hiveRecordingsFragment;
@@ -30,6 +31,12 @@ public class HiveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hive_act);
+
+        // Get apiary id
+        long apiaryId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_APIARY_ID, NO_APIARY);
+        if (apiaryId == NO_APIARY) {
+            throw new IllegalArgumentException("No apiary id passed!");
+        }
 
         // Get hive id
         long hiveId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, NO_HIVE);
@@ -69,7 +76,8 @@ public class HiveActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new HivePresenter(goBeesRepository, (HiveContract.View) hiveRecordingsFragment, hiveId);
+        new HivePresenter(goBeesRepository, (HiveContract.View) hiveRecordingsFragment,
+                apiaryId, hiveId);
     }
 
     @Override

@@ -33,8 +33,11 @@ interface HiveContract {
 
         /**
          * Opens activity to record a hive.
+         *
+         * @param apiaryId apiary id.
+         * @param hiveId   hive id.
          */
-        void startNewRecording(long hiveId);
+        void startNewRecording(long apiaryId, long hiveId);
 
         /**
          * Opens activity to show the details of the given recording.

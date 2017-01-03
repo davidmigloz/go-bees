@@ -51,6 +51,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class HiveRecordingsFragment extends Fragment
         implements BaseTabFragment, HiveContract.View, RecordingsAdapter.RecordingItemListener {
 
+    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
     public static final String ARGUMENT_MONITORING_ERROR = "MONITORING_ERROR";
     public static final int ERROR_SAVING_RECORDING = 0;
@@ -179,8 +180,9 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void startNewRecording(long hiveId) {
+    public void startNewRecording(long apiaryId, long hiveId) {
         Intent intent = new Intent(getContext(), MonitoringActivity.class);
+        intent.putExtra(MonitoringFragment.ARGUMENT_APIARY_ID, apiaryId);
         intent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, hiveId);
         startActivityForResult(intent, MonitoringActivity.REQUEST_MONITORING);
     }

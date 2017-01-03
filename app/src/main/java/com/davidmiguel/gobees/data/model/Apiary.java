@@ -166,9 +166,15 @@ public class Apiary extends RealmObject {
         this.meteoRecords = meteoRecords;
     }
 
-    public void addHive(@NonNull Hive hive){
+    public void addHive(@NonNull Hive hive) {
         if (hives != null) {
             hives.add(hive);
+        }
+    }
+
+    public void addMeteoRecord(@NonNull MeteoRecord meteoRecord) {
+        if (meteoRecords != null) {
+            meteoRecords.add(meteoRecord);
         }
     }
 

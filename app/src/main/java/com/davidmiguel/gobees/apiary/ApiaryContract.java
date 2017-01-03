@@ -40,9 +40,10 @@ interface ApiaryContract {
         /**
          * Opens activity to show the details of the given hive.
          *
-         * @param hiveId hive to show.
+         * @param apiaryId apiary id.
+         * @param hiveId   hive to show.
          */
-        void showHiveDetail(long hiveId);
+        void showHiveDetail(long apiaryId, long hiveId);
 
         /**
          * Shows loading hives error message.

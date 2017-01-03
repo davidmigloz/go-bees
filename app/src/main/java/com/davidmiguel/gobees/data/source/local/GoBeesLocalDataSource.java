@@ -77,6 +77,11 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
+    public Apiary getApiaryBlocking(long apiaryId) {
+        return realm.copyFromRealm(realm.where(Apiary.class).equalTo("id", apiaryId).findFirst());
+    }
+
+    @Override
     public void saveApiary(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
         try {
             realm.executeTransaction(new Realm.Transaction() {
@@ -406,6 +411,34 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                                 .equalTo("id", apiary.getCurrentWeather().getId()).findFirst();
                         requestedApiary.setCurrentWeather(meteoRecord);
                     }
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            callback.onFailure();
+        }
+    }
+
+    @Override
+    public void saveMeteoRecord(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
+        try {
+            if (apiary.getMeteoRecords() == null || apiary.getMeteoRecords().size() != 1) {
+                callback.onFailure();
+            }
+            final MeteoRecord meteoRecord = apiary.getMeteoRecords().first();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // Get next id
+                    Number n = realm.where(MeteoRecord.class).max("id");
+                    long nextId = (n != null ? n.longValue() + 1 : 0);
+                    // Save meteo records
+                    meteoRecord.setId(nextId);
+                    realm.copyToRealmOrUpdate(meteoRecord);
+                    // Add meteo record to apiary
+                    Apiary requestedApiary = realm.where(Apiary.class)
+                            .equalTo("id", apiary.getId()).findFirst();
+                    requestedApiary.addMeteoRecord(meteoRecord);
                 }
             });
             callback.onSuccess();

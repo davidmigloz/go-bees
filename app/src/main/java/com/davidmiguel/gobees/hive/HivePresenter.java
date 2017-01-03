@@ -23,13 +23,15 @@ class HivePresenter implements HiveContract.Presenter {
      * Force update the first time.
      */
     private boolean firstLoad = true;
+    private long apiaryId;
     private long hiveId;
 
     HivePresenter(GoBeesRepository goBeesRepository, HiveContract.View view,
-                  long hiveId) {
+                  long apiaryId, long hiveId) {
         this.goBeesRepository = goBeesRepository;
         this.view = view;
         this.view.setPresenter(this);
+        this.apiaryId = apiaryId;
         this.hiveId = hiveId;
     }
 
@@ -111,7 +113,7 @@ class HivePresenter implements HiveContract.Presenter {
     @Override
     public void startNewRecording() {
         if (view.checkCameraPermission()) {
-            view.startNewRecording(hiveId);
+            view.startNewRecording(apiaryId, hiveId);
         }
     }
 
