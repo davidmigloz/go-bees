@@ -167,14 +167,15 @@ public interface GoBeesDataSource {
     void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull SaveRecordingCallback callback);
 
     /**
-     * Gets recording with records of given period.
+     * Gets recording with records and weather data of given period.
      *
+     * @param apiaryId apiary id.
      * @param hiveId   hive id.
      * @param start    start of the period (00:00 of that date).
      * @param end      end of the period (23:59 of that date).
      * @param callback GetRecordingCallback.
      */
-    void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
+    void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
 
     /**
      * Deletes the records contained in the given recording.

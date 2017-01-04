@@ -331,7 +331,13 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+    public void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+        // Get apiary
+        Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+        if (apiary == null || apiary.getMeteoRecords() == null) {
+            callback.onDataNotAvailable();
+            return;
+        }
         // Get hive
         Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
         if (hive == null || hive.getRecords() == null) {
@@ -345,8 +351,20 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
                 .findAll()
                 .sort("timestamp");
+        if (records.size() == 0) {
+            callback.onDataNotAvailable();
+            return;
+        }
+        // Get weather data
+        RealmResults<MeteoRecord> meteoRecords1 = apiary.getMeteoRecords().where().findAll();
+        RealmResults<MeteoRecord> meteoRecords = apiary.getMeteoRecords()
+                .where()
+                .greaterThanOrEqualTo("timestamp", records.first().getTimestamp())
+                .lessThanOrEqualTo("timestamp", records.last().getTimestamp())
+                .findAll()
+                .sort("timestamp");
         // Create recording
-        Recording recording = new Recording(start, new ArrayList<>(records));
+        Recording recording = new Recording(start, new ArrayList<>(records), meteoRecords);
         callback.onRecordingLoaded(recording);
     }
 

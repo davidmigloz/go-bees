@@ -17,6 +17,7 @@ import java.util.Date;
  */
 public class RecordingActivity extends AppCompatActivity {
 
+    public static final int NO_APIARY = -1;
     public static final int NO_HIVE = -1;
     public static final int NO_DATE = -1;
 
@@ -34,6 +35,12 @@ public class RecordingActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
+        }
+
+        // Get apiary id
+        long apiaryId = getIntent().getLongExtra(RecordingFragment.ARGUMENT_APIARY_ID, NO_APIARY);
+        if (apiaryId == NO_APIARY) {
+            throw new IllegalArgumentException("No apiary id passed!");
         }
 
         // Get hive id
@@ -67,7 +74,7 @@ public class RecordingActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new RecordingPresenter(goBeesRepository, recordingFragment, hiveId,
+        new RecordingPresenter(goBeesRepository, recordingFragment, apiaryId, hiveId,
                 new Date(startDate), new Date(endDate));
     }
 

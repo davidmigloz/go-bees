@@ -42,10 +42,11 @@ interface HiveContract {
         /**
          * Opens activity to show the details of the given recording.
          *
-         * @param hiveId hive id.
-         * @param date   recording date.
+         * @param apiaryId apiary id.
+         * @param hiveId   hive id.
+         * @param date     recording date.
          */
-        void showRecordingDetail(long hiveId, Date date);
+        void showRecordingDetail(long apiaryId, long hiveId, Date date);
 
         /**
          * Shows loading recordings error message.

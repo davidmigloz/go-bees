@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.recording;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,14 +21,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.data.model.MeteoRecord;
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
+import com.davidmiguel.gobees.data.source.preferences.GoBeesPreferences;
 import com.davidmiguel.gobees.utils.HourAxisValueFormatter;
 import com.davidmiguel.gobees.utils.RainValueFormatter;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import com.davidmiguel.gobees.utils.StringUtils;
 import com.davidmiguel.gobees.utils.TempValueFormatter;
+import com.davidmiguel.gobees.utils.WeatherUtils;
 import com.davidmiguel.gobees.utils.WindValueFormatter;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -49,6 +54,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class RecordingFragment extends Fragment implements RecordingContract.View {
 
+    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
     public static final String ARGUMENT_START_DATE = "START_DATE";
     public static final String ARGUMENT_END_DATE = "END_DATE";
@@ -61,6 +67,9 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
     private ImageView tempIcon;
     private ImageView rainIcon;
     private ImageView windIcon;
+
+    private long referenceTimestamp;
+    private long lastTimestamp;
 
     public RecordingFragment() {
         // Requires empty public constructor
@@ -180,9 +189,13 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
     public void showRecording(@NonNull Recording recording) {
         // Setup charts
         setupBeesChart(recording.getRecords());
-        setupTempChart();
-        setupRainChart();
-        setupWindChart();
+        if (recording.getMeteo() != null && recording.getMeteo().size() > 0) {
+            setupTempChart(recording.getMeteo());
+            setupRainChart(recording.getMeteo());
+            setupWindChart(recording.getMeteo());
+        } else {
+            showNoWeatherData();
+        }
         // Show temp chart by default
         showTempChart();
     }
@@ -281,13 +294,13 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
      */
     private void setupBeesChart(List<Record> recordsList) {
         // Setup data
-        long firstTimestamp = recordsList.get(0).getTimestamp().getTime() / 1000;
+        referenceTimestamp = recordsList.get(0).getTimestamp().getTime() / 1000;
         Record[] records = recordsList.toArray(new Record[recordsList.size()]);
         List<Entry> entries = new ArrayList<>();
         int maxNumBees = 0;
         for (Record record : records) {
             // Convert timestamp to seconds and relative to first timestamp
-            long timestamp = (record.getTimestamp().getTime() / 1000 - firstTimestamp);
+            long timestamp = (record.getTimestamp().getTime() / 1000 - referenceTimestamp);
             int numBees = record.getNumBees();
             entries.add(new Entry(timestamp, numBees));
             // Get max num of bees
@@ -295,9 +308,10 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
                 maxNumBees = numBees;
             }
         }
+        lastTimestamp = (long) entries.get(entries.size() - 1).getX();
         // Style char lines (type, color, etc.)
         LineDataSet lineDataSet = new LineDataSet(entries, getString(R.string.num_bees));
-        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         lineDataSet.setCubicIntensity(0.2f);
         lineDataSet.setDrawValues(false);
         lineDataSet.setDrawCircles(false);
@@ -317,8 +331,9 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         BeesMarkerView mv = new BeesMarkerView(getContext(), R.layout.recording_bees_marker_vew);
         mv.setChartView(beesChart);
         beesChart.setMarker(mv);
+        beesChart.setNoDataText(getString(R.string.no_flight_act_data_available));
         // X axis setup
-        IAxisValueFormatter xAxisFormatter = new HourAxisValueFormatter(firstTimestamp);
+        IAxisValueFormatter xAxisFormatter = new HourAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = beesChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
         xAxis.setDrawGridLines(false);
@@ -343,22 +358,46 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
 
     /**
      * Configure temperature chart and the data.
+     *
+     * @param meteo meteo records.
      */
-    private void setupTempChart() {
+    private void setupTempChart(List<MeteoRecord> meteo) {
         // Setup data
-        int[] degrees = {16, 20, 30, 33, 25};
         List<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < degrees.length; i++) {
-            entries.add(new Entry(i, degrees[i]));
+        // Add as first entry a copy of the first temperature record
+        // First relative timestamp is 0 (-5 to don't show the value in the chart)
+        entries.add(new Entry(-5, (float) meteo.get(0).getTemperature()));
+        // Add all temperature records
+        float maxTemp = Float.MIN_VALUE;
+        float minTemp = Float.MAX_VALUE;
+        for (MeteoRecord meteoRecord : meteo) {
+            // Convert timestamp to seconds and relative to first timestamp
+            long timestamp = (meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            float temperature = (float) meteoRecord.getTemperature();
+            entries.add(new Entry(timestamp, temperature));
+            // Get max and min temperature
+            if (temperature > maxTemp) {
+                maxTemp = temperature;
+            }
+            if (temperature < minTemp) {
+                minTemp = temperature;
+            }
         }
+        // Add as last entry a copy of the last temperature record (+5 to don't show the value in the chart)
+        entries.add(new Entry(lastTimestamp + 5, (float) meteo.get(meteo.size() - 1).getTemperature()));
         // Style char lines (type, color, etc.)
+        TempValueFormatter tempValueFormatter = new TempValueFormatter(
+                GoBeesPreferences.isMetric(getContext()) ?
+                        TempValueFormatter.Unit.CELSIUS : TempValueFormatter.Unit.FAHRENHEIT);
         LineDataSet lineDataSet = new LineDataSet(entries, getString(R.string.temperature));
         lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         lineDataSet.setDrawValues(true);
-        lineDataSet.setValueFormatter(new TempValueFormatter(TempValueFormatter.Unit.CELSIUS));
+        lineDataSet.setValueTextSize(10f);
+        lineDataSet.setValueFormatter(tempValueFormatter);
         lineDataSet.setDrawCircles(false);
         lineDataSet.setLineWidth(1.8f);
         lineDataSet.setColor(ContextCompat.getColor(getContext(), R.color.colorLineTempChart));
+        lineDataSet.setLineWidth(2f);
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillColor(ContextCompat.getColor(getContext(), R.color.colorFillTempChart));
         lineDataSet.setFillAlpha(255);
@@ -371,10 +410,15 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         tempChart.getLegend().setEnabled(false);
         tempChart.setTouchEnabled(false);
         // X axis setup
-        tempChart.getXAxis().setEnabled(false);
+        XAxis xAxis = tempChart.getXAxis();
+        xAxis.setEnabled(false);
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(lastTimestamp);
         // Y axis setup
-        tempChart.getAxisLeft().setAxisMinimum(0);
-        tempChart.getAxisLeft().setEnabled(false);
+        YAxis leftAxis = tempChart.getAxisLeft();
+        leftAxis.setEnabled(false);
+        leftAxis.setAxisMaximum(maxTemp + 5);
+        leftAxis.setAxisMinimum(minTemp - 5);
         tempChart.getAxisRight().setEnabled(false);
         // Add data
         tempChart.setData(data);
@@ -383,22 +427,39 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
 
     /**
      * Configure rain chart and the data.
+     *
+     * @param meteo meteo records.
      */
-    private void setupRainChart() {
+    private void setupRainChart(List<MeteoRecord> meteo) {
         // Setup data
-        int[] degrees = {1, 1, 10, 3, 2};
         List<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < degrees.length; i++) {
-            entries.add(new Entry(i, degrees[i]));
+        // Add as first entry a copy of the first rain record
+        // First relative timestamp is 0 (-5 to don't show the value in the chart)
+        entries.add(new Entry(-5, (float) meteo.get(0).getRain()));
+        // Add all rain records
+        float maxRain = Float.MIN_VALUE;
+        for (MeteoRecord meteoRecord : meteo) {
+            // Convert timestamp to seconds and relative to first timestamp
+            long timestamp = (meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            float rain = (float) meteoRecord.getRain();
+            entries.add(new Entry(timestamp, rain));
+            // Get max and min temperature
+            if (rain > maxRain) {
+                maxRain = rain;
+            }
         }
+        // Add as last entry a copy of the last rain record (+5 to don't show the value in the chart)
+        entries.add(new Entry(lastTimestamp + 5, (float) meteo.get(meteo.size() - 1).getRain()));
         // Style char lines (type, color, etc.)
         LineDataSet lineDataSet = new LineDataSet(entries, getString(R.string.rain));
         lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         lineDataSet.setDrawValues(true);
+        lineDataSet.setValueTextSize(10f);
         lineDataSet.setValueFormatter(new RainValueFormatter(RainValueFormatter.Unit.MM));
         lineDataSet.setDrawCircles(false);
         lineDataSet.setLineWidth(1.8f);
         lineDataSet.setColor(ContextCompat.getColor(getContext(), R.color.colorLineRainChart));
+        lineDataSet.setLineWidth(2f);
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillColor(ContextCompat.getColor(getContext(), R.color.colorFillRainChart));
         lineDataSet.setFillAlpha(255);
@@ -411,10 +472,15 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         rainChart.getLegend().setEnabled(false);
         rainChart.setTouchEnabled(false);
         // X axis setup
-        rainChart.getXAxis().setEnabled(false);
+        XAxis xAxis = rainChart.getXAxis();
+        xAxis.setEnabled(false);
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(lastTimestamp);
         // Y axis setup
-        rainChart.getAxisLeft().setAxisMinimum(0);
-        rainChart.getAxisLeft().setEnabled(false);
+        YAxis leftAxis = rainChart.getAxisLeft();
+        leftAxis.setEnabled(false);
+        leftAxis.setAxisMaximum(maxRain + 1);
+        leftAxis.setAxisMinimum(0);
         rainChart.getAxisRight().setEnabled(false);
         // Add data
         rainChart.setData(data);
@@ -423,22 +489,39 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
 
     /**
      * Configure wind chart and the data.
+     *
+     * @param meteo meteo records.
      */
-    private void setupWindChart() {
+    private void setupWindChart(List<MeteoRecord> meteo) {
         // Setup data
-        int[] degrees = {5, 5, 5, 1, 1};
         List<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < degrees.length; i++) {
-            entries.add(new Entry(i, degrees[i]));
+        // Add as first entry a copy of the first wind record
+        // First relative timestamp is 0 (-5 to don't show the value in the chart)
+        entries.add(new Entry(-5, (float) meteo.get(0).getWindSpeed()));
+        // Add all wind records
+        float maxWind = Float.MIN_VALUE;
+        for (MeteoRecord meteoRecord : meteo) {
+            // Convert timestamp to seconds and relative to first timestamp
+            long timestamp = (meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            float wind = (float) meteoRecord.getWindSpeed();
+            entries.add(new Entry(timestamp, wind));
+            // Get max and min temperature
+            if (wind > maxWind) {
+                maxWind = wind;
+            }
         }
+        // Add as last entry a copy of the last wind record (+5 to don't show the value in the chart)
+        entries.add(new Entry(lastTimestamp + 5, (float) meteo.get(meteo.size() - 1).getWindSpeed()));
         // Style char lines (type, color, etc.)
         LineDataSet lineDataSet = new LineDataSet(entries, getString(R.string.wind));
         lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         lineDataSet.setDrawValues(true);
+        lineDataSet.setValueTextSize(10f);
         lineDataSet.setValueFormatter(new WindValueFormatter(WindValueFormatter.Unit.MS));
         lineDataSet.setDrawCircles(false);
         lineDataSet.setLineWidth(1.8f);
         lineDataSet.setColor(ContextCompat.getColor(getContext(), R.color.colorLineWindChart));
+        lineDataSet.setLineWidth(2f);
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillColor(ContextCompat.getColor(getContext(), R.color.colorFillWindChart));
         lineDataSet.setFillAlpha(255);
@@ -451,12 +534,27 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         windChart.getLegend().setEnabled(false);
         windChart.setTouchEnabled(false);
         // X axis setup
-        windChart.getXAxis().setEnabled(false);
+        XAxis xAxis = windChart.getXAxis();
+        xAxis.setEnabled(false);
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(lastTimestamp);
         // Y axis setup
-        windChart.getAxisLeft().setAxisMinimum(0);
-        windChart.getAxisLeft().setEnabled(false);
+        YAxis leftAxis = windChart.getAxisLeft();
+        leftAxis.setEnabled(false);
+        leftAxis.setAxisMaximum(maxWind + 1);
+        leftAxis.setAxisMinimum(0);
         windChart.getAxisRight().setEnabled(false);
         // Add data
         windChart.setData(data);
+    }
+
+    private void showNoWeatherData() {
+        float textSize = WeatherUtils.convertDpToPixel(getResources(), 12);
+        tempChart.setNoDataText(getString(R.string.no_weather_data_available));
+        tempChart.getPaint(Chart.PAINT_INFO).setTextSize(textSize);
+        rainChart.setNoDataText(getString(R.string.no_weather_data_available));
+        rainChart.getPaint(Chart.PAINT_INFO).setTextSize(textSize);
+        windChart.setNoDataText(getString(R.string.no_weather_data_available));
+        windChart.getPaint(Chart.PAINT_INFO).setTextSize(textSize);
     }
 }

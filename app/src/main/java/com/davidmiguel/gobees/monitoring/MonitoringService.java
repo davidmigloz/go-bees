@@ -46,6 +46,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     public static final String STOP_ACTION = "stop_action";
     private static final int NOTIFICATION_ID = 101;
     private static final int T_5_SECONDS = 5000;
+    private static final int T_10_SECONDS = 10000;
     private static final int T_15_MINUTES = 900000;
 
     private static MonitoringService INSTANCE = null;
@@ -258,8 +259,9 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      */
     private void startMonitoring() {
         // If apiary has location -> Start fetching weather data (each 15min)
+        // With a delay of 10 seconds (because first 5 seconds are ignored)
         if (apiary.hasLocation()) {
-            timer.scheduleAtFixedRate(fetchWeatherTask, 0, T_15_MINUTES);
+            timer.scheduleAtFixedRate(fetchWeatherTask, T_10_SECONDS, T_15_MINUTES);
         }
         // Start camera
         if (!androidCamera.isConnected()) {

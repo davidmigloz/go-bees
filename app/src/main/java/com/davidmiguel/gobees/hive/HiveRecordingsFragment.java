@@ -188,8 +188,9 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void showRecordingDetail(long hiveId, Date date) {
+    public void showRecordingDetail(long apiaryId, long hiveId, Date date) {
         Intent intent = new Intent(getActivity(), RecordingActivity.class);
+        intent.putExtra(RecordingFragment.ARGUMENT_APIARY_ID, apiaryId);
         intent.putExtra(RecordingFragment.ARGUMENT_HIVE_ID, hiveId);
         intent.putExtra(RecordingFragment.ARGUMENT_START_DATE, date.getTime());
         intent.putExtra(RecordingFragment.ARGUMENT_END_DATE, date.getTime());

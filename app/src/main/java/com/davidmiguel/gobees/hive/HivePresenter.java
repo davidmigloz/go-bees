@@ -119,7 +119,7 @@ class HivePresenter implements HiveContract.Presenter {
 
     @Override
     public void openRecordingsDetail(@NonNull Recording recording) {
-        view.showRecordingDetail(hiveId, recording.getDate());
+        view.showRecordingDetail(apiaryId, hiveId, recording.getDate());
     }
 
     @Override
