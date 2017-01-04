@@ -22,6 +22,7 @@ import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.SaveRecordingCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.utils.DateTimeUtils;
 import com.davidmiguel.gobees.video.BeesCounter;
 import com.davidmiguel.gobees.video.ContourBeesCounter;
 
@@ -37,32 +38,66 @@ import java.util.TimerTask;
 /**
  * Monitoring service.
  * It reads the camera feed and run the bee counter algorithm in background.
+ * It also gets weather information periodically.
+ * Notes:
+ * - Intent with START action: starts monitoring.
+ * - Intent with STOP action: stops monitoring.
+ * - There is a delay of INITIAL_DELAY before the camera is opened (to avoid trepidations when the
+ * user manipulates the phone).
+ * - The first INITIAL_NUM_FRAMES frames are used to create a background model (they are not used
+ * to count bees). During this time, the frame rate is INITIAL_FRAME_RATE.
+ * - After the background model is created, the frame rate is set to the one configured by the user.
+ * - The recording must have more than 5 records, if not, it is ignored.
+ * - The first and last record of a recording always have numBees = -1 (this is used to know
+ * when the recording starts and ends).
+ * - The service gets and saves apiary weather data every WEATHER_REFRESH_RATE.
+ * - When the service ends, it calls the appropriate callback:
  */
 @SuppressWarnings("deprecation")
 public class MonitoringService extends Service implements AndroidCameraListener {
 
+    // Intent argument
     public static final String ARGUMENT_MON_SETTINGS = "MONITORING_SETTINGS";
+    // Intent actions
     public static final String START_ACTION = "start_action";
     public static final String STOP_ACTION = "stop_action";
+    // Notification id
     private static final int NOTIFICATION_ID = 101;
-    private static final int T_5_SECONDS = 5000;
-    private static final int T_10_SECONDS = 10000;
-    private static final int T_15_MINUTES = 900000;
 
+    // Delay before start recording
+    private static final int INITIAL_DELAY = DateTimeUtils.T_5_SECONDS;
+    // Frame rate while creating background model
+    private static final int INITIAL_FRAME_RATE = 300;
+    // Number of frames to create background model
+    private static final int INITIAL_NUM_FRAMES = 10;
+    // Number of last recording seconds to delete (they usually contains noise)
+    private static final int NUM_LAST_SEC_TO_DELETE = DateTimeUtils.T_5_SECONDS;
+    // Weather refresh rate
+    private static final int WEATHER_REFRESH_RATE = DateTimeUtils.T_15_MINUTES;
+
+    // Service stuff
     private static MonitoringService INSTANCE = null;
     private final IBinder mBinder = new MonitoringBinder();
-    private SaveRecordingCallback callback;
 
+    // Persistence
     private GoBeesRepository goBeesRepository;
-    private Apiary apiary;
+    private SaveRecordingCallback callback;
     private LinkedList<Record> records;
+
+    // Camera and algorithm
     private AndroidCamera androidCamera;
+    private boolean openCVLoaded = false;
     private BeesCounter bc;
-    private MonitoringSettings monitoringSettings;
+    private int initialNumFrames;
+    private long startTime;
+
+    // Weather
     private Timer timer;
     private FetchWeatherTask fetchWeatherTask;
-    private boolean openCVLoaded = false;
-    private long startTime;
+
+    // Model info
+    private Apiary apiary;
+    private MonitoringSettings monitoringSettings;
 
     /**
      * Checks whether the service is running.
@@ -98,10 +133,10 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             // Get apiary
             apiary = goBeesRepository.getApiaryBlocking(monitoringSettings.getApiaryId());
             // Configurations
-            configOpenCV();
             configBeeCounter();
             configCamera();
             Notification n = configNotification();
+            configOpenCV();
             // Start service in foreground
             startForeground(NOTIFICATION_ID, n);
 
@@ -109,28 +144,34 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         } else if (intent.getAction().equals(STOP_ACTION)) {
             // Release camera
             androidCamera.release();
-            // Clean records
-            cleanRecords();
             // Save records
-            goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new SaveRecordingCallback() {
-                @Override
-                public void onRecordingTooShort() {
-                    stopService();
-                    callback.onRecordingTooShort();
-                }
+            if (records.size() > 0) {
+                // Clean records
+                cleanRecords();
+                // Save records on db
+                goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new SaveRecordingCallback() {
+                    @Override
+                    public void onRecordingTooShort() {
+                        stopService();
+                        callback.onRecordingTooShort();
+                    }
 
-                @Override
-                public void onSuccess() {
-                    stopService();
-                    callback.onSuccess();
-                }
+                    @Override
+                    public void onSuccess() {
+                        stopService();
+                        callback.onSuccess();
+                    }
 
-                @Override
-                public void onFailure() {
-                    stopService();
-                    callback.onFailure();
-                }
-            });
+                    @Override
+                    public void onFailure() {
+                        stopService();
+                        callback.onFailure();
+                    }
+                });
+            } else {
+                stopService();
+                callback.onRecordingTooShort();
+            }
         }
         return START_STICKY;
     }
@@ -167,6 +208,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
     @Override
     public void onCameraStarted(int width, int height) {
+        // Counter for creating background model with the first frames
+        initialNumFrames = 0;
         // Calculate start time (to be use in chronometer)
         Date now = new Date();
         long elapsedRealtimeOffset = System.currentTimeMillis() - SystemClock.elapsedRealtime();
@@ -175,6 +218,17 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
     @Override
     public void onPreviewFrame(CameraFrame cameraFrame) {
+        if (initialNumFrames < INITIAL_NUM_FRAMES) {
+            // To create background model
+            bc.countBees(cameraFrame.gray());
+            bc.getProcessedFrame().release();
+            initialNumFrames++;
+            return;
+        } else if (initialNumFrames == INITIAL_NUM_FRAMES) {
+            // After creating background model, set real configuration
+            androidCamera.updateFrameRate(0, monitoringSettings.getFrameRate());
+            initialNumFrames++;
+        }
         // Process frame
         int numBees = bc.countBees(cameraFrame.gray());
         bc.getProcessedFrame().release();
@@ -188,11 +242,55 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      * @return start time.
      */
     public long getStartTime() {
-        return startTime;
+        return startTime + INITIAL_DELAY;
     }
 
     /**
+     * Config bee counter with settings.
+     */
+    private void configBeeCounter() {
+        bc = ContourBeesCounter.getInstance();
+        bc.updateBlobSize(monitoringSettings.getBlobSize());
+        bc.updateMinArea(monitoringSettings.getMinArea());
+        bc.updateMaxArea(monitoringSettings.getMaxArea());
+    }
+
+    /**
+     * Config camera with settings.
+     */
+    private void configCamera() {
+        androidCamera = new AndroidCameraImpl(MonitoringService.this,
+                Camera.CameraInfo.CAMERA_FACING_BACK,
+                monitoringSettings.getMaxFrameWidth(),
+                monitoringSettings.getMaxFrameHeight(),
+                monitoringSettings.getZoomRatio(),
+                INITIAL_DELAY,
+                INITIAL_FRAME_RATE);
+    }
+
+    /**
+     * Config notification.
+     */
+    private Notification configNotification() {
+        // Intent to the monitoring activity (when the notification is clicked)
+        Intent monitoringIntent = new Intent(this, MonitoringActivity.class);
+        monitoringIntent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, monitoringSettings.getHiveId());
+        PendingIntent pMonitoringIntent = PendingIntent.getActivity(this, 0,
+                monitoringIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Create notification
+        return new NotificationCompat.Builder(this)
+                .setContentTitle(getString(R.string.app_name))
+                .setTicker(getString(R.string.app_name))
+                .setContentText(getString(R.string.monitoring_notification_text))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pMonitoringIntent)
+                .setOngoing(true).build();
+    }
+
+
+    /**
      * Config OpenCV (config callback and init OpenCV).
+     * When OpenCV is ready, it starts monitoring.
      */
     private void configOpenCV() {
         // OpenCV callback
@@ -215,53 +313,12 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     }
 
     /**
-     * Config bee counter with settings.
-     */
-    private void configBeeCounter() {
-        bc = ContourBeesCounter.getInstance();
-        bc.updateBlobSize(monitoringSettings.getBlobSize());
-        bc.updateMinArea(monitoringSettings.getMinArea());
-        bc.updateMaxArea(monitoringSettings.getMaxArea());
-    }
-
-    /**
-     * Config camera with settings.
-     */
-    private void configCamera() {
-        androidCamera = new AndroidCameraImpl(MonitoringService.this,
-                Camera.CameraInfo.CAMERA_FACING_BACK,
-                monitoringSettings.getMaxFrameWidth(),
-                monitoringSettings.getMaxFrameHeight(),
-                monitoringSettings.getZoomRatio());
-    }
-
-    /**
-     * Config notification.
-     */
-    private Notification configNotification() {
-        // Intent to the monitoring activity (when the notification is clicked)
-        Intent monitoringIntent = new Intent(this, MonitoringActivity.class);
-        monitoringIntent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, monitoringSettings.getHiveId());
-        PendingIntent pMonitoringIntent = PendingIntent.getActivity(this, 0,
-                monitoringIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // Create notification
-        return new NotificationCompat.Builder(this)
-                .setContentTitle(getString(R.string.app_name))
-                .setTicker(getString(R.string.app_name))
-                .setContentText(getString(R.string.monitoring_notification_text))
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pMonitoringIntent)
-                .setOngoing(true).build();
-    }
-
-    /**
      * Start monitoring (frames will be received via onPreviewFrame()).
      */
     private void startMonitoring() {
-        // If apiary has location -> Start fetching weather data (each 15min)
-        // With a delay of 10 seconds (because first 5 seconds are ignored)
+        // If apiary has location -> Start fetching weather data (each WEATHER_REFRESH_RATE)
         if (apiary.hasLocation()) {
-            timer.scheduleAtFixedRate(fetchWeatherTask, T_10_SECONDS, T_15_MINUTES);
+            timer.scheduleAtFixedRate(fetchWeatherTask, getTotalInitialDelay(), WEATHER_REFRESH_RATE);
         }
         // Start camera
         if (!androidCamera.isConnected()) {
@@ -278,18 +335,14 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     }
 
     /**
-     * Delete first and last records that usually contain noise and add two special records
+     * Delete last records that usually contain noise and add two special records
      * at the beginning and ending to know the limits of the recording.
      */
     private void cleanRecords() {
-        long initTime = records.getFirst().getTimestamp().getTime();
-        long endTime = records.getLast().getTimestamp().getTime();
-        // Delete first seconds
-        while (records.size() > 0 && records.getFirst().getTimestamp().getTime() - initTime < T_5_SECONDS) {
-            records.removeFirst();
-        }
         // Delete last seconds
-        while (records.size() > 0 && endTime - records.getLast().getTimestamp().getTime() < T_5_SECONDS) {
+        long endTime = records.getLast().getTimestamp().getTime();
+        while (records.size() > 0
+                && endTime - records.getLast().getTimestamp().getTime() < NUM_LAST_SEC_TO_DELETE) {
             records.removeLast();
         }
         // Save initial and last record (to know the beginning and ending of the recording)
@@ -297,6 +350,15 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             records.getFirst().setNumBees(-1);
             records.getLast().setNumBees(-1);
         }
+    }
+
+    /**
+     * Get total initial delay: camera delay + creation of background model + 5 sec (of margin).
+     *
+     * @return total initial delay
+     */
+    private long getTotalInitialDelay() {
+        return INITIAL_DELAY + INITIAL_FRAME_RATE * INITIAL_FRAME_RATE + DateTimeUtils.T_5_SECONDS;
     }
 
     /**
@@ -311,6 +373,9 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         }
     }
 
+    /**
+     * Task that makes a request to weather server and stores the received weather data.
+     */
     private class FetchWeatherTask extends TimerTask {
         @Override
         public void run() {

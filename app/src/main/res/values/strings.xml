@@ -301,6 +301,39 @@
     <!-- Value in SharedPreferences for zoom x2 [CHAR LIMIT=NONE] -->
     <string name="pref_zoom_x2" translatable="false">200</string>
 
+    <!-- Label for the frame rate preference [CHAR LIMIT=30] -->
+    <string name="pref_frame_rate_label">Frame rate</string>
+    <!-- Label for frame rate 0.5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_0_5sec">0.5 sec.</string>
+    <!-- Label for frame rate 1 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1sec">1 sec.</string>
+    <!-- Label for frame rate 5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5sec">5 sec.</string>
+    <!-- Label for frame rate 15 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_15sec">15 sec.</string>
+    <!-- Label for frame rate 30 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_30sec">30 sec.</string>
+    <!-- Label for frame rate 1 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1min">1 min.</string>
+    <!-- Label for frame rate 5 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5min">5 min.</string>
+    <!-- Key name for frame rate preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_key" translatable="false">framerate</string>
+    <!-- Value in SharedPreferences for frame rate 0.5 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_0_5sec" translatable="false">500</string>
+    <!-- Value in SharedPreferences for frame rate 1 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_1sec" translatable="false">1000</string>
+    <!-- Value in SharedPreferences for frame rate 5 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_5sec" translatable="false">5000</string>
+    <!-- Value in SharedPreferences for frame rate 15 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_15sec" translatable="false">15000</string>
+    <!-- Value in SharedPreferences for frame rate 30 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_30sec" translatable="false">30000</string>
+    <!-- Value in SharedPreferences for frame rate 1 min [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_1min" translatable="false">60000</string>
+    <!-- Value in SharedPreferences for frame rate 5min [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_5min" translatable="false">300000</string>
+
 
     <!--++++++++++-->
     <!-- Settings -->

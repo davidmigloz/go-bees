@@ -44,7 +44,7 @@ class HivePresenter implements HiveContract.Presenter {
                 loadRecordings(true);
                 // Show message
                 view.showSuccessfullySavedMessage();
-            } else if (resultCode == Activity.RESULT_CANCELED) {
+            } else if (resultCode == Activity.RESULT_CANCELED && data != null) {
                 // Get error type
                 int error = data.getIntExtra(HiveRecordingsFragment.ARGUMENT_MONITORING_ERROR, -1);
                 // Show error message

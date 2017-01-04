@@ -69,6 +69,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_max_area_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_zoom_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_show_algo_output_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_frame_rate_key)));
     }
 
     @Override
@@ -107,6 +108,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
         monitoringSettings.setMinArea(getMinArea());
         monitoringSettings.setMaxArea(getMaxArea());
         monitoringSettings.setZoomRatio(getZoomRatio());
+        monitoringSettings.setFrameRate(getFrameRate());
         monitoringSettings.setMaxFrameWidth(640);
         monitoringSettings.setMaxFrameHeight(480);
         return monitoringSettings;
@@ -284,5 +286,18 @@ public class MonitoringSettingsFragment extends PreferenceFragment
                 .getString(getString(R.string.pref_zoom_key), getString(R.string.pref_zoom_x1));
         // Convert
         return Integer.parseInt(value);
+    }
+
+    /**
+     * Get frame ratio.
+     *
+     * @return frame ratio.
+     */
+    private long getFrameRate() {
+        // Get value
+        String value = PreferenceManager.getDefaultSharedPreferences(getActivity())
+                .getString(getString(R.string.pref_frame_rate_key), getString(R.string.pref_frame_rate_1min));
+        // Convert
+        return Long.parseLong(value);
     }
 }

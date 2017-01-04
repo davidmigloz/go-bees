@@ -298,7 +298,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     @Override
     public void saveRecords(final long hiveId, @NonNull final List<Record> records,
                             @NonNull SaveRecordingCallback callback) {
-        if (records.size() < 10) {
+        if (records.size() < 5) {
             // Recording too short
             callback.onRecordingTooShort();
             return;
@@ -356,7 +356,6 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             return;
         }
         // Get weather data
-        RealmResults<MeteoRecord> meteoRecords1 = apiary.getMeteoRecords().where().findAll();
         RealmResults<MeteoRecord> meteoRecords = apiary.getMeteoRecords()
                 .where()
                 .greaterThanOrEqualTo("timestamp", records.first().getTimestamp())

@@ -47,5 +47,12 @@
             android:key="@string/pref_zoom_key"
             android:title="@string/pref_zoom_label"/>
 
+        <ListPreference
+            android:defaultValue="@string/pref_frame_rate_1sec"
+            android:entries="@array/pref_frame_rate_options"
+            android:entryValues="@array/pref_frame_rate_values"
+            android:key="@string/pref_frame_rate_key"
+            android:title="@string/pref_frame_rate_label"/>
+
     </PreferenceCategory>
 </PreferenceScreen>

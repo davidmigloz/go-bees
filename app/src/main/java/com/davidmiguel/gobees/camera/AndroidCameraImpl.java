@@ -38,8 +38,8 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     private int mMaxFrameWidth;
     private int mMaxFrameHeight;
     private int mZoomRatio;
-    private long delay;
-    private long period;
+    private long initialDelay;
+    private long frameRate;
     private TakePhotoTask takePhotoTask;
     private Timer timer;
     private CameraFrame mCameraFrame;
@@ -56,14 +56,15 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
      * @param zoomRatio      zoom ratio of the desired zoom value.
      */
     public AndroidCameraImpl(AndroidCameraListener user, int cameraIndex,
-                             int maxFrameWidth, int maxFrameHeight, int zoomRatio) {
+                             int maxFrameWidth, int maxFrameHeight, int zoomRatio,
+                             long initialDelay, long frameRate) {
         this.user = user;
         this.cameraIndex = cameraIndex;
         this.mMaxFrameWidth = maxFrameWidth;
         this.mMaxFrameHeight = maxFrameHeight;
         this.mZoomRatio = zoomRatio;
-        this.delay = 1000;
-        this.period = 1000;
+        this.initialDelay = initialDelay;
+        this.frameRate = frameRate;
         this.mThread = new CameraHandlerThread(this);
         this.takePhotoTask = new TakePhotoTask();
         this.timer = new Timer();
@@ -124,9 +125,12 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
 
     @Override
     public void updateFrameRate(long delay, long period) {
-        this.delay = delay;
-        this.period = period;
-        timer.scheduleAtFixedRate(takePhotoTask, delay, delay);
+        this.timer.cancel();
+        this.timer = new Timer();
+        this.takePhotoTask = new TakePhotoTask();
+        this.initialDelay = delay;
+        this.frameRate = period;
+        timer.scheduleAtFixedRate(takePhotoTask, delay, period);
     }
 
     /**
@@ -157,7 +161,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         try {
             mCamera.setPreviewTexture(texture);
             mCamera.startPreview();
-            timer.scheduleAtFixedRate(takePhotoTask, delay, period);
+            timer.scheduleAtFixedRate(takePhotoTask, initialDelay, frameRate);
         } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }

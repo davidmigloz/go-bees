@@ -49,6 +49,11 @@ class MonitoringSettings implements Serializable {
      */
     private int zoomRatio;
 
+    /**
+     * Frame rate (1000 = 1 frame per second...).
+     */
+    private long frameRate;
+
     public long getApiaryId() {
         return apiaryId;
     }
@@ -111,5 +116,13 @@ class MonitoringSettings implements Serializable {
 
     void setZoomRatio(int zoomRatio) {
         this.zoomRatio = zoomRatio;
+    }
+
+    long getFrameRate() {
+        return frameRate;
+    }
+
+    void setFrameRate(long frameRate) {
+        this.frameRate = frameRate;
     }
 }
