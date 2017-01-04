@@ -48,7 +48,7 @@ public class RecordingPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        presenter = new RecordingPresenter(goBeesRepository, view, HIVE_ID, DATE, DATE);
+        presenter = new RecordingPresenter(goBeesRepository, view, 0, HIVE_ID, DATE, DATE);
 
         // The presenter won't update the view unless it's active
         when(view.isActive()).thenReturn(true);
@@ -62,7 +62,7 @@ public class RecordingPresenterTest {
         presenter.start();
 
         // Callback is captured and invoked with stubbed recording
-        verify(goBeesRepository).getRecording(anyLong(), any(Date.class), any(Date.class),
+        verify(goBeesRepository).getRecording(anyLong(), anyLong(), any(Date.class), any(Date.class),
                 getRecordingCallbackArgumentCaptor.capture());
         getRecordingCallbackArgumentCaptor.getValue().onRecordingLoaded(RECORDING);
 

@@ -54,7 +54,7 @@ public class HivePresenterTest {
                 RecordingMother.newDefaultRecording()));
 
         // Get a reference to the class under test
-        hivePresenter = new HivePresenter(goBeesRepository, hiveView, HIVE.getId());
+        hivePresenter = new HivePresenter(goBeesRepository, hiveView, 0,HIVE.getId());
 
         // The presenter won't update the view unless it's active
         when(hiveView.isActive()).thenReturn(true);
