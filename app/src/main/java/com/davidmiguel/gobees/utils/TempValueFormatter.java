@@ -14,7 +14,7 @@ import java.util.Locale;
 /**
  * Format label in xºC format.
  */
-public class TempValueFormatter implements IValueFormatter {
+public class TempValueFormatter implements IValueFormatter, IAxisValueFormatter {
 
     private Unit unit;
 
@@ -25,7 +25,23 @@ public class TempValueFormatter implements IValueFormatter {
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex,
                                     ViewPortHandler viewPortHandler) {
+        return Math.round(convertValue(value)) + unit.toString();
+    }
+
+    @Override
+    public String getFormattedValue(float value, AxisBase axis) {
         return Math.round(value) + unit.toString();
+    }
+
+    private float convertValue(float value) {
+        switch (unit) {
+            case CELSIUS:
+                return value;
+            case FAHRENHEIT:
+                return (float) WeatherUtils.celsiusToFahrenheit(value);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public enum Unit {
@@ -35,9 +51,9 @@ public class TempValueFormatter implements IValueFormatter {
         public String toString() {
             switch (this) {
                 case CELSIUS:
-                    return "ºC";
+                    return "\u00B0C";
                 case FAHRENHEIT:
-                    return "ºF";
+                    return "\u00B0F";
                 default:
                     throw new IllegalArgumentException();
             }

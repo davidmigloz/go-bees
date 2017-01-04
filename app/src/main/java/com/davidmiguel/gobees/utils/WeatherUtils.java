@@ -1,6 +1,8 @@
 package com.davidmiguel.gobees.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.preferences.GoBeesPreferences;
@@ -18,7 +20,7 @@ public class WeatherUtils {
      * @param temperatureInCelsius Temperature in degrees Celsius(°C).
      * @return Temperature in degrees Fahrenheit (°F).
      */
-    private static double celsiusToFahrenheit(double temperatureInCelsius) {
+    static double celsiusToFahrenheit(double temperatureInCelsius) {
         return (temperatureInCelsius * 1.8) + 32;
     }
 
@@ -84,5 +86,18 @@ public class WeatherUtils {
             default: // Not found
                 return R.drawable.ic_weather_day_clear_sky;
         }
+    }
+
+    /**
+     * Convert dp to pixels.
+     *
+     * @param resources android resources.
+     * @param dp        dps to convert.
+     * @return pixels.
+     */
+    public static float convertDpToPixel(Resources resources, float dp) {
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return Math.round(px);
     }
 }

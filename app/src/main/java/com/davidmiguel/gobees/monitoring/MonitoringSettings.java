@@ -10,6 +10,11 @@ import java.io.Serializable;
 class MonitoringSettings implements Serializable {
 
     /**
+     * Apiary id.
+     */
+    private long apiaryId;
+
+    /**
      * Hive id.
      */
     private long hiveId;
@@ -43,6 +48,14 @@ class MonitoringSettings implements Serializable {
      * Zoom ratio (100 = x1, 200 = x2…).
      */
     private int zoomRatio;
+
+    public long getApiaryId() {
+        return apiaryId;
+    }
+
+    public void setApiaryId(long apiaryId) {
+        this.apiaryId = apiaryId;
+    }
 
     long getHiveId() {
         return hiveId;

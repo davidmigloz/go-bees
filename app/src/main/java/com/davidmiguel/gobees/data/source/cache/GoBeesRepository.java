@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.realm.RealmList;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -124,6 +126,11 @@ public class GoBeesRepository implements GoBeesDataSource {
 
         // Query the local storage if available
         goBeesDataSource.getApiary(apiaryId, callback);
+    }
+
+    @Override
+    public Apiary getApiaryBlocking(long apiaryId) {
+        return goBeesDataSource.getApiaryBlocking(apiaryId);
     }
 
     @Override
@@ -259,10 +266,10 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+    public void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
         checkNotNull(callback);
         // Save record
-        goBeesDataSource.getRecording(hiveId, start, end, callback);
+        goBeesDataSource.getRecording(apiaryId, hiveId, start, end, callback);
     }
 
     @Override
@@ -312,6 +319,31 @@ public class GoBeesRepository implements GoBeesDataSource {
             weatherDataSource.getCurrentWeather(i, apiariesToUpdate.get(i).getLocationLat(),
                     apiaries.get(i).getLocationLong(), getWeatherCallback);
         }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public void saveMeteoRecord(@NonNull final Apiary apiary, @NonNull final TaskCallback callback) {
+        checkNotNull(apiary);
+        checkNotNull(callback);
+        weatherDataSource.getCurrentWeather(1, apiary.getLocationLat(), apiary.getLocationLong(),
+                new WeatherDataSource.GetWeatherCallback() {
+                    @Override
+                    public void onWeatherLoaded(int id, MeteoRecord meteoRecord) {
+                        // Fill apiary with just this meteo record to store it on db
+                        RealmList<MeteoRecord> meteoRecords = new RealmList<>();
+                        meteoRecords.add(meteoRecord);
+                        apiary.setMeteoRecords(meteoRecords);
+                        // Save data
+                        goBeesDataSource.saveMeteoRecord(apiary, callback);
+                        callback.onSuccess();
+                    }
+
+                    @Override
+                    public void onDataNotAvailable() {
+                        callback.onFailure();
+                    }
+                });
     }
 
     @Override

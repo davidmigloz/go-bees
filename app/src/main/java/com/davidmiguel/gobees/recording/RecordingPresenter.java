@@ -15,16 +15,18 @@ class RecordingPresenter implements RecordingContract.Presenter {
     private GoBeesRepository goBeesRepository;
     private RecordingContract.View view;
 
+    private long apiaryId;
     private long hiveId;
     private Date start;
     private Date end;
     private Recording recording;
 
     RecordingPresenter(GoBeesRepository goBeesRepository, RecordingContract.View view,
-                       long hiveId, Date start, Date end) {
+                       long apiaryId, long hiveId, Date start, Date end) {
         this.goBeesRepository = goBeesRepository;
         this.view = view;
         this.view.setPresenter(this);
+        this.apiaryId = apiaryId;
         this.hiveId = hiveId;
         this.start = start;
         this.end = end;
@@ -61,7 +63,7 @@ class RecordingPresenter implements RecordingContract.Presenter {
         // Show loading indicator
         view.setLoadingIndicator(true);
         // Get recording
-        goBeesRepository.getRecording(hiveId, start, end, new GetRecordingCallback() {
+        goBeesRepository.getRecording(apiaryId, hiveId, start, end, new GetRecordingCallback() {
             @Override
             public void onRecordingLoaded(Recording r) {
                 recording = r;

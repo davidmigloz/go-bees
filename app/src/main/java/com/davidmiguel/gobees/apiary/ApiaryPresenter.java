@@ -92,7 +92,7 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
 
     @Override
     public void openHiveDetail(@NonNull Hive requestedHive) {
-        view.showHiveDetail(requestedHive.getId());
+        view.showHiveDetail(apiaryId, requestedHive.getId());
     }
 
     @Override

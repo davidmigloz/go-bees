@@ -200,6 +200,10 @@
     <string name="loading_recording_error">Error while loading recording.</string>
     <!-- Error msg shown when there are no records [CHAR LIMIT=100] -->
     <string name="no_records_error">Error: No records found.</string>
+    <!-- No flight activity data available [CHAR LIMIT=100] -->
+    <string name="no_flight_act_data_available">No flight activity data available.</string>
+    <!-- No weather data available [CHAR LIMIT=100] -->
+    <string name="no_weather_data_available">No weather data available.</string>
     <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
     <string name="recording_date_format">EEE d MMM, yyyy</string>
     <!-- Number of bees [CHAR LIMIT=30] -->

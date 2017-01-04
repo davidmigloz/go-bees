@@ -32,7 +32,6 @@ public interface GoBeesDataSource {
 
     /**
      * Gets all apiaries.
-     * Note: don't modify the Apiary objects.
      *
      * @param callback GetApiariesCallback.
      */
@@ -40,12 +39,19 @@ public interface GoBeesDataSource {
 
     /**
      * Gets apiary with given id.
-     * Note: don't modify the Apiary object.
      *
      * @param apiaryId apiary id.
      * @param callback GetApiaryCallback
      */
     void getApiary(long apiaryId, @NonNull GetApiaryCallback callback);
+
+    /**
+     * Gets apiary with given id. Blocking function.
+     *
+     * @param apiaryId apiary id.
+     * @return requested apiary.
+     */
+    Apiary getApiaryBlocking(long apiaryId);
 
     /**
      * Saves given apiary. If it already exists, is updated.
@@ -161,14 +167,15 @@ public interface GoBeesDataSource {
     void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull SaveRecordingCallback callback);
 
     /**
-     * Gets recording with records of given period.
+     * Gets recording with records and weather data of given period.
      *
+     * @param apiaryId apiary id.
      * @param hiveId   hive id.
      * @param start    start of the period (00:00 of that date).
      * @param end      end of the period (23:59 of that date).
      * @param callback GetRecordingCallback.
      */
-    void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
+    void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
 
     /**
      * Deletes the records contained in the given recording.
@@ -186,6 +193,14 @@ public interface GoBeesDataSource {
      * @param callback         TaskCallback.
      */
     void updateApiariesCurrentWeather(List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback);
+
+    /**
+     * Save a meteo record from an apiary.
+     *
+     * @param apiary   corresponding apiary.
+     * @param callback TaskCallback.
+     */
+    void saveMeteoRecord(Apiary apiary, @NonNull TaskCallback callback);
 
     /**
      * Force to update recordings cache.

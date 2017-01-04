@@ -206,7 +206,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             int color = ContextCompat.getColor(context, R.color.colorAccent);
             // Set styles
             LineDataSet lineDataSet = new LineDataSet(entries, "Recording");
-            lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             lineDataSet.setCubicIntensity(0.2f);
             lineDataSet.setDrawValues(false);
             lineDataSet.setDrawCircles(false);
@@ -234,6 +234,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             lineChart.getDescription().setEnabled(false);
             lineChart.getLegend().setEnabled(false);
             lineChart.setTouchEnabled(false);
+            lineChart.setNoDataText(context.getString(R.string.no_flight_act_data_available));
             // X axis setup
             IAxisValueFormatter xAxisFormatter = new HourAxisValueFormatter(firstTimestamp);
             XAxis xAxis = lineChart.getXAxis();

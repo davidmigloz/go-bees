@@ -40,6 +40,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MonitoringFragment extends Fragment implements MonitoringContract.View,
         BackClickHelperFragment {
 
+    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
 
     private MonitoringContract.Presenter presenter;

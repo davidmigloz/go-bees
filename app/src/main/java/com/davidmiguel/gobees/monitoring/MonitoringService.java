@@ -17,7 +17,9 @@ import com.davidmiguel.gobees.camera.AndroidCamera;
 import com.davidmiguel.gobees.camera.AndroidCameraImpl;
 import com.davidmiguel.gobees.camera.AndroidCameraListener;
 import com.davidmiguel.gobees.camera.CameraFrame;
+import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Record;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.SaveRecordingCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.video.BeesCounter;
@@ -29,6 +31,8 @@ import org.opencv.android.OpenCVLoader;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Monitoring service.
@@ -40,18 +44,23 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     public static final String ARGUMENT_MON_SETTINGS = "MONITORING_SETTINGS";
     public static final String START_ACTION = "start_action";
     public static final String STOP_ACTION = "stop_action";
-
     private static final int NOTIFICATION_ID = 101;
     private static final int T_5_SECONDS = 5000;
+    private static final int T_10_SECONDS = 10000;
+    private static final int T_15_MINUTES = 900000;
 
     private static MonitoringService INSTANCE = null;
     private final IBinder mBinder = new MonitoringBinder();
     private SaveRecordingCallback callback;
+
     private GoBeesRepository goBeesRepository;
+    private Apiary apiary;
     private LinkedList<Record> records;
     private AndroidCamera androidCamera;
     private BeesCounter bc;
     private MonitoringSettings monitoringSettings;
+    private Timer timer;
+    private FetchWeatherTask fetchWeatherTask;
     private boolean openCVLoaded = false;
     private long startTime;
 
@@ -73,6 +82,9 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
+        // Create fetch weather task
+        fetchWeatherTask = new FetchWeatherTask();
+        timer = new Timer();
     }
 
     @Override
@@ -83,6 +95,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         if (intent.getAction().equals(START_ACTION)) {
             // Get monitoring config
             monitoringSettings = (MonitoringSettings) intent.getSerializableExtra(ARGUMENT_MON_SETTINGS);
+            // Get apiary
+            apiary = goBeesRepository.getApiaryBlocking(monitoringSettings.getApiaryId());
             // Configurations
             configOpenCV();
             configBeeCounter();
@@ -129,6 +143,12 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         if (androidCamera != null && androidCamera.isConnected()) {
             androidCamera.release();
             androidCamera = null;
+        }
+        // Stop fetching weather data
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+            fetchWeatherTask = null;
         }
         // Close database
         goBeesRepository.closeDb();
@@ -182,7 +202,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
                 switch (status) {
                     case LoaderCallbackInterface.SUCCESS:
                         openCVLoaded = true;
-                        startRecording();
+                        startMonitoring();
                         break;
                     default:
                         super.onManagerConnected(status);
@@ -235,9 +255,15 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     }
 
     /**
-     * Start recording (frames will be received via onPreviewFrame()).
+     * Start monitoring (frames will be received via onPreviewFrame()).
      */
-    private void startRecording() {
+    private void startMonitoring() {
+        // If apiary has location -> Start fetching weather data (each 15min)
+        // With a delay of 10 seconds (because first 5 seconds are ignored)
+        if (apiary.hasLocation()) {
+            timer.scheduleAtFixedRate(fetchWeatherTask, T_10_SECONDS, T_15_MINUTES);
+        }
+        // Start camera
         if (!androidCamera.isConnected()) {
             androidCamera.connect();
         }
@@ -282,6 +308,23 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             callback = c;
             // Return this INSTANCE of MonitoringService so clients can call public methods
             return MonitoringService.this;
+        }
+    }
+
+    private class FetchWeatherTask extends TimerTask {
+        @Override
+        public void run() {
+            goBeesRepository.saveMeteoRecord(apiary, new GoBeesDataSource.TaskCallback() {
+                @Override
+                public void onSuccess() {
+                    // Don't do anything
+                }
+
+                @Override
+                public void onFailure() {
+                    // Don't do anything
+                }
+            });
         }
     }
 }

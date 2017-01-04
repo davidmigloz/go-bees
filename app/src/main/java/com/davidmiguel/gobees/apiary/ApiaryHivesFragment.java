@@ -180,8 +180,9 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void showHiveDetail(long hiveId) {
+    public void showHiveDetail(long apiaryId, long hiveId) {
         Intent intent = new Intent(getActivity(), HiveActivity.class);
+        intent.putExtra(HiveRecordingsFragment.ARGUMENT_APIARY_ID, apiaryId);
         intent.putExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, hiveId);
         getActivity().startActivity(intent);
     }
