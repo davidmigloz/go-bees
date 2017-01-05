@@ -54,11 +54,18 @@ public class GoBeesRepository implements GoBeesDataSource {
      */
     boolean cacheIsDirty = false;
 
-    private GoBeesRepository(GoBeesDataSource goBeesDataSource, WeatherDataSource weatherDataSource) {
+    private GoBeesRepository(GoBeesDataSource goBeesDataSource,
+                             WeatherDataSource weatherDataSource) {
         this.goBeesDataSource = goBeesDataSource;
         this.weatherDataSource = weatherDataSource;
     }
 
+    /**
+     * Get GoBeesRepository instance.
+     * @param apiariesLocalDataSource local data source.
+     * @param weatherDataSource weather data source.
+     * @return GoBeesRepository instace.
+     */
     public static GoBeesRepository getInstance(GoBeesDataSource apiariesLocalDataSource,
                                                WeatherDataSource weatherDataSource) {
         if (INSTANCE == null) {
@@ -259,21 +266,24 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull SaveRecordingCallback callback) {
+    public void saveRecords(long hiveId, @NonNull List<Record> records,
+                            @NonNull SaveRecordingCallback callback) {
         checkNotNull(callback);
         // Save record
         goBeesDataSource.saveRecords(hiveId, records, callback);
     }
 
     @Override
-    public void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+    public void getRecording(long apiaryId, long hiveId, Date start, Date end,
+                             @NonNull GetRecordingCallback callback) {
         checkNotNull(callback);
         // Save record
         goBeesDataSource.getRecording(apiaryId, hiveId, start, end, callback);
     }
 
     @Override
-    public void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback) {
+    public void deleteRecording(long hiveId, @NonNull Recording recording,
+                                @NonNull TaskCallback callback) {
         checkNotNull(callback);
         // Delete recording
         goBeesDataSource.deleteRecording(hiveId, recording, callback);
@@ -281,39 +291,42 @@ public class GoBeesRepository implements GoBeesDataSource {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void updateApiariesCurrentWeather(final List<Apiary> apiariesToUpdate, @NonNull final TaskCallback callback) {
+    public void updateApiariesCurrentWeather(final List<Apiary> apiariesToUpdate,
+                                             @NonNull final TaskCallback callback) {
         checkNotNull(callback);
         // Prepare callback
         final List<Apiary> apiaries = Collections.synchronizedList(apiariesToUpdate);
         final AtomicBoolean error = new AtomicBoolean(false);
         final AtomicInteger counter = new AtomicInteger(0);
-        WeatherDataSource.GetWeatherCallback getWeatherCallback = new WeatherDataSource.GetWeatherCallback() {
-            @Override
-            public void onWeatherLoaded(int id, MeteoRecord meteoRecord) {
-                // Set weather
-                apiaries.get(id).setCurrentWeather(meteoRecord);
-                // Check if all apiaries have finished
-                int value = counter.incrementAndGet();
-                if (value >= apiaries.size()) {
-                    if (!error.get()) {
-                        // Update weather in database and finish
-                        goBeesDataSource.updateApiariesCurrentWeather(apiariesToUpdate, callback);
-                    } else {
-                        callback.onFailure();
+        WeatherDataSource.GetWeatherCallback getWeatherCallback =
+                new WeatherDataSource.GetWeatherCallback() {
+                    @Override
+                    public void onWeatherLoaded(int id, MeteoRecord meteoRecord) {
+                        // Set weather
+                        apiaries.get(id).setCurrentWeather(meteoRecord);
+                        // Check if all apiaries have finished
+                        int value = counter.incrementAndGet();
+                        if (value >= apiaries.size()) {
+                            if (!error.get()) {
+                                // Update weather in database and finish
+                                goBeesDataSource.updateApiariesCurrentWeather(
+                                        apiariesToUpdate, callback);
+                            } else {
+                                callback.onFailure();
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onDataNotAvailable() {
-                error.set(true);
-                // Check if all apiaries have finished
-                int value = counter.incrementAndGet();
-                if (value >= apiaries.size()) {
-                    callback.onFailure();
-                }
-            }
-        };
+                    @Override
+                    public void onDataNotAvailable() {
+                        error.set(true);
+                        // Check if all apiaries have finished
+                        int value = counter.incrementAndGet();
+                        if (value >= apiaries.size()) {
+                            callback.onFailure();
+                        }
+                    }
+                };
         // Update weather
         for (int i = 0; i < apiariesToUpdate.size(); i++) {
             weatherDataSource.getCurrentWeather(i, apiariesToUpdate.get(i).getLocationLat(),
@@ -323,7 +336,8 @@ public class GoBeesRepository implements GoBeesDataSource {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void saveMeteoRecord(@NonNull final Apiary apiary, @NonNull final TaskCallback callback) {
+    public void saveMeteoRecord(@NonNull final Apiary apiary,
+                                @NonNull final TaskCallback callback) {
         checkNotNull(apiary);
         checkNotNull(callback);
         weatherDataSource.getCurrentWeather(1, apiary.getLocationLat(), apiary.getLocationLong(),

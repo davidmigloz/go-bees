@@ -48,6 +48,12 @@ public class ApiaryHivesFragment extends Fragment
     private View noHivesView;
     private LinearLayout hivesView;
 
+    /**
+     * Get ApiaryHivesFragment instance.
+     *
+     * @param apiaryId apiary id.
+     * @return ApiaryHivesFragment instance.
+     */
     public static ApiaryHivesFragment newInstance(long apiaryId) {
         Bundle arguments = new Bundle();
         arguments.putLong(ARGUMENT_APIARY_ID, apiaryId);
@@ -83,7 +89,7 @@ public class ApiaryHivesFragment extends Fragment
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 presenter.addEditHive(AddEditHiveActivity.NEW_HIVE);
             }
         });

@@ -29,6 +29,11 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     private GoBeesLocalDataSource() {
     }
 
+    /**
+     * Get GoBeesLocalDataSource instance.
+     *
+     * @return instance.
+     */
     public static GoBeesLocalDataSource getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new GoBeesLocalDataSource();
@@ -225,7 +230,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void saveHive(final long apiaryId, @NonNull final Hive hive, @NonNull TaskCallback callback) {
+    public void saveHive(final long apiaryId, @NonNull final Hive hive,
+                         @NonNull TaskCallback callback) {
         try {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -277,7 +283,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void saveRecord(final long hiveId, @NonNull final Record record, @NonNull TaskCallback callback) {
+    public void saveRecord(final long hiveId, @NonNull final Record record,
+                           @NonNull TaskCallback callback) {
         try {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -331,7 +338,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback) {
+    public void getRecording(long apiaryId, long hiveId, Date start, Date end,
+                             @NonNull GetRecordingCallback callback) {
         // Get apiary
         Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
         if (apiary == null || apiary.getMeteoRecords() == null) {
@@ -368,7 +376,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback) {
+    public void deleteRecording(long hiveId, @NonNull Recording recording,
+                                @NonNull TaskCallback callback) {
         try {
             // Get hive
             Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
@@ -381,8 +390,10 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 final RealmResults<Record> records;
                 records = hive.getRecords()
                         .where()
-                        .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
-                        .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
+                        .greaterThanOrEqualTo("timestamp",
+                                DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
+                        .lessThanOrEqualTo("timestamp",
+                                DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
                         .findAll();
                 // Delete records
                 realm.executeTransaction(new Realm.Transaction() {
@@ -400,7 +411,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void updateApiariesCurrentWeather(final List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback) {
+    public void updateApiariesCurrentWeather(final List<Apiary> apiariesToUpdate,
+                                             @NonNull TaskCallback callback) {
         try {
             // Save meteo records
             realm.executeTransaction(new Realm.Transaction() {

@@ -1,6 +1,5 @@
 package com.davidmiguel.gobees.recording;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -164,9 +163,10 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
                 NavUtils.navigateUpFromSameTask(getActivity());
                 return true;
             case R.id.menu_refresh:
-                break;
+                return true;
+            default:
+                return false;
         }
-        return true;
     }
 
     @Override
@@ -279,12 +279,12 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
      */
     private void highlightChartIcon(String chartVisible) {
         int defaultColor = ContextCompat.getColor(getContext(), R.color.colorDivider);
-        tempIcon.setColorFilter(chartVisible.equals("temp") ?
-                ContextCompat.getColor(getContext(), R.color.colorTempIcon) : defaultColor);
-        rainIcon.setColorFilter(chartVisible.equals("rain") ?
-                ContextCompat.getColor(getContext(), R.color.colorRainIcon) : defaultColor);
-        windIcon.setColorFilter(chartVisible.equals("wind") ?
-                ContextCompat.getColor(getContext(), R.color.colorWindIcon) : defaultColor);
+        tempIcon.setColorFilter(chartVisible.equals("temp")
+                ? ContextCompat.getColor(getContext(), R.color.colorTempIcon) : defaultColor);
+        rainIcon.setColorFilter(chartVisible.equals("rain")
+                ? ContextCompat.getColor(getContext(), R.color.colorRainIcon) : defaultColor);
+        windIcon.setColorFilter(chartVisible.equals("wind")
+                ? ContextCompat.getColor(getContext(), R.color.colorWindIcon) : defaultColor);
     }
 
     /**
@@ -317,7 +317,6 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         lineDataSet.setDrawCircles(false);
         lineDataSet.setLineWidth(1.8f);
         lineDataSet.setColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
-        LineData data = new LineData(lineDataSet);
         // General setup
         beesChart.setDrawGridBackground(false);
         beesChart.setDrawBorders(false);
@@ -353,7 +352,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         rightAxis.setDrawGridLines(true);
         rightAxis.setDrawAxisLine(false);
         // Add data
-        beesChart.setData(data);
+        beesChart.setData(new LineData(lineDataSet));
     }
 
     /**
@@ -401,7 +400,6 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillColor(ContextCompat.getColor(getContext(), R.color.colorFillTempChart));
         lineDataSet.setFillAlpha(255);
-        LineData data = new LineData(lineDataSet);
         // General setup
         tempChart.setDrawGridBackground(false);
         tempChart.setDrawBorders(false);
@@ -421,7 +419,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         leftAxis.setAxisMinimum(minTemp - 5);
         tempChart.getAxisRight().setEnabled(false);
         // Add data
-        tempChart.setData(data);
+        tempChart.setData(new LineData(lineDataSet));
     }
 
 
@@ -463,7 +461,6 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillColor(ContextCompat.getColor(getContext(), R.color.colorFillRainChart));
         lineDataSet.setFillAlpha(255);
-        LineData data = new LineData(lineDataSet);
         // General setup
         rainChart.setDrawGridBackground(false);
         rainChart.setDrawBorders(false);
@@ -483,7 +480,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         leftAxis.setAxisMinimum(0);
         rainChart.getAxisRight().setEnabled(false);
         // Add data
-        rainChart.setData(data);
+        rainChart.setData(new LineData(lineDataSet));
     }
 
 

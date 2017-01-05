@@ -77,7 +77,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
     // Service stuff
     private static MonitoringService INSTANCE = null;
-    private final IBinder mBinder = new MonitoringBinder();
+    private final IBinder binder = new MonitoringBinder();
 
     // Persistence
     private GoBeesRepository goBeesRepository;
@@ -86,7 +86,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
 
     // Camera and algorithm
     private AndroidCamera androidCamera;
-    private boolean openCVLoaded = false;
+    private boolean openCvLoaded = false;
     private BeesCounter bc;
     private int initialNumFrames;
     private long startTime;
@@ -129,16 +129,17 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         // START action
         if (intent.getAction().equals(START_ACTION)) {
             // Get monitoring config
-            monitoringSettings = (MonitoringSettings) intent.getSerializableExtra(ARGUMENT_MON_SETTINGS);
+            monitoringSettings =
+                    (MonitoringSettings) intent.getSerializableExtra(ARGUMENT_MON_SETTINGS);
             // Get apiary
             apiary = goBeesRepository.getApiaryBlocking(monitoringSettings.getApiaryId());
             // Configurations
             configBeeCounter();
             configCamera();
-            Notification n = configNotification();
-            configOpenCV();
+            Notification not = configNotification();
+            configOpenCv();
             // Start service in foreground
-            startForeground(NOTIFICATION_ID, n);
+            startForeground(NOTIFICATION_ID, not);
 
             // STOP action
         } else if (intent.getAction().equals(STOP_ACTION)) {
@@ -149,25 +150,26 @@ public class MonitoringService extends Service implements AndroidCameraListener 
                 // Clean records
                 cleanRecords();
                 // Save records on db
-                goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records, new SaveRecordingCallback() {
-                    @Override
-                    public void onRecordingTooShort() {
-                        stopService();
-                        callback.onRecordingTooShort();
-                    }
+                goBeesRepository.saveRecords(monitoringSettings.getHiveId(), records,
+                        new SaveRecordingCallback() {
+                            @Override
+                            public void onRecordingTooShort() {
+                                stopService();
+                                callback.onRecordingTooShort();
+                            }
 
-                    @Override
-                    public void onSuccess() {
-                        stopService();
-                        callback.onSuccess();
-                    }
+                            @Override
+                            public void onSuccess() {
+                                stopService();
+                                callback.onSuccess();
+                            }
 
-                    @Override
-                    public void onFailure() {
-                        stopService();
-                        callback.onFailure();
-                    }
-                });
+                            @Override
+                            public void onFailure() {
+                                stopService();
+                                callback.onFailure();
+                            }
+                        });
             } else {
                 stopService();
                 callback.onRecordingTooShort();
@@ -198,12 +200,11 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return mBinder;
+        return binder;
     }
 
-    @Override
-    public boolean isOpenCVLoaded() {
-        return openCVLoaded;
+    public boolean isOpenCvLoaded() {
+        return openCvLoaded;
     }
 
     @Override
@@ -274,7 +275,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private Notification configNotification() {
         // Intent to the monitoring activity (when the notification is clicked)
         Intent monitoringIntent = new Intent(this, MonitoringActivity.class);
-        monitoringIntent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, monitoringSettings.getHiveId());
+        monitoringIntent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID,
+                monitoringSettings.getHiveId());
         PendingIntent pMonitoringIntent = PendingIntent.getActivity(this, 0,
                 monitoringIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         // Create notification
@@ -292,14 +294,14 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      * Config OpenCV (config callback and init OpenCV).
      * When OpenCV is ready, it starts monitoring.
      */
-    private void configOpenCV() {
+    private void configOpenCv() {
         // OpenCV callback
         BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
             @Override
             public void onManagerConnected(final int status) {
                 switch (status) {
                     case LoaderCallbackInterface.SUCCESS:
-                        openCVLoaded = true;
+                        openCvLoaded = true;
                         startMonitoring();
                         break;
                     default:
@@ -318,7 +320,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private void startMonitoring() {
         // If apiary has location -> Start fetching weather data (each WEATHER_REFRESH_RATE)
         if (apiary.hasLocation()) {
-            timer.scheduleAtFixedRate(fetchWeatherTask, getTotalInitialDelay(), WEATHER_REFRESH_RATE);
+            timer.scheduleAtFixedRate(fetchWeatherTask,
+                    getTotalInitialDelay(), WEATHER_REFRESH_RATE);
         }
         // Start camera
         if (!androidCamera.isConnected()) {
@@ -358,7 +361,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      * @return total initial delay
      */
     private long getTotalInitialDelay() {
-        return INITIAL_DELAY + INITIAL_FRAME_RATE * INITIAL_FRAME_RATE + DateTimeUtils.T_5_SECONDS;
+        return INITIAL_DELAY + INITIAL_FRAME_RATE * INITIAL_NUM_FRAMES + DateTimeUtils.T_5_SECONDS;
     }
 
     /**

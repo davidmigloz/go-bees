@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import io.realm.Realm;
-
 /**
  * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
  * UI as required.

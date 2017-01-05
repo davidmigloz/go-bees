@@ -80,7 +80,7 @@ public class ApiariesFragment extends Fragment
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_apiary);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 presenter.addEditApiary(AddEditApiaryActivity.NEW_APIARY);
             }
         });
@@ -133,6 +133,8 @@ public class ApiariesFragment extends Fragment
             case R.id.menu_delete:
                 presenter.deleteData();
                 break;
+            default:
+                return false;
         }
         return true;
     }

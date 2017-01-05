@@ -9,11 +9,11 @@ import org.opencv.imgproc.Imgproc;
  */
 public class CameraFrame {
 
-    private Mat mYuvFrameData;
-    private Mat mRgba;
-    private int mWidth;
-    private int mHeight;
-    private boolean mRgbaConverted;
+    private Mat yuvFrameData;
+    private Mat rgba;
+    private int width;
+    private int height;
+    private boolean rgbaConverted;
 
     /**
      * CameraFrame constructor.
@@ -24,10 +24,10 @@ public class CameraFrame {
      */
     CameraFrame(Mat frame, int width, int height) {
         super();
-        mWidth = width;
-        mHeight = height;
-        mYuvFrameData = frame;
-        mRgba = new Mat();
+        this.width = width;
+        this.height = height;
+        yuvFrameData = frame;
+        rgba = new Mat();
     }
 
     /**
@@ -36,7 +36,7 @@ public class CameraFrame {
      * @param frameData byte array with the data.
      */
     synchronized void putFrameData(byte[] frameData) {
-        mYuvFrameData.put(0, 0, frameData);
+        yuvFrameData.put(0, 0, frameData);
         invalidate();
     }
 
@@ -46,14 +46,14 @@ public class CameraFrame {
      * @return gray Mat.
      */
     public Mat gray() {
-        return mYuvFrameData.submat(0, mHeight, 0, mWidth);
+        return yuvFrameData.submat(0, height, 0, width);
     }
 
     /**
      * Invalidates cached mat.
      */
     private void invalidate() {
-        mRgbaConverted = false;
+        rgbaConverted = false;
     }
 
     /**
@@ -62,17 +62,17 @@ public class CameraFrame {
      * @return RGBA Mat.
      */
     public Mat rgba() {
-        if (!mRgbaConverted) {
-            Imgproc.cvtColor(mYuvFrameData, mRgba, Imgproc.COLOR_YUV2BGR_NV12, 4);
-            mRgbaConverted = true;
+        if (!rgbaConverted) {
+            Imgproc.cvtColor(yuvFrameData, rgba, Imgproc.COLOR_YUV2BGR_NV12, 4);
+            rgbaConverted = true;
         }
-        return mRgba;
+        return rgba;
     }
 
     /**
      * Deallocates frame data.
      */
     public void release() {
-        mRgba.release();
+        rgba.release();
     }
 }

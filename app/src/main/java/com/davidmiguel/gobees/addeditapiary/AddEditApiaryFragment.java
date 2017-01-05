@@ -82,7 +82,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_apiary);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 presenter.save(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }
@@ -108,13 +108,13 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void setLocation(Location location) {
-        String sb = "(" +
-                String.valueOf(location.getLatitude()) +
-                ", " +
-                String.valueOf(location.getLongitude()) +
-                ") ±" +
-                Math.round(location.getAccuracy()) +
-                "m";
+        String sb = "("
+                + String.valueOf(location.getLatitude())
+                + ", "
+                + String.valueOf(location.getLongitude())
+                + ") ±"
+                + Math.round(location.getAccuracy())
+                + "m";
         locationTextView.setText(sb);
     }
 
@@ -125,8 +125,8 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void setLocationIcon(boolean active) {
-        getLocationIcon.setColorFilter(active ?
-                ContextCompat.getColor(getContext(), R.color.colorPrimaryDark) :
+        getLocationIcon.setColorFilter(active
+                ? ContextCompat.getColor(getContext(), R.color.colorPrimaryDark) :
                 ContextCompat.getColor(getContext(), R.color.colorAccent));
     }
 
