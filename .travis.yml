@@ -45,6 +45,8 @@ before_script:
     - cp opencv/build/lib/libopencv_java310.so opencv_lib/libopencv_java310.so
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
     - chmod +x gradlew
+    # Create gradle.properties with fake credentials
+    - echo "OpenWeatherMapApiKey=\"c75f70c4717eb95847d378bba3bdb275\"" > ~/.gradle/gradle.properties
 
 script:
     # Compile and run unit tests

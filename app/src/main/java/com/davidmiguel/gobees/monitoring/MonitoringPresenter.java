@@ -16,17 +16,19 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     private MonitoringContract.View view;
     private MonitoringContract.SettingsView settingsView;
 
+    private long apiaryId;
     private long hiveId;
     private BeesCounter bc;
     private Mat processedFrame;
     private boolean showAlgoOutput;
 
     MonitoringPresenter(MonitoringContract.View view, MonitoringContract.SettingsView settingsView,
-                        long hiveId) {
+                        long apiaryId, long hiveId) {
         this.view = view;
         this.view.setPresenter(this);
         this.settingsView = settingsView;
         this.settingsView.setPresenter(this);
+        this.apiaryId = apiaryId;
         this.hiveId = hiveId;
     }
 
@@ -44,6 +46,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     public void startMonitoring() {
         // Get settings and set hive id
         MonitoringSettings ms = settingsView.getMonitoringSettings();
+        ms.setApiaryId(apiaryId);
         ms.setHiveId(hiveId);
         // Hide camera view
         view.hideCameraView();

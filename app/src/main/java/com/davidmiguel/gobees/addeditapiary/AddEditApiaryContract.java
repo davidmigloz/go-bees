@@ -65,6 +65,13 @@ interface AddEditApiaryContract {
          * Shows save error message.
          */
         void showSaveApiaryError();
+
+        /**
+         * Checks whether ACCESS_FINE_LOCATION permission is granted. If not, asks for it.
+         *
+         * @return if the permission is granted.
+         */
+        boolean checkLocationPermission();
     }
 
     interface Presenter extends BasePresenter {
@@ -75,7 +82,7 @@ interface AddEditApiaryContract {
          * @param name  apiary name.
          * @param notes apiary notes.
          */
-        void saveApiary(String name, String notes);
+        void save(String name, String notes);
 
         /**
          * Fill apiary data (the apiary must already exist in the repository).

@@ -33,16 +33,16 @@ public class Apiary extends RealmObject {
     private String imageUrl;
 
     /**
-     * Apiary location longitude.
-     */
-    @Nullable
-    private Double locationLong;
-
-    /**
      * Apiary location latitude.
      */
     @Nullable
     private Double locationLat;
+
+    /**
+     * Apiary location longitude.
+     */
+    @Nullable
+    private Double locationLong;
 
     /**
      * Apiary notes.
@@ -57,34 +57,34 @@ public class Apiary extends RealmObject {
     private RealmList<Hive> hives;
 
     /**
-     * List of meteorological data from days.
+     * Current weather in the apiary.
      */
     @Nullable
-    private RealmList<MeteoDay> meteoDays;
+    private MeteoRecord currentWeather;
 
     /**
-     * List of meteorological data from specific moments in time.
+     * List of meteorological data from recordings.
      */
     @Nullable
-    private RealmList<MeteoDetail> meteoDetails;
+    private RealmList<MeteoRecord> meteoRecords;
 
     public Apiary() {
         // Needed by Realm
     }
 
-    public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLong,
-                  @Nullable Double locationLat, @Nullable String notes,
-                  @Nullable RealmList<Hive> hives, @Nullable RealmList<MeteoDay> meteoDays,
-                  @Nullable RealmList<MeteoDetail> meteoDetails) {
+    public Apiary(long id, String name, @Nullable String imageUrl, @Nullable Double locationLat,
+                  @Nullable Double locationLong, @Nullable String notes,
+                  @Nullable RealmList<Hive> hives, @Nullable MeteoRecord currentWeather,
+                  @Nullable RealmList<MeteoRecord> meteoRecords) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
-        this.locationLong = locationLong;
         this.locationLat = locationLat;
+        this.locationLong = locationLong;
         this.notes = notes;
         this.hives = hives;
-        this.meteoDays = meteoDays;
-        this.meteoDetails = meteoDetails;
+        this.currentWeather = currentWeather;
+        this.meteoRecords = meteoRecords;
     }
 
     public long getId() {
@@ -113,21 +113,21 @@ public class Apiary extends RealmObject {
     }
 
     @Nullable
-    public Double getLocationLong() {
-        return locationLong;
-    }
-
-    public void setLocationLong(@Nullable Double locationLong) {
-        this.locationLong = locationLong;
-    }
-
-    @Nullable
     public Double getLocationLat() {
         return locationLat;
     }
 
     public void setLocationLat(@Nullable Double locationLat) {
         this.locationLat = locationLat;
+    }
+
+    @Nullable
+    public Double getLocationLong() {
+        return locationLong;
+    }
+
+    public void setLocationLong(@Nullable Double locationLong) {
+        this.locationLong = locationLong;
     }
 
     @Nullable
@@ -149,30 +149,40 @@ public class Apiary extends RealmObject {
     }
 
     @Nullable
-    public RealmList<MeteoDay> getMeteoDays() {
-        return meteoDays;
+    public MeteoRecord getCurrentWeather() {
+        return currentWeather;
     }
 
-    public void setMeteoDays(@Nullable RealmList<MeteoDay> meteoDays) {
-        this.meteoDays = meteoDays;
+    public void setCurrentWeather(@Nullable MeteoRecord currentWeather) {
+        this.currentWeather = currentWeather;
     }
 
     @Nullable
-    public RealmList<MeteoDetail> getMeteoDetails() {
-        return meteoDetails;
+    public RealmList<MeteoRecord> getMeteoRecords() {
+        return meteoRecords;
     }
 
-    public void setMeteoDetails(@Nullable RealmList<MeteoDetail> meteoDetails) {
-        this.meteoDetails = meteoDetails;
+    public void setMeteoRecords(@Nullable RealmList<MeteoRecord> meteoRecords) {
+        this.meteoRecords = meteoRecords;
     }
 
-    public void addHive(@NonNull Hive hive){
+    public void addHive(@NonNull Hive hive) {
         if (hives != null) {
             hives.add(hive);
         }
     }
 
+    public void addMeteoRecord(@NonNull MeteoRecord meteoRecord) {
+        if (meteoRecords != null) {
+            meteoRecords.add(meteoRecord);
+        }
+    }
+
     public boolean isValidApiary() {
         return !Strings.isNullOrEmpty(name);
+    }
+
+    public boolean hasLocation() {
+        return locationLat != null && locationLong != null;
     }
 }

@@ -97,14 +97,16 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
         long totalAbsoluteError = 0;
         long expectedNumBeesTotal = 0;
 
-        File expectedOutputs = TestUtils.getFileFromPath(this, "res/img/" + dataset + "/numBees.txt");
+        File expectedOutputs =
+                TestUtils.getFileFromPath(this, "res/img/" + dataset + "/numBees.txt");
         try (BufferedReader br = new BufferedReader(new FileReader(expectedOutputs))) {
             // Process NUM_FRAMES_SKIP frames to create background model
             for (String line; i <= NUM_FRAMES_SKIP && (line = br.readLine()) != null; i++) {
                 bc.countBees(readFreame(i, dataset));
             }
             // Compare beesCounter output with the expected output
-            int expectedNumBees, numBees;
+            int expectedNumBees;
+            int numBees;
             for (String line; (line = br.readLine()) != null; i++) {
                 // Get number of bees in the frame (expected and output)
                 expectedNumBeesTotal += expectedNumBees = Integer.parseInt(line);
@@ -134,7 +136,8 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
      * @param numBees         output number of bees.
      */
     private void saveFrames(Mat frame, int id, int expectedNumBees, int numBees) {
-        TestUtils.saveMatToFile(frame, String.format("/img/%03d_e%d_o%d", id, expectedNumBees, numBees));
+        TestUtils.saveMatToFile(frame,
+                String.format("/img/%03d_e%d_o%d", id, expectedNumBees, numBees));
     }
 
     /**

@@ -12,6 +12,7 @@ import com.davidmiguel.gobees.utils.ActivityUtils;
 public class MonitoringActivity extends AppCompatActivity {
 
     public static final int REQUEST_MONITORING = 1;
+    public static final int NO_APIARY = -1;
     public static final int NO_HIVE = -1;
 
     private MonitoringFragment monitoringFragment;
@@ -20,6 +21,12 @@ public class MonitoringActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.monitoring_act);
+
+        // Get apiary id
+        long apiaryId = getIntent().getLongExtra(MonitoringFragment.ARGUMENT_APIARY_ID, NO_APIARY);
+        if (apiaryId == NO_APIARY) {
+            throw new IllegalArgumentException("No apiary id passed!");
+        }
 
         // Get hive id
         long hiveId = getIntent().getLongExtra(MonitoringFragment.ARGUMENT_HIVE_ID, NO_HIVE);
@@ -44,7 +51,7 @@ public class MonitoringActivity extends AppCompatActivity {
                 .commit();
 
         // Create the presenter
-        new MonitoringPresenter(monitoringFragment, monitoringSettingsFragment, hiveId);
+        new MonitoringPresenter(monitoringFragment, monitoringSettingsFragment, apiaryId, hiveId);
     }
 
     @Override

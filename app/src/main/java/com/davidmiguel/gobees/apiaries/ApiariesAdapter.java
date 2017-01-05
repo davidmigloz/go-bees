@@ -1,19 +1,25 @@
 package com.davidmiguel.gobees.apiaries;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
+import com.davidmiguel.gobees.utils.WeatherUtils;
 
 import java.util.List;
 
@@ -24,10 +30,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
 
+    private final Context context;
+    private MenuInflater menuInflater;
     private List<Apiary> apiaries;
     private ApiaryItemListener listener;
 
-    ApiariesAdapter(List<Apiary> apiaries, ApiaryItemListener listener) {
+    ApiariesAdapter(Context context, MenuInflater menuInflater, List<Apiary> apiaries, ApiaryItemListener listener) {
+        this.context = context;
+        this.menuInflater = menuInflater;
         this.apiaries = checkNotNull(apiaries);
         this.listener = listener;
     }
@@ -55,38 +65,104 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
     }
 
     interface ApiaryItemListener {
-        void onApiaryClick(Apiary clickedApiary);
+        void onApiaryClick(Apiary apiary);
 
-        void onApiaryDelete(Apiary clickedApiary);
+        void onApiaryDelete(Apiary apiary);
+
+        void onApiaryEdit(Apiary apiary);
+
+        void onOpenMenuClick(View view);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
-            implements BaseViewHolder<Apiary>, View.OnClickListener, ItemTouchHelperViewHolder {
+            implements BaseViewHolder<Apiary>, View.OnClickListener,
+            View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener,
+            ItemTouchHelperViewHolder {
 
+        private View viewHolder;
         private CardView card;
         private TextView apiaryName;
         private TextView numHives;
+        private ImageView weatherIcon;
+        private TextView temp;
+        private ImageView moreIcon;
+
         private Drawable background;
 
         ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+
+            // Get views
+            viewHolder = itemView;
             card = (CardView) itemView.findViewById(R.id.card);
             apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
             numHives = (TextView) itemView.findViewById(R.id.num_hives);
+            weatherIcon = (ImageView) itemView.findViewById(R.id.weather_icon);
+            temp = (TextView) itemView.findViewById(R.id.temp);
+            moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
+
+            // Set listeners
+            viewHolder.setOnClickListener(this);
+            viewHolder.setOnCreateContextMenuListener(this);
+            moreIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Open Menu
+                    listener.onOpenMenuClick(viewHolder);
+                }
+            });
+
             background = card.getBackground();
         }
 
         public void bind(@NonNull Apiary apiary) {
+            // Set apiary name
             apiaryName.setText(apiary.getName());
-            if(apiary.getHives() != null) {
+            // Set number of hives
+            if (apiary.getHives() != null) {
                 numHives.setText(Integer.toString(apiary.getHives().size()));
+            }
+            if (apiary.getCurrentWeather() != null) {
+                // Set weather icon
+                String iconId = apiary.getCurrentWeather().getWeatherConditionIcon();
+                weatherIcon.setImageResource(WeatherUtils.getWeatherIconResourceId(iconId));
+                // Set temperature
+                double temperature = apiary.getCurrentWeather().getTemperature();
+                temp.setText(WeatherUtils.formatTemperature(context, temperature));
+                // Show
+                weatherIcon.setVisibility(View.VISIBLE);
+                temp.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view,
+                                        ContextMenu.ContextMenuInfo contextMenuInfo) {
+            // Inflate menu
+            menuInflater.inflate(R.menu.apiary_item_menu, contextMenu);
+            // Set click listener
+            for (int i = 0; i < contextMenu.size(); i++) {
+                contextMenu.getItem(i).setOnMenuItemClickListener(this);
             }
         }
 
         @Override
         public void onClick(View view) {
             listener.onApiaryClick(apiaries.get(getAdapterPosition()));
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_edit:
+                    listener.onApiaryEdit(apiaries.get(getAdapterPosition()));
+                    return true;
+                case R.id.menu_delete:
+                    listener.onApiaryDelete(apiaries.get(getAdapterPosition()));
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         @Override

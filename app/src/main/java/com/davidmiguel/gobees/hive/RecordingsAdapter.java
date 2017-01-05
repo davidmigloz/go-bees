@@ -7,9 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
@@ -40,11 +44,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolder> {
 
     private Context context;
+    private MenuInflater menuInflater;
     private List<Recording> recordings;
     private RecordingItemListener listener;
 
-    RecordingsAdapter(Context context, List<Recording> recordings, RecordingItemListener listener) {
+    RecordingsAdapter(Context context, MenuInflater menuInflater,
+                      List<Recording> recordings, RecordingItemListener listener) {
         this.context = context;
+        this.menuInflater = menuInflater;
         this.recordings = checkNotNull(recordings);
         this.listener = listener;
     }
@@ -75,24 +82,44 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         void onRecordingClick(Recording clickedRecording);
 
         void onRecordingDelete(Recording clickedRecording);
+
+        void onOpenMenuClick(View view);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
-            implements BaseViewHolder<Recording>, View.OnClickListener, ItemTouchHelperViewHolder {
+            implements BaseViewHolder<Recording>, View.OnClickListener,
+            View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener,
+            ItemTouchHelperViewHolder {
 
+        private View viewHolder;
         private CardView card;
         private TextView recordingDate;
         private LineChart chart;
+        private ImageView moreIcon;
 
         private Drawable background;
         private SimpleDateFormat formatter;
 
         ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+
+            // Get views
+            viewHolder = itemView;
             card = (CardView) itemView.findViewById(R.id.card);
             recordingDate = (TextView) itemView.findViewById(R.id.recording_date);
             chart = (LineChart) itemView.findViewById(R.id.chart);
+            moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
+
+            // Set listeners
+            viewHolder.setOnClickListener(this);
+            viewHolder.setOnCreateContextMenuListener(this);
+            moreIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Open Menu
+                    listener.onOpenMenuClick(viewHolder);
+                }
+            });
 
             background = card.getBackground();
             formatter = new SimpleDateFormat(
@@ -114,8 +141,30 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         }
 
         @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view,
+                                        ContextMenu.ContextMenuInfo contextMenuInfo) {
+            // Inflate menu
+            menuInflater.inflate(R.menu.recording_item_menu, contextMenu);
+            // Set click listener
+            for (int i = 0; i < contextMenu.size(); i++) {
+                contextMenu.getItem(i).setOnMenuItemClickListener(this);
+            }
+        }
+
+        @Override
         public void onClick(View view) {
             listener.onRecordingClick(recordings.get(getAdapterPosition()));
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_delete:
+                    listener.onRecordingDelete(recordings.get(getAdapterPosition()));
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         @Override
@@ -157,7 +206,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             int color = ContextCompat.getColor(context, R.color.colorAccent);
             // Set styles
             LineDataSet lineDataSet = new LineDataSet(entries, "Recording");
-            lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             lineDataSet.setCubicIntensity(0.2f);
             lineDataSet.setDrawValues(false);
             lineDataSet.setDrawCircles(false);
@@ -165,7 +214,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             lineDataSet.setColor(color);
             lineDataSet.setDrawFilled(true);
             lineDataSet.setFillAlpha(255);
-            Drawable drawable = ContextCompat.getDrawable(context, R.drawable.fade_green);
+            Drawable drawable = ContextCompat.getDrawable(context, R.drawable.chart_fade_green);
             lineDataSet.setFillDrawable(drawable);
             return new LineData(lineDataSet);
         }
@@ -185,6 +234,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             lineChart.getDescription().setEnabled(false);
             lineChart.getLegend().setEnabled(false);
             lineChart.setTouchEnabled(false);
+            lineChart.setNoDataText(context.getString(R.string.no_flight_act_data_available));
             // X axis setup
             IAxisValueFormatter xAxisFormatter = new HourAxisValueFormatter(firstTimestamp);
             XAxis xAxis = lineChart.getXAxis();

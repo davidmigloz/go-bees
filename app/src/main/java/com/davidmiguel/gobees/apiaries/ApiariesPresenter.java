@@ -9,6 +9,8 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.data.source.local.DataGenerator;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,25 +19,27 @@ import java.util.List;
  */
 class ApiariesPresenter implements ApiariesContract.Presenter {
 
+    private static final int MIN_UPDATE_WEATHER = 15;
+
     private GoBeesRepository goBeesRepository;
-    private ApiariesContract.View apiariesView;
+    private ApiariesContract.View view;
 
     /**
      * Force update the first time.
      */
     private boolean firstLoad = true;
 
-    ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View apiariesView) {
+    ApiariesPresenter(GoBeesRepository goBeesRepository, ApiariesContract.View view) {
         this.goBeesRepository = goBeesRepository;
-        this.apiariesView = apiariesView;
-        this.apiariesView.setPresenter(this);
+        this.view = view;
+        this.view.setPresenter(this);
     }
 
     @Override
     public void result(int requestCode, int resultCode) {
         // If a apiary was successfully added, show snackbar
         if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
-            apiariesView.showSuccessfullySavedMessage();
+            view.showSuccessfullySavedMessage();
         }
     }
 
@@ -45,7 +49,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         forceUpdate = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
-        apiariesView.setLoadingIndicator(true);
+        view.setLoadingIndicator(true);
         // Refresh data if needed
         if (forceUpdate) {
             goBeesRepository.refreshApiaries();
@@ -56,40 +60,74 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
             @Override
             public void onApiariesLoaded(List<Apiary> apiaries) {
                 // The view may not be able to handle UI updates anymore
-                if (!apiariesView.isActive()) {
+                if (!view.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                apiariesView.setLoadingIndicator(false);
+                view.setLoadingIndicator(false);
                 // Process apiaries
                 if (apiaries.isEmpty()) {
                     // Show a message indicating there are no apiaries
-                    apiariesView.showNoApiaries();
+                    view.showNoApiaries();
                 } else {
                     // Show the list of apiaries
-                    apiariesView.showApiaries(apiaries);
+                    view.showApiaries(apiaries);
+                    // Check whether current weather is up to date
+                    checkCurrentWeather(apiaries);
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
                 // The view may not be able to handle UI updates anymore
-                if (!apiariesView.isActive()) {
+                if (!view.isActive()) {
                     return;
                 }
-                apiariesView.showLoadingApiariesError();
+                view.showLoadingApiariesError();
             }
         });
     }
 
     @Override
-    public void addEditApiary() {
-        apiariesView.showAddEditApiary();
+    public void addEditApiary(long apiaryId) {
+        view.showAddEditApiary(apiaryId);
     }
 
     @Override
     public void openApiaryDetail(@NonNull Apiary requestedApiary) {
-        apiariesView.showApiaryDetail(requestedApiary.getId());
+        view.showApiaryDetail(requestedApiary.getId());
+    }
+
+    @Override
+    public void deleteApiary(@NonNull Apiary apiary) {
+        // Show progress indicator
+        view.setLoadingIndicator(true);
+        // Delete apiary
+        goBeesRepository.deleteApiary(apiary.getId(), new GoBeesDataSource.TaskCallback() {
+            @Override
+            public void onSuccess() {
+                // The view may not be able to handle UI updates anymore
+                if (!view.isActive()) {
+                    return;
+                }
+                // Refresh recordings
+                loadApiaries(true);
+                // Show success message
+                view.showSuccessfullyDeletedMessage();
+            }
+
+            @Override
+            public void onFailure() {
+                // The view may not be able to handle UI updates anymore
+                if (!view.isActive()) {
+                    return;
+                }
+                // Hide progress indicator
+                view.setLoadingIndicator(false);
+                // Show error
+                view.showDeletedErrorMessage();
+            }
+        });
     }
 
     // TODO eliminar generar y eliminar datos
@@ -109,5 +147,48 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     @Override
     public void start() {
         loadApiaries(false);
+    }
+
+    /**
+     * Checks whether current weather is up to date (less than 15min old).
+     * If not, orders to update the current weather in all apiaries.
+     *
+     * @param apiaries list of apiaries.
+     */
+    private void checkCurrentWeather(List<Apiary> apiaries) {
+        List<Apiary> apiariesToUpdate = new ArrayList<>();
+        Date now = new Date();
+        // Check dates
+        for (Apiary apiary : apiaries) {
+            if (apiary.hasLocation()) {
+                if (apiary.getCurrentWeather() != null) {
+                    // Check time
+                    Date weatherDate = apiary.getCurrentWeather().getTimestamp();
+                    long minFromLastUpdate = (now.getTime() - weatherDate.getTime()) / 60000;
+                    if (minFromLastUpdate >= MIN_UPDATE_WEATHER) {
+                        apiariesToUpdate.add(apiary);
+                    }
+                } else {
+                    apiariesToUpdate.add(apiary);
+                }
+
+            }
+        }
+        // Update weather if needed
+        if (apiariesToUpdate.size() > 0) {
+            goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate, new GoBeesDataSource.TaskCallback() {
+                @Override
+                public void onSuccess() {
+                    view.notifyApiariesUpdated();
+                    view.showSuccessfullyWeatherUpdatedMessage();
+                }
+
+                @Override
+                public void onFailure() {
+                    view.showWeatherUpdateErrorMessage();
+                }
+            });
+        }
+
     }
 }

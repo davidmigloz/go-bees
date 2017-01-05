@@ -58,11 +58,10 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
         // Configure floating action button
         FloatingActionButton fab =
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
-        fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.saveHive(nameTextView.getText().toString(),
+                presenter.save(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }
         });
@@ -97,7 +96,7 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
 
     @Override
     public void setNotes(String notes) {
-        nameTextView.setText(notes);
+        notesTextView.setText(notes);
     }
 
     @Override
@@ -112,7 +111,8 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
 
     /**
      * Shows a snackbar with the given message.
-     * @param view view.
+     *
+     * @param view    view.
      * @param message message to show.
      */
     @SuppressWarnings("ConstantConditions")

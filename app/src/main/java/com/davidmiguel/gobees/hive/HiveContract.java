@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.hive;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Recording;
@@ -32,16 +33,20 @@ interface HiveContract {
 
         /**
          * Opens activity to record a hive.
+         *
+         * @param apiaryId apiary id.
+         * @param hiveId   hive id.
          */
-        void startNewRecording(long hiveId);
+        void startNewRecording(long apiaryId, long hiveId);
 
         /**
          * Opens activity to show the details of the given recording.
          *
-         * @param hiveId hive id.
-         * @param date   recording date.
+         * @param apiaryId apiary id.
+         * @param hiveId   hive id.
+         * @param date     recording date.
          */
-        void showRecordingDetail(long hiveId, Date date);
+        void showRecordingDetail(long apiaryId, long hiveId, Date date);
 
         /**
          * Shows loading recordings error message.
@@ -59,11 +64,38 @@ interface HiveContract {
         void showSuccessfullySavedMessage();
 
         /**
+         * Shows error while saving message.
+         */
+        void showSaveErrorMessage();
+
+        /**
+         * Shows recording too short error message.
+         */
+        void showRecordingTooShortErrorMessage();
+
+        /**
+         * Shows successfully deleted message.
+         */
+        void showSuccessfullyDeletedMessage();
+
+        /**
+         * Shows error while deleting recording message.
+         */
+        void showDeletedErrorMessage();
+
+        /**
          * Sets the title in the action bar.
          *
          * @param title title.
          */
         void showTitle(@NonNull String title);
+
+        /**
+         * Checks whether ACCESS_FINE_LOCATION permission is granted. If not, asks for it.
+         *
+         * @return if the permission is granted.
+         */
+        boolean checkCameraPermission();
     }
 
     interface Presenter extends BasePresenter {
@@ -73,8 +105,9 @@ interface HiveContract {
          *
          * @param requestCode request code from the intent.
          * @param resultCode  result code from the intent.
+         * @param data        intent data.
          */
-        void result(int requestCode, int resultCode);
+        void result(int requestCode, int resultCode, Intent data);
 
         /**
          * Load recordings from repository.
@@ -94,5 +127,12 @@ interface HiveContract {
          * @param recording recording.
          */
         void openRecordingsDetail(@NonNull Recording recording);
+
+        /**
+         * Deletes given recording.
+         *
+         * @param recording recording to delete.
+         */
+        void deleteRecording(@NonNull Recording recording);
     }
 }

@@ -40,6 +40,9 @@
             android:layout_marginTop="24dp"
             android:layout_toEndOf="@id/apiary_image"
             android:layout_toStartOf="@+id/more_icon"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/default_apiary_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryText"/>
 
@@ -78,6 +81,7 @@
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@id/hive_icon"
             android:gravity="bottom"
+            android:text="@string/default_num_hives"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorSecondaryText"/>
 
@@ -89,10 +93,11 @@
             android:layout_marginBottom="16dp"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toEndOf="@id/num_hives"
-            android:adjustViewBounds="false"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/weather_icon"
-            android:src="@drawable/ic_filter_drama"
-            android:tint="@color/colorSecondaryText"/>
+            android:src="@drawable/ic_weather_day_clear_sky"
+            android:tint="@color/colorSecondaryText"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/temp"
@@ -103,9 +108,10 @@
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@id/weather_icon"
             android:gravity="bottom"
-            android:text="10ºC"
+            android:text="@string/default_temperature"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/colorSecondaryText"/>
+            android:textColor="@color/colorSecondaryText"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/enter_icon"
@@ -118,7 +124,7 @@
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/enter_icon"
-            android:src="@drawable/ic_chevron_right"
+            android:src="@drawable/ic_enter"
             android:tint="@color/colorAccent"/>
 
     </RelativeLayout>

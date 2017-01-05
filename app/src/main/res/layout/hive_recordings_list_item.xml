@@ -25,7 +25,7 @@
             android:layout_marginTop="18dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/date_icon"
-            android:src="@drawable/ic_event"
+            android:src="@drawable/ic_date"
             android:tint="@color/colorAccent"/>
 
         <TextView
@@ -35,7 +35,10 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:text="@string/default_recording_date"
             android:layout_toEndOf="@id/date_icon"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryText"/>
 
@@ -56,8 +59,8 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/recording_date"/>
+            android:layout_below="@id/recording_date"
+            android:layout_marginTop="8dp"/>
 
     </RelativeLayout>
 

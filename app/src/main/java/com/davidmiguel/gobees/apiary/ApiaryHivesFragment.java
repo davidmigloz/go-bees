@@ -48,6 +48,12 @@ public class ApiaryHivesFragment extends Fragment
     private View noHivesView;
     private LinearLayout hivesView;
 
+    /**
+     * Get ApiaryHivesFragment instance.
+     *
+     * @param apiaryId apiary id.
+     * @return ApiaryHivesFragment instance.
+     */
     public static ApiaryHivesFragment newInstance(long apiaryId) {
         Bundle arguments = new Bundle();
         arguments.putLong(ARGUMENT_APIARY_ID, apiaryId);
@@ -59,7 +65,7 @@ public class ApiaryHivesFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new HivesAdapter(new ArrayList<Hive>(0), this);
+        listAdapter = new HivesAdapter(getActivity().getMenuInflater(), new ArrayList<Hive>(0), this);
     }
 
     @Nullable
@@ -83,8 +89,8 @@ public class ApiaryHivesFragment extends Fragment
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                presenter.addEditHive();
+            public void onClick(View view) {
+                presenter.addEditHive(AddEditHiveActivity.NEW_HIVE);
             }
         });
 
@@ -170,15 +176,19 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void showAddEditHive(long apiaryId) {
+    public void showAddEditHive(long apiaryId, long hiveId) {
         Intent intent = new Intent(getContext(), AddEditHiveActivity.class);
         intent.putExtra(AddEditHiveFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId);
+        if (hiveId != AddEditHiveActivity.NEW_HIVE) {
+            intent.putExtra(AddEditHiveFragment.ARGUMENT_EDIT_HIVE_ID, hiveId);
+        }
         startActivityForResult(intent, AddEditHiveActivity.REQUEST_ADD_HIVE);
     }
 
     @Override
-    public void showHiveDetail(long hiveId) {
+    public void showHiveDetail(long apiaryId, long hiveId) {
         Intent intent = new Intent(getActivity(), HiveActivity.class);
+        intent.putExtra(HiveRecordingsFragment.ARGUMENT_APIARY_ID, apiaryId);
         intent.putExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, hiveId);
         getActivity().startActivity(intent);
     }
@@ -196,6 +206,16 @@ public class ApiaryHivesFragment extends Fragment
     @Override
     public void showSuccessfullySavedMessage() {
         showMessage(getString(R.string.successfully_saved_hive_message));
+    }
+
+    @Override
+    public void showSuccessfullyDeletedMessage() {
+        showMessage(getString(R.string.successfully_deleted_hive_message));
+    }
+
+    @Override
+    public void showDeletedErrorMessage() {
+        showMessage(getString(R.string.deleted_hive_error_message));
     }
 
     @Override
@@ -217,13 +237,23 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void onHiveClick(Hive clickedHive) {
-        presenter.openHiveDetail(clickedHive);
+    public void onHiveClick(Hive hive) {
+        presenter.openHiveDetail(hive);
     }
 
     @Override
-    public void onHiveDelete(Hive clickedHive) {
-        // TODO delete hive
+    public void onHiveDelete(Hive hive) {
+        presenter.deleteHive(hive);
+    }
+
+    @Override
+    public void onHiveEdit(Hive hive) {
+        presenter.addEditHive(hive.getId());
+    }
+
+    @Override
+    public void onOpenMenuClick(View view) {
+        getActivity().openContextMenu(view);
     }
 
     /**

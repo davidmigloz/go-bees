@@ -29,20 +29,20 @@ import java.util.TimerTask;
 @SuppressWarnings("deprecation")
 public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback {
 
-    private final static String TAG = "AndroidCameraImpl";
+    private static final String TAG = "AndroidCameraImpl";
 
     private final AndroidCameraListener user;
-    private final CameraHandlerThread mThread;
+    private final CameraHandlerThread cameraHandlerThread;
     private final int cameraIndex;
-    private android.hardware.Camera mCamera;
-    private int mMaxFrameWidth;
-    private int mMaxFrameHeight;
-    private int mZoomRatio;
-    private long delay;
-    private long period;
+    private android.hardware.Camera camera;
+    private int maxframewidth;
+    private int maxFrameHeight;
+    private int zoomRatio;
+    private long initialDelay;
+    private long frameRate;
     private TakePhotoTask takePhotoTask;
     private Timer timer;
-    private CameraFrame mCameraFrame;
+    private CameraFrame cameraFrame;
     private SurfaceTexture texture = new SurfaceTexture(0);
 
     /**
@@ -56,33 +56,34 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
      * @param zoomRatio      zoom ratio of the desired zoom value.
      */
     public AndroidCameraImpl(AndroidCameraListener user, int cameraIndex,
-                             int maxFrameWidth, int maxFrameHeight, int zoomRatio) {
+                             int maxFrameWidth, int maxFrameHeight, int zoomRatio,
+                             long initialDelay, long frameRate) {
         this.user = user;
         this.cameraIndex = cameraIndex;
-        this.mMaxFrameWidth = maxFrameWidth;
-        this.mMaxFrameHeight = maxFrameHeight;
-        this.mZoomRatio = zoomRatio;
-        this.delay = 1000;
-        this.period = 1000;
-        this.mThread = new CameraHandlerThread(this);
+        this.maxframewidth = maxFrameWidth;
+        this.maxFrameHeight = maxFrameHeight;
+        this.zoomRatio = zoomRatio;
+        this.initialDelay = initialDelay;
+        this.frameRate = frameRate;
+        this.cameraHandlerThread = new CameraHandlerThread(this);
         this.takePhotoTask = new TakePhotoTask();
         this.timer = new Timer();
     }
 
     @Override
     public void onPreviewFrame(byte[] frame, android.hardware.Camera camera) {
-        mCameraFrame.putFrameData(frame);
-        user.onPreviewFrame(mCameraFrame);
+        cameraFrame.putFrameData(frame);
+        user.onPreviewFrame(cameraFrame);
     }
 
     @Override
     public synchronized void connect() {
-        if (!user.isOpenCVLoaded()) {
+        if (!user.isOpenCvLoaded()) {
             return;
         }
         // Start camera
-        synchronized (mThread) {
-            mThread.openCamera();
+        synchronized (cameraHandlerThread) {
+            cameraHandlerThread.openCamera();
         }
     }
 
@@ -94,39 +95,43 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
             timer = null;
             takePhotoTask = null;
             // Release thread
-            mThread.interrupt();
+            cameraHandlerThread.interrupt();
             // Release camera
-            if (mCamera != null) {
-                mCamera.stopPreview();
-                mCamera.setPreviewCallback(null);
+            if (camera != null) {
+                camera.stopPreview();
+                camera.setPreviewCallback(null);
                 try {
-                    mCamera.setPreviewTexture(null);
+                    camera.setPreviewTexture(null);
                 } catch (IOException e) {
                     Log.e(TAG, "Could not release preview-texture from camera.");
                 }
-                mCamera.release();
-                mCamera = null;
+                camera.release();
+                camera = null;
             }
             // Release camera frame
-            if (mCameraFrame != null) {
-                mCameraFrame.release();
+            if (cameraFrame != null) {
+                cameraFrame.release();
             }
             // Release texture
-            if (texture != null)
+            if (texture != null) {
                 texture.release();
+            }
         }
     }
 
     @Override
     public boolean isConnected() {
-        return mCamera != null;
+        return camera != null;
     }
 
     @Override
     public void updateFrameRate(long delay, long period) {
-        this.delay = delay;
-        this.period = period;
-        timer.scheduleAtFixedRate(takePhotoTask, delay, delay);
+        this.timer.cancel();
+        this.timer = new Timer();
+        this.takePhotoTask = new TakePhotoTask();
+        this.initialDelay = delay;
+        this.frameRate = period;
+        timer.scheduleAtFixedRate(takePhotoTask, delay, period);
     }
 
     /**
@@ -135,17 +140,17 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     @SuppressWarnings("ConstantConditions")
     void initCamera() {
         // Get camera instance
-        mCamera = getCameraInstance(cameraIndex, mMaxFrameWidth, mMaxFrameHeight, mZoomRatio);
-        if (mCamera == null) {
+        camera = getCameraInstance(cameraIndex, maxframewidth, maxFrameHeight, zoomRatio);
+        if (camera == null) {
             return;
         }
         // Save frame size
-        Camera.Parameters params = mCamera.getParameters();
+        Camera.Parameters params = camera.getParameters();
         int mFrameWidth = params.getPreviewSize().width;
         int mFrameHeight = params.getPreviewSize().height;
         // Create frame mat
         Mat mFrame = new Mat(mFrameHeight + (mFrameHeight / 2), mFrameWidth, CvType.CV_8UC1);
-        mCameraFrame = new CameraFrame(mFrame, mFrameWidth, mFrameHeight);
+        cameraFrame = new CameraFrame(mFrame, mFrameWidth, mFrameHeight);
         // Config texture
         if (this.texture != null) {
             this.texture.release();
@@ -155,9 +160,9 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         user.onCameraStarted(mFrameWidth, mFrameHeight);
         // Set camera callbacks and start capturing
         try {
-            mCamera.setPreviewTexture(texture);
-            mCamera.startPreview();
-            timer.scheduleAtFixedRate(takePhotoTask, delay, period);
+            camera.setPreviewTexture(texture);
+            camera.startPreview();
+            timer.scheduleAtFixedRate(takePhotoTask, initialDelay, frameRate);
         } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
@@ -280,7 +285,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     private class TakePhotoTask extends TimerTask {
         @Override
         public void run() {
-            mCamera.setOneShotPreviewCallback(AndroidCameraImpl.this);
+            camera.setOneShotPreviewCallback(AndroidCameraImpl.this);
         }
     }
 }

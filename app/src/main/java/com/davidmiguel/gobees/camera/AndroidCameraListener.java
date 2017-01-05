@@ -10,7 +10,7 @@ public interface AndroidCameraListener {
      *
      * @return true / false.
      */
-    boolean isOpenCVLoaded();
+    boolean isOpenCvLoaded();
 
     /**
      * This method is invoked when camera preview has started. After this method is invoked

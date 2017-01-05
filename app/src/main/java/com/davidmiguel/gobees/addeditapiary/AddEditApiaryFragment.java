@@ -1,6 +1,7 @@
 package com.davidmiguel.gobees.addeditapiary;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
+
+import rebus.permissionutils.AskagainCallback;
+import rebus.permissionutils.PermissionEnum;
+import rebus.permissionutils.PermissionManager;
+import rebus.permissionutils.PermissionUtils;
+import rebus.permissionutils.SimpleCallback;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -72,11 +80,10 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         // Configure floating action button
         FloatingActionButton fab =
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_apiary);
-        fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                presenter.saveApiary(nameTextView.getText().toString(),
+            public void onClick(View view) {
+                presenter.save(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }
         });
@@ -101,13 +108,13 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void setLocation(Location location) {
-        String sb = "(" +
-                String.valueOf(location.getLatitude()) +
-                ", " +
-                String.valueOf(location.getLongitude()) +
-                ") ±" +
-                Math.round(location.getAccuracy()) +
-                "m";
+        String sb = "("
+                + String.valueOf(location.getLatitude())
+                + ", "
+                + String.valueOf(location.getLongitude())
+                + ") ±"
+                + Math.round(location.getAccuracy())
+                + "m";
         locationTextView.setText(sb);
     }
 
@@ -118,8 +125,8 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void setLocationIcon(boolean active) {
-        getLocationIcon.setColorFilter(active ?
-                ContextCompat.getColor(getContext(), R.color.colorPrimaryDark) :
+        getLocationIcon.setColorFilter(active
+                ? ContextCompat.getColor(getContext(), R.color.colorPrimaryDark) :
                 ContextCompat.getColor(getContext(), R.color.colorAccent));
     }
 
@@ -148,6 +155,63 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     @Override
     public void showSaveApiaryError() {
         showMessage(getView(), getString(R.string.save_apiary_error_message));
+    }
+
+    @Override
+    public boolean checkLocationPermission() {
+        // Check location permission
+        if (PermissionUtils.isGranted(getActivity(), PermissionEnum.ACCESS_FINE_LOCATION)) {
+            return true;
+        }
+        // Ask for permission
+        PermissionManager.with(getActivity())
+                .permission(PermissionEnum.ACCESS_FINE_LOCATION)
+                .askagain(true)
+                .askagainCallback(new AskagainCallback() {
+                    @Override
+                    public void showRequestPermission(final UserResponse response) {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle(getString(R.string.permission_request_title))
+                                .setMessage(getString(R.string.location_permission_request_body))
+                                .setPositiveButton(getString(R.string.permission_request_allow_button),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                response.result(true);
+                                            }
+                                        })
+                                .setNegativeButton(getString(R.string.permission_request_deny_button),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                response.result(false);
+                                            }
+                                        })
+                                .setCancelable(false)
+                                .show();
+                    }
+                })
+                .callback(new SimpleCallback() {
+                    @Override
+                    public void result(boolean allPermissionsGranted) {
+                        if (allPermissionsGranted) {
+                            // Launch the feature
+                            presenter.toogleLocation(getContext());
+                        } else {
+                            // Warn the user that it's not possible to use the feature
+                            Toast.makeText(getActivity(), getString(R.string.permission_request_denied),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .ask();
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionManager.handleResult(requestCode, permissions, grantResults);
     }
 
     @Override

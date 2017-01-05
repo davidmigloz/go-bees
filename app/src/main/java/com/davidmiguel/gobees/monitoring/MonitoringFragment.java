@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.camera.CameraView;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
+import com.davidmiguel.gobees.hive.HiveRecordingsFragment;
 import com.davidmiguel.gobees.monitoring.MonitoringService.MonitoringBinder;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
@@ -38,6 +40,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MonitoringFragment extends Fragment implements MonitoringContract.View,
         BackClickHelperFragment {
 
+    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
 
     private MonitoringContract.Presenter presenter;
@@ -113,7 +116,35 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder service) {
                 MonitoringBinder binder = (MonitoringBinder) service;
-                mService = binder.getService();
+                mService = binder.getService(new GoBeesDataSource.SaveRecordingCallback() {
+                    @Override
+                    public void onRecordingTooShort() {
+                        // Finish activity with error
+                        Intent intent = new Intent();
+                        intent.putExtra(HiveRecordingsFragment.ARGUMENT_MONITORING_ERROR,
+                                HiveRecordingsFragment.ERROR_RECORDING_TOO_SHORT);
+                        getActivity().setResult(Activity.RESULT_CANCELED, intent);
+                        getActivity().finish();
+
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        // Finish activity with OK
+                        getActivity().setResult(Activity.RESULT_OK);
+                        getActivity().finish();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        // Finish activity with error
+                        Intent intent = new Intent();
+                        intent.putExtra(HiveRecordingsFragment.ARGUMENT_MONITORING_ERROR,
+                                HiveRecordingsFragment.ERROR_SAVING_RECORDING);
+                        getActivity().setResult(Activity.RESULT_CANCELED, intent);
+                        getActivity().finish();
+                    }
+                });
                 // Set chronometer
                 chronometer.setBase(mService.getStartTime());
                 chronometer.start();
@@ -205,9 +236,6 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         Intent stopIntent = new Intent(getActivity(), MonitoringService.class);
         stopIntent.setAction(MonitoringService.STOP_ACTION);
         getActivity().startService(stopIntent);
-        // Finish activity
-        getActivity().setResult(Activity.RESULT_OK);
-        getActivity().finish();
     }
 
     @Override

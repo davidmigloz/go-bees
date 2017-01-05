@@ -32,7 +32,6 @@ public interface GoBeesDataSource {
 
     /**
      * Gets all apiaries.
-     * Note: don't modify the Apiary objects.
      *
      * @param callback GetApiariesCallback.
      */
@@ -40,12 +39,19 @@ public interface GoBeesDataSource {
 
     /**
      * Gets apiary with given id.
-     * Note: don't modify the Apiary object.
      *
      * @param apiaryId apiary id.
      * @param callback GetApiaryCallback
      */
     void getApiary(long apiaryId, @NonNull GetApiaryCallback callback);
+
+    /**
+     * Gets apiary with given id. Blocking function.
+     *
+     * @param apiaryId apiary id.
+     * @return requested apiary.
+     */
+    Apiary getApiaryBlocking(long apiaryId);
 
     /**
      * Saves given apiary. If it already exists, is updated.
@@ -126,6 +132,14 @@ public interface GoBeesDataSource {
     void saveHive(long apiaryId, @NonNull Hive hive, @NonNull TaskCallback callback);
 
     /**
+     * Deletes given hive.
+     *
+     * @param hiveId   hive id.
+     * @param callback TaskCallback.
+     */
+    void deleteHive(long hiveId, @NonNull TaskCallback callback);
+
+    /**
      * Returns the next hive id.
      * (Realm does not support auto-increment at the moment).
      *
@@ -148,19 +162,45 @@ public interface GoBeesDataSource {
      * Note: record must be a new unmanaged object (don't modify managed objects).
      *
      * @param records  list of record unmanaged objects.
-     * @param callback TaskCallback.
+     * @param callback SaveRecordingCallback.
      */
-    void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull TaskCallback callback);
+    void saveRecords(long hiveId, @NonNull List<Record> records, @NonNull SaveRecordingCallback callback);
 
     /**
-     * Get recording with records of given period.
+     * Gets recording with records and weather data of given period.
      *
+     * @param apiaryId apiary id.
      * @param hiveId   hive id.
      * @param start    start of the period (00:00 of that date).
      * @param end      end of the period (23:59 of that date).
      * @param callback GetRecordingCallback.
      */
-    void getRecording(long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
+    void getRecording(long apiaryId, long hiveId, Date start, Date end, @NonNull GetRecordingCallback callback);
+
+    /**
+     * Deletes the records contained in the given recording.
+     *
+     * @param hiveId    hive id.
+     * @param recording recording to delete.
+     * @param callback  TaskCallback.
+     */
+    void deleteRecording(long hiveId, @NonNull Recording recording, @NonNull TaskCallback callback);
+
+    /**
+     * Updates the current weather of the apiaries in the list.
+     *
+     * @param apiariesToUpdate apiaries to update weather.
+     * @param callback         TaskCallback.
+     */
+    void updateApiariesCurrentWeather(List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback);
+
+    /**
+     * Save a meteo record from an apiary.
+     *
+     * @param apiary   corresponding apiary.
+     * @param callback TaskCallback.
+     */
+    void saveMeteoRecord(Apiary apiary, @NonNull TaskCallback callback);
 
     /**
      * Force to update recordings cache.
@@ -203,6 +243,10 @@ public interface GoBeesDataSource {
         void onRecordingLoaded(Recording recording);
 
         void onDataNotAvailable();
+    }
+
+    interface SaveRecordingCallback extends TaskCallback {
+        void onRecordingTooShort();
     }
 
     interface TaskCallback {

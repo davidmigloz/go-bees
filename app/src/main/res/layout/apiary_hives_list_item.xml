@@ -40,6 +40,9 @@
             android:layout_marginTop="24dp"
             android:layout_toEndOf="@id/hive_image"
             android:layout_toStartOf="@+id/more_icon"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/default_hive_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryText"/>
 
@@ -66,7 +69,7 @@
             android:layout_toEndOf="@id/hive_image"
             android:adjustViewBounds="false"
             android:contentDescription="@string/last_revision_icon"
-            android:src="@drawable/ic_cached"
+            android:src="@drawable/ic_last_revision"
             android:tint="@color/colorSecondaryText"/>
 
         <TextView
@@ -79,8 +82,10 @@
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@id/last_revision_icon"
             android:layout_toStartOf="@+id/enter_icon"
+            android:ellipsize="end"
             android:gravity="bottom"
-            android:text="10 days ago"
+            android:maxLines="1"
+            android:text="@string/default_last_revision"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorSecondaryText"/>
 
@@ -95,7 +100,7 @@
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/enter_icon"
-            android:src="@drawable/ic_chevron_right"
+            android:src="@drawable/ic_enter"
             android:tint="@color/colorAccent"/>
 
     </RelativeLayout>

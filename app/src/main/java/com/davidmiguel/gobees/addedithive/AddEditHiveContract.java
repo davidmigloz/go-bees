@@ -6,7 +6,7 @@ import com.davidmiguel.gobees.utils.BaseView;
 /**
  * This specifies the contract between the view and the presenter.
  */
-public class AddEditHiveContract {
+interface AddEditHiveContract {
 
     interface View extends BaseView<AddEditHiveContract.Presenter> {
 
@@ -48,7 +48,7 @@ public class AddEditHiveContract {
          * @param name  hive name.
          * @param notes hive notes.
          */
-        void saveHive(String name, String notes);
+        void save(String name, String notes);
 
         /**
          * Fill hive data (the hive must already exist in the repository).

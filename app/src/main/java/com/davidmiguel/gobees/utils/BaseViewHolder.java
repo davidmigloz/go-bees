@@ -8,6 +8,6 @@ public interface BaseViewHolder<T> {
      * Load data from obj into the view holder.
      * @param obj object from which load data.
      */
-    public void bind(@NonNull T obj);
+    void bind(@NonNull T obj);
 
 }

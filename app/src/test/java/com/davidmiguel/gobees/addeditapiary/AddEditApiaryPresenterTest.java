@@ -57,7 +57,7 @@ public class AddEditApiaryPresenterTest {
                 new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView,
                         AddEditApiaryActivity.NEW_APIARY);
         // When the presenter is asked to save an apiary
-        addEditApiaryPresenter.saveApiary("Apiary 1", "Some notes about it....");
+        addEditApiaryPresenter.save("Apiary 1", "Some notes about it....");
         // Then a new id is requested
         verify(apiariesRepository).getNextApiaryId(getNextApiaryIdCallbackArgumentCaptor.capture());
         getNextApiaryIdCallbackArgumentCaptor.getValue().onNextApiaryIdLoaded(1);
@@ -76,7 +76,7 @@ public class AddEditApiaryPresenterTest {
                 new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView,
                         AddEditApiaryActivity.NEW_APIARY);
         // When the presenter is asked to save an empty apiary
-        addEditApiaryPresenter.saveApiary("", "");
+        addEditApiaryPresenter.save("", "");
         // Then a new id is requested
         verify(apiariesRepository).getNextApiaryId(getNextApiaryIdCallbackArgumentCaptor.capture());
         getNextApiaryIdCallbackArgumentCaptor.getValue().onNextApiaryIdLoaded(1);
@@ -89,8 +89,9 @@ public class AddEditApiaryPresenterTest {
         // Get a reference to the class under test for apiary with id=1
         addEditApiaryPresenter =
                 new AddEditApiaryPresenter(apiariesRepository, addeditapiaryView, 1);
+        addEditApiaryPresenter.onApiaryLoaded(ApiaryMother.newDefaultApiary());
         // When the presenter is asked to save an apiary
-        addEditApiaryPresenter.saveApiary("Apiary 1", "Some more notes about it....");
+        addEditApiaryPresenter.save("Apiary 1", "Some more notes about it....");
         // Then an apiary is saved in the repository
         verify(apiariesRepository)
                 .saveApiary(any(Apiary.class), taskCallbackArgumentCaptor.capture());

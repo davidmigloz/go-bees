@@ -40,4 +40,23 @@
         <item>@string/pref_zoom_x2</item>
     </string-array>
 
+    <string-array name="pref_frame_rate_options">
+        <item>@string/pref_frame_rate_label_0_5sec</item>
+        <item>@string/pref_frame_rate_label_1sec</item>
+        <item>@string/pref_frame_rate_label_5sec</item>
+        <item>@string/pref_frame_rate_label_15sec</item>
+        <item>@string/pref_frame_rate_label_30sec</item>
+        <item>@string/pref_frame_rate_label_1min</item>
+        <item>@string/pref_frame_rate_label_5min</item>
+    </string-array>
+    <string-array name="pref_frame_rate_values">
+        <item>@string/pref_frame_rate_0_5sec</item>
+        <item>@string/pref_frame_rate_1sec</item>
+        <item>@string/pref_frame_rate_5sec</item>
+        <item>@string/pref_frame_rate_15sec</item>
+        <item>@string/pref_frame_rate_30sec</item>
+        <item>@string/pref_frame_rate_1min</item>
+        <item>@string/pref_frame_rate_5min</item>
+    </string-array>
+
 </resources>

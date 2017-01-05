@@ -1,5 +1,6 @@
 package com.davidmiguel.gobees.hive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Recording;
@@ -34,6 +37,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import rebus.permissionutils.AskagainCallback;
+import rebus.permissionutils.PermissionEnum;
+import rebus.permissionutils.PermissionManager;
+import rebus.permissionutils.PermissionUtils;
+import rebus.permissionutils.SimpleCallback;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -42,7 +51,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class HiveRecordingsFragment extends Fragment
         implements BaseTabFragment, HiveContract.View, RecordingsAdapter.RecordingItemListener {
 
+    public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
+    public static final String ARGUMENT_MONITORING_ERROR = "MONITORING_ERROR";
+    public static final int ERROR_SAVING_RECORDING = 0;
+    public static final int ERROR_RECORDING_TOO_SHORT = 2;
 
     private HiveContract.Presenter presenter;
     private RecordingsAdapter listAdapter;
@@ -60,7 +73,8 @@ public class HiveRecordingsFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new RecordingsAdapter(getContext(), new ArrayList<Recording>(0), this);
+        listAdapter = new RecordingsAdapter(getContext(), getActivity().getMenuInflater(),
+                new ArrayList<Recording>(0), this);
     }
 
     @Nullable
@@ -139,7 +153,7 @@ public class HiveRecordingsFragment extends Fragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.result(requestCode, resultCode);
+        presenter.result(requestCode, resultCode, data);
     }
 
     @Override
@@ -166,15 +180,17 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void startNewRecording(long hiveId) {
+    public void startNewRecording(long apiaryId, long hiveId) {
         Intent intent = new Intent(getContext(), MonitoringActivity.class);
+        intent.putExtra(MonitoringFragment.ARGUMENT_APIARY_ID, apiaryId);
         intent.putExtra(MonitoringFragment.ARGUMENT_HIVE_ID, hiveId);
         startActivityForResult(intent, MonitoringActivity.REQUEST_MONITORING);
     }
 
     @Override
-    public void showRecordingDetail(long hiveId, Date date) {
+    public void showRecordingDetail(long apiaryId, long hiveId, Date date) {
         Intent intent = new Intent(getActivity(), RecordingActivity.class);
+        intent.putExtra(RecordingFragment.ARGUMENT_APIARY_ID, apiaryId);
         intent.putExtra(RecordingFragment.ARGUMENT_HIVE_ID, hiveId);
         intent.putExtra(RecordingFragment.ARGUMENT_START_DATE, date.getTime());
         intent.putExtra(RecordingFragment.ARGUMENT_END_DATE, date.getTime());
@@ -197,11 +213,88 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
+    public void showSaveErrorMessage() {
+        showMessage(getString(R.string.save_recording_error_message));
+    }
+
+    @Override
+    public void showRecordingTooShortErrorMessage() {
+        showMessage(getString(R.string.recording_too_short_error_message));
+    }
+
+    @Override
+    public void showSuccessfullyDeletedMessage() {
+        showMessage(getString(R.string.successfully_deleted_recording_message));
+    }
+
+    @Override
+    public void showDeletedErrorMessage() {
+        showMessage(getString(R.string.deleted_recording_error_message));
+    }
+
+    @Override
     public void showTitle(@NonNull String title) {
         ActionBar ab = ((HiveActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
             ab.setTitle(title);
         }
+    }
+
+    @Override
+    public boolean checkCameraPermission() {
+        // Check camera permission
+        if (PermissionUtils.isGranted(getActivity(), PermissionEnum.CAMERA)) {
+            return true;
+        }
+        // Ask for permission
+        PermissionManager.with(getActivity())
+                .permission(PermissionEnum.CAMERA)
+                .askagain(true)
+                .askagainCallback(new AskagainCallback() {
+                    @Override
+                    public void showRequestPermission(final UserResponse response) {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle(getString(R.string.permission_request_title))
+                                .setMessage(getString(R.string.camera_permission_request_body))
+                                .setPositiveButton(getString(R.string.permission_request_allow_button),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                response.result(true);
+                                            }
+                                        })
+                                .setNegativeButton(getString(R.string.permission_request_deny_button),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                response.result(false);
+                                            }
+                                        })
+                                .setCancelable(false)
+                                .show();
+                    }
+                })
+                .callback(new SimpleCallback() {
+                    @Override
+                    public void result(boolean allPermissionsGranted) {
+                        if (allPermissionsGranted) {
+                            // Launch the feature
+                            presenter.startNewRecording();
+                        } else {
+                            // Warn the user that it's not possible to use the feature
+                            Toast.makeText(getActivity(), getString(R.string.permission_request_denied),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .ask();
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionManager.handleResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -226,7 +319,12 @@ public class HiveRecordingsFragment extends Fragment
 
     @Override
     public void onRecordingDelete(Recording clickedRecording) {
-        // TODO delete recording
+        presenter.deleteRecording(clickedRecording);
+    }
+
+    @Override
+    public void onOpenMenuClick(View view) {
+        getActivity().openContextMenu(view);
     }
 
     /**

@@ -10,6 +10,11 @@ import java.io.Serializable;
 class MonitoringSettings implements Serializable {
 
     /**
+     * Apiary id.
+     */
+    private long apiaryId;
+
+    /**
      * Hive id.
      */
     private long hiveId;
@@ -43,6 +48,19 @@ class MonitoringSettings implements Serializable {
      * Zoom ratio (100 = x1, 200 = x2…).
      */
     private int zoomRatio;
+
+    /**
+     * Frame rate (1000 = 1 frame per second...).
+     */
+    private long frameRate;
+
+    public long getApiaryId() {
+        return apiaryId;
+    }
+
+    public void setApiaryId(long apiaryId) {
+        this.apiaryId = apiaryId;
+    }
 
     long getHiveId() {
         return hiveId;
@@ -98,5 +116,13 @@ class MonitoringSettings implements Serializable {
 
     void setZoomRatio(int zoomRatio) {
         this.zoomRatio = zoomRatio;
+    }
+
+    long getFrameRate() {
+        return frameRate;
+    }
+
+    void setFrameRate(long frameRate) {
+        this.frameRate = frameRate;
     }
 }

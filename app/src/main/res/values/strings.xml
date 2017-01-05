@@ -1,4 +1,5 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <!--+++++++++++-->
     <!-- Generals  -->
@@ -16,6 +17,22 @@
     <string name="rain">Rain</string>
     <!-- Wind [CHAR LIMIT=30] -->
     <string name="wind">Wind</string>
+    <!-- Edit action [CHAR LIMIT=30] -->
+    <string name="edit">Edit</string>
+    <!-- Delete action [CHAR LIMIT=30] -->
+    <string name="delete">Delete</string>
+    <!-- Format temperature in Celsius unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
+    <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
+    <!-- Title when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_title">Permission denied</string>
+    <!-- Allow button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_allow_button">ALLOW</string>
+    <!-- Deny button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_deny_button">DENY</string>
+    <!-- Message when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_denied">The app does not have permissions to use this feature.</string>
 
     <!--+++++++++++++++-->
     <!-- General Icons -->
@@ -23,9 +40,9 @@
 
     <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
     <string name="more_icon">More…</string>
-    <!-- Description of enter icon ic_chevron_right [CHAR LIMIT=100] -->
+    <!-- Description of enter icon ic_enter [CHAR LIMIT=100] -->
     <string name="enter_icon">Enter…</string>
-    <!-- Description of date icon ic_event [CHAR LIMIT=25] -->
+    <!-- Description of date icon ic_date [CHAR LIMIT=25] -->
     <string name="date_icon">Date</string>
     <!-- Description of weather icon [CHAR LIMIT=25] -->
     <string name="weather_icon">Weather icon</string>
@@ -33,6 +50,8 @@
     <string name="chart_line">Chart line</string>
     <!-- Description of settings icon [CHAR LIMIT=100] -->
     <string name="settings_icon">Settings icon</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="gps_location_icon">Get GPS location</string>
 
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->
@@ -47,12 +66,26 @@
 
     <!-- Description of number of hives icon[CHAR LIMIT=100] -->
     <string name="num_hives">Number of hives</string>
+    <!-- Default apiary name [CHAR LIMIT=100] -->
+    <string name="default_apiary_name">My apiary</string>
+    <!-- Default value number of bees [CHAR LIMIT=NONE] -->
+    <string name="default_num_hives" translatable="false">0</string>
+    <!-- Default value temperature [CHAR LIMIT=NONE] -->
+    <string name="default_temperature" translatable="false">10\u00B0C</string>
     <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
     <string name="loading_apiaries_error">Error while loading apiaries.</string>
     <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
     <string name="no_apiaries">You have no apiaries!</string>
     <!-- Msg shown when an apiary is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_apiary_message">Apiary saved!</string>
+    <!-- Msg shown when a apiary is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_apiary_message">Apiary deleted!</string>
+    <!-- Msg shown when an error occurs when deleting apiary [CHAR LIMIT=100] -->
+    <string name="deleted_apiary_error_message">Error while deleting apiary.</string>
+    <!-- Msg shown when current weather is updated [CHAR LIMIT=100] -->
+    <string name="successfully_updated_weather_message">Current weather updated!</string>
+    <!-- Msg shown when an error occurs when updating weather [CHAR LIMIT=100] -->
+    <string name="weather_update_error_message">Error while updating current weather.</string>
 
     <!--++++++++++++-->
     <!-- Add apiary -->
@@ -78,6 +111,11 @@
     <string name="save_apiary_error_message">Error while saving apiary.</string>
     <!-- Description of apiary logo [CHAR LIMIT=100] -->
     <string name="apiary_logo">Apiary logo</string>
+    <!-- Body when user doesn't grant location permission [CHAR LIMIT=500] -->
+    <string name="location_permission_request_body">
+        Without this permission the app is unable to receive weather information or to locate
+        your apiaries in a map. Are you sure you want to deny this permission?
+    </string>
 
     <!--++++++++-->
     <!-- Apiary -->
@@ -87,12 +125,20 @@
     <string name="apiary_hives_tab">Hives</string>
     <!-- Apiary info tab name [CHAR LIMIT=30] -->
     <string name="apiary_info_tab">Info</string>
+    <!-- Default hive name [CHAR LIMIT=100] -->
+    <string name="default_hive_name">My hive</string>
+    <!-- Default last revision value [CHAR LIMIT=100] -->
+    <string name="default_last_revision">10 days ago</string>
     <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
     <string name="loading_hives_error">Error while loading hives.</string>
     <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
     <string name="no_hives">You have no hives!</string>
     <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_hive_message">Hive saved!</string>
+    <!-- Msg shown when a hive is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_hive_message">Hive deleted!</string>
+    <!-- Msg shown when an error occurs when deleting hive [CHAR LIMIT=100] -->
+    <string name="deleted_hive_error_message">Error while deleting hive.</string>
     <!-- Description of last revision icon ic_cached [CHAR LIMIT=100] -->
     <string name="last_revision_icon">Last revision icon</string>
     <!-- Description of hive logo [CHAR LIMIT=100] -->
@@ -123,20 +169,41 @@
     <string name="hive_recordings_tab">Recordings</string>
     <!-- Hive info tab name [CHAR LIMIT=20] -->
     <string name="hive_info_tab">Info</string>
+    <!-- Default recording date [CHAR LIMIT=100] -->
+    <string name="default_recording_date">Wen. 18 jan., 2017</string>
     <!-- Error msg shown when it's not possible to load recordings [CHAR LIMIT=100] -->
     <string name="loading_recordings_error">Error while loading recordings.</string>
     <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->
     <string name="no_recordings">You have no recordings!</string>
     <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
     <string name="successfully_saved_recording_message">Recording saved!</string>
+    <!-- Msg shown when an error occurs when saving a recording [CHAR LIMIT=100] -->
+    <string name="save_recording_error_message">Error while saving recording.</string>
+    <!-- Msg shown when a recording is too short [CHAR LIMIT=100] -->
+    <string name="recording_too_short_error_message">Error: Recording too short!</string>
+    <!-- Msg shown when a recordings is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_recording_message">Recording deleted!</string>
+    <!-- Msg shown when an error occurs when deleting recordings [CHAR LIMIT=100] -->
+    <string name="deleted_recording_error_message">Error while deleting recording.</string>
     <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
     <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
+    <!-- Body when user doesn't grant camera permission [CHAR LIMIT=500] -->
+    <string name="camera_permission_request_body">
+        Without this permission the app is unable to monitor the flight activity of your hive.
+        Are you sure you want to deny this permission?
+    </string>
 
     <!--+++++++++++-->
     <!-- Recording -->
     <!--+++++++++++-->
     <!-- Error msg shown when it's not possible to load a recording [CHAR LIMIT=100] -->
     <string name="loading_recording_error">Error while loading recording.</string>
+    <!-- Error msg shown when there are no records [CHAR LIMIT=100] -->
+    <string name="no_records_error">Error: No records found.</string>
+    <!-- No flight activity data available [CHAR LIMIT=100] -->
+    <string name="no_flight_act_data_available">No flight activity data available.</string>
+    <!-- No weather data available [CHAR LIMIT=100] -->
+    <string name="no_weather_data_available">No weather data available.</string>
     <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
     <string name="recording_date_format">EEE d MMM, yyyy</string>
     <!-- Number of bees [CHAR LIMIT=30] -->
@@ -234,6 +301,39 @@
     <!-- Value in SharedPreferences for zoom x2 [CHAR LIMIT=NONE] -->
     <string name="pref_zoom_x2" translatable="false">200</string>
 
+    <!-- Label for the frame rate preference [CHAR LIMIT=30] -->
+    <string name="pref_frame_rate_label">Frame rate</string>
+    <!-- Label for frame rate 0.5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_0_5sec">0.5 sec.</string>
+    <!-- Label for frame rate 1 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1sec">1 sec.</string>
+    <!-- Label for frame rate 5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5sec">5 sec.</string>
+    <!-- Label for frame rate 15 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_15sec">15 sec.</string>
+    <!-- Label for frame rate 30 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_30sec">30 sec.</string>
+    <!-- Label for frame rate 1 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1min">1 min.</string>
+    <!-- Label for frame rate 5 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5min">5 min.</string>
+    <!-- Key name for frame rate preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_key" translatable="false">framerate</string>
+    <!-- Value in SharedPreferences for frame rate 0.5 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_0_5sec" translatable="false">500</string>
+    <!-- Value in SharedPreferences for frame rate 1 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_1sec" translatable="false">1000</string>
+    <!-- Value in SharedPreferences for frame rate 5 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_5sec" translatable="false">5000</string>
+    <!-- Value in SharedPreferences for frame rate 15 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_15sec" translatable="false">15000</string>
+    <!-- Value in SharedPreferences for frame rate 30 sec [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_30sec" translatable="false">30000</string>
+    <!-- Value in SharedPreferences for frame rate 1 min [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_1min" translatable="false">60000</string>
+    <!-- Value in SharedPreferences for frame rate 5min [CHAR LIMIT=NONE] -->
+    <string name="pref_frame_rate_5min" translatable="false">300000</string>
+
 
     <!--++++++++++-->
     <!-- Settings -->
@@ -248,9 +348,9 @@
     <!-- Label for the temperature units preference [CHAR LIMIT=30] -->
     <string name="pref_temp_units_label">Temperature Units</string>
     <!-- Label for metric option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_temp_units_label_metric">Metric</string>
+    <string name="pref_temp_units_label_metric">Metric (\u00B0C)</string>
     <!-- Label for imperial option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_temp_units_label_imperial">Imperial</string>
+    <string name="pref_temp_units_label_imperial">Imperial (\u00B0F)</string>
     <!-- Key name for temperature unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_temp_units_key" translatable="false">units</string>
     <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->
