@@ -476,8 +476,6 @@ forma resumida, establece lo siguiente: [license:gplv3]_
 | Uso privado.       |                                          |                                  |
 +--------------------+------------------------------------------+----------------------------------+
 
-https://www.gnu.org/licenses/gpl-3.0.txt
-
 Sin embargo, GPL v3.0 no es compatible con la licencia EPL que posee
 JUnit. Ya que, la EPL requiere que "cualquier distribución del trabajo
 conceda a todos los destinatarios una licencia para las patentes que
@@ -485,7 +483,7 @@ pudieran tener que cubrir las modificaciones que han hecho" [license:epl]_. Esto
 que los destinatarios pueden añadir una restricción adicional, hecho que
 prohíbe rotundamente GPL: "[que el distribuidor] no imponga ninguna
 restricción más sobre el ejercicio de los derechos concedidos a los
-beneficiarios" [license:gplv3].
+beneficiarios" [license:gplv3]_.
 
 Tras analizar otras licencias alternativas, no se ha encontrado ninguna
 compatible con EPL y, a la vez, con nuestras pretensiones. Por lo que
@@ -538,7 +536,7 @@ El *dataset* de vídeos de prueba también se encuentra bajo la misma
 licencia.
 
 Por otro lado, en la aplicación se han utilizado dos fuentes de
-imágenes:
+imágenes de terceros:
 
 +-------------------------+-----------------------------------------+---------------+
 | Fuente                  | Descripción                             | Licencia      |

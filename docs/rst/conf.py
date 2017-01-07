@@ -45,7 +45,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'GoBees'
-copyright = u'2016, David Miguel Lozano'
+copyright = u'2016, David Miguel Lozano (CC BY 4.0)'
 author = u'David Miguel Lozano'
 
 # The version info for the project you're documenting, acts as replacement for
