@@ -361,10 +361,12 @@ Estudio de viabilidad
 ---------------------
 
 Viabilidad económica
---------------------
+~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 Viabilidad legal
-----------------
+~~~~~~~~~~~~~~~~
 
 En esta sección se discutirán los temas relacionados con las licencias.
 Tanto del propio *software*, como de su documentación, imágenes y
@@ -378,7 +380,7 @@ darse a cambio del pago de un monto determinado por el uso de los
 mismos." [wiki:licencia]_
 
 Software
-========
+^^^^^^^^
 
 En primer lugar, vamos a analizar cuál sería la licencia más conveniente
 para nuestro proyecto. Por un lado, somos nosotros los que podemos
@@ -495,7 +497,7 @@ liberado bajo licencia Apache v2.0, la cual sí que es compatible con
 EPL.
 
 Documentación
-=============
+^^^^^^^^^^^^^
 
 Aunque se puede utilizar también la licencia GPL v3.0 para licenciar la
 documentación, no es lo más recomendable. Ya que contiene numerosas
@@ -526,7 +528,7 @@ International* (CC-BY-4.0). Que establece lo siguiente: [license:ccby4]_
 +--------------+---------------------------+-------------------------------------+
 
 Imágenes y vídeos
-=================
+^^^^^^^^^^^^^^^^^
 
 En la documentación no se ha utilizado ninguna imagen de terceros, todas
 las imágenes son propias del proyecto y cuentan con la misma licencia
@@ -554,7 +556,7 @@ El resto de imágenes y gráficos utilizados son de autoría propia y se
 distribuyen también bajo CC-BY-4.0.3.
 
 Resumen
-=======
+^^^^^^^
 
 En la siguiente tabla se resumen las licencias que posee el proyecto.
 
