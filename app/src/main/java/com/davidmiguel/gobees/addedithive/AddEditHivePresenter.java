@@ -24,6 +24,8 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextHiveIdCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
+import java.util.Date;
+
 /**
  * Listens to user actions from the UI AddEditHiveFragment, retrieves the data and updates the
  * UI as required.
@@ -144,7 +146,7 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     }
 
     /**
-     * aves (or update) the hive.
+     * Saves (or update) the hive.
      *
      * @param hiveId hive id.
      * @param name   hive name.
@@ -157,6 +159,8 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         hive.setName(name);
         // Set notes
         hive.setNotes(notes);
+        // Set last revision (now)
+        hive.setLastRevision(new Date());
         // Save it if it is correct
         if (hive.isValidHive()) {
             goBeesRepository.saveHive(apiaryId, hive, this);

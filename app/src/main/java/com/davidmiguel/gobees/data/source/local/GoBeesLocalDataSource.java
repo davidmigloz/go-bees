@@ -347,6 +347,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     // Add to hive
                     Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
                     hive.addRecords(records);
+                    // Update last revision date (now)
+                    hive.setLastRevision(new Date());
                 }
             });
             callback.onSuccess();

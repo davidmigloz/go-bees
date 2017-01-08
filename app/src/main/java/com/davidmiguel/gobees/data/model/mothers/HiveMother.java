@@ -21,6 +21,7 @@ package com.davidmiguel.gobees.data.model.mothers;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Record;
 
+import java.util.Date;
 import java.util.Random;
 
 import io.realm.RealmList;
@@ -57,6 +58,7 @@ public class HiveMother {
 
     /**
      * Generate a hive.
+     *
      * @return hive.
      */
     public static Hive newDefaultHive() {
@@ -74,6 +76,6 @@ public class HiveMother {
     }
 
     private Hive build() {
-        return new Hive(id, name, imageUrl, notes, records);
+        return new Hive(id, name, imageUrl, notes, new Date(), records);
     }
 }

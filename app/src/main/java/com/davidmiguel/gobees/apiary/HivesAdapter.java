@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -37,6 +38,7 @@ import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -97,6 +99,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
         private View viewHolder;
         private CardView card;
         private TextView hiveName;
+        private TextView lastRevision;
         private ImageView moreIcon;
 
         private Drawable background;
@@ -108,6 +111,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
             viewHolder = itemView;
             card = (CardView) itemView.findViewById(R.id.card);
             hiveName = (TextView) itemView.findViewById(R.id.hive_name);
+            lastRevision = (TextView) itemView.findViewById(R.id.last_revision);
             moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
 
             // Set listeners
@@ -126,6 +130,8 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
 
         public void bind(@NonNull Hive hive) {
             hiveName.setText(hive.getName());
+            lastRevision.setText(DateUtils.getRelativeTimeSpanString(hive.getLastRevision().getTime(),
+                    (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
         }
 
         @Override
