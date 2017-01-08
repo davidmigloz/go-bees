@@ -97,12 +97,16 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
 
     @Override
     public void onSuccess() {
+        // Close keyboard
+        view.closeKeyboard();
         // Apiary saved successfully -> go back to apiaries activity
         view.showHivesList();
     }
 
     @Override
     public void onFailure() {
+        // Close keyboard
+        view.closeKeyboard();
         // Error saving apiaries
         view.showSaveHiveError();
     }

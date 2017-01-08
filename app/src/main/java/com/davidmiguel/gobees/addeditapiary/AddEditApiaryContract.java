@@ -90,6 +90,11 @@ interface AddEditApiaryContract {
          * @return if the permission is granted.
          */
         boolean checkLocationPermission();
+
+        /**
+         * Closes / hides soft Android keyboard.
+         */
+        void closeKeyboard();
     }
 
     interface Presenter extends BasePresenter {

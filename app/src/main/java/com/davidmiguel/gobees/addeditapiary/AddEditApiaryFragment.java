@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 import rebus.permissionutils.AskagainCallback;
 import rebus.permissionutils.PermissionEnum;
@@ -224,6 +225,11 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                 })
                 .ask();
         return false;
+    }
+
+    @Override
+    public void closeKeyboard() {
+        AndroidUtils.closeKeyboard(getActivity());
     }
 
     @Override

@@ -433,7 +433,7 @@ A continuación, se muestran las licencias de las dependencias usadas.
 |                |         |                                              | v2.0     |
 +----------------+---------+----------------------------------------------+----------+
 
-Por lo tanto, podemos licenciar nuestro proyecto bajo una licencia que
+Por lo tanto, tenemos que escoger una licencia para nuestro proyecto que
 sea compatible con Apache v2.0, BSD, MIT y EPL. En el siguiente gráfico
 mostramos la compatibilidad entre estas licencias, así como su grado de
 permisividad.
@@ -447,7 +447,7 @@ librería JUnit.
 
 La forma de monetización del proyecto se realizará mediante
 suscripciones a una plataforma *cloud* que permitirá la sincronización
-entre varios dispositivos, entre otras cosas. Por lo tanto, la
+entre varios dispositivos, entre otras funcionalidades. Por lo tanto, la
 liberación del código del proyecto no pone en peligro su monetización,
 sino todo lo contrario, abre la puerta a que la comunidad *Open Source*
 aporte valor adicional a nuestro proyecto. El permitir la distribución

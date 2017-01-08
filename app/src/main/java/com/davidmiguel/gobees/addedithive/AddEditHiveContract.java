@@ -56,6 +56,11 @@ interface AddEditHiveContract {
          * @param notes hive notes.
          */
         void setNotes(String notes);
+
+        /**
+         * Closes / hides soft Android keyboard.
+         */
+        void closeKeyboard();
     }
 
     interface Presenter extends BasePresenter {
