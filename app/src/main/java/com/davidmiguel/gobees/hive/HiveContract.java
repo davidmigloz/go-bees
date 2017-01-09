@@ -21,6 +21,7 @@ package com.davidmiguel.gobees.hive;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
@@ -33,7 +34,7 @@ import java.util.List;
  */
 interface HiveContract {
 
-    interface View extends BaseView<HiveContract.Presenter> {
+    interface HiveRecordingsView extends BaseView<HiveContract.Presenter> {
 
         /**
          * Displays or hide loading indicator.
@@ -116,6 +117,23 @@ interface HiveContract {
         boolean checkCameraPermission();
     }
 
+    interface HiveInfoView extends BaseView<HiveContract.Presenter> {
+
+        /**
+         * Displays or hide loading indicator.
+         *
+         * @param active true or false.
+         */
+        void setLoadingIndicator(final boolean active);
+
+        /**
+         * Shows the hive info.
+         *
+         * @param hive hive to show.
+         */
+        void showInfo(Hive hive);
+    }
+
     interface Presenter extends BasePresenter {
 
         /**
@@ -128,11 +146,11 @@ interface HiveContract {
         void result(int requestCode, int resultCode, Intent data);
 
         /**
-         * Load recordings from repository.
+         * Load hive and its recordings from repository.
          *
          * @param forceUpdate force cache update.
          */
-        void loadRecordings(boolean forceUpdate);
+        void loadData(boolean forceUpdate);
 
         /**
          * Orders to open activity to record a hive.

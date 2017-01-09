@@ -67,7 +67,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Dispaly a list of recordings.
  */
 public class HiveRecordingsFragment extends Fragment
-        implements BaseTabFragment, HiveContract.View, RecordingsAdapter.RecordingItemListener {
+        implements BaseTabFragment, HiveContract.HiveRecordingsView, RecordingsAdapter.RecordingItemListener {
 
     public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
@@ -79,6 +79,7 @@ public class HiveRecordingsFragment extends Fragment
     private RecordingsAdapter listAdapter;
     private View noRecordingsView;
     private LinearLayout hivesView;
+    private FloatingActionButton fab;
 
     public HiveRecordingsFragment() {
         // Requires empty public constructor
@@ -112,8 +113,7 @@ public class HiveRecordingsFragment extends Fragment
         noRecordingsView = root.findViewById(R.id.no_recordings);
 
         // Set up floating action button
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_new_recording);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_new_recording);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +135,7 @@ public class HiveRecordingsFragment extends Fragment
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.loadRecordings(false);
+                presenter.loadData(false);
             }
         });
 
@@ -152,6 +152,14 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.hive_frag_menu, menu);
     }
@@ -163,7 +171,7 @@ public class HiveRecordingsFragment extends Fragment
                 NavUtils.navigateUpFromSameTask(getActivity());
                 return true;
             case R.id.menu_refresh:
-                presenter.loadRecordings(true);
+                presenter.loadData(true);
                 break;
         }
         return true;
