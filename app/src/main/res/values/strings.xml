@@ -146,7 +146,7 @@
     <!-- Default hive name [CHAR LIMIT=100] -->
     <string name="default_hive_name">My hive</string>
     <!-- Default last revision value [CHAR LIMIT=100] -->
-    <string name="default_last_revision">10 days ago</string>
+    <string name="default_last_revision">0 days ago</string>
     <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
     <string name="loading_hives_error">Error while loading hives.</string>
     <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
@@ -157,8 +157,10 @@
     <string name="successfully_deleted_hive_message">Hive deleted!</string>
     <!-- Msg shown when an error occurs when deleting hive [CHAR LIMIT=100] -->
     <string name="deleted_hive_error_message">Error while deleting hive.</string>
-    <!-- Description of last revision icon ic_cached [CHAR LIMIT=100] -->
+    <!-- Description of last revision icon [CHAR LIMIT=100] -->
     <string name="last_revision_icon">Last revision icon</string>
+    <!-- Description of notes icon [CHAR LIMIT=100] -->
+    <string name="notes_icon">Last revision icon</string>
     <!-- Description of hive logo [CHAR LIMIT=100] -->
     <string name="hive_logo">Hive logo</string>
 
@@ -210,6 +212,13 @@
         Without this permission the app is unable to monitor the flight activity of your hive.
         Are you sure you want to deny this permission?
     </string>
+    <!-- Default note text [CHAR LIMIT=100] -->
+    <string name="default_notes">Notes…</string>
+    <!-- No notes text [CHAR LIMIT=100] -->
+    <string name="no_notes">No notes.</string>
+    <!-- General info title [CHAR LIMIT=100] -->
+    <string name="general_info_title">General info</string>
+
 
     <!--+++++++++++-->
     <!-- Recording -->

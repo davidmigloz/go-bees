@@ -51,7 +51,10 @@ public class HivePresenterTest {
     private GoBeesRepository goBeesRepository;
 
     @Mock
-    private HiveContract.View hiveView;
+    private HiveContract.HiveRecordingsView hiveHiveRecordingsView;
+
+    @Mock
+    private HiveContract.HiveInfoView hiveInfoView;
 
     private HivePresenter hivePresenter;
 
@@ -71,10 +74,11 @@ public class HivePresenterTest {
                 RecordingMother.newDefaultRecording()));
 
         // Get a reference to the class under test
-        hivePresenter = new HivePresenter(goBeesRepository, hiveView, 0,HIVE.getId());
+        hivePresenter = new HivePresenter(goBeesRepository,
+                hiveHiveRecordingsView, hiveInfoView, 0, HIVE.getId());
 
         // The presenter won't update the view unless it's active
-        when(hiveView.isActive()).thenReturn(true);
+        when(hiveHiveRecordingsView.isActive()).thenReturn(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -82,19 +86,19 @@ public class HivePresenterTest {
     public void loadRecordings_showRecordingsIntoView() {
         // Given an initialized HivePresenter
         // When loading of recordings is requested
-        hivePresenter.loadRecordings(true);
+        hivePresenter.loadData(true);
 
         // Callback is captured and invoked with stubbed hives
         verify(goBeesRepository).getHiveWithRecordings(anyLong(), getHiveCallbackArgumentCaptor.capture());
         getHiveCallbackArgumentCaptor.getValue().onHiveLoaded(HIVE);
 
         // Then progress indicator is shown
-        InOrder inOrder = inOrder(hiveView);
-        inOrder.verify(hiveView).setLoadingIndicator(true);
+        InOrder inOrder = inOrder(hiveHiveRecordingsView);
+        inOrder.verify(hiveHiveRecordingsView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
-        inOrder.verify(hiveView).setLoadingIndicator(false);
+        inOrder.verify(hiveHiveRecordingsView).setLoadingIndicator(false);
         ArgumentCaptor<List> showRecordingsArgumentCaptor = ArgumentCaptor.forClass(List.class);
-        verify(hiveView).showRecordings(showRecordingsArgumentCaptor.capture());
+        verify(hiveHiveRecordingsView).showRecordings(showRecordingsArgumentCaptor.capture());
         // Assert that the number of hives shown is the expected
         assertTrue(showRecordingsArgumentCaptor.getValue().size() == HIVE.getRecordings().size());
     }

@@ -94,8 +94,8 @@ public class HiveActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new HivePresenter(goBeesRepository, (HiveContract.View) hiveRecordingsFragment,
-                apiaryId, hiveId);
+        new HivePresenter(goBeesRepository, (HiveContract.HiveRecordingsView)
+                hiveRecordingsFragment, hiveInfoFragment, apiaryId, hiveId);
     }
 
     @Override
