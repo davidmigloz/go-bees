@@ -102,7 +102,7 @@ class HivePresenter implements HiveContract.Presenter {
             @Override
             public void onHiveLoaded(Hive hive) {
                 // The hiveRecordingsView may not be able to handle UI updates anymore
-                if (!hiveRecordingsView.isActive() || !hiveInfoView.isActive()) {
+                if (!hiveRecordingsView.isActive() && !hiveInfoView.isActive()) {
                     return;
                 }
                 // Hide progress indicator
