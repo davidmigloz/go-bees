@@ -81,22 +81,22 @@
     <string name="format_pressure_hpa"><xliff:g id="temp">%1.0f</xliff:g> hPa</string>
     <!-- Format Wind in kph [CHAR LIMIT=NONE] -->
     <string name="format_wind_kmh">
-        <xliff:g id="speed">%1.0f</xliff:g> km/h -
+        <xliff:g id="speed">%1$1.0f</xliff:g> km/h -
         <xliff:g id="direction">%2$s</xliff:g>
     </string>
     <!-- Wind in mph [CHAR LIMIT=NONE -->
     <string name="format_wind_mph">
-        <xliff:g id="speed">%1.0f</xliff:g> mph -
+        <xliff:g id="speed">%1$1.0f</xliff:g> mph -
         <xliff:g id="direction">%2$s</xliff:g>
     </string>
     <!-- Format rain/snow  in mm. Ej: 0.1mm [CHAR LIMIT=NONE] -->
-    <string name="format_rain_snow_mm"><xliff:g id="temp">%1.0f</xliff:g> mm</string>
+    <string name="format_rain_snow_mm"><xliff:g id="temp">%1.2f</xliff:g> mm</string>
     <!-- Time from last update [CHAR LIMIT=15] -->
     <string name="last_updated">Updated</string>
     <!-- Default time from last update [CHAR LIMIT=100] -->
     <string name="default_last_updated">\? days ago</string>
     <!-- OpenWeatherMap.org [CHAR LIMIT=NONE] -->
-    <string name="openweathermap" translatable="false">OpenWeatherMap.org</string>
+    <string name="open_weather_map" translatable="false">OpenWeatherMap.org</string>
     <!-- Weather conditions [CHAR LIMIT=100] -->
     <string name="condition_200">Thunderstorm with light rain</string>
     <string name="condition_201">Thunderstorm with rain</string>

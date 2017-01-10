@@ -466,7 +466,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="8dp"
                         android:gravity="right"
-                        android:text="@string/openweathermap"
+                        android:text="@string/open_weather_map"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="10sp"/>
 
