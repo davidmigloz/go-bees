@@ -20,10 +20,12 @@ package com.davidmiguel.gobees.apiary;
 
 import android.support.annotation.NonNull;
 
+import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ import java.util.List;
  */
 interface ApiaryContract {
 
-    interface View extends BaseView<ApiaryContract.Presenter> {
+    interface ApiaryHivesView extends BaseView<ApiaryContract.Presenter> {
 
         /**
          * Displays or hide loading indicator.
@@ -96,6 +98,24 @@ interface ApiaryContract {
         void showTitle(@NonNull String title);
     }
 
+    interface ApiaryInfoView extends BaseView<ApiaryContract.Presenter> {
+
+        /**
+         * Displays or hide loading indicator.
+         *
+         * @param active true or false.
+         */
+        void setLoadingIndicator(final boolean active);
+
+        /**
+         * Shows the hive info.
+         *
+         * @param apiary apiary to show.
+         * @param lastRevisionDate apiary last revision.
+         */
+        void showInfo(Apiary apiary, Date lastRevisionDate);
+    }
+
     interface Presenter extends BasePresenter {
 
         /**
@@ -107,11 +127,11 @@ interface ApiaryContract {
         void result(int requestCode, int resultCode);
 
         /**
-         * Load hives from repository.
+         * Load apiary info and its hives from repository.
          *
          * @param forceUpdate force cache update.
          */
-        void loadHives(boolean forceUpdate);
+        void loadData(boolean forceUpdate);
 
         /**
          * Orders to open activity to add or edit a hive.

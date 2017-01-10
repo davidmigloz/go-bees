@@ -146,7 +146,7 @@ interface HiveContract {
         void result(int requestCode, int resultCode, Intent data);
 
         /**
-         * Load hive and its recordings from repository.
+         * Load hive info and its recordings from repository.
          *
          * @param forceUpdate force cache update.
          */

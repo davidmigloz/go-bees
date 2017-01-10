@@ -57,7 +57,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Display a list of hives.
  */
 public class ApiaryHivesFragment extends Fragment
-        implements BaseTabFragment, ApiaryContract.View, HivesAdapter.HiveItemListener {
+        implements BaseTabFragment, ApiaryContract.ApiaryHivesView, HivesAdapter.HiveItemListener {
 
     public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
 
@@ -65,6 +65,7 @@ public class ApiaryHivesFragment extends Fragment
     private HivesAdapter listAdapter;
     private View noHivesView;
     private LinearLayout hivesView;
+    private FloatingActionButton fab;
 
     /**
      * Get ApiaryHivesFragment instance.
@@ -103,8 +104,7 @@ public class ApiaryHivesFragment extends Fragment
         noHivesView = root.findViewById(R.id.no_hives);
 
         // Set up floating action button
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +126,7 @@ public class ApiaryHivesFragment extends Fragment
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.loadHives(false);
+                presenter.loadData(false);
             }
         });
 
@@ -143,6 +143,14 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.apiary_frag_menu, menu);
     }
@@ -154,7 +162,7 @@ public class ApiaryHivesFragment extends Fragment
                 NavUtils.navigateUpFromSameTask(getActivity());
                 return true;
             case R.id.menu_refresh:
-                presenter.loadHives(true);
+                presenter.loadData(true);
                 break;
         }
         return true;

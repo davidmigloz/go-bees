@@ -70,6 +70,10 @@
     <string name="settings_icon">Settings icon</string>
     <!-- Description of location icon [CHAR LIMIT=25] -->
     <string name="gps_location_icon">Get GPS location</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="location_icon">Location</string>
+    <!-- Description of number of hives icon[CHAR LIMIT=100] -->
+    <string name="num_hives">Number of hives</string>
 
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->
@@ -82,8 +86,6 @@
     <!-- Apiaries -->
     <!--++++++++++-->
 
-    <!-- Description of number of hives icon[CHAR LIMIT=100] -->
-    <string name="num_hives">Number of hives</string>
     <!-- Default apiary name [CHAR LIMIT=100] -->
     <string name="default_apiary_name">My apiary</string>
     <!-- Default value number of bees [CHAR LIMIT=NONE] -->
@@ -146,7 +148,7 @@
     <!-- Default hive name [CHAR LIMIT=100] -->
     <string name="default_hive_name">My hive</string>
     <!-- Default last revision value [CHAR LIMIT=100] -->
-    <string name="default_last_revision">0 days ago</string>
+    <string name="default_last_revision">\? days ago</string>
     <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
     <string name="loading_hives_error">Error while loading hives.</string>
     <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
@@ -163,6 +165,16 @@
     <string name="notes_icon">Last revision icon</string>
     <!-- Description of hive logo [CHAR LIMIT=100] -->
     <string name="hive_logo">Hive logo</string>
+    <!-- Number of hives default [CHAR LIMIT=100] -->
+    <string name="default_num_hives_long">No hives</string>
+    <!-- Number of hives [CHAR LIMIT=100] -->
+    <plurals name="num_hives_plurals">
+        <item quantity="zero">No hives</item>
+        <item quantity="one">1 hive</item>
+        <item quantity="other">%d hives</item>
+    </plurals>
+    <!-- Number of hives default [CHAR LIMIT=100] -->
+    <string name="no_location">No location</string>
 
     <!--++++++++++-->
     <!-- Add hive -->
@@ -215,7 +227,7 @@
     <!-- Default note text [CHAR LIMIT=100] -->
     <string name="default_notes">Notes…</string>
     <!-- No notes text [CHAR LIMIT=100] -->
-    <string name="no_notes">No notes.</string>
+    <string name="no_notes">No notes</string>
     <!-- General info title [CHAR LIMIT=100] -->
     <string name="general_info_title">General info</string>
 
