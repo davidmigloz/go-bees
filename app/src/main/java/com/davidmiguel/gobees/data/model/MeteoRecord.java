@@ -74,7 +74,7 @@ public class MeteoRecord extends RealmObject {
     private double temperatureMax;
 
     /**
-     * Pressure, e.g: 1023.
+     * Pressure in hPa, e.g: 1023.
      */
     private int pressure;
 

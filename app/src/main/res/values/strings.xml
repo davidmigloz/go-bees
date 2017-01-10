@@ -29,20 +29,10 @@
     <string name="gobees_logo">GoBees logo</string>
     <!-- Refresh menu option [CHAR LIMIT=25] -->
     <string name="refresh">Refresh</string>
-    <!-- Temperature [CHAR LIMIT=30] -->
-    <string name="temperature">Temperature</string>
-    <!-- Rain [CHAR LIMIT=30] -->
-    <string name="rain">Rain</string>
-    <!-- Wind [CHAR LIMIT=30] -->
-    <string name="wind">Wind</string>
     <!-- Edit action [CHAR LIMIT=30] -->
     <string name="edit">Edit</string>
     <!-- Delete action [CHAR LIMIT=30] -->
     <string name="delete">Delete</string>
-    <!-- Format temperature in Celsius unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
-    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
-    <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
-    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
     <!-- Title when user doesn't grant permission [CHAR LIMIT=100] -->
     <string name="permission_request_title">Permission denied</string>
     <!-- Allow button, when user doesn't grant location permission [CHAR LIMIT=30] -->
@@ -51,6 +41,138 @@
     <string name="permission_request_deny_button">DENY</string>
     <!-- Message when user doesn't grant permission [CHAR LIMIT=100] -->
     <string name="permission_request_denied">The app does not have permissions to use this feature.</string>
+
+
+    <!--+++++++++-->
+    <!-- Weather -->
+    <!--+++++++++-->
+
+    <!-- Weather condition [CHAR LIMIT=15] -->
+    <string name="weather_condition">Condition</string>
+    <!-- Temperature [CHAR LIMIT=30] -->
+    <string name="temperature">Temperature</string>
+    <!-- Humidity [CHAR LIMIT=15] -->
+    <string name="humidity">Humidity</string>
+    <!-- Pressure [CHAR LIMIT=15] -->
+    <string name="pressure">Pressure</string>
+    <!-- Wind [CHAR LIMIT=15] -->
+    <string name="wind">Wind</string>
+    <!-- Rain [CHAR LIMIT=15] -->
+    <string name="rain">Rain</string>
+    <!-- Snow [CHAR LIMIT=15] -->
+    <string name="snow">Snow</string>
+    <!-- Default value temperature [CHAR LIMIT=NONE] -->
+    <string name="default_temperature" translatable="false">\?\u00B0C</string>
+    <!-- Default value humidity [CHAR LIMIT=NONE] -->
+    <string name="default_humidity" translatable="false">\?%</string>
+    <!-- Default value pressure [CHAR LIMIT=NONE] -->
+    <string name="default_pressure" translatable="false">\? hPa</string>
+    <!-- Default value wind [CHAR LIMIT=NONE] -->
+    <string name="default_wind" translatable="false">\? km/h</string>
+    <!-- Default value rain/snow [CHAR LIMIT=NONE] -->
+    <string name="default_rain_snow" translatable="false">\? mm</string>
+    <!-- Format temperature in Celsius unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
+    <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
+    <!-- Format humidity  in percentage. Ej: 18% [CHAR LIMIT=NONE] -->
+    <string name="format_humidity_percentage"><xliff:g id="temp">%1.0f</xliff:g>%%</string>
+    <!-- Format pressure  in hPa. Ej: 1024hPa [CHAR LIMIT=NONE] -->
+    <string name="format_pressure_hpa"><xliff:g id="temp">%1.0f</xliff:g> hPa</string>
+    <!-- Format Wind in kph [CHAR LIMIT=NONE] -->
+    <string name="format_wind_kmh">
+        <xliff:g id="speed">%1.0f</xliff:g> km/h -
+        <xliff:g id="direction">%2$s</xliff:g>
+    </string>
+    <!-- Wind in mph [CHAR LIMIT=NONE -->
+    <string name="format_wind_mph">
+        <xliff:g id="speed">%1.0f</xliff:g> mph -
+        <xliff:g id="direction">%2$s</xliff:g>
+    </string>
+    <!-- Format rain/snow  in mm. Ej: 0.1mm [CHAR LIMIT=NONE] -->
+    <string name="format_rain_snow_mm"><xliff:g id="temp">%1.0f</xliff:g> mm</string>
+    <!-- Time from last update [CHAR LIMIT=15] -->
+    <string name="last_updated">Updated</string>
+    <!-- Default time from last update [CHAR LIMIT=100] -->
+    <string name="default_last_updated">\? days ago</string>
+    <!-- OpenWeatherMap.org [CHAR LIMIT=NONE] -->
+    <string name="openweathermap" translatable="false">OpenWeatherMap.org</string>
+    <!-- Weather conditions [CHAR LIMIT=100] -->
+    <string name="condition_200">Thunderstorm with light rain</string>
+    <string name="condition_201">Thunderstorm with rain</string>
+    <string name="condition_202">Thunderstorm with heavy rain</string>
+    <string name="condition_210">Light thunderstorm</string>
+    <string name="condition_211">Thunderstorm</string>
+    <string name="condition_212">Heavy thunderstorm</string>
+    <string name="condition_221">Ragged thunderstorm</string>
+    <string name="condition_230">Thunderstorm with light drizzle</string>
+    <string name="condition_231">Thunderstorm with drizzle </string>
+    <string name="condition_232">Thunderstorm with heavy drizzle</string>
+    <string name="condition_300">Light intensity drizzle </string>
+    <string name="condition_301">Drizzle</string>
+    <string name="condition_302">Heavy drizzle</string>
+    <string name="condition_310">Light drizzle rain</string>
+    <string name="condition_311">Drizzle rain</string>
+    <string name="condition_312">Heavy drizzle rain</string>
+    <string name="condition_313">Shower rain and drizzle</string>
+    <string name="condition_314">Heavy shower rain and drizzle</string>
+    <string name="condition_321">Shower drizzle</string>
+    <string name="condition_500">Light rain</string>
+    <string name="condition_501">Moderate rain</string>
+    <string name="condition_502">Heavy rain</string>
+    <string name="condition_503">Very heavy rain</string>
+    <string name="condition_504">Extreme rain</string>
+    <string name="condition_511">Freezing rain</string>
+    <string name="condition_520">Light shower rain</string>
+    <string name="condition_521">Shower rain</string>
+    <string name="condition_522">Heavy shower rain</string>
+    <string name="condition_531">Ragged shower rain</string>
+    <string name="condition_600">Light snow</string>
+    <string name="condition_601">Snow</string>
+    <string name="condition_602">Heavy snow</string>
+    <string name="condition_611">Sleet</string>
+    <string name="condition_612">Shower sleet</string>
+    <string name="condition_615">Light rain and snow</string>
+    <string name="condition_616">Rain and snow</string>
+    <string name="condition_620">Light shower snow</string>
+    <string name="condition_621">Shower snow</string>
+    <string name="condition_622">Heavy shower snow</string>
+    <string name="condition_701">Mist</string>
+    <string name="condition_711">Smoke</string>
+    <string name="condition_721">Haze</string>
+    <string name="condition_731">Sand, dust whirls</string>
+    <string name="condition_741">Fog</string>
+    <string name="condition_751">Sand</string>
+    <string name="condition_761">Dust</string>
+    <string name="condition_762">Volcanic ash</string>
+    <string name="condition_771">Squalls</string>
+    <string name="condition_781">Tornado</string>
+    <string name="condition_800">Clear sky</string>
+    <string name="condition_801">Mostly clear</string>
+    <string name="condition_802">Scattered clouds</string>
+    <string name="condition_803">Broken clouds</string>
+    <string name="condition_804">Overcast clouds</string>
+    <string name="condition_900">Tornado</string>
+    <string name="condition_901">Tropical storm</string>
+    <string name="condition_902">Hurricane</string>
+    <string name="condition_903">Cold</string>
+    <string name="condition_904">Hot</string>
+    <string name="condition_905">Windy</string>
+    <string name="condition_906">Hail</string>
+    <string name="condition_951">Calm</string>
+    <string name="condition_952">Light breeze</string>
+    <string name="condition_953">Gentle breeze</string>
+    <string name="condition_954">Moderate breeze</string>
+    <string name="condition_955">Fresh breeze</string>
+    <string name="condition_956">Strong breeze</string>
+    <string name="condition_957">High wind</string>
+    <string name="condition_958">Gale</string>
+    <string name="condition_959">Severe gale</string>
+    <string name="condition_960">Storm</string>
+    <string name="condition_961">Violent storm</string>
+    <string name="condition_962">Hurricane</string>
+    <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
+
 
     <!--+++++++++++++++-->
     <!-- General Icons -->
@@ -72,6 +194,8 @@
     <string name="gps_location_icon">Get GPS location</string>
     <!-- Description of location icon [CHAR LIMIT=25] -->
     <string name="location_icon">Location</string>
+    <!-- Description of map icon [CHAR LIMIT=25] -->
+    <string name="map_icon">Map</string>
     <!-- Description of number of hives icon[CHAR LIMIT=100] -->
     <string name="num_hives">Number of hives</string>
 
@@ -90,8 +214,6 @@
     <string name="default_apiary_name">My apiary</string>
     <!-- Default value number of bees [CHAR LIMIT=NONE] -->
     <string name="default_num_hives" translatable="false">0</string>
-    <!-- Default value temperature [CHAR LIMIT=NONE] -->
-    <string name="default_temperature" translatable="false">10\u00B0C</string>
     <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
     <string name="loading_apiaries_error">Error while loading apiaries.</string>
     <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
@@ -162,7 +284,7 @@
     <!-- Description of last revision icon [CHAR LIMIT=100] -->
     <string name="last_revision_icon">Last revision icon</string>
     <!-- Description of notes icon [CHAR LIMIT=100] -->
-    <string name="notes_icon">Last revision icon</string>
+    <string name="notes_icon">Notes</string>
     <!-- Description of hive logo [CHAR LIMIT=100] -->
     <string name="hive_logo">Hive logo</string>
     <!-- Number of hives default [CHAR LIMIT=100] -->
@@ -175,6 +297,8 @@
     </plurals>
     <!-- Number of hives default [CHAR LIMIT=100] -->
     <string name="no_location">No location</string>
+    <!-- Default value city [CHAR LIMIT=100] -->
+    <string name="default_city">Burgos</string>
 
     <!--++++++++++-->
     <!-- Add hive -->
@@ -384,17 +508,17 @@
     <string name="pref_weather_cat_label">Weather</string>
     <!-- Key name for weather category in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_weather_cat_key">weather</string>
-    <!-- Label for the temperature units preference [CHAR LIMIT=30] -->
-    <string name="pref_temp_units_label">Temperature Units</string>
-    <!-- Label for metric option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_temp_units_label_metric">Metric (\u00B0C)</string>
-    <!-- Label for imperial option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_temp_units_label_imperial">Imperial (\u00B0F)</string>
-    <!-- Key name for temperature unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
-    <string name="pref_temp_units_key" translatable="false">units</string>
-    <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->
-    <string name="pref_temp_units_metric" translatable="false">metric</string>
-    <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
-    <string name="pref_temp_units_imperial" translatable="false">imperial</string>
+    <!-- Label for the weather units preference [CHAR LIMIT=30] -->
+    <string name="pref_weather_units_label">Weather Units</string>
+    <!-- Label for metric option in weather unit preference [CHAR LIMIT=25] -->
+    <string name="pref_weather_units_label_metric">Metric (\u00B0C, km/h…)</string>
+    <!-- Label for imperial option in weather unit preference [CHAR LIMIT=25] -->
+    <string name="pref_weather_units_label_imperial">Imperial (\u00B0F, mph…)</string>
+    <!-- Key name for weather unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_weather_units_key" translatable="false">units</string>
+    <!-- Value in SharedPreferences for metric weather unit option [CHAR LIMIT=NONE] -->
+    <string name="pref_weather_units_metric" translatable="false">metric</string>
+    <!-- Value in SharedPreferences for imperial weather unit option [CHAR LIMIT=NONE] -->
+    <string name="pref_weather_units_imperial" translatable="false">imperial</string>
 
 </resources>

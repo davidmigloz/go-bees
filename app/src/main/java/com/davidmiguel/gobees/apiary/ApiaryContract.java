@@ -110,10 +110,17 @@ interface ApiaryContract {
         /**
          * Shows the hive info.
          *
-         * @param apiary apiary to show.
+         * @param apiary           apiary to show.
          * @param lastRevisionDate apiary last revision.
          */
         void showInfo(Apiary apiary, Date lastRevisionDate);
+
+        /**
+         * Shows apiary location on a map.
+         *
+         * @param apiary apiary to show.
+         */
+        void openMap(Apiary apiary);
     }
 
     interface Presenter extends BasePresenter {
@@ -153,5 +160,10 @@ interface ApiaryContract {
          * @param hive hive to delete.
          */
         void deleteHive(@NonNull Hive hive);
+
+        /**
+         * Called when the user clicks the map icon (to show the apiary on a map).
+         */
+        void onOpenMapClicked();
     }
 }

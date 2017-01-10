@@ -38,10 +38,10 @@ public class GoBeesPreferences {
     public static boolean isMetric(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
-        String keyForUnits = context.getString(R.string.pref_temp_units_key);
-        String defaultUnits = context.getString(R.string.pref_temp_units_metric);
+        String keyForUnits = context.getString(R.string.pref_weather_units_key);
+        String defaultUnits = context.getString(R.string.pref_weather_units_metric);
         String preferredUnits = sp.getString(keyForUnits, defaultUnits);
-        String metric = context.getString(R.string.pref_temp_units_metric);
+        String metric = context.getString(R.string.pref_weather_units_metric);
 
         return metric.equals(preferredUnits);
     }

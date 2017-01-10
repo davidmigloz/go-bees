@@ -44,6 +44,7 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
      */
     private boolean firstLoad = true;
     private long apiaryId;
+    private Apiary apiary;
 
     ApiaryPresenter(GoBeesRepository goBeesRepository,
                     ApiaryContract.ApiaryHivesView apiaryHivesView,
@@ -79,6 +80,8 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
         goBeesRepository.getApiary(apiaryId, new GoBeesDataSource.GetApiaryCallback() {
             @Override
             public void onApiaryLoaded(Apiary apiary) {
+                // Save apiary
+                ApiaryPresenter.this.apiary = apiary;
                 // The view may not be able to handle UI updates anymore
                 if (!apiaryHivesView.isActive() && !apiaryInfoView.isActive()) {
                     return;
@@ -155,6 +158,11 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
                 apiaryHivesView.showDeletedErrorMessage();
             }
         });
+    }
+
+    @Override
+    public void onOpenMapClicked() {
+        apiaryInfoView.openMap(apiary);
     }
 
     @Override

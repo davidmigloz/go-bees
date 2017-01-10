@@ -18,42 +18,62 @@
 
 package com.davidmiguel.gobees.apiary;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
+import com.davidmiguel.gobees.utils.WeatherUtils;
 import com.google.common.base.Strings;
 
 import java.util.Date;
+import java.util.Locale;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Display apiary info.
- * TODO
  */
 public class ApiaryInfoFragment extends Fragment
         implements BaseTabFragment, ApiaryContract.ApiaryInfoView {
 
     private ApiaryContract.Presenter presenter;
     private FloatingActionButton fab;
+
     private TextView location;
+    private ImageView map;
     private TextView numHives;
     private TextView lastRevision;
     private TextView notes;
+
+    private CardView weatherCard;
+    private ImageView weatherIcon;
+    private TextView temperature;
+    private TextView city;
+    private TextView condition;
+    private TextView humidity;
+    private TextView pressure;
+    private TextView wind;
+    private TextView rain;
+    private TextView snow;
+    private TextView updated;
+
 
     public static ApiaryInfoFragment newInstance() {
         return new ApiaryInfoFragment();
@@ -70,11 +90,33 @@ public class ApiaryInfoFragment extends Fragment
         View root = inflater.inflate(R.layout.apiary_info_frag, container, false);
 
         // Set up view
-        LinearLayout info = (LinearLayout) root.findViewById(R.id.info);
+        ScrollView info = (ScrollView) root.findViewById(R.id.info);
+
         location = (TextView) root.findViewById(R.id.location);
+        map = (ImageView) root.findViewById(R.id.map_icon);
         numHives = (TextView) root.findViewById(R.id.num_hives);
         lastRevision = (TextView) root.findViewById(R.id.last_revision);
         notes = (TextView) root.findViewById(R.id.notes_content);
+
+        weatherCard = (CardView) root.findViewById(R.id.weather_card);
+        weatherIcon = (ImageView) root.findViewById(R.id.weather_icon);
+        temperature = (TextView) root.findViewById(R.id.temperature);
+        city = (TextView) root.findViewById(R.id.city);
+        condition = (TextView) root.findViewById(R.id.condition);
+        humidity = (TextView) root.findViewById(R.id.humidity);
+        pressure = (TextView) root.findViewById(R.id.pressure);
+        wind = (TextView) root.findViewById(R.id.wind);
+        rain = (TextView) root.findViewById(R.id.rain);
+        snow = (TextView) root.findViewById(R.id.snow);
+        updated = (TextView) root.findViewById(R.id.updated);
+
+        // Set map intent
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onOpenMapClicked();
+            }
+        });
 
         // Set up floating action button
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
@@ -97,6 +139,13 @@ public class ApiaryInfoFragment extends Fragment
             }
         });
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Reset map icon color
+        map.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent));
     }
 
     @Override
@@ -131,10 +180,11 @@ public class ApiaryInfoFragment extends Fragment
     @SuppressWarnings("ConstantConditions")
     @Override
     public void showInfo(Apiary apiary, Date lastRevisionDate) {
+        // GENERAL INFO
         // Location
         String latLetter = (apiary.getLocationLat() > 0) ? "N" : "S";
         String lonLetter = (apiary.getLocationLong() > 0) ? "E" : "W";
-        location.setText(apiary.getLocationLat() + latLetter + ", "
+        location.setText(apiary.getLocationLat() + latLetter + " / "
                 + apiary.getLocationLong() + lonLetter);
         // Num hives
         int num = apiary.getHives().size();
@@ -148,6 +198,57 @@ public class ApiaryInfoFragment extends Fragment
         } else {
             notes.setText(apiary.getNotes());
         }
+
+        // WEATHER
+        // Hide card if no weather data exists
+        if (apiary.getCurrentWeather() == null) {
+            weatherCard.setVisibility(View.GONE);
+            return;
+        }
+        // Weather Icon
+        String iconId = apiary.getCurrentWeather().getWeatherConditionIcon();
+        weatherIcon.setImageResource(WeatherUtils.getWeatherIconResourceId(iconId));
+        // Temperature
+        double temp = apiary.getCurrentWeather().getTemperature();
+        temperature.setText(WeatherUtils.formatTemperature(getContext(), temp));
+        // City
+        String cityName = apiary.getCurrentWeather().getCityName();
+        city.setText(cityName);
+        // Weather condition
+        String weatherCondition = WeatherUtils.getStringForWeatherCondition(getContext(),
+                apiary.getCurrentWeather().getWeatherCondition());
+        condition.setText(weatherCondition);
+        // Humidity
+        double hum = apiary.getCurrentWeather().getHumidity();
+        humidity.setText(WeatherUtils.formatHumidity(getContext(), hum));
+        // Pressure
+        double pre = apiary.getCurrentWeather().getPressure();
+        pressure.setText(WeatherUtils.formatPressure(getContext(), pre));
+        // Wind
+        double windSpeed = apiary.getCurrentWeather().getWindSpeed();
+        double windDegrees = apiary.getCurrentWeather().getWindDegrees();
+        wind.setText(WeatherUtils.formatWind(getContext(), windSpeed, windDegrees));
+        // Rain
+        double rainVol = apiary.getCurrentWeather().getRain();
+        rain.setText(WeatherUtils.formatRainSnow(getContext(), rainVol));
+        // Snow
+        double snowVol = apiary.getCurrentWeather().getSnow();
+        snow.setText(WeatherUtils.formatRainSnow(getContext(), snowVol));
+        // Last update
+        String date = (String) DateUtils.getRelativeTimeSpanString(apiary.getCurrentWeather()
+                .getTimestamp().getTime(), (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS);
+        updated.setText(date);
+    }
+
+    @Override
+    public void openMap(Apiary apiary) {
+        // Change icon color
+        map.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+        // Open map
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f",
+                apiary.getLocationLat(), apiary.getLocationLong());
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        getContext().startActivity(intent);
     }
 
     @Override
