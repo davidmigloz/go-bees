@@ -242,13 +242,15 @@ public class ApiaryInfoFragment extends Fragment
 
     @Override
     public void openMap(Apiary apiary) {
-        // Change icon color
-        map.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
-        // Open map
-        String uri = String.format(Locale.ENGLISH, "geo:%f,%f",
-                apiary.getLocationLat(), apiary.getLocationLong());
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        getContext().startActivity(intent);
+        if (apiary.hasLocation()) {
+            // Change icon color
+            map.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+            // Open map
+            String uri = String.format(Locale.ENGLISH, "geo:%f,%f",
+                    apiary.getLocationLat(), apiary.getLocationLong());
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            getContext().startActivity(intent);
+        }
     }
 
     @Override
