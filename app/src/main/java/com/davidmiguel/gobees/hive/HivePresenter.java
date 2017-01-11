@@ -1,3 +1,21 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.hive;
 
 import android.app.Activity;
@@ -17,7 +35,8 @@ import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 class HivePresenter implements HiveContract.Presenter {
 
     private GoBeesRepository goBeesRepository;
-    private HiveContract.View view;
+    private HiveContract.HiveRecordingsView hiveRecordingsView;
+    private HiveContract.HiveInfoView hiveInfoView;
 
     /**
      * Force update the first time.
@@ -26,11 +45,15 @@ class HivePresenter implements HiveContract.Presenter {
     private long apiaryId;
     private long hiveId;
 
-    HivePresenter(GoBeesRepository goBeesRepository, HiveContract.View view,
+    HivePresenter(GoBeesRepository goBeesRepository,
+                  HiveContract.HiveRecordingsView hiveRecordingsView,
+                  HiveContract.HiveInfoView hiveInfoView,
                   long apiaryId, long hiveId) {
         this.goBeesRepository = goBeesRepository;
-        this.view = view;
-        this.view.setPresenter(this);
+        this.hiveRecordingsView = hiveRecordingsView;
+        this.hiveRecordingsView.setPresenter(this);
+        this.hiveInfoView = hiveInfoView;
+        this.hiveInfoView.setPresenter(this);
         this.apiaryId = apiaryId;
         this.hiveId = hiveId;
     }
@@ -41,34 +64,34 @@ class HivePresenter implements HiveContract.Presenter {
         if (MonitoringActivity.REQUEST_MONITORING == requestCode) {
             if (resultCode == Activity.RESULT_OK) {
                 // Refresh recordings
-                loadRecordings(true);
+                loadData(true);
                 // Show message
-                view.showSuccessfullySavedMessage();
+                hiveRecordingsView.showSuccessfullySavedMessage();
             } else if (resultCode == Activity.RESULT_CANCELED && data != null) {
                 // Get error type
                 int error = data.getIntExtra(HiveRecordingsFragment.ARGUMENT_MONITORING_ERROR, -1);
                 // Show error message
                 switch (error) {
                     case HiveRecordingsFragment.ERROR_RECORDING_TOO_SHORT:
-                        view.showRecordingTooShortErrorMessage();
+                        hiveRecordingsView.showRecordingTooShortErrorMessage();
                         break;
                     case HiveRecordingsFragment.ERROR_SAVING_RECORDING:
-                        view.showSaveErrorMessage();
+                        hiveRecordingsView.showSaveErrorMessage();
                         break;
                     default:
-                        view.showSaveErrorMessage();
+                        hiveRecordingsView.showSaveErrorMessage();
                 }
             }
         }
     }
 
     @Override
-    public void loadRecordings(boolean forceUpdate) {
+    public void loadData(boolean forceUpdate) {
         // Force update the first time
         forceUpdate = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
-        view.setLoadingIndicator(true);
+        hiveRecordingsView.setLoadingIndicator(true);
         // Refresh data if needed
         if (forceUpdate) {
             goBeesRepository.refreshRecordings(hiveId);
@@ -78,84 +101,88 @@ class HivePresenter implements HiveContract.Presenter {
 
             @Override
             public void onHiveLoaded(Hive hive) {
-                // The view may not be able to handle UI updates anymore
-                if (!view.isActive()) {
+                // The hiveRecordingsView may not be able to handle UI updates anymore
+                if (!hiveRecordingsView.isActive() && !hiveInfoView.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                view.setLoadingIndicator(false);
+                hiveRecordingsView.setLoadingIndicator(false);
+                hiveInfoView.setLoadingIndicator(false);
                 // Set hive name as title
-                view.showTitle(hive.getName());
+                hiveRecordingsView.showTitle(hive.getName());
                 // Process recordings
                 if (hive.getRecordings().isEmpty()) {
                     // Show a message indicating there are no recordings
-                    view.showNoRecordings();
+                    hiveRecordingsView.showNoRecordings();
                 } else {
                     // Show the list of recordings
-                    view.showRecordings(hive.getRecordings());
+                    hiveRecordingsView.showRecordings(hive.getRecordings());
                 }
+                // Show hive info
+                hiveInfoView.showInfo(hive);
             }
 
             @Override
             public void onDataNotAvailable() {
-                // The view may not be able to handle UI updates anymore
-                if (!view.isActive()) {
+                // The hiveRecordingsView may not be able to handle UI updates anymore
+                if (!hiveRecordingsView.isActive() || !hiveInfoView.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                view.setLoadingIndicator(false);
+                hiveRecordingsView.setLoadingIndicator(false);
+                hiveInfoView.setLoadingIndicator(false);
                 // Show error
-                view.showLoadingRecordingsError();
+                hiveRecordingsView.showLoadingRecordingsError();
             }
         });
     }
 
     @Override
     public void startNewRecording() {
-        if (view.checkCameraPermission()) {
-            view.startNewRecording(apiaryId, hiveId);
+        if (hiveRecordingsView.checkCameraPermission()) {
+            hiveRecordingsView.startNewRecording(apiaryId, hiveId);
         }
     }
 
     @Override
     public void openRecordingsDetail(@NonNull Recording recording) {
-        view.showRecordingDetail(apiaryId, hiveId, recording.getDate());
+        hiveRecordingsView.showRecordingDetail(apiaryId, hiveId, recording.getDate());
     }
 
     @Override
     public void deleteRecording(@NonNull Recording recording) {
         // Show progress indicator
-        view.setLoadingIndicator(true);
+        hiveRecordingsView.setLoadingIndicator(true);
         // Delete recording
         goBeesRepository.deleteRecording(hiveId, recording, new GoBeesDataSource.TaskCallback() {
             @Override
             public void onSuccess() {
-                // The view may not be able to handle UI updates anymore
-                if (!view.isActive()) {
+                // The hiveRecordingsView may not be able to handle UI updates anymore
+                if (!hiveRecordingsView.isActive()) {
                     return;
                 }
                 // Refresh recordings
-                loadRecordings(true);
+                loadData(true);
                 // Show success message
-                view.showSuccessfullyDeletedMessage();
+                hiveRecordingsView.showSuccessfullyDeletedMessage();
             }
 
             @Override
             public void onFailure() {
-                // The view may not be able to handle UI updates anymore
-                if (!view.isActive()) {
+                // The hiveRecordingsView may not be able to handle UI updates anymore
+                if (!hiveRecordingsView.isActive()) {
                     return;
                 }
                 // Hide progress indicator
-                view.setLoadingIndicator(false);
+                hiveRecordingsView.setLoadingIndicator(false);
                 // Show error
-                view.showDeletedErrorMessage();
+                hiveRecordingsView.showDeletedErrorMessage();
             }
         });
     }
 
     @Override
     public void start() {
-        loadRecordings(false);
+        loadData(false);
     }
 }

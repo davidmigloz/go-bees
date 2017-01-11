@@ -1,3 +1,21 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.apiary;
 
 import android.content.Intent;
@@ -39,7 +57,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Display a list of hives.
  */
 public class ApiaryHivesFragment extends Fragment
-        implements BaseTabFragment, ApiaryContract.View, HivesAdapter.HiveItemListener {
+        implements BaseTabFragment, ApiaryContract.ApiaryHivesView, HivesAdapter.HiveItemListener {
 
     public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
 
@@ -47,6 +65,7 @@ public class ApiaryHivesFragment extends Fragment
     private HivesAdapter listAdapter;
     private View noHivesView;
     private LinearLayout hivesView;
+    private FloatingActionButton fab;
 
     /**
      * Get ApiaryHivesFragment instance.
@@ -85,8 +104,7 @@ public class ApiaryHivesFragment extends Fragment
         noHivesView = root.findViewById(R.id.no_hives);
 
         // Set up floating action button
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +126,7 @@ public class ApiaryHivesFragment extends Fragment
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.loadHives(false);
+                presenter.loadData(false);
             }
         });
 
@@ -125,6 +143,14 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.apiary_frag_menu, menu);
     }
@@ -136,7 +162,7 @@ public class ApiaryHivesFragment extends Fragment
                 NavUtils.navigateUpFromSameTask(getActivity());
                 return true;
             case R.id.menu_refresh:
-                presenter.loadHives(true);
+                presenter.loadData(true);
                 break;
         }
         return true;

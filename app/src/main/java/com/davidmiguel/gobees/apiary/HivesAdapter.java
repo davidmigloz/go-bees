@@ -1,3 +1,21 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.apiary;
 
 import android.graphics.Color;
@@ -5,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -19,6 +38,7 @@ import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.utils.BaseViewHolder;
 import com.davidmiguel.gobees.utils.ItemTouchHelperViewHolder;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -79,6 +99,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
         private View viewHolder;
         private CardView card;
         private TextView hiveName;
+        private TextView lastRevision;
         private ImageView moreIcon;
 
         private Drawable background;
@@ -90,6 +111,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
             viewHolder = itemView;
             card = (CardView) itemView.findViewById(R.id.card);
             hiveName = (TextView) itemView.findViewById(R.id.hive_name);
+            lastRevision = (TextView) itemView.findViewById(R.id.last_revision);
             moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
 
             // Set listeners
@@ -108,6 +130,8 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
 
         public void bind(@NonNull Hive hive) {
             hiveName.setText(hive.getName());
+            lastRevision.setText(DateUtils.getRelativeTimeSpanString(hive.getLastRevision().getTime(),
+                    (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
         }
 
         @Override

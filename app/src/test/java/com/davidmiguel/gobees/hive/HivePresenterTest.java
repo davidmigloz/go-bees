@@ -1,3 +1,20 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package com.davidmiguel.gobees.hive;
 
 import com.davidmiguel.gobees.data.model.Hive;
@@ -34,7 +51,10 @@ public class HivePresenterTest {
     private GoBeesRepository goBeesRepository;
 
     @Mock
-    private HiveContract.View hiveView;
+    private HiveContract.HiveRecordingsView hiveRecordingsView;
+
+    @Mock
+    private HiveContract.HiveInfoView hiveInfoView;
 
     private HivePresenter hivePresenter;
 
@@ -54,10 +74,11 @@ public class HivePresenterTest {
                 RecordingMother.newDefaultRecording()));
 
         // Get a reference to the class under test
-        hivePresenter = new HivePresenter(goBeesRepository, hiveView, 0,HIVE.getId());
+        hivePresenter = new HivePresenter(goBeesRepository,
+                hiveRecordingsView, hiveInfoView, 0, HIVE.getId());
 
         // The presenter won't update the view unless it's active
-        when(hiveView.isActive()).thenReturn(true);
+        when(hiveRecordingsView.isActive()).thenReturn(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,19 +86,20 @@ public class HivePresenterTest {
     public void loadRecordings_showRecordingsIntoView() {
         // Given an initialized HivePresenter
         // When loading of recordings is requested
-        hivePresenter.loadRecordings(true);
+        hivePresenter.loadData(true);
 
         // Callback is captured and invoked with stubbed hives
         verify(goBeesRepository).getHiveWithRecordings(anyLong(), getHiveCallbackArgumentCaptor.capture());
         getHiveCallbackArgumentCaptor.getValue().onHiveLoaded(HIVE);
 
         // Then progress indicator is shown
-        InOrder inOrder = inOrder(hiveView);
-        inOrder.verify(hiveView).setLoadingIndicator(true);
+        InOrder inOrder = inOrder(hiveRecordingsView);
+        inOrder.verify(hiveRecordingsView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
-        inOrder.verify(hiveView).setLoadingIndicator(false);
+        inOrder.verify(hiveRecordingsView).isActive();
+        inOrder.verify(hiveRecordingsView).setLoadingIndicator(false);
         ArgumentCaptor<List> showRecordingsArgumentCaptor = ArgumentCaptor.forClass(List.class);
-        verify(hiveView).showRecordings(showRecordingsArgumentCaptor.capture());
+        verify(hiveRecordingsView).showRecordings(showRecordingsArgumentCaptor.capture());
         // Assert that the number of hives shown is the expected
         assertTrue(showRecordingsArgumentCaptor.getValue().size() == HIVE.getRecordings().size());
     }

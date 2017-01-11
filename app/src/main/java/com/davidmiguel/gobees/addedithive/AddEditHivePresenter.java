@@ -1,3 +1,21 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.addedithive;
 
 import com.davidmiguel.gobees.data.model.Hive;
@@ -5,6 +23,8 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextHiveIdCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+
+import java.util.Date;
 
 /**
  * Listens to user actions from the UI AddEditHiveFragment, retrieves the data and updates the
@@ -77,12 +97,16 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
 
     @Override
     public void onSuccess() {
+        // Close keyboard
+        view.closeKeyboard();
         // Apiary saved successfully -> go back to apiaries activity
         view.showHivesList();
     }
 
     @Override
     public void onFailure() {
+        // Close keyboard
+        view.closeKeyboard();
         // Error saving apiaries
         view.showSaveHiveError();
     }
@@ -126,7 +150,7 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
     }
 
     /**
-     * aves (or update) the hive.
+     * Saves (or update) the hive.
      *
      * @param hiveId hive id.
      * @param name   hive name.
@@ -139,6 +163,8 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
         hive.setName(name);
         // Set notes
         hive.setNotes(notes);
+        // Set last revision (now)
+        hive.setLastRevision(new Date());
         // Save it if it is correct
         if (hive.isValidHive()) {
             goBeesRepository.saveHive(apiaryId, hive, this);

@@ -1,3 +1,21 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.addedithive;
 
 import android.app.Activity;
@@ -10,9 +28,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -97,6 +117,11 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
     @Override
     public void setNotes(String notes) {
         notesTextView.setText(notes);
+    }
+
+    @Override
+    public void closeKeyboard() {
+        AndroidUtils.closeKeyboard(getActivity());
     }
 
     @Override

@@ -361,7 +361,226 @@ Estudio de viabilidad
 ---------------------
 
 Viabilidad económica
---------------------
+~~~~~~~~~~~~~~~~~~~~
+
+TODO
 
 Viabilidad legal
-----------------
+~~~~~~~~~~~~~~~~
+
+En esta sección se discutirán los temas relacionados con las licencias.
+Tanto del propio *software*, como de su documentación, imágenes y
+vídeos.
+
+"En Derecho, una licencia es un contrato mediante el cual una persona
+recibe de otra el derecho de uso, de copia, de distribución, de estudio
+y de modificación (en el caso del *Software* Libre) de varios de sus
+bienes, normalmente de carácter no tangible o intelectual, pudiendo
+darse a cambio del pago de un monto determinado por el uso de los
+mismos." [wiki:licencia]_
+
+Software
+^^^^^^^^
+
+En primer lugar, vamos a analizar cuál sería la licencia más conveniente
+para nuestro proyecto. Por un lado, somos nosotros los que podemos
+elegir qué derechos queremos proporcionar a los usuarios y cuáles no.
+Sin embargo, estamos limitados por los derechos que nos conceden a
+nosotros las licencias de las dependencias utilizadas en el proyecto.
+
+A continuación, se muestran las licencias de las dependencias usadas.
+
++----------------+---------+----------------------------------------------+----------+
+| Dependencia    | Versión | Descripción                                  | Licencia |
++================+=========+==============================================+==========+
+| Android        | 25.1.0  | Biblioteca de compatibilidad de Android.     | Apache   |
+| Support        |         |                                              | v2.0     |
+| Library        |         |                                              |          |
++----------------+---------+----------------------------------------------+----------+
+| OpenCV         | 3.1.0   | Biblioteca de visión artificial.             | BSD      |
++----------------+---------+----------------------------------------------+----------+
+| Google Play    | 10.0.1  | Biblioteca que proporciona acceso a          | Apache   |
+| Services       |         | diferentes servicios, entre ellos,           | v2.0     |
+|                |         | localización.                                |          |
++----------------+---------+----------------------------------------------+----------+
+| Guava          | 20.0    | Conjunto de bibliotecas comunes para Java.   | Apache   |
+|                |         |                                              | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+| RoundedImageVi | 2.3.0   | Componente para mostrar imágenes redondeadas | Apache   |
+| ew             |         | en Android.                                  | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+| MPAndroidChart | 3.0.1   | Biblioteca de gráficos para Android.         | Apache   |
+|                |         |                                              | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+| VNTNumberPicker| 1.0.0   | Componente para seleccionar valores          | Apache   |
+| Preference     |         | numéricos.                                   | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+| Permission     | 1.0.6   | Biblioteca que facilita la gestión de        | MIT      |
+| Utils          |         | permisos en tiempo de ejecución.             |          |
++----------------+---------+----------------------------------------------+----------+
+| JUnit          | 4.12    | Framework para *testing* unitario en Java.   | EPL      |
++----------------+---------+----------------------------------------------+----------+
+| Mockito        | 2.0.2   | Framework para *mocking* en Java.            | MIT      |
++----------------+---------+----------------------------------------------+----------+
+| SLF4J          | 1.7.21  | API para *logging* en Java.                  | MIT      |
+|                |         |                                              |          |
++----------------+---------+----------------------------------------------+----------+
+| Apache Log4j   | 1.7.21  | Biblioteca para *logging* en Java.           | Apache   |
+|                |         |                                              | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+| Android JSON   | 20160810| Biblioteca para trabajar con JSON.           | Apache   |
+|                |         |                                              | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+| Espresso       | 2.2.2   | Framework de *testing* para Android.         | Apache   |
+|                |         |                                              | v2.0     |
++----------------+---------+----------------------------------------------+----------+
+
+Por lo tanto, tenemos que escoger una licencia para nuestro proyecto que
+sea compatible con Apache v2.0, BSD, MIT y EPL. En el siguiente gráfico
+mostramos la compatibilidad entre estas licencias, así como su grado de
+permisividad.
+
+.. figure:: https://cloud.githubusercontent.com/assets/6546265/21730744/6bc30c16-d451-11e6-9c6a-dfae7ba3348d.png
+   :alt: licenses\_compatibility
+
+Podemos observar que la licencia más restrictiva (en el sentido de
+obligaciones a cumplir) es la *Eclipse Public License* que posee la
+librería JUnit.
+
+La forma de monetización del proyecto se realizará mediante
+suscripciones a una plataforma *cloud* que permitirá la sincronización
+entre varios dispositivos, entre otras funcionalidades. Por lo tanto, la
+liberación del código del proyecto no pone en peligro su monetización,
+sino todo lo contrario, abre la puerta a que la comunidad *Open Source*
+aporte valor adicional a nuestro proyecto. El permitir la distribución
+de la app libremente y de forma gratuita también nos es beneficioso, ya
+que aumenta las posibilidades de recibir nuevas suscripciones de
+usuarios. Y por último, no nos importaría que otras empresas se basaran
+en nuestro código fuente para desarrollar sus productos, siempre los
+liberaran bajo una licencia de código abierto para que nosotros también
+pudiéramos aprovechar las mejoras que hubieran realizado.
+
+Teniendo en cuenta todo lo anterior, la licencia que más se ajusta a
+nuestras pretensiones es la *GNU General Public License v3.0*, que, de
+forma resumida, establece lo siguiente: [license:gplv3]_
+
++--------------------+------------------------------------------+----------------------------------+
+| Derechos           | Condiciones                              | Limitaciones                     |
++====================+==========================================+==================================+
+| Uso comercial.     | Liberar código fuente.                   | Limitación de responsabilidad.   |
++--------------------+------------------------------------------+----------------------------------+
+| Distribución.      | Nota sobre la licencia y copyright.      | Sin garantías.                   |
++--------------------+------------------------------------------+----------------------------------+
+| Modificación.      | Modificaciones bajo la misma licencia.   |                                  |
++--------------------+------------------------------------------+----------------------------------+
+| Uso de patentes.   | Indicar modificaciones realizadas.       |                                  |
++--------------------+------------------------------------------+----------------------------------+
+| Uso privado.       |                                          |                                  |
++--------------------+------------------------------------------+----------------------------------+
+
+Sin embargo, GPL v3.0 no es compatible con la licencia EPL que posee
+JUnit. Ya que, la EPL requiere que "cualquier distribución del trabajo
+conceda a todos los destinatarios una licencia para las patentes que
+pudieran tener que cubrir las modificaciones que han hecho" [license:epl]_. Esto supone
+que los destinatarios pueden añadir una restricción adicional, hecho que
+prohíbe rotundamente GPL: "[que el distribuidor] no imponga ninguna
+restricción más sobre el ejercicio de los derechos concedidos a los
+beneficiarios" [license:gplv3]_.
+
+Tras analizar otras licencias alternativas, no se ha encontrado ninguna
+compatible con EPL y, a la vez, con nuestras pretensiones. Por lo que
+finalmente se ha tomado la decisión de utilizar dos licencias para el
+código fuente del proyecto. Por un lado, todo el código fuente de la
+aplicación se ha licenciado bajo GPL v3.0. Mientras que el código fuente
+de testeo, que hace uso de código licenciado bajo EPL (JUnit), se ha
+liberado bajo licencia Apache v2.0, la cual sí que es compatible con
+EPL.
+
+Documentación
+^^^^^^^^^^^^^
+
+Aunque se puede utilizar también la licencia GPL v3.0 para licenciar la
+documentación, no es lo más recomendable. Ya que contiene numerosas
+cláusulas que solo tienen sentido cuando se habla de código fuente. Por
+ejemplo, si alguien quisiese distribuir una copia de la documentación de
+forma impresa, estaría obligado a proporcionar también una copia del
+código fuente.
+
+Por lo que se ha decido utilizar una licencia *Creative Commons*, las
+cuales están más enfocadas a licenciar este tipo de material. En
+concreto, se ha elegido la *Creative Commons Attribution 4.0
+International* (CC-BY-4.0). Que establece lo siguiente: [license:ccby4]_
+
++--------------+---------------------------+-------------------------------------+
+| Derechos     | Condiciones               | Limitaciones                        |
++==============+===========================+=====================================+
+| Uso          | Nota sobre la licencia y  | Limitación de responsabilidad.      |
+| comercial.   | copyright.                |                                     |
++--------------+---------------------------+-------------------------------------+
+| Distribución.| Indicar modificaciones    | Sin garantías.                      |
+|              | realizadas.               |                                     |
++--------------+---------------------------+-------------------------------------+
+| Modificación.|                           | No proporciona derechos sobre       |
+|              |                           | marcas registradas.                 |
++--------------+---------------------------+-------------------------------------+
+| Uso privado. |                           | No proporciona derechos sobre       |
+|              |                           | patentes.                           |
++--------------+---------------------------+-------------------------------------+
+
+Imágenes y vídeos
+^^^^^^^^^^^^^^^^^
+
+En la documentación no se ha utilizado ninguna imagen de terceros, todas
+las imágenes son propias del proyecto y cuentan con la misma licencia
+que la documentación (CC-BY-4.0).
+
+El *dataset* de vídeos de prueba también se encuentra bajo la misma
+licencia.
+
+Por otro lado, en la aplicación se han utilizado dos fuentes de
+imágenes de terceros:
+
++-------------------------+-----------------------------------------+---------------+
+| Fuente                  | Descripción                             | Licencia      |
++=========================+=========================================+===============+
+| Material design icons   | Conjunto de iconos oficial de Google.   | Apache v2.0   |
++-------------------------+-----------------------------------------+---------------+
+| Simple Weather Icons    | Conjunto de iconos meteorológicos.      | Apache v2.0   |
++-------------------------+-----------------------------------------+---------------+
+
+Aunque ambos autores renuncian a la obligación de especificar
+explícitamente su autoría, se les ha mencionado en la sección "Licencias
+de software libre" de la aplicación.
+
+El resto de imágenes y gráficos utilizados son de autoría propia y se
+distribuyen también bajo CC-BY-4.0.3.
+
+Resumen
+^^^^^^^
+
+En la siguiente tabla se resumen las licencias que posee el proyecto.
+
++-----------------------+---------------+
+| Recurso               | Licencia      |
++=======================+===============+
+| Código fuente app     | GPLv3         |
++-----------------------+---------------+
+| Código fuente tests   | Apache v2.0   |
++-----------------------+---------------+
+| Documentación         | CC-BY-4.0     |
++-----------------------+---------------+
+| Imágenes              | CC-BY-4.0     |
++-----------------------+---------------+
+| Vídeos                | CC-BY-4.0     |
++-----------------------+---------------+
+
+.. References
+
+.. [wiki:licencia]
+   https://es.wikipedia.org/w/index.php?title=Licencia&oldid=94243114
+.. [license:gplv3]
+   https://www.gnu.org/licenses/gpl-3.0.txt
+.. [license:epl]
+   https://www.eclipse.org/legal/epl-v10.html
+.. [license:ccby4]
+   https://creativecommons.org/licenses/by/4.0

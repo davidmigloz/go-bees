@@ -1,3 +1,21 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.data.source.local;
 
 import android.support.annotation.NonNull;
@@ -158,6 +176,15 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
         Number nextId = realm.where(Apiary.class).max("id");
         callback.onNextApiaryIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
+    }
+
+    @Override
+    public Date getApiaryLastRevision(long apiaryId) {
+        // Get apiary
+        Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+        // Get last revision date from all hives
+        return apiary.getHives() == null
+                ? null : apiary.getHives().where().maximumDate("lastRevision");
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -329,6 +356,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     // Add to hive
                     Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
                     hive.addRecords(records);
+                    // Update last revision date (now)
+                    hive.setLastRevision(new Date());
                 }
             });
             callback.onSuccess();

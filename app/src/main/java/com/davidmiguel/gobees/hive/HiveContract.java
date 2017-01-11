@@ -1,8 +1,27 @@
+/*
+ * GoBees
+ * Copyright (c) 2016 - 2017 David Miguel Lozano
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ */
+
 package com.davidmiguel.gobees.hive;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
+import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
@@ -15,7 +34,7 @@ import java.util.List;
  */
 interface HiveContract {
 
-    interface View extends BaseView<HiveContract.Presenter> {
+    interface HiveRecordingsView extends BaseView<HiveContract.Presenter> {
 
         /**
          * Displays or hide loading indicator.
@@ -98,6 +117,23 @@ interface HiveContract {
         boolean checkCameraPermission();
     }
 
+    interface HiveInfoView extends BaseView<HiveContract.Presenter> {
+
+        /**
+         * Displays or hide loading indicator.
+         *
+         * @param active true or false.
+         */
+        void setLoadingIndicator(final boolean active);
+
+        /**
+         * Shows the hive info.
+         *
+         * @param hive hive to show.
+         */
+        void showInfo(Hive hive);
+    }
+
     interface Presenter extends BasePresenter {
 
         /**
@@ -110,11 +146,11 @@ interface HiveContract {
         void result(int requestCode, int resultCode, Intent data);
 
         /**
-         * Load recordings from repository.
+         * Load hive info and its recordings from repository.
          *
          * @param forceUpdate force cache update.
          */
-        void loadRecordings(boolean forceUpdate);
+        void loadData(boolean forceUpdate);
 
         /**
          * Orders to open activity to record a hive.
