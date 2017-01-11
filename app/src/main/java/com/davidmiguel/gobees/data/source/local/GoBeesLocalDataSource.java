@@ -178,6 +178,15 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         callback.onNextApiaryIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
     }
 
+    @Override
+    public Date getApiaryLastRevision(long apiaryId) {
+        // Get apiary
+        Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+        // Get last revision date from all hives
+        return apiary.getHives() == null
+                ? null : apiary.getHives().where().maximumDate("lastRevision");
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Override
     public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {

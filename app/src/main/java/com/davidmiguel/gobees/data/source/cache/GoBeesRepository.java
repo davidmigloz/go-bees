@@ -80,8 +80,9 @@ public class GoBeesRepository implements GoBeesDataSource {
 
     /**
      * Get GoBeesRepository instance.
+     *
      * @param apiariesLocalDataSource local data source.
-     * @param weatherDataSource weather data source.
+     * @param weatherDataSource       weather data source.
      * @return GoBeesRepository instace.
      */
     public static GoBeesRepository getInstance(GoBeesDataSource apiariesLocalDataSource,
@@ -200,6 +201,11 @@ public class GoBeesRepository implements GoBeesDataSource {
         checkNotNull(callback);
         // Get next id
         goBeesDataSource.getNextApiaryId(callback);
+    }
+
+    @Override
+    public Date getApiaryLastRevision(long apiaryId) {
+        return goBeesDataSource.getApiaryLastRevision(apiaryId);
     }
 
     @SuppressWarnings("ConstantConditions")

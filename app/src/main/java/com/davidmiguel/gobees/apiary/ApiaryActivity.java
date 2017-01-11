@@ -83,7 +83,7 @@ public class ApiaryActivity extends AppCompatActivity {
         goBeesRepository.openDb();
 
         // Create the presenter
-        new ApiaryPresenter(goBeesRepository, apiaryHivesFragment, apiaryId);
+        new ApiaryPresenter(goBeesRepository, apiaryHivesFragment, apiaryInfoFragment, apiaryId);
     }
 
     @Override

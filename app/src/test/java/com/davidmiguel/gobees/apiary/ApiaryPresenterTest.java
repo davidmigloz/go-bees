@@ -51,7 +51,7 @@ public class ApiaryPresenterTest {
     private GoBeesRepository goBeesRepository;
 
     @Mock
-    private ApiaryContract.View hivesView;
+    private ApiaryContract.ApiaryHivesView apiaryHivesView;
 
     private ApiaryPresenter apiaryPresenter;
 
@@ -67,10 +67,10 @@ public class ApiaryPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        apiaryPresenter = new ApiaryPresenter(goBeesRepository, hivesView, APIARY_ID);
+        apiaryPresenter = new ApiaryPresenter(goBeesRepository, apiaryHivesView, APIARY_ID);
 
         // The presenter won't update the view unless it's active
-        when(hivesView.isActive()).thenReturn(true);
+        when(apiaryHivesView.isActive()).thenReturn(true);
 
         // Create 3 hives
         APIARY = ApiaryMother.newDefaultApiary(NUM_BEES);
@@ -81,19 +81,19 @@ public class ApiaryPresenterTest {
     public void loadHives_showHivesIntoView() {
         // Given an initialized ApiaryPresenter
         // When loading of hives of apiary 1 is requested
-        apiaryPresenter.loadHives(true);
+        apiaryPresenter.loadData(true);
 
         // Callback is captured and invoked with stubbed hives
         verify(goBeesRepository).getApiary(anyLong(), getApiaryCallbackArgumentCaptor.capture());
         getApiaryCallbackArgumentCaptor.getValue().onApiaryLoaded(APIARY);
 
         // Then progress indicator is shown
-        InOrder inOrder = inOrder(hivesView);
-        inOrder.verify(hivesView).setLoadingIndicator(true);
+        InOrder inOrder = inOrder(apiaryHivesView);
+        inOrder.verify(apiaryHivesView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
-        inOrder.verify(hivesView).setLoadingIndicator(false);
+        inOrder.verify(apiaryHivesView).setLoadingIndicator(false);
         ArgumentCaptor<List> showHivesArgumentCaptor = ArgumentCaptor.forClass(List.class);
-        verify(hivesView).showHives(showHivesArgumentCaptor.capture());
+        verify(apiaryHivesView).showHives(showHivesArgumentCaptor.capture());
         // Assert that the number of hives shown is the expected
         assertTrue(showHivesArgumentCaptor.getValue().size() == APIARY.getHives().size());
     }

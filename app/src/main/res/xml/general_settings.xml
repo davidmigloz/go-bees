@@ -23,10 +23,10 @@
         android:key="@string/pref_weather_cat_key"
         android:title="@string/pref_weather_cat_label">
         <ListPreference
-            android:defaultValue="@string/pref_temp_units_metric"
+            android:defaultValue="@string/pref_weather_units_metric"
             android:entries="@array/pref_temp_units_options"
             android:entryValues="@array/pref_temp_units_values"
-            android:key="@string/pref_temp_units_key"
-            android:title="@string/pref_temp_units_label"/>
+            android:key="@string/pref_weather_units_key"
+            android:title="@string/pref_weather_units_label"/>
     </PreferenceCategory>
 </PreferenceScreen>

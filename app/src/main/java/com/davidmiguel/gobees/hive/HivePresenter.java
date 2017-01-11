@@ -120,7 +120,6 @@ class HivePresenter implements HiveContract.Presenter {
                 }
                 // Show hive info
                 hiveInfoView.showInfo(hive);
-                hive.getRecords();
             }
 
             @Override

@@ -45,7 +45,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Displays hive info.
  */
-public class HiveInfoFragment extends Fragment implements BaseTabFragment, HiveContract.HiveInfoView {
+public class HiveInfoFragment extends Fragment
+        implements BaseTabFragment, HiveContract.HiveInfoView {
 
     private HiveContract.Presenter presenter;
     private FloatingActionButton fab;
@@ -125,8 +126,10 @@ public class HiveInfoFragment extends Fragment implements BaseTabFragment, HiveC
 
     @Override
     public void showInfo(Hive hive) {
+        // Last revision
         lastRevision.setText(DateUtils.getRelativeTimeSpanString(hive.getLastRevision().getTime(),
                 (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
+        // Notes
         if (Strings.isNullOrEmpty(hive.getNotes())) {
             notes.setText(getString(R.string.no_notes));
         } else {

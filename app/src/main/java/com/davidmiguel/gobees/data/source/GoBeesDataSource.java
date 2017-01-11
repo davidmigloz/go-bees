@@ -109,6 +109,14 @@ public interface GoBeesDataSource {
     void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback);
 
     /**
+     * Gets the last date when apiary info was updated.
+     *
+     * @param apiaryId apiary id.
+     * @return apiary last revision date.
+     */
+    Date getApiaryLastRevision(long apiaryId);
+
+    /**
      * Gets all hives.
      * Note: don't modify the Hive objects.
      *
