@@ -53,6 +53,9 @@ public class ApiaryPresenterTest {
     @Mock
     private ApiaryContract.ApiaryHivesView apiaryHivesView;
 
+    @Mock
+    private ApiaryContract.ApiaryInfoView apiaryInfoView;
+
     private ApiaryPresenter apiaryPresenter;
 
     @Captor
@@ -67,7 +70,8 @@ public class ApiaryPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        apiaryPresenter = new ApiaryPresenter(goBeesRepository, apiaryHivesView, APIARY_ID);
+        apiaryPresenter = new ApiaryPresenter(goBeesRepository,
+                apiaryHivesView, apiaryInfoView, APIARY_ID);
 
         // The presenter won't update the view unless it's active
         when(apiaryHivesView.isActive()).thenReturn(true);
