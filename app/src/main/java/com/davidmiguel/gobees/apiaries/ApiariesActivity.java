@@ -103,8 +103,9 @@ public class ApiariesActivity extends AppCompatActivity {
                 // Open the navigation drawer when the home icon is selected from the toolbar
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /**

@@ -56,7 +56,8 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     @Override
     public void result(int requestCode, int resultCode) {
         // If a apiary was successfully added, show snackbar
-        if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode && Activity.RESULT_OK == resultCode) {
+        if (AddEditApiaryActivity.REQUEST_ADD_APIARY == requestCode
+                && Activity.RESULT_OK == resultCode) {
             view.showSuccessfullySavedMessage();
         }
     }
@@ -72,7 +73,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         if (forceUpdate) {
             goBeesRepository.refreshApiaries();
         }
-        // Get apiaires
+        // Get apiaries
         goBeesRepository.getApiaries(new GoBeesDataSource.GetApiariesCallback() {
 
             @Override
@@ -194,7 +195,8 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         }
         // Update weather if needed
         if (apiariesToUpdate.size() > 0) {
-            goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate, new GoBeesDataSource.TaskCallback() {
+            goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate,
+                    new GoBeesDataSource.TaskCallback() {
                 @Override
                 public void onSuccess() {
                     view.notifyApiariesUpdated();
