@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ GoBees
+  ~ Copyright (c) 2016 - 2017 David Miguel Lozano
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+  -->
+
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+    <string name="about_title">Sobre GoBees</string>
+    <string name="add_apiary">Afegir abellar</string>
+    <string name="add_hive">Afegir rusc</string>
+    <string name="apiary_hives_tab">Ruscs</string>
+    <string name="apiary_info_tab">Info</string>
+    <string name="apiary_location_hint">Localització</string>
+    <string name="apiary_logo">Logotip de l\'abellar</string>
+    <string name="apiary_name_hint">Nom</string>
+    <string name="apiary_notes_hint">Notes…</string>
+    <string name="camera_permission_request_body">Sense aquest permís l\'aplicació no pot monitoritzar l\'activitat del vol del teu rusc. Estàs segur que vols rebutjar aquest permís?</string>
+    <string name="chart_line">Línia del gràfic</string>
+    <string name="condition_200">Tempesta amb pluja lleugera</string>
+    <string name="condition_201">Tempesta amb pluja</string>
+    <string name="condition_202">Tempesta amb pluja abundant</string>
+    <string name="condition_210">Tempesta dèbil</string>
+    <string name="condition_211">Tempesta</string>
+    <string name="condition_212">Tempesta abundant</string>
+    <string name="condition_221">Tempesta intermitent</string>
+    <string name="condition_230">Tempesta amb plugim lleuger</string>
+    <string name="condition_231">Tempesta amb plugim</string>
+    <string name="condition_232">Tempesta amb plugim abundant</string>
+    <string name="condition_300">Plugim lleuger</string>
+    <string name="condition_301">Plugim</string>
+    <string name="condition_302">Plugim abundant</string>
+    <string name="condition_310">Plugim lleuger</string>
+    <string name="condition_311">Plugim</string>
+    <string name="condition_312">Plugim abundant</string>
+    <string name="condition_313">Xàfec</string>
+    <string name="condition_314">Xàfec abundant</string>
+    <string name="condition_321">Xàfec</string>
+    <string name="condition_500">Pluja lleugera</string>
+    <string name="condition_501">Pluja moderada</string>
+    <string name="condition_502">Pluja abundant</string>
+    <string name="condition_503">Pluja molt forta</string>
+    <string name="condition_504">Pluja extrema</string>
+    <string name="condition_511">Pluja aiguaneu</string>
+    <string name="condition_520">Xàfec lleguer</string>
+    <string name="condition_521">Xàfec</string>
+    <string name="condition_522">Xàfec abundant</string>
+    <string name="condition_601">Neu</string>
+    <string name="condition_600">Neu lleugera</string>
+    <string name="condition_602">Neu abundant</string>
+    <string name="condition_531">Xàfec intermitent</string>
+    <string name="condition_611">Aiguaneu</string>
+    <string name="condition_612">Aiguaneu</string>
+    <string name="condition_615">Pluja lleugera amb neu</string>
+    <string name="condition_616">Pluja amb neu</string>
+    <string name="condition_620">Pluja lleugera amb neu</string>
+    <string name="condition_621">Nevades intermitents</string>
+    <string name="condition_622">Nevades fortes intermitents</string>
+    <string name="condition_701">Boirina</string>
+    <string name="condition_711">Fum</string>
+    <string name="condition_741">Boira</string>
+    <string name="condition_731">Núvols de pols</string>
+    <string name="condition_721">Núvols de pol·lució</string>
+    <string name="condition_751">Núvols de sorra</string>
+    <string name="condition_761">Núvols de pols</string>
+    <string name="condition_762">Cendra volcànica</string>
+    <string name="condition_771">Borrasca</string>
+    <string name="condition_781">Tornado</string>
+    <string name="condition_800">Cel clar</string>
+    <string name="condition_801">Cel majoritàriament clar</string>
+    <string name="condition_802">Núvuls dispersos</string>
+    <string name="condition_803">Núvuls dispersos</string>
+    <string name="condition_804">Cel cobert</string>
+    <string name="condition_900">Tornado</string>
+    <string name="condition_902">Huracà</string>
+    <string name="condition_901">Tempesta tropical</string>
+    <string name="condition_903">Fred</string>
+    <string name="condition_905">Ventós</string>
+    <string name="condition_904">Calor</string>
+    <string name="condition_906">Calamarsa</string>
+    <string name="condition_951">Calma</string>
+    <string name="condition_952">Brisa lleugera</string>
+    <string name="condition_953">Brisa lleugera</string>
+    <string name="condition_954">Brisa moderada</string>
+    <string name="wind">Vent</string>
+    <string name="weather_update_error_message">Error a l\'actualitzar la meteorologia actual.</string>
+    <string name="weather_icon">Icona del temps</string>
+    <string name="weather_condition">Temps</string>
+    <string name="temperature">Temperatura</string>
+    <string name="successfully_updated_weather_message">Meteorologia actual actualitzada!</string>
+    <string name="snow">Neu</string>
+    <string name="start_record_icon">Icona d\'inici de gravació</string>
+    <string name="successfully_deleted_apiary_message">Abellar eliminat!</string>
+    <string name="successfully_deleted_hive_message">Rusc eliminat!</string>
+    <string name="successfully_deleted_recording_message">Gravació eliminada!</string>
+    <string name="successfully_saved_apiary_message">Abellar guardat!</string>
+    <string name="successfully_saved_hive_message">Rusc guardat!</string>
+    <string name="successfully_saved_recording_message">Gravació guardada!</string>
+    <string name="share_app_url">https://play.google.com/store/apps/details?id=com.davidmiguel.gobees</string>
+    <string name="share_app_title">Comparteix aquesta aplicació</string>
+    <string name="share_app_text">"GoBees - Aplicació Android per la monitorització de l'activitat dels ruscs. "</string>
+    <string name="settings_title">Configuració</string>
+    <string name="settings_toolbar_title">Configuració</string>
+    <string name="settings_icon">Icona de configuració</string>
+    <string name="searching_gps_message">Buscant connexió GPS…</string>
+    <string name="save_apiary_error_message">Error al guardar l\'abellar.</string>
+    <string name="save_hive_error_message">Error al guardar el rusc.</string>
+    <string name="save_recording_error_message">Error al guardar la gravació.</string>
+    <string name="refresh">Actualitzar</string>
+    <string name="recording_too_short_error_message">Error: La gravació és massa curta!</string>
+    <string name="recording_date_format">EEE d MMM, yyyy</string>
+    <string name="rain">Pluja</string>
+    <string name="pressure">Pressió</string>
+    <string name="pref_zoom_label_x2">x2.0</string>
+    <string name="pref_zoom_label_x1_5">x1.5</string>
+    <string name="pref_zoom_label_x1">x1.0</string>
+    <string name="pref_zoom_label">Zoom</string>
+    <string name="pref_weather_units_label_metric">Mètric (°C, km/h…)</string>
+    <string name="pref_weather_units_label_imperial">Imperial (°F, mph…)</string>
+    <string name="pref_weather_units_label">Unitats meteorològuiques</string>
+    <string name="pref_weather_cat_label">Meteorologia</string>
+    <string name="pref_show_algo_output_label">Mostrar la sortida de l\'algoritme</string>
+    <string name="pref_min_area_label">Mín. àrea abella</string>
+    <string name="pref_max_area_label">Màx. àrea abella</string>
+    <string name="pref_frame_rate_label_5sec">5 seg.</string>
+    <string name="pref_frame_rate_label_5min">5 min.</string>
+    <string name="pref_frame_rate_label_30sec">30 seg.</string>
+    <string name="pref_frame_rate_label_1sec">1 seg.</string>
+    <string name="pref_frame_rate_label_1min">1 min.</string>
+    <string name="pref_frame_rate_label_15sec">15 seg.</string>
+    <string name="pref_frame_rate_label_0_5sec">0.5 seg.</string>
+    <string name="pref_frame_rate_label">Freqüència de mostreig</string>
+    <string name="pref_camera_cat_label">Càmera</string>
+    <string name="pref_blob_size_label">Modificar la mida de les regions</string>
+    <string name="pref_blob_size_label_big">Gran</string>
+    <string name="pref_blob_size_label_normal">Normal</string>
+    <string name="pref_blob_size_label_small">Petit</string>
+    <string name="permission_request_allow_button">PERMETRE</string>
+    <string name="permission_request_denied">L\'aplicació no té permissos per utilitzar aquesta característica.</string>
+    <string name="permission_request_deny_button">DENEGAR</string>
+    <string name="permission_request_title">Permís denegat</string>
+    <string name="pref_bees_cat_label">Abella</string>
+    <string name="num_hives">Número de ruscs</string>
+    <string name="num_bees_default">0</string>
+    <string name="num_bees">Nº d\'abelles</string>
+    <string name="notes_icon">Notes</string>
+    <string name="no_weather_data_available">Informació meteorològica no disponible.</string>
+    <string name="no_records_error">Error: no hi ha dades.</string>
+    <string name="default_city">Burgos</string>
+    <string name="default_hive_name">El meu rusc</string>
+    <string name="default_last_revision">Fa ? dies</string>
+    <string name="default_last_updated">Fa ? dies</string>
+    <string name="default_notes">Notes…</string>
+    <string name="default_num_hives_long">No hi ha ruscs</string>
+    <string name="default_recording_date">Dc. 18 de gen; 2017</string>
+    <string name="general_info_title">Info general</string>
+    <string name="condition_unknown">Desconegut (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
+    <string name="condition_962">Huracà</string>
+    <string name="condition_961">Tempesta violenta</string>
+    <string name="condition_960">Tempesta</string>
+    <string name="condition_957">Vent fort</string>
+    <string name="date_icon">Data</string>
+    <string name="default_apiary_name">El meu rusc</string>
+    <string name="delete">Eliminar</string>
+    <string name="deleted_apiary_error_message">Error a l\'eliminar l\'abellar.</string>
+    <string name="deleted_hive_error_message">Error a l\'eliminar el rusc.</string>
+    <string name="deleted_recording_error_message">Error a l\'eliminar la gravació.</string>
+    <string name="edit">Editar</string>
+    <string name="edit_apiary">Editar l\'abellar</string>
+    <string name="edit_hive">Editar el rusc</string>
+    <string name="empty_apiary_message">El nom de l\'abellar no pot estar buit!</string>
+    <string name="empty_hive_message">El nom del rusc no pot estar buit!</string>
+    <string name="enter_icon">Entrar…</string>
+    <string name="feedback_title">Enviar comentaris</string>
+    <string name="format_humidity_percentage"><xliff:g id="temp">%1.0f</xliff:g>%%</string>
+    <string name="format_pressure_hpa"><xliff:g id="temp">%1.0f</xliff:g> hPa</string>
+    <string name="format_rain_snow_mm"><xliff:g id="temp">%1.2f</xliff:g> mm</string>
+    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>°C</string>
+    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>°F</string>
+    <string name="format_wind_kmh"><xliff:g id="speed">%1$1.0f</xliff:g> km/h - <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="format_wind_mph"><xliff:g id="speed">%1$1.0f</xliff:g> mph - <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="gobees_email_body">Escriu aquí els teus comentaris…</string>
+    <string name="gobees_logo">Logotip de GoBees</string>
+    <string name="gps_error_message">No es pot establir connexió GPS!</string>
+    <string name="gps_location_icon">Obtenir localització GPS</string>
+    <string name="help_title">Ajuda</string>
+    <string name="hive_info_tab">Info</string>
+    <string name="hive_logo">Logotip del rusc</string>
+    <string name="hive_name_hint">Nom</string>
+    <string name="hive_notes_hint">Notes…</string>
+    <string name="hive_recordings_date_format">EEE d MMM, yyyy</string>
+    <string name="hive_recordings_tab">Gravacions</string>
+    <string name="humidity">Humitat</string>
+    <string name="last_revision_icon">Icona de l\'última revisió</string>
+    <string name="last_updated">Actualitzat</string>
+    <string name="loading_apiaries_error">Error al carregar els abellars.</string>
+    <string name="loading_hives_error">Error al carregar els ruscs.</string>
+    <string name="loading_recording_error">Error al carregar la gravació.</string>
+    <string name="loading_recordings_error">Error al carregar les gravacions.</string>
+    <string name="location_icon">Localització</string>
+    <string name="location_permission_request_body">Sense aquest permís l\'aplicació no pot rebre informació meteorològica o localitzar els teus abellars en un mapa. Estàs segur que vols denegar aquest permís?</string>
+    <string name="monitoring_notification_text">Monitoritzant rusc…</string>
+    <string name="map_icon">Mapa</string>
+    <string name="monitoring_text">Monitoritzant…\nPots apagar la pantalla.</string>
+    <string name="more_icon">Més…</string>
+    <string name="no_apiaries">No tens abellars!</string>
+    <string name="no_flight_act_data_available">No hi ha dades disponibles sobre l\'activitat del vol.</string>
+    <string name="no_hives">No tens cap rusc!</string>
+    <string name="no_location">Sense localització</string>
+    <string name="no_notes">Sense notes</string>
+    <string name="no_recordings">No tens gravacions!</string>
+    <string name="condition_955">Brisa fresca</string>
+    <string name="condition_956">Brisa forta</string>
+    <string name="condition_958">Vendaval</string>
+    <string name="condition_959">Vendaval fort</string>
+    <string name="website_btn">Website</string>
+    <string name="version">Versió</string>
+    <string name="gobees_app">GoBees App</string>
+    <string name="developed_author">Desenvolupat per David Miguel Lozano.</string>
+    <string name="default_version">Versió 1.0</string>
+    <string name="changelog_btn">Changelog</string>
+    <string name="close_btn">Cerrar</string>
+    <string name="libraries">Llibreries Codi Obert:</string>
+    <string name="license_btn">Llicència</string>
+</resources>
