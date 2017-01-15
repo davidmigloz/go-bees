@@ -36,6 +36,7 @@ import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.about.AboutActivity;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.help.HelpActivity;
 import com.davidmiguel.gobees.settings.SettingsActivity;
 import com.davidmiguel.gobees.utils.ActivityUtils;
 
@@ -126,7 +127,9 @@ public class ApiariesActivity extends AppCompatActivity {
                                 break;
                             case R.id.help_navigation_menu_item:
                                 // Help
-
+                                Intent helpIntent =
+                                        new Intent(ApiariesActivity.this, HelpActivity.class);
+                                startActivity(helpIntent);
                                 break;
                             case R.id.feedback_navigation_menu_item:
                                 // Feedback

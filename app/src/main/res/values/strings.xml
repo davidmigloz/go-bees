@@ -560,7 +560,7 @@
     <!-- Developed by [CHAR LIMIT=100] -->
     <string name="developed_author">Developed by David Miguel Lozano.</string>
     <!-- Libs [CHAR LIMIT=100] -->
-    <string name="libraries">OpenSource libs:</string>
+    <string name="libraries">Open Source Libraries:</string>
     <!-- Changelog [CHAR LIMIT=NONE] -->
     <string name="changelog">
         <![CDATA[
@@ -641,11 +641,11 @@
 
         <p>
             * Redistributions of source code must retain the above copyright notice,
-              this list of conditions and the following disclaimer.</br>
+              this list of conditions and the following disclaimer.<br>
             * Redistributions in binary form must reproduce the above copyright notice,
               this list of conditions and the following disclaimer in the documentation
-              and/or other materials provided with the distribution.</br>
-            * Neither the name of {{ project }} nor the names of its contributors
+              and/or other materials provided with the distribution.<br>
+            * Neither the name of the project nor the names of its contributors
               may be used to endorse or promote products derived from this software
               without specific prior written permission.
         </p>

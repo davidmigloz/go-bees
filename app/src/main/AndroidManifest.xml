@@ -60,6 +60,9 @@
         <activity
             android:name=".about.AboutActivity"
             android:parentActivityName=".apiaries.ApiariesActivity"/>
+        <activity
+            android:name=".help.HelpActivity"
+            android:parentActivityName=".apiaries.ApiariesActivity"/>
 
         <service android:name=".monitoring.MonitoringService"/>
     </application>
