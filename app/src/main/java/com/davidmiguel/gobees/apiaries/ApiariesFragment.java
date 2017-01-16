@@ -74,7 +74,8 @@ public class ApiariesFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new ApiariesAdapter(getContext(), getActivity().getMenuInflater(), new ArrayList<Apiary>(0), this);
+        listAdapter = new ApiariesAdapter(getContext(), getActivity().getMenuInflater(),
+                new ArrayList<Apiary>(0), this);
     }
 
     @Nullable

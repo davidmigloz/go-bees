@@ -356,6 +356,27 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint13.png
    :alt: Sprint 13.
+
+Sprint 14 (15/12/16 - 11/01/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Se trató del sprint más largo de todos los realizados, con una duración de cuatro
+semanas debido a las vacaciones de Navidad.
+
+Los objetivos de este *sprint* fueron: implementar el servicio de monitorización 
+en segundo plano, junto con su sección de ajustes, la obtención de información 
+meteorológica, la edición y borrado de colmenares y colmenas y las pestañas de 
+información de colmenar y colmena. Además, realizar un estudio de viabilidad 
+legal y selececionar la licencia más apropiada para el proyecto.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 14 <https://github.com/davidmigloz/go-bees/milestone/15?closed=1>`__.
+
+Se estimaron 143 horas de trabajo y se invirtieron finalmente 187,75
+horas, completando todas las tareas.
+
+.. figure:: ../../img/burndowns/sprint14.png
+   :alt: Sprint 14.
    
 Estudio de viabilidad
 ---------------------

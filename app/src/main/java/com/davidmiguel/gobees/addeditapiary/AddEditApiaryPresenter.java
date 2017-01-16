@@ -182,7 +182,7 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
+    public void onConnectionSuspended(int cause) {
         // We don't need to perform any action
     }
 

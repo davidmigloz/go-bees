@@ -104,9 +104,11 @@ public class AddEditApiaryActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         if (addEditApiaryFragment != null) {
-            addEditApiaryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            addEditApiaryFragment.onRequestPermissionsResult(requestCode,
+                    permissions, grantResults);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }

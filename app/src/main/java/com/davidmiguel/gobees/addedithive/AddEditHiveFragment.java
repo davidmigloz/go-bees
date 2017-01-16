@@ -80,7 +80,7 @@ public class AddEditHiveFragment extends Fragment implements AddEditHiveContract
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_hive);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 presenter.save(nameTextView.getText().toString(),
                         notesTextView.getText().toString());
             }

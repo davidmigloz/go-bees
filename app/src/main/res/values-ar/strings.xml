@@ -1,0 +1,475 @@
+<!--
+  ~ GoBees
+  ~ Copyright (c) 2016 - 2017 David Miguel Lozano
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+  --><resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+
+    <!--+++++++++++-->
+    <!-- Generals  -->
+    <!--+++++++++++-->
+
+    <!-- GoBees logo [CHAR LIMIT=NONE] -->
+    <string name="gobees_logo">"شعار GoBees"</string>
+    <!-- Refresh menu option [CHAR LIMIT=25] -->
+    <string name="refresh">"تحديث"</string>
+    <!-- Edit action [CHAR LIMIT=30] -->
+    <string name="edit">"تعديل"</string>
+    <!-- Delete action [CHAR LIMIT=30] -->
+    <string name="delete">"حذف"</string>
+    <!-- Title when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_title">"طلب مرفوض"</string>
+    <!-- Allow button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_allow_button">"السماح"</string>
+    <!-- Deny button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_deny_button">"الرفض"</string>
+    <!-- Message when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_denied">"التطبيق ليس لديه الصلاحية لاستخدام هذه الميزة"</string>
+
+
+    <!--+++++++++-->
+    <!-- Weather -->
+    <!--+++++++++-->
+
+    <!-- Weather condition [CHAR LIMIT=15] -->
+    <string name="weather_condition">"الحالة"</string>
+    <!-- Temperature [CHAR LIMIT=30] -->
+    <string name="temperature">"درجة الحرارة"</string>
+    <!-- Humidity [CHAR LIMIT=15] -->
+    <string name="humidity">"رطوبة"</string>
+    <!-- Pressure [CHAR LIMIT=15] -->
+    <string name="pressure">"الضغط"</string>
+    <!-- Wind [CHAR LIMIT=15] -->
+    <string name="wind">"سرعة الرياح"</string>
+    <!-- Rain [CHAR LIMIT=15] -->
+    <string name="rain">"مطر"</string>
+    <!-- Snow [CHAR LIMIT=15] -->
+    <string name="snow">"ثلج"</string>
+    <!-- Format temperature in Celsius unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
+    <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
+    <!-- Format humidity  in percentage. Ej: 18% [CHAR LIMIT=NONE] -->
+    <string name="format_humidity_percentage"><xliff:g id="temp">%1.0f</xliff:g>%%</string>
+    <!-- Format pressure  in hPa. Ej: 1024hPa [CHAR LIMIT=NONE] -->
+    <string name="format_pressure_hpa"><xliff:g id="temp">%1.0f</xliff:g> hPa</string>
+    <!-- Format Wind in kph [CHAR LIMIT=NONE] -->
+    <string name="format_wind_kmh"><xliff:g id="speed">%1$1.0f</xliff:g> km/h - <xliff:g id="direction">%2$s</xliff:g></string>
+    <!-- Wind in mph [CHAR LIMIT=NONE -->
+    <string name="format_wind_mph"><xliff:g id="speed">%1$1.0f</xliff:g> mph - <xliff:g id="direction">%2$s</xliff:g></string>
+    <!-- Format rain/snow  in mm. Ej: 0.1mm [CHAR LIMIT=NONE] -->
+    <string name="format_rain_snow_mm"><xliff:g id="temp">%1.2f</xliff:g> mm</string>
+    <!-- Time from last update [CHAR LIMIT=15] -->
+    <string name="last_updated">"تم التحديث"</string>
+    <!-- Default time from last update [CHAR LIMIT=100] -->
+    <string name="default_last_updated">"قبل أيام"</string>
+    <!-- Weather conditions [CHAR LIMIT=100] -->
+    <string name="condition_200">"عاصفة رعدية مع أمطار خفيفة"</string>
+    <string name="condition_201">"عاصفة رعدية مع مطر"</string>
+    <string name="condition_202">"عاصفة رعدية مع هطول امطار غزيرة"</string>
+    <string name="condition_210">"عاصفة رعدية خفيفة"</string>
+    <string name="condition_211">"عاصفة رعدية"</string>
+    <string name="condition_212">"عاصفة رعدية شديدة"</string>
+    <string name="condition_221">"عاصفة رعدية متقلبة"</string>
+    <string name="condition_230">"عاصفة رعدية مصحوبة برذاذ خفيف"</string>
+    <string name="condition_231">"عاصفة رعدية مصحوبة برذاذ "</string>
+    <string name="condition_232">"عاصفة رعدية مصحوبة برذاذ الثقيلة"</string>
+    <string name="condition_300">"رذاذ كثيف وخفيف "</string>
+    <string name="condition_301">"رذاذ"</string>
+    <string name="condition_302">"رذاذ كثيف"</string>
+    <string name="condition_310">"مطر رذاذ خفيف"</string>
+    <string name="condition_311">"رذاذ المطر"</string>
+    <string name="condition_312">"مطر رذاذ كثيف"</string>
+    <string name="condition_313">"مطر غزير ورذاذ"</string>
+    <string name="condition_314">"مطر غزير جدا ورذاذ"</string>
+    <string name="condition_321">"رذاذ شديد"</string>
+    <string name="condition_500">"مطر خفيف"</string>
+    <string name="condition_501">"أمطار متوسطة"</string>
+    <string name="condition_502">"أمطار غزيرة"</string>
+    <string name="condition_503">"هطول أمطار غزيرة جدا"</string>
+    <string name="condition_504">"مطر شديد جداً"</string>
+    <string name="condition_511">"مطر مجمد"</string>
+    <string name="condition_520">"مطر غزير بخفة"</string>
+    <string name="condition_521">"مطر غزير"</string>
+    <string name="condition_522">"مطر غزير جداً"</string>
+    <string name="condition_531">"مطر غزير متقلب"</string>
+    <string name="condition_600">"ثلوج خفيفة"</string>
+    <string name="condition_601">"ثلج"</string>
+    <string name="condition_602">"ثلج كثيف"</string>
+    <string name="condition_611">"مطر متجمد"</string>
+    <string name="condition_612">"مطر متجمد كثيف"</string>
+    <string name="condition_615">"أمطار خفيفة والثلوج"</string>
+    <string name="condition_616">"مطر و ثلج"</string>
+    <string name="condition_620">"ثلج خفيف وغزير"</string>
+    <string name="condition_621">"ثلج غزير"</string>
+    <string name="condition_622">"ثلج غزير جداً"</string>
+    <string name="condition_701">"ضباب"</string>
+    <string name="condition_711">"دخان"</string>
+    <string name="condition_721">"ضباب سديمي"</string>
+    <string name="condition_731">"الرمال، الغبار"</string>
+    <string name="condition_741">"ضباب"</string>
+    <string name="condition_751">"رمل"</string>
+    <string name="condition_761">"غبار"</string>
+    <string name="condition_762">"رماد بركاني"</string>
+    <string name="condition_771">"العواصف"</string>
+    <string name="condition_781">"ترنادو (إعصار قمعي)"</string>
+    <string name="condition_800">"سماء صافية"</string>
+    <string name="condition_801">"معظمها صافي"</string>
+    <string name="condition_802">"غيوم متفرقة"</string>
+    <string name="condition_803">"غيوم متقطعة"</string>
+    <string name="condition_804">"سماء ملبدة بالغيوم"</string>
+    <string name="condition_900">"ترنادو (إعصار قمعي)"</string>
+    <string name="condition_901">"عاصفة إستوائية"</string>
+    <string name="condition_902">"إعصار"</string>
+    <string name="condition_903">"برد"</string>
+    <string name="condition_904">"حار"</string>
+    <string name="condition_905">"عاصف"</string>
+    <string name="condition_906">"وابل"</string>
+    <string name="condition_951">"هدوء"</string>
+    <string name="condition_952">"نسيم عليل"</string>
+    <string name="condition_953">"نسيم لطيف"</string>
+    <string name="condition_954">"نسيم معتدل"</string>
+    <string name="condition_955">"نسيم جديدة"</string>
+    <string name="condition_956">"نسيم قوي"</string>
+    <string name="condition_957">"الرياح العالية"</string>
+    <string name="condition_958">"عاصفة"</string>
+    <string name="condition_959">"عاصفة شديدة"</string>
+    <string name="condition_960">"عاصفة"</string>
+    <string name="condition_961">"عاصفة عنيفة"</string>
+    <string name="condition_962">"هاريكان (إعصار مداري)"</string>
+    <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
+
+
+    <!--+++++++++++++++-->
+    <!-- General Icons -->
+    <!--+++++++++++++++-->
+
+    <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
+    <string name="more_icon">"المزيد…"</string>
+    <!-- Description of enter icon ic_enter [CHAR LIMIT=100] -->
+    <string name="enter_icon">"مفتاح الدخول (إنتر Enter)"</string>
+    <!-- Description of date icon ic_date [CHAR LIMIT=25] -->
+    <string name="date_icon">"تاريخ"</string>
+    <!-- Description of weather icon [CHAR LIMIT=25] -->
+    <string name="weather_icon">"أيقونة الطقس"</string>
+    <!-- Description of chart line [CHAR LIMIT=25] -->
+    <string name="chart_line">"خط الرسم البياني"</string>
+    <!-- Description of settings icon [CHAR LIMIT=100] -->
+    <string name="settings_icon">"ايقونة الإعدادات"</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="gps_location_icon">"الحصول على موقع GPS"</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="location_icon">"موقع"</string>
+    <!-- Description of map icon [CHAR LIMIT=25] -->
+    <string name="map_icon">"خريطة"</string>
+    <!-- Description of number of hives icon[CHAR LIMIT=100] -->
+    <string name="num_hives">"عدد خلايا النحل"</string>
+
+    <!--+++++++++++++++-->
+    <!-- drawerLayout  -->
+    <!--+++++++++++++++-->
+
+    <!-- Settings [CHAR LIMIT=30] -->
+    <string name="settings_title">"إعدادات"</string>
+    <!-- Help [CHAR LIMIT=30] -->
+    <string name="help_title">"مساعدة"</string>
+    <!-- Send feedback [CHAR LIMIT=30] -->
+    <string name="feedback_title">"أرسل تعليقك"</string>
+    <!-- Share this app [CHAR LIMIT=30] -->
+    <string name="share_app_title">"شارك هذا التطبيق"</string>
+    <!-- About GoBees [CHAR LIMIT=30] -->
+    <string name="about_title">"حول GoBees"</string>
+
+    <!--++++++++++-->
+    <!-- Apiaries -->
+    <!--++++++++++-->
+
+    <!-- Default apiary name [CHAR LIMIT=100] -->
+    <string name="default_apiary_name">"المنحل الخاص بي"</string>
+    <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
+    <string name="loading_apiaries_error">"خطأ أثناء تحميل المناحل."</string>
+    <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
+    <string name="no_apiaries">"لا يوجد لديك المناحل!"</string>
+    <!-- Msg shown when an apiary is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_apiary_message">"المنحل تم حفظها!"</string>
+    <!-- Msg shown when a apiary is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_apiary_message">"المنحل تم حذفه!"</string>
+    <!-- Msg shown when an error occurs when deleting apiary [CHAR LIMIT=100] -->
+    <string name="deleted_apiary_error_message">"خطأ أثناء حذف المنحل."</string>
+    <!-- Msg shown when current weather is updated [CHAR LIMIT=100] -->
+    <string name="successfully_updated_weather_message">"تحديث الطقس الحالي!"</string>
+    <!-- Msg shown when an error occurs when updating weather [CHAR LIMIT=100] -->
+    <string name="weather_update_error_message">"خطأ أثناء تحديث الطقس الحالي."</string>
+
+    <!--++++++++++++-->
+    <!-- Add apiary -->
+    <!--++++++++++++-->
+
+    <!-- Edit apiary action bar title [CHAR LIMIT=50] -->
+    <string name="edit_apiary">"تحرير المنحل"</string>
+    <!-- Add apiary action bar title [CHAR LIMIT=50] -->
+    <string name="add_apiary">"إضافة المنحل"</string>
+    <!-- Apiary name input [CHAR LIMIT=50] -->
+    <string name="apiary_name_hint">"اسم"</string>
+    <!-- Apiary location input [CHAR LIMIT=50] -->
+    <string name="apiary_location_hint">"موقع"</string>
+    <!-- Apiary notes input [CHAR LIMIT=50] -->
+    <string name="apiary_notes_hint">"ملاحظات"</string>
+    <!-- Msg shown when we're searching for gps [CHAR LIMIT=100] -->
+    <string name="searching_gps_message">"البحث عن نظام تحديد المواقع …"</string>
+    <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
+    <string name="empty_apiary_message">"اسم المنحل لا يمكن أن يكون فارغا!"</string>
+    <!-- Error msg shown when we cannot connect to GPS [CHAR LIMIT=100] -->
+    <string name="gps_error_message">"غير قادر على الاتصال لتحديد المواقع!"</string>
+    <!-- Error msg shown when it's not possible to save the apiary [CHAR LIMIT=100] -->
+    <string name="save_apiary_error_message">"خطأ أثناء حفظ المنحل."</string>
+    <!-- Description of apiary logo [CHAR LIMIT=100] -->
+    <string name="apiary_logo">"شعار المنحل"</string>
+    <!-- Body when user doesn't grant location permission [CHAR LIMIT=500] -->
+    <string name="location_permission_request_body">"دون هذا الإذن التطبيق غير قادر على الحصول على معلومات الطقس أو تحديد موقع المناحل الخاصة بك في خريطة. هل أنت متأكد أنك تريد أن ترفض هذا إذن؟"</string>
+
+    <!--++++++++-->
+    <!-- Apiary -->
+    <!--++++++++-->
+
+    <!-- Apiary hives tab name [CHAR LIMIT=30] -->
+    <string name="apiary_hives_tab">"خلايا النحل"</string>
+    <!-- Apiary info tab name [CHAR LIMIT=30] -->
+    <string name="apiary_info_tab">"معلومات"</string>
+    <!-- Default hive name [CHAR LIMIT=100] -->
+    <string name="default_hive_name">"خليتي"</string>
+    <!-- Default last revision value [CHAR LIMIT=100] -->
+    <string name="default_last_revision">"قبل أيام"</string>
+    <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
+    <string name="loading_hives_error">"خطأ أثناء تحميل الخلايا."</string>
+    <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
+    <string name="no_hives">"لا يوجد لديك خلايا النحل!"</string>
+    <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_hive_message">"الخلية تم حفظها!"</string>
+    <!-- Msg shown when a hive is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_hive_message">"الخلية تم حذفها!"</string>
+    <!-- Msg shown when an error occurs when deleting hive [CHAR LIMIT=100] -->
+    <string name="deleted_hive_error_message">"خطأ أثناء حذف خلية."</string>
+    <!-- Description of last revision icon [CHAR LIMIT=100] -->
+    <string name="last_revision_icon">"أيقونة المراجعة الاخيرة"</string>
+    <!-- Description of notes icon [CHAR LIMIT=100] -->
+    <string name="notes_icon">"الملاحظات"</string>
+    <!-- Description of hive logo [CHAR LIMIT=100] -->
+    <string name="hive_logo">"شعار خلية"</string>
+    <!-- Number of hives default [CHAR LIMIT=100] -->
+    <string name="default_num_hives_long">"لا خلايا النحل"</string>
+    <!-- Number of hives [CHAR LIMIT=100] -->
+    <plurals name="num_hives_plurals">
+        <item quantity="zero">"لا خلايا النحل"</item>
+        <item quantity="one">"1 خلية"</item>
+        <item quantity="two">%d خلايا النحل</item>
+        <item quantity="few">%d خلايا النحل</item>
+        <item quantity="many">%d خلايا النحل</item>
+        <item quantity="other">%d خلايا النحل</item>
+    </plurals>
+    <!-- Number of hives default [CHAR LIMIT=100] -->
+    <string name="no_location">"لا موقع"</string>
+    <!-- Default value city [CHAR LIMIT=100] -->
+    <string name="default_city">"برغش"</string>
+
+    <!--++++++++++-->
+    <!-- Add hive -->
+    <!--++++++++++-->
+
+    <!-- Edit hive action bar title [CHAR LIMIT=50] -->
+    <string name="edit_hive">"تحرير الخلية"</string>
+    <!-- Add hive action bar title [CHAR LIMIT=50] -->
+    <string name="add_hive">"إضافة خلية"</string>
+    <!-- Hive name input [CHAR LIMIT=50] -->
+    <string name="hive_name_hint">"اسم"</string>
+    <!-- Hive notes input [CHAR LIMIT=50] -->
+    <string name="hive_notes_hint">"الملاحظات"</string>
+    <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
+    <string name="empty_hive_message">"اسم الخلية لا يمكن أن يكون فارغا!"</string>
+    <!-- Error msg shown when it's not possible to save the hive [CHAR LIMIT=100] -->
+    <string name="save_hive_error_message">"خطأ أثناء إنقاذ الخلية."</string>
+
+    <!--++++++-->
+    <!-- Hive -->
+    <!--++++++-->
+
+    <!-- Hive recordings tab name [CHAR LIMIT=20] -->
+    <string name="hive_recordings_tab">"التسجيلات"</string>
+    <!-- Hive info tab name [CHAR LIMIT=20] -->
+    <string name="hive_info_tab">"معلومات"</string>
+    <!-- Default recording date [CHAR LIMIT=100] -->
+    <string name="default_recording_date">"الأربعاء. 18 يناير 2017"</string>
+    <!-- Error msg shown when it's not possible to load recordings [CHAR LIMIT=100] -->
+    <string name="loading_recordings_error">"خطأ أثناء تحميل التسجيلات."</string>
+    <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->
+    <string name="no_recordings">"لا يوجد لديك التسجيلات!"</string>
+    <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_recording_message">"تسجيل تم حفظها!"</string>
+    <!-- Msg shown when an error occurs when saving a recording [CHAR LIMIT=100] -->
+    <string name="save_recording_error_message">"خطأ أثناء حفظ التسجيل."</string>
+    <!-- Msg shown when a recording is too short [CHAR LIMIT=100] -->
+    <string name="recording_too_short_error_message">"خطأ: التسجيل قصيرة جدا!"</string>
+    <!-- Msg shown when a recordings is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_recording_message">"تسجيل تم حذفه!"</string>
+    <!-- Msg shown when an error occurs when deleting recordings [CHAR LIMIT=100] -->
+    <string name="deleted_recording_error_message">"خطأ أثناء حذف التسجيل."</string>
+    <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
+    <string name="hive_recordings_date_format">"البوم, الشهر, السنة"</string>
+    <!-- Body when user doesn't grant camera permission [CHAR LIMIT=500] -->
+    <string name="camera_permission_request_body">"
+        دون هذا الإذن فإن التطبيق غير قادر على مراقبة نشط الطيران في الخلية الخاصة بك. هل أنت متأكد أنك تريد أن ترفض هذا إذن؟
+    "</string>
+    <!-- Default note text [CHAR LIMIT=100] -->
+    <string name="default_notes">"الملاحظات"</string>
+    <!-- No notes text [CHAR LIMIT=100] -->
+    <string name="no_notes">"لا يوجد ملاحظات"</string>
+    <!-- General info title [CHAR LIMIT=100] -->
+    <string name="general_info_title">"معلومات عامة"</string>
+
+
+    <!--+++++++++++-->
+    <!-- Recording -->
+    <!--+++++++++++-->
+    <!-- Error msg shown when it's not possible to load a recording [CHAR LIMIT=100] -->
+    <string name="loading_recording_error">"خطأ أثناء تحميل التسجيل."</string>
+    <!-- Error msg shown when there are no records [CHAR LIMIT=100] -->
+    <string name="no_records_error">"خطأ: لا توجد سجلات."</string>
+    <!-- No flight activity data available [CHAR LIMIT=100] -->
+    <string name="no_flight_act_data_available">"لا توجد بيانات متاحة عن نشاطات الطيران"</string>
+    <!-- No weather data available [CHAR LIMIT=100] -->
+    <string name="no_weather_data_available">"لا توجد بيانات متاحة للطقس"</string>
+    <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
+    <string name="recording_date_format">"اليوم, الشهر, السنة"</string>
+    <!-- Number of bees [CHAR LIMIT=30] -->
+    <string name="num_bees">"النحل Nº"</string>
+
+    <!--++++++++++++-->
+    <!-- Monitoring -->
+    <!--++++++++++++-->
+
+    <!-- Description of start record icon [CHAR LIMIT=100] -->
+    <string name="start_record_icon">"أيقونة بدء التسجيل"</string>
+    <!-- Text shown when the monitoring service is running [CHAR LIMIT=150] -->
+    <string name="monitoring_text">"مراقبة… n\ ن يمكنك إيقاف تشغيل الشاشة."</string>
+    <!-- Default number of bees [CHAR LIMIT=4] -->
+    <string name="num_bees_default">"0"</string>
+    <!-- Monitoring notification text [CHAR LIMIT=100] -->
+    <string name="monitoring_notification_text">"رصد خلية …"</string>
+
+
+    <!--++++++++++++++++++++-->
+    <!-- Monitoring Settings-->
+    <!--++++++++++++++++++++-->
+
+    <!-- Label for bees category [CHAR LIMIT=30] -->
+    <string name="pref_bees_cat_label">"النحل"</string>
+
+    <!-- Label for the show algorithm output preference [CHAR LIMIT=30] -->
+    <string name="pref_show_algo_output_label">"إظهار مخرجات الخوارزمية"</string>
+    <!-- Label for the blob blobSize preference [CHAR LIMIT=30] -->
+    <string name="pref_blob_size_label">"حجم النقطة"</string>
+    <!-- Label for blob blobSize small [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_small">"صغير"</string>
+    <!-- Label for blob blobSize normal [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_normal">"عادي"</string>
+    <!-- Label for blob blobSize big [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_big">"كبير"</string>
+
+    <!-- Label for the min area preference [CHAR LIMIT=30] -->
+    <string name="pref_min_area_label">"دقيقة. نحل المنطقة"</string>
+    <!-- Min value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_min">0</integer>
+    <!-- Max value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_max">399</integer>
+    <!-- Default value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_default">15</integer>
+
+
+    <!-- Label for the max area preference [CHAR LIMIT=30] -->
+    <string name="pref_max_area_label">"الأعظم. نحل المنطقة"</string>
+    <!-- Min value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_min">400</integer>
+    <!-- Max value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_max">1500</integer>
+    <!-- Default value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_default">800</integer>
+
+    <!-- Label for camera category [CHAR LIMIT=30] -->
+    <string name="pref_camera_cat_label">"الكاميرا"</string>
+
+    <!-- Label for the zoom preference [CHAR LIMIT=30] -->
+    <string name="pref_zoom_label">"تكبير"</string>
+    <!-- Label for zoom x1 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1">"10."</string>
+    <!-- Label for zoom x1.5 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1_5">"1.5."</string>
+    <!-- Label for zoom x2.0 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x2">".2"</string>
+
+    <!-- Label for the frame rate preference [CHAR LIMIT=30] -->
+    <string name="pref_frame_rate_label">"معدل الإطارات"</string>
+    <!-- Label for frame rate 0.5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_0_5sec">"0.5 ثانية"</string>
+    <!-- Label for frame rate 1 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1sec">"1 ثانية"</string>
+    <!-- Label for frame rate 5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5sec">"5 ثانية"</string>
+    <!-- Label for frame rate 15 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_15sec">"15 ثانية"</string>
+    <!-- Label for frame rate 30 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_30sec">"30 ثانية"</string>
+    <!-- Label for frame rate 1 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1min">"1 دقيقة"</string>
+    <!-- Label for frame rate 5 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5min">"5 دقيقة"</string>
+
+
+    <!--++++++++++-->
+    <!-- Settings -->
+    <!--++++++++++-->
+
+    <!-- Toolbar title in settings [CHAR LIMIT=30] -->
+    <string name="settings_toolbar_title">"إعدادات"</string>
+    <!-- Label for weather category [CHAR LIMIT=30] -->
+    <string name="pref_weather_cat_label">"الطقس"</string>
+    <!-- Label for the weather units preference [CHAR LIMIT=30] -->
+    <string name="pref_weather_units_label">"وحدات الطقس"</string>
+    <!-- Label for metric option in weather unit preference [CHAR LIMIT=25] -->
+    <string name="pref_weather_units_label_metric">Metric (\u00B0C, km/h…)</string>
+    <!-- Label for imperial option in weather unit preference [CHAR LIMIT=25] -->
+    <string name="pref_weather_units_label_imperial">Imperial (\u00B0F, mph…)</string>
+
+
+    <!--+++++++++++++++++++++-->
+    <!-- Share app & feedback-->
+    <!--+++++++++++++++++++++-->
+
+    <!-- Share app text [CHAR LIMIT=30] -->
+    <string name="share_app_text">"GoBees - تطبيق Android لمراقبة نشاط خلايا النحل "</string>
+    <!-- Share app url [CHAR LIMIT=30] -->
+    <string name="share_app_url">"
+        https://play.google.com/store/apps/details?id=com.davidmiguel.gobees
+    "</string>
+    <!-- Feedback email body [CHAR LIMIT=100] -->
+    <string name="gobees_email_body">"إرسال ملاحظاتك هنا …"</string>
+    <string name="website_btn">موقع الكتروني</string>
+    <string name="version">الإصدار</string>
+    <string name="license_btn">رخصة</string>
+    <string name="libraries">فتح المكتبات المصدر:</string>
+    <string name="developed_author">وضعت من قبل ديفيد ميغيل لوزانو.</string>
+    <string name="default_version">الإصدار 1.0</string>
+    <string name="changelog_btn">التغيير</string>
+    <string name="close_btn">قريب</string>
+
+</resources>

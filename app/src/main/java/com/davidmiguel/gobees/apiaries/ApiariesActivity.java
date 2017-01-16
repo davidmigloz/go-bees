@@ -20,6 +20,7 @@ package com.davidmiguel.gobees.apiaries;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -33,7 +34,9 @@ import android.view.MenuItem;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.about.AboutActivity;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.help.HelpActivity;
 import com.davidmiguel.gobees.settings.SettingsActivity;
 import com.davidmiguel.gobees.utils.ActivityUtils;
 
@@ -103,8 +106,9 @@ public class ApiariesActivity extends AppCompatActivity {
                 // Open the navigation drawer when the home icon is selected from the toolbar
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -117,14 +121,49 @@ public class ApiariesActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.settings_navigation_menu_item:
+                                // Settings
                                 Intent intent = new Intent(context, SettingsActivity.class);
                                 startActivity(intent);
+                                break;
+                            case R.id.help_navigation_menu_item:
+                                // Help
+                                Intent helpIntent =
+                                        new Intent(ApiariesActivity.this, HelpActivity.class);
+                                startActivity(helpIntent);
+                                break;
+                            case R.id.feedback_navigation_menu_item:
+                                // Feedback
+                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                                        Uri.parse("mailto:" + getString(R.string.gobees_email)));
+                                emailIntent.putExtra(Intent.EXTRA_SUBJECT,
+                                        getString(R.string.gobees_email_subject));
+                                emailIntent.putExtra(Intent.EXTRA_TEXT,
+                                        getString(R.string.gobees_email_body));
+                                startActivity(Intent.createChooser(
+                                        emailIntent, getString(R.string.feedback_title)));
+                                break;
+                            case R.id.share_app_navigation_menu_item:
+                                // Share app
+                                Intent sendIntent = new Intent();
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                                        getString(R.string.share_app_text) +
+                                                Uri.parse(getString(R.string.share_app_url)));
+                                sendIntent.setType("text/plain");
+                                startActivity(Intent.createChooser(
+                                        sendIntent, getString(R.string.share_app_title)));
+                                break;
+                            case R.id.about_navigation_menu_item:
+                                // About
+                                Intent aboutIntent =
+                                        new Intent(ApiariesActivity.this, AboutActivity.class);
+                                startActivity(aboutIntent);
                                 break;
                             default:
                                 break;
                         }
                         // Close the navigation drawer when an item is selected.
-                        menuItem.setChecked(true);
+                        menuItem.setChecked(false);
                         drawerLayout.closeDrawers();
                         return true;
                     }

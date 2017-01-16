@@ -16,31 +16,44 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package com.davidmiguel.gobees.about;
 
-buildscript {
-    repositories {
-        jcenter()
+/**
+ * Models a dependence of the app.
+ */
+class Library {
+
+    private String name;
+    private License license;
+
+    Library(String name, License license) {
+        this.name = name;
+        this.license = license;
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
-        classpath 'io.realm:realm-gradle-plugin:2.2.2'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+    public String getName() {
+        return name;
     }
-}
 
-allprojects {
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven { url "http://dl.bintray.com/raphaelbussa/maven" }
+    public License getLicense() {
+        return license;
     }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    public enum License {
+        APACHE2("Apache v2.0"),
+        GPL3("GPLv3"),
+        MIT("MIT"),
+        BSD("BSD"),
+        CCBYSA4("CC BY-SA 4.0");
+
+        private final String name;
+
+        License(String s) {
+            name = s;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+    }
 }

@@ -192,17 +192,21 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                         new AlertDialog.Builder(getActivity())
                                 .setTitle(getString(R.string.permission_request_title))
                                 .setMessage(getString(R.string.location_permission_request_body))
-                                .setPositiveButton(getString(R.string.permission_request_allow_button),
+                                .setPositiveButton(
+                                        getString(R.string.permission_request_allow_button),
                                         new DialogInterface.OnClickListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                            public void onClick(DialogInterface dialogInterface,
+                                                                int which) {
                                                 response.result(true);
                                             }
                                         })
-                                .setNegativeButton(getString(R.string.permission_request_deny_button),
+                                .setNegativeButton(
+                                        getString(R.string.permission_request_deny_button),
                                         new DialogInterface.OnClickListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                            public void onClick(DialogInterface dialogInterface,
+                                                                int which) {
                                                 response.result(false);
                                             }
                                         })
@@ -218,7 +222,8 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                             presenter.toogleLocation(getContext());
                         } else {
                             // Warn the user that it's not possible to use the feature
-                            Toast.makeText(getActivity(), getString(R.string.permission_request_denied),
+                            Toast.makeText(getActivity(),
+                                    getString(R.string.permission_request_denied),
                                     Toast.LENGTH_LONG).show();
                         }
                     }

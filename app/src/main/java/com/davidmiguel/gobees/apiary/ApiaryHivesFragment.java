@@ -84,7 +84,8 @@ public class ApiaryHivesFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new HivesAdapter(getActivity().getMenuInflater(), new ArrayList<Hive>(0), this);
+        listAdapter = new HivesAdapter(getActivity().getMenuInflater(),
+                new ArrayList<Hive>(0), this);
     }
 
     @Nullable
@@ -163,9 +164,10 @@ public class ApiaryHivesFragment extends Fragment
                 return true;
             case R.id.menu_refresh:
                 presenter.loadData(true);
-                break;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return true;
     }
 
     @Override

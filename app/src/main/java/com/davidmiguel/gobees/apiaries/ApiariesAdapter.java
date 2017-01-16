@@ -53,7 +53,8 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
     private List<Apiary> apiaries;
     private ApiaryItemListener listener;
 
-    ApiariesAdapter(Context context, MenuInflater menuInflater, List<Apiary> apiaries, ApiaryItemListener listener) {
+    ApiariesAdapter(Context context, MenuInflater menuInflater, List<Apiary> apiaries,
+                    ApiaryItemListener listener) {
         this.context = context;
         this.menuInflater = menuInflater;
         this.apiaries = checkNotNull(apiaries);

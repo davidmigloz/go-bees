@@ -19,9 +19,36 @@
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/settings_navigation_menu_item"
-        android:orderInCategory="2"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings_title"/>
+    <group
+        android:id="@+id/settings_help"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/settings_navigation_menu_item"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings_title"/>
+        <item
+            android:id="@+id/help_navigation_menu_item"
+            android:icon="@drawable/ic_help"
+            android:title="@string/help_title"/>
+    </group>
+    <group
+        android:id="@+id/feedback_share"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/feedback_navigation_menu_item"
+            android:icon="@drawable/ic_feedback"
+            android:title="@string/feedback_title"/>
+        <item
+            android:id="@+id/share_app_navigation_menu_item"
+            android:icon="@drawable/ic_share"
+            android:title="@string/share_app_title"/>
+    </group>
+    <group
+        android:id="@+id/about"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/about_navigation_menu_item"
+            android:icon="@drawable/ic_info"
+            android:title="@string/about_title"/>
+    </group>
 </menu>
