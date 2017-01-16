@@ -564,6 +564,15 @@
     <!-- Changelog [CHAR LIMIT=NONE] -->
     <string name="changelog" translatable="false">
         <![CDATA[
+        <b>Version 0.7:</b><br/>
+        - Spanish translation.<br/>
+        - Catalan translation<br/>
+        - Arabic translation<br/>
+        - Help section.<br/>
+        - About GoBees section.<br/>
+        - Add Send feedback.<br/>
+        - Add Share app.<br/>
+        - Minor improvements and fixes.<br/><br/>
         <b>Version 0.6:</b><br/>
         - Add license.<br/>
         - Apiary and hive info tab.<br/>
