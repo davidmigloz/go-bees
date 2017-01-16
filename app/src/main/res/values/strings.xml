@@ -544,7 +544,7 @@
     <!-- About -->
     <!--+++++++-->
     <!-- GoBees app [CHAR LIMIT=100] -->
-    <string name="gobees_app">GoBees App</string>
+    <string name="gobees_app" translatable="false">GoBees App</string>
     <!-- App version [CHAR LIMIT=100] -->
     <string name="version">Version</string>
     <!-- App version default [CHAR LIMIT=100] -->
@@ -562,7 +562,7 @@
     <!-- Libs [CHAR LIMIT=100] -->
     <string name="libraries">Open Source Libraries:</string>
     <!-- Changelog [CHAR LIMIT=NONE] -->
-    <string name="changelog">
+    <string name="changelog" translatable="false">
         <![CDATA[
         <b>Version 0.6:</b><br/>
         - Add license.<br/>

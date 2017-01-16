@@ -464,8 +464,6 @@
     <!--+++++++-->
     <!-- About -->
     <!--+++++++-->
-    <!-- GoBees app [CHAR LIMIT=100] -->
-    <string name="gobees_app">"GoBees App"</string>
     <!-- App version [CHAR LIMIT=100] -->
     <string name="version">"Versión"</string>
     <!-- App version default [CHAR LIMIT=100] -->

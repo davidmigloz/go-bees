@@ -463,5 +463,13 @@
     "</string>
     <!-- Feedback email body [CHAR LIMIT=100] -->
     <string name="gobees_email_body">"إرسال ملاحظاتك هنا …"</string>
+    <string name="website_btn">موقع الكتروني</string>
+    <string name="version">الإصدار</string>
+    <string name="license_btn">رخصة</string>
+    <string name="libraries">فتح المكتبات المصدر:</string>
+    <string name="developed_author">وضعت من قبل ديفيد ميغيل لوزانو.</string>
+    <string name="default_version">الإصدار 1.0</string>
+    <string name="changelog_btn">التغيير</string>
+    <string name="close_btn">قريب</string>
 
 </resources>
