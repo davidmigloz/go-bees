@@ -44,7 +44,7 @@ public class HelpActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.about_title);
+            actionBar.setTitle(R.string.help_title);
         }
 
         // Add fragment to the activity
