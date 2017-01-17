@@ -1,18 +1,18 @@
 Resumen
 =======
 
-La actividad de vuelo de una colmena es un indicador importante sobre el
-estado de salud de esta. Sin embargo, la monitorización manual de este
-parámetro es un proceso muy costoso y que puede introducir una tasa de
-error elevada. Por ello, se han desarrollado diversos métodos que
-permiten automatizar este proceso.
+La actividad de vuelo de una colmena es un indicador importante sobre su
+estado de salud. Sin embargo, la monitorización manual de este parámetro
+es un proceso muy costoso y puede introducir una tasa de error elevada.
+Por ello, se han desarrollado diversos métodos que permiten automatizar
+este proceso.
 
 En este trabajo se propone un nuevo método más accesible al público
 general que permite la monitorización de la actividad de vuelo de una
-colmena mediante la cámara de un smartphone Android.
+colmena mediante la cámara de un *smartphone* Android.
 
 Además, se ha desarrollado una aplicación de gestión de colmenares que
-integra el algoritmo y que proporciona las herramientas necesarias para
+integra el algoritmo y proporciona las herramientas necesarias para
 interpretar y organizar toda la información recabada.
 
 GoBees es la aplicación resultante y se encuentra disponible a través de
