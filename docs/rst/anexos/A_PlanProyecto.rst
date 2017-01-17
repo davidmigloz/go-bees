@@ -461,7 +461,7 @@ sea compatible con Apache v2.0, BSD, MIT y EPL. En el siguiente gráfico
 mostramos la compatibilidad entre estas licencias, así como su grado de
 permisividad.
 
-.. figure:: https://cloud.githubusercontent.com/assets/6546265/21730744/6bc30c16-d451-11e6-9c6a-dfae7ba3348d.png
+.. figure:: ../../img/licenses_compatibility.png
    :alt: licenses\_compatibility
 
 Podemos observar que la licencia más restrictiva (en el sentido de
