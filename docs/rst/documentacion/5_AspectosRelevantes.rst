@@ -180,10 +180,8 @@ se dio con la fuente del problema, el cual tenía su origen en que la
 versión de la aplicación OpenCV Manager distribuida en el Google Play
 contaba con una versión corrupta de la librería OpenCV 3.1.
 
-Se notificó al equipo de OpenCV en su gestor de incidencias y vía email,
-pero siguen sin resolverlo hasta el momento. Por lo que finalmente se
-optó por utilizar la versión anterior de la librería (OpenCV 3.0) que no
-padecía este problema.
+Se notificó al equipo de OpenCV a través de su gestor de incidencias 
+y finalmente solucionaron el problema en la nueva versión OpenCV 3.2.
 
 El segundo *bug* (*issue*
 `#27 <https://github.com/davidmigloz/go-bees/issues/27>`__) hacía que la
@@ -200,6 +198,12 @@ está a la espera de ser incorporado en futuras *releases* del
 
 Una vez solventados ambos *bugs,* se logró que el algoritmo funcionase
 sin problemas en la nueva plataforma.
+
+Cabe destacar que como OpenCV no distribuía oficialmente la librería a
+través de ningún repositorio que permitiese utilizarla directamente como
+dependencia Gradle, se creó uno propio. Se encuentra disponible en la 
+siguiente dirección 
+`https://github.com/davidmigloz/opencv-android-gradle-repo <https://github.com/davidmigloz/opencv-android-gradle-repo>`__.
 
 Para el diseño de la arquitectura de la *app* se siguió el patrón de
 arquitectura *Model-View-Presenter* (MVP), que permite separar los datos

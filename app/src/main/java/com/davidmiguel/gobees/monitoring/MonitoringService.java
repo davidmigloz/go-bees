@@ -329,7 +329,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             }
         };
         // Init openCV
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, this, loaderCallback);
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, loaderCallback);
     }
 
     /**

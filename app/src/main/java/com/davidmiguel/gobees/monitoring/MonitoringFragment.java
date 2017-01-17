@@ -215,7 +215,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public void initOpenCV(CvCameraViewListener2 listener) {
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, getContext(), loaderCallback);
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, getContext(), loaderCallback);
         cameraView.setCvCameraViewListener(listener);
     }
 
