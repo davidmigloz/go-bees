@@ -328,8 +328,10 @@ repositorio, se ejecutaban las siguientes tareas:
 Por último, cabe comentar algunas estadísticas del proyecto:
 
 +--------------------------------------+----------+
-| Total de líneas                      | 38.068   |
+| Concepto                             | Valor    |
 +======================================+==========+
+| Total de líneas                      | 38.068   |
++--------------------------------------+----------+
 | Líneas de código                     | 57%      |
 +--------------------------------------+----------+
 | Comentarios                          | 35%      |
