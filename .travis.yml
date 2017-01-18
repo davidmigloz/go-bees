@@ -3,6 +3,11 @@ language: android
 jdk: oraclejdk8
 compiler: gcc
 
+addons:
+  sonarqube:
+    token:
+      secure: "rfDdj44cQRCJ/2ufQ9x/APSOnVCZGA0WljK0QSpKw5tmeeeao9WbEpNrbshdXm3Q1qtJkvzpP4qjIMYpYS17gPRejLi/SdoFRT2UZam3GNUqjucNkmLBShQYb/gjiiHPClS/Xuu5ME9OMYKpve7xvcxifEOkMuBUrRUON3zJipbukdASScU2SueMI9w4dZra5G7LYhrYj+hDygNlRYiyCEL8ediWFo0ZySWpyZc2OTVZS+6FE5spwU29LRp9sbYSDmHWsOVOD+V6SuPGwPb1flYmrcQ0RKz+MpIqVfa3CjtjfXlX5u0RZq8Suelsx7Z65bX9MGYUWPGu6TDkyi/9mKChFQkvTNcAx4zs0SvYXf6dXSZnebMGL6xF4omlflFPSoRRTX0n5i84t3QADmLEYJmvjG1HcC5VafBZHZraznAFqXc7ml/UwUknuPy4A44WmxKWdsIAXYlZTpHAYfGebiqu5oc2YbDDylWQHju+CMXdXGlkWlgbnlaW8R+2COuWDID/cf/ZvJ7qK8pfkRVjotTifNi/nFYsHoNiDIy6oCrtjt18In0DzGgc3TbFWegJ6TgUxvyaMVGPcWG77cNBwZopCB6CqRnVQr+aD4d2/E4YtqMDmdrvt+ELaevjlRdgBPwi9fzOBKOQcLFs1VSEe3K0igZzZudz4TvfmvK+27k="
+
 env:
   matrix:
     - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
@@ -53,6 +58,8 @@ script:
     - ./gradlew assembleDebug lint
     # Run test coverage report
     - ./gradlew jacocoTestMockDebugUnitTestReport
+    # Run SonarQube analysis
+    - ./gradlew sonarqube
     # Build test app
     # ./gradlew assembleAndroidTest
     # Create and lunch emulator
@@ -67,4 +74,7 @@ after_success:
 
 cache:
   directories:
-    - $HOME/.gradle
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
