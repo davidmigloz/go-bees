@@ -15,9 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
-plugins {
-    id "org.sonarqube" version "2.2"
-}
 
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
@@ -167,14 +164,4 @@ Run copy test resources directory tasks before build.
 */
 afterEvaluate {
     preBuild.dependsOn(copyResDirectoryToTestMockDebugClasses)
-}
-
-/*
-SonarQube configuration.
-*/
-sonarqube {
-    properties {
-        property "sonar.projectName", "GoBees"
-        property "sonar.projectKey", "com.davidmiguel.gobees"
-    }
 }
