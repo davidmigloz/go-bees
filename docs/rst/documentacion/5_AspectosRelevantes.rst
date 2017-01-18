@@ -112,11 +112,37 @@ Una gran parte de los recursos del proyecto se dedicaron al desarrollo
 del algoritmo de visión artificial para la monitorización de la
 actividad de vuelo de una colmena.
 
+El problema a resolver poseía una serie de condicionantes que
+dificultaban el análisis:
+
+-  Cada abeja ocupa una porción muy pequeña de la imagen.
+
+-  Las condiciones lumínicas varían a lo largo del día o de la época del
+   año.
+
+-  Existen sombras producidas por la cámara o abejas.
+
+-  A 20fps una abeja volando puede recorrer una distancia significativa
+   entre fotogramas.
+
+-  Un grupo de abejas puede estar confinado, dificultando su
+   segmentación.
+
 El desarrollo comenzó con una búsqueda bibliográfica sobre el tema. En
 esta, se encontraron varios artículos relacionados que nos dieron una
 idea de las técnicas que podíamos probar. También se tuvo una reunión
 con un experto en visión artificial que nos proporcionó su punto de
 vista sobre cómo abordar el problema.
+
+El primer punto a abordar fue la toma de las imágenes. Se decidió que la
+toma se debía de hacer con un trípode en posición cenital a la colmena.
+De esta manera, se disminuía las diferencias de tamaño por perspectiva,
+no se obstaculizaba el vuelo de las abejas y se facilitaba el análisis.
+Además, era aconsejable cubrir el suelo con alguna superficie uniforme
+para mejorar la segmentación de las abejas.
+
+.. figure:: ../../img/cenital.png
+   :alt: 
 
 En un primer momento, el desarrollo del algoritmo se iba a realizar
 directamente sobre la plataforma Android. Sin embargo, rápidamente nos
