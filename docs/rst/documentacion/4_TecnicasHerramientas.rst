@@ -12,15 +12,15 @@ engloba dentro de las metodologías ágiles. Aplica una estrategia de
 trabajo iterativa e incremental a través de iteraciones (*sprints*) y
 revisiones.
 
-*Test-driven development* (TDD)
+*Test-Driven Development* (TDD)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Es una práctica de desarrollo de software que se basa en la repetición
-de un ciclo corto de desarrollo: transformar requerimientos a tests,
-desarrollar el código necesario para pasar los tests y posteriormente
+de un ciclo corto de desarrollo: transformar requerimientos a test,
+desarrollar el código necesario para pasar los test y posteriormente
 refactorizar el código. Esta práctica obliga a los desarrolladores a
 analizar cuidadosamente las especificaciones antes de empezar a escribir
-código, fomenta la escritura de tests y la simplicidad de código y
+código, fomenta la escritura de test y la simplicidad de código y
 aumenta la productividad. Como resultado se obtiene software más seguro
 y de mayor calidad.
 
@@ -40,26 +40,47 @@ se soluciona en una *hotfix branch*.
 Patrones de diseño
 ------------------
 
-*Model-View-Presenter* (MVP)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Model-View-Presenter (MVP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MVP es un patrón de arquitectura derivado del *Model–View–Controller*
 (MVC). Permite separar los datos internos del modelo de una vista pasiva
 y enlazarlos mediante el *presenter* que maneja toda la lógica de la
 aplicación. Posee tres capas:
 
--  Model: almacena y proporciona los datos internos.
--  View: maneja la visualización de los datos (del modelo). Propaga las
-   acciones de usuario al presenter.
--  Presenter: enlaza las dos capas anteriores. Sincroniza los datos
+-  **Model**: almacena y proporciona los datos internos.
+
+-  *View*: maneja la visualización de los datos (del modelo). Propaga
+   las acciones de usuario al *presenter*.
+
+-  *Presenter*: enlaza las dos capas anteriores. Sincroniza los datos
    mostrados en la vista con los almacenados en el modelo y actúa ante
    los eventos de usuario propagados por la vista.
+
+.. figure:: ../../img/mvp.png
+   :alt: 
+
+Patrón repositorio
+~~~~~~~~~~~~~~~~~~
+
+El patrón repositorio proporciona una abstracción de la implementación
+del acceso a datos con el objetivo de que este sea transparente a la
+lógica de negocio de la aplicación. Por ejemplo, las fuentes de datos
+pueden ser una base de datos, un *web service*, etc. El repositorio
+media entre la capa de acceso a datos y la lógica de negocio de tal
+forma que no existe ninguna dependencia entre ellas. Consiguiendo
+desacoplar, mantener y testear más fácilmente el código y permitiendo la
+reutilización del acceso a datos desde cualquier cliente.
+
+.. figure:: ../../img/repository_pattern.png
+   :alt: 
 
 Control de versiones
 --------------------
 
 -  Herramientas consideradas: `Git <https://git-scm.com/>`__ y
    `Subversion <https://subversion.apache.org/>`__.
+
 -  Herramienta elegida: `Git <https://git-scm.com/>`__.
 
 Git es un sistema de control de versiones distribuido. A día de hoy, es
@@ -74,6 +95,7 @@ Hosting del repositorio
 -  Herramientas consideradas: `GitHub <https://github.com/>`__,
    `Bitbucket <https://bitbucket.org/>`__ y
    `GitLab <https://gitlab.com/>`__.
+
 -  Herramienta elegida: `GitHub <https://github.com/>`__.
 
 GitHub es la plataforma web de hospedaje de repositorios por excelencia.
@@ -95,6 +117,7 @@ Gestión del proyecto
    `VersionOne <https://www.versionone.com/>`__,
    `XP-Dev <https://xp-dev.com/>`__ y `GitHub
    Projects <https://github.com/>`__.
+
 -  Herramienta elegida: `ZenHub <https://www.zenhub.com/>`__.
 
 ZenHub es una herramienta de gestión de proyectos totalmente integrada
@@ -103,7 +126,7 @@ representada se corresponde con un *issue* nativo de GitHub. Cada tarea
 se puede priorizar dependiendo de su posición en la lista, se le puede
 asignar una estimación, uno o varios responsables y el *sprint* al que
 pertenece. ZenHub también permite visualizar el gráfico *burndown* de
-cada *sprint*. Es gratuita para proyectos pequeños (max. 5
+cada *sprint*. Es gratuita para proyectos pequeños (máx. 5
 colaboradores) o proyectos *open source*.
 
 Comunicación
@@ -111,11 +134,12 @@ Comunicación
 
 -  Herramientas consideradas: email y
    `Slack <https://gobees.slack.com/>`__.
+
 -  Herramienta elegida: `Slack <https://gobees.slack.com/>`__.
 
 Slack es una herramienta de colaboración de equipos que ofrece salas de
 chat, mensajes directos y llamadas VoIP. Posee un buscador que permite
-encontrar todo el contenido generado dentro de Slack. Además ofrece un
+encontrar todo el contenido generado dentro de Slack. Además, ofrece un
 gran número de integraciones con otros servicios. En nuestro proyecto
 vamos a utilizar la integración con GitHub para crear un canal que sirva
 de log de todas las acciones realizadas en GitHub. Slack ofrece una
@@ -130,6 +154,7 @@ Java
 -  Herramientas consideradas: `IntelliJ
    IDEA <https://www.jetbrains.com/idea/>`__ y
    `Eclipse <https://eclipse.org/>`__.
+
 -  Herramienta elegida: `IntelliJ
    IDEA <https://www.jetbrains.com/idea/>`__.
 
@@ -147,6 +172,7 @@ Android
 -  Herramientas consideradas: `Android
    Studio <https://developer.android.com/studio/index.html>`__ y
    `Eclipse <https://eclipse.org/>`__.
+
 -  Herramienta elegida: `Android
    Studio <https://developer.android.com/studio/index.html>`__.
 
@@ -162,6 +188,7 @@ Markdown
 
 -  Herramientas consideradas: `StackEdit <https://stackedit.io/>`__ y
    `Haroopad <http://pad.haroopress.com/>`__.
+
 -  Herramienta elegida: `Haroopad <http://pad.haroopress.com/>`__.
 
 Haroopad es un editor de documentos Markdown. Soporta Github Flavored
@@ -174,6 +201,7 @@ LaTeX
 -  Herramientas consideradas:
    `ShareLaTeX <https://www.sharelatex.com/>`__ y
    `Texmaker <http://www.xm1math.net/texmaker/>`__.
+
 -  Herramienta elegida: `Texmaker <http://www.xm1math.net/texmaker/>`__.
 
 Texmaker es un editor gratuito y multiplataforma para LaTeX. Integra la
@@ -191,6 +219,7 @@ Documentación
    `LaTeX <https://www.latex-project.org/>`__,
    `Markdown <http://daringfireball.net/projects/markdown/>`__, `GitHub
    Wikis <https://github.com/>`__.
+
 -  Herramienta elegida:
    `Markdown <http://daringfireball.net/projects/markdown/>`__ +
    `LaTeX <https://www.latex-project.org/>`__.
@@ -219,6 +248,7 @@ Compilación y testeo
 
 -  Herramientas consideradas: `TravisCI <https://travis-ci.org/>`__ y
    `CircleCI <https://circleci.com/>`__.
+
 -  Herramienta elegida: `TravisCI <https://travis-ci.org/>`__.
 
 Travis es una plataforma de integración continua en la nube para
@@ -232,6 +262,7 @@ Cobertura de código
 
 -  Herramientas consideradas: `Coveralls <https://coveralls.io/>`__ y
    `Codecov <https://codecov.io/>`__.
+
 -  Herramienta elegida: `Codecov <https://codecov.io/>`__.
 
 Codecov es una herramienta que permite medir el porcentaje de código que
@@ -246,6 +277,7 @@ Calidad del código
 
 -  Herramientas consideradas: `Codeclimate <https://codeclimate.com/>`__
    y `Codacy <https://www.codacy.com/>`__.
+
 -  Herramienta elegida: `Codeclimate <https://codeclimate.com/>`__.
 
 Codeclimate es una herramienta que realiza revisiones de código
@@ -261,6 +293,7 @@ Revisión de dependencias
 
 -  Herramientas consideradas:
    `VersionEye <https://www.versioneye.com/>`__.
+
 -  Herramienta elegida: `VersionEye <https://www.versioneye.com/>`__.
 
 VersionEye es una herramienta que monitoriza las dependencias del
@@ -273,6 +306,7 @@ Documentación
 
 -  Herramientas consideradas: `Read the
    Docs <https://readthedocs.org/>`__.
+
 -  Herramienta elegida: `Read the Docs <https://readthedocs.org/>`__.
 
 Read the Docs es un servicio de documentación continua que permite crear
@@ -283,27 +317,31 @@ buscador, da soporte para diferentes versiones del proyecto y soporta
 internacionalización. El servicio es totalmente gratuito, sostenido por
 donaciones y subscripciones *Gold*.
 
+Sistemas de construcción automática del software
+------------------------------------------------
+
+Maven
+~~~~~
+
+`Maven <https://maven.apache.org/>`__ es una herramienta para para
+automatizar el proceso de construcción del *software* (compilación,
+testeo, empaquetado, etc.) enfocada a proyectos Java. Básicamente
+describe cómo se tiene que construir el *software* y cuáles son sus
+dependencias.
+
+Gradle
+~~~~~~
+
+`Gradle <https://gradle.org/>`__ es una herramienta similar a Maven pero
+basada en el lenguaje de programación orientado a objetos Groovy. El
+sistema de construcción de Android Studio está basado en Gradle y es
+actualmente el único soportado de forma oficial para Android.
+
 Librerías
 ---------
 
-OpenCV
-~~~~~~
-
-`OpenCV <www.opencv.org>`__ es un paquete Open Source de visión
-artificial que contiene más de 2500 librerías de procesamiento de
-imagenes y visión artificial, escritas en C/C++ a bajo/medio nivel. Se
-distribuye gratuitamente bajo una licencia BSD desde hace más de una
-década. Posee una comunidad de más de 50.000 usuarios alrededor de todo
-el mundo y se ha descargado más de 8 millones de veces.
-
-Aunque OpenCV está escrito en C/C++ posee wrappers para varias
-plataformas, entre ellas Android, en donde da soporte a las principales
-arquitecturas de CPU. Desde hace unos años, también soporta CUDA para el
-desarrollo en GPU tanto en escritorio como en móvil, aunque en esta
-última el soporte es todavía reducido.
-
-Android Support Library
-~~~~~~~~~~~~~~~~~~~~~~~
+*Android Support Library*
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La `librería de soporte de
 Android <https://developer.android.com/topic/libraries/support-library/>`__
@@ -311,6 +349,14 @@ facilita algunas características que no se incluyen en el framework
 oficial. Proporciona compatibilidad a versiones antiguas con las últimas
 características, incluye elementos para la interfaz adicionales y
 utilidades extra.
+
+Espresso
+~~~~~~~~
+
+`Espresso <https://google.github.io/android-testing-support-library/docs/espresso/>`__
+es un framework de *testing* para Android incluido en la librería de
+soporte para *testing* en Android. Provee una API para escribir UI test
+que simulen las interacciones de usuario con la app.
 
 Google Guava
 ~~~~~~~~~~~~
@@ -321,11 +367,36 @@ cotidianas, una extensión del *Java collections framework* (JCF) y otras
 extensiones como programación funcional, almacenamiento en caché,
 objetos de rango o *hashing*.
 
+Google Play Services
+~~~~~~~~~~~~~~~~~~~~
+
+`Google Play
+Services <https://developers.google.com/android/guides/overview>`__ es
+una librería que permite a las aplicaciones de terceros utilizar
+características de aplicaciones de Google como Maps, Google+, etc. En
+nuestro caso se ha hecho uso de su servicio de localización, que utiliza
+varias fuentes de datos (GPS, red y wifi) para ubicar el dispositivo
+rápidamente.
+
+JavaFx
+~~~~~~
+
+JavaFx es una librería para la creación de interfaces gráficas en Java.
+
 JUnit
 ~~~~~
 
 `JUnit <http://junit.org/junit4/>`__ es un *framework* para Java
 utilizado para realizar pruebas unitarias.
+
+Material Design
+~~~~~~~~~~~~~~~
+
+Material Design es una guía de estilos enfocada a la plataforma Android,
+pero aplicable a cualquier otra plataforma. Fue presentada en el Google
+I/O 2014 y se adoptó en Android a partir de la versión 5.0 (Lollipop).
+Se basa en objetos materiales, piezas colocadas en un espacio (lugar) y
+con un tiempo (movimiento) determinado.
 
 Mockito
 ~~~~~~~
@@ -336,10 +407,44 @@ comportamiento de una clase. Mockito está basado en EasyMock, mejorando
 su sintaxis haciendo los test más simples y fáciles de leer y con
 mensajes de error descriptivos.
 
-Espresso
-~~~~~~~~
+MPAndroidChart
+~~~~~~~~~~~~~~
 
-`Espresso <https://google.github.io/android-testing-support-library/docs/espresso/>`__
-es un framework de *testing* para Android incluido en la librería de
-soporte para *testing* en Android. Provee una API para escribir UI test
-que simulen las interacciones de usuario con la app.
+`MPAndroidChart <https://github.com/PhilJay/MPAndroidChart>`__ es una
+librería para la creación de gráficos en Android.
+
+OpenCV
+~~~~~~
+
+`OpenCV <www.opencv.org>`__ es un paquete *Open Source* de visión
+artificial que contiene más de 2500 librerías de procesamiento de
+imágenes y visión artificial, escritas en C/C++ a bajo/medio nivel. Se
+distribuye gratuitamente bajo una licencia *BSD* desde hace más de una
+década. Posee una comunidad de más de 50.000 usuarios alrededor de todo
+el mundo y se ha descargado más de 8 millones de veces.
+
+Aunque OpenCV está escrito en C/C++ posee *wrappers* para varias
+plataformas, entre ellas Android, en donde da soporte a las principales
+arquitecturas de CPU. Desde hace unos años, también soporta CUDA para el
+desarrollo en GPU tanto en escritorio como en móvil, aunque en esta
+última el soporte es todavía reducido.
+
+OpenWeatherMaps
+~~~~~~~~~~~~~~~
+
+OpenWeatherMap es un servicio online que proporciona información
+meteorológica. Está inspirado en OpenStreetMap y su filosofía de hacer
+accesible la información a la gente de forma gratuita. Utiliza distintas
+fuentes de datos desde estaciones meteorológicas oficiales, de
+aeropuertos, radares e incentiva a los propietarios de estaciones
+meteorológicas a conectarlas a su red. Proporciona una API que permite
+realizar hasta 60 llamadas por segundo de forma gratuita.
+
+Realm
+~~~~~
+
+`Realm <https://realm.io/products/realm-mobile-database/>`__ es una base
+de datos orientada a objetos enfocada a dispositivos móviles. Se definen
+como la alternativa a SQLite y presumen de ser más rápidos que cualquier
+ORM e incluso que SQLite puro. Posee una API muy intuitiva que facilita
+en gran medida el acceso a datos.

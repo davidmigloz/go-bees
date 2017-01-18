@@ -49,4 +49,3 @@ Objetivos personales
    mercado laboral.
 -  Adentrarme en el campo de la visión artificial.
 -  Profundizar en el desarrollo de aplicaciones Android.
--  Mejorar la documentación disponible de OpenCV para Android.
