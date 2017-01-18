@@ -378,6 +378,22 @@ horas, completando todas las tareas.
 .. figure:: ../../img/burndowns/sprint14.png
    :alt: Sprint 14.
    
+Sprint 15 (12/01/17 - 18/01/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: finalizar el desarrollo principal de la 
+app completando el menú y la internacionalización. Completar los contenidos de 
+la memoria y continuar con los anexos "Plan del proyecto software" y "Requisitos."
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 15 <https://github.com/davidmigloz/go-bees/milestone/16?closed=1>`__.
+
+Se estimaron 39 horas de trabajo y se invirtieron finalmente 37,75
+horas, a falta de terminar los anexos planificados por falta de tiempo.
+
+.. figure:: ../../img/burndowns/sprint15.png
+   :alt: Sprint 15.   
+   
 Estudio de viabilidad
 ---------------------
 
