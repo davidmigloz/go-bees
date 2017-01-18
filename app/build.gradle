@@ -168,3 +168,13 @@ Run copy test resources directory tasks before build.
 afterEvaluate {
     preBuild.dependsOn(copyResDirectoryToTestMockDebugClasses)
 }
+
+/*
+SonarQube configuration.
+*/
+sonarqube {
+    properties {
+        property "sonar.projectName", "GoBees"
+        property "sonar.projectKey", "com.davidmiguel.gobees"
+    }
+}
