@@ -141,7 +141,7 @@ no se obstaculizaba el vuelo de las abejas y se facilitaba el análisis.
 Además, era aconsejable cubrir el suelo con alguna superficie uniforme
 para mejorar la segmentación de las abejas.
 
-.. figure:: ../../img/cenital.png
+.. figure:: ../../img/cenital.jpg
    :alt: 
 
 En un primer momento, el desarrollo del algoritmo se iba a realizar
