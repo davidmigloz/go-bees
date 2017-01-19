@@ -22,14 +22,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".apiaries.ApiariesActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.OverlapSystemBar">
+            android:name=".splash.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".apiaries.ApiariesActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.OverlapSystemBar">
         </activity>
         <activity
             android:name=".addeditapiary.AddEditApiaryActivity"
