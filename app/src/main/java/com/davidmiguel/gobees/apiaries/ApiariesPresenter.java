@@ -65,12 +65,12 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     @Override
     public void loadApiaries(boolean forceUpdate) {
         // Force update the first time
-        forceUpdate = forceUpdate || firstLoad;
+        boolean update = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
         view.setLoadingIndicator(true);
         // Refresh data if needed
-        if (forceUpdate) {
+        if (update) {
             goBeesRepository.refreshApiaries();
         }
         // Get apiaries
@@ -194,7 +194,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
             }
         }
         // Update weather if needed
-        if (apiariesToUpdate.size() > 0) {
+        if (!apiariesToUpdate.isEmpty()) {
             goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate,
                     new GoBeesDataSource.TaskCallback() {
                 @Override

@@ -68,12 +68,12 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
     @Override
     public void loadData(boolean forceUpdate) {
         // Force update the first time
-        forceUpdate = forceUpdate || firstLoad;
+        boolean update = forceUpdate || firstLoad;
         firstLoad = false;
         // Show progress indicator
         apiaryHivesView.setLoadingIndicator(true);
         // Refresh data if needed
-        if (forceUpdate) {
+        if (update) {
             goBeesRepository.refreshHives(apiaryId);
         }
         // Get apiary

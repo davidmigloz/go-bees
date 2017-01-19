@@ -74,10 +74,9 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
 
     @Override
     public void populateApiary() {
-        if (isNewApiary()) {
-            throw new RuntimeException("populateApiary() was called but apiary is new.");
+        if (!isNewApiary()) {
+            goBeesRepository.getApiary(apiaryId, this);
         }
-        goBeesRepository.getApiary(apiaryId, this);
     }
 
     @Override
@@ -224,10 +223,9 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
      * @param notes apiary notes.
      */
     private void updateApiary(String name, String notes) {
-        if (isNewApiary()) {
-            throw new RuntimeException("updateApiary() was called but apiary is new.");
+        if (!isNewApiary()) {
+            saveApiary(apiaryId, name, notes);
         }
-        saveApiary(apiaryId, name, notes);
     }
 
     /**

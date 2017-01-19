@@ -20,6 +20,8 @@ package com.davidmiguel.gobees.data.model;
 
 import android.support.annotation.NonNull;
 
+import com.google.common.base.Objects;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -83,5 +85,18 @@ public class Record extends RealmObject implements Comparable<Record> {
     @Override
     public int compareTo(@NonNull Record r) {
         return this.getTimestamp().compareTo(r.getTimestamp());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Record record = (Record) obj;
+        return id == record.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

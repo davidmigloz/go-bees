@@ -18,6 +18,8 @@
 
 package com.davidmiguel.gobees.utils;
 
+import android.util.Log;
+
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
@@ -30,6 +32,8 @@ import java.util.Locale;
  * Format label in (HH:mm) format from a timestamp (relative to a reference timestamp).
  */
 public class HourAxisValueFormatter implements IAxisValueFormatter {
+
+    private static final String TAG = HourAxisValueFormatter.class.getSimpleName();
 
     private long referenceTimestamp;
     private DateFormat mDataFormat;
@@ -73,7 +77,8 @@ public class HourAxisValueFormatter implements IAxisValueFormatter {
         try {
             mDate.setTime(timestamp * 1000); // Convert from seconds to milliseconds
             return mDataFormat.format(mDate);
-        } catch (Exception ex) {
+        } catch (Exception e) {
+            Log.e(TAG, "Error: getHour()", e);
             return "--:--";
         }
     }

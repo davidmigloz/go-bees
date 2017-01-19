@@ -64,10 +64,9 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
 
     @Override
     public void populateHive() {
-        if (isNewHive()) {
-            throw new RuntimeException("populateHive() was called but hive is new.");
+        if (!isNewHive()) {
+            goBeesRepository.getHive(hiveId, this);
         }
-        goBeesRepository.getHive(hiveId, this);
     }
 
     @Override
@@ -143,10 +142,9 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
      * @param notes hive notes
      */
     private void updateHive(String name, String notes) {
-        if (isNewHive()) {
-            throw new RuntimeException("updateHive() was called but hive is new.");
+        if (!isNewHive()) {
+            saveHive(hiveId, name, notes);
         }
-        saveHive(hiveId, name, notes);
     }
 
     /**

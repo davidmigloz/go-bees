@@ -30,6 +30,7 @@ class CameraHandlerThread extends HandlerThread {
 
     private Handler mHandler;
     private AndroidCameraImpl owner;
+    private boolean running;
 
     CameraHandlerThread(AndroidCameraImpl owner) {
         super("CameraHandlerThread");
@@ -41,7 +42,8 @@ class CameraHandlerThread extends HandlerThread {
     /**
      * Starts
      */
-    void openCamera() {
+    synchronized void openCamera() {
+        running = true;
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -51,13 +53,16 @@ class CameraHandlerThread extends HandlerThread {
         });
 
         try {
-            wait();
+            while(running) {
+                wait();
+            }
         } catch (InterruptedException e) {
-            Log.d(TAG, "Thread was interrupted.");
+            Log.d(TAG, "Thread was interrupted.", e);
         }
     }
 
     private synchronized void notifyCameraOpened() {
+        running = false;
         notify();
     }
 }

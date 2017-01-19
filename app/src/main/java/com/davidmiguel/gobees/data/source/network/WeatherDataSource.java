@@ -19,6 +19,7 @@
 package com.davidmiguel.gobees.data.source.network;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.davidmiguel.gobees.data.model.MeteoRecord;
 
@@ -32,6 +33,7 @@ import java.net.URL;
  */
 public class WeatherDataSource {
 
+    private static final String TAG = WeatherDataSource.class.getSimpleName();
     private static WeatherDataSource INSTANCE;
 
     private WeatherDataSource() {
@@ -78,6 +80,7 @@ public class WeatherDataSource {
                 data.setMeteoRecord(meteoRecord);
                 return data;
             } catch (IOException | JSONException e) {
+                Log.e(TAG, "Error: GetWeatherTask()", e);
                 return data;
             }
         }

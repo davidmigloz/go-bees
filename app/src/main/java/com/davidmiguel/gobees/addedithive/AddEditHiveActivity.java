@@ -77,7 +77,7 @@ public class AddEditHiveActivity extends AppCompatActivity {
                     actionBar.setTitle(R.string.edit_hive);
                 }
                 Bundle bundle = new Bundle();
-                bundle.putString(AddEditHiveFragment.ARGUMENT_EDIT_HIVE_ID, hiveId + "");
+                bundle.putString(AddEditHiveFragment.ARGUMENT_EDIT_HIVE_ID, Long.toString(hiveId));
                 addEditHiveFragment.setArguments(bundle);
             } else {
                 // If new -> set add title

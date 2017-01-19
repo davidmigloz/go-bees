@@ -121,7 +121,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
                 try {
                     camera.setPreviewTexture(null);
                 } catch (IOException e) {
-                    Log.e(TAG, "Could not release preview-texture from camera.");
+                    Log.e(TAG, "Could not release preview-texture from camera.", e);
                 }
                 camera.release();
                 camera = null;
@@ -182,7 +182,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
             camera.startPreview();
             timer.scheduleAtFixedRate(takePhotoTask, initialDelay, frameRate);
         } catch (Exception e) {
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+            Log.d(TAG, "Error starting camera preview: " + e.getMessage(), e);
         }
     }
 
@@ -227,7 +227,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
                     camera = Camera.open(camIndex);
                     break;
                 } catch (RuntimeException e) {
-                    Log.e(TAG, "AndroidCamera is not available (in use or does not exist).");
+                    Log.e(TAG, "AndroidCamera is not available (in use or does not exist).", e);
                 }
             }
         }

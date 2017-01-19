@@ -69,7 +69,8 @@ public class AddEditApiaryActivity extends AppCompatActivity {
                     actionBar.setTitle(R.string.edit_apiary);
                 }
                 Bundle bundle = new Bundle();
-                bundle.putString(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId + "");
+                bundle.putString(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID,
+                        Long.toString(apiaryId));
                 addEditApiaryFragment.setArguments(bundle);
             } else {
                 // If new -> set add title

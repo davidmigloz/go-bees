@@ -138,9 +138,9 @@ public class ApiaryMother {
      */
     private Location getRandomNearLocation(double latitude, double longitude) {
         Random random = new Random();
-        double lat = new BigDecimal(latitude + random.nextInt(100) / 100d)
+        double lat = BigDecimal.valueOf(latitude + random.nextInt(100) / 100d)
                 .setScale(7, RoundingMode.HALF_UP).doubleValue();
-        double lon = new BigDecimal(longitude + random.nextInt(100) / 100d)
+        double lon = BigDecimal.valueOf(longitude + random.nextInt(100) / 100d)
                 .setScale(7, RoundingMode.HALF_UP).doubleValue();
         Location location = new Location("");
         location.setLatitude(lat);

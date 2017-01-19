@@ -19,6 +19,7 @@
 package com.davidmiguel.gobees.data.source.local;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
@@ -40,6 +41,7 @@ import io.realm.RealmResults;
  */
 public class GoBeesLocalDataSource implements GoBeesDataSource {
 
+    private static final String TAG = GoBeesLocalDataSource.class.getSimpleName();
     private static GoBeesLocalDataSource INSTANCE;
     private Realm realm;
 
@@ -85,6 +87,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             RealmResults<Apiary> apiaries = realm.where(Apiary.class).findAll();
             callback.onApiariesLoaded(realm.copyFromRealm(apiaries));
         } catch (Exception e) {
+            Log.e(TAG, "Error: getApiaries()", e);
             callback.onDataNotAvailable();
         }
     }
@@ -95,6 +98,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
             callback.onApiaryLoaded(realm.copyFromRealm(apiary));
         } catch (Exception e) {
+            Log.e(TAG, "Error: getApiary()", e);
             callback.onDataNotAvailable();
         }
     }
@@ -116,6 +120,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: saveApiary()", e);
             callback.onFailure();
         }
     }
@@ -151,6 +156,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: deleteApiary()", e);
             callback.onFailure();
         }
     }
@@ -168,6 +174,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: deleteAllApiaries()", e);
             callback.onFailure();
         }
     }
@@ -194,6 +201,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
             callback.onHivesLoaded(realm.copyFromRealm(apiary.getHives()));
         } catch (Exception e) {
+            Log.e(TAG, "Error: getHives()", e);
             callback.onDataNotAvailable();
         }
     }
@@ -204,6 +212,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
             callback.onHiveLoaded(realm.copyFromRealm(hive));
         } catch (Exception e) {
+            Log.e(TAG, "Error: getHive()", e);
             callback.onDataNotAvailable();
         }
     }
@@ -246,6 +255,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             // Return hive
             callback.onHiveLoaded(hive);
         } catch (Exception e) {
+            Log.e(TAG, "Error: getHiveWithRecordings()", e);
             callback.onDataNotAvailable();
         }
     }
@@ -278,6 +288,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: saveHive()", e);
             callback.onFailure();
         }
     }
@@ -299,6 +310,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: deleteHive()", e);
             callback.onFailure();
         }
     }
@@ -325,6 +337,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: saveRecord()", e);
             callback.onFailure();
         }
     }
@@ -362,6 +375,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: saveRecords()", e);
             callback.onFailure();
         }
     }
@@ -434,6 +448,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             }
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: deleteRecording()", e);
             callback.onFailure();
         }
     }
@@ -473,6 +488,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: updateApiariesCurrentWeather()", e);
             callback.onFailure();
         }
     }
@@ -501,6 +517,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
+            Log.e(TAG, "Error: saveMeteoRecord()", e);
             callback.onFailure();
         }
     }
