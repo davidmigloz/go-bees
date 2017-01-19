@@ -3,6 +3,13 @@ language: android
 jdk: oraclejdk8
 compiler: gcc
 
+addons:
+  sonarqube:
+    branches:
+      - master
+      - develop
+      - sonarqube-integration
+
 env:
   matrix:
     - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
@@ -53,6 +60,8 @@ script:
     - ./gradlew assembleDebug lint
     # Run test coverage report
     - ./gradlew jacocoTestMockDebugUnitTestReport
+    # Run SonarQube analysis
+    - ./gradlew sonarqube
     # Build test app
     # ./gradlew assembleAndroidTest
     # Create and lunch emulator
@@ -67,4 +76,7 @@ after_success:
 
 cache:
   directories:
-    - $HOME/.gradle
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'

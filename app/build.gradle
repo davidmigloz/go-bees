@@ -165,3 +165,14 @@ Run copy test resources directory tasks before build.
 afterEvaluate {
     preBuild.dependsOn(copyResDirectoryToTestMockDebugClasses)
 }
+
+/*
+SonarQube configuration.
+https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle
+*/
+sonarqube {
+    properties {
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.android.lint.report", "build/outputs/lint-results-mockDebug.xml"
+    }
+}
