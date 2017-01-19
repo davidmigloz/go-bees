@@ -8,7 +8,6 @@ addons:
     branches:
       - master
       - develop
-      - sonarqube-integration
 
 env:
   matrix:
