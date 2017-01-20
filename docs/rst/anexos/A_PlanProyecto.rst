@@ -105,7 +105,9 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint0.png
    :alt: Sprint 0.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 1 (17/09/16 - 23/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -128,6 +130,8 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint1.png
    :alt: Sprint 1.
+   :align: center
+   :figwidth: 100 %
 
 Sprint 2 (24/09/16 - 29/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -154,7 +158,9 @@ horas, quedando dos tareas pendientes para terminar durante el siguiente
 
 .. figure:: ../../img/burndowns/sprint2.png
    :alt: Sprint 2.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 3 (30/09/16 - 06/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -171,7 +177,9 @@ horas, quedando una tarea por terminar.
 
 .. figure:: ../../img/burndowns/sprint3.png
    :alt: Sprint 3.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 4 (07/10/16 - 13/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -190,7 +198,9 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint4.png
    :alt: Sprint 4.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 5 (14/10/16 - 20/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -208,7 +218,9 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint5.png
    :alt: Sprint 5.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 6 (21/10/16 - 27/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -239,7 +251,9 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint6.png
    :alt: Sprint 6.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 7 (28/10/16 - 04/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -257,7 +271,9 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint7.png
    :alt: Sprint 7.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 8 (05/11/16 - 10/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -275,7 +291,9 @@ completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint8.png
    :alt: Sprint 8.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 9 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -291,7 +309,9 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint9.png
    :alt: Sprint 9.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 10 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -307,6 +327,8 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint10.png
    :alt: Sprint 10.
+   :align: center
+   :figwidth: 100 %
    
 Sprint 11 (26/11/16 - 01/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -324,6 +346,8 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint11.png
    :alt: Sprint 11.
+   :align: center
+   :figwidth: 100 %
    
 Sprint 12 (02/12/16 - 09/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -341,7 +365,9 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint12.png
    :alt: Sprint 12.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 13 (10/12/16 - 14/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -356,7 +382,9 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint13.png
    :alt: Sprint 13.
-
+   :align: center
+   :figwidth: 100 %
+   
 Sprint 14 (15/12/16 - 11/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -377,6 +405,8 @@ horas, completando todas las tareas.
 
 .. figure:: ../../img/burndowns/sprint14.png
    :alt: Sprint 14.
+   :align: center
+   :figwidth: 100 %
    
 Sprint 15 (12/01/17 - 18/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -393,7 +423,9 @@ horas, a falta de terminar los anexos planificados por falta de tiempo.
 
 .. figure:: ../../img/burndowns/sprint15.png
    :alt: Sprint 15.   
-   
+   :align: center
+   :figwidth: 100 %
+
 Estudio de viabilidad
 ---------------------
 
@@ -601,6 +633,8 @@ permisividad.
 
 .. figure:: ../../img/licenses_compatibility.png
    :alt: licenses\_compatibility
+   :align: center
+   :figwidth: 100 %   
 
 Podemos observar que la licencia más restrictiva (en el sentido de
 obligaciones a cumplir) es la *Eclipse Public License* que posee la

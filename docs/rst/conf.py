@@ -235,23 +235,7 @@ htmlhelp_basename = 'GoBeesDoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
-latex_elements = {
-     # The paper blobSize ('letterpaper' or 'a4paper').
-     #
-     'papersize': 'a4paper',
-
-     # The font blobSize ('10pt', '11pt' or '12pt').
-     #
-     # 'pointsize': '10pt',
-
-     # Additional stuff for the LaTeX preamble.
-     #
-     # 'preamble': '',
-
-     # Latex figure (float) alignment
-     #
-     'figure_align': 'H',
-}
+latex_elements = {'figure_align': 'H'}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
