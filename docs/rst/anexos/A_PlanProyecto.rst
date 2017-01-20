@@ -434,7 +434,7 @@ contingencias comunes, más un 5,50% por desempleo de tipo general, más
 un 0,20% para el Fondo de Garantía Salarial y más un 0,60% de formación
 profesional. En total un 29,9% que se aplica al salario bruto [ss_cotizacion]_.
 
-**Costes de *hardware*:**
+**Costes de hardware:**
 
 En este apartado se revisan todos los costes en dispositivos *hardware*
 que se han necesitado para el desarrollo del proyecto. Se considera que
@@ -450,7 +450,7 @@ la amortización ronda los 5 años y han sido utilizados durante 5 meses.
 | **Total**            | 1.100€      | 91,67€                 |
 +----------------------+-------------+------------------------+
 
-**Costes de *software*:**
+**Costes de software:**
 
 En este apartado se revisan todos los costes en licencias de *software*
 no gratuito. Se considera que la amortización del *software* ronda los 2
