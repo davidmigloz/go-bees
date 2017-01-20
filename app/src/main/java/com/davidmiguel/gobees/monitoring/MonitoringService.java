@@ -83,15 +83,15 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private static final int NOTIFICATION_ID = 101;
 
     // Delay before start recording
-    private static final int INITIAL_DELAY = DateTimeUtils.T_5_SECONDS;
+    private static final long INITIAL_DELAY = DateTimeUtils.T_5_SECONDS;
     // Frame rate while creating background model
-    private static final int INITIAL_FRAME_RATE = 300;
+    private static final long INITIAL_FRAME_RATE = 300;
     // Number of frames to create background model
-    private static final int INITIAL_NUM_FRAMES = 10;
+    private static final long INITIAL_NUM_FRAMES = 10;
     // Number of last recording seconds to delete (they usually contains noise)
-    private static final int NUM_LAST_SEC_TO_DELETE = DateTimeUtils.T_5_SECONDS;
+    private static final long NUM_LAST_SEC_TO_DELETE = DateTimeUtils.T_5_SECONDS;
     // Weather refresh rate
-    private static final int WEATHER_REFRESH_RATE = DateTimeUtils.T_15_MINUTES;
+    private static final long WEATHER_REFRESH_RATE = DateTimeUtils.T_15_MINUTES;
 
     // Service stuff
     private static MonitoringService INSTANCE = null;
@@ -164,7 +164,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             // Release camera
             androidCamera.release();
             // Save records
-            if (records.size() > 0) {
+            if (!records.isEmpty()) {
                 // Clean records
                 cleanRecords();
                 // Save records on db
@@ -362,12 +362,12 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private void cleanRecords() {
         // Delete last seconds
         long endTime = records.getLast().getTimestamp().getTime();
-        while (records.size() > 0
+        while (!records.isEmpty()
                 && endTime - records.getLast().getTimestamp().getTime() < NUM_LAST_SEC_TO_DELETE) {
             records.removeLast();
         }
         // Save initial and last record (to know the beginning and ending of the recording)
-        if (records.size() > 0) {
+        if (!records.isEmpty()) {
             records.getFirst().setNumBees(-1);
             records.getLast().setNumBees(-1);
         }

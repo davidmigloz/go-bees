@@ -54,11 +54,14 @@ public class WeatherUtils {
      */
     public static String formatTemperature(Context context, double temperature) {
         int temperatureFormatResourceId = R.string.format_temperature_celsius;
+        double value;
         if (!GoBeesPreferences.isMetric(context)) {
-            temperature = celsiusToFahrenheit(temperature);
+            value = celsiusToFahrenheit(temperature);
             temperatureFormatResourceId = R.string.format_temperature_fahrenheit;
+        } else {
+            value = temperature;
         }
-        return String.format(context.getString(temperatureFormatResourceId), temperature);
+        return String.format(context.getString(temperatureFormatResourceId), value);
     }
 
     /**
@@ -98,9 +101,12 @@ public class WeatherUtils {
     public static String formatWind(Context context, double windSpeed, double degrees) {
         int windFormat = R.string.format_wind_kmh;
 
+        double value;
         if (!GoBeesPreferences.isMetric(context)) {
             windFormat = R.string.format_wind_mph;
-            windSpeed = .621371192237334f * windSpeed;
+            value = .621371192237334f * windSpeed;
+        } else {
+            value = windSpeed;
         }
 
         String direction = "";
@@ -122,7 +128,7 @@ public class WeatherUtils {
             direction = "NW";
         }
 
-        return String.format(context.getString(windFormat), windSpeed, direction);
+        return String.format(context.getString(windFormat), value, direction);
     }
 
     /**
@@ -148,6 +154,7 @@ public class WeatherUtils {
     public static int getWeatherIconResourceId(String weatherIconId) {
         switch (weatherIconId) {
             case "01d": // clear sky day
+            default: // Not found
                 return R.drawable.ic_weather_day_clear_sky;
             case "01n": // clear sky night
                 return R.drawable.ic_weather_night_clear_sky;
@@ -177,8 +184,6 @@ public class WeatherUtils {
             case "50d": // mist day
             case "50n": // mist night
                 return R.drawable.ic_weather_day_night_mist;
-            default: // Not found
-                return R.drawable.ic_weather_day_clear_sky;
         }
     }
 

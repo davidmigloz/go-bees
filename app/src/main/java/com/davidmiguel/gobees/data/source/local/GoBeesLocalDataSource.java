@@ -402,7 +402,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
                 .findAll()
                 .sort("timestamp");
-        if (records.size() == 0) {
+        if (records.isEmpty()) {
             callback.onDataNotAvailable();
             return;
         }

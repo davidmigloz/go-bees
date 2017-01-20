@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/davidmigloz/go-bees.svg?branch=master)](https://travis-ci.org/davidmigloz/go-bees)
 [![codecov](https://codecov.io/gh/davidmigloz/go-bees/branch/master/graph/badge.svg)](https://codecov.io/gh/davidmigloz/go-bees)
 [![Code Climate](https://codeclimate.com/github/davidmigloz/go-bees/badges/gpa.svg)](https://codeclimate.com/github/davidmigloz/go-bees)
-[![SonarQube](https://sonarqube.com/api/badges/gate?key=com.davidmiguel.gobees%3Asonarqube-integration)](https://sonarqube.com/dashboard/index/com.davidmiguel.gobees%3Asonarqube-integration)
+[![SonarQube](https://sonarqube.com/api/badges/gate?key=com.davidmiguel.gobees%3Adevelop)](https://sonarqube.com/dashboard/index/com.davidmiguel.gobees%3Adevelop)
 [![Dependency Status](https://www.versioneye.com/user/projects/57f7b19e823b88004e06ad33/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57f7b19e823b88004e06ad33)
 [![Documentation Status](https://readthedocs.org/projects/go-bees/badge/?version=develop)](http://go-bees.readthedocs.io/es/develop/?badge=develop)
 

@@ -168,21 +168,24 @@ public class MonitoringSettingsFragment extends PreferenceFragment
      */
     private void updatePreference(Preference preference, Object value) {
         // Get value if not passed
+        Object newVal;
         if (value == null) {
             if (preference instanceof VNTNumberPickerPreference) {
-                value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
+                newVal = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getInt(preference.getKey(), Integer.parseInt(preference.getSummary().toString()));
             } else if (preference instanceof TwoStatePreference) {
-                value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
+                newVal = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getBoolean(preference.getKey(), true);
             } else {
-                value = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
+                newVal = PreferenceManager.getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), "");
             }
+        } else {
+            newVal = value;
         }
         // Update preference
-        updateAlgorithm(preference, value);
-        updateSummary(preference, value);
+        updateAlgorithm(preference, newVal);
+        updateSummary(preference, newVal);
     }
 
     /**
@@ -202,10 +205,10 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             presenter.updateAlgoBlobSize(getBlobSize(val));
         } else if (preference.getKey().equals(getString(R.string.pref_min_area_key))) {
             // Update min area
-            presenter.updateAlgoMinArea(Double.valueOf((Integer) value));
+            presenter.updateAlgoMinArea((Double) value);
         } else if (preference.getKey().equals(getString(R.string.pref_max_area_key))) {
             // Update max area
-            presenter.updateAlgoMaxArea((Double.valueOf((Integer) value)));
+            presenter.updateAlgoMaxArea(((Double) value));
         } else if (preference.getKey().equals(getString(R.string.pref_zoom_key))) {
             // Update zoom
             presenter.updateAlgoZoom((Integer.parseInt((String) value)));

@@ -202,7 +202,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
     public void showRecording(@NonNull Recording recording) {
         // Setup charts
         setupBeesChart(recording.getRecords());
-        if (recording.getMeteo() != null && recording.getMeteo().size() > 0) {
+        if (recording.getMeteo() != null && !recording.getMeteo().isEmpty()) {
             setupTempChart(recording.getMeteo());
             setupRainChart(recording.getMeteo());
             setupWindChart(recording.getMeteo());
@@ -280,9 +280,9 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
      * @param chartVisible chart to make visible.
      */
     private void setChartsVisibility(String chartVisible) {
-        tempChart.setVisibility(chartVisible.equals("temp") ? View.VISIBLE : View.GONE);
-        rainChart.setVisibility(chartVisible.equals("rain") ? View.VISIBLE : View.GONE);
-        windChart.setVisibility(chartVisible.equals("wind") ? View.VISIBLE : View.GONE);
+        tempChart.setVisibility("temp".equals(chartVisible) ? View.VISIBLE : View.GONE);
+        rainChart.setVisibility("rain".equals(chartVisible) ? View.VISIBLE : View.GONE);
+        windChart.setVisibility("wind".equals(chartVisible) ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -292,11 +292,11 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
      */
     private void highlightChartIcon(String chartVisible) {
         int defaultColor = ContextCompat.getColor(getContext(), R.color.colorDivider);
-        tempIcon.setColorFilter(chartVisible.equals("temp")
+        tempIcon.setColorFilter("temp".equals(chartVisible)
                 ? ContextCompat.getColor(getContext(), R.color.colorTempIcon) : defaultColor);
-        rainIcon.setColorFilter(chartVisible.equals("rain")
+        rainIcon.setColorFilter("rain".equals(chartVisible)
                 ? ContextCompat.getColor(getContext(), R.color.colorRainIcon) : defaultColor);
-        windIcon.setColorFilter(chartVisible.equals("wind")
+        windIcon.setColorFilter("wind".equals(chartVisible)
                 ? ContextCompat.getColor(getContext(), R.color.colorWindIcon) : defaultColor);
     }
 

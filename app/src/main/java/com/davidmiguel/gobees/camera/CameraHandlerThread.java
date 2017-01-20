@@ -58,6 +58,7 @@ class CameraHandlerThread extends HandlerThread {
             }
         } catch (InterruptedException e) {
             Log.d(TAG, "Thread was interrupted.", e);
+            Thread.currentThread().interrupt();
         }
     }
 

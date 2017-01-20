@@ -78,11 +78,8 @@ class OpenWeatherMapUtils {
             switch (errorCode) {
                 case HttpURLConnection.HTTP_OK:
                     break;
-                case HttpURLConnection.HTTP_NOT_FOUND:
-                    /* Location invalid */
-                    return null;
-                default:
-                    /* Server probably down */
+                case HttpURLConnection.HTTP_NOT_FOUND: // Location invalid
+                default: // Server probably down
                     return null;
             }
         }
