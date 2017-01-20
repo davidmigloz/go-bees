@@ -107,7 +107,6 @@ completando todas las tareas.
 
 .. |Sprint 0| image:: ../../img/burndowns/sprint0.png
    :align: center
-   :scale: 100%
 
 Sprint 1 (17/09/16 - 23/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,7 +132,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 1| image:: ../../img/burndowns/sprint1.png
    :align: center
-   :scale: 100%
    
 
 Sprint 2 (24/09/16 - 29/09/16)
@@ -163,7 +161,6 @@ horas, quedando dos tareas pendientes para terminar durante el siguiente
 
 .. |Sprint 2| image:: ../../img/burndowns/sprint2.png
    :align: center
-   :scale: 100%
 
 Sprint 3 (30/09/16 - 06/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -183,7 +180,6 @@ horas, quedando una tarea por terminar.
 
 .. |Sprint 3| image:: ../../img/burndowns/sprint3.png
    :align: center
-   :scale: 100%
 
 Sprint 4 (07/10/16 - 13/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -205,7 +201,6 @@ completando todas las tareas.
 
 .. |Sprint 4| image:: ../../img/burndowns/sprint4.png
    :align: center
-   :scale: 100%
 
 Sprint 5 (14/10/16 - 20/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -226,7 +221,6 @@ completando todas las tareas.
 
 .. |Sprint 5| image:: ../../img/burndowns/sprint5.png
    :align: center
-   :scale: 100%
 
 Sprint 6 (21/10/16 - 27/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -260,7 +254,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 6| image:: ../../img/burndowns/sprint6.png
    :align: center
-   :scale: 100%
 
 Sprint 7 (28/10/16 - 04/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -281,7 +274,6 @@ completando todas las tareas.
 
 .. |Sprint 7| image:: ../../img/burndowns/sprint7.png
    :align: center
-   :scale: 100%
 
 Sprint 8 (05/11/16 - 10/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -302,7 +294,6 @@ completando todas las tareas.
 
 .. |Sprint 8| image:: ../../img/burndowns/sprint8.png
    :align: center
-   :scale: 100%
 
 Sprint 9 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -321,7 +312,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 9| image:: ../../img/burndowns/sprint9.png
    :align: center
-   :scale: 100%
 
 Sprint 10 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -340,7 +330,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 10| image:: ../../img/burndowns/sprint10.png
    :align: center
-   :scale: 100%
    
 Sprint 11 (26/11/16 - 01/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -360,7 +349,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 11| image:: ../../img/burndowns/sprint11.png
    :align: center
-   :scale: 100%
    
 Sprint 12 (02/12/16 - 09/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -380,7 +368,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 12| image:: ../../img/burndowns/sprint12.png
    :align: center
-   :scale: 100%
 
 Sprint 13 (10/12/16 - 14/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -398,7 +385,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 13| image:: ../../img/burndowns/sprint13.png
    :align: center
-   :scale: 100%
 
 Sprint 14 (15/12/16 - 11/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -422,7 +408,6 @@ horas, completando todas las tareas.
 
 .. |Sprint 14| image:: ../../img/burndowns/sprint14.png
    :align: center
-   :scale: 100%
    
 Sprint 15 (12/01/17 - 18/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -441,7 +426,6 @@ horas, a falta de terminar los anexos planificados por falta de tiempo.
 
 .. |Sprint 15| image:: ../../img/burndowns/sprint15.png
    :align: center
-   :scale: 100%
    
 Estudio de viabilidad
 ---------------------
@@ -648,11 +632,10 @@ sea compatible con Apache v2.0, BSD, MIT y EPL. En el siguiente gráfico
 mostramos la compatibilidad entre estas licencias, así como su grado de
 permisividad.
 
-|licenses\_compatibility|
+|licenses compatibility|
 
-.. |licenses\_compatibility| image:: ../../img/licenses_compatibility.png
+.. |licenses compatibility| image:: ../../img/licenses_compatibility.png
    :align: center
-   :scale: 100%
 
 Podemos observar que la licencia más restrictiva (en el sentido de
 obligaciones a cumplir) es la *Eclipse Public License* que posee la
