@@ -203,7 +203,7 @@ desarrollará cada uno de ellos.
 Diagrama de casos de uso
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-|use_cases_diagram|
+|use cases diagram|
 
 .. |use cases diagram| image:: ../../img/use_cases_diagram.png
    :align: center
