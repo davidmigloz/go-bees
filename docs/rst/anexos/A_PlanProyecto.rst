@@ -106,6 +106,8 @@ completando todas las tareas.
 |Sprint 0|
 
 .. |Sprint 0| image:: ../../img/burndowns/sprint0.png
+   :align: center
+   :scale: 100%
 
 Sprint 1 (17/09/16 - 23/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,8 +129,12 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 7,25 horas de trabajo y se invirtieron finalmente 13,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint1.png
-   :alt: Sprint 1.
+|Sprint 1|
+
+.. |Sprint 1| image:: ../../img/burndowns/sprint1.png
+   :align: center
+   :scale: 100%
+   
 
 Sprint 2 (24/09/16 - 29/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -153,8 +159,11 @@ Se estimaron 11,75 horas de trabajo y se invirtieron finalmente 33
 horas, quedando dos tareas pendientes para terminar durante el siguiente
 *sprint*.
 
-.. figure:: ../../img/burndowns/sprint2.png
-   :alt: Sprint 2.
+|Sprint 2|
+
+.. |Sprint 2| image:: ../../img/burndowns/sprint2.png
+   :align: center
+   :scale: 100%
 
 Sprint 3 (30/09/16 - 06/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -170,8 +179,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 31
 horas, quedando una tarea por terminar.
 
-.. figure:: ../../img/burndowns/sprint3.png
-   :alt: Sprint 3.
+|Sprint 3|
+
+.. |Sprint 3| image:: ../../img/burndowns/sprint3.png
+   :align: center
+   :scale: 100%
 
 Sprint 4 (07/10/16 - 13/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -189,8 +201,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 37 horas de trabajo y se invirtieron finalmente 39,5 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint4.png
-   :alt: Sprint 4.
+|Sprint 4|
+
+.. |Sprint 4| image:: ../../img/burndowns/sprint4.png
+   :align: center
+   :scale: 100%
 
 Sprint 5 (14/10/16 - 20/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -207,8 +222,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 27 horas de trabajo y se invirtieron finalmente 34 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint5.png
-   :alt: Sprint 5.
+|Sprint 5|
+
+.. |Sprint 5| image:: ../../img/burndowns/sprint5.png
+   :align: center
+   :scale: 100%
 
 Sprint 6 (21/10/16 - 27/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -238,8 +256,11 @@ tests unitarios).
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 41
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint6.png
-   :alt: Sprint 6.
+|Sprint 6|
+
+.. |Sprint 6| image:: ../../img/burndowns/sprint6.png
+   :align: center
+   :scale: 100%
 
 Sprint 7 (28/10/16 - 04/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,8 +277,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 16 horas de trabajo y se invirtieron finalmente 23 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint7.png
-   :alt: Sprint 7.
+|Sprint 7|
+
+.. |Sprint 7| image:: ../../img/burndowns/sprint7.png
+   :align: center
+   :scale: 100%
 
 Sprint 8 (05/11/16 - 10/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -274,8 +298,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 46 horas de trabajo y se invirtieron finalmente 53 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint8.png
-   :alt: Sprint 8.
+|Sprint 8|
+
+.. |Sprint 8| image:: ../../img/burndowns/sprint8.png
+   :align: center
+   :scale: 100%
 
 Sprint 9 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -290,8 +317,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 23 horas de trabajo y se invirtieron finalmente 24,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint9.png
-   :alt: Sprint 9.
+|Sprint 9|
+
+.. |Sprint 9| image:: ../../img/burndowns/sprint9.png
+   :align: center
+   :scale: 100%
 
 Sprint 10 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -306,8 +336,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 33,75 horas de trabajo y se invirtieron finalmente 39,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint10.png
-   :alt: Sprint 10.
+|Sprint 10|
+
+.. |Sprint 10| image:: ../../img/burndowns/sprint10.png
+   :align: center
+   :scale: 100%
    
 Sprint 11 (26/11/16 - 01/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,8 +356,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 25,75 horas de trabajo y se invirtieron finalmente 34
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint11.png
-   :alt: Sprint 11.
+|Sprint 11|
+
+.. |Sprint 11| image:: ../../img/burndowns/sprint11.png
+   :align: center
+   :scale: 100%
    
 Sprint 12 (02/12/16 - 09/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -340,8 +376,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 36,25 horas de trabajo y se invirtieron finalmente 50,75
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint12.png
-   :alt: Sprint 12.
+|Sprint 12|
+
+.. |Sprint 12| image:: ../../img/burndowns/sprint12.png
+   :align: center
+   :scale: 100%
 
 Sprint 13 (10/12/16 - 14/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -355,8 +394,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 26,25 horas de trabajo y se invirtieron finalmente 14,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint13.png
-   :alt: Sprint 13.
+|Sprint 13|
+
+.. |Sprint 13| image:: ../../img/burndowns/sprint13.png
+   :align: center
+   :scale: 100%
 
 Sprint 14 (15/12/16 - 11/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -376,8 +418,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 143 horas de trabajo y se invirtieron finalmente 187,75
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint14.png
-   :alt: Sprint 14.
+|Sprint 14|
+
+.. |Sprint 14| image:: ../../img/burndowns/sprint14.png
+   :align: center
+   :scale: 100%
    
 Sprint 15 (12/01/17 - 18/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -392,8 +437,11 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 39 horas de trabajo y se invirtieron finalmente 37,75
 horas, a falta de terminar los anexos planificados por falta de tiempo.
 
-.. figure:: ../../img/burndowns/sprint15.png
-   :alt: Sprint 15.   
+|Sprint 15|
+
+.. |Sprint 15| image:: ../../img/burndowns/sprint15.png
+   :align: center
+   :scale: 100%
    
 Estudio de viabilidad
 ---------------------
@@ -600,8 +648,11 @@ sea compatible con Apache v2.0, BSD, MIT y EPL. En el siguiente gráfico
 mostramos la compatibilidad entre estas licencias, así como su grado de
 permisividad.
 
-.. figure:: ../../img/licenses_compatibility.png
-   :alt: licenses\_compatibility
+|licenses\_compatibility|
+
+.. |licenses\_compatibility| image:: ../../img/licenses_compatibility.png
+   :align: center
+   :scale: 100%
 
 Podemos observar que la licencia más restrictiva (en el sentido de
 obligaciones a cumplir) es la *Eclipse Public License* que posee la

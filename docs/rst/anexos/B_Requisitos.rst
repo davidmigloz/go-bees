@@ -203,8 +203,11 @@ desarrollará cada uno de ellos.
 Diagrama de casos de uso
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: ../../img/use_cases_diagram.png
-   :alt: 
+|use_cases_diagram|
+
+.. |use_cases_diagram| image:: ../../img/use_cases_diagram.png
+   :align: center
+   :scale: 100%
 
 Actores
 ~~~~~~~
