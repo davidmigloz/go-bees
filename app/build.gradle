@@ -168,7 +168,7 @@ afterEvaluate {
 
 /*
 SonarQube configuration.
-https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle
+
 */
 sonarqube {
     properties {
@@ -178,7 +178,7 @@ sonarqube {
         property "sonar.sources", "."
         property "sonar.java.binaries", "./build/intermediates/classes/mock/debug"
         property "sonar.java.test.binaries", "./build/intermediates/classes/test/mock/debug"
-        property "sonar.exclusions", "build/**,**/*.png,**/*.jpg"
+        property "sonar.exclusions", "**/*.png,**/*.jpg"
         property "sonar.import_unknown_files", true
         property "sonar.android.lint.report", "./build/outputs/lint-results-mockDebug.xml"
         property "sonar.junit.reportsPath", "./build/test-results/mockDebug"
