@@ -400,7 +400,129 @@ Estudio de viabilidad
 Viabilidad económica
 ~~~~~~~~~~~~~~~~~~~~
 
-TODO
+En el siguiente apartado se analizarán los costes y beneficios que
+podría haber supuesto el proyecto si se hubiese realizado en un entorno
+empresarial real.
+
+Costes
+^^^^^^
+
+La estructura de costes del proyecto se puede desglosar en las
+siguientes categorías.
+
+**Costes de personal:**
+
+El proyecto ha sido llevado a cabo por un desarrollador empleado a
+tiempo completo durante cinco meses. Se considera el siguiente salario:
+
++----------------------------+--------------+
+| **Concepto**               | **Coste**    |
++============================+==============+
+| Salario mensual neto       | 1.000€       |
++----------------------------+--------------+
+| Retención IRPF (15%)       | 272,23€      |
++----------------------------+--------------+
+| Seguridad Social (29,9%)   | 542,65€      |
++----------------------------+--------------+
+| Salario mensual bruto      | 1.814,88€    |
++----------------------------+--------------+
+| **Total 5 meses**          | 9.074,40 €   |
++----------------------------+--------------+
+
+La retribución a la Seguridad Social se ha calculado como un 23,60% por
+contingencias comunes, más un 5,50% por desempleo de tipo general, más
+un 0,20% para el Fondo de Garantía Salarial y más un 0,60% de formación
+profesional. En total un 29,9% que se aplica al salario bruto [ss_cotizacion]_.
+
+**Costes de *hardware*:**
+
+En este apartado se revisan todos los costes en dispositivos *hardware*
+que se han necesitado para el desarrollo del proyecto. Se considera que
+la amortización ronda los 5 años y han sido utilizados durante 5 meses.
+
++----------------------+-------------+------------------------+
+| **Concepto**         | **Coste**   | **Coste amortizado**   |
++======================+=============+========================+
+| Dispositivo móvil    | 300€        | 25€                    |
++----------------------+-------------+------------------------+
+| Ordenador portátil   | 800€        | 66,67€                 |
++----------------------+-------------+------------------------+
+| **Total**            | 1.100€      | 91,67€                 |
++----------------------+-------------+------------------------+
+
+**Costes de *software*:**
+
+En este apartado se revisan todos los costes en licencias de *software*
+no gratuito. Se considera que la amortización del *software* ronda los 2
+años.
+
++------------------+-------------+------------------------+
+| **Concepto**     | **Coste**   | **Coste amortizado**   |
++==================+=============+========================+
+| Windows 10 Pro   | 279€        | 58,13€                 |
++------------------+-------------+------------------------+
+| Creately         | 5€          | 1,04€                  |
++------------------+-------------+------------------------+
+| **Total**        | 284€        | 59,17€                 |
++------------------+-------------+------------------------+
+
+**Costes varios:**
+
+En este apartado se revisan el resto de costes del proyecto.
+
++------------------------------------+-------------+
+| **Concepto**                       | **Coste**   |
++====================================+=============+
+| Dominio gobees.io                  | 31,90€      |
++------------------------------------+-------------+
+| Alquiler de oficina                | 500€        |
++------------------------------------+-------------+
+| Internet                           | 150€        |
++------------------------------------+-------------+
+| Material de apicultura de prueba   | 150€        |
++------------------------------------+-------------+
+| **Total**                          | 831,90€     |
++------------------------------------+-------------+
+
+**Costes totales:**
+
+El sumatorio de todos los costes es el siguiente:
+
++----------------+--------------+
+| **Concepto**   | **Coste**    |
++================+==============+
+| Personal       | 9.074,40 €   |
++----------------+--------------+
+| *Hardware*     | 91,67€       |
++----------------+--------------+
+| *Software*     | 59,17€       |
++----------------+--------------+
+| Varios         | 831,90€      |
++----------------+--------------+
+| Total          | 10.057,14€   |
++----------------+--------------+
+
+Beneficios
+^^^^^^^^^^
+
+La aplicación desarrollada se distribuirá de forma gratuita y sin
+publicidad, por lo que a corto plazo no se obtendrán beneficios.
+
+La forma de monetizar la aplicación será en una segunda fase, cuando se
+desarrolle una plataforma en la nube que sincronice la información de
+varios dispositivos y permita el acceso remoto a la información.
+
+Se considerarán tres tipos de suscripciones:
+
++---------------+------------------+----------------+-------------------+--------------+
+| **Tipo**      | **Colmenares**   | **Colmenas**   | **Plataformas**   | **Precio**   |
++===============+==================+================+===================+==============+
+| Hobby         | 1                | 10             | App / Cloud       | Gratis       |
++---------------+------------------+----------------+-------------------+--------------+
+| Amateur       | 5                | 100            | App / Cloud       | 5€/mes       |
++---------------+------------------+----------------+-------------------+--------------+
+| Profesional   | Ilimitados       | Ilimitados     | App / Cloud       | 20€/mes      |
++---------------+------------------+----------------+-------------------+--------------+
 
 Viabilidad legal
 ~~~~~~~~~~~~~~~~
@@ -621,3 +743,5 @@ En la siguiente tabla se resumen las licencias que posee el proyecto.
    https://www.eclipse.org/legal/epl-v10.html
 .. [license:ccby4]
    https://creativecommons.org/licenses/by/4.0
+.. [ss_cotizacion]
+   http://www.seg-social.es/Internet_1/Trabajadores/CotizacionRecaudaci10777/Basesytiposdecotiza36537/index.htm
