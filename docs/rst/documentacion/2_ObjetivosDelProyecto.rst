@@ -8,7 +8,8 @@ Objetivos generales
 -------------------
 
 -  Desarrollar una aplicación para smartphone que permita la
-   monitorización de la actividad de vuelo de una colmena.
+   monitorización de la actividad de vuelo de una colmena a través de 
+   su cámara.
 -  Facilitar la interpretación de los datos recogidos mediante
    representaciones gráficas.
 -  Aportar información extra a los datos de actividad que ayude en la
