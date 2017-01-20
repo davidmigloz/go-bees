@@ -77,8 +77,9 @@ corresponde con: [book:mastering_opencv]_
 En la siguiente imagen se puede ver el resultado de aplicar esta fase a
 la imagen de entrada:
 
-.. figure:: ../../img/s1.png
-   :alt: Fase 1.
+|Fase 1|
+
+.. |Fase 1| image:: ../../img/s1.png
 
 Substracción del fondo
 ----------------------
@@ -308,8 +309,9 @@ nuestro problema concreto.
 En la siguiente imagen se puede ver una captura de nuestra plataforma 
 de desarrollo en la pestaña correspondiente a esta fase:
 
-.. figure:: ../../img/devplatform.png
-   :alt: devplatform.
+|devplatform|
+
+.. |devplatform| image:: ../../img/devplatform.png
 
 Una vez parametrizado correctamente, vimos como este algoritmo era el
 que mejores resultados nos proporcionaba. Con un tiempo de ejecución en
@@ -338,8 +340,9 @@ que no están disponibles a través de los *wrappers* de Android.
 En la siguiente imagen se puede ver el resultado de aplicar 
 ``BackgroundSubtractorMOG2`` a la salida de la fase anterior:
 
-.. figure:: ../../img/s2.png
-   :alt: Fase 2.
+|Fase 2|
+
+.. |Fase 2| image:: ../../img/s2.png
 
 Se puede apreciar como ha descartado correctamente las sombras en movimiento
 de los árboles y se ha quedado únicamente con los objetos en movimiento.
@@ -381,8 +384,9 @@ En nuestro algoritmo aplicamos tres operaciones morfológicas seguidas:
 
 A continuación podemos ver el resultado de esta fase:
 
-.. figure:: ../../img/s3.png
-   :alt: Fase 3.
+|Fase 3|
+
+.. |Fase 3| image:: ../../img/s3.png
 
 Búsqueda de contornos
 ---------------------
@@ -450,14 +454,16 @@ diminutos o grandes generados por ruidos o por objetos del entorno
 
 En la siguiente imagen podemos ver la salida del algoritmo:
 
-.. figure:: ../../img/s4.png
-   :alt: Fase 4.
+|Fase 4|
+
+.. |Fase 4| image:: ../../img/s4.png
 
 En esta otra se puede apreciar como se descartan las tres moscas que 
 hay en la imagen:
 
-.. figure:: ../../img/flies.png
-   :alt: Moscas en la escena.
+|Moscas en la escena|
+
+.. |Moscas en la escena| image:: ../../img/flies.png
 
 .. References
 

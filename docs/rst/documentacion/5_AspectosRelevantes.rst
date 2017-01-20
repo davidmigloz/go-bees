@@ -22,8 +22,9 @@ soluciones tecnológicas a alguno de estos problemas.
 Tras formalizar la idea del proyecto y recibir el visto bueno de los
 tutores, nos pusimos manos a la obra.
 
-.. figure:: ../../img/GoBees_logo.v3.png
-   :alt: 
+|GoBees|
+
+.. |GoBees| image:: ../../img/GoBees_logo.v3.png
 
 Metodologías
 ------------
@@ -58,8 +59,9 @@ diarias, etc.), sí que se aplicó una filosofía ágil en líneas generales:
 -  Para monitorizar el progreso del proyecto se utilizó gráficos
    *burndown*.
 
-.. figure:: ../../img/board.png
-   :alt: 
+|board|
+
+.. |board| image:: ../../img/board.png
 
 Para el diseño del algoritmo de visión artificial se utilizó una
 metodología de ensayo y error. Se barajaban diferentes alternativas y se
@@ -141,8 +143,9 @@ no se obstaculizaba el vuelo de las abejas y se facilitaba el análisis.
 Además, era aconsejable cubrir el suelo con alguna superficie uniforme
 para mejorar la segmentación de las abejas.
 
-.. figure:: ../../img/cenital.jpg
-   :alt: 
+|cenital|
+
+.. |cenital| image:: ../../img/cenital.jpg
 
 En un primer momento, el desarrollo del algoritmo se iba a realizar
 directamente sobre la plataforma Android. Sin embargo, rápidamente nos
@@ -158,8 +161,9 @@ Para facilitar el desarrollo del algoritmo y del testeo de las
 diferentes alternativas se realizó una aplicación Java que permitía
 parametrizar en tiempo real las diferentes etapas del algoritmo.
 
-.. figure:: ../../img/devplatform.png
-   :alt: 
+|devplatform|
+
+.. |devplatform| image:: ../../img/devplatform.png
 
 Además de permitir variar la parametrización, la aplicación nos permitía
 observar la salida de cada etapa del algoritmo y su tiempo de
@@ -256,8 +260,9 @@ la *app*.
 
 El siguiente esquema resume la arquitectura de la aplicación:
 
-.. figure:: ../../img/architecture.png
-   :alt: 
+|architecture|
+
+.. |architecture| image:: ../../img/architecture.png
 
 Surgieron problemas al implementar el algoritmo de monitorización como
 un servicio de Android para que el usuario pudiese apagar la pantalla
@@ -296,8 +301,9 @@ La aplicación iba mostrando los diferentes fotogramas al usuario y este
 indicaba con el ratón los píxeles pertenecientes a abejas. Finalmente
 permitía exportar los datos en un archivo CSV.
 
-.. figure:: ../../img/counting_platform.png
-   :alt: 
+|counting|
+
+.. |counting| image:: ../../img/counting_platform.png
 
 Se etiquetaron fragmentos de vídeo correspondientes a tres situaciones
 distintas:
@@ -352,8 +358,9 @@ repositorio, se ejecutaban las siguientes tareas:
    problema de seguridad conocido, o si violaban la licencia del
    proyecto.
 
-.. figure:: ../../img/ci.png
-   :alt: 
+|ci|
+   
+.. |ci| image:: ../../img/ci.png
 
 Por último, cabe comentar algunas estadísticas del proyecto:
 
@@ -405,8 +412,9 @@ todo configurado, ahora ReadTheDocs generaba automáticamente la página
 web y un PDF actualizado con los últimos cambios realizados en la
 documentación.
 
-.. figure:: ../../img/readthedocs.png
-   :alt: 
+|readthedocs|
+
+.. |readthedocs| image:: ../../img/readthedocs.png 
 
 Para la exportación final de la memoria se utilizó el conversor Pandoc,
 con objeto de transformar la documentación del formato reStructuredText

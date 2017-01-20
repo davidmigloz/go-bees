@@ -57,8 +57,9 @@ aplicación. Posee tres capas:
    mostrados en la vista con los almacenados en el modelo y actúa ante
    los eventos de usuario propagados por la vista.
 
-.. figure:: ../../img/mvp.png
-   :alt: 
+|MVP|
+   
+.. |MVP| image:: ../../img/mvp.png
 
 Patrón repositorio
 ~~~~~~~~~~~~~~~~~~
@@ -72,8 +73,9 @@ forma que no existe ninguna dependencia entre ellas. Consiguiendo
 desacoplar, mantener y testear más fácilmente el código y permitiendo la
 reutilización del acceso a datos desde cualquier cliente.
 
-.. figure:: ../../img/repository_pattern.png
-   :alt: 
+|repositorio|
+
+.. |repositorio| image:: ../../img/repository_pattern.png
 
 Control de versiones
 --------------------
