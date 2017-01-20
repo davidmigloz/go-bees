@@ -172,7 +172,18 @@ https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gra
 */
 sonarqube {
     properties {
+        property "sonar.projectName", "GoBees"
+        property "sonar.projectKey", "com.davidmiguel.gobees"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.sources", "."
+        property "sonar.java.binaries", "./build/intermediates/classes/mock/debug"
+        property "sonar.java.test.binaries", "./build/intermediates/classes/test/mock/debug"
+        property "sonar.exclusions", "build/**,**/*.png"
+        property "sonar.import_unknown_files", true
+        property "sonar.android.lint.report", "./build/outputs/lint-results-mockDebug.xml"
+        property "sonar.junit.reportsPath", "./build/test-results/mockDebug"
+        property "sonar.jacoco.reportPath", "./build/jacoco/testMockDebugUnitTest.exec"
         property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.android.lint.report", "build/outputs/lint-results-mockDebug.xml"
+        property "sonar.jacoco.reportMissing.force.zero", true
     }
 }

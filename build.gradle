@@ -49,14 +49,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-/*
-SonarQube configuration.
-https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle
-*/
-sonarqube {
-    properties {
-        property "sonar.projectName", "GoBees"
-        property "sonar.projectKey", "com.davidmiguel.gobees"
-    }
-}
