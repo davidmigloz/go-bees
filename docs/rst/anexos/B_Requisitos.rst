@@ -206,7 +206,6 @@ Diagrama de casos de uso
 |use cases diagram|
 
 .. |use cases diagram| image:: ../../img/use_cases_diagram.png
-   :align: center
 
 Actores
 ~~~~~~~
