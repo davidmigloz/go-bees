@@ -18,6 +18,8 @@
 
 package com.davidmiguel.gobees.utils;
 
+import java.util.Locale;
+
 /**
  * String utils.
  */
@@ -30,6 +32,6 @@ public class StringUtils {
      * @return capitalized string.
      */
     public static String capitalize(String string) {
-        return string.substring(0, 1).toUpperCase() + string.substring(1);
+        return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 }

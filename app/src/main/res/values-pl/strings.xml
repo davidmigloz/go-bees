@@ -273,7 +273,6 @@
     <string name="default_num_hives_long">"Brak uli"</string>
     <!-- Number of hives [CHAR LIMIT=100] -->
     <plurals name="num_hives_plurals">
-        <item quantity="zero">"Zero uli"</item>
         <item quantity="one">"1 ul"</item>
         <item quantity="few">"%d uli"</item>
         <item quantity="many">"%d uli"</item>

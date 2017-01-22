@@ -30,6 +30,7 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.utils.DateTimeUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -234,13 +235,13 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             }
             // Get records
             RealmResults<Record> records = hive.getRecords().where().findAll().sort("timestamp");
-            // Clasify records by date into recordings
+            // Classify records by date into recordings
             Date day;                   // Actual date of the recording
             Date nextDay = new Date(0); // Next day to the recording
             RealmResults<Record> filteredRecords;
             List<Recording> recordings = new ArrayList<>();
             while (true) {
-                // Get all records greather than last recordings
+                // Get all records greater than last recordings
                 records = records.where().greaterThanOrEqualTo("timestamp", nextDay).findAll();
                 if (records.isEmpty()) {
                     break;
@@ -256,6 +257,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 // Create recording
                 recordings.add(new Recording(day, new ArrayList<>(filteredRecords)));
             }
+            // Sort recordings (newest - oldest)
+            Collections.reverse(recordings);
             // Set recordings to hive
             hive.setRecordings(recordings);
             // Return hive
@@ -472,7 +475,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     // Get next id
                     Number n = realm.where(MeteoRecord.class).max("id");
                     long nextId = (n != null ? n.longValue() + 1 : 0);
-                    // Save records
+                    // Save meteo records
                     for (Apiary apiary : apiariesToUpdate) {
                         MeteoRecord meteoRecord = apiary.getCurrentWeather();
                         meteoRecord.setId(nextId++);
@@ -485,8 +488,15 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 public void execute(Realm realm) {
                     // Save apiaries with current weather updated
                     for (Apiary apiary : apiariesToUpdate) {
+                        // Get apiary from db
                         Apiary requestedApiary = realm.where(Apiary.class)
                                 .equalTo("id", apiary.getId()).findFirst();
+                        // Delete previous record
+                        MeteoRecord oldMeteoRecord = requestedApiary.getCurrentWeather();
+                        if (oldMeteoRecord != null) {
+                            oldMeteoRecord.deleteFromRealm();
+                        }
+                        // Add new current weather to apiary
                         MeteoRecord meteoRecord = realm.where(MeteoRecord.class)
                                 .equalTo("id", apiary.getCurrentWeather().getId()).findFirst();
                         requestedApiary.setCurrentWeather(meteoRecord);

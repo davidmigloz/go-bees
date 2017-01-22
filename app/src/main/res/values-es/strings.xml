@@ -273,7 +273,6 @@
     <string name="default_num_hives_long">"No hay colmenas"</string>
     <!-- Number of hives [CHAR LIMIT=100] -->
     <plurals name="num_hives_plurals">
-        <item quantity="zero">"No hay colmenas"</item>
         <item quantity="one">"1 colmena"</item>
         <item quantity="other">"%d colmenas"</item>
     </plurals>
