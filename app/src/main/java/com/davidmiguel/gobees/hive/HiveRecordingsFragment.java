@@ -139,9 +139,6 @@ public class HiveRecordingsFragment extends Fragment
             }
         });
 
-        // Listen menu options
-        setHasOptionsMenu(true);
-
         return root;
     }
 
@@ -157,24 +154,6 @@ public class HiveRecordingsFragment extends Fragment
         if (isVisibleToUser && isResumed()) {
             fab.setVisibility(View.VISIBLE);
         }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.hive_frag_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
-                return true;
-            case R.id.menu_refresh:
-                presenter.loadData(true);
-                break;
-        }
-        return true;
     }
 
     @Override

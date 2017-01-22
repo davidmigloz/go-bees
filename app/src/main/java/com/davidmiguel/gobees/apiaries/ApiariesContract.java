@@ -48,7 +48,7 @@ interface ApiariesContract {
         void showApiaries(@NonNull List<Apiary> apiaries);
 
         /**
-         * Notify that the apiaries data has changed to update the list.
+         * Notifies that the apiaries data has changed and the list must be updated.
          */
         void notifyApiariesUpdated();
 
@@ -90,11 +90,6 @@ interface ApiariesContract {
          * Shows error while deleting apiary message.
          */
         void showDeletedErrorMessage();
-
-        /**
-         * Shows successfully current weather updated message.
-         */
-        void showSuccessfullyWeatherUpdatedMessage();
 
         /**
          * Shows error while updating current weather message.
@@ -139,10 +134,5 @@ interface ApiariesContract {
          * @param apiary apiary to delete.
          */
         void deleteApiary(@NonNull Apiary apiary);
-
-        // TODO eliminar generar y eliminar datos
-        void generateData();
-
-        void deleteData();
     }
 }

@@ -220,8 +220,6 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
          * @return line data chart.
          */
         private LineData styleChartLines(List<Entry> entries) {
-            // Get primary dark color
-            int color = ContextCompat.getColor(context, R.color.colorAccent);
             // Set styles
             LineDataSet lineDataSet = new LineDataSet(entries, "Recording");
             lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
@@ -229,7 +227,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             lineDataSet.setDrawValues(false);
             lineDataSet.setDrawCircles(false);
             lineDataSet.setLineWidth(1.8f);
-            lineDataSet.setColor(color);
+            lineDataSet.setColor(ContextCompat.getColor(context, R.color.colorAccent));
             lineDataSet.setDrawFilled(true);
             lineDataSet.setFillAlpha(255);
             Drawable drawable = ContextCompat.getDrawable(context, R.drawable.chart_fade_green);
@@ -248,7 +246,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             // General setup
             lineChart.setDrawGridBackground(false);
             lineChart.setDrawBorders(false);
-            lineChart.setViewPortOffsets(0, 0, 0, 0);
+            lineChart.setViewPortOffsets(50, 0, 50, 50);
             lineChart.getDescription().setEnabled(false);
             lineChart.getLegend().setEnabled(false);
             lineChart.setTouchEnabled(false);
@@ -259,15 +257,16 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             xAxis.setValueFormatter(xAxisFormatter);
             xAxis.setDrawGridLines(false);
             xAxis.setDrawAxisLine(false);
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-            xAxis.setCenterAxisLabels(true);
-            xAxis.setTextColor(Color.WHITE);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setCenterAxisLabels(false);
+            xAxis.setTextColor(ContextCompat.getColor(context, R.color.colorIcons));
             // Y axis setup
             YAxis yAxis = lineChart.getAxisLeft();
             yAxis.setAxisMaximum(40);
             yAxis.setAxisMinimum(0);
+            yAxis.setDrawLabels(false);
+            yAxis.setDrawAxisLine(false);
             yAxis.setDrawGridLines(true);
-            xAxis.setDrawAxisLine(false);
             lineChart.getAxisRight().setEnabled(false);
             // Add data
             lineChart.setData(data);

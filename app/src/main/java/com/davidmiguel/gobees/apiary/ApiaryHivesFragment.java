@@ -131,9 +131,6 @@ public class ApiaryHivesFragment extends Fragment
             }
         });
 
-        // Listen menu options
-        setHasOptionsMenu(true);
-
         return root;
     }
 
@@ -148,25 +145,6 @@ public class ApiaryHivesFragment extends Fragment
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
             fab.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.apiary_frag_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
-                return true;
-            case R.id.menu_refresh:
-                presenter.loadData(true);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 

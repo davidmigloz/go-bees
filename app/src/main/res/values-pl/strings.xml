@@ -473,5 +473,17 @@
     <string name="license_btn">Licencja</string>
     <string name="libraries">Otwórz Biblioteki Źródło:</string>
     <string name="developed_author">Opracowany przez Davida Miguel Lozano.</string>
+    <string name="all_data_deleted_msg">Dane usunięte!</string>
+    <string name="loading_msg">Załadunek…</string>
+    <string name="pref_data_cat_label">Dane</string>
+    <string name="pref_delete_all_data_desc">OSTRZEŻENIE! Wszystkie dane zostaną usunięte.</string>
+    <string name="pref_delete_all_data_label">Usuń wszystkie dane</string>
+    <string name="pref_generate_sample_data_desc">Zostanie utworzony przykładowy pasieki.</string>
+    <string name="pref_generate_sample_data_label">Generowanie danych przykładowych</string>
+    <string name="sample_apiary_name">Próbka pasieki</string>
+    <string name="sample_apiary_notes">Przynieś dwa ula ciała i dwa covery.\nDystrybutor wody jest prawie pusta.\nUsuń szczepionek następny poniedziałek.</string>
+    <string name="sample_data_generated_msg">pasieka Próbka utworzona!</string>
+    <string name="sample_hive_name">Ula #<xliff:g id="temp">%1$d</xliff:g></string>
+    <string name="sample_hive_notes">Sprawdź, czy to ma Varroa.</string>
 
 </resources>

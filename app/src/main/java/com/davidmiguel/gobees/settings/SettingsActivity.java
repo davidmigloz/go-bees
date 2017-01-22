@@ -23,12 +23,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 /**
  * Presents a set of application settings presented as a single list.
  */
 public class SettingsActivity extends AppCompatActivity {
+
+    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,24 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         // Add fragment to the activity
+        SettingsFragment settingsFragment = SettingsFragment.newInstance();
         getFragmentManager().beginTransaction()
-                .replace(R.id.contentFrame, new SettingsFragment())
+                .replace(R.id.contentFrame, settingsFragment)
                 .commit();
+
+        // Init db
+        goBeesRepository = Injection.provideApiariesRepository();
+        goBeesRepository.openDb();
+
+        // Create the presenter
+        new SettingsPresenter(goBeesRepository, settingsFragment);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Close database
+        goBeesRepository.closeDb();
     }
 
     @Override

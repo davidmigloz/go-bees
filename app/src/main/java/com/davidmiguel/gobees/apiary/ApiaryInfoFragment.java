@@ -182,16 +182,20 @@ public class ApiaryInfoFragment extends Fragment
     public void showInfo(Apiary apiary, Date lastRevisionDate) {
         // GENERAL INFO
         // Location
-        String latLetter = (apiary.getLocationLat() > 0) ? "N" : "S";
-        String lonLetter = (apiary.getLocationLong() > 0) ? "E" : "W";
-        location.setText(apiary.getLocationLat() + latLetter + " / "
-                + apiary.getLocationLong() + lonLetter);
+        if (apiary.hasLocation()) {
+            String latLetter = (apiary.getLocationLat() > 0) ? "N" : "S";
+            String lonLetter = (apiary.getLocationLong() > 0) ? "E" : "W";
+            location.setText(apiary.getLocationLat() + latLetter + " / "
+                    + apiary.getLocationLong() + lonLetter);
+        }
         // Num hives
         int num = apiary.getHives().size();
         numHives.setText(getResources().getQuantityString(R.plurals.num_hives_plurals, num, num));
         // Last revision
-        lastRevision.setText(DateUtils.getRelativeTimeSpanString(lastRevisionDate.getTime(),
-                (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
+        if (lastRevisionDate != null) {
+            lastRevision.setText(DateUtils.getRelativeTimeSpanString(lastRevisionDate.getTime(),
+                    (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
+        }
         // Notes
         if (Strings.isNullOrEmpty(apiary.getNotes())) {
             notes.setText(getString(R.string.no_notes));

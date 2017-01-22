@@ -25,7 +25,6 @@ import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.data.source.local.DataGenerator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -149,20 +148,6 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         });
     }
 
-    // TODO eliminar generar y eliminar datos
-    @Override
-    public void generateData() {
-        DataGenerator dataGenerator = new DataGenerator(goBeesRepository);
-        dataGenerator.generateData(1);
-        loadApiaries(false);
-    }
-
-    @Override
-    public void deleteData() {
-        goBeesRepository.deleteAll();
-        loadApiaries(false);
-    }
-
     @Override
     public void start() {
         loadApiaries(false);
@@ -197,17 +182,16 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
         if (!apiariesToUpdate.isEmpty()) {
             goBeesRepository.updateApiariesCurrentWeather(apiariesToUpdate,
                     new GoBeesDataSource.TaskCallback() {
-                @Override
-                public void onSuccess() {
-                    view.notifyApiariesUpdated();
-                    view.showSuccessfullyWeatherUpdatedMessage();
-                }
+                        @Override
+                        public void onSuccess() {
+                            view.notifyApiariesUpdated();
+                        }
 
-                @Override
-                public void onFailure() {
-                    view.showWeatherUpdateErrorMessage();
-                }
-            });
+                        @Override
+                        public void onFailure() {
+                            view.showWeatherUpdateErrorMessage();
+                        }
+                    });
         }
 
     }

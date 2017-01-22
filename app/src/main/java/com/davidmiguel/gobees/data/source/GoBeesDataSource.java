@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.MeteoRecord;
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
 
@@ -46,7 +47,7 @@ public interface GoBeesDataSource {
     /**
      * Clean database.
      */
-    void deleteAll();
+    void deleteAll(@NonNull TaskCallback callback);
 
     /**
      * Gets all apiaries.
@@ -176,6 +177,7 @@ public interface GoBeesDataSource {
     /**
      * Saves given record. If it already exists, is updated.
      * Note: record must be a new unmanaged object (don't modify managed objects).
+     * Actual id record will be used.
      *
      * @param hiveId   hive id.
      * @param record   record unmanaged object.
@@ -186,6 +188,7 @@ public interface GoBeesDataSource {
     /**
      * Saves given list of records.
      * Note: record must be a new unmanaged object (don't modify managed objects).
+     * The record id will be assigned (actual id will be ignored).
      *
      * @param records  list of record unmanaged objects.
      * @param callback SaveRecordingCallback.
@@ -221,12 +224,20 @@ public interface GoBeesDataSource {
     void updateApiariesCurrentWeather(List<Apiary> apiariesToUpdate, @NonNull TaskCallback callback);
 
     /**
-     * Save a meteo record from an apiary.
+     * Gets and saves a meteo record from an apiary.
      *
      * @param apiary   corresponding apiary.
      * @param callback TaskCallback.
      */
-    void saveMeteoRecord(Apiary apiary, @NonNull TaskCallback callback);
+    void getAndSaveMeteoRecord(Apiary apiary, @NonNull TaskCallback callback);
+
+    /**
+     * Save a list of meteo records from an apiary.
+     *
+     * @param apiaryId     apiary id.
+     * @param meteoRecords list of meteo records.
+     */
+    void saveMeteoRecords(long apiaryId, @NonNull List<MeteoRecord> meteoRecords);
 
     /**
      * Force to update recordings cache.

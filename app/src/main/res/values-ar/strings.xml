@@ -471,5 +471,17 @@
     <string name="default_version">الإصدار 1.0</string>
     <string name="changelog_btn">التغيير</string>
     <string name="close_btn">قريب</string>
+    <string name="all_data_deleted_msg">حذف البيانات!</string>
+    <string name="loading_msg">جار التحميل…</string>
+    <string name="pref_data_cat_label">البيانات</string>
+    <string name="pref_delete_all_data_desc">تحذير! سيتم حذف جميع البيانات.</string>
+    <string name="pref_delete_all_data_label">حذف جميع البيانات</string>
+    <string name="pref_generate_sample_data_desc">سيتم إنشاء المنحل العينة.</string>
+    <string name="pref_generate_sample_data_label">توليد بيانات عينة</string>
+    <string name="sample_apiary_name">عينة كولمينار</string>
+    <string name="sample_apiary_notes">جلب اثنين من الهيئات خلية واثنين من الأغطية. موزع المياه فارغ تقريبا. إزالة اللقاحات يوم الاثنين المقبل.</string>
+    <string name="sample_data_generated_msg">المنحل عينة التي تم إنشاؤها!</string>
+    <string name="sample_hive_name">خلية #<xliff:g id="temp">%1$d</xliff:g></string>
+    <string name="sample_hive_notes">تحقق إذا كان لديه الفاروا.</string>
 
 </resources>

@@ -72,13 +72,19 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteAll() {
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.deleteAll();
-            }
-        });
+    public void deleteAll(@NonNull TaskCallback callback) {
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.deleteAll();
+                }
+            });
+            callback.onSuccess();
+        } catch (Exception e) {
+            Log.e(TAG, "Error: deleteAll()", e);
+            callback.onFailure();
+        }
     }
 
     @Override
@@ -414,7 +420,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 .findAll()
                 .sort("timestamp");
         // Create recording
-        Recording recording = new Recording(start, new ArrayList<>(records), meteoRecords);
+        Recording recording = new Recording(start,
+                realm.copyFromRealm(records), realm.copyFromRealm(meteoRecords));
         callback.onRecordingLoaded(recording);
     }
 
@@ -494,7 +501,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     }
 
     @Override
-    public void saveMeteoRecord(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
+    public void getAndSaveMeteoRecord(@NonNull final Apiary apiary, @NonNull TaskCallback callback) {
         try {
             if (apiary.getMeteoRecords() == null || apiary.getMeteoRecords().size() != 1) {
                 callback.onFailure();
@@ -517,9 +524,30 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             });
             callback.onSuccess();
         } catch (Exception e) {
-            Log.e(TAG, "Error: saveMeteoRecord()", e);
+            Log.e(TAG, "Error: getAndSaveMeteoRecord()", e);
             callback.onFailure();
         }
+    }
+
+    @Override
+    public void saveMeteoRecords(final long apiaryId, @NonNull final List<MeteoRecord> meteoRecords) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                // Get next id
+                Number n = realm.where(MeteoRecord.class).max("id");
+                long nextId = (n != null ? n.longValue() + 1 : 0);
+                // Save meteo records
+                for (MeteoRecord meteoRecord : meteoRecords) {
+                    meteoRecord.setId(nextId++);
+                    realm.copyToRealmOrUpdate(meteoRecord);
+                }
+                // Add meteo records to apiary
+                Apiary requestedApiary = realm.where(Apiary.class)
+                        .equalTo("id", apiaryId).findFirst();
+                requestedApiary.addMeteoRecords(meteoRecords);
+            }
+        });
     }
 
     @Override

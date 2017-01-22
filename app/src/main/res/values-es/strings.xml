@@ -480,4 +480,16 @@
     <string name="developed_author">"Desarrollado por David Miguel Lozano."</string>
     <!-- Libs [CHAR LIMIT=100] -->
     <string name="libraries">"Bibliotecas Open Source:"</string>
+    <string name="all_data_deleted_msg">Datos eliminados!</string>
+    <string name="loading_msg">Cargando…</string>
+    <string name="pref_data_cat_label">Datos</string>
+    <string name="pref_delete_all_data_desc">PELIGRO! Se borrarán todos los datos.</string>
+    <string name="pref_delete_all_data_label">Borrar todos los datos</string>
+    <string name="pref_generate_sample_data_desc">Se creará un colmenar de prueba.</string>
+    <string name="pref_generate_sample_data_label">Generar datos de muestra</string>
+    <string name="sample_apiary_name">Colmenar de muestra</string>
+    <string name="sample_apiary_notes">Traer dos cajones y dos tapas.\nEl bebedero está casi vacío.\nQuitar vacunas el próximo lunes.</string>
+    <string name="sample_data_generated_msg">Colmenar de muestra creado!</string>
+    <string name="sample_hive_name">Colmena #<xliff:g id="temp">%1$d</xliff:g></string>
+    <string name="sample_hive_notes">Comprobar si tiene varroa.</string>
 </resources>

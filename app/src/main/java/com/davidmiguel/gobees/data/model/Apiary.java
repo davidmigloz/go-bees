@@ -23,6 +23,8 @@ import android.support.annotation.Nullable;
 
 import com.google.common.base.Strings;
 
+import java.util.List;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -193,6 +195,12 @@ public class Apiary extends RealmObject {
     public void addMeteoRecord(@NonNull MeteoRecord meteoRecord) {
         if (meteoRecords != null) {
             meteoRecords.add(meteoRecord);
+        }
+    }
+
+    public void addMeteoRecords(@NonNull List<MeteoRecord> meteoRecords) {
+        if (this.meteoRecords != null) {
+            this.meteoRecords.addAll(meteoRecords);
         }
     }
 

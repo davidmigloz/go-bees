@@ -75,6 +75,12 @@ class RecordingPresenter implements RecordingContract.Presenter {
         loadRecording(start, end);
     }
 
+    /**
+     * Load recording from a given period.
+     *
+     * @param start start date.
+     * @param end   end date.
+     */
     private void loadRecording(final Date start, Date end) {
         // Set title
         view.showTitle(start);

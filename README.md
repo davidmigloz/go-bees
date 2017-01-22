@@ -1,4 +1,4 @@
-![header](https://cloud.githubusercontent.com/assets/6546265/19186791/3e4ee522-8c88-11e6-8074-a4c9219871fc.png)
+![header](https://cloud.githubusercontent.com/assets/6546265/22174630/785cdf04-dfe3-11e6-8cf4-024e8dc1c051.png)
 
 [![GitHub Issues](https://img.shields.io/github/issues/davidmigloz/go-bees.svg)](https://github.com/davidmigloz/go-bees/issues)
 [![Build Status](https://travis-ci.org/davidmigloz/go-bees.svg?branch=master)](https://travis-ci.org/davidmigloz/go-bees)

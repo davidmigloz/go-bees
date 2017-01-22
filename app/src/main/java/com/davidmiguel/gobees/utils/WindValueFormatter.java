@@ -18,14 +18,16 @@
 
 package com.davidmiguel.gobees.utils;
 
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 /**
  * Format label in x m/s format.
  */
-public class WindValueFormatter implements IValueFormatter {
+public class WindValueFormatter implements IValueFormatter, IAxisValueFormatter {
 
     private Unit unit;
 
@@ -36,6 +38,21 @@ public class WindValueFormatter implements IValueFormatter {
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex,
                                     ViewPortHandler viewPortHandler) {
+        return formatWind(value);
+    }
+
+    @Override
+    public String getFormattedValue(float value, AxisBase axis) {
+        return formatWind(value);
+    }
+
+    /**
+     * Format wind.
+     *
+     * @param value wind value.
+     * @return wind formatted.
+     */
+    private String formatWind(float value) {
         return Math.round(value) + unit.toString();
     }
 

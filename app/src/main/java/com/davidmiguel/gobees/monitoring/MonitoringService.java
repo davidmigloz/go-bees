@@ -400,7 +400,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private class FetchWeatherTask extends TimerTask {
         @Override
         public void run() {
-            goBeesRepository.saveMeteoRecord(apiary, new GoBeesDataSource.TaskCallback() {
+            goBeesRepository.getAndSaveMeteoRecord(apiary, new GoBeesDataSource.TaskCallback() {
                 @Override
                 public void onSuccess() {
                     // Don't do anything

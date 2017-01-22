@@ -18,19 +18,26 @@
 
 package com.davidmiguel.gobees.settings;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.apiaries.ApiariesActivity;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Display list of Preference objects.
  * Android 3.0 (API level 11) and higher.
  */
-public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragment implements SettingsContract.View {
+
+    private SettingsContract.Presenter presenter;
+    private Toast loadingToast;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -43,43 +50,76 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.general_settings);
 
+        // For all preferences with values, attach an OnPreferenceChangeListener
+        // so the UI summary can be updated when the preference changes
+        presenter.bindPreferenceSummaryToValue(
+                findPreference(getString(R.string.pref_weather_units_key)));
 
-        // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
-        // updated when the preference changes
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_weather_units_key)));
-    }
-
-    /**
-     * Attaches a listener so the summary is always updated with the preference value.
-     * Also fires the listener once, to initialize the summary (so it shows up before the value
-     * is changed.)
-     */
-    private void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes
-        preference.setOnPreferenceChangeListener(this);
-
-        // Trigger the listener immediately with the preference's current value
-        onPreferenceChange(preference, PreferenceManager
-                .getDefaultSharedPreferences(preference.getContext())
-                .getString(preference.getKey(), ""));
+        // For all preferences that trigger some action, attach an OnPreferenceClickListener
+        presenter.bindPreferenceClickListener(
+                findPreference(getString(R.string.pref_generate_sample_data_key)));
+        presenter.bindPreferenceClickListener(
+                findPreference(getString(R.string.pref_delete_all_data_key)));
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        String stringValue = value.toString();
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
 
-        if (preference instanceof ListPreference) {
-            // For list preferences, look up the correct display value in
-            // the preference's 'entries' list (since they have separate labels/values)
-            ListPreference listPreference = (ListPreference) preference;
-            int prefIndex = listPreference.findIndexOfValue(stringValue);
-            if (prefIndex >= 0) {
-                preference.setSummary(listPreference.getEntries()[prefIndex]);
-            }
-        } else {
-            // For other preferences, set the summary to the value's simple string representation
-            preference.setSummary(stringValue);
+    @Override
+    public void setPresenter(@NonNull SettingsContract.Presenter presenter) {
+        this.presenter = checkNotNull(presenter);
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
+    @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
+    public void showLoadingMsg() {
+        loadingToast = Toast.makeText(getActivity(), getString(R.string.loading_msg),
+                Toast.LENGTH_SHORT);
+        loadingToast.show();
+    }
+
+    @Override
+    public void showDataGeneratedMsg() {
+        hideLoading();
+        // Show msg
+        Toast.makeText(getActivity(), getString(R.string.sample_data_generated_msg),
+                Toast.LENGTH_SHORT).show();
+        // Go to main activity
+        Intent intent = new Intent(getActivity(), ApiariesActivity.class);
+        getActivity().startActivity(intent);
+
+
+    }
+
+    @Override
+    public void showDataDeletedMsg() {
+        hideLoading();
+        // Show msg
+        Toast.makeText(getActivity(), getString(R.string.all_data_deleted_msg),
+                Toast.LENGTH_SHORT).show();
+        // Go to main activity
+        Intent intent = new Intent(getActivity(), ApiariesActivity.class);
+        getActivity().startActivity(intent);
+    }
+
+    /**
+     * Hides loading message.
+     */
+    private void hideLoading() {
+        if (loadingToast != null) {
+            loadingToast.cancel();
         }
-        return true;
     }
 }

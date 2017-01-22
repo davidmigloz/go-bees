@@ -108,9 +108,10 @@ public class GoBeesRepository implements GoBeesDataSource {
     }
 
     @Override
-    public void deleteAll() {
+    public void deleteAll(@NonNull TaskCallback callback) {
+        checkNotNull(callback);
         cachedApiaries.clear();
-        goBeesDataSource.deleteAll();
+        goBeesDataSource.deleteAll(callback);
     }
 
     @Override
@@ -360,8 +361,8 @@ public class GoBeesRepository implements GoBeesDataSource {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void saveMeteoRecord(@NonNull final Apiary apiary,
-                                @NonNull final TaskCallback callback) {
+    public void getAndSaveMeteoRecord(@NonNull final Apiary apiary,
+                                      @NonNull final TaskCallback callback) {
         checkNotNull(apiary);
         checkNotNull(callback);
         weatherDataSource.getCurrentWeather(1, apiary.getLocationLat(), apiary.getLocationLong(),
@@ -373,7 +374,7 @@ public class GoBeesRepository implements GoBeesDataSource {
                         meteoRecords.add(meteoRecord);
                         apiary.setMeteoRecords(meteoRecords);
                         // Save data
-                        goBeesDataSource.saveMeteoRecord(apiary, callback);
+                        goBeesDataSource.getAndSaveMeteoRecord(apiary, callback);
                         callback.onSuccess();
                     }
 
@@ -382,6 +383,12 @@ public class GoBeesRepository implements GoBeesDataSource {
                         callback.onFailure();
                     }
                 });
+    }
+
+    @Override
+    public void saveMeteoRecords(long apiaryId, @NonNull List<MeteoRecord> meteoRecords) {
+        checkNotNull(meteoRecords);
+        goBeesDataSource.saveMeteoRecords(apiaryId, meteoRecords);
     }
 
     @Override

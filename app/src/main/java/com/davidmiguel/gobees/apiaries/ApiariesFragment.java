@@ -30,9 +30,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -122,9 +119,6 @@ public class ApiariesFragment extends Fragment
             }
         });
 
-        // Listen menu options
-        setHasOptionsMenu(true);
-
         return root;
     }
 
@@ -132,30 +126,6 @@ public class ApiariesFragment extends Fragment
     public void onResume() {
         super.onResume();
         presenter.start();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.apiaries_frag_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_refresh:
-                presenter.loadApiaries(true);
-                break;
-            // TODO eliminar generar y eliminar datos
-            case R.id.menu_generate:
-                presenter.generateData();
-                break;
-            case R.id.menu_delete:
-                presenter.deleteData();
-                break;
-            default:
-                return false;
-        }
-        return true;
     }
 
     @Override
@@ -230,12 +200,6 @@ public class ApiariesFragment extends Fragment
     @Override
     public void showDeletedErrorMessage() {
         showMessage(getString(R.string.deleted_apiary_error_message));
-    }
-
-    @Override
-    public void showSuccessfullyWeatherUpdatedMessage() {
-        Toast.makeText(getActivity(), getString(R.string.successfully_updated_weather_message),
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override
