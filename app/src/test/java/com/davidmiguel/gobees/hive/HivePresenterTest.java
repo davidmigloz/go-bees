@@ -94,7 +94,6 @@ public class HivePresenterTest {
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(hiveRecordingsView);
-        inOrder.verify(hiveRecordingsView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
         inOrder.verify(hiveRecordingsView).isActive();
         inOrder.verify(hiveRecordingsView).setLoadingIndicator(false);

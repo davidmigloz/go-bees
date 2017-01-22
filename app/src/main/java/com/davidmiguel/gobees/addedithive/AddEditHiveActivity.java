@@ -21,12 +21,12 @@ package com.davidmiguel.gobees.addedithive;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
  * Add / edit hive activity.
@@ -45,13 +45,7 @@ public class AddEditHiveActivity extends AppCompatActivity {
         setContentView(R.layout.addedithive_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+        ActionBar actionBar = AndroidUtils.setUpToolbar(this, false);
 
         // Get apiary
         long apiaryId = getIntent()

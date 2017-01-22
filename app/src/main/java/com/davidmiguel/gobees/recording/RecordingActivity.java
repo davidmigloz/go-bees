@@ -19,14 +19,13 @@
 package com.davidmiguel.gobees.recording;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 import java.util.Date;
 
@@ -47,13 +46,7 @@ public class RecordingActivity extends AppCompatActivity {
         setContentView(R.layout.recording_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+        AndroidUtils.setUpToolbar(this, false);
 
         // Get apiary id
         long apiaryId = getIntent().getLongExtra(RecordingFragment.ARGUMENT_APIARY_ID, NO_APIARY);

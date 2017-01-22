@@ -85,7 +85,6 @@ public class RecordingPresenterTest {
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(view);
-        inOrder.verify(view).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
         inOrder.verify(view).setLoadingIndicator(false);
         ArgumentCaptor<Recording> showRecordingArgumentCaptor = ArgumentCaptor.forClass(Recording.class);

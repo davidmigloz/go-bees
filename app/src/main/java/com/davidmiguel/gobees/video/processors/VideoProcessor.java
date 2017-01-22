@@ -27,6 +27,7 @@ interface VideoProcessor {
 
     /**
      * Process a frame in accordance with some algorithm.
+     *
      * @param frame input frame
      * @return processed frame
      */

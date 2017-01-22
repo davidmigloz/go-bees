@@ -33,7 +33,8 @@ public interface AndroidCameraListener {
     /**
      * This method is invoked when camera preview has started. After this method is invoked
      * the frames will start to be delivered to client via the onPreviewFrame() callback.
-     * @param width width of the frames that will be delivered.
+     *
+     * @param width  width of the frames that will be delivered.
      * @param height height of the frames that will be delivered.
      */
     void onCameraStarted(int width, int height);

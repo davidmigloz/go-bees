@@ -25,6 +25,10 @@
 
     <!-- App name [CHAR LIMIT=NONE] -->
     <string name="app_name" translatable="false">GoBees</string>
+    <!-- App name - Go [CHAR LIMIT=NONE] -->
+    <string name="gobees_go" translatable="false">Go</string>
+    <!-- App name - Bees [CHAR LIMIT=NONE] -->
+    <string name="gobees_bees" translatable="false">Bees</string>
     <!-- GoBees logo [CHAR LIMIT=NONE] -->
     <string name="gobees_logo">GoBees logo</string>
     <!-- GoBees URL [CHAR LIMIT=NONE] -->

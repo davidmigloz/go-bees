@@ -21,7 +21,7 @@ package com.davidmiguel.gobees.apiaries;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.utils.BasePresenter;
+import com.davidmiguel.gobees.utils.BaseLoadDataPresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
 import java.util.List;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 interface ApiariesContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView<LoadDataPresenter> {
 
         /**
          * Displays or hide loading indicator.
@@ -97,7 +97,7 @@ interface ApiariesContract {
         void showWeatherUpdateErrorMessage();
     }
 
-    interface Presenter extends BasePresenter {
+    interface LoadDataPresenter extends BaseLoadDataPresenter {
 
         /**
          * Shows a snackbar showing whether an apiary was successfully added or not.
@@ -106,13 +106,6 @@ interface ApiariesContract {
          * @param resultCode  result code from the intent.
          */
         void result(int requestCode, int resultCode);
-
-        /**
-         * Load apiaries from repository.
-         *
-         * @param forceUpdate force cache update.
-         */
-        void loadApiaries(boolean forceUpdate);
 
         /**
          * Orders to open activity to add or edit an apiary.

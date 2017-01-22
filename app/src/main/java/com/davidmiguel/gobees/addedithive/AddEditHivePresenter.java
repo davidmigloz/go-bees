@@ -20,8 +20,8 @@ package com.davidmiguel.gobees.addedithive;
 
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextHiveIdCallback;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 
 import java.util.Date;

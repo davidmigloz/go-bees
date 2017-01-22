@@ -25,6 +25,7 @@ public interface BaseTabFragment {
 
     /**
      * Returns the name to display in the tab.
+     *
      * @return tab name.
      */
     int getTabName();

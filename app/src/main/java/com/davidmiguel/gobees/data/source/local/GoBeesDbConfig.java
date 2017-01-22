@@ -25,8 +25,8 @@ import io.realm.RealmConfiguration;
  */
 public class GoBeesDbConfig {
 
-    private static final int    DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME    = "gobees.realm";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "gobees.realm";
 
     private RealmConfiguration realmConfiguration = null;
 

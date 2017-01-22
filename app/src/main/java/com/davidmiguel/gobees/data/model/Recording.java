@@ -20,6 +20,8 @@ package com.davidmiguel.gobees.data.model;
 
 import android.support.annotation.NonNull;
 
+import com.google.common.base.Objects;
+
 import java.util.Date;
 import java.util.List;
 
@@ -67,6 +69,18 @@ public class Recording implements Comparable<Recording> {
         return meteo;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Recording recording = (Recording) obj;
+        return Objects.equal(date, recording.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(date);
+    }
 
     @Override
     public int compareTo(@NonNull Recording recording) {

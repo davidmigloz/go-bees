@@ -66,12 +66,12 @@ class RecordingPresenter implements RecordingContract.Presenter {
     }
 
     @Override
-    public void deleteRecording() {
-        //  TODO
+    public void start() {
+        loadRecording(start, end);
     }
 
     @Override
-    public void start() {
+    public void loadData(boolean forceUpdate) {
         loadRecording(start, end);
     }
 
@@ -84,8 +84,6 @@ class RecordingPresenter implements RecordingContract.Presenter {
     private void loadRecording(final Date start, Date end) {
         // Set title
         view.showTitle(start);
-        // Show loading indicator
-        view.setLoadingIndicator(true);
         // Get recording
         goBeesRepository.getRecording(apiaryId, hiveId, start, end, new GetRecordingCallback() {
             @Override

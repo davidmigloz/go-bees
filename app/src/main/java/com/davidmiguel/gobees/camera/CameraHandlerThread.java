@@ -53,7 +53,7 @@ class CameraHandlerThread extends HandlerThread {
         });
 
         try {
-            while(running) {
+            while (running) {
                 wait();
             }
         } catch (InterruptedException e) {

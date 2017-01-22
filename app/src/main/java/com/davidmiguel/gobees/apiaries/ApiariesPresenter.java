@@ -34,7 +34,7 @@ import java.util.List;
  * Listens to user actions from the UI ApiariesFragment, retrieves the data and updates the
  * UI as required.
  */
-class ApiariesPresenter implements ApiariesContract.Presenter {
+class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
 
     private static final int MIN_UPDATE_WEATHER = 15;
 
@@ -62,12 +62,10 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
     }
 
     @Override
-    public void loadApiaries(boolean forceUpdate) {
+    public void loadData(boolean forceUpdate) {
         // Force update the first time
         boolean update = forceUpdate || firstLoad;
         firstLoad = false;
-        // Show progress indicator
-        view.setLoadingIndicator(true);
         // Refresh data if needed
         if (update) {
             goBeesRepository.refreshApiaries();
@@ -129,7 +127,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
                     return;
                 }
                 // Refresh recordings
-                loadApiaries(true);
+                loadData(true);
                 // Show success message
                 view.showSuccessfullyDeletedMessage();
             }
@@ -150,7 +148,7 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
 
     @Override
     public void start() {
-        loadApiaries(false);
+        loadData(false);
     }
 
     /**
@@ -193,6 +191,5 @@ class ApiariesPresenter implements ApiariesContract.Presenter {
                         }
                     });
         }
-
     }
 }

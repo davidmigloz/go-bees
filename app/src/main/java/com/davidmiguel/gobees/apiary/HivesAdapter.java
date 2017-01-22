@@ -132,7 +132,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
             hiveName.setText(hive.getName());
             lastRevision.setText(
                     DateUtils.getRelativeTimeSpanString(hive.getLastRevision().getTime(),
-                    (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
+                            (new Date()).getTime(), DateUtils.MINUTE_IN_MILLIS));
         }
 
         @Override

@@ -19,13 +19,14 @@
 package com.davidmiguel.gobees.utils;
 
 /**
- * Base presenter.
+ * Base presenter for presenters that allow to refresh the data.
  */
-public interface BasePresenter {
+public interface BaseLoadDataPresenter extends BasePresenter {
 
     /**
-     * Start presenter logic. It should be called by the view when it is prepared.
+     * Load data from repository.
+     *
+     * @param forceUpdate force cache update.
      */
-    void start();
-
+    void loadData(boolean forceUpdate);
 }

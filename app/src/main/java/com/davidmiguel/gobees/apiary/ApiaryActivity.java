@@ -21,13 +21,12 @@ package com.davidmiguel.gobees.apiary;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.TabsFragmentPagerAdapter;
 import com.google.common.collect.Lists;
@@ -47,13 +46,7 @@ public class ApiaryActivity extends AppCompatActivity {
         setContentView(R.layout.apiary_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+        AndroidUtils.setUpToolbar(this, false);
 
         // Get apiary id
         long apiaryId = getIntent().getLongExtra(ApiaryHivesFragment.ARGUMENT_APIARY_ID, NO_APIARY);

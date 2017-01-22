@@ -90,8 +90,6 @@ class HivePresenter implements HiveContract.Presenter {
         // Force update the first time
         boolean update = forceUpdate || firstLoad;
         firstLoad = false;
-        // Show progress indicator
-        hiveRecordingsView.setLoadingIndicator(true);
         // Refresh data if needed
         if (update) {
             goBeesRepository.refreshRecordings(hiveId);

@@ -24,14 +24,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,9 +37,9 @@ import com.davidmiguel.gobees.data.model.MeteoRecord;
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.preferences.GoBeesPreferences;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 import com.davidmiguel.gobees.utils.HourAxisValueFormatter;
 import com.davidmiguel.gobees.utils.RainValueFormatter;
-import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 import com.davidmiguel.gobees.utils.StringUtils;
 import com.davidmiguel.gobees.utils.TempValueFormatter;
 import com.davidmiguel.gobees.utils.WeatherUtils;
@@ -134,23 +129,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         });
 
         // Set up progress indicator
-        final ScrollChildSwipeRefreshLayout swipeRefreshLayout =
-                (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
-        swipeRefreshLayout.setColorSchemeColors(
-                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
-                ContextCompat.getColor(getActivity(), R.color.colorAccent),
-                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark)
-        );
-
-        // Set the scrolling view in the custom SwipeRefreshLayout
         LinearLayout ll = (LinearLayout) root.findViewById(R.id.linear_layout);
-        swipeRefreshLayout.setScrollUpChild(ll);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                setLoadingIndicator(false);
-            }
-        });
+        AndroidUtils.setUpProgressIndicator(root, getContext(), ll, presenter);
 
         return root;
     }
@@ -163,18 +143,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
 
     @Override
     public void setLoadingIndicator(final boolean active) {
-        if (getView() == null) {
-            return;
-        }
-        final SwipeRefreshLayout srl =
-                (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
-        // Make sure setRefreshing() is called after the layout is done with everything else
-        srl.post(new Runnable() {
-            @Override
-            public void run() {
-                srl.setRefreshing(active);
-            }
-        });
+        AndroidUtils.setLoadingIndicator(getView(), active);
     }
 
     @Override
