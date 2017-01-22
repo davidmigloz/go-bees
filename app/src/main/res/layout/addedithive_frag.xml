@@ -44,9 +44,9 @@
             android:id="@+id/add_hive_notes"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:gravity="top"
+            android:gravity="top|left"
             android:hint="@string/hive_notes_hint"
-            android:inputType="textCapSentences"/>
+            android:inputType="textMultiLine|textCapSentences"/>
 
     </LinearLayout>
 </ScrollView>
