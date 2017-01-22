@@ -27,7 +27,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
@@ -72,7 +71,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
                     actionBar.setTitle(R.string.add_apiary);
                 }
             }
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+            AndroidUtils.addFragmentToActivity(getSupportFragmentManager(),
                     addEditApiaryFragment, R.id.contentFrame);
         }
 

@@ -25,6 +25,9 @@ import java.util.Locale;
  */
 public class StringUtils {
 
+    private StringUtils() {
+    }
+
     /**
      * Capitalize firt letter of the string.
      *

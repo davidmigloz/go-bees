@@ -25,7 +25,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
@@ -79,7 +78,7 @@ public class AddEditHiveActivity extends AppCompatActivity {
                     actionBar.setTitle(R.string.add_hive);
                 }
             }
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+            AndroidUtils.addFragmentToActivity(getSupportFragmentManager(),
                     addEditHiveFragment, R.id.contentFrame);
         }
 

@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
@@ -44,7 +43,7 @@ public class HelpActivity extends AppCompatActivity {
         if (helpFragment == null) {
             // Create the fragment
             helpFragment = HelpFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), helpFragment, R.id.contentFrame);
         }
 

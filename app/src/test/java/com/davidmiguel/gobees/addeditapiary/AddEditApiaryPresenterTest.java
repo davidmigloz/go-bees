@@ -19,8 +19,8 @@ package com.davidmiguel.gobees.addeditapiary;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextApiaryIdCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextApiaryIdCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 

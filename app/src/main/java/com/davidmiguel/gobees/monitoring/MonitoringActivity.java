@@ -22,7 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
  * Monitoring activity.
@@ -58,7 +58,7 @@ public class MonitoringActivity extends AppCompatActivity {
         if (monitoringFragment == null) {
             // Create the fragment
             monitoringFragment = MonitoringFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), monitoringFragment, R.id.contentFrame);
         }
 

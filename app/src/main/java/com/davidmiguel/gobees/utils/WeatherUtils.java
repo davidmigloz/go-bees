@@ -32,6 +32,9 @@ import com.davidmiguel.gobees.data.source.preferences.GoBeesPreferences;
  */
 public class WeatherUtils {
 
+    private WeatherUtils() {
+    }
+
     /**
      * This method will convert a temperature from Celsius to Fahrenheit.
      *

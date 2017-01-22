@@ -36,7 +36,6 @@ import com.davidmiguel.gobees.about.AboutActivity;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.help.HelpActivity;
 import com.davidmiguel.gobees.settings.SettingsActivity;
-import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
@@ -70,7 +69,7 @@ public class ApiariesActivity extends AppCompatActivity {
         if (apiariesFragment == null) {
             // Create the fragment
             apiariesFragment = ApiariesFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), apiariesFragment, R.id.contentFrame);
         }
 

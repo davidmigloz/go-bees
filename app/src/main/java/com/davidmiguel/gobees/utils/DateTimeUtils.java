@@ -35,6 +35,9 @@ public class DateTimeUtils {
     private static final long ONE_MIN_IN_MS = 60000;
     private static final long ONE_SEC_IN_MS = 1000;
 
+    private DateTimeUtils() {
+    }
+
     /**
      * Get actual date with hours, min, sec and millisec set to 0.
      *

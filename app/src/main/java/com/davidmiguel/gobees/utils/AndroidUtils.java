@@ -20,6 +20,10 @@ package com.davidmiguel.gobees.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -32,10 +36,31 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.davidmiguel.gobees.R;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Android related utilities.
  */
 public class AndroidUtils {
+
+    /**
+     * Private constructor.
+     */
+    private AndroidUtils() {
+    }
+
+    /**
+     * The fragment is added to the container view with id frameId. The operation is
+     * performed by the fragmentManager.
+     */
+    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
+                                             @NonNull Fragment fragment, int frameId) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(frameId, fragment);
+        transaction.commit();
+    }
 
     /**
      * Closes / hides soft Android keyboard.

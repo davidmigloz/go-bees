@@ -24,7 +24,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.utils.ActivityUtils;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 import java.util.Date;
@@ -76,7 +75,7 @@ public class RecordingActivity extends AppCompatActivity {
         if (recordingFragment == null) {
             // Create the fragment
             recordingFragment = RecordingFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), recordingFragment, R.id.contentFrame);
         }
 
