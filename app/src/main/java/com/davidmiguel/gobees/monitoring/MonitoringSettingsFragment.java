@@ -205,10 +205,10 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             presenter.updateAlgoBlobSize(getBlobSize(val));
         } else if (preference.getKey().equals(getString(R.string.pref_min_area_key))) {
             // Update min area
-            presenter.updateAlgoMinArea((Double) value);
+            presenter.updateAlgoMinArea(((Integer) value).doubleValue());
         } else if (preference.getKey().equals(getString(R.string.pref_max_area_key))) {
             // Update max area
-            presenter.updateAlgoMaxArea(((Double) value));
+            presenter.updateAlgoMaxArea(((Integer) value).doubleValue());
         } else if (preference.getKey().equals(getString(R.string.pref_zoom_key))) {
             // Update zoom
             presenter.updateAlgoZoom((Integer.parseInt((String) value)));

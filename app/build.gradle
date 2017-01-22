@@ -103,7 +103,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.github.davidmigloz:opencv-android-gradle-repo:3.2.0'
     compile 'com.google.android.gms:play-services-location:10.0.1'
-    compile 'com.google.guava:guava:20.0'
+    compile 'com.google.guava:guava:21.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.vanniktech:vntnumberpickerpreference:1.0.0'
