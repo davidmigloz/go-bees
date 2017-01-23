@@ -71,8 +71,7 @@ del *presenter* que actúa de mediador entre estas dos capas. Su segundo
 objetivo es maximizar la cantidad de código que se puede testear de
 forma automática.
 
-MVP divide la aplicación en las siguientes capas:
-https://martinfowler.com/eaaDev/uiArchs.html
+MVP divide la aplicación en las siguientes capas:[pattern:mvp]_
 
 -  *Model*: se corresponde únicamente con el acceso a datos. Se encarga
    de almacenar y proporcionar los diferentes datos que maneja la
@@ -93,7 +92,7 @@ https://martinfowler.com/eaaDev/uiArchs.html
 
 Existen varias variantes sobre cómo implementar MVP en Android. En
 nuestro caso, se ha seguido la expuesta Google en Android Architecture
-Blueprints (https://github.com/googlesamples/android-architecture). En
+Blueprints [pattern:android_architecture]_. En
 ellas se realizan las siguientes consideraciones:
 
 -  Se utilizan las *Activity* como controladores globales que se
@@ -107,8 +106,7 @@ Patrón repositorio
 
 Para la capa del modelo, se ha utilizado el patrón repositorio que
 proporciona una abstracción de la implementación del acceso a datos con
-el objetivo de que este sea transparente a la lógica de negocio.
-https://martinfowler.com/eaaCatalog/repository.html
+el objetivo de que este sea transparente a la lógica de negocio [pattern:repository]_.
 
 En nuestra aplicación existen dos fuentes de datos: por una parte, está
 la base de datos local implementada con Realm, y por otra, tenemos la
@@ -139,7 +137,7 @@ La inyección de dependencias es un patrón mediante el cual se
 proporcionan todas las dependencias que una clase necesita para su
 funcionamiento, en lugar de ser la propia clase quien las cree. Al
 separar las dependencias de la propia clase, se posibilita la opción de
-sustituir estas por dobles con un comportamiento definido.
+sustituir estas por dobles con un comportamiento definido [wiki:injection]_.
 
 Para la implementación de la inyección de dependencias se han utilizado
 los *build flavors* que proporciona Gradle. Se crearon dos *flavors*:
@@ -256,3 +254,15 @@ diagrama de clases es el siguiente:
 |sourceclassdiagram|
 
 .. |sourceclassdiagram| image:: ../../img/source-class-diagram.png
+
+.. References
+
+.. [pattern:mvp]
+   https://martinfowler.com/eaaDev/uiArchs.html
+.. [pattern:repository]
+   https://martinfowler.com/eaaCatalog/repository.html
+.. [pattern:android_architecture]
+   https://github.com/googlesamples/android-architecture
+.. [wiki:injection]
+   https://en.wikipedia.org/wiki/Dependency_injection 
+   
