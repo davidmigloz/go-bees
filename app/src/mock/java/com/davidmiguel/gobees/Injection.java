@@ -18,7 +18,7 @@
 
 package com.davidmiguel.gobees;
 
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
 import com.davidmiguel.gobees.data.source.network.WeatherDataSource;
 

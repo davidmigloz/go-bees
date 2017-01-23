@@ -30,7 +30,7 @@ import com.davidmiguel.gobees.data.source.preferences.GoBeesPreferences;
  * from kph to mph, and from degrees to NSEW.  It also contains the mapping of weather condition
  * codes in OpenWeatherMap to strings.
  */
-public class WeatherUtils {
+public final class WeatherUtils {
 
     private WeatherUtils() {
     }
@@ -157,7 +157,6 @@ public class WeatherUtils {
     public static int getWeatherIconResourceId(String weatherIconId) {
         switch (weatherIconId) {
             case "01d": // clear sky day
-            default: // Not found
                 return R.drawable.ic_weather_day_clear_sky;
             case "01n": // clear sky night
                 return R.drawable.ic_weather_night_clear_sky;
@@ -187,6 +186,8 @@ public class WeatherUtils {
             case "50d": // mist day
             case "50n": // mist night
                 return R.drawable.ic_weather_day_night_mist;
+            default: // Not found
+                return R.drawable.ic_help;
         }
     }
 

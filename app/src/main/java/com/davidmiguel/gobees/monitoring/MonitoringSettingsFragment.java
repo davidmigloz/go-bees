@@ -33,7 +33,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.video.BeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
 import com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference;
 
 import static com.google.common.base.Preconditions.checkNotNull;

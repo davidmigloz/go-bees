@@ -25,7 +25,7 @@ import android.support.annotation.NonNull;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 
 /**

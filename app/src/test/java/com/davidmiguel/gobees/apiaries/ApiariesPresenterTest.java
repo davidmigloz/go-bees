@@ -20,7 +20,7 @@ package com.davidmiguel.gobees.apiaries;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;

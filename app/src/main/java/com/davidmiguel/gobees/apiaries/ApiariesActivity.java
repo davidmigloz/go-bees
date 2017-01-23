@@ -33,7 +33,7 @@ import android.view.MenuItem;
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.about.AboutActivity;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.help.HelpActivity;
 import com.davidmiguel.gobees.settings.SettingsActivity;
 import com.davidmiguel.gobees.utils.AndroidUtils;

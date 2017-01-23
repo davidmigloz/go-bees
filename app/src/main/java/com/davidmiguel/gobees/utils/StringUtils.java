@@ -23,7 +23,7 @@ import java.util.Locale;
 /**
  * String utils.
  */
-public class StringUtils {
+public final class StringUtils {
 
     private StringUtils() {
     }

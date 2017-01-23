@@ -41,7 +41,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Android related utilities.
  */
-public class AndroidUtils {
+public final class AndroidUtils {
 
     /**
      * Private constructor.

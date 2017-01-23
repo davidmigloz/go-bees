@@ -25,7 +25,7 @@ import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import java.util.Date;
 

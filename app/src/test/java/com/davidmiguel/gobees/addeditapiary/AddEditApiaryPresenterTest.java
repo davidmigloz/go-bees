@@ -22,7 +22,7 @@ import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextApiaryIdCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import org.junit.Before;
 import org.junit.Test;

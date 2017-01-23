@@ -32,17 +32,15 @@ public class GoBeesPreferences {
     /**
      * Returns true if the user has selected metric temperature display.
      *
-     * @param context Context used to get the SharedPreferences.
+     * @param context Context used to get the Strings.
      * @return true if metric display should be used, false if imperial display should be used.
      */
     public static boolean isMetric(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-
         String keyForUnits = context.getString(R.string.pref_weather_units_key);
         String defaultUnits = context.getString(R.string.pref_weather_units_metric);
         String preferredUnits = sp.getString(keyForUnits, defaultUnits);
         String metric = context.getString(R.string.pref_weather_units_metric);
-
         return metric.equals(preferredUnits);
     }
 }

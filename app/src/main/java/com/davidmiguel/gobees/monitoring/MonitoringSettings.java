@@ -18,7 +18,7 @@
 
 package com.davidmiguel.gobees.monitoring;
 
-import com.davidmiguel.gobees.video.BeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
 
 import java.io.Serializable;
 

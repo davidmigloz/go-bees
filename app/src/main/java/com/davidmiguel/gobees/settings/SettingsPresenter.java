@@ -24,8 +24,8 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.data.source.local.DataGenerator;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 /**
  * Listens to user actions from the UI SettingsFragment, retrieves the data and updates the

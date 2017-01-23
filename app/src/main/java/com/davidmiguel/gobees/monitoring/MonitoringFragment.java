@@ -39,10 +39,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.camera.CameraView;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.hive.HiveRecordingsFragment;
 import com.davidmiguel.gobees.monitoring.MonitoringService.MonitoringBinder;
+import com.davidmiguel.gobees.monitoring.camera.CameraView;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;

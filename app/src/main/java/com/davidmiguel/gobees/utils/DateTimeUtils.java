@@ -26,7 +26,7 @@ import java.util.GregorianCalendar;
  * Java Date utils.
  */
 @SuppressWarnings("WeakerAccess")
-public class DateTimeUtils {
+public final class DateTimeUtils {
 
     public static final long T_5_SECONDS = 5000;
     public static final long T_15_MINUTES = 900000;

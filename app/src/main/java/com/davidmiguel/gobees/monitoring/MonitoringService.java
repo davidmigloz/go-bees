@@ -31,18 +31,18 @@ import android.support.v4.app.NotificationCompat;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.camera.AndroidCamera;
-import com.davidmiguel.gobees.camera.AndroidCameraImpl;
-import com.davidmiguel.gobees.camera.AndroidCameraListener;
-import com.davidmiguel.gobees.camera.CameraFrame;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Record;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.SaveRecordingCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
+import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.ContourBeesCounter;
+import com.davidmiguel.gobees.monitoring.camera.AndroidCamera;
+import com.davidmiguel.gobees.monitoring.camera.AndroidCameraImpl;
+import com.davidmiguel.gobees.monitoring.camera.AndroidCameraListener;
+import com.davidmiguel.gobees.monitoring.camera.CameraFrame;
 import com.davidmiguel.gobees.utils.DateTimeUtils;
-import com.davidmiguel.gobees.video.BeesCounter;
-import com.davidmiguel.gobees.video.ContourBeesCounter;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;

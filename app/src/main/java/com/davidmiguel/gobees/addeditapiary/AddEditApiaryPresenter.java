@@ -28,7 +28,7 @@ import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;

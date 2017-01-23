@@ -18,8 +18,8 @@
 
 package com.davidmiguel.gobees.monitoring;
 
-import com.davidmiguel.gobees.video.BeesCounter;
-import com.davidmiguel.gobees.video.ContourBeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.ContourBeesCounter;
 
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;

@@ -24,7 +24,7 @@ import android.support.annotation.NonNull;
 import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import java.util.ArrayList;
 import java.util.Date;

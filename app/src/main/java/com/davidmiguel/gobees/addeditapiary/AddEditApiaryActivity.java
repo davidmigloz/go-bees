@@ -26,7 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**

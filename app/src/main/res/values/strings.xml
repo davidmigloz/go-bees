@@ -84,9 +84,9 @@
     <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
     <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
     <!-- Format humidity  in percentage. Ej: 18% [CHAR LIMIT=NONE] -->
-    <string name="format_humidity_percentage"><xliff:g id="temp">%1.0f</xliff:g>%%</string>
+    <string name="format_humidity_percentage"><xliff:g id="hum">%1.0f</xliff:g>%%</string>
     <!-- Format pressure  in hPa. Ej: 1024hPa [CHAR LIMIT=NONE] -->
-    <string name="format_pressure_hpa"><xliff:g id="temp">%1.0f</xliff:g> hPa</string>
+    <string name="format_pressure_hpa"><xliff:g id="pre">%1.0f</xliff:g> hPa</string>
     <!-- Format Wind in kph [CHAR LIMIT=NONE] -->
     <string name="format_wind_kmh"><xliff:g id="speed">%1$1.0f</xliff:g> km/h - <xliff:g id="direction">%2$s</xliff:g></string>
     <!-- Wind in mph [CHAR LIMIT=NONE -->
