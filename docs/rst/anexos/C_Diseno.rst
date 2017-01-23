@@ -54,3 +54,205 @@ Diseño procedimental
 
 Diseño arquitectónico
 ---------------------
+
+El hecho de que el proyecto se haya realizado para la plataforma Android
+ha condicionado muchas de las decisiones de diseño. Aun así, se han
+aplicado una serie de patrones para intentar desacoplar el código lo
+máximo posible y así mejorar su testabilidad y mantenibilidad.
+
+Model-View-Presenter (MVP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Uno de los patrones arquitectónicos que más relevancia está ganando para
+el desarrollo de aplicaciones es MVP (*Model-View-Presenter)*. Se trata
+de un patrón derivado del MVC (*Model-View-Controler*) cuyo objetivo es
+separar la vista del modelo de datos subyacente. MVP introduce la figura
+del *presenter* que actúa de mediador entre estas dos capas. Su segundo
+objetivo es maximizar la cantidad de código que se puede testear de
+forma automática.
+
+MVP divide la aplicación en las siguientes capas:
+https://martinfowler.com/eaaDev/uiArchs.html
+
+-  *Model*: se corresponde únicamente con el acceso a datos. Se encarga
+   de almacenar y proporcionar los diferentes datos que maneja la
+   aplicación. En nuestra aplicación se corresponde con el Repositorio.
+
+-  *View*: se encarga de la visualización de los datos (del modelo).
+   Propaga todas las acciones de usuario al *presenter*. En nuestra
+   aplicación se corresponde con los *Fragments*.
+
+-  *Presenter*: enlaza las dos capas anteriores. Sincroniza los datos
+   mostrados en la vista con los almacenados en el modelo y actúa ante
+   los eventos de usuario propagados por la vista. En nuestra aplicación
+   se corresponde con los *Presenters*.
+
+|mvp|
+
+.. |relational| image:: ../../img/mvp.png
+
+Existen varias variantes sobre cómo implementar MVP en Android. En
+nuestro caso, se ha seguido la expuesta Google en Android Architecture
+Blueprints (https://github.com/googlesamples/android-architecture). En
+ellas se realizan las siguientes consideraciones:
+
+-  Se utilizan las *Activity* como controladores globales que se
+   encargan de crear y conectar las vistas y los *presenters*.
+
+-  Se utilizan los *Fragment* como vistas ya que proporcionan numerosas
+   ventajas cuando se trabaja con múltiples vistas.
+
+Patrón repositorio
+~~~~~~~~~~~~~~~~~~
+
+Para la capa del modelo, se ha utilizado el patrón repositorio que
+proporciona una abstracción de la implementación del acceso a datos con
+el objetivo de que este sea transparente a la lógica de negocio.
+https://martinfowler.com/eaaCatalog/repository.html
+
+En nuestra aplicación existen dos fuentes de datos: por una parte, está
+la base de datos local implementada con Realm, y por otra, tenemos la
+API remota que nos da acceso a la información meteorológica. Ambas
+fuentes son transparentes para los *presenters*.
+
+El repositorio media entre la capa de acceso a datos y la lógica de
+negocio de tal forma que no existe ninguna dependencia entre ellas.
+Consiguiendo desacoplar, mantener y testear más fácilmente el código y
+permitiendo la reutilización del acceso a datos desde cualquier cliente.
+
+|repositorypattern|
+
+.. |repositorypattern| image:: ../../img/repository_pattern.png
+
+Inyección de dependencias
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A la hora de testear, es muy frecuente necesitar sustituir la
+implementación de una clase por otra “falsa” que se comporte de una
+manera predeterminada para conseguir probar la funcionalidad de manera
+aislada. En nuestro caso, para facilitar la labor de testeo nos vimos
+obligados a sustituir la base de datos Realm por una base de datos en
+memoria. Esta sustitución se realizó mediante la inyección de
+dependencias.
+
+La inyección de dependencias es un patrón mediante el cual se
+proporcionan todas las dependencias que una clase necesita para su
+funcionamiento, en lugar de ser la propia clase quien las cree. Al
+separar las dependencias de la propia clase, se posibilita la opción de
+sustituir estas por dobles con un comportamiento definido.
+
+Para la implementación de la inyección de dependencias se han utilizado
+los *build flavors* que proporciona Gradle. Se crearon dos *flavors*:
+
+-  Mock: inyectaba una base de datos en memoria utilizada para el testeo
+   de la aplicación.
+
+-  Prod: inyectaba la base de datos Realm utilizada para producción.
+
+Arquitectura general
+~~~~~~~~~~~~~~~~~~~~
+
+El resultado de la arquitectura tras aplicar los patrones explicados es
+el siguiente:
+
+|architecture|
+
+.. |architecture| image:: ../../img/architecture.png
+
+Para agilizar la navegación por la aplicación se implementó una capa de
+caché en el repositorio.
+
+Diseño de paquetes
+~~~~~~~~~~~~~~~~~~
+
+Para la organización de los diferentes archivos que componen la
+aplicación no se utilizó la estrategia convencional de paquete por capa
+(*package by layer approach*), sino una estrategia de paquete por
+característica (*package per feature approach*).
+
+Siguiendo esta estrategia se agruparon todos los archivos relacionados
+cada una de las distintas funcionalidades de la aplicación en un mismo
+paquete. De esta manera se mejora notablemente la legibilidad y la
+modularización de la aplicación, ya que se puede modificar cada
+funcionalidad de forma independiente.
+
+Existen dos paquetes excepcionales que no siguen esta convención:
+
+-  Paquete *data*: agrupa toda la capa de modelo.
+
+-  Paquete *utils*: reúne un conjunto de clases de utilidad generales
+   que son utilizadas por varias características.
+
+El diagrama de paquetes es el siguiente:
+
+|packagesdiagram|
+
+.. |packagesdiagram| image:: ../../img/packages-diagram.png
+
+El paquete *feature X* se correspondería con cada paquete de cada
+funcionalidad. Se ha representado de esta manera para simplificar el
+diagrama.
+
+A continuación, se muestran por separado los paquetes de todas las
+funcionalidades:
+
+|packagesfeaturesdiagram|
+
+.. |packagesfeaturesdiagram| image:: ../../img/packages-features-diagram.png
+
+Diseño de clases
+~~~~~~~~~~~~~~~~
+
+Aplicando MVP, cada característica clave de la aplicación posee los
+siguientes componentes:
+
+-  FeatureActivity: funciona como un controlador global que crea la
+   vista y el *presenter* y los enlaza.
+
+-  FeatureContract: se trata de una interfaz que establece los
+   siguientes contratos:
+
+   -  FeatureContract.View: define la capa *view* para esta
+      característica (las únicas funciones que expone a otras capas).
+
+   -  FeatureContract.Presenter: define la interacción entre las capas
+      *view* y *presenter*. Describe las acciones que pueden ser
+      iniciadas desde la vista.
+
+-  FeatureFragment: implementación concreta de la capa *view*.
+
+-  FeaturePresenter: implementación concreta de la capa *presenter*.
+   Escucha las acciones de usuario y actualiza la vista cuando cambia el
+   modelo.
+
+|featurepackage|
+
+.. |featurepackage| image:: ../../img/feature-package.png
+
+El diagrama de clases general que muestra cómo se relacionan todos los
+componentes de una determinada característica es el siguiente:
+
+|generalclassdiagram|
+
+.. |generalclassdiagram| image:: ../../img/general-class-diagram.png
+
+En la parte del acceso a datos se poseen dos paquetes como se ha visto
+en el apartado anterior.
+
+El paquete *model* contiene todas las clases de modelo que se mapean con
+la base de datos.
+
+|modelpackage|
+
+.. |modelpackage| image:: ../../img/model-package.png
+
+\*La clase Recording se utiliza para agrupar a un conjunto de Records,
+pero no se almacena en la base de datos directamente (solo los Records).
+
+Por otro lado, el paquete *source* contiene todas las clases
+correspondientes a los accesos de las diferentes fuentes de datos. Su
+diagrama de clases es el siguiente:
+
+|sourceclassdiagram|
+
+.. |sourceclassdiagram| image:: ../../img/source-class-diagram.png

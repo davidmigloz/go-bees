@@ -31,6 +31,8 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.Locale;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -139,7 +141,8 @@ public class WeatherUtilsTest {
     @Test
     public void formatRainSnow() throws Exception {
         String result = WeatherUtils.formatRainSnow(context, 10);
-        assertEquals("<xliff:g id=\"temp\">10,00</xliff:g> mm", result);
+        assertEquals("<xliff:g id=\"temp\">" + String.format(Locale.getDefault(), "%1.2f", 10.0)
+                + "</xliff:g> mm", result);
     }
 
     @Test
