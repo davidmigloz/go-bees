@@ -330,6 +330,43 @@ posterior procesado por el algoritmo de conteo.
 
 .. |algosequencediagram| image:: ../../img/algo-sequence-diagram.png
 
+Diseño de interfaces
+--------------------
+
+En el diseño de la interfaz se ha seguido la guía de estilos de
+*Material Design* [design:material]_ introducida en el Google I/O 2014 
+y que se adoptó en Android a partir de la versión 5.0 (*Lollipop*).
+
+En las primeras etapas de proyecto se realizaron una serie de prototipos
+en los que se plasmaron las principales funcionalidades de la
+aplicación.
+
+|prototipos|
+
+.. |prototipos| image:: ../../img/prototipos.jpg
+
+Tras una serie de interacciones, estos se fueron mejorando hasta obtener
+las interfaces con las que cuenta hoy en día la *app*.
+
+TODO meter capturas de la app
+
+El siguiente diagrama muestra la navegabilidad por la aplicación. Esta
+ha sido distribuida de acuerdo al tipo de contenido y a las tareas a
+realizar sobre este.
+
+|navegationdiagram|
+
+.. |navegationdiagram| image:: ../../img/navegation-diagram.png
+
+Se ha escogido la paleta de colores entre los recomendados por *Material
+Design*. Utilizando como principal un color en la gama de los 500, lo
+que denominan un color *material,* y definiendo otro color que contraste
+con este para acentuar.
+
+|palette|
+
+.. |palette| image:: ../../img/palette.png
+
 .. References
 
 .. [pattern:mvp]
