@@ -49,9 +49,6 @@ Diagrama Relacional
 
 .. |relational| image:: ../../img/relational-diagram.png
 
-Diseño procedimental
---------------------
-
 Diseño arquitectónico
 ---------------------
 
