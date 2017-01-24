@@ -314,6 +314,22 @@ diagrama de clases es el siguiente:
 Para conocer a mayor detalle las funciones de cada clase se puede
 consultar la documentación JavaDoc de la aplicación.
 
+Diseño procedimental
+--------------------
+
+En este apartado se recogen los detalles más relevantes respecto a la
+ejecución del algoritmo de monitorización de la actividad de vuelo de
+una colmena.
+
+En el siguiente diagrama de secuencia se ha representado como es la
+interacción entre los diferentes objetos que se encargan de la
+inicialización de la monitorización, la obtención de las imágenes y su
+posterior procesado por el algoritmo de conteo.
+
+|algosequencediagram|
+
+.. |algosequencediagram| image:: ../../img/algo-sequence-diagram.png
+
 .. References
 
 .. [pattern:mvp]
