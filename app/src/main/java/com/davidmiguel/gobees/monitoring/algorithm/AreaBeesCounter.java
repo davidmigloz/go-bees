@@ -31,10 +31,10 @@ import org.opencv.core.Mat;
 /**
  * Counts the number of bees based on the area of detected moving contours.
  */
-public class ContourBeesCounter implements BeesCounter {
+public class AreaBeesCounter implements BeesCounter {
 
     private static final String TAG = "ContourBeesCounter";
-    private static ContourBeesCounter INSTANCE;
+    private static AreaBeesCounter INSTANCE;
 
     private Blur blur;
     private BackgroundSubtractor bs;
@@ -47,16 +47,16 @@ public class ContourBeesCounter implements BeesCounter {
      * History is initialized to 10 and shadows threshold to 0.7.
      * minArea is initialized to 15 and maxArea to 800.
      */
-    private ContourBeesCounter() {
+    private AreaBeesCounter() {
         blur = new Blur();
         bs = new BackgroundSubtractor();
         morphology = new Morphology();
         cf = new ContoursFinder();
     }
 
-    public static ContourBeesCounter getInstance() {
+    public static AreaBeesCounter getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new ContourBeesCounter();
+            INSTANCE = new AreaBeesCounter();
         }
         return INSTANCE;
     }

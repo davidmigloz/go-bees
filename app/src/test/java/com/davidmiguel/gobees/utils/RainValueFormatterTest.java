@@ -19,6 +19,8 @@ package com.davidmiguel.gobees.utils;
 
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static org.junit.Assert.*;
 
 /**
@@ -29,8 +31,8 @@ public class RainValueFormatterTest {
     public void getFormattedValue() throws Exception {
         RainValueFormatter rainValueFormatter = new RainValueFormatter(RainValueFormatter.Unit.MM);
         String res = rainValueFormatter.getFormattedValue(10, null);
-        assertEquals("10,0mm", res);
+        assertEquals(String.format(Locale.getDefault(), "%1.1f", 10.0) + "mm", res);
         res = rainValueFormatter.getFormattedValue(10, null, -1, null);
-        assertEquals("10,0mm", res);
+        assertEquals(String.format(Locale.getDefault(), "%1.1f", 10.0) + "mm", res);
     }
 }

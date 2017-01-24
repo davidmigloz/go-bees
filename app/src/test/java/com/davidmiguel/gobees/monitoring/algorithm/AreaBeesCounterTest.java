@@ -42,12 +42,12 @@ import static junit.framework.Assert.assertTrue;
  * This relative error is asserted with a max. error threshold.
  */
 @SuppressLint("DefaultLocale")
-public class ContourBeesCounterTest extends OpenCvBaseTest {
+public class AreaBeesCounterTest extends OpenCvBaseTest {
 
     private static final String LOGGER_PROP = "src/test/res/log4j.properties";
     private static final double MAX_ERROR_THRESHOLD = 0.1;
     private static final int NUM_FRAMES_SKIP = 10;
-    private final Logger logger = LoggerFactory.getLogger(ContourBeesCounterTest.class);
+    private final Logger logger = LoggerFactory.getLogger(AreaBeesCounterTest.class);
     private DecimalFormat df;
 
     @BeforeClass
@@ -66,7 +66,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @Test
     public void case1() throws Exception {
         logger.debug("Case1:");
-        BeesCounter bc = ContourBeesCounter.getInstance();
+        BeesCounter bc = AreaBeesCounter.getInstance();
         bc.updateBlobSize(BeesCounter.BlobSize.NORMAL);
         double error = calculateRelativeError(bc, "c14");
         System.out.println("Error case1: " + df.format(error));
@@ -79,7 +79,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @Test
     public void case2() throws Exception {
         logger.debug("Case2:");
-        BeesCounter bc = ContourBeesCounter.getInstance();
+        BeesCounter bc = AreaBeesCounter.getInstance();
         bc.updateBlobSize(BeesCounter.BlobSize.SMALL);
         bc.updateMinArea(10.0);
         bc.updateMaxArea(800.0);
@@ -94,7 +94,7 @@ public class ContourBeesCounterTest extends OpenCvBaseTest {
     @Test
     public void case3() throws Exception {
         logger.debug("Case3:");
-        BeesCounter bc = ContourBeesCounter.getInstance();
+        BeesCounter bc = AreaBeesCounter.getInstance();
         bc.updateBlobSize(BeesCounter.BlobSize.BIG);
         bc.updateMinArea(30.0);
         bc.updateMaxArea(2000.0);

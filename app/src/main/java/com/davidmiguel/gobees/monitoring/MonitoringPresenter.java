@@ -19,7 +19,7 @@
 package com.davidmiguel.gobees.monitoring;
 
 import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
-import com.davidmiguel.gobees.monitoring.algorithm.ContourBeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.AreaBeesCounter;
 
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
@@ -132,7 +132,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     @Override
     public void onCameraViewStarted(int width, int height) {
         processedFrame = new Mat();
-        bc = ContourBeesCounter.getInstance();
+        bc = AreaBeesCounter.getInstance();
         settingsView.initSettings();
     }
 

@@ -88,15 +88,15 @@ MVP divide la aplicación en las siguientes capas:[pattern:mvp]_
 
 |mvp|
 
-.. |relational| image:: ../../img/mvp.png
+.. |mvp| image:: ../../img/mvp.png
 
 Existen varias variantes sobre cómo implementar MVP en Android. En
 nuestro caso, se ha seguido la expuesta Google en Android Architecture
 Blueprints [pattern:android_architecture]_. En
-ellas se realizan las siguientes consideraciones:
+ella se realizan las siguientes consideraciones:
 
 -  Se utilizan las *Activity* como controladores globales que se
-   encargan de crear y conectar las vistas y los *presenters*.
+   encargan de crear y conectar las vistas con los *presenters*.
 
 -  Se utilizan los *Fragment* como vistas ya que proporcionan numerosas
    ventajas cuando se trabaja con múltiples vistas.
@@ -198,6 +198,37 @@ funcionalidades:
 
 .. |packagesfeaturesdiagram| image:: ../../img/packages-features-diagram.png
 
+-  **About**: contiene la funcionalidad de “Acerca de” de la aplicación.
+   Donde se muestra el autor, licencia, versión de la *app*, sitio web,
+   historial de cambio y todas las dependencias junto con sus licencias.
+
+-  **Addeditapiary**: permite añadir o editar colmenares.
+
+-  **Addedithive**: permite añadir o editar colmenas.
+
+-  **Apiaries**: permite listar los colmenares y gestionarlos.
+
+-  **Apiary**: permite listar las colmenas de un colmenar, gestionarlas
+   y mostrar la información relativa al colmenar.
+
+-  **Help**: muestra la ayuda de la aplicación.
+
+-  **Hive**: permite listar las grabaciones de una colmena, gestionarlas
+   y mostrar la información relativa a la colmena.
+
+-  **Monitoring**: agrupa toda la funcionalidad de monitorización de la
+   actividad de vuelo de una colmena, desde la configuración hasta la
+   ejecución del algoritmo.
+
+-  **Recording**: permite visualizar los detalles de una determinada
+   grabación.
+
+-  **Settings**: permite configurar los distintos parámetros de la
+   aplicación.
+
+-  **Splash**: muestra una pantalla de inicio mientras la aplicación
+   carga en memoria los recursos necesarios.
+
 Diseño de clases
 ~~~~~~~~~~~~~~~~
 
@@ -234,8 +265,33 @@ componentes de una determinada característica es el siguiente:
 
 .. |generalclassdiagram| image:: ../../img/general-class-diagram.png
 
-En la parte del acceso a datos se poseen dos paquetes como se ha visto
+El único paquete que se diferencia de la estructura expuesta es el
+paquete *monitoring.* Este integra a su vez toda la lógica de acceso a
+la cámara y todas las clases relacionadas con el algoritmo de conteo.
+
+|monitoringpackage|
+
+.. |monitoringpackage| image:: ../../img/monitoring-package.png
+
+El diagrama de clases del paquete cámara es el siguiente:
+
+|cameraclassdiagram|
+
+.. |cameraclassdiagram| image:: ../../img/camera-class-diagram.png
+
+El diagrama de las clases que implementan el algoritmo de conteo es el
+siguiente:
+
+|algorithmclassdiagram|
+
+.. |algorithmclassdiagram| image:: ../../img/algorithm-class-diagram.png
+
+En la parte del acceso a datos, se poseen dos paquetes como se ha visto
 en el apartado anterior.
+
+|datapackage|
+
+.. |datapackage| image:: ../../img/data-package.png
 
 El paquete *model* contiene todas las clases de modelo que se mapean con
 la base de datos.
@@ -255,6 +311,9 @@ diagrama de clases es el siguiente:
 
 .. |sourceclassdiagram| image:: ../../img/source-class-diagram.png
 
+Para conocer a mayor detalle las funciones de cada clase se puede
+consultar la documentación JavaDoc de la aplicación.
+
 .. References
 
 .. [pattern:mvp]
@@ -265,4 +324,6 @@ diagrama de clases es el siguiente:
    https://github.com/googlesamples/android-architecture
 .. [wiki:injection]
    https://en.wikipedia.org/wiki/Dependency_injection 
+.. [design:material]
+   https://material.io/guidelines/
    

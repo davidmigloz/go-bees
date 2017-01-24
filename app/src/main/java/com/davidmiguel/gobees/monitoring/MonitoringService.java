@@ -37,7 +37,7 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.SaveRecordingCallback;
 import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
-import com.davidmiguel.gobees.monitoring.algorithm.ContourBeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.AreaBeesCounter;
 import com.davidmiguel.gobees.monitoring.camera.AndroidCamera;
 import com.davidmiguel.gobees.monitoring.camera.AndroidCameraImpl;
 import com.davidmiguel.gobees.monitoring.camera.AndroidCameraListener;
@@ -268,7 +268,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      * Config bee counter with settings.
      */
     private void configBeeCounter() {
-        bc = ContourBeesCounter.getInstance();
+        bc = AreaBeesCounter.getInstance();
         bc.updateBlobSize(monitoringSettings.getBlobSize());
         bc.updateMinArea(monitoringSettings.getMinArea());
         bc.updateMaxArea(monitoringSettings.getMaxArea());
