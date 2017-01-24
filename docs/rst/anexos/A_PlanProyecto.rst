@@ -85,10 +85,10 @@ Sprint 0 (09/09/16 - 16/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La reunión de planificación de este *sprint* marcó el comienzo del
-proyecto. En una reunión previa se había planeado la idea del proyecto
-al tutor y este la había aceptado. En esta nueva reunión se profundizó
-en la idea, se formó el equipo del proyecto y se plantearon los
-objetivos del primer *sprint*.
+proyecto. En una reunión previa se había planteado la idea del proyecto
+a Jose Francisco y este había aceptado tutorizarla. En esta nueva reunión se 
+profundizó en la idea, se incorporó Raúl Marticorena como cotutor y se 
+plantearon los objetivos del primer *sprint*.
 
 Los objetivos fueron: profundizar y formalizar los objetivos del
 proyecto, investigar el estado del arte en algoritmos de detección y

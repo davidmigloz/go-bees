@@ -81,7 +81,8 @@ public class AddEditApiaryActivity extends AppCompatActivity {
 
         // Create the presenter
         new AddEditApiaryPresenter(goBeesRepository,
-                (AddEditApiaryContract.View) addEditApiaryFragment, apiaryId);
+                (AddEditApiaryContract.View) addEditApiaryFragment, apiaryId,
+                new LocationService(this));
     }
 
     @Override

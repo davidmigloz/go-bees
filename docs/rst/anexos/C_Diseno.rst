@@ -4,7 +4,7 @@ Especificación de diseño
 Introducción
 ------------
 
-En este anexo se define cómo se han resulto los objetivos y
+En este anexo se define cómo se han resuelto los objetivos y
 especificaciones expuestos con anterioridad. Define los datos que va a
 manejar la aplicación, su arquitectura, el diseño de sus interfaces, sus
 detalles procedimentales, etc.

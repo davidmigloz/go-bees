@@ -38,19 +38,26 @@ class LocationService {
     private static final int UPDATE_INTERVAL = 2000;
     private static final int FASTEST_INTERVAL = 1000;
 
+    private Context context;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
 
     /**
      * Location service constructor.
      *
-     * @param context                  context.
+     * @param context context.
+     */
+    LocationService(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * Set location service listeners.
      * @param connectionListener       ConnectionCallbacks.
      * @param connectionFailedListener OnConnectionFailedListener.
      */
-    LocationService(Context context,
-                    ConnectionCallbacks connectionListener,
-                    OnConnectionFailedListener connectionFailedListener) {
+    void setListeners(ConnectionCallbacks connectionListener,
+                      OnConnectionFailedListener connectionFailedListener) {
         // Create an instance of the Google Play services API client
         this.googleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(connectionListener)
@@ -66,6 +73,15 @@ class LocationService {
         if (googleApiClient != null) {
             googleApiClient.connect();
         }
+    }
+
+    /**
+     * Check if location service is connected.
+     *
+     * @return status.
+     */
+    boolean isConnected() {
+        return googleApiClient != null && googleApiClient.isConnected();
     }
 
     /**

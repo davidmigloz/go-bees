@@ -31,51 +31,122 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <EditText
-            android:id="@+id/add_apiary_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/apiary_name_hint"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/add_apiary_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/get_location_icon"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:hint="@string/apiary_location_hint"
-                android:inputType="none"
-                android:maxLines="1"/>
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/get_location_icon"
+                android:id="@+id/name_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
                 android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
                 android:adjustViewBounds="false"
-                android:contentDescription="@string/gps_location_icon"
-                android:src="@drawable/ic_get_location"
-                android:tint="@color/colorAccent"/>
+                android:contentDescription="@string/name_icon"
+                android:src="@drawable/ic_name"
+                android:tint="@color/colorSecondaryText"/>
 
-        </RelativeLayout>
+            <EditText
+                android:id="@+id/add_apiary_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/apiary_name_hint"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/add_apiary_notes"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:gravity="top|left"
-            android:hint="@string/apiary_notes_hint"
-            android:inputType="textMultiLine|textCapSentences"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/location_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/location_icon"
+                android:src="@drawable/ic_location"
+                android:tint="@color/colorSecondaryText"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/add_apiary_latitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/apiary_location__latitude_hint"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:maxLines="1"/>
+
+                <EditText
+                    android:id="@+id/add_apiary_longitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/apiary_location__longitude_hint"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:maxLines="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/get_location_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:adjustViewBounds="false"
+                    android:contentDescription="@string/gps_location_icon"
+                    android:src="@drawable/ic_get_location"
+                    android:tint="@color/colorAccent"/>
+
+                <TextView
+                    android:id="@+id/location_precision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/notes_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/notes_icon"
+                android:src="@drawable/ic_notes"
+                android:tint="@color/colorSecondaryText"/>
+
+            <EditText
+                android:id="@+id/add_apiary_notes"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                android:layout_weight="1"
+                android:gravity="top|left"
+                android:hint="@string/apiary_notes_hint"
+                android:inputType="textMultiLine|textCapSentences"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

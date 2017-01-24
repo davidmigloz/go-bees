@@ -18,7 +18,6 @@
 
 package com.davidmiguel.gobees.addeditapiary;
 
-import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,10 +28,12 @@ import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiaryCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
+import com.davidmiguel.gobees.utils.LocationUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationListener;
+import com.google.common.base.Strings;
 
 /**
  * Listens to user actions from the UI AddEditApiaryFragment, retrieves the data and updates the
@@ -49,11 +50,10 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
 
     private long apiaryId;
     private Apiary apiary;
-    private Location apiaryLocation;
 
     AddEditApiaryPresenter(GoBeesRepository goBeesRepository,
                            AddEditApiaryContract.View view,
-                           long apiaryId) {
+                           long apiaryId, LocationService locationService) {
         this.goBeesRepository = goBeesRepository;
         this.view = view;
         this.apiaryId = apiaryId;
@@ -61,14 +61,33 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
             apiary = new Apiary();
         }
         view.setPresenter(this);
+        this.locationService = locationService;
+        this.locationService.setListeners(this, this);
     }
 
     @Override
-    public void save(String name, String notes) {
+    public void save(String name, String latitude, String longitude, String notes) {
+        Double lat = null;
+        Double lon = null;
+        // Check name not empty
+        if (Strings.isNullOrEmpty(name)) {
+            view.showEmptyApiaryError();
+            return;
+        }
+        // Check location if it exists
+        else if (hasLocation(latitude, longitude)) {
+            lat = Double.parseDouble(latitude.replace(',', '.'));
+            lon = Double.parseDouble(longitude.replace(',', '.'));
+            if (!LocationUtils.isValidLocation(lat, lon)) {
+                view.showInvalidLocationError();
+                return;
+            }
+        }
+        // Create or update
         if (isNewApiary()) {
-            createApiary(name, notes);
+            createApiary(name, lat, lon, notes);
         } else {
-            updateApiary(name, notes);
+            updateApiary(name, lat, lon, notes);
         }
     }
 
@@ -80,11 +99,10 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     }
 
     @Override
-    public void toogleLocation(Context context) {
+    public void toogleLocation() {
         if (view.checkLocationPermission()) {
-            if (locationService == null) {
+            if (!locationService.isConnected()) {
                 // Connect GPS service
-                locationService = new LocationService(context, this, this);
                 locationService.connect();
                 view.setLocationIcon(true);
                 view.showSearchingGpsMsg();
@@ -97,11 +115,10 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
 
     @Override
     public void stopLocation() {
-        if (locationService != null) {
+        if (locationService.isConnected()) {
             locationService.stopLocationUpdates(this);
             locationService.disconnect();
         }
-        locationService = null;
         view.setLocationIcon(false);
     }
 
@@ -124,7 +141,7 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
             view.setNotes(apiary.getNotes());
             // Set location
             if (apiary.hasLocation()) {
-                apiaryLocation = new Location("");
+                Location apiaryLocation = new Location("");
                 apiaryLocation.setLatitude(apiary.getLocationLat());
                 apiaryLocation.setLongitude(apiary.getLocationLong());
                 view.setLocation(apiaryLocation);
@@ -204,14 +221,17 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
      * Create an save a new apiary.
      *
      * @param name  apiary name.
+     * @param latitude latitude coordinate.
+     * @param longitude longitude coordinate.
      * @param notes apiary notes.
      */
-    private void createApiary(final String name, final String notes) {
+    private void createApiary(final String name, final Double latitude, final Double longitude,
+                              final String notes) {
         // Get next id
         goBeesRepository.getNextApiaryId(new GoBeesDataSource.GetNextApiaryIdCallback() {
             @Override
             public void onNextApiaryIdLoaded(long apiaryId) {
-                saveApiary(apiaryId, name, notes);
+                saveApiary(apiaryId, name, latitude, longitude, notes);
             }
         });
     }
@@ -222,9 +242,9 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
      * @param name  apiary name.
      * @param notes apiary notes.
      */
-    private void updateApiary(String name, String notes) {
+    private void updateApiary(String name, Double latitude, Double longitude, String notes) {
         if (!isNewApiary()) {
-            saveApiary(apiaryId, name, notes);
+            saveApiary(apiaryId, name, latitude, longitude, notes);
         }
     }
 
@@ -235,24 +255,23 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
      * @param name     apiary name.
      * @param notes    apiary notes.
      */
-    private void saveApiary(long apiaryId, String name, String notes) {
+    private void saveApiary(long apiaryId, String name, Double latitude, Double longitude,
+                            String notes) {
         // Set id
         apiary.setId(apiaryId);
         // Set name
         apiary.setName(name);
         // Set location
-        if (apiaryLocation != null) {
-            apiary.setLocationLat(apiaryLocation.getLatitude());
-            apiary.setLocationLong(apiaryLocation.getLongitude());
+        if (latitude != null && longitude != null) {
+            apiary.setLocationLat(latitude);
+            apiary.setLocationLong(longitude);
         }
         // Set notes
         apiary.setNotes(notes);
+        // Reset current weather if exists
+        apiary.setCurrentWeather(null);
         // Save it if it is correct
-        if (apiary.isValidApiary()) {
-            goBeesRepository.saveApiary(apiary, this);
-        } else {
-            view.showEmptyApiaryError();
-        }
+        goBeesRepository.saveApiary(apiary, this);
     }
 
     /**
@@ -261,7 +280,17 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
      * @param location new location.
      */
     private void updateLocation(@NonNull Location location) {
-        apiaryLocation = location;
-        view.setLocation(apiaryLocation);
+        view.setLocation(location);
+    }
+
+    /**
+     * Returns whether a location has been introduced.
+     *
+     * @param latitude  latitude string.
+     * @param longitude longitude string.
+     * @return if it has location.
+     */
+    private boolean hasLocation(String latitude, String longitude) {
+        return !Strings.isNullOrEmpty(latitude) && !Strings.isNullOrEmpty(longitude);
     }
 }

@@ -75,6 +75,11 @@ interface AddEditApiaryContract {
         void showEmptyApiaryError();
 
         /**
+         * Shows message warning that the location is invalid.
+         */
+        void showInvalidLocationError();
+
+        /**
          * Shows message warning that we cannot connect to GPS.
          */
         void showGpsConnectionError();
@@ -103,9 +108,11 @@ interface AddEditApiaryContract {
          * Saves or updates an apiary in the repository.
          *
          * @param name  apiary name.
-         * @param notes apiary notes.
+         * @param latitude latitude coordinate.
+         * @param longitude longitude coordinate.
+         *  @param notes apiary notes.
          */
-        void save(String name, String notes);
+        void save(String name, String latitude, String longitude, String notes);
 
         /**
          * Fill apiary data (the apiary must already exist in the repository).
@@ -115,9 +122,8 @@ interface AddEditApiaryContract {
         /**
          * Start/stop location service.
          *
-         * @param context context.
          */
-        void toogleLocation(Context context);
+        void toogleLocation();
 
         /**
          * Stop location service.

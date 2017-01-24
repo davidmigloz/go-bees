@@ -204,10 +204,6 @@ public class Apiary extends RealmObject {
         }
     }
 
-    public boolean isValidApiary() {
-        return !Strings.isNullOrEmpty(name);
-    }
-
     public boolean hasLocation() {
         return locationLat != null && locationLong != null;
     }

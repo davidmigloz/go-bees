@@ -192,7 +192,7 @@
     <string name="chart_line">Chart line</string>
     <!-- Description of settings icon [CHAR LIMIT=100] -->
     <string name="settings_icon">Settings icon</string>
-    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <!-- Description of get location icon [CHAR LIMIT=25] -->
     <string name="gps_location_icon">Get GPS location</string>
     <!-- Description of location icon [CHAR LIMIT=25] -->
     <string name="location_icon">Location</string>
@@ -200,6 +200,8 @@
     <string name="map_icon">Map</string>
     <!-- Description of number of hives icon[CHAR LIMIT=100] -->
     <string name="num_hives">Number of hives</string>
+    <!-- Description of name icon[CHAR LIMIT=100] -->
+    <string name="name_icon">Name</string>
 
     <!--+++++++++++++++-->
     <!-- drawerLayout  -->
@@ -251,12 +253,18 @@
     <string name="apiary_name_hint">Name</string>
     <!-- Apiary location input [CHAR LIMIT=50] -->
     <string name="apiary_location_hint">Location</string>
-    <!-- Apiary notes input [CHAR LIMIT=50] -->
+    <!-- Apiary location latitude input [CHAR LIMIT=50] -->
+    <string name="apiary_location__latitude_hint">Latitude (e.g. 42.352083)</string>
+    <!-- Apiary location longitude input [CHAR LIMIT=50] -->
+    <string name="apiary_location__longitude_hint">Longitude (e.g. -3.697586)</string>
+    <!-- Apiary notes input [apiary_location__latitude_hint LIMIT=50] -->
     <string name="apiary_notes_hint">Notes…</string>
     <!-- Msg shown when we're searching for gps [CHAR LIMIT=100] -->
     <string name="searching_gps_message">Searching for GPS…</string>
     <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
     <string name="empty_apiary_message">Apiary name cannot be empty!</string>
+    <!-- Error msg shown when location is not valid [CHAR LIMIT=100] -->
+    <string name="invalid_location_message">Invalid location!</string>
     <!-- Error msg shown when we cannot connect to GPS [CHAR LIMIT=100] -->
     <string name="gps_error_message">Unable to connect to GPS!</string>
     <!-- Error msg shown when it's not possible to save the apiary [CHAR LIMIT=100] -->

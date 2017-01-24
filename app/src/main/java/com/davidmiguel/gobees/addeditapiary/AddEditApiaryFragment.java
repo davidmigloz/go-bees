@@ -32,12 +32,15 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.AndroidUtils;
+
+import java.util.Locale;
 
 import rebus.permissionutils.AskagainCallback;
 import rebus.permissionutils.PermissionEnum;
@@ -56,10 +59,12 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     private AddEditApiaryContract.Presenter presenter;
 
-    private TextView nameTextView;
-    private TextView locationTextView;
+    private EditText nameEditText;
+    private EditText latitudeEditText;
+    private EditText longitudeEditText;
     private ImageView getLocationIcon;
-    private TextView notesTextView;
+    private TextView locationPrecisionTextView;
+    private EditText notesEditText;
 
     public AddEditApiaryFragment() {
         // Requires empty public constructor
@@ -74,10 +79,12 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.addeditapiary_frag, container, false);
-        nameTextView = (TextView) root.findViewById(R.id.add_apiary_name);
-        locationTextView = (TextView) root.findViewById(R.id.add_apiary_location);
+        nameEditText = (EditText) root.findViewById(R.id.add_apiary_name);
+        latitudeEditText = (EditText) root.findViewById(R.id.add_apiary_latitude);
+        longitudeEditText = (EditText) root.findViewById(R.id.add_apiary_longitude);
         getLocationIcon = (ImageView) root.findViewById(R.id.get_location_icon);
-        notesTextView = (TextView) root.findViewById(R.id.add_apiary_notes);
+        locationPrecisionTextView = (TextView) root.findViewById(R.id.location_precision);
+        notesEditText = (EditText) root.findViewById(R.id.add_apiary_notes);
 
         setHasOptionsMenu(true);
         setRetainInstance(true);
@@ -92,7 +99,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         getLocationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.toogleLocation(getContext());
+                presenter.toogleLocation();
             }
         });
 
@@ -102,8 +109,10 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.save(nameTextView.getText().toString(),
-                        notesTextView.getText().toString());
+                presenter.save(nameEditText.getText().toString(),
+                        latitudeEditText.getText().toString(),
+                        longitudeEditText.getText().toString(),
+                        notesEditText.getText().toString());
             }
         });
     }
@@ -122,24 +131,20 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void setName(String name) {
-        nameTextView.setText(name);
+        nameEditText.setText(name);
     }
 
     @Override
     public void setLocation(Location location) {
-        String sb = "("
-                + String.valueOf(location.getLatitude())
-                + ", "
-                + String.valueOf(location.getLongitude())
-                + ") ±"
-                + Math.round(location.getAccuracy())
-                + "m";
-        locationTextView.setText(sb);
+        latitudeEditText.setText(String.valueOf(location.getLatitude()));
+        longitudeEditText.setText(String.valueOf(location.getLongitude()));
+        locationPrecisionTextView.setText(String.format(
+                Locale.getDefault(), "±%dm", Math.round(location.getAccuracy())));
     }
 
     @Override
     public void setNotes(String notes) {
-        notesTextView.setText(notes);
+        notesEditText.setText(notes);
     }
 
     @Override
@@ -163,12 +168,17 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void showEmptyApiaryError() {
-        showMessage(nameTextView, getString(R.string.empty_apiary_message));
+        showMessage(nameEditText, getString(R.string.empty_apiary_message));
+    }
+
+    @Override
+    public void showInvalidLocationError() {
+        showMessage(nameEditText, getString(R.string.invalid_location_message));
     }
 
     @Override
     public void showGpsConnectionError() {
-        showMessage(nameTextView, getString(R.string.gps_error_message));
+        showMessage(nameEditText, getString(R.string.gps_error_message));
     }
 
     @Override
@@ -219,7 +229,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
                     public void result(boolean allPermissionsGranted) {
                         if (allPermissionsGranted) {
                             // Launch the feature
-                            presenter.toogleLocation(getContext());
+                            presenter.toogleLocation();
                         } else {
                             // Warn the user that it's not possible to use the feature
                             Toast.makeText(getActivity(),
