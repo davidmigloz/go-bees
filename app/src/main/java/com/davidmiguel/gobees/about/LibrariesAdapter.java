@@ -36,12 +36,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Libraries list adapter.
  */
-class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.ViewHolder> {
+class LibrariesAdapter extends RecyclerView.Adapter<LibrariesAdapter.ViewHolder> {
 
     private List<Library> libraries;
     private LibItemListener listener;
 
-    LibsAdapter(List<Library> libraries, LibItemListener listener) {
+    LibrariesAdapter(List<Library> libraries, LibItemListener listener) {
         this.libraries = checkNotNull(libraries);
         this.listener = listener;
     }
@@ -89,6 +89,7 @@ class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.ViewHolder> {
             license.setOnClickListener(this);
         }
 
+        @Override
         public void bind(@NonNull Library library) {
             // Set library name
             libraryTv.setText(library.getName());

@@ -46,10 +46,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Display about GoBees info and open source licenses.
  */
 public class AboutFragment extends Fragment
-        implements AboutContract.View, LibsAdapter.LibItemListener {
+        implements AboutContract.View, LibrariesAdapter.LibItemListener {
 
     private AboutContract.Presenter presenter;
-    private LibsAdapter libsAdapter;
+    private LibrariesAdapter librariesAdapter;
 
     private TextView versionTv;
 
@@ -96,7 +96,7 @@ public class AboutFragment extends Fragment
         // Set libs list
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(libsAdapter);
+        recyclerView.setAdapter(librariesAdapter);
 
 
         return root;
@@ -105,7 +105,7 @@ public class AboutFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        libsAdapter = new LibsAdapter(new ArrayList<Library>(0), this);
+        librariesAdapter = new LibrariesAdapter(new ArrayList<Library>(0), this);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class AboutFragment extends Fragment
 
     @Override
     public void showLibraries(List<Library> libraries) {
-        libsAdapter.replaceData(libraries);
+        librariesAdapter.replaceData(libraries);
     }
 
     /**
@@ -163,6 +163,7 @@ public class AboutFragment extends Fragment
         alertDialog.setMessage(AndroidUtils.fromHtml(body));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.close_btn),
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }

@@ -48,6 +48,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
 
     private GoBeesLocalDataSource() {
+        // Singleton
     }
 
     /**
@@ -546,7 +547,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             public void execute(Realm realm) {
                 // Get next id
                 Number n = realm.where(MeteoRecord.class).max("id");
-                long nextId = (n != null ? n.longValue() + 1 : 0);
+                long nextId = n != null ? n.longValue() + 1 : 0;
                 // Save meteo records
                 for (MeteoRecord meteoRecord : meteoRecords) {
                     meteoRecord.setId(nextId++);

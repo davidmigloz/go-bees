@@ -34,6 +34,9 @@ public final class LocationUtils {
     private static final Pattern LONGITUDE_PATTERN = Pattern.compile(
             "^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$");
 
+    private LocationUtils() {
+    }
+
     /**
      * Checks if a location is valid.
      * The latitude must be a number between -90 and 90 and the longitude between -180 and 180.

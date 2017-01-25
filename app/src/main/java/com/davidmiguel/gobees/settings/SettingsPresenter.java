@@ -45,7 +45,7 @@ class SettingsPresenter implements SettingsContract.Presenter,
 
     @Override
     public void start() {
-
+        // Nothing to do
     }
 
     @Override
@@ -123,7 +123,7 @@ class SettingsPresenter implements SettingsContract.Presenter,
 
             @Override
             public void onFailure() {
-
+                // Nothing to do
             }
         });
     }

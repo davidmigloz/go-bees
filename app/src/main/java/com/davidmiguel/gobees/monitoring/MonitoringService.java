@@ -221,6 +221,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         return binder;
     }
 
+    @Override
     public boolean isOpenCvLoaded() {
         return openCvLoaded;
     }
@@ -317,14 +318,11 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         BaseLoaderCallback loaderCallback = new BaseLoaderCallback(this) {
             @Override
             public void onManagerConnected(final int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS:
-                        openCvLoaded = true;
-                        startMonitoring();
-                        break;
-                    default:
-                        super.onManagerConnected(status);
-                        break;
+                if (status == LoaderCallbackInterface.SUCCESS) {
+                    openCvLoaded = true;
+                    startMonitoring();
+                } else {
+                    super.onManagerConnected(status);
                 }
             }
         };

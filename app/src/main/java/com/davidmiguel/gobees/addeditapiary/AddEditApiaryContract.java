@@ -18,7 +18,6 @@
 
 package com.davidmiguel.gobees.addeditapiary;
 
-import android.content.Context;
 import android.location.Location;
 
 import com.davidmiguel.gobees.utils.BasePresenter;

@@ -46,7 +46,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Hives list adapter.
  */
-class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
+class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.HivesViewHolder> {
 
     private MenuInflater menuInflater;
     private List<Hive> hives;
@@ -60,14 +60,14 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HivesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.apiary_hives_list_item, parent, false);
-        return new HivesAdapter.ViewHolder(view);
+        return new HivesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(HivesViewHolder holder, int position) {
         holder.bind(hives.get(position));
     }
 
@@ -91,7 +91,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
         void onOpenMenuClick(View view);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    class HivesViewHolder extends RecyclerView.ViewHolder
             implements BaseViewHolder<Hive>, View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener,
             ItemTouchHelperViewHolder {
@@ -104,7 +104,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
 
         private Drawable background;
 
-        ViewHolder(View itemView) {
+        HivesViewHolder(View itemView) {
             super(itemView);
 
             // Get views
@@ -128,6 +128,7 @@ class HivesAdapter extends RecyclerView.Adapter<HivesAdapter.ViewHolder> {
             background = card.getBackground();
         }
 
+        @Override
         public void bind(@NonNull Hive hive) {
             hiveName.setText(hive.getName());
             lastRevision.setText(

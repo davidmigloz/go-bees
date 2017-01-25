@@ -72,7 +72,6 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
         }
         // Get apiaries
         goBeesRepository.getApiaries(new GoBeesDataSource.GetApiariesCallback() {
-
             @Override
             public void onApiariesLoaded(List<Apiary> apiaries) {
                 // The view may not be able to handle UI updates anymore
@@ -83,7 +82,6 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
                 view.setLoadingIndicator(false);
                 // Process apiaries
                 if (apiaries.isEmpty()) {
-                    // Show a message indicating there are no apiaries
                     view.showNoApiaries();
                 } else {
                     // Show the list of apiaries
@@ -173,7 +171,6 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
                 } else {
                     apiariesToUpdate.add(apiary);
                 }
-
             }
         }
         // Update weather if needed

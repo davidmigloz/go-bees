@@ -46,7 +46,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Apiaries list adapter.
  */
-class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
+class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ApiaryViewHolder> {
 
     private final Context context;
     private MenuInflater menuInflater;
@@ -62,14 +62,14 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ApiaryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.apiaries_list_item, parent, false);
-        return new ViewHolder(view);
+        return new ApiaryViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ApiaryViewHolder holder, int position) {
         holder.bind(apiaries.get(position));
     }
 
@@ -93,7 +93,7 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
         void onOpenMenuClick(View view);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    class ApiaryViewHolder extends RecyclerView.ViewHolder
             implements BaseViewHolder<Apiary>, View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener,
             ItemTouchHelperViewHolder {
@@ -108,7 +108,7 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
 
         private Drawable background;
 
-        ViewHolder(View itemView) {
+        ApiaryViewHolder(View itemView) {
             super(itemView);
 
             // Get views
@@ -134,6 +134,7 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ViewHolder> {
             background = card.getBackground();
         }
 
+        @Override
         public void bind(@NonNull Apiary apiary) {
             // Set apiary name
             apiaryName.setText(apiary.getName());

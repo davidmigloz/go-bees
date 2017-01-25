@@ -98,6 +98,7 @@ public class HelpFragment extends Fragment implements HelpContract.View {
     private class MyBrowser extends WebViewClient {
 
         @SuppressWarnings("deprecation")
+        @Deprecated
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);

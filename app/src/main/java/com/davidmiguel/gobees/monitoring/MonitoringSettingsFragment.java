@@ -105,6 +105,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
         fadeOut.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                // Nothing to do
             }
 
             @Override
@@ -114,6 +115,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
 
             @Override
             public void onAnimationRepeat(Animation animation) {
+                // Nothing to do
             }
         });
         settingsLayout.startAnimation(fadeOut);
@@ -211,7 +213,7 @@ public class MonitoringSettingsFragment extends PreferenceFragment
             presenter.updateAlgoMaxArea(((Integer) value).doubleValue());
         } else if (preference.getKey().equals(getString(R.string.pref_zoom_key))) {
             // Update zoom
-            presenter.updateAlgoZoom((Integer.parseInt((String) value)));
+            presenter.updateAlgoZoom(Integer.parseInt((String) value));
         }
     }
 

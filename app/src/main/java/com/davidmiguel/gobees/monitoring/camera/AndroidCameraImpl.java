@@ -195,18 +195,18 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     private Camera getCameraInstance(int facing, int maxFrameWidth,
                                      int maxFrameHeight, int zoomRatio) {
         // Get desired camera
-        Camera camera = getCamera(facing);
-        if (camera == null) {
+        Camera cam = getCamera(facing);
+        if (cam == null) {
             Log.e(TAG, "Could not find any camera matching facing: " + facing);
             return null;
         }
         // Set frame size
-        setFrameSize(camera, maxFrameWidth, maxFrameHeight);
+        setFrameSize(cam, maxFrameWidth, maxFrameHeight);
         // Set zoom ratio
-        setZoomRatio(camera, zoomRatio);
+        setZoomRatio(cam, zoomRatio);
         // Set autofocus
-        setAutofocus(camera);
-        return camera;
+        setAutofocus(cam);
+        return cam;
     }
 
     /**
@@ -216,7 +216,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
      * @return Camera (or null if it does not exist).
      */
     private Camera getCamera(int facing) {
-        Camera camera = null;
+        Camera cam = null;
         CameraInfo cameraInfo = new CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
         for (int camIndex = 0; camIndex < cameraCount; camIndex++) {
@@ -224,14 +224,14 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
             if (cameraInfo.facing == facing) {
                 try {
                     // Open camera
-                    camera = Camera.open(camIndex);
+                    cam = Camera.open(camIndex);
                     break;
                 } catch (RuntimeException e) {
                     Log.e(TAG, "AndroidCamera is not available (in use or does not exist).", e);
                 }
             }
         }
-        return camera;
+        return cam;
     }
 
     /**

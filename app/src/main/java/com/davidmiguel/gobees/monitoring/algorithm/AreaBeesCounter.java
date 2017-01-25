@@ -34,7 +34,7 @@ import org.opencv.core.Mat;
 public class AreaBeesCounter implements BeesCounter {
 
     private static final String TAG = "ContourBeesCounter";
-    private static AreaBeesCounter INSTANCE;
+    private static AreaBeesCounter instance;
 
     private Blur blur;
     private BackgroundSubtractor bs;
@@ -55,10 +55,10 @@ public class AreaBeesCounter implements BeesCounter {
     }
 
     public static AreaBeesCounter getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new AreaBeesCounter();
+        if (instance == null) {
+            instance = new AreaBeesCounter();
         }
-        return INSTANCE;
+        return instance;
     }
 
     @Override

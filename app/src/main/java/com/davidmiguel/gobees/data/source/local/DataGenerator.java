@@ -273,14 +273,16 @@ public class DataGenerator implements GoBeesDataSource.SaveRecordingCallback {
 
     @Override
     public void onSuccess() {
+        // Nothing to do
     }
 
     @Override
     public void onFailure() {
+        // Nothing to do
     }
 
     @Override
     public void onRecordingTooShort() {
-
+        // Nothing to do
     }
 }

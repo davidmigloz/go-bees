@@ -89,8 +89,12 @@ public class Record extends RealmObject implements Comparable<Record> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Record record = (Record) obj;
         return id == record.id;
     }
