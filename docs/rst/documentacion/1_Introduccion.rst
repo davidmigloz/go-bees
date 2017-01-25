@@ -24,7 +24,7 @@ factores, tanto externos como internos a la colmena. Entre ellos se
 encuentran la propia población de la colmena, las condiciones
 meteorológicas, la presencia de enfermedades, parásitos o depredadores,
 la exposición a tóxicos, la presencia de fuentes de néctar, etc. A pesar 
-de los numerosos factores que influyen en actividad de vuelo, su 
+de los numerosos factores que influyen en la actividad de vuelo, su 
 conocimiento es de gran ayuda para la toma de decisiones por parte del 
 apicultor. Ya que este posee información sobre la mayoría de los 
 factores necesarios para su interpretación.
@@ -45,7 +45,7 @@ tienen el inconveniente de que es necesario realizar modificaciones en
 la colmena, mientras que en los basados en códigos de barras o
 microchips es necesario manipular las abejas directamente. Estos motivos
 los convierten en métodos poco prácticos fuera del campo investigador.
-Por el contrario, la visión artificial aporta un gran potencial. Ya que
+Por el contrario, la visión artificial aporta un gran potencial, ya que
 evita tener que realizar ningún tipo de modificación ni en el entorno,
 ni en las abejas. Además, abre la puerta a la monitorización de nuevos
 parámetros como la detección de enjambrazón (división de la colmena y salida de un enjambre) o la detección de amenazas (avispones, abejaruco, etc.).
@@ -56,7 +56,7 @@ propone un método de monitorización de la actividad de vuelo de una
 colmena mediante la cámara de un *smartphone* con Android.
 
 El método propuesto podría revolucionar el campo de la monitorización de
-colmenas, ya que lo hace accesible al gran público. Ya no es necesario
+la actividad de vuelo de colmenas, ya que lo hace accesible al gran público. Ya no es necesario
 contar con costoso hardware, difícil de instalar. Solamente es necesario
 disponer de un smartphone con cámara y la aplicación GoBees. Además,
 esta facilita la interpretación de los datos, representándolos
@@ -107,7 +107,20 @@ Junto a la memoria se proporcionan los siguientes anexos:
 Materiales adjuntos
 -------------------
 
-TODO
+Los materiales que se adjuntan con la memoria son:
+
+- Aplicación para Android GoBees.
+- Aplicación Java para el desarrollo del algoritmo.
+- Aplicación Java para el etiquetado de fotogramas.
+- JavaDoc.
+- *Dataset* de vídeos de prueba.
+
+Además, los siguientes recursos están accesibles a través de internet:
+
+- Página web del proyecto: http://gobees.io/
+- GoBees en Google Play: https://play.google.com/store/apps/details?id=com.davidmiguel.gobees
+- Repositorio del proyecto: https://github.com/davidmigloz/go-bees
+- Repositorio de las herramientas desarrolladas para el proyecto: https://github.com/davidmigloz/go-bees-prototypes
 
 .. References
 

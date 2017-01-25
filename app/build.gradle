@@ -89,7 +89,7 @@ android {
 
     // Lint checks
     lintOptions {
-        disable 'SetJavaScriptEnabled'
+        disable 'SetJavaScriptEnabled','MissingTranslation'
     }
 }
 
