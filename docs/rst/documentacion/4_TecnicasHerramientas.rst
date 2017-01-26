@@ -277,10 +277,12 @@ proyectos *open source*.
 Calidad del código
 ~~~~~~~~~~~~~~~~~~
 
--  Herramientas consideradas: `Codeclimate <https://codeclimate.com/>`__
+-  Herramientas consideradas: `Codeclimate <https://codeclimate.com/>`__,
+   `SonarQube <https://sonarqube.com/>`__ 
    y `Codacy <https://www.codacy.com/>`__.
 
--  Herramienta elegida: `Codeclimate <https://codeclimate.com/>`__.
+-  Herramientas elegidas: `Codeclimate <https://codeclimate.com/>`__ y
+   `SonarQube <https://sonarqube.com/>`__.
 
 Codeclimate es una herramienta que realiza revisiones de código
 automáticamente. Es gratuita para proyectos *open source*. En nuestro
@@ -289,6 +291,10 @@ proyecto hemos activado los siguientes motores de chequeo:
 `fixme <https://docs.codeclimate.com/docs/fixme>`__,
 `markdownlint <https://docs.codeclimate.com/docs/markdownlint>`__ y
 `pmd <https://docs.codeclimate.com/docs/pmd>`__.
+
+SonarQube es una plataforma de código abierto para la revisión continua 
+de la calidad de código. Permite detectar código duplicado, violaciones 
+de estándares, cobertura de tests unitarios, *bugs* potenciales, etc. 
 
 Revisión de dependencias
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -313,11 +319,13 @@ Documentación
 
 Read the Docs es un servicio de documentación continua que permite crear
 y hospedar una página web generada a partir de los distintos ficheros
-Markdown de la documentación. Cada vez que se realiza un *commit* en el
+Markdown o  reStructuredText de la documentación. 
+Cada vez que se realiza un *commit* en el
 repositorio se actualiza la versión hospedada. La página web posee un
 buscador, da soporte para diferentes versiones del proyecto y soporta
-internacionalización. El servicio es totalmente gratuito, sostenido por
-donaciones y subscripciones *Gold*.
+internacionalización. Además, permite exportar la documentación en 
+varios formatos (pdf, epub, html, etc.). El servicio es totalmente 
+gratuito, sostenido por donaciones y subscripciones *Gold*.
 
 Sistemas de construcción automática del software
 ------------------------------------------------
@@ -334,7 +342,7 @@ dependencias.
 Gradle
 ~~~~~~
 
-`Gradle <https://gradle.org/>`__ es una herramienta similar a Maven pero
+`Gradle <https://gradle.org/>`__ es una herramienta similar a Maven, pero
 basada en el lenguaje de programación orientado a objetos Groovy. El
 sistema de construcción de Android Studio está basado en Gradle y es
 actualmente el único soportado de forma oficial para Android.
@@ -383,7 +391,8 @@ rápidamente.
 JavaFX
 ~~~~~~
 
-JavaFX es una librería para la creación de interfaces gráficas en Java.
+`JavaFX <http://docs.oracle.com/javase/8/javase-clienttechnologies.htm>`__ 
+es una librería para la creación de interfaces gráficas en Java.
 
 JUnit
 ~~~~~
@@ -394,7 +403,8 @@ utilizado para realizar pruebas unitarias.
 Material Design
 ~~~~~~~~~~~~~~~
 
-Material Design es una guía de estilos enfocada a la plataforma Android,
+`Material Design <https://material.io/guidelines/>`__ es una guía 
+de estilos enfocada a la plataforma Android,
 pero aplicable a cualquier otra plataforma. Fue presentada en el Google
 I/O 2014 y se adoptó en Android a partir de la versión 5.0 (Lollipop).
 Se basa en objetos materiales, piezas colocadas en un espacio (lugar) y
@@ -434,13 +444,21 @@ desarrollo en GPU tanto en escritorio como en móvil, aunque en esta
 OpenWeatherMaps
 ~~~~~~~~~~~~~~~
 
-OpenWeatherMap es un servicio online que proporciona información
+`OpenWeatherMap <http://openweathermap.org/>`__ es un 
+servicio online que proporciona información
 meteorológica. Está inspirado en OpenStreetMap y su filosofía de hacer
 accesible la información a la gente de forma gratuita. Utiliza distintas
 fuentes de datos desde estaciones meteorológicas oficiales, de
 aeropuertos, radares e incentiva a los propietarios de estaciones
 meteorológicas a conectarlas a su red. Proporciona una API que permite
 realizar hasta 60 llamadas por segundo de forma gratuita.
+
+PowerMock
+~~~~~~~~~
+
+`PowerMock <https://github.com/powermock/powermock>`__ es 
+una librería de *testing* que permite la creación de *mocks*
+de métodos estáticos, constructores, clases finales o métodos privados.
 
 Realm
 ~~~~~
@@ -450,3 +468,39 @@ de datos orientada a objetos enfocada a dispositivos móviles. Se definen
 como la alternativa a SQLite y presumen de ser más rápidos que cualquier
 ORM e incluso que SQLite puro. Posee una API muy intuitiva que facilita
 en gran medida el acceso a datos.
+
+Página web
+----------
+
+GitHub Pages 
+~~~~~~~~~~~~
+
+`GitHub Pages <https://pages.github.com/>`__ es un servicio de hosting estático 
+que permite hospedar la página del proyecto en su propio repositorio de GitHub.
+Permite utilizar Jekyll, un generador de sitios estáticos. No soporta tecnologías
+del lado de servidor como PHP, Ruby, Python, etc.
+
+Bootstrap 
+~~~~~~~~~
+
+`Bootstrap <http://getbootstrap.com/>`__ es un *framework* para desarrollo 
+*front-end*. Contiene una serie de componentes ya implementados que facilitan y agilizan
+diseño. Está desarrollado siguiendo la filosofía *mobile first*.
+
+Otras herramientas
+------------------
+
+Mendeley 
+~~~~~~~~
+
+`Mendeley <https://www.mendeley.com/>`__ es un gestor de referencias bibliográficas. Permite 
+añadir referencias de varias formas, visualizar los documentos, etiquetarlos, compartirlos, etc.
+Posteriormente se puede exportar todo el catálogo a un fichero BibTex para ser utilizadas desde LaTeX.
+
+Creately 
+~~~~~~~~
+
+`Creately <https://creately.com/>`__ es una aplicación web que permite crear todo tipo de diagramas
+altamente personalizables. Aunque posee una versión gratuita limitada, se optó por pagar un mes de 
+subscripción al valorar que realmente iba a ser utilidad.
+

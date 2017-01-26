@@ -62,7 +62,7 @@ utilizando para ello una convolución con una función Gaussiana
 más peso a los vecinos cercanos, siendo estos más influyentes en el
 resultado.
 
-El kernel utilizado en la convolución es una muestra discreta de la
+El kernel utilizado en la convolución es una muestra discreta de una
 función Gaussiana. En nuestro caso utilizamos un kernel 3x3 que se
 corresponde con: \citep{book:mastering_opencv}
 
@@ -104,11 +104,13 @@ nuestro interés (falsos positivos).
 
 Con OpenCV para Android podemos implementar varios algoritmos básicos de
 extracción del fondo y además, nos proporciona la implementación de dos
-algoritmos más sofisticados: \texttt{BackgroundSubtractorMOG} y
-\texttt{BackgroundSubtractorKNN}. Tras realizar un estudio de todos
+algoritmos más sofisticados: \texttt{BackgroundSubtractorMOG} y \\
+\texttt{BackgroundSubtractorKNN}. 
+
+Tras realizar un estudio de todos
 ellos, nos decantamos finalmente por \texttt{BackgroundSubtractorMOG2}.
 A continuación, explicamos el funcionamiento de todos los algoritmos que
-se probaron, así como los resultados que nos proporcionaron.
+se probaron, así como los resultados que proporcionaron.
 
 \subsection{Substracción con imagen de referencia}\label{substraccion-con-imagen-de-referencia}
 
@@ -162,7 +164,7 @@ siguiente fórmula:
 
 Donde $p_t$ es el nuevo valor del píxel, $u_{t-1}$ es la media del
 fondo en el instante $t-1$, $u_t$ es la nueva media del fondo y
-$\alpha$ es el ratio de aprendizaje (cómo de rápido olvida los frames
+$\alpha$ es el ratio de aprendizaje (cómo de rápido olvida los \emph{frames}
 anteriores) \citep{book:opencv_java}.
 
 OpenCV provee la función \texttt{Imgproc.accumulateWeighted()} que
@@ -206,7 +208,7 @@ descartó el uso de este algoritmo.
 \subsection{BackgroundSubtractorMOG2}\label{backgroundsubtractormog2}
 
 \texttt{BackgroundSubtractorMOG2} es una mejora del algoritmo
-\texttt{BackgroundSubtractorMOG}. En la versión original de OpenCV se
+\\ \texttt{BackgroundSubtractorMOG}. En la versión original de OpenCV se
 encuentran implementados ambos, sin embargo, en los \emph{wrappers} para
 Android solo disponemos de la revisión.
 
@@ -329,7 +331,7 @@ De todos ellos, los parámetros más importantes a ajustar son
 La parametrización correcta de este algoritmo es clave para su buen
 funcionamiento. Por ello, durante las pruebas se integró en nuestra
 aplicación de desarrollo, permitiendo variar todos estos parámetros en
-tiempo real. De esta manera. se pudo elegir la mejor configuración para
+tiempo real. De esta manera, se pudo elegir la mejor configuración para
 nuestro problema concreto.
 
 En la siguiente imagen se puede ver una captura de nuestra plataforma de
@@ -339,12 +341,21 @@ desarrollo en la pestaña correspondiente a esta fase:
 
 Una vez parametrizado correctamente, vimos como este algoritmo era el
 que mejores resultados nos proporcionaba. Con un tiempo de ejecución en
-nuestro equipo de pruebas de entorno a 4ms/frame, mucho menor que el
+nuestro equipo de pruebas de entorno a 4 ms/frame, mucho menor que el
 proporcionado por \texttt{BackgroundSubtractorKNN}, de entorno a
-25ms/frame. El algoritmo detectaba correctamente las abejas, era
+25 ms/frame. El algoritmo detectaba correctamente las abejas, era
 resistente al ruido, y además, era capaz de diferenciar una abeja de su
 sombra. Por todos estos motivos, se seleccionó para la fase de
 substracción del fondo.
+
+En la siguiente imagen se puede ver el resultado de aplicar
+\\ \texttt{BackgroundSubtractorMOG2} a la salida de la fase anterior:
+
+\imagen{s2}{Resultado de la fase de substracción del fondo.}
+
+Se puede apreciar como ha descartado correctamente las sombras en
+movimiento de los árboles y se ha quedado únicamente con los objetos en
+movimiento.
 
 \subsection{Otros algoritmos}\label{otros-algoritmos}
 
@@ -363,15 +374,6 @@ que no están disponibles a través de los \emph{wrappers} de Android.
   elementos del fondo y los del primer plano atendiendo a sus vectores
   de características \citep{art:li_foreground_2003}.
 \end{itemize}
-
-En la siguiente imagen se puede ver el resultado de aplicar
-\texttt{BackgroundSubtractorMOG2} a la salida de la fase anterior:
-
-\imagen{s2}{Resultado de la fase de substracción del fondo.}
-
-Se puede apreciar como ha descartado correctamente las sombras en
-movimiento de los árboles y se ha quedado únicamente con los objetos en
-movimiento.
 
 \section{Posprocesado}\label{posprocesado}
 
