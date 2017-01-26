@@ -20,7 +20,7 @@ autores fueron Jason Campbell, Lily Mummert y Rahul Sukthankar del
 artificial para monitorizar las entradas y salidas de abejas en una
 colmena, consiguiendo diferenciar las que entran de las que salen. Se
 describen los desafíos técnicos que supuso y la solución a la que
-llegaron finalmente.
+llegaron finalmente [art:campbell2008]_.
 
 Detecting and tracking honeybees in 3D at the beehive entrance using stereo vision
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,15 +30,15 @@ un artículo en *EURASIP Journal on Image and Video Processing,* donde
 proponían un método para la monitorización de abejas a la entrada de una
 colmena basado en un sistema de tiempo real con visión estereoscópica.
 Gracias al cual podían obtener una representación en tres dimensiones de
-las trayectorias de las abejas.
+las trayectorias de las abejas [art:chiron2013]_.
 
 Image Processing for Honey Bee hive Health Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 El último artículo publicado data del año 2015 por Rahman Tashakkori y
 Ahmad Ghadiri de la *Appalachian State University*. En él, mejoran el
-método de detección propuesto por Campbell et al. y lo utilizan para
-estimar el número de abejas que habrá en un instante de tiempo dado.
+método de detección propuesto en [art:campbell2008]_ y lo utilizan para
+estimar el número de abejas que habrá en un instante de tiempo dado [art:tashakkori2015]_.
 
 Comparación
 ~~~~~~~~~~~
@@ -66,7 +66,7 @@ Comparación
 |                          | 5 |    | invariant         |              |               |
 |                          |   |    | method.*          |              |               |
 +--------------------------+---+----+-------------------+--------------+---------------+
-| GoBees                   | 2 |    | *Mixture of       | *Area-based  | No            |
+| GoBees                   | 2 | 0  | *Mixture of       | *Area-based  | No            |
 |                          | 0 |    | Gaussians method  | method.*     |               |
 |                          | 1 |    | (BackgroundSubtra |              |               |
 |                          | 7 |    | ctorMOG2).*       |              |               |
@@ -166,3 +166,12 @@ Las principales debilidades son:
    tarea. Esto nos ha limitado en las técnicas de visión artificial que
    hemos podido aplicar, por no disponer de imágenes con la suficiente
    nitidez.
+   
+.. References
+
+.. [art:campbell2008]
+   http://homepages.inf.ed.ac.uk/rbf/VAIB08PAPERS/vaib9_mummert.pdf
+.. [art:chiron2013]
+   http://jivp.eurasipjournals.springeropen.com/articles/10.1186/1687-5281-2013-59
+.. [art:tashakkori2015]
+   http://ieeexplore.ieee.org/document/7133029/?arnumber=7133029

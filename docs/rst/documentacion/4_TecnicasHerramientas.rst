@@ -325,7 +325,7 @@ Sistemas de construcción automática del software
 Maven
 ~~~~~
 
-`Maven <https://maven.apache.org/>`__ es una herramienta para para
+`Maven <https://maven.apache.org/>`__ es una herramienta para 
 automatizar el proceso de construcción del *software* (compilación,
 testeo, empaquetado, etc.) enfocada a proyectos Java. Básicamente
 describe cómo se tiene que construir el *software* y cuáles son sus
@@ -347,7 +347,7 @@ Librerías
 
 La `librería de soporte de
 Android <https://developer.android.com/topic/libraries/support-library/>`__
-facilita algunas características que no se incluyen en el framework
+facilita algunas características que no se incluyen en el *framework*
 oficial. Proporciona compatibilidad a versiones antiguas con las últimas
 características, incluye elementos para la interfaz adicionales y
 utilidades extra.
@@ -380,10 +380,10 @@ nuestro caso se ha hecho uso de su servicio de localización, que utiliza
 varias fuentes de datos (GPS, red y wifi) para ubicar el dispositivo
 rápidamente.
 
-JavaFx
+JavaFX
 ~~~~~~
 
-JavaFx es una librería para la creación de interfaces gráficas en Java.
+JavaFX es una librería para la creación de interfaces gráficas en Java.
 
 JUnit
 ~~~~~

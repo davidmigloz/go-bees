@@ -64,7 +64,7 @@ nube que sincronice los datos de varios dispositivos y permita el acceso
 a estos mediante una aplicación web. Se planea monetizar el proyecto
 mediante la subscripción a esta plataforma.
 
-Otro tema pendiente es mudar la totalidad de la aplicación a la
+Otro tema pendiente es migrar la totalidad de la aplicación a la
 plataforma iOS.
 
 En el futuro, se podrían explotar los datos almacenados en la plataforma

@@ -14,7 +14,7 @@ poder aunar mi formación técnica y mis aficiones.
 
 Mi padre me transmitió el interés por la apicultura desde bien pequeño
 y, posteriormente, llegué a trabajar en una empresa de apicultura
-profesional. Esto me hizo ser consciente de los problemas con los lidia
+profesional. Esto me hizo ser consciente de los problemas con los que lidia
 día a día un apicultor. Por otro lado, los conocimientos adquiridos
 durante mis estudios de Ingeniería Informática, me posibilitaron idear
 soluciones tecnológicas a alguno de estos problemas.
@@ -45,7 +45,7 @@ diarias, etc.), sí que se aplicó una filosofía ágil en líneas generales:
 -  La duración media de los *sprints* fue de una semana.
 
 -  Al finalizar cada *sprint* se entregaba una parte del producto
-   operativa (incremento).
+   operativo (incremento).
 
 -  Se realizaban reuniones de revisión al finalizar cada *sprint* y al
    mismo tiempo de planificación del nuevo *sprint*.
@@ -154,7 +154,7 @@ metodología basada en el ensayo y error, debido a los elevados tiempos
 de compilación y a la poca flexibilidad de la plataforma.
 
 Finalmente se decidió desarrollar el algoritmo directamente en Java, ya
-que nos proporcionaba una mayor flexibilidad y, además, mudar el código
+que nos proporcionaba una mayor flexibilidad y, además, migrar el código
 a Android posteriormente sería una tarea bastante trivial.
 
 Para facilitar el desarrollo del algoritmo y del testeo de las
@@ -195,9 +195,9 @@ Desarrollo de la *app*
 El desarrollo de la aplicación Android se realizó de forma incremental,
 publicando una *release* al finalizar cada *sprint*.
 
-La primera tarea consistió en mudar el algoritmo de visión artificial a
+La primera tarea consistió en migrar el algoritmo de visión artificial a
 la plataforma Android. A primera vista, no parecía una tarea complicada.
-Sin embargo, nos encontramos con varios bugs que, unidos a la mala
+Sin embargo, nos encontramos con varios *bugs* que, unidos a la mala
 documentación de OpenCV para Android, dificultó considerablemente la
 labor.
 
@@ -222,7 +222,7 @@ publicar el caso en
 un usuario sugirió que podía estar relacionado con el *Instant Run* de
 Android Studio. Y así fue; desactivando esta característica, la
 aplicación no fallaba. Se describió el caso en el gestor de incidencias
-de Android y, a día de hoy (enero 2017), el bug se encuentra resuelto y
+de Android y, a día de hoy (enero 2017), el *bug* se encuentra resuelto y
 está a la espera de ser incorporado en futuras *releases* del
 *framework*.
 
@@ -394,7 +394,7 @@ directamente desde GitHub sin necesidad de tener que compilarla con cada
 modificación.
 
 Posteriormente, se optó por implementar un sistema de documentación
-continúa integrado en el repositorio, en concreto ReadTheDocs. De tal
+continua integrado en el repositorio, en concreto ReadTheDocs. De tal
 forma que la documentación se escribía en archivos Markdown dentro del
 repositorio y este servicio generaba una página web
 (`go-bees.readthedocs.io <http://go-bees.readthedocs.io/>`__) que se
@@ -407,8 +407,10 @@ Sphinx junto con ReadTheDocs.
 Sphinx es un generador de documentación que permite exportar la
 documentación en varios formatos, entre ellos HTML y PDF.
 Desafortunadamente, no soportaba Markdown como formato de entrada, por
-lo que hubo que mudar la documentación al formato reStructuredText. Con
-todo configurado, ahora ReadTheDocs generaba automáticamente la página
+lo que hubo que migrar la documentación al formato reStructuredText. 
+Esta conversión se realizó con la herramienta Pandoc. 
+
+Con todo configurado, ahora ReadTheDocs generaba automáticamente la página
 web y un PDF actualizado con los últimos cambios realizados en la
 documentación.
 
@@ -418,14 +420,15 @@ documentación.
 
 Para la exportación final de la memoria se utilizó el conversor Pandoc,
 con objeto de transformar la documentación del formato reStructuredText
-a LaTeX.
+a LaTeX. Algunos elementos como las citas o las imágenes no eran convertidas 
+correctamente, por lo que se tuvo que hacer uso de expresiones regulares.
 
 La totalidad de este tedioso proceso se realizó bajo la idea de que
 cualquier proyecto comercial tiene su documentación accesible desde una
 página web, y que además necesita estar acorde con la versión del
 proyecto. Sin embargo, para este caso concreto en el que el entregable
 final es un PDF con un formato determinado, el montar todo este sistema
-ha supuesto una sobrecarga notable e innecesaria.
+ha supuesto una sobrecarga notable.
 
 Publicación
 -----------

@@ -58,7 +58,7 @@ colmena mediante la cámara de un *smartphone* con Android.
 El método propuesto podría revolucionar el campo de la monitorización de
 la actividad de vuelo de colmenas, ya que lo hace accesible al gran público. Ya no es necesario
 contar con costoso hardware, difícil de instalar. Solamente es necesario
-disponer de un smartphone con cámara y la aplicación GoBees. Además,
+disponer de un *smartphone* con cámara y la aplicación GoBees. Además,
 esta facilita la interpretación de los datos, representándolos
 gráficamente y añadiendo información adicional como la situación
 meteorológica. Permitiendo a los apicultores centrar su atención donde

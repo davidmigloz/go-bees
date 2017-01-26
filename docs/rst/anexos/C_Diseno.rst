@@ -342,7 +342,7 @@ aplicación.
 
 .. |prototipos| image:: ../../img/prototipos.jpg
 
-Tras una serie de interacciones, estos se fueron mejorando hasta obtener
+Tras una serie de iteraciones, estos se fueron mejorando hasta obtener
 las interfaces con las que cuenta hoy en día la *app*.
 
 TODO meter capturas de la app

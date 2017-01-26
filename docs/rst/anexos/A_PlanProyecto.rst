@@ -46,7 +46,7 @@ en líneas generales una filosofía ágil:
    iteraciones (*sprints*) y revisiones.
 -  La duración media de los *sprints* fue de una semana.
 -  Al finalizar cada *sprint* se entregaba una parte del producto
-   operativa (incremento).
+   operativo (incremento).
 -  Se realizaban reuniones de revisión al finalizar cada *sprint* y al
    mismo tiempo de planificación del nuevo *sprint*.
 -  En la planificación del *sprint* se generaba una pila de tareas a
@@ -382,7 +382,7 @@ Los objetivos de este *sprint* fueron: implementar el servicio de monitorizació
 en segundo plano, junto con su sección de ajustes, la obtención de información 
 meteorológica, la edición y borrado de colmenares y colmenas y las pestañas de 
 información de colmenar y colmena. Además, realizar un estudio de viabilidad 
-legal y selececionar la licencia más apropiada para el proyecto.
+legal y seleccionar la licencia más apropiada para el proyecto.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
 `Sprint 14 <https://github.com/davidmigloz/go-bees/milestone/15?closed=1>`__.

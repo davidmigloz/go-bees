@@ -29,6 +29,9 @@
 % Párrafos
 \nonzeroparskip
 
+% Listas estrechas
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % Imagenes
 \usepackage{graphicx}
@@ -345,7 +348,7 @@
     \noindent\LARGE
     Presentado por \@author{}\\ 
     en Universidad de Burgos --- \@date{}\\
-    Tutor: \@tutor{}\\
+    Tutores: \@tutor{}\\
   }%
   \end{center}%
   \null
@@ -353,11 +356,12 @@
   }
 \makeatother
 
+\newcommand{\nombre}{David Miguel Lozano} %%% cambio de comando
 
 % Datos de portada
-\title{título del TFG}
-\author{nombre alumno}
-\tutor{nombre tutor}
+\title{{\Huge GoBees}\\[0.5cm]Monitorización del estado de una colmena mediante la cámara de un smartphone.}
+\author{\nombre}
+\tutor{José Francisco Díez Pastor\\y Raúl Marticorena Sánchez}
 \date{\today}
 
 \begin{document}
@@ -379,7 +383,7 @@
 
 \noindent Expone:
 
-\noindent Que el alumno D. nombre alumno, con DNI dni, ha realizado el Trabajo final de Grado en Ingeniería Informática titulado título de TFG. 
+\noindent Que el alumno D. \nombre, con DNI dni, ha realizado el Trabajo final de Grado en Ingeniería Informática titulado título de TFG. 
 
 \noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
 
@@ -470,7 +474,7 @@ keywords separated by commas.
 \include{./tex/7_Conclusiones_Lineas_de_trabajo_futuras}
 
 
-\bibliographystyle{plain}
 \bibliography{bibliografia}
+\bibliographystyle{plainnat}
 
 \end{document}
