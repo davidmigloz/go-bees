@@ -20,23 +20,19 @@ package com.davidmiguel.gobees.addedithive;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 /**
  * Add / edit hive activity.
  */
-public class AddEditHiveActivity extends AppCompatActivity {
+public class AddEditHiveActivity extends BaseActivity {
 
     public static final int REQUEST_ADD_HIVE = 1;
     public static final int NO_APIARY = -1;
     public static final int NEW_HIVE = -1;
-
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,24 +78,7 @@ public class AddEditHiveActivity extends AppCompatActivity {
                     addEditHiveFragment, R.id.contentFrame);
         }
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new AddEditHivePresenter(goBeesRepository, addEditHiveFragment, apiaryId, hiveId);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

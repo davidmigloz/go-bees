@@ -19,25 +19,21 @@
 package com.davidmiguel.gobees.recording;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 import java.util.Date;
 
 /**
  * Recording detail activity.
  */
-public class RecordingActivity extends AppCompatActivity {
+public class RecordingActivity extends BaseActivity {
 
     public static final int NO_APIARY = -1;
     public static final int NO_HIVE = -1;
     public static final int NO_DATE = -1;
-
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,25 +75,8 @@ public class RecordingActivity extends AppCompatActivity {
                     getSupportFragmentManager(), recordingFragment, R.id.contentFrame);
         }
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new RecordingPresenter(goBeesRepository, recordingFragment, apiaryId, hiveId,
                 new Date(startDate), new Date(endDate));
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

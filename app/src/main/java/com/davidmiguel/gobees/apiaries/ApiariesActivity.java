@@ -26,25 +26,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.about.AboutActivity;
-import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.help.HelpActivity;
 import com.davidmiguel.gobees.settings.SettingsActivity;
 import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 /**
  * Apiaries activity.
  */
-public class ApiariesActivity extends AppCompatActivity {
+public class ApiariesActivity extends BaseActivity {
 
     private DrawerLayout drawerLayout;
-
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +71,8 @@ public class ApiariesActivity extends AppCompatActivity {
         // Set default preferences values
         PreferenceManager.setDefaultValues(this, R.xml.general_settings, false);
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new ApiariesPresenter(goBeesRepository, apiariesFragment);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
     }
 
     @Override

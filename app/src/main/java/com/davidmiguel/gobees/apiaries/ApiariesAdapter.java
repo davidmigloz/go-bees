@@ -98,13 +98,13 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ApiaryViewHol
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener,
             ItemTouchHelperViewHolder {
 
-        private View viewHolder;
+        private View view;
         private CardView card;
         private TextView apiaryName;
         private TextView numHives;
         private ImageView weatherIcon;
         private TextView temp;
-        private ImageView moreIcon;
+        private ImageView moreIc;
 
         private Drawable background;
 
@@ -112,22 +112,22 @@ class ApiariesAdapter extends RecyclerView.Adapter<ApiariesAdapter.ApiaryViewHol
             super(itemView);
 
             // Get views
-            viewHolder = itemView;
+            view = itemView;
             card = (CardView) itemView.findViewById(R.id.card);
             apiaryName = (TextView) itemView.findViewById(R.id.apiary_name);
             numHives = (TextView) itemView.findViewById(R.id.num_hives);
             weatherIcon = (ImageView) itemView.findViewById(R.id.weather_icon);
             temp = (TextView) itemView.findViewById(R.id.temp);
-            moreIcon = (ImageView) itemView.findViewById(R.id.more_icon);
+            moreIc = (ImageView) itemView.findViewById(R.id.more_icon);
 
-            // Set listeners
-            viewHolder.setOnClickListener(this);
-            viewHolder.setOnCreateContextMenuListener(this);
-            moreIcon.setOnClickListener(new View.OnClickListener() {
+            // Set listeners (click -> enter, long click -> menu, more ic click -> menu)
+            view.setOnClickListener(this);
+            view.setOnCreateContextMenuListener(this);
+            moreIc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // Open Menu
-                    listener.onOpenMenuClick(viewHolder);
+                    listener.onOpenMenuClick(ApiaryViewHolder.this.view);
                 }
             });
 

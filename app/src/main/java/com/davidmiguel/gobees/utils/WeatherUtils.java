@@ -97,11 +97,11 @@ public final class WeatherUtils {
      *
      * @param context   Android Context to access preferences and resources
      * @param windSpeed Wind speed in kilometers / hour
-     * @param degrees   Degrees as measured on a compass, NOT temperature degrees!
+     * @param deg   Degrees as measured on a compass, NOT temperature degrees!
      *                  See https://www.mathsisfun.com/geometry/degrees.html
      * @return Wind String in the following form: "2 km/h SW"
      */
-    public static String formatWind(Context context, double windSpeed, double degrees) {
+    public static String formatWind(Context context, double windSpeed, double deg) {
         int windFormat = R.string.format_wind_kmh;
 
         double value;
@@ -112,26 +112,26 @@ public final class WeatherUtils {
             value = windSpeed;
         }
 
-        String direction = "";
-        if (degrees >= 337.5 || degrees < 22.5) {
-            direction = "N";
-        } else if (degrees >= 22.5 && degrees < 67.5) {
-            direction = "NE";
-        } else if (degrees >= 67.5 && degrees < 112.5) {
-            direction = "E";
-        } else if (degrees >= 112.5 && degrees < 157.5) {
-            direction = "SE";
-        } else if (degrees >= 157.5 && degrees < 202.5) {
-            direction = "S";
-        } else if (degrees >= 202.5 && degrees < 247.5) {
-            direction = "SW";
-        } else if (degrees >= 247.5 && degrees < 292.5) {
-            direction = "W";
-        } else if (degrees >= 292.5 && degrees < 337.5) {
-            direction = "NW";
+        String dir = "";
+        if (deg >= 337.5 || deg < 22.5) {
+            dir = "N";
+        } else if (deg >= 22.5 && deg < 67.5) {
+            dir = "NE";
+        } else if (deg >= 67.5 && deg < 112.5) {
+            dir = "E";
+        } else if (deg >= 112.5 && deg < 157.5) {
+            dir = "SE";
+        } else if (deg >= 157.5 && deg < 202.5) {
+            dir = "S";
+        } else if (deg >= 202.5 && deg < 247.5) {
+            dir = "SW";
+        } else if (deg >= 247.5 && deg < 292.5) {
+            dir = "W";
+        } else if (deg >= 292.5 && deg < 337.5) {
+            dir = "NW";
         }
 
-        return String.format(context.getString(windFormat), value, direction);
+        return String.format(context.getString(windFormat), value, dir);
     }
 
     /**

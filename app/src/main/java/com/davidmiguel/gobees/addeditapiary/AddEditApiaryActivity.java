@@ -22,23 +22,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 /**
  * Add / edit apiary activity.
  */
-public class AddEditApiaryActivity extends AppCompatActivity {
+public class AddEditApiaryActivity extends BaseActivity {
 
     public static final int REQUEST_ADD_APIARY = 1;
     public static final int NEW_APIARY = -1;
 
     private Fragment addEditApiaryFragment;
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,27 +72,10 @@ public class AddEditApiaryActivity extends AppCompatActivity {
                     addEditApiaryFragment, R.id.contentFrame);
         }
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new AddEditApiaryPresenter(goBeesRepository,
                 (AddEditApiaryContract.View) addEditApiaryFragment, apiaryId,
                 new LocationService(this));
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     @Override

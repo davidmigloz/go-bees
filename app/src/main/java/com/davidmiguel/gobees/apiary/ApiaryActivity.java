@@ -21,12 +21,10 @@ package com.davidmiguel.gobees.apiary;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.TabsFragmentPagerAdapter;
 import com.google.common.collect.Lists;
@@ -34,11 +32,9 @@ import com.google.common.collect.Lists;
 /**
  * Apiary activity.
  */
-public class ApiaryActivity extends AppCompatActivity {
+public class ApiaryActivity extends BaseActivity {
 
     public static final int NO_APIARY = -1;
-
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,24 +67,7 @@ public class ApiaryActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new ApiaryPresenter(goBeesRepository, apiaryHivesFragment, apiaryInfoFragment, apiaryId);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

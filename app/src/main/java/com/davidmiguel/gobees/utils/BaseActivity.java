@@ -16,34 +16,40 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.davidmiguel.gobees.settings;
+package com.davidmiguel.gobees.utils;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.utils.AndroidUtils;
-import com.davidmiguel.gobees.utils.BaseActivity;
+import com.davidmiguel.gobees.Injection;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 /**
- * Presents a set of application settings presented as a single list.
+ * Base activity that creates db connection by default.
  */
-public class SettingsActivity extends BaseActivity {
+public abstract class BaseActivity extends AppCompatActivity {
+
+    protected GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_act);
 
-        // Set up the toolbar
-        AndroidUtils.setUpToolbar(this, false, R.string.settings_toolbar_title);
+        // Init db
+        goBeesRepository = Injection.provideApiariesRepository();
+        goBeesRepository.openDb();
+    }
 
-        // Add fragment to the activity
-        SettingsFragment settingsFragment = SettingsFragment.newInstance();
-        getFragmentManager().beginTransaction()
-                .replace(R.id.contentFrame, settingsFragment)
-                .commit();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Close database
+        goBeesRepository.closeDb();
+    }
 
-        // Create the presenter
-        new SettingsPresenter(goBeesRepository, settingsFragment);
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

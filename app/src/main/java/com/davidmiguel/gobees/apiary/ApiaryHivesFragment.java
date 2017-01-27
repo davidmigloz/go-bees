@@ -107,9 +107,8 @@ public class ApiaryHivesFragment extends Fragment
             }
         });
 
-        // Set up progress indicator
+        // Configure progress indicator
         AndroidUtils.setUpProgressIndicator(root, getContext(), recyclerView, presenter);
-
         return root;
     }
 
@@ -120,16 +119,16 @@ public class ApiaryHivesFragment extends Fragment
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.result(requestCode, resultCode);
-    }
-
-    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
             fab.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        presenter.result(requestCode, resultCode);
     }
 
     @Override
