@@ -410,6 +410,23 @@ horas, a falta de terminar los anexos planificados por falta de tiempo.
 |Sprint 15|
 
 .. |Sprint 15| image:: ../../img/burndowns/sprint15.png
+
+Sprint 16 (19/01/17 - 25/01/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: completar las tareas pendientes del anterior 
+sprint (Especificación de requisitos y Análisis económico), documentar el diseño de 
+datos, procedimental y arquitectónico y aumentar la cobertura de los test.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 16 <https://github.com/davidmigloz/go-bees/milestone/17?closed=1>`__.
+
+Se estimaron 45,75 horas de trabajo y se invirtieron finalmente 45,25
+horas, completando todas las tareas.
+
+|Sprint 16|
+
+.. |Sprint 16| image:: ../../img/burndowns/sprint16.png
    
 Estudio de viabilidad
 ---------------------
