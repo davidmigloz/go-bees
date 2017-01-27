@@ -53,6 +53,7 @@ class LocationService {
 
     /**
      * Set location service listeners.
+     *
      * @param connectionListener       ConnectionCallbacks.
      * @param connectionFailedListener OnConnectionFailedListener.
      */

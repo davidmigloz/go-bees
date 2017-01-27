@@ -141,6 +141,7 @@ public class ApiariesActivity extends BaseActivity {
                 new Intent(ApiariesActivity.this, HelpActivity.class);
         startActivity(helpIntent);
     }
+
     /**
      * Opens send feedback option.
      */

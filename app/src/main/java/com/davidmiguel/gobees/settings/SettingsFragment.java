@@ -98,6 +98,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsCont
                 Toast.LENGTH_SHORT).show();
         // Go to main activity
         Intent intent = new Intent(getActivity(), ApiariesActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(intent);
 
 
@@ -111,6 +112,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsCont
                 Toast.LENGTH_SHORT).show();
         // Go to main activity
         Intent intent = new Intent(getActivity(), ApiariesActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(intent);
     }
 

@@ -102,7 +102,7 @@ class NetworkUtils {
             }
             return response;
         } finally {
-            if(scanner != null) {
+            if (scanner != null) {
                 scanner.close();
             }
             if (urlConnection != null) {

@@ -128,6 +128,11 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
+    public void setLoadingIndicator(final boolean active) {
+        AndroidUtils.setLoadingIndicator(getView(), active);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
@@ -138,11 +143,6 @@ public class HiveRecordingsFragment extends Fragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         presenter.result(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void setLoadingIndicator(final boolean active) {
-        AndroidUtils.setLoadingIndicator(getView(), active);
     }
 
     @Override

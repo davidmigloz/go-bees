@@ -97,7 +97,7 @@ public final class WeatherUtils {
      *
      * @param context   Android Context to access preferences and resources
      * @param windSpeed Wind speed in kilometers / hour
-     * @param deg   Degrees as measured on a compass, NOT temperature degrees!
+     * @param deg       Degrees as measured on a compass, NOT temperature degrees!
      *                  See https://www.mathsisfun.com/geometry/degrees.html
      * @return Wind String in the following form: "2 km/h SW"
      */

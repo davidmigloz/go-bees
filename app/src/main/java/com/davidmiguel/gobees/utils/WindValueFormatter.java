@@ -62,7 +62,7 @@ public class WindValueFormatter implements IValueFormatter, IAxisValueFormatter 
         @Override
         public String toString() {
             if (this == MS) {
-                    return "m/s";
+                return "m/s";
             }
             return "";
         }

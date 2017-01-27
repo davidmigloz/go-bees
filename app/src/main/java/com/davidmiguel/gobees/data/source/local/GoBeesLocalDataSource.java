@@ -45,8 +45,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     private static final String TAG = GoBeesLocalDataSource.class.getSimpleName();
 
     // Fields names
-    private static final String ID = "id"; 
-    private static final String TIMESTAMP = "timestamp"; 
+    private static final String ID = "id";
+    private static final String TIMESTAMP = "timestamp";
     private static final String LAST_REVISION = "lastRevision";
 
     private static GoBeesLocalDataSource instance;

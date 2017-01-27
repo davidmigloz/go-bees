@@ -63,7 +63,7 @@ public class RainValueFormatter implements IValueFormatter, IAxisValueFormatter 
 
         @Override
         public String toString() {
-            if(this == MM) {
+            if (this == MM) {
                 return "mm";
             }
             return "";

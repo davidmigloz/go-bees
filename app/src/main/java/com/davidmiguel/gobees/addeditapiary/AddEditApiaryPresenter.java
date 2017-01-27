@@ -220,10 +220,10 @@ class AddEditApiaryPresenter implements AddEditApiaryContract.Presenter,
     /**
      * Create an save a new apiary.
      *
-     * @param name  apiary name.
-     * @param latitude latitude coordinate.
+     * @param name      apiary name.
+     * @param latitude  latitude coordinate.
      * @param longitude longitude coordinate.
-     * @param notes apiary notes.
+     * @param notes     apiary notes.
      */
     private void createApiary(final String name, final Double latitude, final Double longitude,
                               final String notes) {
