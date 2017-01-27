@@ -83,6 +83,13 @@ interface MonitoringContract {
          * Hides count down and shows monitoring view.
          */
         void showMonitoringView();
+
+        /**
+         * Hides or shows the num bees view.
+         *
+         * @param active true to show.
+         */
+        void showNumBeesView(boolean active);
     }
 
     interface SettingsView extends BaseView<MonitoringContract.Presenter> {

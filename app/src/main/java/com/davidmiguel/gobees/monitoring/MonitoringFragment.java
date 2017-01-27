@@ -290,6 +290,15 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
+    public void showNumBeesView(boolean active) {
+        if (active) {
+            numBeesTV.setVisibility(View.VISIBLE);
+        } else {
+            numBeesTV.setText(View.GONE);
+        }
+    }
+
+    @Override
     public boolean onBackPressed() {
         if (settingsLayout.getVisibility() == View.VISIBLE) {
             presenter.closeSettings();

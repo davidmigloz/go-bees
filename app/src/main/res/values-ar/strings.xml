@@ -362,8 +362,6 @@
     <string name="start_record_icon">"أيقونة بدء التسجيل"</string>
     <!-- Text shown when the monitoring service is running [CHAR LIMIT=150] -->
     <string name="monitoring_text">"مراقبة… n\ ن يمكنك إيقاف تشغيل الشاشة."</string>
-    <!-- Default number of bees [CHAR LIMIT=4] -->
-    <string name="num_bees_default">"0"</string>
     <!-- Monitoring notification text [CHAR LIMIT=100] -->
     <string name="monitoring_notification_text">"رصد خلية …"</string>
 

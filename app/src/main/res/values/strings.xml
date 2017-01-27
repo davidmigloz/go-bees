@@ -395,8 +395,8 @@
     <string name="start_record_icon">Start record icon</string>
     <!-- Text shown when the monitoring service is running [CHAR LIMIT=150] -->
     <string name="monitoring_text">Monitoring…\n You can switch off the screen.</string>
-    <!-- Default number of bees [CHAR LIMIT=4] -->
-    <string name="num_bees_default">0</string>
+    <!-- Default number of bees [CHAR LIMIT=NONE] -->
+    <string name="num_bees_default" translatable="false">0</string>
     <!-- Monitoring notification text [CHAR LIMIT=100] -->
     <string name="monitoring_notification_text">Monitoring hive…</string>
 

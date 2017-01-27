@@ -89,6 +89,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     @Override
     public void showAlgoOutput(boolean status) {
         showAlgoOutput = status;
+        view.showNumBeesView(status);
     }
 
     @Override
@@ -143,10 +144,14 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
 
     @Override
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        int numBees = bc.countBees(inputFrame.gray());
-        view.setNumBees(numBees);
-        bc.getProcessedFrame().copyTo(processedFrame);
-        bc.getProcessedFrame().release();
-        return showAlgoOutput ? processedFrame : inputFrame.rgba();
+        if(showAlgoOutput) {
+            int numBees = bc.countBees(inputFrame.gray());
+            view.setNumBees(numBees);
+            bc.getProcessedFrame().copyTo(processedFrame);
+            bc.getProcessedFrame().release();
+            return processedFrame;
+        }
+        // If show algorithm output is false -> show original frame
+        return inputFrame.rgba();
     }
 }

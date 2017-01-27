@@ -130,7 +130,8 @@
                     android:text="@string/num_bees_default"
                     android:textAlignment="center"
                     android:textColor="@color/colorCameraControlsIcons"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </LinearLayout>

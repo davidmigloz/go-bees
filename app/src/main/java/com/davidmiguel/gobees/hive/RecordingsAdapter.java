@@ -227,7 +227,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.Recording
             lineDataSet.setDrawCircles(false);
             lineDataSet.setLineWidth(1.8f);
             lineDataSet.setColor(ContextCompat.getColor(context, R.color.colorAccent));
-            if (lineDataSet.getYMax() != 0) {
+            if (((int) lineDataSet.getYMax()) != 0) {
                 lineDataSet.setDrawFilled(true);
                 lineDataSet.setFillAlpha(255);
                 Drawable drawable = ContextCompat.getDrawable(context, R.drawable.chart_fade_green);

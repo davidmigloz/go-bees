@@ -153,7 +153,6 @@
     <string name="permission_request_title">Permís denegat</string>
     <string name="pref_bees_cat_label">Abella</string>
     <string name="num_hives">Número de ruscs</string>
-    <string name="num_bees_default">0</string>
     <string name="num_bees">Nº d\'abelles</string>
     <string name="notes_icon">Notes</string>
     <string name="no_weather_data_available">Informació meteorològica no disponible.</string>
