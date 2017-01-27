@@ -24,7 +24,7 @@ tutores, nos pusimos manos a la obra.
 
 |GoBees|
 
-.. |GoBees| image:: ../../img/GoBees_logo.v3.png
+.. |GoBees| image:: ../../img/GoBees_logo.png
 
 Metodologías
 ------------
@@ -65,7 +65,7 @@ diarias, etc.), sí que se aplicó una filosofía ágil en líneas generales:
 
 Para el diseño del algoritmo de visión artificial se utilizó una
 metodología de ensayo y error. Se barajaban diferentes alternativas y se
-iban verificando su eficacia y eficiencia.
+iban verificando empíricamente su eficacia y eficiencia.
 
 Para el desarrollo de la aplicación Android se intentó utilizar
 *Test-Driven Development* (TDD) para fomentar la escritura de test y
@@ -87,21 +87,23 @@ principales recursos didácticos que se utilizaron.
 Para la formación en visión artificial y OpenCV se leyeron los
 siguientes libros:
 
--  *Android Application Programming with OpenCV 3* (Joseph Howse).
+-  *Android Application Programming with OpenCV 3* (Joseph Howse) [book:android_opencv]_.
 
 -  *Mastering OpenCV Android Application Programming* (Salil Kapur y
-   Nisarg Thakkar).
+   Nisarg Thakkar) [book:mastering_opencv]_.
 
 -  *Learning Image Processing with OpenCV* (Ismael Serrano Gracia, Jesús
-   Salido Tercero y José Luis Espinosa Aranda).
+   Salido Tercero y José Luis Espinosa Aranda) [book:learning_cv]_.
 
--  *OpenCV 3.0 Computer Vision with Java* (Daniel Lélis Baggio).
+-  *OpenCV 3.0 Computer Vision with Java* (Daniel Lélis Baggio) [book:opencv_java]_.
 
 Para la formación en Android se realizaron los siguientes cursos online:
 
--  *Android Development for Beginners: How to Make Apps* (Udacity).
+-  *Android Development for Beginners: How to Make Apps* (Udacity) [course:android_beginners]_.
 
--  *Developing Android Apps* (Udacity)
+-  *Developing Android Apps* (Udacity) [course:developing_android]_.
+
+-  *Android Testing Codelab* (Google) [course:testing]_.
 
 También cabe destacar la importancia que tuvo la comunidad
 `StackOverflow <http://stackoverflow.com/>`__ para la resolución de los
@@ -122,9 +124,9 @@ dificultaban el análisis:
 -  Las condiciones lumínicas varían a lo largo del día o de la época del
    año.
 
--  Existen sombras producidas por la cámara o abejas.
+-  Existen sombras producidas por la cámara o por las propias abejas.
 
--  A 20fps una abeja volando puede recorrer una distancia significativa
+-  A 20 fps una abeja volando puede recorrer una distancia significativa
    entre fotogramas.
 
 -  Un grupo de abejas puede estar confinado, dificultando su
@@ -181,13 +183,13 @@ robusto que poseía las siguientes etapas:
    Gaussiano para facilitar el procesado.
 
 2. **Substracción del fondo:** extracción de los elementos en movimiento
-   utilizando el algoritmo BackgroundSubtractorMOG2.
+   utilizando el algoritmo ``BackgroundSubtractorMOG2``.
 
 3. **Posprocesado:** mejora de la salida de la etapa anterior mediante
    varias iteraciones de erosión y dilatación.
 
-4. **Búsqueda de contornos:** localización de los contornos
-   pertenecientes a abejas y conteo de los mismos.
+4. **Detección y conteo de abejas:** localización de los contornos
+   pertenecientes a abejas en base al área y conteo de los mismos.
 
 Desarrollo de la *app*
 ----------------------
@@ -231,9 +233,7 @@ sin problemas en la nueva plataforma.
 
 Cabe destacar que como OpenCV no distribuía oficialmente la librería a
 través de ningún repositorio que permitiese utilizarla directamente como
-dependencia Gradle, se creó uno propio. Se encuentra disponible en la 
-siguiente dirección 
-`https://github.com/davidmigloz/opencv-android-gradle-repo <https://github.com/davidmigloz/opencv-android-gradle-repo>`__.
+dependencia Gradle, se creó uno propio [gobees:prototipes]_.
 
 Para el diseño de la arquitectura de la *app* se siguió el patrón de
 arquitectura *Model-View-Presenter* (MVP), que permite separar los datos
@@ -279,15 +279,15 @@ disposición de los elementos, tipos de componentes, patrones de
 navegación, gestos, etc.
 
 Por último, se internacionalizó la aplicación a los siguientes idiomas:
-español, inglés, catalán, alemán, polaco y árabe. Para ello se utilizó
+español, inglés, catalán, polaco y árabe. Para ello se utilizó
 la herramienta Toolkit del Traductor de Google que permite realizar una
 primera traducción automática de los diferentes textos de la aplicación
 y posteriormente una revisión colaborativa de los resultados de esta.
 Para la revisión se recurrió a amistades nativas en los diferentes
 idiomas.
 
-Testing
--------
+*Testing*
+---------
 
 En lo relativo al *testing*, podemos diferenciar el testeo del algoritmo
 del testeo de la *app*.
@@ -318,13 +318,14 @@ distintas:
    actividad, solapamiento, sombras y fondo no uniforme.
 
 Tras ejecutar el algoritmo se obtuvieron los siguientes errores
-relativos:
+relativos (considerando como error absoluto la distancia entre la 
+medida esperada y la obtenida):
 
--  **Caso 1:** 2,43%\ **.**
+-  **Caso 1:** 2,43%.
 
 -  **Caso 2**: 0,89%.
 
--  **Caso 3**: 4,48%\ **.**
+-  **Caso 3**: 4,48%.
 
 Se puede observar que en la situación menos favorable el error es menor
 a un 5%, precisión más que suficiente para la finalidad de los datos.
@@ -334,17 +335,19 @@ era de 25 ms en el equipo de pruebas (Intel i7-3610QM) y de 100 ms
 cuando se ejecutaba en un *smartphone* (Xiaomi Mi4).
 
 Por otra parte, la aplicación se testeó mediante test unitarios, test de
-integración y test de interfaz. La mayor parte de los test se realizaron
+integración y test de interfaz. La mayor parte de los test unitatios se realizaron
 contra los *presenters*, que son los que poseen la lógica de negocio de
-la *app*.
+la *app*. Los test de interfáz se ejecutaron en siete dispositivos diferentes,
+uno por cada versión de Android que soporta la *app* (API 19-25).
 
-Además, se configuraron una serie de servicios de integración continua
-de tal forma que cada vez que se realizaba un *commit* en el
+Además, se configuraron una serie de servicios de integración continua,
+de tal forma, que cada vez que se realizaba un *commit* en el
 repositorio, se ejecutaban las siguientes tareas:
 
 1. **Travis**: realizaba una compilación del proyecto, ejecutaba los
    test unitarios, ejecutaba *Lint*, ponía en marcha un emulador de
-   Android, y ejecutaba los Android test sobre este.
+   Android, y ejecutaba los Android test sobre este. Al finalizar, 
+   enviaba los resultados a Codecov y SonarQube.
 
 2. **Codecov**: realizaba un análisis sobre la cobertura de los test
    unitarios.
@@ -352,8 +355,11 @@ repositorio, se ejecutaban las siguientes tareas:
 3. **CodeClimate**: ejecutaba cuatro motores de chequeo (*checkstyle*,
    *fixme*, *pmd* y *markdownlint*) sobre el código para detectar
    posibles problemas o vulnerabilidades en él.
+   
+4. **SonarQube**: analizaba código duplicado, violaciones de estándares, 
+   cobertura de tests unitarios, bugs potenciales, etc.
 
-4. **VersionEye**: analizaba todas las dependencias usadas en la
+5. **VersionEye**: chequeaba todas las dependencias utilizadas en la
    aplicación y comprobaba si estaban actualizadas, si tenían algún
    problema de seguridad conocido, o si violaban la licencia del
    proyecto.
@@ -379,9 +385,15 @@ Por último, cabe comentar algunas estadísticas del proyecto:
 +--------------------------------------+----------+
 | Número de XML                        | 86       |
 +--------------------------------------+----------+
+| Número de test unitarios             | x        |
++--------------------------------------+----------+
+| Número de test de interfáz           | x        |
++--------------------------------------+----------+
 | Cobertura total test unitarios       | 14%      |
 +--------------------------------------+----------+
 | Cobertura test unitarios algoritmo   | 100%     |
++--------------------------------------+----------+
+| Cobertura test unitarios *presenters*| 100%     |
 +--------------------------------------+----------+
 
 Documentación
@@ -390,12 +402,12 @@ Documentación
 En un primer momento, se decidió escribir la documentación en formato
 Markdown, utilizando las *wikis* que proporciona GitHub en el
 repositorio. De esta forma, la documentación podía ser visualizada
-directamente desde GitHub sin necesidad de tener que compilarla con cada
+directamente desde GitHub, sin necesidad de tener que compilarla con cada
 modificación.
 
 Posteriormente, se optó por implementar un sistema de documentación
 continua integrado en el repositorio, en concreto ReadTheDocs. De tal
-forma que la documentación se escribía en archivos Markdown dentro del
+forma, que la documentación se escribía en archivos Markdown dentro del
 repositorio y este servicio generaba una página web
 (`go-bees.readthedocs.io <http://go-bees.readthedocs.io/>`__) que se
 actualizaba cada vez que se realizaba un *commit*.
@@ -420,7 +432,7 @@ documentación.
 
 Para la exportación final de la memoria se utilizó el conversor Pandoc,
 con objeto de transformar la documentación del formato reStructuredText
-a LaTeX. Algunos elementos como las citas o las imágenes no eran convertidas 
+a LaTeX. Algunos elementos, como las citas o las imágenes, no eran convertidos 
 correctamente, por lo que se tuvo que hacer uso de expresiones regulares.
 
 La totalidad de este tedioso proceso se realizó bajo la idea de que
@@ -465,3 +477,22 @@ Durante el desarrollo del proyecto se obtuvieron varios reconocimientos:
 -  **YUZZ**: GoBees fue elegido para participar en el programa YUZZ
    2017, patrocinado por el Banco Santander para el impulso del talento
    joven y el espíritu emprendedor.
+   
+.. References
+
+.. [book:android_opencv]
+   https://www.packtpub.com/application-development/android-application-programming-opencv-3
+.. [book:mastering_opencv]
+   https://www.packtpub.com/application-development/mastering-opencv-android-application-programming
+.. [book:opencv_java]
+   https://www.packtpub.com/application-development/opencv-30-computer-vision-java 
+.. [book:learning_cv]
+   https://www.packtpub.com/application-development/learning-image-processing-opencv
+.. [course:android_beginners]
+   https://www.udacity.com/course/android-development-for-beginners--ud837
+.. [course:developing_android]
+   https://www.udacity.com/course/new-android-fundamentals--ud851
+.. [course:testing]
+   https://codelabs.developers.google.com/codelabs/android-testing/
+.. [gobees:prototipes]
+   https://github.com/davidmigloz/opencv-android-gradle-repo/
