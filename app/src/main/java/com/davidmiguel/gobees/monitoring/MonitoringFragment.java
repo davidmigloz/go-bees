@@ -93,13 +93,10 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         loaderCallback = new BaseLoaderCallback(getContext()) {
             @Override
             public void onManagerConnected(final int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS:
-                        presenter.onOpenCvConnected();
-                        break;
-                    default:
-                        super.onManagerConnected(status);
-                        break;
+                if (status == LoaderCallbackInterface.SUCCESS) {
+                    presenter.onOpenCvConnected();
+                } else {
+                    super.onManagerConnected(status);
                 }
             }
         };

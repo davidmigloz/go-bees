@@ -94,7 +94,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     private static final long WEATHER_REFRESH_RATE = DateTimeUtils.T_15_MINUTES;
 
     // Service stuff
-    private static MonitoringService INSTANCE = null;
+    private static MonitoringService instance = null;
     private final IBinder binder = new MonitoringBinder();
 
     // Persistence
@@ -123,13 +123,13 @@ public class MonitoringService extends Service implements AndroidCameraListener 
      * @return status.
      */
     public static boolean isRunning() {
-        return INSTANCE != null;
+        return instance != null;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        INSTANCE = this;
+        instance = this;
         // Init record list
         records = new LinkedList<>();
         // Init db
@@ -199,7 +199,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        INSTANCE = null;
+        instance = null;
         // Release camera
         if (androidCamera != null && androidCamera.isConnected()) {
             androidCamera.release();
@@ -387,7 +387,7 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     public class MonitoringBinder extends Binder {
         MonitoringService getService(SaveRecordingCallback c) {
             callback = c;
-            // Return this INSTANCE of MonitoringService so clients can call public methods
+            // Return this instance of MonitoringService so clients can call public methods
             return MonitoringService.this;
         }
     }

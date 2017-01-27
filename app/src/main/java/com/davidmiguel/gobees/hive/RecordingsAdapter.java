@@ -59,7 +59,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Recordings list adapter.
  */
-class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolder> {
+class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.RecordingViewHolder> {
 
     private Context context;
     private MenuInflater menuInflater;
@@ -75,14 +75,14 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecordingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.hive_recordings_list_item, parent, false);
-        return new RecordingsAdapter.ViewHolder(view);
+        return new RecordingViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecordingViewHolder holder, int position) {
         holder.bind(recordings.get(position));
     }
 
@@ -104,7 +104,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         void onOpenMenuClick(View view);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    class RecordingViewHolder extends RecyclerView.ViewHolder
             implements BaseViewHolder<Recording>, View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener,
             ItemTouchHelperViewHolder {
@@ -118,7 +118,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
         private Drawable background;
         private SimpleDateFormat formatter;
 
-        ViewHolder(View itemView) {
+        RecordingViewHolder(View itemView) {
             super(itemView);
 
             // Get views
@@ -144,6 +144,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
                     context.getString(R.string.hive_recordings_date_format), Locale.getDefault());
         }
 
+        @Override
         public void bind(@NonNull final Recording recording) {
             // Title
             String date = formatter.format(recording.getDate());
@@ -176,13 +177,11 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
 
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.menu_delete:
-                    listener.onRecordingDelete(recordings.get(getAdapterPosition()));
-                    return true;
-                default:
-                    return false;
+            if (menuItem.getItemId() == R.id.menu_delete) {
+                listener.onRecordingDelete(recordings.get(getAdapterPosition()));
+                return true;
             }
+            return false;
         }
 
         @Override
@@ -207,7 +206,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.ViewHolde
             List<Entry> entries = new ArrayList<>();
             for (Record record : records) {
                 // Convert timestamp to seconds and relative to first timestamp
-                long timestamp = (record.getTimestamp().getTime() / 1000 - firstTimestamp);
+                long timestamp = record.getTimestamp().getTime() / 1000 - firstTimestamp;
                 entries.add(new Entry(timestamp, record.getNumBees()));
             }
             return entries;

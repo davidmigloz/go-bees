@@ -61,12 +61,10 @@ public class WindValueFormatter implements IValueFormatter, IAxisValueFormatter 
 
         @Override
         public String toString() {
-            switch (this) {
-                case MS:
+            if (this == MS) {
                     return "m/s";
-                default:
-                    throw new IllegalArgumentException();
             }
+            return "";
         }
     }
 }

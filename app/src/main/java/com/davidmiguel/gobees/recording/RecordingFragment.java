@@ -261,7 +261,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         int maxNumBees = 0;
         for (Record record : records) {
             // Convert timestamp to seconds and relative to first timestamp
-            long timestamp = (record.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            long timestamp = record.getTimestamp().getTime() / 1000 - referenceTimestamp;
             int numBees = record.getNumBees();
             entries.add(new Entry(timestamp, numBees));
             // Get max num of bees
@@ -331,7 +331,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         float minTemp = Float.MAX_VALUE;
         for (MeteoRecord meteoRecord : meteo) {
             // Convert timestamp to seconds and relative to first timestamp
-            long timestamp = (meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            long timestamp = meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp;
             float temperature = (float) meteoRecord.getTemperature();
             entries.add(new Entry(timestamp, temperature));
             // Get max and min temperature
@@ -373,7 +373,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         float maxRain = Float.MIN_VALUE;
         for (MeteoRecord meteoRecord : meteo) {
             // Convert timestamp to seconds and relative to first timestamp
-            long timestamp = (meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            long timestamp = meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp;
             float rain = (float) meteoRecord.getRain();
             entries.add(new Entry(timestamp, rain));
             // Get max and min temperature
@@ -408,7 +408,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         float maxWind = Float.MIN_VALUE;
         for (MeteoRecord meteoRecord : meteo) {
             // Convert timestamp to seconds and relative to first timestamp
-            long timestamp = (meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp);
+            long timestamp = meteoRecord.getTimestamp().getTime() / 1000 - referenceTimestamp;
             float wind = (float) meteoRecord.getWindSpeed();
             entries.add(new Entry(timestamp, wind));
             // Get max and min temperature

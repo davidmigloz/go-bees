@@ -29,6 +29,9 @@ import com.davidmiguel.gobees.R;
  */
 public class GoBeesPreferences {
 
+    private GoBeesPreferences() {
+    }
+
     /**
      * Returns true if the user has selected metric temperature display.
      *

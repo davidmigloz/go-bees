@@ -63,12 +63,10 @@ public class RainValueFormatter implements IValueFormatter, IAxisValueFormatter 
 
         @Override
         public String toString() {
-            switch (this) {
-                case MM:
-                    return "mm";
-                default:
-                    throw new IllegalArgumentException();
+            if(this == MM) {
+                return "mm";
             }
+            return "";
         }
     }
 }

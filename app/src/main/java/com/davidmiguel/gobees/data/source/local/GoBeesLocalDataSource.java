@@ -43,7 +43,13 @@ import io.realm.RealmResults;
 public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     private static final String TAG = GoBeesLocalDataSource.class.getSimpleName();
-    private static GoBeesLocalDataSource INSTANCE;
+
+    // Fields names
+    private static final String ID = "id"; 
+    private static final String TIMESTAMP = "timestamp"; 
+    private static final String LAST_REVISION = "lastRevision";
+
+    private static GoBeesLocalDataSource instance;
     private Realm realm;
 
 
@@ -57,10 +63,10 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
      * @return instance.
      */
     public static GoBeesLocalDataSource getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new GoBeesLocalDataSource();
+        if (instance == null) {
+            instance = new GoBeesLocalDataSource();
         }
-        return INSTANCE;
+        return instance;
     }
 
     @Override
@@ -103,7 +109,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     @Override
     public void getApiary(long apiaryId, @NonNull GetApiaryCallback callback) {
         try {
-            Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+            Apiary apiary = realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst();
             callback.onApiaryLoaded(realm.copyFromRealm(apiary));
         } catch (Exception e) {
             Log.e(TAG, "Error: getApiary()", e);
@@ -113,7 +119,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public Apiary getApiaryBlocking(long apiaryId) {
-        return realm.copyFromRealm(realm.where(Apiary.class).equalTo("id", apiaryId).findFirst());
+        return realm.copyFromRealm(realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst());
     }
 
     @Override
@@ -143,7 +149,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
         try {
             // Get apiary
-            final Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+            final Apiary apiary = realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst();
             // Delete
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -189,24 +195,24 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextApiaryId(@NonNull GetNextApiaryIdCallback callback) {
-        Number nextId = realm.where(Apiary.class).max("id");
+        Number nextId = realm.where(Apiary.class).max(ID);
         callback.onNextApiaryIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
     }
 
     @Override
     public Date getApiaryLastRevision(long apiaryId) {
         // Get apiary
-        Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+        Apiary apiary = realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst();
         // Get last revision date from all hives
         return apiary.getHives() == null
-                ? null : apiary.getHives().where().maximumDate("lastRevision");
+                ? null : apiary.getHives().where().maximumDate(LAST_REVISION);
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
     public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
         try {
-            Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+            Apiary apiary = realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst();
             callback.onHivesLoaded(realm.copyFromRealm(apiary.getHives()));
         } catch (Exception e) {
             Log.e(TAG, "Error: getHives()", e);
@@ -217,7 +223,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     @Override
     public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
         try {
-            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
             callback.onHiveLoaded(realm.copyFromRealm(hive));
         } catch (Exception e) {
             Log.e(TAG, "Error: getHive()", e);
@@ -229,13 +235,13 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
         try {
             // Get hive
-            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
             if (hive == null || hive.getRecords() == null) {
                 callback.onDataNotAvailable();
                 return;
             }
             // Get records
-            RealmResults<Record> records = hive.getRecords().where().findAll().sort("timestamp");
+            RealmResults<Record> records = hive.getRecords().where().findAll().sort(TIMESTAMP);
             // Classify records by date into recordings
             Date day;                   // Actual date of the recording
             Date nextDay = new Date(0); // Next day to the recording
@@ -243,7 +249,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             List<Recording> recordings = new ArrayList<>();
             while (true) {
                 // Get all records greater than last recordings
-                records = records.where().greaterThanOrEqualTo("timestamp", nextDay).findAll();
+                records = records.where().greaterThanOrEqualTo(TIMESTAMP, nextDay).findAll();
                 if (records.isEmpty()) {
                     break;
                 }
@@ -252,8 +258,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 nextDay = DateTimeUtils.getNextDay(day);
                 // Filter records of that date and create recording
                 filteredRecords = records.where()
-                        .greaterThanOrEqualTo("timestamp", day)
-                        .lessThan("timestamp", DateTimeUtils.getNextDay(nextDay))
+                        .greaterThanOrEqualTo(TIMESTAMP, day)
+                        .lessThan(TIMESTAMP, DateTimeUtils.getNextDay(nextDay))
                         .findAll();
                 // Create recording
                 recordings.add(new Recording(day, new ArrayList<>(filteredRecords)));
@@ -286,9 +292,9 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     // Save hive
                     realm.copyToRealmOrUpdate(hive);
                     // Add to apiary
-                    Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+                    Apiary apiary = realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst();
                     if (apiary.getHives() != null) {
-                        Hive h = apiary.getHives().where().equalTo("id", hive.getId()).findFirst();
+                        Hive h = apiary.getHives().where().equalTo(ID, hive.getId()).findFirst();
                         if (h == null) {
                             // New hive
                             apiary.addHive(hive);
@@ -306,7 +312,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     @Override
     public void deleteHive(long hiveId, @NonNull TaskCallback callback) {
         try {
-            final Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            final Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
@@ -327,7 +333,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
 
     @Override
     public void getNextHiveId(@NonNull GetNextHiveIdCallback callback) {
-        Number nextId = realm.where(Hive.class).max("id");
+        Number nextId = realm.where(Hive.class).max(ID);
         callback.onNextHiveIdLoaded(nextId != null ? nextId.longValue() + 1 : 0);
     }
 
@@ -341,7 +347,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     // Save record
                     realm.copyToRealmOrUpdate(record);
                     // Add to hive
-                    Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+                    Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
                     hive.addRecord(record);
                 }
             });
@@ -362,7 +368,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         }
         try {
             // Get first id
-            Number n = realm.where(Record.class).max("id");
+            Number n = realm.where(Record.class).max(ID);
             long nextId = n != null ? n.longValue() + 1 : 0;
             // Set ids
             for (Record r : records) {
@@ -377,7 +383,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                         realm.copyToRealmOrUpdate(r);
                     }
                     // Add to hive
-                    Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+                    Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
                     hive.addRecords(records);
                     // Update last revision date (now)
                     hive.setLastRevision(new Date());
@@ -394,13 +400,13 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
     public void getRecording(long apiaryId, long hiveId, Date start, Date end,
                              @NonNull GetRecordingCallback callback) {
         // Get apiary
-        Apiary apiary = realm.where(Apiary.class).equalTo("id", apiaryId).findFirst();
+        Apiary apiary = realm.where(Apiary.class).equalTo(ID, apiaryId).findFirst();
         if (apiary == null || apiary.getMeteoRecords() == null) {
             callback.onDataNotAvailable();
             return;
         }
         // Get hive
-        Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+        Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
         if (hive == null || hive.getRecords() == null) {
             callback.onDataNotAvailable();
             return;
@@ -408,10 +414,10 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         // Get records
         RealmResults<Record> records = hive.getRecords()
                 .where()
-                .greaterThanOrEqualTo("timestamp", DateTimeUtils.setTime(start, 0, 0, 0, 0))
-                .lessThanOrEqualTo("timestamp", DateTimeUtils.setTime(end, 23, 59, 59, 999))
+                .greaterThanOrEqualTo(TIMESTAMP, DateTimeUtils.setTime(start, 0, 0, 0, 0))
+                .lessThanOrEqualTo(TIMESTAMP, DateTimeUtils.setTime(end, 23, 59, 59, 999))
                 .findAll()
-                .sort("timestamp");
+                .sort(TIMESTAMP);
         if (records.isEmpty()) {
             callback.onDataNotAvailable();
             return;
@@ -419,10 +425,10 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
         // Get weather data
         RealmResults<MeteoRecord> meteoRecords = apiary.getMeteoRecords()
                 .where()
-                .greaterThanOrEqualTo("timestamp", records.first().getTimestamp())
-                .lessThanOrEqualTo("timestamp", records.last().getTimestamp())
+                .greaterThanOrEqualTo(TIMESTAMP, records.first().getTimestamp())
+                .lessThanOrEqualTo(TIMESTAMP, records.last().getTimestamp())
                 .findAll()
-                .sort("timestamp");
+                .sort(TIMESTAMP);
         // Create recording
         Recording recording = new Recording(start,
                 realm.copyFromRealm(records), realm.copyFromRealm(meteoRecords));
@@ -434,7 +440,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                                 @NonNull TaskCallback callback) {
         try {
             // Get hive
-            Hive hive = realm.where(Hive.class).equalTo("id", hiveId).findFirst();
+            Hive hive = realm.where(Hive.class).equalTo(ID, hiveId).findFirst();
             if (hive == null) {
                 callback.onFailure();
                 return;
@@ -444,9 +450,9 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 final RealmResults<Record> records;
                 records = hive.getRecords()
                         .where()
-                        .greaterThanOrEqualTo("timestamp",
+                        .greaterThanOrEqualTo(TIMESTAMP,
                                 DateTimeUtils.setTime(recording.getDate(), 0, 0, 0, 0))
-                        .lessThanOrEqualTo("timestamp",
+                        .lessThanOrEqualTo(TIMESTAMP,
                                 DateTimeUtils.setTime(recording.getDate(), 23, 59, 59, 999))
                         .findAll();
                 // Delete records
@@ -474,8 +480,8 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 @Override
                 public void execute(Realm realm) {
                     // Get next id
-                    Number n = realm.where(MeteoRecord.class).max("id");
-                    long nextId = (n != null ? n.longValue() + 1 : 0);
+                    Number n = realm.where(MeteoRecord.class).max(ID);
+                    long nextId = n != null ? n.longValue() + 1 : 0;
                     // Save meteo records
                     for (Apiary apiary : apiariesToUpdate) {
                         MeteoRecord meteoRecord = apiary.getCurrentWeather();
@@ -491,7 +497,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                     for (Apiary apiary : apiariesToUpdate) {
                         // Get apiary from db
                         Apiary requestedApiary = realm.where(Apiary.class)
-                                .equalTo("id", apiary.getId()).findFirst();
+                                .equalTo(ID, apiary.getId()).findFirst();
                         // Delete previous record
                         MeteoRecord oldMeteoRecord = requestedApiary.getCurrentWeather();
                         if (oldMeteoRecord != null) {
@@ -499,7 +505,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                         }
                         // Add new current weather to apiary
                         MeteoRecord meteoRecord = realm.where(MeteoRecord.class)
-                                .equalTo("id", apiary.getCurrentWeather().getId()).findFirst();
+                                .equalTo(ID, apiary.getCurrentWeather().getId()).findFirst();
                         requestedApiary.setCurrentWeather(meteoRecord);
                     }
                 }
@@ -522,14 +528,14 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 @Override
                 public void execute(Realm realm) {
                     // Get next id
-                    Number n = realm.where(MeteoRecord.class).max("id");
-                    long nextId = (n != null ? n.longValue() + 1 : 0);
+                    Number n = realm.where(MeteoRecord.class).max(ID);
+                    long nextId = n != null ? n.longValue() + 1 : 0;
                     // Save meteo records
                     meteoRecord.setId(nextId);
                     realm.copyToRealmOrUpdate(meteoRecord);
                     // Add meteo record to apiary
                     Apiary requestedApiary = realm.where(Apiary.class)
-                            .equalTo("id", apiary.getId()).findFirst();
+                            .equalTo(ID, apiary.getId()).findFirst();
                     requestedApiary.addMeteoRecord(meteoRecord);
                 }
             });
@@ -546,7 +552,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
             @Override
             public void execute(Realm realm) {
                 // Get next id
-                Number n = realm.where(MeteoRecord.class).max("id");
+                Number n = realm.where(MeteoRecord.class).max(ID);
                 long nextId = n != null ? n.longValue() + 1 : 0;
                 // Save meteo records
                 for (MeteoRecord meteoRecord : meteoRecords) {
@@ -555,7 +561,7 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                 }
                 // Add meteo records to apiary
                 Apiary requestedApiary = realm.where(Apiary.class)
-                        .equalTo("id", apiaryId).findFirst();
+                        .equalTo(ID, apiaryId).findFirst();
                 requestedApiary.addMeteoRecords(meteoRecords);
             }
         });

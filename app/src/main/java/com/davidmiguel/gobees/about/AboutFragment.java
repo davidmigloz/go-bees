@@ -46,10 +46,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Display about GoBees info and open source licenses.
  */
 public class AboutFragment extends Fragment
-        implements AboutContract.View, LibrariesAdapter.LibItemListener {
+        implements AboutContract.View, LibsAdapter.LibItemListener {
 
     private AboutContract.Presenter presenter;
-    private LibrariesAdapter librariesAdapter;
+    private LibsAdapter libsAdapter;
 
     private TextView versionTv;
 
@@ -96,7 +96,7 @@ public class AboutFragment extends Fragment
         // Set libs list
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(librariesAdapter);
+        recyclerView.setAdapter(libsAdapter);
 
 
         return root;
@@ -105,7 +105,7 @@ public class AboutFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        librariesAdapter = new LibrariesAdapter(new ArrayList<Library>(0), this);
+        libsAdapter = new LibsAdapter(new ArrayList<Library>(0), this);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class AboutFragment extends Fragment
 
     @Override
     public void showLibraries(List<Library> libraries) {
-        librariesAdapter.replaceData(libraries);
+        libsAdapter.replaceData(libraries);
     }
 
     /**

@@ -36,25 +36,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Libraries list adapter.
  */
-class LibrariesAdapter extends RecyclerView.Adapter<LibrariesAdapter.ViewHolder> {
+class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.LibViewHolder> {
 
     private List<Library> libraries;
     private LibItemListener listener;
 
-    LibrariesAdapter(List<Library> libraries, LibItemListener listener) {
+    LibsAdapter(List<Library> libraries, LibItemListener listener) {
         this.libraries = checkNotNull(libraries);
         this.listener = listener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LibViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.about_libs_list_item, parent, false);
-        return new ViewHolder(view);
+        return new LibViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(LibViewHolder holder, int position) {
         holder.bind(libraries.get(position));
     }
 
@@ -72,13 +72,13 @@ class LibrariesAdapter extends RecyclerView.Adapter<LibrariesAdapter.ViewHolder>
         void onLibraryClicked(Library.License license);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    class LibViewHolder extends RecyclerView.ViewHolder
             implements BaseViewHolder<Library>, View.OnClickListener {
 
         private TextView libraryTv;
         private Button license;
 
-        ViewHolder(View itemView) {
+        LibViewHolder(View itemView) {
             super(itemView);
 
             // Get views

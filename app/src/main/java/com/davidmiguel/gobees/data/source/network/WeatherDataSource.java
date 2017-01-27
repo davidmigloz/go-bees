@@ -34,16 +34,16 @@ import java.net.URL;
 public class WeatherDataSource {
 
     private static final String TAG = WeatherDataSource.class.getSimpleName();
-    private static WeatherDataSource INSTANCE;
+    private static WeatherDataSource instance;
 
     private WeatherDataSource() {
     }
 
     public static WeatherDataSource getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new WeatherDataSource();
+        if (instance == null) {
+            instance = new WeatherDataSource();
         }
-        return INSTANCE;
+        return instance;
     }
 
     /**

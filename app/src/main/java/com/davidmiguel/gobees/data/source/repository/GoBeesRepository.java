@@ -49,7 +49,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @SuppressWarnings("WeakerAccess")
 public class GoBeesRepository implements GoBeesDataSource {
 
-    private static GoBeesRepository INSTANCE = null;
+    private static GoBeesRepository instance = null;
 
     /**
      * Local database.
@@ -87,14 +87,14 @@ public class GoBeesRepository implements GoBeesDataSource {
      */
     public static GoBeesRepository getInstance(GoBeesDataSource apiariesLocalDataSource,
                                                WeatherDataSource weatherDataSource) {
-        if (INSTANCE == null) {
-            INSTANCE = new GoBeesRepository(apiariesLocalDataSource, weatherDataSource);
+        if (instance == null) {
+            instance = new GoBeesRepository(apiariesLocalDataSource, weatherDataSource);
         }
-        return INSTANCE;
+        return instance;
     }
 
     public static void destroyInstance() {
-        INSTANCE = null;
+        instance = null;
     }
 
     @Override
@@ -134,7 +134,6 @@ public class GoBeesRepository implements GoBeesDataSource {
 
             @Override
             public void onDataNotAvailable() {
-                // TODO get from network
                 // If cacheIsDirty synchronize all data from network
                 callback.onDataNotAvailable();
             }

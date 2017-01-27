@@ -29,6 +29,9 @@ import com.davidmiguel.gobees.data.source.network.WeatherDataSource;
  */
 public class Injection {
 
+    private Injection() {
+    }
+
     public static GoBeesRepository provideApiariesRepository() {
         return GoBeesRepository.getInstance(GoBeesLocalDataSource.getInstance(),
                 WeatherDataSource.getInstance());
