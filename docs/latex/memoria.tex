@@ -12,6 +12,19 @@
 \RequirePackage{xtab}
 \RequirePackage{multirow}
 
+% Multi-page tables using
+\usepackage{longtable}
+\usepackage{tabularx}
+
+% Cell with line break (e.g. \specialcell{Foo\\bar})
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+% Mathematic font
+\usepackage{amsfonts}
+
+% Color
+
 % Bibliography management
 \usepackage[numbers,sort]{natbib}
 
@@ -101,7 +114,7 @@
 %
 % Nuevo comando para tablas pequeñas (menos de una página).
 \newcommand{\tablaSmall}[5]{%
- \begin{table}
+ \begin{table}[H]
   \begin{center}
    \rowcolors {2}{gray!35}{}
    \begin{tabular}{#2}

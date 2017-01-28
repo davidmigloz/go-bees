@@ -99,23 +99,23 @@ artificial desarrollado sobre una Raspberry Pi.
 Fortalezas y debilidades del proyecto
 -------------------------------------
 
-+--------------------------+-----------+---------------+------------+
-| Características          | GoBees    | EyesOnHives   | HiveTool   |
-+==========================+===========+===============+============+
-| *Hardware* específico    | NO        | SI            | SI         |
-+--------------------------+-----------+---------------+------------+
-| Instalación sencilla     | SI        | SI            | NO         |
-+--------------------------+-----------+---------------+------------+
-| Procesamiento en local   | SI        | Parcial       | SI         |
-+--------------------------+-----------+---------------+------------+
-| Requiere wifi            | NO        | SI            | NO         |
-+--------------------------+-----------+---------------+------------+
-| Requiere red eléctrica   | NO        | SI            | NO         |
-+--------------------------+-----------+---------------+------------+
-| Localización GPS         | SI        | NO            | NO         |
-+--------------------------+-----------+---------------+------------+
-| Plataformas              | Android   | Web App       | Linux      |
-+--------------------------+-----------+---------------+------------+
++-----------------------------------+-----------+---------------+------------+
+| Características                   | GoBees    | EyesOnHives   | HiveTool   |
++===================================+===========+===============+============+
+| No requiere *Hardware* específico | ✔         | ✘             | ✘          |
++-----------------------------------+-----------+---------------+------------+
+| Instalación sencilla              | ✔         | ✔             | ✘          |
++-----------------------------------+-----------+---------------+------------+
+| Procesamiento en local            | ✔         | Parcial       | ✔          |
++-----------------------------------+-----------+---------------+------------+
+| No requiere wifi                  | ✔         | ✘             | ✔          |
++-----------------------------------+-----------+---------------+------------+
+| No requiere red eléctrica         | ✔         | ✔             | ✔          |
++-----------------------------------+-----------+---------------+------------+
+| Localización GPS                  | ✔         | ✘             | ✘          |
++-----------------------------------+-----------+---------------+------------+
+| Plataformas                       | Android   | Web App       | Linux      |
++-----------------------------------+-----------+---------------+------------+
 
 Las principales fortalezas del proyecto son:
 
@@ -123,7 +123,9 @@ Las principales fortalezas del proyecto son:
    de proyectos, simplemente se necesita un *smartphone* con Android.
    Esto hace el proyecto mucho más accesible a los potenciales usuarios.
 
--  La instalación es muy sencilla. Únicamente se requiere un trípode.
+-  La instalación es muy sencilla. Únicamente se requiere un trípode o 
+   cualquier otro tipo de soporte que permita sujetar el *smartphone* en 
+   posición cenital.
 
 -  El procesamiento de las imágenes se realiza en local no en un
    servidor. Considerando que los colmenares suelen estar en medio del
