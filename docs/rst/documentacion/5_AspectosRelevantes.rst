@@ -197,6 +197,12 @@ Desarrollo de la *app*
 El desarrollo de la aplicación Android se realizó de forma incremental,
 publicando una *release* al finalizar cada *sprint*.
 
+Se decidió dar soporte a partir de la versión KitKat (API 19), de tal
+forma que es cubría un 86,3\% de los dispositivos Android del mercado
+[android:versions]_.  Dar soporte a versiones anteriores suponía una 
+sobrecarga importante, por lo que se descartó al no constituir una cuota de
+mercado importante.
+
 La primera tarea consistió en migrar el algoritmo de visión artificial a
 la plataforma Android. A primera vista, no parecía una tarea complicada.
 Sin embargo, nos encontramos con varios *bugs* que, unidos a la mala
@@ -496,3 +502,6 @@ Durante el desarrollo del proyecto se obtuvieron varios reconocimientos:
    https://codelabs.developers.google.com/codelabs/android-testing/
 .. [gobees:prototipes]
    https://github.com/davidmigloz/opencv-android-gradle-repo/
+.. [android:versions]
+   https://developer.android.com/about/dashboards/
+   

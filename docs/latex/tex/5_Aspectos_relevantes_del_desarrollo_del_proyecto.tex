@@ -63,8 +63,6 @@ diarias, etc.), sí que se aplicó una filosofía ágil en líneas generales:
   \emph{burndown}.
 \end{itemize}
 
-\imagen{board}{Tablero \emph{canvas}.}
-
 Para el diseño del algoritmo de visión artificial se utilizó una
 metodología de ensayo y error. Se barajaban diferentes alternativas y se
 iban verificando empíricamente su eficacia y eficiencia.
@@ -218,6 +216,12 @@ robusto que poseía las siguientes etapas:
 
 El desarrollo de la aplicación Android se realizó de forma incremental,
 publicando una \emph{release} al finalizar cada \emph{sprint}.
+
+Se decidió dar soporte a partir de la versión KitKat (API 19), de tal
+forma que es cubría un 86,3\% de los dispositivos Android del mercado
+\citep{android:versions}. Dar soporte a versiones anteriores suponía una 
+sobrecarga importante, por lo que se descartó al no constituir una cuota de
+mercado importante.
 
 La primera tarea consistió en migrar el algoritmo de visión artificial a
 la plataforma Android. A primera vista, no parecía una tarea complicada.
@@ -420,7 +424,7 @@ Cobertura test unitarios algoritmo & TODO                               \\
 \label{stats}
 \end{table}
 
-\section{Documentación}\label{documentacion}
+\section{Documentación}\label{aspectos-documentacion}
 
 En un primer momento, se decidió escribir la documentación en formato
 Markdown, utilizando las \emph{wikis} que proporciona GitHub en el

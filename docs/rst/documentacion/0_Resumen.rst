@@ -24,6 +24,22 @@ monitorización de colmenas, gestión de colmenares, aplicación Android.
 Abstract
 --------
 
-{A brief presentation of the topic addressed in the project.}
+Flight activity of a honey bee colony is an overall indicator of the 
+state of the hive's health. However, manually monitoring this parameter  
+is a very expensive and time-consuming process and can introduce a
+high error rate. Thus, several methods to automate this process have 
+been developed over the years.
 
-**Keywords:** {...}
+In this work, we propose a new method more accessible to the general public
+which allows monitoring the flight activity of a honey bee colony using the built-in 
+camera of an Android smartphone.
+
+In addition, an apiary management application has been developed, incorporating
+the algorithm and providing the necessary tools to interpret and organize 
+all the information gathered.
+
+GoBees is the resulting application and it is available from Google Play or
+the official web site http://gobees.io/.
+
+**Keywords:** bee counter, flight activity, hive monitoring, apiary management,
+Android application.

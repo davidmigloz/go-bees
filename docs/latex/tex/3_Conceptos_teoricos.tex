@@ -334,11 +334,6 @@ aplicación de desarrollo, permitiendo variar todos estos parámetros en
 tiempo real. De esta manera, se pudo elegir la mejor configuración para
 nuestro problema concreto.
 
-En la siguiente imagen se puede ver una captura de nuestra plataforma de
-desarrollo en la pestaña correspondiente a esta fase:
-
-\imagen{devplatform}{Plataforma de desarrollo del algoritmo.}
-
 Una vez parametrizado correctamente, vimos como este algoritmo era el
 que mejores resultados nos proporcionaba. Con un tiempo de ejecución en
 nuestro equipo de pruebas de entorno a 4 ms/frame, mucho menor que el
@@ -356,24 +351,6 @@ En la siguiente imagen se puede ver el resultado de aplicar
 Se puede apreciar como ha descartado correctamente las sombras en
 movimiento de los árboles y se ha quedado únicamente con los objetos en
 movimiento.
-
-\subsection{Otros algoritmos}\label{otros-algoritmos}
-
-La implementación original de OpenCV implementa otros dos algoritmos más
-que no están disponibles a través de los \emph{wrappers} de Android.
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{BackgroundSubtractorGMG} es un algoritmo que combina una
-  estimación estadística del fondo de la imagen junto con una
-  segmentación Bayesiana píxel a píxel \citep{opencv:bs_tutorial}.
-\item
-  \texttt{BackgroundSubtractorFGD} está disponible en la versión para
-  CUDA. Utiliza la regla de decisión de Bayes para clasificar los
-  elementos del fondo y los del primer plano atendiendo a sus vectores
-  de características \citep{art:li_foreground_2003}.
-\end{itemize}
 
 \section{Posprocesado}\label{posprocesado}
 
@@ -417,7 +394,12 @@ En nuestro algoritmo aplicamos tres operaciones morfológicas seguidas:
 
 A continuación podemos ver el resultado de esta fase:
 
-\imagen{s3}{Resultado de la fase de posprocesado.}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{s3}
+	\caption{Resultado de la fase de posprocesado.}
+	\label{fig:s3}
+\end{figure}
 
 \section{Detección y conteo de abejas}\label{deteccion-y-conteo-de-abejas}
 
