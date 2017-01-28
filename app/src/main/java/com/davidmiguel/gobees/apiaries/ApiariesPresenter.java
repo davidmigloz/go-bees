@@ -62,9 +62,9 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
     }
 
     @Override
-    public void loadData(boolean forceUpdate) {
+    public void loadData(final boolean forceUpdate) {
         // Force update the first time
-        boolean update = forceUpdate || firstLoad;
+        final boolean update = forceUpdate || firstLoad;
         firstLoad = false;
         // Refresh data if needed
         if (update) {
@@ -87,7 +87,7 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
                     // Show the list of apiaries
                     view.showApiaries(apiaries);
                     // Check whether current weather is up to date
-                    checkCurrentWeather(apiaries);
+                    checkCurrentWeather(forceUpdate, apiaries);
                 }
             }
 
@@ -125,7 +125,7 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
                     return;
                 }
                 // Refresh recordings
-                loadData(true);
+                loadData(false);
                 // Show success message
                 view.showSuccessfullyDeletedMessage();
             }
@@ -153,15 +153,16 @@ class ApiariesPresenter implements ApiariesContract.LoadDataPresenter {
      * Checks whether current weather is up to date (less than 15min old).
      * If not, orders to update the current weather in all apiaries.
      *
+     * @param forceUpdate force to update weather.
      * @param apiaries list of apiaries.
      */
-    private void checkCurrentWeather(List<Apiary> apiaries) {
+    private void checkCurrentWeather(boolean forceUpdate, List<Apiary> apiaries) {
         List<Apiary> apiariesToUpdate = new ArrayList<>();
         Date now = new Date();
         // Check dates
         for (Apiary apiary : apiaries) {
             if (apiary.hasLocation()) {
-                if (apiary.getCurrentWeather() != null) {
+                if (!forceUpdate && apiary.getCurrentWeather() != null) {
                     // Check time
                     Date weatherDate = apiary.getCurrentWeather().getTimestamp();
                     long minFromLastUpdate = (now.getTime() - weatherDate.getTime()) / 60000;

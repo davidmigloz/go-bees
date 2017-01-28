@@ -324,8 +324,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         // Setup data
         List<Entry> entries = new ArrayList<>();
         // Add as first entry a copy of the first temperature record
-        // First relative timestamp is 0 (-5 to don't show the value in the chart)
-        entries.add(new Entry(-5, (float) meteo.get(0).getTemperature()));
+        // First relative timestamp is 0
+        entries.add(new Entry(0, (float) meteo.get(0).getTemperature()));
         // Add all temperature records
         float maxTemp = Float.MIN_VALUE;
         float minTemp = Float.MAX_VALUE;
@@ -343,8 +343,7 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
             }
         }
         // Add as last entry a copy of the last temperature record
-        // (+5 to don't show the value in the chart)
-        entries.add(new Entry(lastTimestamp + 5,
+        entries.add(new Entry(lastTimestamp,
                 (float) meteo.get(meteo.size() - 1).getTemperature()));
         // Style char lines (type, color, etc.)
         TempValueFormatter tempValueFormatter = new TempValueFormatter(
@@ -367,8 +366,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         // Setup data
         List<Entry> entries = new ArrayList<>();
         // Add as first entry a copy of the first rain record
-        // First relative timestamp is 0 (-5 to don't show the value in the chart)
-        entries.add(new Entry(-5, (float) meteo.get(0).getRain()));
+        // First relative timestamp is 0
+        entries.add(new Entry(0, (float) meteo.get(0).getRain()));
         // Add all rain records
         float maxRain = Float.MIN_VALUE;
         for (MeteoRecord meteoRecord : meteo) {
@@ -381,8 +380,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
                 maxRain = rain;
             }
         }
-        // Add as last entry a copy of the last rain record (+5 to don't show the value in the chart)
-        entries.add(new Entry(lastTimestamp + 5, (float) meteo.get(meteo.size() - 1).getRain()));
+        // Add as last entry a copy of the last rain record
+        entries.add(new Entry(lastTimestamp, (float) meteo.get(meteo.size() - 1).getRain()));
         // Style char lines (type, color, etc.)
         RainValueFormatter rainValueFormatter = new RainValueFormatter(RainValueFormatter.Unit.MM);
         rainChart.setData(new LineData(
@@ -402,8 +401,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         // Setup data
         List<Entry> entries = new ArrayList<>();
         // Add as first entry a copy of the first wind record
-        // First relative timestamp is 0 (-5 to don't show the value in the chart)
-        entries.add(new Entry(-5, (float) meteo.get(0).getWindSpeed()));
+        // First relative timestamp is 0
+        entries.add(new Entry(0, (float) meteo.get(0).getWindSpeed()));
         // Add all wind records
         float maxWind = Float.MIN_VALUE;
         for (MeteoRecord meteoRecord : meteo) {
@@ -416,8 +415,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
                 maxWind = wind;
             }
         }
-        // Add as last entry a copy of the last wind record (+5 to don't show the value in the chart)
-        entries.add(new Entry(lastTimestamp + 5, (float) meteo.get(meteo.size() - 1).getWindSpeed()));
+        // Add as last entry a copy of the last wind record
+        entries.add(new Entry(lastTimestamp, (float) meteo.get(meteo.size() - 1).getWindSpeed()));
         // Style char lines (type, color, etc.)
         WindValueFormatter windValueFormatter = new WindValueFormatter(WindValueFormatter.Unit.MS);
         windChart.setData(new LineData(
@@ -468,6 +467,8 @@ public class RecordingFragment extends Fragment implements RecordingContract.Vie
         leftAxis.setAxisMaximum((float) (maxVal));
         leftAxis.setAxisMinimum((float) (minVal));
         YAxis rightAxis = chart.getAxisRight();
+        rightAxis.setAxisMaximum((float) (maxVal));
+        rightAxis.setAxisMinimum((float) (minVal));
         rightAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         rightAxis.setValueFormatter(formatter);
         return lineDataSet;

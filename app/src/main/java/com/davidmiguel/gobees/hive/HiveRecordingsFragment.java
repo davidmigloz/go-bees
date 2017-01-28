@@ -114,6 +114,7 @@ public class HiveRecordingsFragment extends Fragment
                 presenter.startNewRecording();
             }
         });
+        fab.setVisibility(View.VISIBLE);
 
         // Set up progress indicator
         AndroidUtils.setUpProgressIndicator(root, getContext(), recyclerView, presenter);

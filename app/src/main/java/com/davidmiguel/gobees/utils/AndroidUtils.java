@@ -118,7 +118,7 @@ public final class AndroidUtils {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.loadData(false);
+                presenter.loadData(true);
             }
         });
     }

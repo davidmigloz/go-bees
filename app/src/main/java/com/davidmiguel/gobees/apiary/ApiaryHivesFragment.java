@@ -106,6 +106,7 @@ public class ApiaryHivesFragment extends Fragment
                 presenter.addEditHive(AddEditHiveActivity.NEW_HIVE);
             }
         });
+        fab.setVisibility(View.VISIBLE);
 
         // Configure progress indicator
         AndroidUtils.setUpProgressIndicator(root, getContext(), recyclerView, presenter);

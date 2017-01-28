@@ -143,13 +143,11 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void getApiary(long apiaryId, @NonNull final GetApiaryCallback callback) {
         checkNotNull(callback);
-
         // Respond immediately with cache if available and not dirty
         if (cachedApiaries != null && !cacheIsDirty) {
             callback.onApiaryLoaded(cachedApiaries.get(apiaryId));
             return;
         }
-
         // Query the local storage if available
         goBeesDataSource.getApiary(apiaryId, callback);
     }
@@ -180,6 +178,11 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void deleteApiary(long apiaryId, @NonNull TaskCallback callback) {
         checkNotNull(callback);
+        // Do in memory cache update to keep the app UI up to date
+        if (cachedApiaries == null) {
+            cachedApiaries = new LinkedHashMap<>();
+        }
+        cachedApiaries.remove(apiaryId);
         // Delete apiary
         goBeesDataSource.deleteApiary(apiaryId, callback);
     }
@@ -187,13 +190,13 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void deleteAllApiaries(@NonNull TaskCallback callback) {
         checkNotNull(callback);
-        // Delete all apiaries
-        goBeesDataSource.deleteAllApiaries(callback);
         // Do in memory cache update to keep the app UI up to date
         if (cachedApiaries == null) {
             cachedApiaries = new LinkedHashMap<>();
         }
         cachedApiaries.clear();
+        // Delete all apiaries
+        goBeesDataSource.deleteAllApiaries(callback);
     }
 
     @Override
@@ -212,13 +215,11 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void getHives(long apiaryId, @NonNull GetHivesCallback callback) {
         checkNotNull(callback);
-
         // Respond immediately with cache if available and not dirty
         if (!cacheIsDirty && cachedApiaries != null && cachedApiaries.containsKey(apiaryId)) {
             callback.onHivesLoaded(new ArrayList<>(cachedApiaries.get(apiaryId).getHives()));
             return;
         }
-
         // Query the local storage if available
         goBeesDataSource.getHives(apiaryId, callback);
     }
@@ -226,14 +227,6 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void getHive(long hiveId, @NonNull GetHiveCallback callback) {
         checkNotNull(callback);
-
-        // Respond immediately with cache if available and not dirty
-        // TODO add to cache
-//        if (cachedApiaries != null && !cacheIsDirty) {
-//            callback.onHiveLoaded(cachedApiaries.get(apiaryId));
-//            return;
-//        }
-
         // Query the local storage if available
         goBeesDataSource.getHive(hiveId, callback);
     }
@@ -241,10 +234,6 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void getHiveWithRecordings(long hiveId, @NonNull GetHiveCallback callback) {
         checkNotNull(callback);
-
-        // Respond immediately with cache if available and not dirty
-        // TODO add to cache
-
         // Query the local storage if available
         goBeesDataSource.getHiveWithRecordings(hiveId, callback);
     }

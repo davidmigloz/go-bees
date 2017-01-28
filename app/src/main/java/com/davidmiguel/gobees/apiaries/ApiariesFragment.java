@@ -98,6 +98,7 @@ public class ApiariesFragment extends Fragment
                 presenter.addEditApiary(AddEditApiaryActivity.NEW_APIARY);
             }
         });
+        fab.setVisibility(View.VISIBLE);
 
         // Set up progress indicator
         AndroidUtils.setUpProgressIndicator(root, getContext(), recyclerView, presenter);
