@@ -104,7 +104,7 @@
 
                 <ImageView
                     android:id="@+id/get_location_icon"
-                    android:layout_width="24dp"
+                    android:layout_width="32dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"

@@ -138,8 +138,13 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
     public void setLocation(Location location) {
         latitudeEditText.setText(String.valueOf(location.getLatitude()));
         longitudeEditText.setText(String.valueOf(location.getLongitude()));
-        locationPrecisionTextView.setText(String.format(
-                Locale.getDefault(), "±%dm", Math.round(location.getAccuracy())));
+        long precision = Math.round(location.getAccuracy());
+        if (precision != 0) {
+            locationPrecisionTextView.setText(String.format(
+                    Locale.getDefault(), "±%dm", precision));
+        } else {
+            locationPrecisionTextView.setText("");
+        }
     }
 
     @Override
@@ -152,6 +157,7 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
         getLocationIcon.setColorFilter(active
                 ? ContextCompat.getColor(getContext(), R.color.colorPrimaryDark) :
                 ContextCompat.getColor(getContext(), R.color.colorAccent));
+        locationPrecisionTextView.setText("");
     }
 
     @Override
