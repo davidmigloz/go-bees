@@ -33,25 +33,31 @@
         <activity
             android:name=".apiaries.ApiariesActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.OverlapSystemBar">
         </activity>
         <activity
             android:name=".addeditapiary.AddEditApiaryActivity"
-            android:parentActivityName=".apiaries.ApiariesActivity"/>
+            android:parentActivityName=".apiaries.ApiariesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".apiary.ApiaryActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".apiaries.ApiariesActivity"/>
+            android:parentActivityName=".apiaries.ApiariesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".addedithive.AddEditHiveActivity"
-            android:parentActivityName=".apiary.ApiaryActivity"/>
+            android:parentActivityName=".apiary.ApiaryActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".hive.HiveActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".apiary.ApiaryActivity"/>
+            android:parentActivityName=".apiary.ApiaryActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".recording.RecordingActivity"
-            android:parentActivityName=".hive.HiveActivity"/>
+            android:parentActivityName=".hive.HiveActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".monitoring.MonitoringActivity"
             android:launchMode="singleTop"
@@ -60,15 +66,17 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
             android:name=".settings.SettingsActivity"
-            android:parentActivityName=".apiaries.ApiariesActivity"/>
+            android:parentActivityName=".apiaries.ApiariesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".about.AboutActivity"
-            android:parentActivityName=".apiaries.ApiariesActivity"/>
+            android:parentActivityName=".apiaries.ApiariesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".help.HelpActivity"
-            android:parentActivityName=".apiaries.ApiariesActivity"/>
+            android:parentActivityName=".apiaries.ApiariesActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".monitoring.MonitoringService"/>
     </application>
-
 </manifest>
