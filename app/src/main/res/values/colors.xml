@@ -29,6 +29,10 @@
     <color name="colorIcons">#212121</color>
     <color name="colorDivider">#BDBDBD</color>
 
+    <!-- Bees chart fade  -->
+    <color name="endColorChart">#ffd180</color>
+    <color name="startColorChart">#ffa000</color>
+
     <!-- Temp chart -->
     <color name="colorLineTempChart">#FFC107</color>
     <color name="colorFillTempChart">#FFECB3</color>

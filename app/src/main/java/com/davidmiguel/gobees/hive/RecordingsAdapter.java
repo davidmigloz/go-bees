@@ -21,8 +21,10 @@ package com.davidmiguel.gobees.hive;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -230,8 +232,14 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.Recording
             if (((int) lineDataSet.getYMax()) != 0) {
                 lineDataSet.setDrawFilled(true);
                 lineDataSet.setFillAlpha(255);
-                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.chart_fade_green);
-                lineDataSet.setFillDrawable(drawable);
+                // Fix bug with vectors in API < 21
+                if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
+                    Drawable drawable = ResourcesCompat.getDrawable(context.getResources(),
+                            R.drawable.chart_fade, null);
+                    lineDataSet.setFillDrawable(drawable);
+                } else{
+                    lineDataSet.setFillColor(ContextCompat.getColor(context, R.color.colorPrimary));
+                }
             }
             return new LineData(lineDataSet);
         }

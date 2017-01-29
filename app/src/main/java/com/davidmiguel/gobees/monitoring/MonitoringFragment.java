@@ -294,7 +294,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         if (active) {
             numBeesTV.setVisibility(View.VISIBLE);
         } else {
-            numBeesTV.setText(View.GONE);
+            numBeesTV.setVisibility(View.GONE);
         }
     }
 
