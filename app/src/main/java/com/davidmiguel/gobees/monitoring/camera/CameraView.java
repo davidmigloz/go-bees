@@ -34,14 +34,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class CameraView extends JavaCameraView {
 
-    private static final int MAX_HEIGHT = 480;
-    private static final int MAX_WIDTH = 640;
-
     private Camera.Parameters params;
-
-    public CameraView(Context context, int cameraId) {
-        super(context, cameraId);
-    }
 
     public CameraView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,10 +42,6 @@ public class CameraView extends JavaCameraView {
 
     @Override
     protected boolean initializeCamera(int width, int height) {
-        // Set back camera
-        this.setCameraIndex(0);
-        // Config size
-        this.setMaxFrameSize(MAX_WIDTH, MAX_HEIGHT);
         // Initialize camera
         boolean ok = super.initializeCamera(width, height);
         // Get camera parameters
