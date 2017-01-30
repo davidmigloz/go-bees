@@ -16,25 +16,28 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.davidmiguel.gobees.help;
+package com.davidmiguel.gobees;
+
+import android.app.Application;
+
+import com.davidmiguel.gobees.data.source.local.GoBeesDbConfig;
+
+import io.realm.Realm;
 
 /**
- * Listens to user actions from the UI HelpFragment, retrieves the data and updates the
- * UI as required.
+ * Main app.
  */
-class HelpPresenter implements HelpContract.Presenter {
-
-    private static final String HELP_URL = "http://gobees.io/help";
-
-    private HelpContract.View view;
-
-    HelpPresenter(HelpContract.View view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
-
+public class GoBeesApp extends Application {
     @Override
-    public void start() {
-        view.loadUrl(HELP_URL);
+    public void onCreate() {
+        super.onCreate();
+        // Initialize Realm. Should only be done once when the application starts.
+        Realm.init(this);
+        // Get Realm config
+        GoBeesDbConfig realmConfig = new GoBeesDbConfig();
+        // Delete all
+        Realm.deleteRealm(realmConfig.getRealmConfiguration());
+        // Set config
+        Realm.setDefaultConfiguration(realmConfig.getRealmConfiguration());
     }
 }

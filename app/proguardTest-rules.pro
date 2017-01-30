@@ -42,3 +42,5 @@
 -dontwarn java.lang.ClassValue
 -dontwarn com.google.j2objc.annotations.Weak
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+# RecyclerView
+-keep class android.support.v7.widget.RecyclerView { *; }

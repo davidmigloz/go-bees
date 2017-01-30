@@ -110,7 +110,9 @@ public class GoBeesRepository implements GoBeesDataSource {
     @Override
     public void deleteAll(@NonNull TaskCallback callback) {
         checkNotNull(callback);
-        cachedApiaries.clear();
+        if(cachedApiaries != null) {
+            cachedApiaries.clear();
+        }
         goBeesDataSource.deleteAll(callback);
     }
 
