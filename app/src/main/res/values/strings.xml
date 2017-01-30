@@ -599,6 +599,15 @@
     <!-- Changelog [CHAR LIMIT=NONE] -->
     <string name="changelog" translatable="false">
         <![CDATA[
+        <b>Version 1.0:</b><br/>
+        - Splash screen.<br/>
+        - Sample apiary generator.<br/>
+        - Delete all data option.<br/>
+        - Add coordinates manually.<br/>
+        - Update OpenCV to v3.2.0.<br/>
+        - Several bug fixes for Android < 5.0.<br/>
+        - Add Share app.<br/>
+        - Minor improvements and fixes.<br/><br/>
         <b>Version 0.7:</b><br/>
         - Spanish translation.<br/>
         - Catalan translation.<br/>
