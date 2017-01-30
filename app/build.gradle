@@ -27,8 +27,8 @@ android {
         applicationId "com.davidmiguel.gobees"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 7
-        versionName "v0.7"
+        versionCode 10
+        versionName "v1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -169,6 +169,7 @@ sonarqube {
     properties {
         property "sonar.projectName", "GoBees"
         property "sonar.projectKey", "com.davidmiguel.gobees"
+        property "sonar.projectVersion", versionName
         property "sonar.exclusions", "**/*.png,**/*.jpg"
         property "sonar.android.lint.report", "./build/outputs/lint-results-mockDebug.xml"
         property "sonar.junit.reportsPath", "./build/test-results/mockDebug"
