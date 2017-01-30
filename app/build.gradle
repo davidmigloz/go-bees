@@ -23,7 +23,6 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
-
     defaultConfig {
         applicationId "com.davidmiguel.gobees"
         minSdkVersion 19
@@ -33,7 +32,6 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -50,12 +48,10 @@ android {
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
     }
-
     buildTypes.each {
         // OpenWeatherMap key (stored in [USER_HOME]/.gradle/gradle.properties)
         it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', OpenWeatherMapApiKey
     }
-
     // Mock: stubs out the service layer completely and returns a fake dataset
     // Prod: production version
     productFlavors {
@@ -66,7 +62,6 @@ android {
 
         }
     }
-
     // Remove mockRelease as it's not needed.
     android.variantFilter { variant ->
         if (variant.buildType.name.equals('release')
@@ -74,22 +69,19 @@ android {
             variant.setIgnore(true);
         }
     }
-
     // android.jar methods return either null or zero, not throw exceptions
     testOptions {
         unitTests.returnDefaultValues = true
     }
-
     // Always show the result of every unit test, even if it passes
     testOptions.unitTests.all {
         testLogging {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
-
     // Lint checks
     lintOptions {
-        disable 'SetJavaScriptEnabled','MissingTranslation'
+        disable 'SetJavaScriptEnabled', 'MissingTranslation'
     }
 }
 
@@ -100,6 +92,7 @@ sourceSets {
 }
 
 dependencies {
+
     // App's dependencies, including test
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.android.support:appcompat-v7:25.1.0'
@@ -113,30 +106,25 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.vanniktech:vntnumberpickerpreference:1.0.0'
     compile 'rebus:permission-utils:1.0.6'
-
     // Dependencies for local unit tests
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
-    testCompile "org.powermock:powermock-module-junit4:1.6.6"
-    testCompile "org.powermock:powermock-api-mockito:1.6.6"
+    testCompile 'org.powermock:powermock-module-junit4:1.6.6'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.6'
     testCompile 'org.slf4j:slf4j-api:1.7.22'
     testCompile 'org.slf4j:slf4j-log4j12:1.7.22'
     testCompile 'log4j:log4j:1.2.17'
     testCompile 'org.json:json:20160810'
-
     // Android Testing Support Library's runner and rules
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
-
     // Dependencies for Android unit tests
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'org.mockito:mockito-core:2.6.2'
-
     // Espresso UI Testing
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
-
     // Resolve conflicts between main and test APK:
     androidTestCompile 'com.android.support:support-annotations:25.1.0'
     androidTestCompile 'com.android.support:support-v4:25.1.0'
@@ -162,7 +150,7 @@ configurations.compile.dependencies.each { compileDependency ->
 Copy test resources directory (test/mock/debug).
 */
 task copyResDirectoryToTestMockDebugClasses(type: Copy) {
-    from "${projectDir}/src/test/res"
+    from "${projectDir}/src/testMock/res"
     into "${buildDir}/intermediates/classes/test/mock/debug/res"
 }
 

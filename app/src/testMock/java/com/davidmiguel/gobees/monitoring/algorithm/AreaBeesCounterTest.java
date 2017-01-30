@@ -44,7 +44,7 @@ import static junit.framework.Assert.assertTrue;
 @SuppressLint("DefaultLocale")
 public class AreaBeesCounterTest extends OpenCvBaseTest {
 
-    private static final String LOGGER_PROP = "src/test/res/log4j.properties";
+    private static final String LOGGER_PROP = "src/testMock/res/log4j.properties";
     private static final double MAX_ERROR_THRESHOLD = 0.1;
     private static final int NUM_FRAMES_SKIP = 10;
     private final Logger logger = LoggerFactory.getLogger(AreaBeesCounterTest.class);
