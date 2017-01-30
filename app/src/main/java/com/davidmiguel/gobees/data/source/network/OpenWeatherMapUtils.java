@@ -68,6 +68,9 @@ class OpenWeatherMapUtils {
     private static final String OWM_SNOW = "snow";
     private static final String OWM_SNOW_3H = "3h";
 
+    private OpenWeatherMapUtils() {
+    }
+
     static MeteoRecord parseCurrentWeatherJson(String weatherJson) throws JSONException {
         // Get JSON
         JSONObject jsonObject = new JSONObject(weatherJson);
@@ -78,11 +81,8 @@ class OpenWeatherMapUtils {
             switch (errorCode) {
                 case HttpURLConnection.HTTP_OK:
                     break;
-                case HttpURLConnection.HTTP_NOT_FOUND:
-                    /* Location invalid */
-                    return null;
-                default:
-                    /* Server probably down */
+                case HttpURLConnection.HTTP_NOT_FOUND: // Location invalid
+                default: // Server probably down
                     return null;
             }
         }

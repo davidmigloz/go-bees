@@ -153,7 +153,6 @@
     <string name="permission_request_title">Permís denegat</string>
     <string name="pref_bees_cat_label">Abella</string>
     <string name="num_hives">Número de ruscs</string>
-    <string name="num_bees_default">0</string>
     <string name="num_bees">Nº d\'abelles</string>
     <string name="notes_icon">Notes</string>
     <string name="no_weather_data_available">Informació meteorològica no disponible.</string>
@@ -233,4 +232,20 @@
     <string name="close_btn">Cerrar</string>
     <string name="libraries">Llibreries Codi Obert:</string>
     <string name="license_btn">Llicència</string>
+    <string name="all_data_deleted_msg">Dades eliminades!</string>
+    <string name="loading_msg">Carregant…</string>
+    <string name="pref_data_cat_label">Dades</string>
+    <string name="pref_delete_all_data_desc">PERILL! S\'eliminaran totes les dades.</string>
+    <string name="pref_delete_all_data_label">Esborrar totes les dades</string>
+    <string name="pref_generate_sample_data_desc">Es crearà un abellar de mostra.</string>
+    <string name="pref_generate_sample_data_label">Generar dades de mostra</string>
+    <string name="sample_apiary_name">Abellar de mostra</string>
+    <string name="sample_data_generated_msg">Abellar de mostra creat!</string>
+    <string name="sample_hive_name">Rusc #<xliff:g id="temp">%1$d</xliff:g></string>
+    <string name="sample_hive_notes">Comprovar si té varroa.</string>
+    <string name="sample_apiary_notes">Treure dues caixes i dues tapes.\nL\' abeurador està gairebé buit.\nTreure les vacunes el dilluns que ve.</string>
+    <string name="apiary_location__latitude_hint">\"Latitud (ex. 42.352083)\"</string>
+    <string name="apiary_location__longitude_hint">\"Longitud (e.x. -3.697586)\"</string>
+    <string name="invalid_location_message">Ubicació no vàlida!</string>
+    <string name="name_icon">Nom</string>
 </resources>

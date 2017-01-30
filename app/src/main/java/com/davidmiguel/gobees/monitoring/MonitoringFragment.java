@@ -39,13 +39,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.camera.CameraView;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.hive.HiveRecordingsFragment;
 import com.davidmiguel.gobees.monitoring.MonitoringService.MonitoringBinder;
+import com.davidmiguel.gobees.monitoring.camera.CameraView;
 import com.davidmiguel.gobees.utils.BackClickHelperFragment;
 
 import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -60,6 +61,9 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     public static final String ARGUMENT_APIARY_ID = "APIARY_ID";
     public static final String ARGUMENT_HIVE_ID = "HIVE_ID";
+
+    private static final int MAX_HEIGHT = 480;
+    private static final int MAX_WIDTH = 640;
 
     private MonitoringContract.Presenter presenter;
 
@@ -93,13 +97,10 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         loaderCallback = new BaseLoaderCallback(getContext()) {
             @Override
             public void onManagerConnected(final int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS:
-                        presenter.onOpenCvConnected();
-                        break;
-                    default:
-                        super.onManagerConnected(status);
-                        break;
+                if (status == LoaderCallbackInterface.SUCCESS) {
+                    presenter.onOpenCvConnected();
+                } else {
+                    super.onManagerConnected(status);
                 }
             }
         };
@@ -107,8 +108,11 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         // Don't switch off screen
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        // Configure view
+        // Configure camera
         cameraView = (CameraView) root.findViewById(R.id.camera_view);
+        cameraView.setCameraIndex(CameraBridgeViewBase.CAMERA_ID_BACK);
+        cameraView.setMaxFrameSize(MAX_WIDTH, MAX_HEIGHT);
+        // Configure view
         numBeesTV = (TextView) root.findViewById(R.id.num_bees);
         settingsLayout = (RelativeLayout) getActivity().findViewById(R.id.settings);
         chronometer = (Chronometer) root.findViewById(R.id.chronometer);
@@ -215,7 +219,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
 
     @Override
     public void initOpenCV(CvCameraViewListener2 listener) {
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, getContext(), loaderCallback);
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, getContext(), loaderCallback);
         cameraView.setCvCameraViewListener(listener);
     }
 
@@ -290,6 +294,15 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
                 presenter.stopRecording();
             }
         });
+    }
+
+    @Override
+    public void showNumBeesView(boolean active) {
+        if (active) {
+            numBeesTV.setVisibility(View.VISIBLE);
+        } else {
+            numBeesTV.setVisibility(View.GONE);
+        }
     }
 
     @Override

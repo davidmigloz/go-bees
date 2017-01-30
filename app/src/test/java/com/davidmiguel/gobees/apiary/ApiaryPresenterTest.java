@@ -20,7 +20,7 @@ package com.davidmiguel.gobees.apiary;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -93,7 +93,6 @@ public class ApiaryPresenterTest {
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(apiaryHivesView);
-        inOrder.verify(apiaryHivesView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
         inOrder.verify(apiaryHivesView).setLoadingIndicator(false);
         ArgumentCaptor<List> showHivesArgumentCaptor = ArgumentCaptor.forClass(List.class);

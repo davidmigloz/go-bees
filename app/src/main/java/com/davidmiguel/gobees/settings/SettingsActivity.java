@@ -19,16 +19,15 @@
 package com.davidmiguel.gobees.settings;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.R;
+import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 /**
  * Presents a set of application settings presented as a single list.
  */
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +35,15 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.settings_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(getString(R.string.settings_toolbar_title));
-        }
+        AndroidUtils.setUpToolbar(this, false, R.string.settings_toolbar_title);
 
         // Add fragment to the activity
+        SettingsFragment settingsFragment = SettingsFragment.newInstance();
         getFragmentManager().beginTransaction()
-                .replace(R.id.contentFrame, new SettingsFragment())
+                .replace(R.id.contentFrame, settingsFragment)
                 .commit();
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        // Create the presenter
+        new SettingsPresenter(goBeesRepository, settingsFragment);
     }
 }

@@ -39,7 +39,7 @@ public class BeesMarkerView extends MarkerView {
     /**
      * Constructor. Sets up the MarkerView with a custom layout resource.
      *
-     * @param context contex.
+     * @param context        contex.
      * @param layoutResource the layout resource to use for the MarkerView
      */
     public BeesMarkerView(Context context, int layoutResource) {

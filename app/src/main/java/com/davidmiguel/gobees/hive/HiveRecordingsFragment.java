@@ -26,17 +26,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -48,8 +42,8 @@ import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 import com.davidmiguel.gobees.monitoring.MonitoringFragment;
 import com.davidmiguel.gobees.recording.RecordingActivity;
 import com.davidmiguel.gobees.recording.RecordingFragment;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
-import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -120,27 +114,10 @@ public class HiveRecordingsFragment extends Fragment
                 presenter.startNewRecording();
             }
         });
+        fab.setVisibility(View.VISIBLE);
 
         // Set up progress indicator
-        final ScrollChildSwipeRefreshLayout swipeRefreshLayout =
-                (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
-        swipeRefreshLayout.setColorSchemeColors(
-                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
-                ContextCompat.getColor(getActivity(), R.color.colorAccent),
-                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark)
-        );
-
-        // Set the scrolling view in the custom SwipeRefreshLayout
-        swipeRefreshLayout.setScrollUpChild(recyclerView);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.loadData(false);
-            }
-        });
-
-        // Listen menu options
-        setHasOptionsMenu(true);
+        AndroidUtils.setUpProgressIndicator(root, getContext(), recyclerView, presenter);
 
         return root;
     }
@@ -152,6 +129,11 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
+    public void setLoadingIndicator(final boolean active) {
+        AndroidUtils.setLoadingIndicator(getView(), active);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
@@ -160,42 +142,8 @@ public class HiveRecordingsFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.hive_frag_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
-                return true;
-            case R.id.menu_refresh:
-                presenter.loadData(true);
-                break;
-        }
-        return true;
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         presenter.result(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void setLoadingIndicator(final boolean active) {
-        if (getView() == null) {
-            return;
-        }
-        final SwipeRefreshLayout srl =
-                (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
-        // Make sure setRefreshing() is called after the layout is done with everything else
-        srl.post(new Runnable() {
-            @Override
-            public void run() {
-                srl.setRefreshing(active);
-            }
-        });
     }
 
     @Override

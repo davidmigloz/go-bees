@@ -21,7 +21,7 @@ import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.mothers.HiveMother;
 import com.davidmiguel.gobees.data.model.mothers.RecordingMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
@@ -94,7 +94,6 @@ public class HivePresenterTest {
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(hiveRecordingsView);
-        inOrder.verify(hiveRecordingsView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
         inOrder.verify(hiveRecordingsView).isActive();
         inOrder.verify(hiveRecordingsView).setLoadingIndicator(false);

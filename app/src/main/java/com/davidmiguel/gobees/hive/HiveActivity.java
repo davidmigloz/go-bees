@@ -23,13 +23,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 import com.davidmiguel.gobees.utils.BaseTabFragment;
 import com.davidmiguel.gobees.utils.TabsFragmentPagerAdapter;
 import com.google.common.collect.Lists;
@@ -37,18 +34,20 @@ import com.google.common.collect.Lists;
 /**
  * Hive activity.
  */
-public class HiveActivity extends AppCompatActivity {
+public class HiveActivity extends BaseActivity {
 
     public static final int NO_APIARY = -1;
     public static final int NO_HIVE = -1;
 
     private Fragment hiveRecordingsFragment;
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hive_act);
+
+        // Set up the toolbar
+        AndroidUtils.setUpToolbar(this, false);
 
         // Get apiary id
         long apiaryId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_APIARY_ID, NO_APIARY);
@@ -60,15 +59,6 @@ public class HiveActivity extends AppCompatActivity {
         long hiveId = getIntent().getLongExtra(HiveRecordingsFragment.ARGUMENT_HIVE_ID, NO_HIVE);
         if (hiveId == NO_HIVE) {
             throw new IllegalArgumentException("No hive id passed!");
-        }
-
-        // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
         }
 
         // Create recordings fragment
@@ -89,26 +79,9 @@ public class HiveActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new HivePresenter(goBeesRepository, (HiveContract.HiveRecordingsView)
                 hiveRecordingsFragment, hiveInfoFragment, apiaryId, hiveId);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     @Override

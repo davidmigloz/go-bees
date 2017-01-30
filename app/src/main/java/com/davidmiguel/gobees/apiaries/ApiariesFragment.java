@@ -25,14 +25,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -45,7 +40,7 @@ import com.davidmiguel.gobees.apiaries.ApiariesAdapter.ApiaryItemListener;
 import com.davidmiguel.gobees.apiary.ApiaryActivity;
 import com.davidmiguel.gobees.apiary.ApiaryHivesFragment;
 import com.davidmiguel.gobees.data.model.Apiary;
-import com.davidmiguel.gobees.utils.ScrollChildSwipeRefreshLayout;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +53,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class ApiariesFragment extends Fragment
         implements ApiariesContract.View, ApiaryItemListener {
 
-    private ApiariesContract.Presenter presenter;
+    private ApiariesContract.LoadDataPresenter presenter;
     private ApiariesAdapter listAdapter;
     private View noApiariesView;
     private LinearLayout apiariesView;
@@ -103,27 +98,10 @@ public class ApiariesFragment extends Fragment
                 presenter.addEditApiary(AddEditApiaryActivity.NEW_APIARY);
             }
         });
+        fab.setVisibility(View.VISIBLE);
 
         // Set up progress indicator
-        final ScrollChildSwipeRefreshLayout swipeRefreshLayout =
-                (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
-        swipeRefreshLayout.setColorSchemeColors(
-                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
-                ContextCompat.getColor(getActivity(), R.color.colorAccent),
-                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark)
-        );
-
-        // Set the scrolling view in the custom SwipeRefreshLayout
-        swipeRefreshLayout.setScrollUpChild(recyclerView);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.loadApiaries(false);
-            }
-        });
-
-        // Listen menu options
-        setHasOptionsMenu(true);
+        AndroidUtils.setUpProgressIndicator(root, getContext(), recyclerView, presenter);
 
         return root;
     }
@@ -135,48 +113,13 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.apiaries_frag_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_refresh:
-                presenter.loadApiaries(true);
-                break;
-            // TODO eliminar generar y eliminar datos
-            case R.id.menu_generate:
-                presenter.generateData();
-                break;
-            case R.id.menu_delete:
-                presenter.deleteData();
-                break;
-            default:
-                return false;
-        }
-        return true;
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         presenter.result(requestCode, resultCode);
     }
 
     @Override
     public void setLoadingIndicator(final boolean active) {
-        if (getView() == null) {
-            return;
-        }
-        final SwipeRefreshLayout srl =
-                (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
-        // Make sure setRefreshing() is called after the layout is done with everything else
-        srl.post(new Runnable() {
-            @Override
-            public void run() {
-                srl.setRefreshing(active);
-            }
-        });
+        AndroidUtils.setLoadingIndicator(getView(), active);
     }
 
     @Override
@@ -233,12 +176,6 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void showSuccessfullyWeatherUpdatedMessage() {
-        Toast.makeText(getActivity(), getString(R.string.successfully_updated_weather_message),
-                Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showWeatherUpdateErrorMessage() {
         Toast.makeText(getActivity(), getString(R.string.weather_update_error_message),
                 Toast.LENGTH_SHORT).show();
@@ -250,7 +187,7 @@ public class ApiariesFragment extends Fragment
     }
 
     @Override
-    public void setPresenter(@NonNull ApiariesContract.Presenter presenter) {
+    public void setPresenter(@NonNull ApiariesContract.LoadDataPresenter presenter) {
         this.presenter = checkNotNull(presenter);
     }
 

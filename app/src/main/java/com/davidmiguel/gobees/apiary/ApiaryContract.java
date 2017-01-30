@@ -22,7 +22,7 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
-import com.davidmiguel.gobees.utils.BasePresenter;
+import com.davidmiguel.gobees.utils.BaseLoadDataPresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
 import java.util.Date;
@@ -123,7 +123,7 @@ interface ApiaryContract {
         void openMap(Apiary apiary);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BaseLoadDataPresenter {
 
         /**
          * Shows a snackbar showing whether a hive was successfully added or not.
@@ -132,13 +132,6 @@ interface ApiaryContract {
          * @param resultCode  result code from the intent.
          */
         void result(int requestCode, int resultCode);
-
-        /**
-         * Load apiary info and its hives from repository.
-         *
-         * @param forceUpdate force cache update.
-         */
-        void loadData(boolean forceUpdate);
 
         /**
          * Orders to open activity to add or edit a hive.

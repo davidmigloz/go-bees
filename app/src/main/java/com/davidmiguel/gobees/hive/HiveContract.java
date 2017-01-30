@@ -23,7 +23,7 @@ import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
-import com.davidmiguel.gobees.utils.BasePresenter;
+import com.davidmiguel.gobees.utils.BaseLoadDataPresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
 import java.util.Date;
@@ -134,7 +134,7 @@ interface HiveContract {
         void showInfo(Hive hive);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BaseLoadDataPresenter {
 
         /**
          * Shows a snackbar showing whether a hive was successfully added or not.
@@ -144,13 +144,6 @@ interface HiveContract {
          * @param data        intent data.
          */
         void result(int requestCode, int resultCode, Intent data);
-
-        /**
-         * Load hive info and its recordings from repository.
-         *
-         * @param forceUpdate force cache update.
-         */
-        void loadData(boolean forceUpdate);
 
         /**
          * Orders to open activity to record a hive.

@@ -1,3 +1,157 @@
 \capitulo{1}{Introducción}
 
-Descripción del contenido del trabajo y del estrucutra de la memoria y del resto de materiales entregados.
+Las abejas son una pieza clave en nuestro ecosistema. La producción de
+alimentos a nivel mundial y la biodiversidad de nuestro planeta dependen
+en gran medida de ellas. Son las encargadas de polinizar el 70\% de los
+cultivos de comida, que suponen un 90\% de la alimentación humana \citep{art:bees_decline}. 
+Sin embargo, la población mundial de abejas
+está disminuyendo a pasos agigantados en los últimos años debido, entre
+otras causas, al uso extendido de plaguicidas tóxicos, parásitos como la
+varroa o la expansión del avispón asiático \citep{art:ccd}.
+
+Actualmente los apicultores inspeccionan sus colmenares de forma manual.
+Uno de los indicadores que más información les proporciona es la
+actividad de vuelo de la colmena (número de abejas en vuelo a la entrada
+de la colmena en un determinado instante) \citep{art:campbell2008}. Este
+dato, junto con información previa de la colmena y conocimiento de las
+condiciones locales, permite al apicultor conocer el estado de la
+colmena con bastante seguridad, pudiendo determinar si esta necesita o
+no una intervención.
+
+La actividad de vuelo de una colmena varía dependiendo de múltiples
+factores, tanto externos como internos a la colmena. Entre ellos se
+encuentran la propia población de la colmena, las condiciones
+meteorológicas, la presencia de enfermedades, parásitos o depredadores,
+la exposición a tóxicos, la presencia de fuentes de néctar, etc. A pesar
+de los numerosos factores que influyen en la actividad de vuelo, su
+conocimiento es de gran ayuda para la toma de decisiones por parte del
+apicultor. Ya que este posee información sobre la mayoría de los
+factores necesarios para su interpretación.
+
+La captación prolongada de la actividad de vuelo de forma manual es muy
+costosa, tediosa y puede introducir una tasa de error elevada. Es por
+esto que a lo largo de los años se haya intentado automatizar este
+proceso de muy diversas maneras. Los primeros intentos se remontan a
+principios del siglo XX, donde se desarrollaron contadores por contacto
+eléctrico \citep{art:lundie1925}. Otros métodos posteriores se basan en
+sensores de infrarrojos \citep{art:struye1994}, sensores capacitivos
+\citep{art:campbell2005}, códigos de barras \citep{beebarcode} o incluso
+en microchips acoplados a las abejas
+\citep{art:decourtye_honeybee_2011}. En los últimos años, se han
+desarrollado numerosos métodos basados en visión artificial
+\citep{art:campbell2008,art:chiron2013a,art:chiron2013,art:tashakkori2015}.
+
+Los métodos basados en contacto, sensores de infrarrojos o capacitivos
+tienen el inconveniente de que es necesario realizar modificaciones en
+la colmena, mientras que en los basados en códigos de barras o
+microchips es necesario manipular las abejas directamente. Estos motivos
+los convierten en métodos poco prácticos fuera del campo investigador.
+Por el contrario, la visión artificial aporta un gran potencial, ya que
+evita tener que realizar ningún tipo de modificación ni en el entorno,
+ni en las abejas. Además, abre la puerta a la monitorización de nuevos
+parámetros como la detección de enjambrazón (división de la colmena y
+salida de un enjambre) o la detección de amenazas (avispones, abejaruco,
+etc.).
+
+Todos los métodos basados en visión artificial propuestos hasta la fecha
+utilizan hardware específico con un coste elevado. En este trabajo se
+propone un método de monitorización de la actividad de vuelo de una
+colmena mediante la cámara de un \emph{smartphone} con Android.
+
+El método propuesto podría revolucionar el campo de la monitorización de
+la actividad de vuelo de colmenas, ya que lo hace accesible al gran
+público. Ya no es necesario contar con costoso hardware, difícil de
+instalar. Solamente es necesario disponer de un \emph{smartphone} con cámara y
+la aplicación GoBees. Además, esta facilita la interpretación de los
+datos, representándolos gráficamente y añadiendo información adicional
+como la situación meteorológica. Permitiendo a los apicultores centrar
+su atención donde realmente es necesaria.
+
+\section{Estructura de la memoria}\label{estructura-de-la-memoria}
+
+La memoria sigue la siguiente estructura:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Introducción:} breve descripción del problema a resolver y la
+  solución propuesta. Estructura de la memoria y listado de materiales
+  adjuntos.
+\item
+  \textbf{Objetivos del proyecto:} exposición de los objetivos que
+  persigue el proyecto.
+\item
+  \textbf{Conceptos teóricos:} breve explicación de los conceptos
+  teóricos clave para la comprensión de la solución propuesta.
+\item
+  \textbf{Técnicas y herramientas:} listado de técnicas metodológicas y
+  herramientas utilizadas para gestión y desarrollo del proyecto.
+\item
+  \textbf{Aspectos relevantes del desarrollo:} exposición de aspectos
+  destacables que tuvieron lugar durante la realización del proyecto.
+\item
+  \textbf{Trabajos relacionados:} estado del arte en el campo de la
+  monitorización de la actividad de vuelo de colmenas y proyectos
+  relacionados.
+\item
+  \textbf{Conclusiones y líneas de trabajo futuras:} conclusiones
+  obtenidas tras la realización del proyecto y posibilidades de mejora o
+  expansión de la solución aportada.
+\end{itemize}
+
+Junto a la memoria se proporcionan los siguientes anexos:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Plan del proyecto software:} planificación temporal y estudio
+  de viabilidad del proyecto.
+\item
+  \textbf{Especificación de requisitos del software:} se describe la
+  fase de análisis; los objetivos generales, el catálogo de requisitos
+  del sistema y la especificación de requisitos funcionales y no
+  funcionales.
+\item
+  \textbf{Especificación de diseño:} se describe la fase de diseño; el
+  ámbito del software, el diseño de datos, el diseño procedimental y el
+  diseño arquitectónico.
+\item
+  \textbf{Manual del programador:} recoge los aspectos más relevantes
+  relacionados con el código fuente (estructura, compilación,
+  instalación, ejecución, pruebas, etc.).
+\item
+  \textbf{Manual de usuario:} guía de usuario para el correcto manejo de
+  la aplicación.
+\end{itemize}
+
+\section{Materiales adjuntos}\label{materiales-adjuntos}
+
+Los materiales que se adjuntan con la memoria son: 
+
+\begin{itemize}
+\tightlist
+\item
+	Aplicación para Android GoBees.
+\item
+	Aplicación Java para el desarrollo del algoritmo.
+\item	
+	Aplicación Java para el etiquetado de fotogramas.
+\item	
+	JavaDoc.
+\item	
+	\emph{Dataset} de vídeos de prueba.
+\end{itemize}
+
+Además, los siguientes recursos están accesibles a través de internet:
+
+\begin{itemize}
+\tightlist
+\item
+  Página web del proyecto \citep{gobees:web}.
+\item
+  GoBees en Google Play \citep{gobees:play}.
+\item
+  Repositorio del proyecto \citep{gobees:repo}.
+\item
+  Repositorio de las herramientas desarrolladas para el proyecto \citep{gobees:prototipes}.
+\end{itemize}

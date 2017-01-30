@@ -26,14 +26,17 @@ import java.util.GregorianCalendar;
  * Java Date utils.
  */
 @SuppressWarnings("WeakerAccess")
-public class DateTimeUtils {
+public final class DateTimeUtils {
 
-    public static final int T_5_SECONDS = 5000;
-    public static final int T_15_MINUTES = 900000;
+    public static final long T_5_SECONDS = 5000;
+    public static final long T_15_MINUTES = 900000;
 
     private static final long ONE_HOUR_IN_MS = 3600000;
     private static final long ONE_MIN_IN_MS = 60000;
     private static final long ONE_SEC_IN_MS = 1000;
+
+    private DateTimeUtils() {
+    }
 
     /**
      * Get actual date with hours, min, sec and millisec set to 0.

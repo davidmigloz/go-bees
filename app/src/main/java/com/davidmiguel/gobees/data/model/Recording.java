@@ -18,6 +18,10 @@
 
 package com.davidmiguel.gobees.data.model;
 
+import android.support.annotation.NonNull;
+
+import com.google.common.base.Objects;
+
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +29,7 @@ import java.util.List;
  * Model class for a recording. A recording contains all the records from one day.
  * A recording is not stored in the db, just the records.
  */
-public class Recording {
+public class Recording implements Comparable<Recording> {
 
     /**
      * Data of the recording.
@@ -63,5 +67,27 @@ public class Recording {
 
     public List<MeteoRecord> getMeteo() {
         return meteo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Recording recording = (Recording) obj;
+        return Objects.equal(date, recording.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(date);
+    }
+
+    @Override
+    public int compareTo(@NonNull Recording recording) {
+        return this.date.compareTo(recording.getDate());
     }
 }

@@ -20,9 +20,9 @@ package com.davidmiguel.gobees.addedithive;
 
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetHiveCallback;
-import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetNextHiveIdCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource.TaskCallback;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import java.util.Date;
 
@@ -64,10 +64,9 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
 
     @Override
     public void populateHive() {
-        if (isNewHive()) {
-            throw new RuntimeException("populateHive() was called but hive is new.");
+        if (!isNewHive()) {
+            goBeesRepository.getHive(hiveId, this);
         }
-        goBeesRepository.getHive(hiveId, this);
     }
 
     @Override
@@ -143,10 +142,9 @@ class AddEditHivePresenter implements AddEditHiveContract.Presenter,
      * @param notes hive notes
      */
     private void updateHive(String name, String notes) {
-        if (isNewHive()) {
-            throw new RuntimeException("updateHive() was called but hive is new.");
+        if (!isNewHive()) {
+            saveHive(hiveId, name, notes);
         }
-        saveHive(hiveId, name, notes);
     }
 
     /**

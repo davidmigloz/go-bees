@@ -24,7 +24,7 @@ package com.davidmiguel.gobees.help;
  */
 class HelpPresenter implements HelpContract.Presenter {
 
-    private static final String HELP_URL = "http://davidmiguel.com/proyectos/robotium/taxsystem/";
+    private static final String HELP_URL = "http://gobees.io/help";
 
     private HelpContract.View view;
 

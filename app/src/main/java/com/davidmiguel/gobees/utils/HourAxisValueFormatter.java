@@ -70,11 +70,7 @@ public class HourAxisValueFormatter implements IAxisValueFormatter {
      * @return formatted hour.
      */
     private String getHour(long timestamp) {
-        try {
-            mDate.setTime(timestamp * 1000); // Convert from seconds to milliseconds
-            return mDataFormat.format(mDate);
-        } catch (Exception ex) {
-            return "--:--";
-        }
+        mDate.setTime(timestamp * 1000); // Convert from seconds to milliseconds
+        return mDataFormat.format(mDate);
     }
 }

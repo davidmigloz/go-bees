@@ -19,13 +19,10 @@
 package com.davidmiguel.gobees.help;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.about.AboutFragment;
-import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
  * Help activity (webview that shows GoBees help webpage).
@@ -38,14 +35,7 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.about_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.help_title);
-        }
+        AndroidUtils.setUpToolbar(this, false, R.string.help_title);
 
         // Add fragment to the activity
         HelpFragment helpFragment =
@@ -53,7 +43,7 @@ public class HelpActivity extends AppCompatActivity {
         if (helpFragment == null) {
             // Create the fragment
             helpFragment = HelpFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), helpFragment, R.id.contentFrame);
         }
 

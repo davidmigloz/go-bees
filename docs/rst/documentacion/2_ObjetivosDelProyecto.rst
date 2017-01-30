@@ -1,14 +1,15 @@
 Objetivos del proyecto
 ======================
 
-A continuación se detallan los diferentes objetivos que han motivado la
+A continuación, se detallan los diferentes objetivos que han motivado la
 realización del proyecto.
 
 Objetivos generales
 -------------------
 
--  Desarrollar una aplicación para smartphone que permita la
-   monitorización de la actividad de vuelo de una colmena.
+-  Desarrollar una aplicación para *smartphone* que permita la
+   monitorización de la actividad de vuelo de una colmena a través de 
+   su cámara.
 -  Facilitar la interpretación de los datos recogidos mediante
    representaciones gráficas.
 -  Aportar información extra a los datos de actividad que ayude en la
@@ -20,7 +21,7 @@ Objetivos técnicos
 ------------------
 
 -  Desarrollar un algoritmo de visión artificial con OpenCV que permita
-   realizar el conteo de abejas en tiempo real.
+   contar el número de abejas en cada fotograma en tiempo real.
 -  Desarrollar una aplicación Android con soporte para API 19 y
    superiores.
 -  Aplicar la arquitectura MVP (*Model-View-Presenter*) en el desarrollo
@@ -30,7 +31,7 @@ Objetivos técnicos
 -  Utilizar Git como sistema de control de versiones distribuido junto
    con la plataforma GitHub.
 -  Hacer uso de herramientas de integración continua como Travis,
-   Codecov, Code Climate o VersionEye en el repositorio.
+   Codecov, Code Climate, SonarQube o VersionEye en el repositorio.
 -  Aplicar la metodología ágil Scrum junto con TDD (*Test Driven
    Development*) en el desarrollo del software.
 -  Realizar test unitarios, de integración y de interfaz.
@@ -49,4 +50,3 @@ Objetivos personales
    mercado laboral.
 -  Adentrarme en el campo de la visión artificial.
 -  Profundizar en el desarrollo de aplicaciones Android.
--  Mejorar la documentación disponible de OpenCV para Android.

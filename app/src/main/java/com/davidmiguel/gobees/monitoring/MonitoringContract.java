@@ -18,9 +18,9 @@
 
 package com.davidmiguel.gobees.monitoring;
 
+import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
 import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
-import com.davidmiguel.gobees.video.BeesCounter;
 
 import org.opencv.android.CameraBridgeViewBase;
 
@@ -83,6 +83,13 @@ interface MonitoringContract {
          * Hides count down and shows monitoring view.
          */
         void showMonitoringView();
+
+        /**
+         * Hides or shows the num bees view.
+         *
+         * @param active true to show.
+         */
+        void showNumBeesView(boolean active);
     }
 
     interface SettingsView extends BaseView<MonitoringContract.Presenter> {

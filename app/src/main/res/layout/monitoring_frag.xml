@@ -62,7 +62,7 @@
     </LinearLayout>
 
 
-    <com.davidmiguel.gobees.camera.CameraView
+    <com.davidmiguel.gobees.monitoring.camera.CameraView
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -130,7 +130,8 @@
                     android:text="@string/num_bees_default"
                     android:textAlignment="center"
                     android:textColor="@color/colorCameraControlsIcons"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -18,7 +18,7 @@
   -->
 
 <resources>
-    <!--  -->
+    <!-- https://www.materialpalette.com/amber/blue-grey -->
     <color name="colorPrimary">#FFC107</color>
     <color name="colorPrimaryDark">#FFA000</color>
     <color name="colorAccent">#607D8B</color>
@@ -28,6 +28,10 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorIcons">#212121</color>
     <color name="colorDivider">#BDBDBD</color>
+
+    <!-- Bees chart fade  -->
+    <color name="endColorChart">#ffd180</color>
+    <color name="startColorChart">#ffa000</color>
 
     <!-- Temp chart -->
     <color name="colorLineTempChart">#FFC107</color>

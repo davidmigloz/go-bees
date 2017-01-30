@@ -3,7 +3,7 @@ Conceptos teóricos
 
 La parte del proyecto con mayor complejidad teórica radica en el algoritmo de visión
 artificial, el cual se puede dividir en cuatro fases. En primer lugar, se realiza un 
-preprocesado de la señal de entrada para mejorarla. En segundo lugar, se substrae 
+preprocesado de la señal de entrada para optimizarla. En segundo lugar, se substrae 
 el fondo para segmentar los objetos en movimiento. Posteriormente, se realiza un 
 posprocesado de la señal para mejorar los resultados obtenidos de la substracción 
 del fondo. Y por último, se clasifican y cuentan los contornos que pueden pertenecer 
@@ -15,7 +15,7 @@ Preprocesado
 ------------
 
 Antes de aplicar el algoritmo de substracción del fondo, es recomendable
-realizar un preprocesado de los fotogramas para facilitar el procesado,
+realizar un preprocesado de los fotogramas para facilitar el procesado posterior,
 minimizar el ruido y optimizar los resultados. A continuación se
 explican las técnicas utilizadas.
 
@@ -28,10 +28,10 @@ este formato se poseen tres matrices, una por cada canal
 imagen a color.
 
 Sin embargo, el color no proporciona ninguna información relevante en
-nuestra tarea de identificación de abejas. Es por esto que se puede
+nuestra tarea de identificación de abejas. Es por esto que se pueden
 convertir los fotogramas de RGB a escala de grises. De esta manera, se
-trabajará solamente con una matriz de píxeles en lugar de tres
-simplificando, en gran medida, el número de operaciones a realizar y por
+trabajará solamente con una matriz de píxeles en lugar de tres.
+Simplificando, en gran medida, el número de operaciones a realizar y por
 tanto, aumentado el rendimiento de nuestro algoritmo final.
 
 OpenCV utiliza la conversión colométrica a escala de grises [opencv:color_cvt]_. Esta
@@ -77,18 +77,19 @@ corresponde con: [book:mastering_opencv]_
 En la siguiente imagen se puede ver el resultado de aplicar esta fase a
 la imagen de entrada:
 
-.. figure:: ../../img/s1.png
-   :alt: Fase 1.
+|Fase 1|
+
+.. |Fase 1| image:: ../../img/s1.png
 
 Substracción del fondo
 ----------------------
 
-En un sistema de vigilancia resulta de gran interés el poder extraer los
+En un sistema de monitorización por vídeo resulta de gran interés el poder extraer los
 objetos en movimiento del resto de la imagen. Esto se conoce como
 extracción del fondo, en inglés *background subtraction* o *foreground
 detection*, y consiste en clasificar todos los píxeles de un
 determinado fotograma bien como fondo, o como primer plano [wiki:bs]_. En
-primer plano se engloban a todos los objetos en movimiento, mientras que
+primer plano se engloban todos los objetos en movimiento, mientras que
 en el fondo se encuentran todos los objetos estáticos junto con posibles
 sombras, cambios de iluminación u otros objetos en movimiento que no son
 de interés, como puede ser la rama de un árbol balanceándose por el
@@ -107,8 +108,8 @@ extracción del fondo y además, nos proporciona la implementación de dos
 algoritmos más sofisticados: ``BackgroundSubtractorMOG`` y 
 ``BackgroundSubtractorKNN``. Tras realizar un estudio de todos ellos, 
 nos decantamos finalmente por ``BackgroundSubtractorMOG2``. A 
-continuación explicamos cada uno de ellos así como los motivos de nuestra
-decisión.
+continuación, explicamos el funcionamiento de todos los algoritmos que se 
+probaron, así como los resultados que nos proporcionaron.
 
 
 Substracción con imagen de referencia
@@ -136,7 +137,7 @@ Substracción del fotograma anterior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En este método, el modelo del fondo se extrae del fotograma anterior. De
-tal manera que a cada nuevo fotograma se le substrae el anterior.
+tal manera, que a cada nuevo fotograma se le substrae el anterior.
 
 De esta manera se mejora la respuesta a cambios en la escena, como los
 cambios de iluminación. Sin embargo, si un objeto en movimiento se queda
@@ -168,12 +169,12 @@ en el instante :math:`t-1`, :math:`u_t` es la nueva media del fondo y
 los frames anteriores) [book:opencv_java]_.
 
 OpenCV provee la función ``Imgproc.accumulateWeighted()`` que implementa
-por nosotros la fórmula anterior. Haciendo uso de esta función y de la
+la fórmula anterior por nosotros. Haciendo uso de esta función y de la
 utilizada en la sección anterior podemos implementar este algoritmo.
 
 Tras probarlo, vimos que tenía una eficiencia muy buena y se adaptaba a
-los cambios correctamente. Sin embargo, de vez en cuando se producían
-ruidos que daban lugar a falsos positivos.
+los cambios correctamente. Sin embargo, no era capaz de diferenciar las 
+sombras de las abejas, por lo que se obtenían falsos positivos.
 
 BackgroundSubtractorKNN
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,8 +211,10 @@ Android solo disponemos de la revisión.
 ``BackgroundSubtractorMOG`` está basado en el modelo *Gaussian Mixture*
 (GMM). Se trata de un modelo compuesto por la suma de varias
 distribuciones Gaussianas que, correctamente elegidas, permiten modelar
-cualquier distribución [coursera:gmm]_. El algoritmo de substracción del fondo
-fue propuesto en el artículo [art:yao_improved_2001]_ y modela cada píxel del fondo como
+cualquier distribución [coursera:gmm]_. 
+
+El algoritmo de substracción del fondo fue propuesto en el artículo 
+[art:yao_improved_2001]_ y modela cada píxel del fondo como
 la mezcla de *K* distribuciones Gaussianas. Los pesos de la mezcla
 representan las proporciones de tiempo que el color de ese píxel se ha
 mantenido en la escena. Siendo los colores de fondo más probables los
@@ -221,7 +224,7 @@ que más permanezcan y sean más estáticos [opencv:bs_tutorial]_.
 antecesor pero implementa una mejora sustancial. Es el propio algoritmo
 el que selecciona el número adecuado de distribuciones Gaussianas
 necesarias para modelar cada píxel. De esta manera, se mejora
-notablemente la adaptabilidad a variaciones en la escena. Fue propuesto
+notablemente la adaptabilidad del algoritmo a variaciones en la escena. Fue propuesto
 en los artículos [art:zivkovic_improved_2004]_ y [art:zivkovic_efficient_2006]_.
 
 El código fuente de este algoritmo está disponible en [github:background_segm]_ (interfaz)
@@ -245,8 +248,8 @@ Posee los siguientes parámetros configurables: [opencv:mog]_
    resultados iniciales estableciendo ``alfa=1`` en el instante 0 e ir
    decrementándolo hasta ``alfa=1/history``. De esta manera, en el
    inicio aprende rápidamente, pero una vez estabilizada la situación
-   las variaciones afectan menos al modelo. En nuestro caso el valor por 
-   defecto ha funcionado bien.
+   las variaciones afectan menos al modelo. En nuestro caso, el valor por 
+   defecto ha funcionado correctamente.
 -  ``backgroundRatio``: si un pixel del primer plano permanece con un
    valor semi-constante durante ``backgroundRatio*history`` fotogramas,
    es considerado fondo y se añade al modelo del fondo como centro de
@@ -254,10 +257,10 @@ Posee los siguientes parámetros configurables: [opencv:mog]_
    este parámetro como ``TB``. ``TB=0.9`` es el valor por defecto. Este 
    parámetro nos permite decidir cuando dejar de contar una abeja que se
    ha quedado inmóvil o un objeto nuevo en la escena como podría ser una 
-   hoja que acaba de caer árbol.
+   hoja que se acaba de caer de un árbol.
 -  ``detectShadows``: con un valor verdadero (valor por defecto) detecta
    las sombras (aumenta ligeramente el tiempo de procesado). Nos permite 
-   despreciar las sombras de las abejas con muy buen resultado.
+   despreciar las sombras de las abejas con muy buenos resultados.
 -  ``shadowThreshold``: el algoritmo detecta las sombras comprobando si
    un píxel es una versión oscurecida del fondo. Este parámetro define
    cómo de oscura puede ser la sombra como máximo. Por ejemplo, un valor
@@ -308,16 +311,16 @@ nuestro problema concreto.
 En la siguiente imagen se puede ver una captura de nuestra plataforma 
 de desarrollo en la pestaña correspondiente a esta fase:
 
-.. figure:: ../../img/devplatform.png
-   :alt: devplatform.
+|devplatform|
+
+.. |devplatform| image:: ../../img/devplatform.png
 
 Una vez parametrizado correctamente, vimos como este algoritmo era el
 que mejores resultados nos proporcionaba. Con un tiempo de ejecución en
 nuestro equipo de pruebas de entorno a 4ms/frame, mucho menor que el
 proporcionado por ``BackgroundSubtractorKNN``, de entorno a 25ms/frame.
-El algoritmo detectaba correctamente las abejas, era resistente al ruido
-que afectaba al algoritmo de substracción de los fotogramas anteriores
-y, además, era capaz de diferenciar una abeja de su sombra. Por todos
+El algoritmo detectaba correctamente las abejas, era resistente al ruido,
+y además, era capaz de diferenciar una abeja de su sombra. Por todos
 estos motivos, se seleccionó para la fase de substracción del fondo.
 
 Otros algoritmos
@@ -338,8 +341,9 @@ que no están disponibles a través de los *wrappers* de Android.
 En la siguiente imagen se puede ver el resultado de aplicar 
 ``BackgroundSubtractorMOG2`` a la salida de la fase anterior:
 
-.. figure:: ../../img/s2.png
-   :alt: Fase 2.
+|Fase 2|
+
+.. |Fase 2| image:: ../../img/s2.png
 
 Se puede apreciar como ha descartado correctamente las sombras en movimiento
 de los árboles y se ha quedado únicamente con los objetos en movimiento.
@@ -348,7 +352,7 @@ Posprocesado
 -------------
 
 Para mejorar los resultados de la extracción de fondo y preparar la
-imagen para la búsqueda de contornos se han aplicado las siguientes
+imagen para la búsqueda de contornos, se han aplicado las siguientes
 técnicas:
 
 Dilatación
@@ -381,24 +385,27 @@ En nuestro algoritmo aplicamos tres operaciones morfológicas seguidas:
 
 A continuación podemos ver el resultado de esta fase:
 
-.. figure:: ../../img/s3.png
-   :alt: Fase 3.
+|Fase 3|
 
-Búsqueda de contornos
----------------------
+.. |Fase 3| image:: ../../img/s3.png
 
-El último paso que realiza nuestro algoritmo de visión artificial es la
-búsqueda de los contornos de las abejas. Entendemos por contorno una
-línea curva que une todos los puntos continuos del borde de una región
-de un mismo color o intensidad.
+Detección y conteo de abejas
+----------------------------
+
+El último paso que realiza nuestro algoritmo de visión artificial es
+detectar cuáles de las regiones obtenidas en la fase anterior se correponden
+con abejas. Para ello, se realiza una búsqueda de contornos y se filtran por área. 
+
+Entendemos por contorno una línea curva que une todos los puntos continuos del 
+borde de una región de un mismo color o intensidad.
 
 La salida de la fase anterior es una imagen binaria con los objetos en
 movimiento en blanco y el fondo en negro. Por lo tanto, el objetivo de
 esta fase es detectar todas las regiones blancas que puedan
 corresponderse con una abeja.
 
-OpenCV provee la función ``Imgproc.findContours()`` para realizar esta
-tarea. Esta toma una imagen binaria y devuelve una lista con todos los
+OpenCV provee la función ``Imgproc.findContours()`` para realizar la búsqueda
+de contornos. Esta toma una imagen binaria y devuelve una lista con todos los
 contornos encontrados. Para entender la función se necesita comprender
 una serie de conceptos: [opencv:contour]_
 
@@ -450,14 +457,16 @@ diminutos o grandes generados por ruidos o por objetos del entorno
 
 En la siguiente imagen podemos ver la salida del algoritmo:
 
-.. figure:: ../../img/s4.png
-   :alt: Fase 4.
+|Fase 4|
+
+.. |Fase 4| image:: ../../img/s4.png
 
 En esta otra se puede apreciar como se descartan las tres moscas que 
-hay en la imagen:
+hay en la imagen ya que su área es inferior al área mínima:
 
-.. figure:: ../../img/flies.png
-   :alt: Moscas en la escena.
+|Moscas en la escena|
+
+.. |Moscas en la escena| image:: ../../img/flies.png
 
 .. References
 

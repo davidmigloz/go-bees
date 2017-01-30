@@ -1,6 +1,525 @@
 \capitulo{4}{Técnicas y herramientas}
 
-Esta parte de la memoria tiene como objetivo presentar las técnicas metodológicas y las herramientas de desarrollo que se han utilizado para llevar a cabo el proyecto. Si se han estudiado diferentes alternativas de metodologías, herramientas, bibliotecas se puede hacer un resumen de los aspectos más destacados de cada alternativa, incluyendo comparativas entre las distintas opciones y una justificación de las elecciones realizadas. 
-No se pretende que este apartado se convierta en un capítulo de un libro dedicado a cada una de las alternativas, sino comentar los aspectos más destacados de cada opción, con un repaso somero a los fundamentos esenciales y referencias bibliográficas para que el lector pueda ampliar su conocimiento sobre el tema.
+\section{Metodologías}\label{metodologias}
 
+\subsection{Scrum}\label{scrum}
 
+Scrum es un marco de trabajo para el desarrollo de \emph{software} que se
+engloba dentro de las metodologías ágiles. Aplica una estrategia de
+trabajo iterativa e incremental a través de iteraciones (\emph{sprints})
+y revisiones \citep{wiki:scrum}.
+
+\subsection{\emph{Test-Driven Development} (TDD)}\label{test-driven-development-tdd}
+
+Es una práctica de desarrollo de \emph{software} que se basa en la repetición
+de un ciclo corto de desarrollo: transformar requerimientos a test,
+desarrollar el código necesario para pasar los test y posteriormente
+refactorizar el código. Esta práctica obliga a los desarrolladores a
+analizar cuidadosamente las especificaciones antes de empezar a escribir
+código, fomenta la escritura de test, la simplicidad del código y
+aumenta la productividad. Como resultado se obtiene \emph{software} más seguro
+y de mayor calidad \citep{wiki:tdd}.
+
+\subsection{Gitflow}\label{gitflow}
+
+Gitflow es un flujo de trabajo con Git que define un modelo estricto de ramas
+diseñado en torno a los lanzamientos de proyecto. En la rama \emph{main}
+se hospeda la última versión estable del proyecto. La rama
+\emph{develop} contiene los últimos desarrollos realizados para el
+siguiente lanzamiento. Por cada característica que se vaya a implementar
+se crea una \emph{feature branch}. La preparación del siguiente
+lanzamiento se realiza en una \emph{release branch}. Si aparece un fallo
+en producción, este se soluciona en una \emph{hotfix branch} \citep{git:gitflow}.
+
+\subsection{Técnica Pomodoro}\label{pomodoro}
+
+La técnica Pomodoro es un método para incrementar la productividad aprovechando 
+mejor el tiempo. Para aplicarla, se divide la tarea a realizar en intervalos de
+25 minutos, llamados \emph{pomodoros}. Durante estos intervalos se debe evitar cualquier 
+distracción que nos desvíe de la tarea. Después de cada Pomodoro se descansa 5 
+minutos, menos en los múltiplos de cuatro que se realiza un descanso de 30 minutos
+\citep{wiki:pomodoro}.
+
+Se ha utilizado la aplicación \href{https://www.microsoft.com/es-es/store/p/focus-10/9nblggh5g2xh}{Focus 10} como temporizador.
+
+\section{Patrones de diseño}\label{patrones-de-diseno}
+
+\subsection{\emph{Model-View-Presenter} (MVP)}\label{model-view-presenter-mvp}
+
+MVP es un patrón de arquitectura derivado del
+\emph{Model--View--Controller} (MVC). Permite separar los datos internos
+del modelo de una vista pasiva y enlazarlos mediante el \emph{presenter}
+que maneja toda la lógica de la aplicación \citep{pattern:mvp}. 
+Posee tres capas:
+
+\begin{itemize}
+\tightlist
+\item
+  \textit{\textbf{Model}}: almacena y proporciona los datos internos.
+\item
+  \textit{\textbf{View}}: maneja la visualización de los datos (del modelo).
+  Propaga las acciones de usuario al \emph{presenter}.
+\item
+  \textit{\textbf{Presenter}}: enlaza las dos capas anteriores. Sincroniza los
+  datos mostrados en la vista con los almacenados en el modelo y actúa
+  ante los eventos de usuario propagados por la vista.
+\end{itemize}
+
+\imagen{mvp}{Patrón MVP.}
+
+\subsection{Patrón repositorio}\label{patron-repositorio}
+
+El patrón repositorio proporciona una abstracción de la implementación
+del acceso a datos con el objetivo de que este sea transparente a la
+lógica de negocio de la aplicación. Por ejemplo, las fuentes de datos
+pueden ser una base de datos, un \emph{web service}, etc. El repositorio
+media entre la capa de acceso a datos y la lógica de negocio de tal
+forma que no existe ninguna dependencia entre ellas. Consiguiendo
+desacoplar, mantener y testear más fácilmente el código y permitiendo la
+reutilización del acceso a datos desde cualquier cliente \citep{pattern:repository}.
+
+\imagen{repository_pattern}{Patrón Repositorio.}
+
+\section{Control de versiones}\label{control-de-versiones}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: \href{https://git-scm.com/}{Git} y
+  \href{https://subversion.apache.org/}{Subversion}.
+\item
+  Herramienta elegida: \href{https://git-scm.com/}{Git}.
+\end{itemize}
+
+Git es un sistema de control de versiones distribuido. A día de hoy, es
+el sistema con mayor número de usuarios. La principal diferencia con
+Subversion es su carácter descentralizado, que permite a cada
+desarrollador tener una copia en local del repositorio completo. Git
+está licenciado bajo la licencia de software libre GNU LGPL v2.1.
+
+\section{\emph{Hosting} del repositorio}\label{hosting-del-repositorio}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: \href{https://github.com/}{GitHub},
+  \href{https://bitbucket.org/}{Bitbucket} y
+  \href{https://gitlab.com/}{GitLab}.
+\item
+  Herramienta elegida: \href{https://github.com/}{GitHub}.
+\end{itemize}
+
+GitHub es la plataforma web de hospedaje de repositorios por excelencia.
+Ofrece todas las funcionalidades de Git, revisión de código,
+documentación, \emph{bug tracking}, gestión de tareas, \emph{wikis}, red
+social\ldots{} y numerosas integraciones con otros servicios. Es
+gratuita para proyectos \emph{open source}.
+
+Utilizamos GitHub como plataforma principal donde hospedamos el código
+del proyecto, la gestión de proyecto (gracias a ZenHub) y la
+documentación. Además, el repositorio está integrado con varios
+servicios de integración continua.
+
+\section{Gestión del proyecto}\label{gestion-del-proyecto}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: \href{https://www.zenhub.com/}{ZenHub},
+  \href{https://trello.com/}{Trello}, \href{https://waffle.io/}{Waffle},
+  \href{https://www.versionone.com/}{VersionOne},
+  \href{https://xp-dev.com/}{XP-Dev} y \href{https://github.com/}{GitHub
+  Projects}.
+\item
+  Herramienta elegida: \href{https://www.zenhub.com/}{ZenHub}.
+\end{itemize}
+
+ZenHub es una herramienta de gestión de proyectos totalmente integrada
+en GitHub. Proporciona un tablero canvas en donde cada tarea
+representada se corresponde con un \emph{issue} nativo de GitHub. Cada
+tarea se puede priorizar dependiendo de su posición en la lista, se le
+puede asignar una estimación, uno o varios responsables y el
+\emph{sprint} al que pertenece. ZenHub también permite visualizar el
+gráfico \emph{burndown} de cada \emph{sprint}. Es gratuita para
+proyectos pequeños (máx. 5 colaboradores) o proyectos \emph{open
+source}.
+
+\section{Comunicación}\label{comunicacion}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: email y
+  \href{https://gobees.slack.com/}{Slack}.
+\item
+  Herramienta elegida: \href{https://gobees.slack.com/}{Slack}.
+\end{itemize}
+
+Slack es una herramienta de colaboración de equipos que ofrece salas de
+chat, mensajes directos y llamadas VoIP. Posee un buscador que permite
+encontrar todo el contenido generado dentro de Slack. Además, ofrece un
+gran número de integraciones con otros servicios. En nuestro proyecto
+vamos a utilizar la integración con GitHub para crear un canal que sirva
+de \emph{log} de todas las acciones realizadas en GitHub. Slack ofrece una
+versión gratuita que provee las características principales.
+
+\section{Entorno de desarrollo integrado
+(IDE)}\label{entorno-de-desarrollo-integrado-ide}
+
+\subsection{Java}\label{java}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas:
+  \href{https://www.jetbrains.com/idea/}{IntelliJ IDEA} y
+  \href{https://eclipse.org/}{Eclipse}.
+\item
+  Herramienta elegida: \href{https://www.jetbrains.com/idea/}{IntelliJ
+  IDEA}.
+\end{itemize}
+
+IntelliJ IDEA es un IDE para Java desarrollado por JetBrains. Posee un
+gran número de herramientas para facilitar el proceso de escritura,
+revisión y refactorización del código. Además, permite la integración de
+diferentes herramientas y posee un ecosistema de \emph{plugins} para
+ampliar su funcionalidad. Su versión \emph{community} está disponible
+bajo la licencia Apache 2. Aunque también es posible adquirir la versión
+\emph{Ultimate} gratuitamente si se es estudiante.
+
+\subsection{Android}\label{android}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas:
+  \href{https://developer.android.com/studio/index.html}{Android Studio}
+  y \href{https://eclipse.org/}{Eclipse}.
+\item
+  Herramienta elegida:
+  \href{https://developer.android.com/studio/index.html}{Android
+  Studio}.
+\end{itemize}
+
+Android Studio es el IDE oficial para el desarrollo de aplicaciones
+Android. Está basado en IntelliJ IDEA de JetBrains. Proporciona soporte
+para Gradle, emulador, editor de \emph{layouts}, refactorizaciones
+específicas de Android, herramientas Lint para detectar problemas de
+rendimiento, uso, compatibilidad de versión, etc. Se distribuye bajo la
+licencia Apache 2.
+
+\subsection{Markdown}\label{markdown}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: \href{https://stackedit.io/}{StackEdit} y
+  \href{http://pad.haroopress.com/}{Haroopad}.
+\item
+  Herramienta elegida: \href{http://pad.haroopress.com/}{Haroopad}.
+\end{itemize}
+
+Haroopad es un editor de documentos Markdown. Soporta Github Flavored
+Markdown y Mathematics Expression, además de contar con un gran número
+de extensiones. Se distribuye bajo licencia GNU GPL v3.0.
+
+\subsection{LaTeX}\label{latex}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas:
+  \href{https://www.sharelatex.com/}{ShareLaTeX} y
+  \href{http://www.xm1math.net/texmaker/}{Texmaker}.
+\item
+  Herramienta elegida:
+  \href{http://www.xm1math.net/texmaker/}{Texmaker}.
+\end{itemize}
+
+Texmaker es un editor gratuito y multiplataforma para \LaTeX. Integra la
+mayoría de herramientas necesarias para la escritura de documentos en
+\LaTeX (PdfLaTeX , BibTeX, makeindex, etx). Además, incluye corrector
+ortográfico, auto-completado, resaltado de sintaxis, visor de PDFs
+integrado, etc. Está licenciado bajo GNU GPL v2.
+
+\section{Documentación}\label{documentacion}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas:
+  \href{https://www.latex-project.org/}{LaTeX},
+  \href{http://daringfireball.net/projects/markdown/}{Markdown},
+  \href{http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html}{reStructuredText} y  
+  \href{https://products.office.com/es-es/word}{Microsoft Word}
+\item
+  Herramienta elegida:
+  \href{http://daringfireball.net/projects/markdown/}{Markdown} +
+  \href{http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html}{reStructuredText} +
+  \href{https://www.latex-project.org/}{\LaTeX}.
+\end{itemize}
+
+La documentación se ha desarrollado en Markdown y reStructuredText para integrarla con el
+servicio de documentación continua \href{https://readthedocs.org/}{Read
+the Docs}. Una vez terminada, se ha exportado a \LaTeX utilizando el
+conversor \href{http://pandoc.org/}{Pandoc}.
+
+Markdown es un lenguaje de marcado ligero en texto plano que puede ser
+exportado a numerosos formatos como HTML o PDF. Su filosofía es que el
+lenguaje de marcado sea fácil de escribir y leer. Markdown es
+ampliamente utilizado para la escritura de archivos README, en foros
+como StackOverflow o en herramientas de comunicación como Slack.
+
+reStructuredText es uno de los leguajes de marcado ligero en los que se 
+inspiró Markdown. Su principal aplicación es la escritura de documentación 
+de Python junto con el sistema de generación de documentación Sphinx.
+
+\LaTeX es un sistema de composición de textos que genera documentos con
+una alta calidad tipográfica. Es ampliamente utilizado para la
+generación de artículos y libros científicos, principalmente por su
+potencia a la hora de representar expresiones matemáticas.
+
+\section{Servicios de integración
+continua}\label{servicios-de-integraciuxf3n-continua}
+
+\subsection{Compilación y testeo}\label{compilacion-y-testeo}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: \href{https://travis-ci.org/}{TravisCI} y
+  \href{https://circleci.com/}{CircleCI}.
+\item
+  Herramienta elegida: \href{https://travis-ci.org/}{TravisCI}.
+\end{itemize}
+
+Travis es una plataforma de integración continua en la nube para
+proyectos alojados en GitHub. Permite realizar una \emph{build} del
+proyecto y testearla automáticamente cada vez que se realiza un
+\emph{commit}, devolviendo un informe con los resultados. Es gratuita
+para proyectos \emph{open source}.
+
+\subsection{Cobertura de código}\label{cobertura-de-codigo}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas: \href{https://coveralls.io/}{Coveralls} y
+  \href{https://codecov.io/}{Codecov}.
+\item
+  Herramienta elegida: \href{https://codecov.io/}{Codecov}.
+\end{itemize}
+
+Codecov es una herramienta que permite medir el porcentaje de código que
+está cubierto por un test. Además, realiza representaciones visuales de
+la cobertura y gráficos de su evolución. Posee una extensión de
+navegador para GitHub que permite visualizar por cada archivo de código
+que líneas están cubiertas por un test y cuáles no. Es gratuita para
+proyectos \emph{open source}.
+
+\subsection{Calidad del código}\label{calidad-del-codigo}
+
+\begin{itemize}
+\tightlist
+\item
+  Herramientas consideradas:
+  \href{https://codeclimate.com/}{Codeclimate},
+  \href{https://sonarqube.com/}{SonarQube} y
+  \href{https://www.codacy.com/}{Codacy}.
+\item
+  Herramientas elegidas: \href{https://codeclimate.com/}{Codeclimate} y
+  \href{https://sonarqube.com/}{SonarQube}.
+\end{itemize}
+
+Codeclimate es una herramienta que realiza revisiones de código
+automáticamente. Es gratuita para proyectos \emph{open source}. En
+nuestro proyecto hemos activado los siguientes motores de chequeo:
+\href{https://docs.codeclimate.com/docs/checkstyle}{checkstyle},
+\href{https://docs.codeclimate.com/docs/fixme}{fixme},
+\href{https://docs.codeclimate.com/docs/markdownlint}{markdownlint} y
+\href{https://docs.codeclimate.com/docs/pmd}{pmd}.
+
+SonarQube es una plataforma de código abierto para la revisión continua
+de la calidad de código. Permite detectar código duplicado, violaciones
+de estándares, cobertura de tests unitarios, \emph{bugs} potenciales,
+etc.
+
+\subsection{Revisión de dependencias}\label{revision-de-dependencias}
+
+\href{https://www.versioneye.com/}{VersionEye} es una herramienta que monitoriza las dependencias del
+proyecto y envía notificaciones cuando alguna de estas está
+desactualizada, es vulnerable o viola la licencia del proyecto. Posee
+una versión gratuita con ciertas limitaciones.
+
+\subsection{Documentación continua}\label{documentacion-continua}
+
+\href{https://readthedocs.org/}{Read the Docs} es un servicio de documentación continua que permite crear
+y hospedar una página web generada a partir de los distintos ficheros
+Markdown o reStructuredText de la documentación. Cada vez que se realiza
+un \emph{commit} en el repositorio se actualiza la versión hospedada. La
+página web posee un buscador, da soporte para diferentes versiones del
+proyecto y soporta internacionalización. Además, permite exportar la
+documentación en varios formatos (pdf, epub, html, etc.). El servicio es
+totalmente gratuito, sostenido por donaciones y subscripciones
+\emph{Gold}.
+
+\section{Sistemas de construcción automática del
+software}\label{sistemas-de-construccion-automuxe1tica-del-software}
+
+\subsection{Maven}\label{maven}
+
+\href{https://maven.apache.org/}{Maven} es una herramienta para
+automatizar el proceso de construcción del \emph{software} (compilación,
+testeo, empaquetado, etc.) enfocada a proyectos Java. Básicamente
+describe cómo se tiene que construir el \emph{software} y cuáles son sus
+dependencias.
+
+\subsection{Gradle}\label{gradle}
+
+\href{https://gradle.org/}{Gradle} es una herramienta similar a Maven
+pero basada en el lenguaje de programación orientado a objetos Groovy.
+El sistema de construcción de Android Studio está basado en Gradle y es
+actualmente el único soportado de forma oficial para Android.
+
+\section{Librerías}\label{libreruxedas}
+
+\subsection{\texorpdfstring{\emph{Android Support
+Library}}{Android Support Library}}\label{android-support-library}
+
+La
+\href{https://developer.android.com/topic/libraries/support-library/}{librería
+de soporte de Android} facilita algunas características que no se
+incluyen en el \emph{framework} oficial. Proporciona compatibilidad a
+versiones antiguas con las últimas características, incluye elementos
+para la interfaz adicionales y utilidades extra.
+
+\subsection{Espresso}\label{espresso}
+
+\href{https://google.github.io/android-testing-support-library/docs/espresso/}{Espresso}
+es un framework de \emph{testing} para Android incluido en la librería
+de soporte para \emph{testing} en Android. Provee una API para escribir
+UI test que simulen las interacciones de usuario con la app.
+
+\subsection{Google Guava}\label{google-guava}
+
+\href{https://github.com/google/guava}{Google Guava} agrupa un conjunto
+de librerías comunes para Java. Proporciona utilidades básicas para
+tareas cotidianas, una extensión del \emph{Java collections framework}
+(JCF) y otras extensiones como programación funcional, almacenamiento en
+caché, objetos de rango o \emph{hashing}.
+
+\subsection{Google Play Services}\label{google-play-services}
+
+\href{https://developers.google.com/android/guides/overview}{Google Play
+Services} es una librería que permite a las aplicaciones de terceros
+utilizar características de aplicaciones de Google como Maps, Google+,
+etc. En nuestro caso se ha hecho uso de su servicio de localización, que
+utiliza varias fuentes de datos (GPS, red y \emph{wifi}) para ubicar el
+dispositivo rápidamente.
+
+\subsection{JavaFX}\label{javafx}
+
+\href{http://docs.oracle.com/javase/8/javase-clienttechnologies.htm}{JavaFX}
+es una librería para la creación de interfaces gráficas en Java.
+
+\subsection{JUnit}\label{junit}
+
+\href{http://junit.org/junit4/}{JUnit} es un \emph{framework} para Java
+utilizado para realizar pruebas unitarias.
+
+\subsection{Material Design}\label{material-design}
+
+\href{https://material.io/guidelines/}{Material Design} es una guía de
+estilos enfocada a la plataforma Android, pero aplicable a cualquier
+otra plataforma. Fue presentada en el Google I/O 2014 y se adoptó en
+Android a partir de la versión 5.0 (Lollipop). Se basa en objetos
+materiales, piezas colocadas en un espacio (lugar) y con un tiempo
+(movimiento) determinado.
+
+\subsection{Mockito}\label{mockito}
+
+\href{http://mockito.org/}{Mockito} es un \emph{framework} de
+\emph{mocking} que permite crear objetos \emph{mock} fácilmente. Estos
+objetos simulan parte del comportamiento de una clase. Mockito está
+basado en EasyMock, mejorando su sintaxis haciendo los test más simples
+y fáciles de leer y con mensajes de error descriptivos.
+
+\subsection{MPAndroidChart}\label{mpandroidchart}
+
+\href{https://github.com/PhilJay/MPAndroidChart}{MPAndroidChart} es una
+librería para la creación de gráficos en Android.
+
+\subsection{OpenCV}\label{opencv}
+
+\href{www.opencv.org}{OpenCV} es un paquete \emph{Open Source} de visión
+artificial que contiene más de 2500 librerías de procesamiento de
+imágenes y visión artificial, escritas en C/C++ a bajo/medio nivel. Se
+distribuye gratuitamente bajo una licencia \emph{BSD} desde hace más de
+una década. Posee una comunidad de más de 50.000 usuarios alrededor de
+todo el mundo y se ha descargado más de 8 millones de veces.
+
+Aunque OpenCV está escrito en C/C++ posee \emph{wrappers} para varias
+plataformas, entre ellas Android, en donde da soporte a las principales
+arquitecturas de CPU. Desde hace unos años, también soporta CUDA para el
+desarrollo en GPU tanto en escritorio como en móvil, aunque en esta
+última el soporte es todavía reducido.
+
+\subsection{OpenWeatherMaps}\label{openweathermaps}
+
+\href{http://openweathermap.org/}{OpenWeatherMap} es un servicio online
+que proporciona información meteorológica. Está inspirado en
+OpenStreetMap y su filosofía de hacer accesible la información a la
+gente de forma gratuita. Utiliza distintas fuentes de datos desde
+estaciones meteorológicas oficiales, de aeropuertos, radares e incentiva
+a los propietarios de estaciones meteorológicas a conectarlas a su red.
+Proporciona una API que permite realizar hasta 60 llamadas por segundo
+de forma gratuita.
+
+\subsection{PowerMock}\label{powermock}
+
+\href{https://github.com/powermock/powermock}{PowerMock} es una librería
+de \emph{testing} que permite la creación de \emph{mocks} de métodos
+estáticos, constructores, clases finales o métodos privados.
+
+\subsection{Realm}\label{realm}
+
+\href{https://realm.io/products/realm-mobile-database/}{Realm} es una
+base de datos orientada a objetos enfocada a dispositivos móviles. Se
+definen como la alternativa a SQLite y presumen de ser más rápidos que
+cualquier ORM e incluso que SQLite puro. Posee una API muy intuitiva que
+facilita en gran medida el acceso a datos.
+
+\newpage
+\section{Página web}\label{pagina-web}
+
+\subsection{GitHub Pages}\label{github-pages}
+
+\href{https://pages.github.com/}{GitHub Pages} es un servicio de hosting
+estático que permite a proyectos que utilicen un repositorio de GitHub 
+hospedar su página web en el propio repositorio. Permite utilizar Jekyll, un generador de sitios
+estáticos. No soporta tecnologías del lado de servidor como PHP, Ruby,
+Python, etc.
+
+\subsection{Bootstrap}\label{bootstrap}
+
+\href{http://getbootstrap.com/}{Bootstrap} es un \emph{framework} para
+desarrollo \emph{front-end}. Contiene una serie de componentes ya
+implementados que facilitan y agilizan el diseño. Está desarrollado
+siguiendo la filosofía \emph{mobile first}.
+
+\section{Otras herramientas}\label{otras-herramientas}
+
+\subsection{Mendeley}\label{mendeley}
+
+\href{https://www.mendeley.com/}{Mendeley} es un gestor de referencias
+bibliográficas. Permite añadir referencias de varias formas, visualizar
+los documentos, etiquetarlos, compartirlos, etc. Posteriormente se puede
+exportar todo el catálogo a un fichero BibTex para ser utilizadas desde
+\LaTeX.
+
+\subsection{Creately}\label{creately}
+
+\href{https://creately.com/}{Creately} es una aplicación web que permite
+crear todo tipo de diagramas altamente personalizables. Aunque posee una
+versión gratuita limitada, se optó por pagar un mes de subscripción al
+valorar que realmente iba a ser de utilidad.

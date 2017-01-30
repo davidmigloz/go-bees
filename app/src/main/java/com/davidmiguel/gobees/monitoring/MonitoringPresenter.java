@@ -18,8 +18,8 @@
 
 package com.davidmiguel.gobees.monitoring;
 
-import com.davidmiguel.gobees.video.BeesCounter;
-import com.davidmiguel.gobees.video.ContourBeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.AreaBeesCounter;
+import com.davidmiguel.gobees.monitoring.algorithm.BeesCounter;
 
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
@@ -89,6 +89,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     @Override
     public void showAlgoOutput(boolean status) {
         showAlgoOutput = status;
+        view.showNumBeesView(status);
     }
 
     @Override
@@ -132,7 +133,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     @Override
     public void onCameraViewStarted(int width, int height) {
         processedFrame = new Mat();
-        bc = ContourBeesCounter.getInstance();
+        bc = AreaBeesCounter.getInstance();
         settingsView.initSettings();
     }
 
@@ -143,10 +144,14 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
 
     @Override
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        int numBees = bc.countBees(inputFrame.gray());
-        view.setNumBees(numBees);
-        bc.getProcessedFrame().copyTo(processedFrame);
-        bc.getProcessedFrame().release();
-        return showAlgoOutput ? processedFrame : inputFrame.rgba();
+        if(showAlgoOutput) {
+            int numBees = bc.countBees(inputFrame.gray());
+            view.setNumBees(numBees);
+            bc.getProcessedFrame().copyTo(processedFrame);
+            bc.getProcessedFrame().release();
+            return processedFrame;
+        }
+        // If show algorithm output is false -> show original frame
+        return inputFrame.rgba();
     }
 }

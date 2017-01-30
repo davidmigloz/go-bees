@@ -1,3 +1,178 @@
 \capitulo{6}{Trabajos relacionados}
 
-Este apartado sería parecido a un estado del arte de una tesis o tesina. En un trabajo final grado no parece obligada su presencia, aunque se puede dejar a juicio del tutor el incluir un pequeño resumen comentado de los trabajos y proyectos ya realizados en el campo del proyecto en curso. 
+Como se comentó en la introducción, los intentos de automatizar el
+proceso de monitorización de la actividad de una colmena se remontan
+hasta principios del siglo pasado. Sin embargo, no es hasta 2008 cuando
+se introduce la visión artificial en este campo. A continuación, se
+exponen los artículos científicos relacionados publicados hasta la
+fecha, así como proyectos con objetivos similares.
+
+\section{Artículos científicos}\label{artuxedculos-cientuxedficos}
+
+\subsection{Video Monitoring of Honey Bee Colonies at the Hive
+Entrance}\label{video-monitoring-of-honey-bee-colonies-at-the-hive-entrance}
+
+Se trata del primer artículo publicado sobre el tema (año 2008). Los
+autores fueron Jason Campbell, Lily Mummert y Rahul Sukthankar del
+\emph{Intel Research Pittsburgh}. En él proponen un método de visión
+artificial para monitorizar las entradas y salidas de abejas en una
+colmena, consiguiendo diferenciar las que entran de las que salen. Se
+describen los desafíos técnicos que supuso y la solución a la que
+llegaron finalmente \citep{art:campbell2008}.
+
+\subsection{Detecting and tracking honeybees in 3D at the beehive
+entrance using stereo
+vision}\label{detecting-and-tracking-honeybees-in-3d-at-the-beehive-entrance-using-stereo-vision}
+
+En 2013, Guillaume Chiron, Petra Gomez-Krämer y Ménard Michel publicaron
+un artículo en \emph{EURASIP Journal on Image and Video Processing,}
+donde proponían un método para la monitorización de abejas a la entrada
+de una colmena basado en un sistema de tiempo real con visión
+estereoscópica. Gracias al cual podían obtener una representación en
+tres dimensiones de las trayectorias de las abejas
+\citep{art:chiron2013}.
+
+\subsection{Image Processing for Honey Bee hive Health
+Monitoring}\label{image-processing-for-honey-bee-hive-health-monitoring}
+
+El último artículo publicado data del año 2015 por Rahman Tashakkori y
+Ahmad Ghadiri de la \emph{Appalachian State University}. En él, mejoran
+el método de detección propuesto en \citep{art:campbell2008} y lo
+utilizan para estimar el número de abejas que habrá en un instante de
+tiempo dado \citep{art:tashakkori2015}.
+
+\subsection{Comparativa sobre las técnicas utilizadas}\label{comparacion-articulos}
+
+A continuación, se muestran las diferentes técnicas de detección de movimiento,
+conteo de abejas y \emph{tracking} utilizadas en los tres artículos 
+anteriores y se comparan con las utilizadas en el proyecto.
+
+\tablaSmall{Comparativa métodos de detección de movimiento.}{l l l l l}{comparativa-1}
+{ Artículo & Año & Citas & Detección de movimiento \\}{ 
+{\citep{art:campbell2008}}   & 2008 & 24 & \emph{Adaptative background subtraction}. \\
+{\citep{art:chiron2013}}     & 2013 & 8  & \specialcell{\emph{Adaptative background subtraction}\\\emph{with depth information}.} \\
+{\citep{art:tashakkori2015}} & 2015 & 0  & \specialcell{\emph{Averaging a background with}\\\emph{illumination invariant method}.}\\
+GoBees                       & 2017 & 0  & \specialcell{\emph{Mixture of Gaussians method}\\(\texttt{BackgroundSubtractorMOG2}).}     \\
+} 
+
+\tablaSmall{Comparativa métodos de conteo de abejas y \emph{tracking}.}{l l l}{comparativa-2}
+{ Artículo & Conteo de abejas & \emph{Tracking} \\}{ 
+{\citep{art:campbell2008}} & \emph{Template-based method.} & \specialcell{\emph{Maximum weighted bipartite}\\\emph{graph matching.}} \\
+{\citep{art:chiron2013}} & \specialcell{\emph{Hybrid 3D intensity}\\\emph{depth method.}} & \specialcell{\emph{Kalman filter }y\\\emph{Global Nearest Neighbor}.} \\
+{\citep{art:tashakkori2015}} & \emph{Area-based method.} & No \\
+GoBees & \emph{Area-based method.} & No \\
+} 
+\newpage
+
+\section{Proyectos}\label{proyectos}
+
+\subsection{EyesOnHives}\label{eyesonhives}
+
+EyesOnHives es el principal competidor del proyecto. Se trata de un
+producto comercial cuyo fin es la monitorización del estado de salud de
+las colmenas mediante su actividad de vuelo. Integra un \emph{hardware}
+específico que se encarga de la captación de imágenes y una plataforma
+en la nube que las procesa y permite el acceso a los datos.
+
+\begin{itemize}
+\tightlist
+\item
+  Web del proyecto: \url{http://www.keltronixinc.com}
+\end{itemize}
+
+\subsection{HiveTool}\label{hivetool}
+
+Se trata de un proyecto \emph{OpenSource} que ofrece un conjunto de
+herramientas para monitorizar distintos parámetros de una colmena. Una
+de estas herramientas es ``Bee Counter'', un contador de abejas por
+visión artificial desarrollado sobre una Raspberry Pi.
+
+\begin{itemize}
+\tightlist
+\item
+  Web del proyecto: \url{http://hivetool.org}
+\end{itemize}
+
+\section{Fortalezas y debilidades del
+proyecto}\label{fortalezas-y-debilidades-del-proyecto}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Características                 & GoBees     & EyesOnHives & HiveTool   \\
+\midrule
+No requiere \emph{hardware} específico & \cellcolor{green!25} {$\checkmark$} & \cellcolor{red!25} {$\times$} & \cellcolor{red!25} {$\times$} \\
+Instalación sencilla            & \cellcolor{green!25} {$\checkmark$} & \cellcolor{green!25} {$\checkmark$}  & \cellcolor{red!25} {$\times$} \\
+Procesamiento en local          & \cellcolor{green!25} {$\checkmark$} & \cellcolor{yellow!25} Parcial & \cellcolor{green!25} {$\checkmark$}  \\
+No requiere \emph{wifi}         & \cellcolor{green!25} {$\checkmark$} & \cellcolor{red!25} {$\times$} & \cellcolor{green!25} {$\checkmark$}  \\
+No requiere red eléctrica       & \cellcolor{green!25} {$\checkmark$} & \cellcolor{red!25} {$\times$}  & \cellcolor{green!25} {$\checkmark$}  \\
+Localización GPS                & \cellcolor{green!25} {$\checkmark$} & \cellcolor{red!25} {$\times$} & \cellcolor{red!25} {$\times$}        \\
+Gratuito                        & \cellcolor{green!25} {$\checkmark$} & \cellcolor{red!25} {$\times$}  & \cellcolor{green!25} {$\checkmark$}  \\
+Plataformas                     & Android    & Web App     & Linux     \\
+\bottomrule
+\end{tabular}
+\caption{Comparativa de las características de los proyectos.}
+\label{comparativa-proyectos}
+\end{table}
+
+Las principales fortalezas del proyecto son:
+
+\begin{itemize}
+\tightlist
+\item
+  No se necesita adquirir ningún \emph{hardware} específico como en el
+  resto de proyectos, simplemente se necesita un \emph{smartphone} con
+  Android. Esto hace el proyecto mucho más accesible a los potenciales
+  usuarios.
+\item
+  La instalación es muy sencilla. Únicamente se requiere un trípode o
+  cualquier otro tipo de soporte que permita sujetar el
+  \emph{smartphone} en posición cenital.
+\item
+  El procesamiento de las imágenes se realiza en local no en un
+  servidor. Considerando que los colmenares suelen estar en medio del
+  monte, no podemos requerir una conexión \emph{wifi} como necesita
+  EyesOnHives y el envío de vídeo mediante tecnologías 3G/4G supondría
+  un coste económico muy elevado.
+\item
+  No requiere estar conectado a la red eléctrica. El \emph{smartphone}
+  cuenta con su propia batería. El consumo de la aplicación no es muy
+  elevado al estar la pantalla apagada durante la monitorización. Aun
+  así, se pueden utilizar \emph{powerbanks} (baterías portátiles) en
+  caso de ser necesarios.
+\item
+  El \emph{smartphone} tiene integradas varias tecnologías de
+  transmisión de información. Lo da la posibilidad de crear una
+  plataforma que centralice la recogida de datos de varios dispositivos
+  sin importar su localización.
+\item
+  Relacionado con el punto anterior, el \emph{smartphone} nos permite
+  estar conectados a internet, posibilitándonos ampliar la información
+  que maneja nuestra aplicación. Por ejemplo, podemos acceder a la
+  información meteorológica en tiempo real.
+\item
+  El GPS del \emph{smartphone} nos permite localizar geográficamente la
+  monitorización y, por tanto, la información meteorológica. Además,
+  puede ser de utilidad en caso de robo, gracias a aplicaciones como
+  \emph{Android Device Manager}, Cerberus, etc. que permiten localizar
+  el dispositivo de forma remota.
+\end{itemize}
+
+Las principales debilidades son:
+
+\begin{itemize}
+\tightlist
+\item
+  Actualmente solo se encuentra disponible para Android. Aunque en una
+  segunda fase del proyecto se creará una plataforma en la nube que
+  centralice todos los datos y una aplicación web que permita acceder a
+  ellos.
+\item
+  El utilizar un \emph{smartphone} como soporte \emph{hardware} tiene
+  sus ventajas, pero también sus inconvenientes. La cámara no tiene el
+  mismo rendimiento que una cámara diseñada específicamente para esta
+  tarea. Esto nos ha limitado en las técnicas de visión artificial que
+  hemos podido aplicar, por no disponer de imágenes con la suficiente
+  nitidez.
+\end{itemize}

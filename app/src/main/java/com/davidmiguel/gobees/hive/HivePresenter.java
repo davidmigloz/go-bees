@@ -25,7 +25,7 @@ import android.support.annotation.NonNull;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.monitoring.MonitoringActivity;
 
 /**
@@ -88,12 +88,10 @@ class HivePresenter implements HiveContract.Presenter {
     @Override
     public void loadData(boolean forceUpdate) {
         // Force update the first time
-        forceUpdate = forceUpdate || firstLoad;
+        boolean update = forceUpdate || firstLoad;
         firstLoad = false;
-        // Show progress indicator
-        hiveRecordingsView.setLoadingIndicator(true);
         // Refresh data if needed
-        if (forceUpdate) {
+        if (update) {
             goBeesRepository.refreshRecordings(hiveId);
         }
         // Get recordings

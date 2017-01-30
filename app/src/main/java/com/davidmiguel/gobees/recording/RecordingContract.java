@@ -21,7 +21,7 @@ package com.davidmiguel.gobees.recording;
 import android.support.annotation.NonNull;
 
 import com.davidmiguel.gobees.data.model.Recording;
-import com.davidmiguel.gobees.utils.BasePresenter;
+import com.davidmiguel.gobees.utils.BaseLoadDataPresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
 import java.util.Date;
@@ -81,7 +81,7 @@ interface RecordingContract {
 
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BaseLoadDataPresenter {
 
         /**
          * Opens temperature chart.
@@ -97,10 +97,5 @@ interface RecordingContract {
          * Opens wind chart.
          */
         void openWindChart();
-
-        /**
-         * Delete the recording records.
-         */
-        void deleteRecording();
     }
 }

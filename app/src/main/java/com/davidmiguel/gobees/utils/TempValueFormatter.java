@@ -38,14 +38,30 @@ public class TempValueFormatter implements IValueFormatter, IAxisValueFormatter 
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex,
                                     ViewPortHandler viewPortHandler) {
-        return Math.round(convertValue(value)) + unit.toString();
+        return formatTemperature(convertValue(value));
     }
 
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
+        return formatTemperature(convertValue(value));
+    }
+
+    /**
+     * Format temperature.
+     *
+     * @param value temperature value.
+     * @return temperature formatted.
+     */
+    private String formatTemperature(float value) {
         return Math.round(value) + unit.toString();
     }
 
+    /**
+     * Convert temperature units.
+     *
+     * @param value temperature in celsius.
+     * @return value converted.
+     */
     private float convertValue(float value) {
         switch (unit) {
             case CELSIUS:

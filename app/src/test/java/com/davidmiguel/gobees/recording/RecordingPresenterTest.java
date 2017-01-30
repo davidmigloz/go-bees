@@ -20,7 +20,7 @@ package com.davidmiguel.gobees.recording;
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.model.mothers.RecordingMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetRecordingCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,7 +85,6 @@ public class RecordingPresenterTest {
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(view);
-        inOrder.verify(view).setLoadingIndicator(true);
         // Then progress indicator is hidden and all hives are shown in UI
         inOrder.verify(view).setLoadingIndicator(false);
         ArgumentCaptor<Recording> showRecordingArgumentCaptor = ArgumentCaptor.forClass(Recording.class);

@@ -20,7 +20,7 @@ package com.davidmiguel.gobees.recording;
 
 import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetRecordingCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import java.util.Date;
 
@@ -66,20 +66,24 @@ class RecordingPresenter implements RecordingContract.Presenter {
     }
 
     @Override
-    public void deleteRecording() {
-        //  TODO
-    }
-
-    @Override
     public void start() {
         loadRecording(start, end);
     }
 
+    @Override
+    public void loadData(boolean forceUpdate) {
+        loadRecording(start, end);
+    }
+
+    /**
+     * Load recording from a given period.
+     *
+     * @param start start date.
+     * @param end   end date.
+     */
     private void loadRecording(final Date start, Date end) {
         // Set title
         view.showTitle(start);
-        // Show loading indicator
-        view.setLoadingIndicator(true);
         // Get recording
         goBeesRepository.getRecording(apiaryId, hiveId, start, end, new GetRecordingCallback() {
             @Override

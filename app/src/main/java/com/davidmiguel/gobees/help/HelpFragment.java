@@ -97,7 +97,22 @@ public class HelpFragment extends Fragment implements HelpContract.View {
      */
     private class MyBrowser extends WebViewClient {
 
+        /**
+         * Give the host application a chance to take over the control when a new url is about to
+         * be loaded in the current WebView. If WebViewClient is not provided, by default WebView
+         * will ask Activity Manager to choose the proper handler for the url.
+         * If WebViewClient is provided, return true means the host application handles the url,
+         * while return false means the current WebView handles the url.
+         * This method is not called for requests using the POST "method".
+         *
+         * @param view web-view
+         * @param url  url to load.
+         * @return True if the host application wants to leave the current WebView
+         * and handle the url itself, otherwise return false.
+         * @deprecated It's deprecated for versions from Android N and up.
+         */
         @SuppressWarnings("deprecation")
+        @Deprecated
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);

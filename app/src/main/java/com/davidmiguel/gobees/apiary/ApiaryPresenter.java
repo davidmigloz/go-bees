@@ -25,7 +25,7 @@ import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.Hive;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 
 import java.util.Date;
 
@@ -68,12 +68,10 @@ class ApiaryPresenter implements ApiaryContract.Presenter {
     @Override
     public void loadData(boolean forceUpdate) {
         // Force update the first time
-        forceUpdate = forceUpdate || firstLoad;
+        boolean update = forceUpdate || firstLoad;
         firstLoad = false;
-        // Show progress indicator
-        apiaryHivesView.setLoadingIndicator(true);
         // Refresh data if needed
-        if (forceUpdate) {
+        if (update) {
             goBeesRepository.refreshHives(apiaryId);
         }
         // Get apiary

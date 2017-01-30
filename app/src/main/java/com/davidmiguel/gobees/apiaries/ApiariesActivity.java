@@ -18,7 +18,6 @@
 
 package com.davidmiguel.gobees.apiaries;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,27 +26,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.about.AboutActivity;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
 import com.davidmiguel.gobees.help.HelpActivity;
 import com.davidmiguel.gobees.settings.SettingsActivity;
-import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 /**
  * Apiaries activity.
  */
-public class ApiariesActivity extends AppCompatActivity {
+public class ApiariesActivity extends BaseActivity {
 
     private DrawerLayout drawerLayout;
-
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +48,14 @@ public class ApiariesActivity extends AppCompatActivity {
         setContentView(R.layout.apiaries_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
+        AndroidUtils.setUpToolbar(this, true);
 
         // Set up the navigation drawer.
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
-            setupDrawerContent(navigationView, this);
+            setupDrawerContent(navigationView);
         }
 
         // Add fragment to the activity
@@ -77,44 +64,31 @@ public class ApiariesActivity extends AppCompatActivity {
         if (apiariesFragment == null) {
             // Create the fragment
             apiariesFragment = ApiariesFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), apiariesFragment, R.id.contentFrame);
         }
 
         // Set default preferences values
         PreferenceManager.setDefaultValues(this, R.xml.general_settings, false);
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new ApiariesPresenter(goBeesRepository, apiariesFragment);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // Open the navigation drawer when the home icon is selected from the toolbar
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            // Open the navigation drawer when the home icon is selected from the toolbar
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
      * Set the actions to be carried out from the drawerLayout.
      */
-    private void setupDrawerContent(NavigationView navigationView, final Context context) {
+    private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -122,42 +96,23 @@ public class ApiariesActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.settings_navigation_menu_item:
                                 // Settings
-                                Intent intent = new Intent(context, SettingsActivity.class);
-                                startActivity(intent);
+                                openSettings();
                                 break;
                             case R.id.help_navigation_menu_item:
                                 // Help
-                                Intent helpIntent =
-                                        new Intent(ApiariesActivity.this, HelpActivity.class);
-                                startActivity(helpIntent);
+                                openHelp();
                                 break;
                             case R.id.feedback_navigation_menu_item:
                                 // Feedback
-                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
-                                        Uri.parse("mailto:" + getString(R.string.gobees_email)));
-                                emailIntent.putExtra(Intent.EXTRA_SUBJECT,
-                                        getString(R.string.gobees_email_subject));
-                                emailIntent.putExtra(Intent.EXTRA_TEXT,
-                                        getString(R.string.gobees_email_body));
-                                startActivity(Intent.createChooser(
-                                        emailIntent, getString(R.string.feedback_title)));
+                                openSendFeedback();
                                 break;
                             case R.id.share_app_navigation_menu_item:
                                 // Share app
-                                Intent sendIntent = new Intent();
-                                sendIntent.setAction(Intent.ACTION_SEND);
-                                sendIntent.putExtra(Intent.EXTRA_TEXT,
-                                        getString(R.string.share_app_text) +
-                                                Uri.parse(getString(R.string.share_app_url)));
-                                sendIntent.setType("text/plain");
-                                startActivity(Intent.createChooser(
-                                        sendIntent, getString(R.string.share_app_title)));
+                                openShareApp();
                                 break;
                             case R.id.about_navigation_menu_item:
                                 // About
-                                Intent aboutIntent =
-                                        new Intent(ApiariesActivity.this, AboutActivity.class);
-                                startActivity(aboutIntent);
+                                openAbout();
                                 break;
                             default:
                                 break;
@@ -168,5 +123,59 @@ public class ApiariesActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    /**
+     * Opens settings section.
+     */
+    private void openSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Opens help section.
+     */
+    private void openHelp() {
+        Intent helpIntent =
+                new Intent(ApiariesActivity.this, HelpActivity.class);
+        startActivity(helpIntent);
+    }
+
+    /**
+     * Opens send feedback option.
+     */
+    private void openSendFeedback() {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                Uri.parse("mailto:" + getString(R.string.gobees_email)));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT,
+                getString(R.string.gobees_email_subject));
+        emailIntent.putExtra(Intent.EXTRA_TEXT,
+                getString(R.string.gobees_email_body));
+        startActivity(Intent.createChooser(
+                emailIntent, getString(R.string.feedback_title)));
+    }
+
+    /**
+     * Opens share app option.
+     */
+    private void openShareApp() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,
+                getString(R.string.share_app_text) +
+                        Uri.parse(getString(R.string.share_app_url)));
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(
+                sendIntent, getString(R.string.share_app_title)));
+    }
+
+    /**
+     * Opens about section.
+     */
+    private void openAbout() {
+        Intent aboutIntent =
+                new Intent(ApiariesActivity.this, AboutActivity.class);
+        startActivity(aboutIntent);
     }
 }

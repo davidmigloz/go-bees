@@ -1,20 +1,40 @@
 \documentclass[a4paper,11pt,oneside]{memoir}
 
 % Castellano
-\usepackage[spanish]{babel}
+\usepackage[spanish,es-tabla]{babel}
 \selectlanguage{spanish}
 \usepackage[utf8]{inputenc}
 \usepackage{placeins}
+\usepackage{float}
 
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
 \RequirePackage{xtab}
 \RequirePackage{multirow}
 
+% Multi-page tables using
+\usepackage{longtable}
+\usepackage{tabularx}
+
+% Cell with line break (e.g. \specialcell{Foo\\bar})
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+% Mathematic font
+\usepackage{amsfonts}
+
+% Color
+
+% Bibliography management
+\usepackage[numbers,sort]{natbib}
+
 % Links
 \usepackage[colorlinks]{hyperref}
 \hypersetup{
-	allcolors = {red}
+	colorlinks,
+	linkcolor={green!40!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
 }
 
 % Ecuaciones
@@ -26,6 +46,9 @@
 % Párrafos
 \nonzeroparskip
 
+% Listas estrechas
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % Imagenes
 \usepackage{graphicx}
@@ -91,7 +114,7 @@
 %
 % Nuevo comando para tablas pequeñas (menos de una página).
 \newcommand{\tablaSmall}[5]{%
- \begin{table}
+ \begin{table}[H]
   \begin{center}
    \rowcolors {2}{gray!35}{}
    \begin{tabular}{#2}
@@ -285,7 +308,7 @@
 
 
 
-\graphicspath{ {./img/} }
+\graphicspath{ {../img/} }
 
 % Capítulos
 \chapterstyle{bianchi}
@@ -341,8 +364,8 @@
   {%
     \noindent\LARGE
     Presentado por \@author{}\\ 
-    en Universidad de Burgos --- \@date{}\\
-    Tutor: \@tutor{}\\
+    en la Universidad de Burgos --- \@date{}\\
+    Tutores: \@tutor{}\\
   }%
   \end{center}%
   \null
@@ -350,11 +373,12 @@
   }
 \makeatother
 
+\newcommand{\nombre}{David Miguel Lozano} %%% cambio de comando
 
 % Datos de portada
-\title{título del TFG}
-\author{nombre alumno}
-\tutor{nombre tutor}
+\title{{\Huge GoBees}\\[0.5cm]Monitorización del estado de una colmena mediante la cámara de un smartphone.}
+\author{\nombre}
+\tutor{Dr. José Francisco Díez Pastor\\y Dr. Raúl Marticorena Sánchez}
 \date{\today}
 
 \begin{document}
@@ -363,20 +387,20 @@
 
 
 
-\null\cleardoublepage
+\newpage\null\thispagestyle{empty}\newpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagestyle{empty}
+\thispagestyle{empty}
 
 
 \noindent\includegraphics[width=\textwidth]{cabecera}\vspace{1cm}
 
-\noindent D. nombre tutor, profesor del departamento de nombre departamento, área de nombre área.
+\noindent D. José Francisco Díez Pastor y D. Raúl Marticorena Sánchez, profesores del departamento de Ingeniería Civil, área de Lenguajes y Sistemas Informáticos.
 
 \noindent Expone:
 
-\noindent Que el alumno D. nombre alumno, con DNI dni, ha realizado el Trabajo final de Grado en Ingeniería Informática titulado título de TFG. 
+\noindent Que el alumno D. \nombre, con DNI 71307412Y, ha realizado el Trabajo Final de Grado en Ingeniería Informática titulado ``GoBees - Monitorización del estado de una colmena mediante la cámara de un smartphone''. 
 
 \noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
 
@@ -390,14 +414,14 @@ En Burgos, {\large \today}
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
 Vº. Bº. del Tutor:\\[2cm]
-D. nombre tutor
+D. José Francisco Díez Pastor
 \end{flushleft}
 \end{minipage}
 \hfill
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
-Vº. Bº. del co-tutor:\\[2cm]
-D. nombre co-tutor
+Vº. Bº. del Tutor:\\[2cm]
+D. Raúl Marticorena Sánchez
 \end{flushleft}
 \end{minipage}
 \hfill
@@ -410,8 +434,7 @@ D. nombre co-tutor
 %D. nombre tutor
 
 
-\null\cleardoublepage
-\null\cleardoublepage
+\newpage\null\thispagestyle{empty}\newpage
 
 
 
@@ -421,12 +444,28 @@ D. nombre co-tutor
 % Abstract en castellano
 \renewcommand*\abstractname{Resumen}
 \begin{abstract}
-En este primer apartado se hace una \textbf{breve} presentación del tema que se aborda en el proyecto.
+La actividad de vuelo de una colmena es un indicador importante sobre su
+estado de salud. Sin embargo, la monitorización manual de este parámetro
+es un proceso muy costoso y puede introducir una tasa de error elevada.
+Por ello, se han desarrollado diversos métodos que permiten automatizar
+este proceso.
+
+En este trabajo se propone un nuevo método más accesible al público
+general que permite la monitorización de la actividad de vuelo de una
+colmena mediante la cámara de un \emph{smartphone} Android.
+
+Además, se ha desarrollado una aplicación de gestión de colmenares que
+integra el algoritmo y proporciona las herramientas necesarias para
+interpretar y organizar toda la información recabada.
+
+GoBees es la aplicación resultante y se encuentra disponible a través de
+Google Play o de la página oficial del proyecto \url{http://gobees.io/}.
 \end{abstract}
 
 \renewcommand*\abstractname{Descriptores}
 \begin{abstract}
-Palabras separadas por comas que identifiquen el contenido del proyecto Ej: servidor web, buscador de vuelos, android \ldots
+Contador de abejas, actividad de vuelo, monitorización de colmenas, 
+gestión de colmenares, aplicación Android.
 \end{abstract}
 
 \clearpage
@@ -434,12 +473,28 @@ Palabras separadas por comas que identifiquen el contenido del proyecto Ej: serv
 % Abstract en inglés
 \renewcommand*\abstractname{Abstract}
 \begin{abstract}
-A \textbf{brief} presentation of the topic addressed in the project.
+Flight activity of a honey bee colony is an overall indicator of the
+state of the hive's health. However, manually monitoring this parameter
+is a very expensive and time-consuming process and can introduce a high
+error rate. Thus, several methods to automate this process have been
+developed over the years.
+
+In this work, we propose a new method more accessible to the general
+public which allows monitoring the flight activity of a honey bee colony
+using the built-in camera of an Android smartphone.
+
+In addition, an apiary management application has been developed,
+incorporating the algorithm and providing the necessary tools to
+interpret and organize all the information gathered.
+
+GoBees is the resulting application and it is available from Google Play
+or the official web site \url{http://gobees.io/}.
 \end{abstract}
 
 \renewcommand*\abstractname{Keywords}
 \begin{abstract}
-keywords separated by commas.
+Bee counter, flight activity, hive monitoring, apiary management, 
+Android application.
 \end{abstract}
 
 \clearpage
@@ -467,7 +522,7 @@ keywords separated by commas.
 \include{./tex/7_Conclusiones_Lineas_de_trabajo_futuras}
 
 
-\bibliographystyle{plain}
 \bibliography{bibliografia}
+\bibliographystyle{plainnat}
 
 \end{document}

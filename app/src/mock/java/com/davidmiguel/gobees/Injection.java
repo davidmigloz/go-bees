@@ -18,7 +18,7 @@
 
 package com.davidmiguel.gobees;
 
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
 import com.davidmiguel.gobees.data.source.network.WeatherDataSource;
 
@@ -28,6 +28,9 @@ import com.davidmiguel.gobees.data.source.network.WeatherDataSource;
  * to isolate the dependencies and run a test hermetically.
  */
 public class Injection {
+
+    private Injection() {
+    }
 
     public static GoBeesRepository provideApiariesRepository() {
         return GoBeesRepository.getInstance(GoBeesLocalDataSource.getInstance(),

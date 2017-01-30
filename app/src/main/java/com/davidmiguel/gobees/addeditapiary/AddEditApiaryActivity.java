@@ -22,24 +22,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
-import com.davidmiguel.gobees.Injection;
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
-import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
+import com.davidmiguel.gobees.utils.BaseActivity;
 
 /**
  * Add / edit apiary activity.
  */
-public class AddEditApiaryActivity extends AppCompatActivity {
+public class AddEditApiaryActivity extends BaseActivity {
 
     public static final int REQUEST_ADD_APIARY = 1;
     public static final int NEW_APIARY = -1;
 
     private Fragment addEditApiaryFragment;
-    private GoBeesRepository goBeesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +43,7 @@ public class AddEditApiaryActivity extends AppCompatActivity {
         setContentView(R.layout.addeditapiary_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+        ActionBar actionBar = AndroidUtils.setUpToolbar(this, false);
 
         // Get apiary id (if edit)
         long apiaryId = getIntent()
@@ -69,7 +59,8 @@ public class AddEditApiaryActivity extends AppCompatActivity {
                     actionBar.setTitle(R.string.edit_apiary);
                 }
                 Bundle bundle = new Bundle();
-                bundle.putString(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID, apiaryId + "");
+                bundle.putString(AddEditApiaryFragment.ARGUMENT_EDIT_APIARY_ID,
+                        Long.toString(apiaryId));
                 addEditApiaryFragment.setArguments(bundle);
             } else {
                 // If new -> set add title
@@ -77,30 +68,14 @@ public class AddEditApiaryActivity extends AppCompatActivity {
                     actionBar.setTitle(R.string.add_apiary);
                 }
             }
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+            AndroidUtils.addFragmentToActivity(getSupportFragmentManager(),
                     addEditApiaryFragment, R.id.contentFrame);
         }
 
-        // Init db
-        goBeesRepository = Injection.provideApiariesRepository();
-        goBeesRepository.openDb();
-
         // Create the presenter
         new AddEditApiaryPresenter(goBeesRepository,
-                (AddEditApiaryContract.View) addEditApiaryFragment, apiaryId);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close database
-        goBeesRepository.closeDb();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+                (AddEditApiaryContract.View) addEditApiaryFragment, apiaryId,
+                new LocationService(this));
     }
 
     @Override

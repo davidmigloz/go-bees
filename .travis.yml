@@ -3,6 +3,12 @@ language: android
 jdk: oraclejdk8
 compiler: gcc
 
+addons:
+  sonarqube:
+    branches:
+      - master
+      - develop
+
 env:
   matrix:
     - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
@@ -31,9 +37,9 @@ install:
 
 before_script:
     # Compile OpenCV and set it to path
-    - wget https://github.com/opencv/opencv/archive/3.1.0.zip
-    - unzip 3.1.0.zip >/dev/null
-    - mv opencv-3.1.0 opencv
+    - wget https://github.com/opencv/opencv/archive/3.2.0.zip
+    - unzip 3.2.0.zip >/dev/null
+    - mv opencv-3.2.0 opencv
     - cd opencv
     - mkdir build
     - cd build
@@ -42,7 +48,7 @@ before_script:
     - sudo make -j8 install >/dev/null
     - cd ../..
     - mkdir opencv_lib
-    - cp opencv/build/lib/libopencv_java310.so opencv_lib/libopencv_java310.so
+    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
     - chmod +x gradlew
     # Create gradle.properties with fake credentials
@@ -53,6 +59,8 @@ script:
     - ./gradlew assembleDebug lint
     # Run test coverage report
     - ./gradlew jacocoTestMockDebugUnitTestReport
+    # Run SonarQube analysis
+    - ./gradlew sonarqube
     # Build test app
     # ./gradlew assembleAndroidTest
     # Create and lunch emulator
@@ -67,4 +75,7 @@ after_success:
 
 cache:
   directories:
-    - $HOME/.gradle
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'

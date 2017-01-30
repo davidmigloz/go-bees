@@ -21,7 +21,7 @@ package com.davidmiguel.gobees.data.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.google.common.base.Strings;
+import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -196,8 +196,10 @@ public class Apiary extends RealmObject {
         }
     }
 
-    public boolean isValidApiary() {
-        return !Strings.isNullOrEmpty(name);
+    public void addMeteoRecords(@NonNull List<MeteoRecord> meteoRecords) {
+        if (this.meteoRecords != null) {
+            this.meteoRecords.addAll(meteoRecords);
+        }
     }
 
     public boolean hasLocation() {

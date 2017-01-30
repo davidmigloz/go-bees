@@ -18,14 +18,18 @@
 
 package com.davidmiguel.gobees.utils;
 
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+
+import java.util.Locale;
 
 /**
  * Format label in xmm format.
  */
-public class RainValueFormatter implements IValueFormatter {
+public class RainValueFormatter implements IValueFormatter, IAxisValueFormatter {
 
     private Unit unit;
 
@@ -36,7 +40,22 @@ public class RainValueFormatter implements IValueFormatter {
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex,
                                     ViewPortHandler viewPortHandler) {
-        return Math.round(value) + unit.toString();
+        return formatRain(value);
+    }
+
+    @Override
+    public String getFormattedValue(float value, AxisBase axis) {
+        return formatRain(value);
+    }
+
+    /**
+     * Format rain.
+     *
+     * @param value rain value.
+     * @return rain formatted.
+     */
+    private String formatRain(float value) {
+        return String.format(Locale.getDefault(), "%.1f", value) + unit.toString();
     }
 
     public enum Unit {
@@ -44,12 +63,10 @@ public class RainValueFormatter implements IValueFormatter {
 
         @Override
         public String toString() {
-            switch (this) {
-                case MM:
-                    return "mm";
-                default:
-                    throw new IllegalArgumentException();
+            if (this == MM) {
+                return "mm";
             }
+            return "";
         }
     }
 }

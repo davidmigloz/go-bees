@@ -163,6 +163,7 @@ public class AboutFragment extends Fragment
         alertDialog.setMessage(AndroidUtils.fromHtml(body));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.close_btn),
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }

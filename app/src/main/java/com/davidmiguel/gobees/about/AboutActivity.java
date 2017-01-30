@@ -19,12 +19,10 @@
 package com.davidmiguel.gobees.about;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.davidmiguel.gobees.R;
-import com.davidmiguel.gobees.utils.ActivityUtils;
+import com.davidmiguel.gobees.utils.AndroidUtils;
 
 /**
  * About GoBees activity.
@@ -37,14 +35,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.about_act);
 
         // Set up the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.about_title);
-        }
+        AndroidUtils.setUpToolbar(this, false, R.string.about_title);
 
         // Add fragment to the activity
         AboutFragment aboutFragment =
@@ -52,7 +43,7 @@ public class AboutActivity extends AppCompatActivity {
         if (aboutFragment == null) {
             // Create the fragment
             aboutFragment = AboutFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            AndroidUtils.addFragmentToActivity(
                     getSupportFragmentManager(), aboutFragment, R.id.contentFrame);
         }
 

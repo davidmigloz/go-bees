@@ -46,7 +46,7 @@ en líneas generales una filosofía ágil:
    iteraciones (*sprints*) y revisiones.
 -  La duración media de los *sprints* fue de una semana.
 -  Al finalizar cada *sprint* se entregaba una parte del producto
-   operativa (incremento).
+   operativo (incremento).
 -  Se realizaban reuniones de revisión al finalizar cada *sprint* y al
    mismo tiempo de planificación del nuevo *sprint*.
 -  En la planificación del *sprint* se generaba una pila de tareas a
@@ -85,10 +85,10 @@ Sprint 0 (09/09/16 - 16/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La reunión de planificación de este *sprint* marcó el comienzo del
-proyecto. En una reunión previa se había planeado la idea del proyecto
-al tutor y este la había aceptado. En esta nueva reunión se profundizó
-en la idea, se formó el equipo del proyecto y se plantearon los
-objetivos del primer *sprint*.
+proyecto. En una reunión previa se había planteado la idea del proyecto
+a Jose Francisco y este había aceptado tutorizarla. En esta nueva reunión se 
+profundizó en la idea, se incorporó Raúl Marticorena como cotutor y se 
+plantearon los objetivos del primer *sprint*.
 
 Los objetivos fueron: profundizar y formalizar los objetivos del
 proyecto, investigar el estado del arte en algoritmos de detección y
@@ -103,8 +103,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 8 horas de trabajo y se invirtieron finalmente 9,25 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint0.png
-   :alt: Sprint 0.
+|Sprint 0|
+
+.. |Sprint 0| image:: ../../img/burndowns/sprint0.png
 
 Sprint 1 (17/09/16 - 23/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,8 +127,10 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 7,25 horas de trabajo y se invirtieron finalmente 13,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint1.png
-   :alt: Sprint 1.
+|Sprint 1|
+
+.. |Sprint 1| image:: ../../img/burndowns/sprint1.png
+   
 
 Sprint 2 (24/09/16 - 29/09/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -152,8 +155,9 @@ Se estimaron 11,75 horas de trabajo y se invirtieron finalmente 33
 horas, quedando dos tareas pendientes para terminar durante el siguiente
 *sprint*.
 
-.. figure:: ../../img/burndowns/sprint2.png
-   :alt: Sprint 2.
+|Sprint 2|
+
+.. |Sprint 2| image:: ../../img/burndowns/sprint2.png
 
 Sprint 3 (30/09/16 - 06/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,8 +173,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 31
 horas, quedando una tarea por terminar.
 
-.. figure:: ../../img/burndowns/sprint3.png
-   :alt: Sprint 3.
+|Sprint 3|
+
+.. |Sprint 3| image:: ../../img/burndowns/sprint3.png
 
 Sprint 4 (07/10/16 - 13/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -188,8 +193,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 37 horas de trabajo y se invirtieron finalmente 39,5 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint4.png
-   :alt: Sprint 4.
+|Sprint 4|
+
+.. |Sprint 4| image:: ../../img/burndowns/sprint4.png
 
 Sprint 5 (14/10/16 - 20/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,8 +212,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 27 horas de trabajo y se invirtieron finalmente 34 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint5.png
-   :alt: Sprint 5.
+|Sprint 5|
+
+.. |Sprint 5| image:: ../../img/burndowns/sprint5.png
 
 Sprint 6 (21/10/16 - 27/10/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -237,8 +244,9 @@ tests unitarios).
 Se estimaron 20,75 horas de trabajo y se invirtieron finalmente 41
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint6.png
-   :alt: Sprint 6.
+|Sprint 6|
+
+.. |Sprint 6| image:: ../../img/burndowns/sprint6.png
 
 Sprint 7 (28/10/16 - 04/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -255,8 +263,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 16 horas de trabajo y se invirtieron finalmente 23 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint7.png
-   :alt: Sprint 7.
+|Sprint 7|
+
+.. |Sprint 7| image:: ../../img/burndowns/sprint7.png
 
 Sprint 8 (05/11/16 - 10/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -273,8 +282,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 46 horas de trabajo y se invirtieron finalmente 53 horas,
 completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint8.png
-   :alt: Sprint 8.
+|Sprint 8|
+
+.. |Sprint 8| image:: ../../img/burndowns/sprint8.png
 
 Sprint 9 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -289,8 +299,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 23 horas de trabajo y se invirtieron finalmente 24,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint9.png
-   :alt: Sprint 9.
+|Sprint 9|
+
+.. |Sprint 9| image:: ../../img/burndowns/sprint9.png
 
 Sprint 10 (11/11/16 - 17/11/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -305,8 +316,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 33,75 horas de trabajo y se invirtieron finalmente 39,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint10.png
-   :alt: Sprint 10.
+|Sprint 10|
+
+.. |Sprint 10| image:: ../../img/burndowns/sprint10.png
    
 Sprint 11 (26/11/16 - 01/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -322,8 +334,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 25,75 horas de trabajo y se invirtieron finalmente 34
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint11.png
-   :alt: Sprint 11.
+|Sprint 11|
+
+.. |Sprint 11| image:: ../../img/burndowns/sprint11.png
    
 Sprint 12 (02/12/16 - 09/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -339,8 +352,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 36,25 horas de trabajo y se invirtieron finalmente 50,75
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint12.png
-   :alt: Sprint 12.
+|Sprint 12|
+
+.. |Sprint 12| image:: ../../img/burndowns/sprint12.png
 
 Sprint 13 (10/12/16 - 14/12/16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -354,8 +368,9 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 26,25 horas de trabajo y se invirtieron finalmente 14,25
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint13.png
-   :alt: Sprint 13.
+|Sprint 13|
+
+.. |Sprint 13| image:: ../../img/burndowns/sprint13.png
 
 Sprint 14 (15/12/16 - 11/01/17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -367,7 +382,7 @@ Los objetivos de este *sprint* fueron: implementar el servicio de monitorizació
 en segundo plano, junto con su sección de ajustes, la obtención de información 
 meteorológica, la edición y borrado de colmenares y colmenas y las pestañas de 
 información de colmenar y colmena. Además, realizar un estudio de viabilidad 
-legal y selececionar la licencia más apropiada para el proyecto.
+legal y seleccionar la licencia más apropiada para el proyecto.
 
 Las tareas en las que se descompusieron los objetivos se pueden ver en:
 `Sprint 14 <https://github.com/davidmigloz/go-bees/milestone/15?closed=1>`__.
@@ -375,8 +390,43 @@ Las tareas en las que se descompusieron los objetivos se pueden ver en:
 Se estimaron 143 horas de trabajo y se invirtieron finalmente 187,75
 horas, completando todas las tareas.
 
-.. figure:: ../../img/burndowns/sprint14.png
-   :alt: Sprint 14.
+|Sprint 14|
+
+.. |Sprint 14| image:: ../../img/burndowns/sprint14.png
+   
+Sprint 15 (12/01/17 - 18/01/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: finalizar el desarrollo principal de la 
+app completando el menú y la internacionalización. Completar los contenidos de 
+la memoria y continuar con los anexos "Plan del proyecto software" y "Requisitos."
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 15 <https://github.com/davidmigloz/go-bees/milestone/16?closed=1>`__.
+
+Se estimaron 39 horas de trabajo y se invirtieron finalmente 37,75
+horas, a falta de terminar los anexos planificados por falta de tiempo.
+
+|Sprint 15|
+
+.. |Sprint 15| image:: ../../img/burndowns/sprint15.png
+
+Sprint 16 (19/01/17 - 25/01/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: completar las tareas pendientes del anterior 
+sprint (Especificación de requisitos y Análisis económico), documentar el diseño de 
+datos, procedimental y arquitectónico y aumentar la cobertura de los test.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 16 <https://github.com/davidmigloz/go-bees/milestone/17?closed=1>`__.
+
+Se estimaron 45,75 horas de trabajo y se invirtieron finalmente 45,25
+horas, completando todas las tareas.
+
+|Sprint 16|
+
+.. |Sprint 16| image:: ../../img/burndowns/sprint16.png
    
 Estudio de viabilidad
 ---------------------
@@ -384,7 +434,129 @@ Estudio de viabilidad
 Viabilidad económica
 ~~~~~~~~~~~~~~~~~~~~
 
-TODO
+En el siguiente apartado se analizarán los costes y beneficios que
+podría haber supuesto el proyecto si se hubiese realizado en un entorno
+empresarial real.
+
+Costes
+^^^^^^
+
+La estructura de costes del proyecto se puede desglosar en las
+siguientes categorías.
+
+**Costes de personal:**
+
+El proyecto ha sido llevado a cabo por un desarrollador empleado a
+tiempo completo durante cinco meses. Se considera el siguiente salario:
+
++----------------------------+--------------+
+| **Concepto**               | **Coste**    |
++============================+==============+
+| Salario mensual neto       | 1.000€       |
++----------------------------+--------------+
+| Retención IRPF (15%)       | 272,23€      |
++----------------------------+--------------+
+| Seguridad Social (29,9%)   | 542,65€      |
++----------------------------+--------------+
+| Salario mensual bruto      | 1.814,88€    |
++----------------------------+--------------+
+| **Total 5 meses**          | 9.074,40 €   |
++----------------------------+--------------+
+
+La retribución a la Seguridad Social se ha calculado como un 23,60% por
+contingencias comunes, más un 5,50% por desempleo de tipo general, más
+un 0,20% para el Fondo de Garantía Salarial y más un 0,60% de formación
+profesional. En total un 29,9% que se aplica al salario bruto [ss_cotizacion]_.
+
+**Costes de hardware:**
+
+En este apartado se revisan todos los costes en dispositivos *hardware*
+que se han necesitado para el desarrollo del proyecto. Se considera que
+la amortización ronda los 5 años y han sido utilizados durante 5 meses.
+
++----------------------+-------------+------------------------+
+| **Concepto**         | **Coste**   | **Coste amortizado**   |
++======================+=============+========================+
+| Dispositivo móvil    | 300€        | 25€                    |
++----------------------+-------------+------------------------+
+| Ordenador portátil   | 800€        | 66,67€                 |
++----------------------+-------------+------------------------+
+| **Total**            | 1.100€      | 91,67€                 |
++----------------------+-------------+------------------------+
+
+**Costes de software:**
+
+En este apartado se revisan todos los costes en licencias de *software*
+no gratuito. Se considera que la amortización del *software* ronda los 2
+años.
+
++------------------+-------------+------------------------+
+| **Concepto**     | **Coste**   | **Coste amortizado**   |
++==================+=============+========================+
+| Windows 10 Pro   | 279€        | 58,13€                 |
++------------------+-------------+------------------------+
+| Creately         | 5€          | 1,04€                  |
++------------------+-------------+------------------------+
+| **Total**        | 284€        | 59,17€                 |
++------------------+-------------+------------------------+
+
+**Costes varios:**
+
+En este apartado se revisan el resto de costes del proyecto.
+
++------------------------------------+-------------+
+| **Concepto**                       | **Coste**   |
++====================================+=============+
+| Dominio gobees.io                  | 31,90€      |
++------------------------------------+-------------+
+| Alquiler de oficina                | 500€        |
++------------------------------------+-------------+
+| Internet                           | 150€        |
++------------------------------------+-------------+
+| Material de apicultura de prueba   | 150€        |
++------------------------------------+-------------+
+| **Total**                          | 831,90€     |
++------------------------------------+-------------+
+
+**Costes totales:**
+
+El sumatorio de todos los costes es el siguiente:
+
++----------------+--------------+
+| **Concepto**   | **Coste**    |
++================+==============+
+| Personal       | 9.074,40 €   |
++----------------+--------------+
+| *Hardware*     | 91,67€       |
++----------------+--------------+
+| *Software*     | 59,17€       |
++----------------+--------------+
+| Varios         | 831,90€      |
++----------------+--------------+
+| Total          | 10.057,14€   |
++----------------+--------------+
+
+Beneficios
+^^^^^^^^^^
+
+La aplicación desarrollada se distribuirá de forma gratuita y sin
+publicidad, por lo que a corto plazo no se obtendrán beneficios.
+
+La forma de monetizar la aplicación será en una segunda fase, cuando se
+desarrolle una plataforma en la nube que sincronice la información de
+varios dispositivos y permita el acceso remoto a la información.
+
+Se considerarán tres tipos de suscripciones:
+
++---------------+------------------+----------------+-------------------+--------------+
+| **Tipo**      | **Colmenares**   | **Colmenas**   | **Plataformas**   | **Precio**   |
++===============+==================+================+===================+==============+
+| Hobby         | 1                | 10             | App / Cloud       | Gratis       |
++---------------+------------------+----------------+-------------------+--------------+
+| Amateur       | 5                | 100            | App / Cloud       | 5€/mes       |
++---------------+------------------+----------------+-------------------+--------------+
+| Profesional   | Ilimitados       | Ilimitados     | App / Cloud       | 20€/mes      |
++---------------+------------------+----------------+-------------------+--------------+
 
 Viabilidad legal
 ~~~~~~~~~~~~~~~~
@@ -461,8 +633,9 @@ sea compatible con Apache v2.0, BSD, MIT y EPL. En el siguiente gráfico
 mostramos la compatibilidad entre estas licencias, así como su grado de
 permisividad.
 
-.. figure:: https://cloud.githubusercontent.com/assets/6546265/21730744/6bc30c16-d451-11e6-9c6a-dfae7ba3348d.png
-   :alt: licenses\_compatibility
+|licenses compatibility|
+
+.. |licenses compatibility| image:: ../../img/licenses_compatibility.png
 
 Podemos observar que la licencia más restrictiva (en el sentido de
 obligaciones a cumplir) es la *Eclipse Public License* que posee la
@@ -605,3 +778,5 @@ En la siguiente tabla se resumen las licencias que posee el proyecto.
    https://www.eclipse.org/legal/epl-v10.html
 .. [license:ccby4]
    https://creativecommons.org/licenses/by/4.0
+.. [ss_cotizacion]
+   http://www.seg-social.es/Internet_1/Trabajadores/CotizacionRecaudaci10777/Basesytiposdecotiza36537/index.htm

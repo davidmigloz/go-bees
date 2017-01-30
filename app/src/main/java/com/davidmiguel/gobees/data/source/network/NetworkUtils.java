@@ -47,6 +47,9 @@ class NetworkUtils {
     /* The units we want our API to return */
     private static final String UNITS = "metric";
 
+    private NetworkUtils() {
+    }
+
     /**
      * Builds the URL to get current weather data.
      *
@@ -82,13 +85,14 @@ class NetworkUtils {
         }
         // Make the call to the api
         HttpURLConnection urlConnection = null;
+        Scanner scanner = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
             InputStream in = urlConnection.getInputStream();
 
-            Scanner scanner = new Scanner(in);
+            scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
 
             boolean hasInput = scanner.hasNext();
@@ -96,9 +100,11 @@ class NetworkUtils {
             if (hasInput) {
                 response = scanner.next();
             }
-            scanner.close();
             return response;
         } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }

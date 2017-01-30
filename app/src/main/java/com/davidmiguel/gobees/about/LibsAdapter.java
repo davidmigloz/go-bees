@@ -36,7 +36,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Libraries list adapter.
  */
-class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.ViewHolder> {
+class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.LibViewHolder> {
 
     private List<Library> libraries;
     private LibItemListener listener;
@@ -47,14 +47,14 @@ class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LibViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.about_libs_list_item, parent, false);
-        return new ViewHolder(view);
+        return new LibViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(LibViewHolder holder, int position) {
         holder.bind(libraries.get(position));
     }
 
@@ -72,13 +72,13 @@ class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.ViewHolder> {
         void onLibraryClicked(Library.License license);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    class LibViewHolder extends RecyclerView.ViewHolder
             implements BaseViewHolder<Library>, View.OnClickListener {
 
         private TextView libraryTv;
         private Button license;
 
-        ViewHolder(View itemView) {
+        LibViewHolder(View itemView) {
             super(itemView);
 
             // Get views
@@ -89,6 +89,7 @@ class LibsAdapter extends RecyclerView.Adapter<LibsAdapter.ViewHolder> {
             license.setOnClickListener(this);
         }
 
+        @Override
         public void bind(@NonNull Library library) {
             // Set library name
             libraryTv.setText(library.getName());

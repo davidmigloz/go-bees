@@ -18,6 +18,9 @@
 
 package com.davidmiguel.gobees.utils;
 
+/**
+ * Base presenter.
+ */
 public interface BasePresenter {
 
     /**

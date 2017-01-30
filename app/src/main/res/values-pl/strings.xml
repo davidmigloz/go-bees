@@ -1,0 +1,490 @@
+<!--
+  ~ GoBees
+  ~ Copyright (c) 2016 - 2017 David Miguel Lozano
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+  -->
+
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+
+    <!--+++++++++++-->
+    <!-- Generals  -->
+    <!--+++++++++++-->
+
+    <!-- GoBees logo [CHAR LIMIT=NONE] -->
+    <string name="gobees_logo">"GoBees logo"</string>
+    <!-- Refresh menu option [CHAR LIMIT=25] -->
+    <string name="refresh">"Odśwież"</string>
+    <!-- Edit action [CHAR LIMIT=30] -->
+    <string name="edit">"Edytuj"</string>
+    <!-- Delete action [CHAR LIMIT=30] -->
+    <string name="delete">"Skasuj"</string>
+    <!-- Title when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_title">"Odmowa Uprawnień"</string>
+    <!-- Allow button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_allow_button">"Zezwolić"</string>
+    <!-- Deny button, when user doesn't grant location permission [CHAR LIMIT=30] -->
+    <string name="permission_request_deny_button">"Zabronić"</string>
+    <!-- Message when user doesn't grant permission [CHAR LIMIT=100] -->
+    <string name="permission_request_denied">"Aplikacja nie ma uprawnień do korzystania z tej funkcji."</string>
+
+
+    <!--+++++++++-->
+    <!-- Weather -->
+    <!--+++++++++-->
+
+    <!-- Weather condition [CHAR LIMIT=15] -->
+    <string name="weather_condition">"Stan/Warunek"</string>
+    <!-- Temperature [CHAR LIMIT=30] -->
+    <string name="temperature">"Temperatura"</string>
+    <!-- Humidity [CHAR LIMIT=15] -->
+    <string name="humidity">"Wilgotność"</string>
+    <!-- Pressure [CHAR LIMIT=15] -->
+    <string name="pressure">"Ciśnienie"</string>
+    <!-- Wind [CHAR LIMIT=15] -->
+    <string name="wind">"Wiatr"</string>
+    <!-- Rain [CHAR LIMIT=15] -->
+    <string name="rain">"Deszcz"</string>
+    <!-- Snow [CHAR LIMIT=15] -->
+    <string name="snow">"Śnieg"</string>
+    <!-- Format temperature in Celsius unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_celsius"><xliff:g id="temp">%1.0f</xliff:g>\u00B0C</string>
+    <!-- Format temperature in Fahrenheit unit. Ej: 30ºC [CHAR LIMIT=NONE] -->
+    <string name="format_temperature_fahrenheit"><xliff:g id="temp">%1.0f</xliff:g>\u00B0F</string>
+    <!-- Format humidity  in percentage. Ej: 18% [CHAR LIMIT=NONE] -->
+    <string name="format_humidity_percentage"><xliff:g id="temp">%1.0f</xliff:g>%%</string>
+    <!-- Format pressure  in hPa. Ej: 1024hPa [CHAR LIMIT=NONE] -->
+    <string name="format_pressure_hpa"><xliff:g id="temp">%1.0f</xliff:g> hPa</string>
+    <!-- Format Wind in kph [CHAR LIMIT=NONE] -->
+    <string name="format_wind_kmh"><xliff:g id="speed">%1$1.0f</xliff:g> km/h - <xliff:g id="direction">%2$s</xliff:g></string>
+    <!-- Wind in mph [CHAR LIMIT=NONE -->
+    <string name="format_wind_mph"><xliff:g id="speed">%1$1.0f</xliff:g> mph - <xliff:g id="direction">%2$s</xliff:g></string>
+    <!-- Format rain/snow  in mm. Ej: 0.1mm [CHAR LIMIT=NONE] -->
+    <string name="format_rain_snow_mm"><xliff:g id="temp">%1.2f</xliff:g> mm</string>
+    <!-- Time from last update [CHAR LIMIT=15] -->
+    <string name="last_updated">"Zaktualizowany"</string>
+    <!-- Default time from last update [CHAR LIMIT=100] -->
+    <string name="default_last_updated">"\? dni temu"</string>
+    <!-- Weather conditions [CHAR LIMIT=100] -->
+    <string name="condition_200">"Burza z lekkim deszczem"</string>
+    <string name="condition_201">"Burza z deszczem"</string>
+    <string name="condition_202">"Burza i ulewny deszcz"</string>
+    <string name="condition_210">"Lekka burza"</string>
+    <string name="condition_211">"Burza z piorunami"</string>
+    <string name="condition_212">"Potężna burza"</string>
+    <string name="condition_221">"Szarpiąca burza"</string>
+    <string name="condition_230">"Burza z lekką mżawkę"</string>
+    <string name="condition_231">"Burza z mżawką "</string>
+    <string name="condition_232">"Burza z silną mżawką"</string>
+    <string name="condition_300">"Łekka mżawka "</string>
+    <string name="condition_301">"Mżawka"</string>
+    <string name="condition_302">"Ciężki deszcz"</string>
+    <string name="condition_310">"Lekki deszcz i mżawka"</string>
+    <string name="condition_311">"Mżawka i deszcz"</string>
+    <string name="condition_312">"Ciężka mżawka i deszcz"</string>
+    <string name="condition_313">"Silny deszcz i mżawka"</string>
+    <string name="condition_314">"Ciężki deszcz i mżawka"</string>
+    <string name="condition_321">"Słaba mżawka"</string>
+    <string name="condition_500">"Lekki deszcz"</string>
+    <string name="condition_501">"Umiarkowany deszcz"</string>
+    <string name="condition_502">"Ulewa"</string>
+    <string name="condition_503">"Bardzo ciężki deszcz"</string>
+    <string name="condition_504">"Ekstremalny deszcz"</string>
+    <string name="condition_511">"Marznący deszcz"</string>
+    <string name="condition_520">"Lekki deszcz"</string>
+    <string name="condition_521">"Deszcz"</string>
+    <string name="condition_522">"Ciężki deszcz"</string>
+    <string name="condition_531">"Szarpiący deszcz"</string>
+    <string name="condition_600">"Lekki śnieg"</string>
+    <string name="condition_601">"Śnieg"</string>
+    <string name="condition_602">"Duże opady śniegu"</string>
+    <string name="condition_611">"Śnieg z deszczem"</string>
+    <string name="condition_612">"Śnieg z deszczem"</string>
+    <string name="condition_615">"Lekki Deszcz i śnieg"</string>
+    <string name="condition_616">"Deszcz i Śnieg"</string>
+    <string name="condition_620">"Lekki śnieg"</string>
+    <string name="condition_621">"Śnieg"</string>
+    <string name="condition_622">"Ciężkie opady śniegu"</string>
+    <string name="condition_701">"Mgła"</string>
+    <string name="condition_711">"Smog"</string>
+    <string name="condition_721">"Mgła"</string>
+    <string name="condition_731">"Piasek, wiry pyłowe"</string>
+    <string name="condition_741">"Mgła"</string>
+    <string name="condition_751">"Piasek"</string>
+    <string name="condition_761">"Kurz"</string>
+    <string name="condition_762">"Pył wulkaniczny"</string>
+    <string name="condition_771">"szkwały"</string>
+    <string name="condition_781">"Tornado"</string>
+    <string name="condition_800">"Jasne Niebo"</string>
+    <string name="condition_801">"W większości jasne"</string>
+    <string name="condition_802">"Rzadkie chmury"</string>
+    <string name="condition_803">"Osobne chmury"</string>
+    <string name="condition_804">"Pochmurnie"</string>
+    <string name="condition_900">"Tornado"</string>
+    <string name="condition_901">"Burza tropikalna"</string>
+    <string name="condition_902">"Huragan"</string>
+    <string name="condition_903">"Zimno"</string>
+    <string name="condition_904">"Gorąco"</string>
+    <string name="condition_905">"Wietrznie"</string>
+    <string name="condition_906">"Grad"</string>
+    <string name="condition_951">"Spokojnie"</string>
+    <string name="condition_952">"Lekki wiatr"</string>
+    <string name="condition_953">"Delikatny wiatr"</string>
+    <string name="condition_954">"umiarkowany wiatr"</string>
+    <string name="condition_955">"Świeży powiew"</string>
+    <string name="condition_956">"Silny wiatr"</string>
+    <string name="condition_957">"Silny wiatr"</string>
+    <string name="condition_958">"Wichura"</string>
+    <string name="condition_959">"Ciężka wichura"</string>
+    <string name="condition_960">"Burza"</string>
+    <string name="condition_961">"Gwałtowna burza"</string>
+    <string name="condition_962">"Huragan"</string>
+    <string name="condition_unknown">Nieznany (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
+
+
+    <!--+++++++++++++++-->
+    <!-- General Icons -->
+    <!--+++++++++++++++-->
+
+    <!-- Description of icon ic_more_vert [CHAR LIMIT=100] -->
+    <string name="more_icon">"Więcej…"</string>
+    <!-- Description of enter icon ic_enter [CHAR LIMIT=100] -->
+    <string name="enter_icon">"Wprowadź…"</string>
+    <!-- Description of date icon ic_date [CHAR LIMIT=25] -->
+    <string name="date_icon">"Data"</string>
+    <!-- Description of weather icon [CHAR LIMIT=25] -->
+    <string name="weather_icon">"ikona pogody"</string>
+    <!-- Description of chart line [CHAR LIMIT=25] -->
+    <string name="chart_line">"Wykres liniowy"</string>
+    <!-- Description of settings icon [CHAR LIMIT=100] -->
+    <string name="settings_icon">"Ikona ustawień"</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="gps_location_icon">"Pobierz lokalizację GPS"</string>
+    <!-- Description of location icon [CHAR LIMIT=25] -->
+    <string name="location_icon">"Lokalizacja"</string>
+    <!-- Description of map icon [CHAR LIMIT=25] -->
+    <string name="map_icon">"Mapa"</string>
+    <!-- Description of number of hives icon[CHAR LIMIT=100] -->
+    <string name="num_hives">"Liczba uli"</string>
+
+    <!--+++++++++++++++-->
+    <!-- drawerLayout  -->
+    <!--+++++++++++++++-->
+
+    <!-- Settings [CHAR LIMIT=30] -->
+    <string name="settings_title">"Ustawienia"</string>
+    <!-- Help [CHAR LIMIT=30] -->
+    <string name="help_title">"Pomoc"</string>
+    <!-- Send feedback [CHAR LIMIT=30] -->
+    <string name="feedback_title">"Wyślij opinię"</string>
+    <!-- Share this app [CHAR LIMIT=30] -->
+    <string name="share_app_title">"Podziel się tą aplikację"</string>
+    <!-- About GoBees [CHAR LIMIT=30] -->
+    <string name="about_title">"Na GoBees"</string>
+
+    <!--++++++++++-->
+    <!-- Apiaries -->
+    <!--++++++++++-->
+
+    <!-- Default apiary name [CHAR LIMIT=100] -->
+    <string name="default_apiary_name">"Moja pasieka"</string>
+    <!-- Error msg shown when it's not posible to load apiaries [CHAR LIMIT=100] -->
+    <string name="loading_apiaries_error">"Błąd podczas wczytywania pasiek."</string>
+    <!-- Error msg shown when there's no apiaries [CHAR LIMIT=100] -->
+    <string name="no_apiaries">"Nie masz pasiek!"</string>
+    <!-- Msg shown when an apiary is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_apiary_message">"Pasieka zapisana!"</string>
+    <!-- Msg shown when a apiary is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_apiary_message">"Pasieka usunięta!"</string>
+    <!-- Msg shown when an error occurs when deleting apiary [CHAR LIMIT=100] -->
+    <string name="deleted_apiary_error_message">"Błąd podczas usuwania pasiekę."</string>
+    <!-- Msg shown when current weather is updated [CHAR LIMIT=100] -->
+    <string name="successfully_updated_weather_message">"Pogoda uaktualniona!"</string>
+    <!-- Msg shown when an error occurs when updating weather [CHAR LIMIT=100] -->
+    <string name="weather_update_error_message">"Błąd podczas aktualizacji pogody."</string>
+
+    <!--++++++++++++-->
+    <!-- Add apiary -->
+    <!--++++++++++++-->
+
+    <!-- Edit apiary action bar title [CHAR LIMIT=50] -->
+    <string name="edit_apiary">"Edycja pasieki"</string>
+    <!-- Add apiary action bar title [CHAR LIMIT=50] -->
+    <string name="add_apiary">"Dodaj pasiekę"</string>
+    <!-- Apiary name input [CHAR LIMIT=50] -->
+    <string name="apiary_name_hint">"Imię"</string>
+    <!-- Apiary location input [CHAR LIMIT=50] -->
+    <string name="apiary_location_hint">"Lokalizacja"</string>
+    <!-- Apiary notes input [CHAR LIMIT=50] -->
+    <string name="apiary_notes_hint">"Uwagi"</string>
+    <!-- Msg shown when we're searching for gps [CHAR LIMIT=100] -->
+    <string name="searching_gps_message">"Poszukiwanie GPS…"</string>
+    <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
+    <string name="empty_apiary_message">"Nazwa Pasieki nie może być pusta!"</string>
+    <!-- Error msg shown when we cannot connect to GPS [CHAR LIMIT=100] -->
+    <string name="gps_error_message">"Nie można połączyć się z GPS!"</string>
+    <!-- Error msg shown when it's not possible to save the apiary [CHAR LIMIT=100] -->
+    <string name="save_apiary_error_message">"Błąd podczas zapisywania pasieki."</string>
+    <!-- Description of apiary logo [CHAR LIMIT=100] -->
+    <string name="apiary_logo">"Logo pasieki"</string>
+    <!-- Body when user doesn't grant location permission [CHAR LIMIT=500] -->
+    <string name="location_permission_request_body">"Bez tej zgody aplikacja nie jest w stanie odbierać informacje o pogodzie lub zlokalizować pasiek na mapie. Czy na pewno chcesz odrzucić to uprawnienie?"</string>
+
+    <!--++++++++-->
+    <!-- Apiary -->
+    <!--++++++++-->
+
+    <!-- Apiary hives tab name [CHAR LIMIT=30] -->
+    <string name="apiary_hives_tab">"Ule"</string>
+    <!-- Apiary info tab name [CHAR LIMIT=30] -->
+    <string name="apiary_info_tab">"Informacje"</string>
+    <!-- Default hive name [CHAR LIMIT=100] -->
+    <string name="default_hive_name">"Moja ula"</string>
+    <!-- Default last revision value [CHAR LIMIT=100] -->
+    <string name="default_last_revision">"\? dni temu"</string>
+    <!-- Error msg shown when it's not possible to load hives [CHAR LIMIT=100] -->
+    <string name="loading_hives_error">"Błąd podczas wczytywania uli."</string>
+    <!-- Error msg shown when there's no hives [CHAR LIMIT=100] -->
+    <string name="no_hives">"Nie masz uli!"</string>
+    <!-- Msg shown when a hive is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_hive_message">"Hive zapisane!"</string>
+    <!-- Msg shown when a hive is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_hive_message">"Hive usunięte!"</string>
+    <!-- Msg shown when an error occurs when deleting hive [CHAR LIMIT=100] -->
+    <string name="deleted_hive_error_message">"Błąd podczas usuwania"</string>
+    <!-- Description of last revision icon [CHAR LIMIT=100] -->
+    <string name="last_revision_icon">"Ikona ostatniej rewizji"</string>
+    <!-- Description of notes icon [CHAR LIMIT=100] -->
+    <string name="notes_icon">"Uwagi"</string>
+    <!-- Description of hive logo [CHAR LIMIT=100] -->
+    <string name="hive_logo">"Logo ula"</string>
+    <!-- Number of hives default [CHAR LIMIT=100] -->
+    <string name="default_num_hives_long">"Brak uli"</string>
+    <!-- Number of hives [CHAR LIMIT=100] -->
+    <plurals name="num_hives_plurals">
+        <item quantity="one">"1 ul"</item>
+        <item quantity="few">"%d uli"</item>
+        <item quantity="many">"%d uli"</item>
+        <item quantity="other">"%d uli"</item>
+    </plurals>
+    <!-- Number of hives default [CHAR LIMIT=100] -->
+    <string name="no_location">"Brak lokalizacji"</string>
+    <!-- Default value city [CHAR LIMIT=100] -->
+    <string name="default_city">"Burgos"</string>
+
+    <!--++++++++++-->
+    <!-- Add hive -->
+    <!--++++++++++-->
+
+    <!-- Edit hive action bar title [CHAR LIMIT=50] -->
+    <string name="edit_hive">"Edycja ula"</string>
+    <!-- Add hive action bar title [CHAR LIMIT=50] -->
+    <string name="add_hive">"Dodaj ul"</string>
+    <!-- Hive name input [CHAR LIMIT=50] -->
+    <string name="hive_name_hint">"Nazwa"</string>
+    <!-- Hive notes input [CHAR LIMIT=50] -->
+    <string name="hive_notes_hint">"Uwagi"</string>
+    <!-- Error msg shown when name is empty [CHAR LIMIT=100] -->
+    <string name="empty_hive_message">"Nazwa ula nie może być pusta!"</string>
+    <!-- Error msg shown when it's not possible to save the hive [CHAR LIMIT=100] -->
+    <string name="save_hive_error_message">"Błąd podczas zapisywania ula."</string>
+
+    <!--++++++-->
+    <!-- Hive -->
+    <!--++++++-->
+
+    <!-- Hive recordings tab name [CHAR LIMIT=20] -->
+    <string name="hive_recordings_tab">"Nagrania"</string>
+    <!-- Hive info tab name [CHAR LIMIT=20] -->
+    <string name="hive_info_tab">"Informacje"</string>
+    <!-- Default recording date [CHAR LIMIT=100] -->
+    <string name="default_recording_date">"Wen. 18 jan., 2017"</string>
+    <!-- Error msg shown when it's not possible to load recordings [CHAR LIMIT=100] -->
+    <string name="loading_recordings_error">"Błąd podczas wczytywania nagrań."</string>
+    <!-- Error msg shown when there's no recordings [CHAR LIMIT=100] -->
+    <string name="no_recordings">"Nie masz żadnych nagrań!"</string>
+    <!-- Msg shown when a recordings is saved [CHAR LIMIT=100] -->
+    <string name="successfully_saved_recording_message">"Nagrywanie zapisane!"</string>
+    <!-- Msg shown when an error occurs when saving a recording [CHAR LIMIT=100] -->
+    <string name="save_recording_error_message">"Błąd podczas zapisywania nagrywania."</string>
+    <!-- Msg shown when a recording is too short [CHAR LIMIT=100] -->
+    <string name="recording_too_short_error_message">"Błąd: Zapis zbyt krótki!"</string>
+    <!-- Msg shown when a recordings is deleted [CHAR LIMIT=100] -->
+    <string name="successfully_deleted_recording_message">"Nagranie usunięte!"</string>
+    <!-- Msg shown when an error occurs when deleting recordings [CHAR LIMIT=100] -->
+    <string name="deleted_recording_error_message">"Błąd podczas usuwania nagrania."</string>
+    <!-- Date shown as title of a recording card [CHAR LIMIT=25] -->
+    <string name="hive_recordings_date_format">"EEE d MMM, yyyy"</string>
+    <!-- Body when user doesn't grant camera permission [CHAR LIMIT=500] -->
+    <string name="camera_permission_request_body">"
+        Bez tej zgody aplikacja nie jest w stanie monitorować aktywność lotów w twoim ulu. Czy na pewno chcesz odrzucić tego uprawnienia?
+    "</string>
+    <!-- Default note text [CHAR LIMIT=100] -->
+    <string name="default_notes">"Uwagi…"</string>
+    <!-- No notes text [CHAR LIMIT=100] -->
+    <string name="no_notes">"Brak notatek"</string>
+    <!-- General info title [CHAR LIMIT=100] -->
+    <string name="general_info_title">"Ogólne informacje"</string>
+
+
+    <!--+++++++++++-->
+    <!-- Recording -->
+    <!--+++++++++++-->
+    <!-- Error msg shown when it's not possible to load a recording [CHAR LIMIT=100] -->
+    <string name="loading_recording_error">"Błąd podczas ładowania nagrania"</string>
+    <!-- Error msg shown when there are no records [CHAR LIMIT=100] -->
+    <string name="no_records_error">"Błąd: Brak nagrań."</string>
+    <!-- No flight activity data available [CHAR LIMIT=100] -->
+    <string name="no_flight_act_data_available">"Brak dostępnych danych dotyczących aktywności lotniczej."</string>
+    <!-- No weather data available [CHAR LIMIT=100] -->
+    <string name="no_weather_data_available">"Brak danych pogodowych."</string>
+    <!-- Date shown as title of a recording activity [CHAR LIMIT=30] -->
+    <string name="recording_date_format">"EEE d MMM, yyyy"</string>
+    <!-- Number of bees [CHAR LIMIT=30] -->
+    <string name="num_bees">"Pszczoły Nº"</string>
+
+    <!--++++++++++++-->
+    <!-- Monitoring -->
+    <!--++++++++++++-->
+
+    <!-- Description of start record icon [CHAR LIMIT=100] -->
+    <string name="start_record_icon">"Ikona startu nagrania"</string>
+    <!-- Text shown when the monitoring service is running [CHAR LIMIT=150] -->
+    <string name="monitoring_text">"Monitorowanie…\n można wyłączyć ekran."</string>
+    <!-- Monitoring notification text [CHAR LIMIT=100] -->
+    <string name="monitoring_notification_text">"Monitorowanie ula…"</string>
+
+
+    <!--++++++++++++++++++++-->
+    <!-- Monitoring Settings-->
+    <!--++++++++++++++++++++-->
+
+    <!-- Label for bees category [CHAR LIMIT=30] -->
+    <string name="pref_bees_cat_label">"Pszczoły"</string>
+
+    <!-- Label for the show algorithm output preference [CHAR LIMIT=30] -->
+    <string name="pref_show_algo_output_label">"Pokaż wyniki algorytmu"</string>
+
+    <!-- Label for the blob blobSize preference [CHAR LIMIT=30] -->
+    <string name="pref_blob_size_label">"wielkość kropli"</string>
+    <!-- Label for blob blobSize small [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_small">"Mały"</string>
+    <!-- Label for blob blobSize normal [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_normal">"Normalny"</string>
+    <!-- Label for blob blobSize big [CHAR LIMIT=25] -->
+    <string name="pref_blob_size_label_big">"Duży"</string>
+
+    <!-- Label for the min area preference [CHAR LIMIT=30] -->
+    <string name="pref_min_area_label">"Min. obszar pszczeli"</string>
+    <!-- Min value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_min">0</integer>
+    <!-- Max value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_max">399</integer>
+    <!-- Default value in SharedPreferences for min area [CHAR LIMIT=NONE] -->
+    <integer name="pref_min_area_default">15</integer>
+
+
+    <!-- Label for the max area preference [CHAR LIMIT=30] -->
+    <string name="pref_max_area_label">"Max. obszar pszczeli"</string>
+    <!-- Min value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_min">400</integer>
+    <!-- Max value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_max">1500</integer>
+    <!-- Default value in SharedPreferences for max area [CHAR LIMIT=NONE] -->
+    <integer name="pref_max_area_default">800</integer>
+
+    <!-- Label for camera category [CHAR LIMIT=30] -->
+    <string name="pref_camera_cat_label">"Kamera"</string>
+
+    <!-- Label for the zoom preference [CHAR LIMIT=30] -->
+    <string name="pref_zoom_label">"Powiększenie"</string>
+    <!-- Label for zoom x1 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1">"x1.0"</string>
+    <!-- Label for zoom x1.5 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x1_5">"x1.5"</string>
+    <!-- Label for zoom x2.0 [CHAR LIMIT=25] -->
+    <string name="pref_zoom_label_x2">"x2.0"</string>
+
+    <!-- Label for the frame rate preference [CHAR LIMIT=30] -->
+    <string name="pref_frame_rate_label">"Prędkość - ilość klatek na sekundę"</string>
+    <!-- Label for frame rate 0.5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_0_5sec">"0.5 sek."</string>
+    <!-- Label for frame rate 1 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1sec">"1 sek."</string>
+    <!-- Label for frame rate 5 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5sec">"5 sek."</string>
+    <!-- Label for frame rate 15 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_15sec">"15 sek."</string>
+    <!-- Label for frame rate 30 sec [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_30sec">"30 sek."</string>
+    <!-- Label for frame rate 1 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_1min">"1 min."</string>
+    <!-- Label for frame rate 5 min [CHAR LIMIT=25] -->
+    <string name="pref_frame_rate_label_5min">"5 min."</string>
+
+
+    <!--++++++++++-->
+    <!-- Settings -->
+    <!--++++++++++-->
+
+    <!-- Toolbar title in settings [CHAR LIMIT=30] -->
+    <string name="settings_toolbar_title">"Ustawienia"</string>
+    <!-- Label for weather category [CHAR LIMIT=30] -->
+    <string name="pref_weather_cat_label">"Pogoda"</string>
+    <!-- Label for the weather units preference [CHAR LIMIT=30] -->
+    <string name="pref_weather_units_label">"Jednostki pogodowe"</string>
+    <!-- Label for metric option in weather unit preference [CHAR LIMIT=25] -->
+    <string name="pref_weather_units_label_metric">"Metryka (\u00B0C, km/h…)"</string>
+    <!-- Label for imperial option in weather unit preference [CHAR LIMIT=25] -->
+    <string name="pref_weather_units_label_imperial">"Imperial (\u00B0F, mph…)"</string>
+
+
+    <!--+++++++++++++++++++++-->
+    <!-- Share app & feedback-->
+    <!--+++++++++++++++++++++-->
+
+    <!-- Share app text [CHAR LIMIT=30] -->
+    <string name="share_app_text">"GoBees - Aplikacja Android do monitorowania aktywności pszczół w ulach.\n"</string>
+    <!-- Share app url [CHAR LIMIT=30] -->
+    <string name="share_app_url">"
+        https://play.google.com/store/apps/details?id=com.davidmiguel.gobees
+    "</string>
+    <!-- Feedback email body [CHAR LIMIT=100] -->
+    <string name="gobees_email_body">"Napisz swoją opinię tutaj…"</string>
+    <string name="changelog_btn">Changelog</string>
+    <string name="close_btn">Zamknąć</string>
+    <string name="default_version">Wersję 1.0</string>
+    <string name="version">"Wersję "</string>
+    <string name="website_btn">Website</string>
+    <string name="license_btn">Licencja</string>
+    <string name="libraries">Otwórz Biblioteki Źródło:</string>
+    <string name="developed_author">Opracowany przez Davida Miguel Lozano.</string>
+    <string name="all_data_deleted_msg">Dane usunięte!</string>
+    <string name="loading_msg">Załadunek…</string>
+    <string name="pref_data_cat_label">Dane</string>
+    <string name="pref_delete_all_data_desc">OSTRZEŻENIE! Wszystkie dane zostaną usunięte.</string>
+    <string name="pref_delete_all_data_label">Usuń wszystkie dane</string>
+    <string name="pref_generate_sample_data_desc">Zostanie utworzony przykładowy pasieki.</string>
+    <string name="pref_generate_sample_data_label">Generowanie danych przykładowych</string>
+    <string name="sample_apiary_name">Próbka pasieki</string>
+    <string name="sample_apiary_notes">Przynieś dwa ula ciała i dwa covery.\nDystrybutor wody jest prawie pusta.\nUsuń szczepionek następny poniedziałek.</string>
+    <string name="sample_data_generated_msg">pasieka Próbka utworzona!</string>
+    <string name="sample_hive_name">Ula #<xliff:g id="temp">%1$d</xliff:g></string>
+    <string name="sample_hive_notes">Sprawdź, czy to ma Varroa.</string>
+    <string name="apiary_location__latitude_hint">\"Szerokość (np 42.352083)\"</string>
+    <string name="apiary_location__longitude_hint">\"Długość (np -3.697586)\"</string>
+    <string name="invalid_location_message">Nieprawidłowa lokalizacja!</string>
+    <string name="name_icon">Imię</string>
+
+</resources>

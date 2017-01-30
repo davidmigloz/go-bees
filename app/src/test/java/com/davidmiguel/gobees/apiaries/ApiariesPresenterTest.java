@@ -20,7 +20,7 @@ package com.davidmiguel.gobees.apiaries;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
-import com.davidmiguel.gobees.data.source.cache.GoBeesRepository;
+import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
@@ -79,7 +79,7 @@ public class ApiariesPresenterTest {
     public void loadAllApiariesFromRepositoryAndLoadIntoView() {
         // Given an initialized ApiariesPresenter with initialized apiaries
         // When loading of apiaries is requested
-        apiariesPresenter.loadApiaries(true);
+        apiariesPresenter.loadData(true);
 
         // Callback is captured and invoked with stubbed apiaries
         verify(goBeesRepository).getApiaries(getApiariesCallbackCaptor.capture());
@@ -87,7 +87,6 @@ public class ApiariesPresenterTest {
 
         // Then progress indicator is shown
         InOrder inOrder = inOrder(apiariesView);
-        inOrder.verify(apiariesView).setLoadingIndicator(true);
         // Then progress indicator is hidden and all apairies are shown in UI
         inOrder.verify(apiariesView).setLoadingIndicator(false);
         ArgumentCaptor<List> showApiariesArgumentCaptor = ArgumentCaptor.forClass(List.class);
