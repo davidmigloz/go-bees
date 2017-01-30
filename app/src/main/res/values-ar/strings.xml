@@ -14,7 +14,8 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
-  --><resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+  -->
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <!--+++++++++++-->
     <!-- Generals  -->
@@ -481,5 +482,9 @@
     <string name="sample_data_generated_msg">المنحل عينة التي تم إنشاؤها!</string>
     <string name="sample_hive_name">خلية #<xliff:g id="temp">%1$d</xliff:g></string>
     <string name="sample_hive_notes">تحقق إذا كان لديه الفاروا.</string>
+    <string name="apiary_location__latitude_hint">خط العرض (على سبيل المثال، 42.352083)</string>
+    <string name="apiary_location__longitude_hint">خط الطول (على سبيل المثال -3،697586)</string>
+    <string name="invalid_location_message">موقع غير صالح!</string>
+    <string name="name_icon">اسم</string>
 
 </resources>

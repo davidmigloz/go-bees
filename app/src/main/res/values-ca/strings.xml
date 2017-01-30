@@ -244,4 +244,8 @@
     <string name="sample_hive_name">Rusc #<xliff:g id="temp">%1$d</xliff:g></string>
     <string name="sample_hive_notes">Comprovar si té varroa.</string>
     <string name="sample_apiary_notes">Treure dues caixes i dues tapes.\nL\' abeurador està gairebé buit.\nTreure les vacunes el dilluns que ve.</string>
+    <string name="apiary_location__latitude_hint">\"Latitud (ex. 42.352083)\"</string>
+    <string name="apiary_location__longitude_hint">\"Longitud (e.x. -3.697586)\"</string>
+    <string name="invalid_location_message">Ubicació no vàlida!</string>
+    <string name="name_icon">Nom</string>
 </resources>

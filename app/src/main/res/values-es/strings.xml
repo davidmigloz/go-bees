@@ -489,4 +489,8 @@
     <string name="sample_data_generated_msg">Colmenar de muestra creado!</string>
     <string name="sample_hive_name">Colmena #<xliff:g id="temp">%1$d</xliff:g></string>
     <string name="sample_hive_notes">Comprobar si tiene varroa.</string>
+    <string name="apiary_location__latitude_hint">\"Latitud (ej. 42.352083)\"</string>
+    <string name="apiary_location__longitude_hint">\"Longitud (e.g. -3.697586)\"</string>
+    <string name="invalid_location_message">Ubicación no válida!</string>
+    <string name="name_icon">Nombre</string>
 </resources>
