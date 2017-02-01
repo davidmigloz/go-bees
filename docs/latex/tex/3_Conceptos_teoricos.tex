@@ -63,7 +63,7 @@ más peso a los vecinos cercanos, siendo estos más influyentes en el
 resultado.
 
 El kernel utilizado en la convolución es una muestra discreta de una
-función Gaussiana. En nuestro caso utilizamos un kernel 3x3 que se
+función Gaussiana. En nuestro caso utilizamos un kernel $3 \times 3$ que se
 corresponde con: \citep{book:mastering_opencv}
 
 \begin{equation*}
@@ -75,7 +75,7 @@ corresponde con: \citep{book:mastering_opencv}
     \end{bmatrix}
 \end{equation*}
 
-En la siguiente imagen se puede ver el resultado de aplicar esta fase a
+En la imagen \ref{fig:s1} se puede ver el resultado de aplicar esta fase a
 la imagen de entrada:
 
 \imagen{s1}{Resultado de la fase de preprocesado.}
@@ -104,7 +104,7 @@ nuestro interés (falsos positivos).
 
 Con OpenCV para Android podemos implementar varios algoritmos básicos de
 extracción del fondo y además, nos proporciona la implementación de dos
-algoritmos más sofisticados: \texttt{BackgroundSubtractorMOG} y \\
+algoritmos más sofisticados: \texttt{BackgroundSubtractorMOG2} y \\
 \texttt{BackgroundSubtractorKNN}. 
 
 Tras realizar un estudio de todos
@@ -343,7 +343,7 @@ resistente al ruido, y además, era capaz de diferenciar una abeja de su
 sombra. Por todos estos motivos, se seleccionó para la fase de
 substracción del fondo.
 
-En la siguiente imagen se puede ver el resultado de aplicar
+En la imagen \ref{fig:s2} se puede ver el resultado de aplicar
 \\ \texttt{BackgroundSubtractorMOG2} a la salida de la fase anterior:
 
 \imagen{s2}{Resultado de la fase de substracción del fondo.}
@@ -392,7 +392,7 @@ En nuestro algoritmo aplicamos tres operaciones morfológicas seguidas:
   \textbf{Erosión (3x3)}: recupera el tamaño inicial.
 \end{enumerate}
 
-A continuación podemos ver el resultado de esta fase:
+En la imagen \ref{fig:s3} podemos ver el resultado de esta fase:
 
 \begin{figure}[H]
 	\centering
@@ -487,11 +487,11 @@ máximo en el área del contorno. De esta manera, evitamos que contornos
 diminutos o grandes generados por ruidos o por objetos del entorno
 (moscas, pájaros, roedores\ldots{}) sean contados cómo abejas.
 
-En la siguiente imagen podemos ver la salida del algoritmo:
+En la imagen \ref{fig:s4} podemos ver la salida del algoritmo:
 
 \imagen{s4}{Resultado de la fase de detección y conteo de abejas.}
 
-En esta otra se puede apreciar como se descartan las tres moscas que hay
+En \ref{fig:flies} se puede apreciar como se descartan las tres moscas que hay
 en la imagen ya que su área es inferior al área mínima:
 
 \imagen{flies}{Resultado del algoritmo en una imágen con moscas.}

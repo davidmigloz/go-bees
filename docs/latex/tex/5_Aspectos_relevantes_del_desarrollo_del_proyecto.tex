@@ -173,8 +173,8 @@ que nos proporcionaba una mayor flexibilidad y, además, migrar el código
 a Android posteriormente sería una tarea bastante trivial.
 
 Para facilitar el desarrollo del algoritmo y del testeo de las
-diferentes alternativas se realizó una aplicación Java que permitía
-parametrizar en tiempo real las diferentes etapas del algoritmo.
+diferentes alternativas se realizó una aplicación Java (ver \ref{fig:devplatform1}) 
+que permitía parametrizar en tiempo real las diferentes etapas del algoritmo.
 
 Además de permitir variar la parametrización, la aplicación nos permitía
 observar la salida de cada etapa del algoritmo y su tiempo de
@@ -318,7 +318,8 @@ algoritmo del testeo de la \emph{app}.
 Para testear el error cometido por el algoritmo era necesario contar con
 fragmentos de vídeo etiquetados con el número de abejas presentes en
 cada fotograma. Como esta labor era muy tediosa, se desarrolló una
-aplicación Java para agilizar el etiquetado de los fotogramas.
+aplicación Java (ver \ref{fig:counting_platform}) para agilizar 
+el etiquetado de los fotogramas.
 
 La aplicación iba mostrando los diferentes fotogramas al usuario y este
 indicaba con el ratón los píxeles pertenecientes a abejas. Finalmente
@@ -450,8 +451,8 @@ lo que hubo que migrar la documentación al formato reStructuredText.
 Esta conversión se realizó con la herramienta Pandoc.
 
 Con todo configurado, ahora ReadTheDocs generaba automáticamente la
-página web y un PDF actualizado con los últimos cambios realizados en la
-documentación.
+página web (\ref{fig:readthedocs}) y un PDF actualizado con los 
+últimos cambios realizados en la documentación.
 
 \imagen{readthedocs}{Página web de documentación generada con ReadTheDocs.}
 
@@ -471,20 +472,18 @@ ha supuesto una sobrecarga notable.
 \section{Publicación}\label{publicacion}
 
 En cuanto la aplicación estuvo lista para pasar a producción, se publicó
-en Google Play.
+en la plataforma de distribución de aplicaciones Google Play.
 
-\begin{quote}
-TODO meter captura Google Play.
-\end{quote}
+\begin{figure}[H]
+		\centering
+	\includegraphics[width=0.65\textwidth]{gobees-google-play}
+	\caption{GoBees en Google Play.}\label{fig:gobees-google-play}
+\end{figure}
 
 Además, se desarrolló una página web promocional
 (\href{http://gobees.io/}{gobees.io}), donde se describen las
 características de la aplicación, los manuales de usuario, y el enlace
 de descarga, entre otras cosas.
-
-\begin{quote}
-TODO meter captura página web.
-\end{quote}
 
 Por último, se crearon perfiles en las principales redes sociales para
 promocionar la aplicación.
