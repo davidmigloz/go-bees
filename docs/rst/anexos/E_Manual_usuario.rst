@@ -70,7 +70,6 @@ Para instalar la aplicación debemos realizar los siguientes pasos:
 
 .. |install| image:: ../../img/gobees-google-play-install.png
    :width: 400px
-   :align: center
 
 Desde fichero ejecutable
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -134,7 +133,6 @@ Para generar los datos de prueba:
 
 .. |sample-apiary| image:: ../../img/sample-apiary.png
    :width: 200px
-   :align: center
 
 Añadir un colmenar
 ~~~~~~~~~~~~~~~~~~
@@ -172,7 +170,6 @@ Para añadir un nuevo colmenar:
 
 .. |add-apiary| image:: ../../img/add-apiary.png
    :width: 200px
-   :align: center
 
 Editar un colmenar
 ~~~~~~~~~~~~~~~~~~
@@ -261,7 +258,6 @@ Se pueden cambiar las unidades meteorológicas, para ello:
 
 .. |meteo-info| image:: ../../img/meteo-info.png
    :width: 200px
-   :align: center
 
 Visualizar un colmenar en el mapa
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -439,7 +435,6 @@ ser cerrada durante la monitorización.
 
 .. |monitoring-settings| image:: ../../img/monitoring-settings.png
    :width: 400px
-   :align: center
 
 Ver los detalles de una grabación
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -477,7 +472,6 @@ Para ver los detalles de una grabación:
 
 .. |recording-detail| image:: ../../img/recording-detail.png
    :width: 200px
-   :align: center
 
 Eliminar una grabación
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -550,4 +544,3 @@ Para acceder a la sección “Acerca de GoBees”:
 
 .. |about-gobees| image:: ../../img/about-gobees.png
    :width: 200px
-   :align: center
