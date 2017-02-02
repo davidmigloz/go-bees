@@ -65,7 +65,7 @@ public class MonitoringPresenterTest {
         // Config view and start monitoring
         verify(view).hideCameraView();
         verify(view).showMonitoringView();
-        verify(view).startMonitoringgService(eq(monitoringSettings));
+        verify(view).startMonitoringService(eq(monitoringSettings));
         verify(view).bindMonitoringService();
     }
 

@@ -169,6 +169,7 @@ sonarqube {
     properties {
         property "sonar.projectName", "GoBees"
         property "sonar.projectKey", "com.davidmiguel.gobees"
+        property "sonar.language", "java"
         property "sonar.projectVersion", "${android.defaultConfig.versionName}"
         property "sonar.exclusions", "**/*.png,**/*.jpg"
         property "sonar.android.lint.report", "./build/outputs/lint-results-mockDebug.xml"

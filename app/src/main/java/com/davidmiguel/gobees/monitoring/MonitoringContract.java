@@ -61,7 +61,7 @@ interface MonitoringContract {
          *
          * @param ms monitoring settings.
          */
-        void startMonitoringgService(MonitoringSettings ms);
+        void startMonitoringService(MonitoringSettings ms);
 
         /**
          * Stops monitoring service.
