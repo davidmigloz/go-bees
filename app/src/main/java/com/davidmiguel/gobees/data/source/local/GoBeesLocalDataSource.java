@@ -163,14 +163,14 @@ public class GoBeesLocalDataSource implements GoBeesDataSource {
                         }
                         // Delete hives
                         apiary.getHives().where().findAll().deleteAllFromRealm();
-                        // Delete current weather
-                        if(apiary.getCurrentWeather() != null) {
-                            apiary.getCurrentWeather().deleteFromRealm();
-                        }
-                        // Delete meteo records
-                        if(apiary.getMeteoRecords() != null) {
-                            apiary.getMeteoRecords().where().findAll().deleteAllFromRealm();
-                        }
+                    }
+                    // Delete current weather
+                    if (apiary.getCurrentWeather() != null) {
+                        apiary.getCurrentWeather().deleteFromRealm();
+                    }
+                    // Delete meteo records
+                    if (apiary.getMeteoRecords() != null) {
+                        apiary.getMeteoRecords().where().findAll().deleteAllFromRealm();
                     }
                     // Delete apiary
                     apiary.deleteFromRealm();
