@@ -244,7 +244,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
-    public void startRecordingService(MonitoringSettings ms) {
+    public void startMonitoringgService(MonitoringSettings ms) {
         // Start service
         Intent intent = new Intent(getActivity(), MonitoringService.class);
         intent.setAction(MonitoringService.START_ACTION);
@@ -253,7 +253,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
-    public void stopRecordingService() {
+    public void stopMonitoringService() {
         // Stop service
         Intent stopIntent = new Intent(getActivity(), MonitoringService.class);
         stopIntent.setAction(MonitoringService.STOP_ACTION);
@@ -261,7 +261,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
     }
 
     @Override
-    public void bindRecordingService() {
+    public void bindMonitoringService() {
         Intent intent = new Intent(getActivity(), MonitoringService.class);
         getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
@@ -291,7 +291,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
             @Override
             public void onClick(View view) {
                 // Stop recording service
-                presenter.stopRecording();
+                presenter.stopMonitoring();
             }
         });
     }

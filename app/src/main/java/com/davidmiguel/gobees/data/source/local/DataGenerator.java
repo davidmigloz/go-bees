@@ -193,6 +193,7 @@ public class DataGenerator implements GoBeesDataSource.SaveRecordingCallback {
         apiary.setNotes(context.getString(R.string.sample_apiary_notes));
         // Save apiary
         goBeesDataSource.saveApiary(apiary, this);
+        goBeesDataSource.refreshApiaries();
         return apiary;
     }
 

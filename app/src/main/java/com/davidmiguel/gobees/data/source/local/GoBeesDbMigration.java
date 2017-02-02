@@ -16,34 +16,17 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.davidmiguel.gobees.monitoring.camera;
+package com.davidmiguel.gobees.data.source.local;
 
-import android.hardware.Camera;
-
-import java.util.Comparator;
+import io.realm.DynamicRealm;
+import io.realm.RealmMigration;
 
 /**
- * Comparator for camera preview sizes.
+ * Defines schema changes between db versions.
  */
-@SuppressWarnings("deprecation")
-class PreviewSizeComparator implements Comparator<Camera.Size> {
+class GoBeesDbMigration implements RealmMigration {
     @Override
-    public int compare(Camera.Size size1, Camera.Size size2) {
-        // Check nulls
-        if (size1 == null && size2 == null) {
-            return 0;
-        } else if (size1 == null) {
-            return 1;
-        } else if (size2 == null) {
-            return -1;
-        }
-        // Check size
-        if (size1.width < size2.width) {
-            return -1;
-        } else if (size1.width > size2.width) {
-            return 1;
-        } else {
-            return 0;
-        }
+    public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
+        // No schema changes so far
     }
 }

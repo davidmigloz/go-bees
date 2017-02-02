@@ -49,7 +49,7 @@ public final class DateTimeUtils {
 
 
     /**
-     * Get date with hours, min, sec and milisec set to 0.
+     * Get date with hours, min, sec and millisec set to 0.
      *
      * @param date date to trim.
      * @return trimmed date.

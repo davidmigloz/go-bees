@@ -71,14 +71,14 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
         // Show monitoring view
         view.showMonitoringView();
         // Start recording service
-        view.startRecordingService(ms);
+        view.startMonitoringgService(ms);
         // Bind to service
-        view.bindRecordingService();
+        view.bindMonitoringService();
     }
 
     @Override
-    public void stopRecording() {
-        view.stopRecordingService();
+    public void stopMonitoring() {
+        view.stopMonitoringService();
     }
 
     @Override
@@ -116,7 +116,7 @@ class MonitoringPresenter implements MonitoringContract.Presenter, CvCameraViewL
     public void start(boolean serviceRunning) {
         if (serviceRunning) {
             // Bind to service (that is already running)
-            view.bindRecordingService();
+            view.bindMonitoringService();
             view.hideCameraView();
             view.showMonitoringView();
         } else {

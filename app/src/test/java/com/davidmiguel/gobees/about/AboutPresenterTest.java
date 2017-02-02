@@ -41,7 +41,7 @@ public class AboutPresenterTest {
     private AboutPresenter aboutPresenter;
 
     @Before
-    public void setupApiariesPresenter() {
+    public void setupMocksAndView() {
         // To inject the mocks in the test the initMocks method needs to be called
         MockitoAnnotations.initMocks(this);
 

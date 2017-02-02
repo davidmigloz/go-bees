@@ -18,6 +18,9 @@
 package com.davidmiguel.gobees.data.source.repository;
 
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.Hive;
+import com.davidmiguel.gobees.data.model.Record;
+import com.davidmiguel.gobees.data.model.Recording;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
@@ -36,11 +39,15 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -76,6 +83,22 @@ public class GoBeesRepositoryTest {
     @Mock
     private TaskCallback taskCallback;
 
+    @Mock
+    private GoBeesDataSource.SaveRecordingCallback saveRecordingCallback;
+
+    @Mock
+    private GoBeesDataSource.GetRecordingCallback getRecordingCallback;
+
+    @Mock
+    private GoBeesDataSource.GetNextHiveIdCallback getNextHiveIdCallback;
+
+    @Mock
+    private GoBeesDataSource.GetHivesCallback getHivesCallback;
+
+
+    @Mock
+    private GoBeesDataSource.GetNextApiaryIdCallback getNextApiaryIdCallback;
+
     @Captor
     private ArgumentCaptor<GetApiariesCallback> apiariesCallbackArgumentCaptor;
 
@@ -100,6 +123,20 @@ public class GoBeesRepositoryTest {
     @After
     public void destroyRepositoryInstance() {
         GoBeesRepository.destroyInstance();
+    }
+
+    @Test
+    public void deleteAll_deleteDataFromDataSource() {
+        goBeesRepository.deleteAll(taskCallback);
+        verify(goBeesLocalDataSource).deleteAll(eq(taskCallback));
+    }
+
+    @Test
+    public void openCloseDb() {
+        goBeesRepository.openDb();
+        verify(goBeesLocalDataSource).openDb();
+        goBeesRepository.closeDb();
+        verify(goBeesLocalDataSource).closeDb();
     }
 
     @Test
@@ -144,6 +181,14 @@ public class GoBeesRepositoryTest {
 
         // Verify no data is returned
         verify(getApiaryCallback).onDataNotAvailable();
+    }
+
+    @Test
+    public void getApiaryBlocking_getFromDataSource() {
+        // When calling getApiaries in the repository
+        goBeesRepository.getApiaryBlocking(APIARY_ID);
+        // Verify
+        verify(goBeesLocalDataSource).getApiaryBlocking(eq(APIARY_ID));
     }
 
     @Test
@@ -202,12 +247,93 @@ public class GoBeesRepositoryTest {
     }
 
     @Test
-    public void getHiveWithRecordings_requestsAllHivesWithRecordingsFromLocalDataSource() {
-        // When apiaries are requested from the tasks repository
-        goBeesRepository.getHiveWithRecordings(HIVE_ID, getHiveCallback);
+    public void getNextApiaryId_getFromLocalDataSource() {
+        goBeesRepository.getNextApiaryId(getNextApiaryIdCallback);
+        // Then apiary last revision is loaded from the local data source
+        verify(goBeesLocalDataSource).getNextApiaryId(eq(getNextApiaryIdCallback));
+    }
 
+    @Test
+    public void refreshApiaries_clearCache() {
+        goBeesRepository.refreshApiaries();
+        assertTrue(goBeesRepository.cacheIsDirty);
+    }
+
+    @Test
+    public void getApiaryLastRevision_getFromLocalDataSource() {
+        goBeesRepository.getApiaryLastRevision(APIARY_ID);
+        // Then apiary last revision is loaded from the local data source
+        verify(goBeesLocalDataSource).getApiaryLastRevision(APIARY_ID);
+    }
+
+    @Test
+    public void getHives_requestsHivesFromLocalDataSource() {
+        goBeesRepository.getHives(APIARY_ID, getHivesCallback);
+        // Then hives are loaded from the local data source
+        verify(goBeesLocalDataSource).getHives(eq(APIARY_ID), eq(getHivesCallback));
+    }
+
+    @Test
+    public void getHive_requestsHiveFromLocalDataSource() {
+        // When apiaries are requested from the tasks repository
+        goBeesRepository.getHive(HIVE_ID, getHiveCallback);
+        // Then apiaries are loaded from the local data source
+        verify(goBeesLocalDataSource).getHive(anyLong(), any(GetHiveCallback.class));
+    }
+
+    @Test
+    public void getHiveWithRecordings_requestsHiveWithRecordingsFromLocalDataSource() {
+        goBeesRepository.getHiveWithRecordings(HIVE_ID, getHiveCallback);
         // Then apiaries are loaded from the local data source
         verify(goBeesLocalDataSource).getHiveWithRecordings(anyLong(), any(GetHiveCallback.class));
+    }
+
+    @Test
+    public void saveHive_saveLocalDataSource() {
+        goBeesRepository.saveHive(APIARY_ID, new Hive(), taskCallback);
+        verify(goBeesLocalDataSource).saveHive(anyLong(), any(Hive.class),
+                eq(taskCallback));
+    }
+
+    @Test
+    public void deleteHive_deleteFromLocalDataSource() {
+        goBeesRepository.deleteHive(HIVE_ID, taskCallback);
+        verify(goBeesLocalDataSource).deleteHive(anyLong(), eq(taskCallback));
+    }
+
+    @Test
+    public void getNextHiveId_getFromLocalDataSource() {
+        goBeesRepository.getNextHiveId(getNextHiveIdCallback);
+        verify(goBeesLocalDataSource).getNextHiveId(eq(getNextHiveIdCallback));
+    }
+
+    @Test
+    public void saveRecord_saveLocalDataSource() {
+        goBeesRepository.saveRecord(HIVE_ID, new Record(), saveRecordingCallback);
+        verify(goBeesLocalDataSource).saveRecord(anyLong(), any(Record.class),
+                eq(saveRecordingCallback));
+    }
+
+    @Test
+    public void saveRecords_saveLocalDataSource() {
+        goBeesRepository.saveRecords(HIVE_ID, new ArrayList<Record>(), saveRecordingCallback);
+        verify(goBeesLocalDataSource).saveRecords(anyLong(), anyListOf(Record.class),
+                eq(saveRecordingCallback));
+    }
+
+    @Test
+    public void getRecording_getFromLocalDataSource() {
+        goBeesRepository.getRecording(APIARY_ID, HIVE_ID,
+                new Date(), new Date(), getRecordingCallback);
+        verify(goBeesLocalDataSource).getRecording(anyLong(), anyLong(),
+                any(Date.class), any(Date.class), eq(getRecordingCallback));
+    }
+
+    @Test
+    public void deleteRecording_deleteFromLocalDataSource() {
+        goBeesRepository.deleteRecording(HIVE_ID, new Recording(null, null, null), taskCallback);
+        verify(goBeesLocalDataSource).deleteRecording(anyLong(), any(Recording.class),
+                eq(taskCallback));
     }
 
     /**

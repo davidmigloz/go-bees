@@ -78,4 +78,24 @@ public class DateTimeUtilsTest {
         resultDate = DateTimeUtils.sumTimeToDate(actualDate, 2, 0, 0);
         assertEquals(newDate.getTime(), resultDate.getTime());
     }
+
+    @Test
+    public void getDateOnly() throws Exception {
+        Date actualDate = df.parse("20/11/2016 20:10:10");
+        Date newDate, resultDate;
+        // Test seconds (add 30 sec)
+        newDate = df.parse("20/11/2016 00:00:00");
+        resultDate = DateTimeUtils.getDateOnly(actualDate);
+        assertEquals(newDate.getTime(), resultDate.getTime());
+    }
+
+    @Test
+    public void getNextDay() throws Exception {
+        Date actualDate = df.parse("20/11/2016 20:10:10");
+        Date newDate, resultDate;
+        // Test seconds (add 30 sec)
+        newDate = df.parse("21/11/2016 00:00:00");
+        resultDate = DateTimeUtils.getNextDay(actualDate);
+        assertEquals(newDate.getTime(), resultDate.getTime());
+    }
 }

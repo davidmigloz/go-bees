@@ -428,7 +428,7 @@ de la aplicación:
 
 \*Si se posee alguna aplicación de ahorro de batería es imprescindible
 añadir una excepción a la aplicación GoBees para que esta se pueda
-ejecutar en segundo plano sin restricciones. Sino, la aplicación puede
+ejecutar en segundo plano sin restricciones. Si no, la aplicación puede
 ser cerrada durante la monitorización.
 
 |monitoring-settings|
