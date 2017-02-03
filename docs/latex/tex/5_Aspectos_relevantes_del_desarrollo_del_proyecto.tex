@@ -23,7 +23,7 @@ tutores, nos pusimos manos a la obra.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\textwidth]{GoBees_logo}
-	\caption{Logo GoBees.}
+	\caption{Logo de GoBees.}
 	\label{fig:logo}
 \end{figure}
 
@@ -175,9 +175,7 @@ a Android posteriormente sería una tarea bastante trivial.
 Para facilitar el desarrollo del algoritmo y del testeo de las
 diferentes alternativas se realizó una aplicación Java (ver \ref{fig:devplatform1}) 
 que permitía parametrizar en tiempo real las diferentes etapas del algoritmo.
-
-Además de permitir variar la parametrización, la aplicación nos permitía
-observar la salida de cada etapa del algoritmo y su tiempo de
+Además, se podía observar la salida de cada etapa del algoritmo y su tiempo de
 computación.
 
 Es importante recalcar que los tiempos de computación obtenidos en la
@@ -218,7 +216,7 @@ El desarrollo de la aplicación Android se realizó de forma incremental,
 publicando una \emph{release} al finalizar cada \emph{sprint}.
 
 Se decidió dar soporte a partir de la versión KitKat (API 19), de tal
-forma que es cubría un 86,3\% de los dispositivos Android del mercado
+forma que se cubría un 86,3\% de los dispositivos Android del mercado
 \citep{android:versions}. Dar soporte a versiones anteriores suponía una 
 sobrecarga importante, por lo que se descartó al no constituir una cuota de
 mercado importante.
@@ -325,11 +323,15 @@ La aplicación iba mostrando los diferentes fotogramas al usuario y este
 indicaba con el ratón los píxeles pertenecientes a abejas. Finalmente
 permitía exportar los datos en un archivo CSV.
 
-\imagen{counting_platform}{Plataforma de conteo de abejas.}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{counting_platform}
+	\caption{Plataforma de conteo de abejas}\label{fig:counting_platform}
+\end{figure}
 
 Se etiquetaron fragmentos de vídeo correspondientes a tres situaciones
 distintas:
-
+\newpage
 \begin{itemize}
 \tightlist
 \item
@@ -367,9 +369,9 @@ cuando se ejecutaba en un \emph{smartphone} (Xiaomi Mi4).
 Por otra parte, la aplicación se testeó mediante test unitarios, test de
 integración y test de interfaz. La mayor parte de los test unitatios se
 realizaron contra los \emph{presenters}, que son los que poseen la
-lógica de negocio de la \emph{app}. Los test de interfáz se ejecutaron
-en siete dispositivos diferentes, uno por cada versión de Android que
-soporta la \emph{app} (API 19-25).
+lógica de negocio de la \emph{app}. Se realizó un test de interfáz por 
+cada requisito y se se ejecutaron en siete dispositivos diferentes, uno por 
+cada versión de Android que soporta la \emph{app} (API 19-25).
 
 Además, se configuraron una serie de servicios de integración continua,
 de tal forma, que cada vez que se realizaba un \emph{commit} en el
@@ -393,7 +395,7 @@ repositorio, se ejecutaban las siguientes tareas:
   él.
 \item
   \textbf{SonarQube}: analizaba código duplicado, violaciones de
-  estándares, cobertura de tests unitarios, bugs potenciales, etc.
+  estándares, cobertura de tests unitarios, \emph{bugs} potenciales, etc.
 \item
   \textbf{VersionEye}: chequeaba todas las dependencias utilizadas en la
   aplicación y comprobaba si estaban actualizadas, si tenían algún
@@ -401,7 +403,11 @@ repositorio, se ejecutaban las siguientes tareas:
   proyecto.
 \end{enumerate}
 
-\imagen{ci}{Servicios de integración continua.}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{ci}
+	\caption{Servicios de integración continua.}\label{fig:ci}
+\end{figure}
 
 Por último, cabe comentar algunas estadísticas del proyecto:
 
@@ -409,21 +415,31 @@ Por último, cabe comentar algunas estadísticas del proyecto:
 \centering
 \begin{tabular}{lr}
 \toprule
-\textbf{Concepto}                  & \multicolumn{1}{l}{\textbf{Valor}} \\ 
+\textbf{Concepto}                  & \multicolumn{1}{r}{\textbf{Valor}} \\ 
 \midrule
-Total de líneas                    & TODO                               \\
-Líneas de código                   & TODO                               \\
-Comentarios                        & TODO                               \\
-Líneas en blanco                   & TODO                               \\
-Número de clases                   & TODO                               \\
-Número de XML                      & TODO                               \\
-Cobertura total test unitarios     & TODO                               \\
-Cobertura test unitarios algoritmo & TODO                               \\ 
+Ratio de fiabilidad                & A          												\\
+Ratio de seguridad                 & A																	\\
+Ratio de mantenibilidad						 & A																  \\ 
+\midrule
+Número de clases Java              & 157                                \\
+Número de archivos XML             & 96                                 \\
+\midrule
+Total de líneas Java               & 20.732                             \\
+Líneas de código                   & 58\%            				            \\
+Comentarios                        & 29\%          			                \\
+Líneas en blanco                   & 13\%    		                        \\
+\midrule
+Número de test unitarios           & 120																\\
+Cobertura total test unitarios     & 35,8\%                             \\
+Cobertura test unitarios algoritmo & 100\%                              \\
+Número de UI test                  & 17																	\\ 
 \bottomrule
 \end{tabular}
 \caption{Estadísticas del proyecto.}
 \label{stats}
 \end{table}
+
+\emph{*Los datos han sido obtenidos de los informes proporcionados por SonarQube y AndroidStudio.}
 
 \section{Documentación}\label{aspectos-documentacion}
 
@@ -446,7 +462,7 @@ Sphinx junto con ReadTheDocs.
 
 Sphinx es un generador de documentación que permite exportar la
 documentación en varios formatos, entre ellos HTML y PDF.
-Desafortunadamente, no soportaba Markdown como formato de entrada, por
+Desafortunadamente, no soporta Markdown como formato de entrada, por
 lo que hubo que migrar la documentación al formato reStructuredText.
 Esta conversión se realizó con la herramienta Pandoc.
 
@@ -476,7 +492,7 @@ en la plataforma de distribución de aplicaciones Google Play.
 
 \begin{figure}[H]
 		\centering
-	\includegraphics[width=0.65\textwidth]{gobees-google-play}
+	\includegraphics[width=\textwidth]{gobees-google-play}
 	\caption{GoBees en Google Play.}\label{fig:gobees-google-play}
 \end{figure}
 

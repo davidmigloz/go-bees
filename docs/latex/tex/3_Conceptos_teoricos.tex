@@ -45,7 +45,7 @@ Utiliza la siguiente fórmula para calcular la luminancia resultante:
 \end{equation*}
 
 La fórmula calcula la luminancia de una forma no lineal, sin necesidad
-de realizar una expansión gamma. Los coeficientes intentan imitar la
+de realizar una expansión \emph{gamma}. Los coeficientes intentan imitar la
 percepción de intensidad medida por un humano tricromático, siendo más
 sensible al color verde y menos al color azul \citep{wiki:grayscale}.
 
@@ -62,8 +62,8 @@ utilizando para ello una convolución con una función Gaussiana
 más peso a los vecinos cercanos, siendo estos más influyentes en el
 resultado.
 
-El kernel utilizado en la convolución es una muestra discreta de una
-función Gaussiana. En nuestro caso utilizamos un kernel $3 \times 3$ que se
+El \emph{kernel} utilizado en la convolución es una muestra discreta de una
+función Gaussiana. En nuestro caso utilizamos un \emph{kernel} $3 \times 3$ que se
 corresponde con: \citep{book:mastering_opencv}
 
 \begin{equation*}
@@ -329,10 +329,11 @@ De todos ellos, los parámetros más importantes a ajustar son
 \texttt{detectShadows}.
 
 La parametrización correcta de este algoritmo es clave para su buen
-funcionamiento. Por ello, durante las pruebas se integró en nuestra
-aplicación de desarrollo, permitiendo variar todos estos parámetros en
-tiempo real. De esta manera, se pudo elegir la mejor configuración para
-nuestro problema concreto.
+funcionamiento. Por ello, durante las pruebas se desarrolló una
+aplicación Java que permitía variar todos estos parámetros en 
+tiempo real, ver la salida de cada fase y 
+calcular los tiempos de ejecución. De esta manera, se pudo elegir 
+la mejor configuración para nuestro problema concreto.
 
 Una vez parametrizado correctamente, vimos como este algoritmo era el
 que mejores resultados nos proporcionaba. Con un tiempo de ejecución en
@@ -364,8 +365,8 @@ Se trata de una operación morfológica por la cual se expanden las
 regiones luminosas de una imagen. Esto se consigue mediante la
 sustitución de cada píxel por el más brillante de los vecinos
 considerados por el \emph{kernel} (matriz utilizada para la
-convolución). De esta manera se consiguen unir las regiones de abejas
-que podían haberse roto \citep{book:mastering_opencv}.
+convolución) \citep{book:mastering_opencv}. De esta manera se 
+consiguen unir las regiones de abejas que podían haberse roto.
 
 \subsection{Erosión}\label{erosion}
 
@@ -383,7 +384,7 @@ En nuestro algoritmo aplicamos tres operaciones morfológicas seguidas:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Erosión (3x3)}: elimina las piernas de las abejas.
+  \textbf{Erosión (3x3)}: elimina las patas de las abejas.
 \item
   \textbf{Dilatación (2x2)}: junta la cabeza de las abejas con su cuerpo
   que en numerosas ocasiones es separado durante la substracción de
@@ -485,13 +486,13 @@ almacenan estos, sólo nos interesa el número.
 Para evitar posibles falsos positivos, establecemos un umbral mínimo y
 máximo en el área del contorno. De esta manera, evitamos que contornos
 diminutos o grandes generados por ruidos o por objetos del entorno
-(moscas, pájaros, roedores\ldots{}) sean contados cómo abejas.
+(moscas, pájaros, roedores\ldots{}) sean contados como abejas.
 
 En la imagen \ref{fig:s4} podemos ver la salida del algoritmo:
 
 \imagen{s4}{Resultado de la fase de detección y conteo de abejas.}
 
-En \ref{fig:flies} se puede apreciar como se descartan las tres moscas que hay
+En \ref{fig:flies} se puede apreciar cómo se descartan las tres moscas que hay
 en la imagen ya que su área es inferior al área mínima:
 
 \imagen{flies}{Resultado del algoritmo en una imágen con moscas.}
