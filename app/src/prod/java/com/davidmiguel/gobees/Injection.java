@@ -5,7 +5,7 @@ import com.davidmiguel.gobees.data.source.local.GoBeesLocalDataSource;
 import com.davidmiguel.gobees.data.source.network.WeatherDataSource;
 
 /**
- * Enables injection of production implementations for TasksDataSource at compile time.
+ * Enables injection of production implementations for GoBeesDataSource at compile time.
  */
 public class Injection {
 
