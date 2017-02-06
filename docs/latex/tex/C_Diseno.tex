@@ -1,11 +1,353 @@
 \apendice{Especificación de diseño}
 
-\section{Introducción}
+\section{Introducción}\label{introduccion}
 
-\section{Diseño de datos}
+En este anexo se define cómo se han resuelto los objetivos y
+especificaciones expuestos con anterioridad. Define los datos que va a
+manejar la aplicación, su arquitectura, el diseño de sus interfaces, sus
+detalles procedimentales, etc.
 
-\section{Diseño procedimental}
+\section{Diseño de datos}\label{diseno-de-datos}
 
-\section{Diseño arquitectónico}
+La aplicación cuenta con las siguientes entidades:
 
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Colmenar (Apiary)}: tiene un nombre, una imagen, una
+  localización y unas notas. A su vez, guarda un registro del tiempo
+  meteorológico actual y varios registros del tiempo que hacía cuando se
+  realizaron las grabaciones de sus colmenas.
+\item
+  \textbf{Colmena (Hive)}: tiene un nombre, una imagen y unas notas. A
+  su vez, posee varias grabaciones de distintas monitorizaciones de la
+  colmena.
+\item
+  \textbf{Registro (Record)}: se corresponde a la salida del algoritmo
+  de conteo al analizar un fotograma. Tiene un \emph{timestamp} y el
+  número de abejas que había en el fotograma.
+\item
+  \textbf{Registro meteorológico (MeteoRecord)}: guarda información
+  sobre el estado meteorológico en una localización y un momento dado.
+  Tiene un \emph{timestamp}, la localidad, el código correspondiente a
+  la condición meteorológica, el icono correspondiente, temperatura,
+  presión, humedad, velocidad y dirección del viento, porcentaje de
+  nubes, precipitaciones, y nieve.
+\end{itemize}
+\newpage
+\subsection{Diagrama E/R}\label{diagrama-er}
 
+\imagenAncho{er-diagram}{Diagrama E/R.}{1}
+
+\subsection{Diagrama Relacional}\label{diagrama-relacional}
+
+\imagenAncho{relational-diagram}{Diagrama relacional.}{0.8}
+
+\section{Diseño arquitectónico}\label{diseno-arquitectonico}
+
+El hecho de que el proyecto se haya realizado para la plataforma Android
+ha condicionado muchas de las decisiones de diseño. Aun así, se han
+aplicado una serie de patrones para intentar desacoplar el código lo
+máximo posible y así mejorar su testabilidad y mantenibilidad.
+
+\subsection{Model-View-Presenter (MVP)}\label{model-view-presenter-mvp}
+
+Uno de los patrones arquitectónicos que más relevancia está ganando para
+el desarrollo de aplicaciones es MVP (\emph{Model-View-Presenter)}. Se
+trata de un patrón derivado del MVC (\emph{Model-View-Controler}) cuyo
+objetivo es separar la vista del modelo de datos subyacente. MVP
+introduce la figura del \emph{presenter} que actúa de mediador entre
+estas dos capas. Su segundo objetivo es maximizar la cantidad de código
+que se puede testear de forma automática.
+
+MVP divide la aplicación en las siguientes capas:\citep{pattern:mvp}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Model}: se corresponde únicamente con el acceso a datos. Se
+  encarga de almacenar y proporcionar los diferentes datos que maneja la
+  aplicación. En nuestra aplicación se corresponde con el Repositorio.
+\item
+  \emph{View}: se encarga de la visualización de los datos (del modelo).
+  Propaga todas las acciones de usuario al \emph{presenter}. En nuestra
+  aplicación se corresponde con los \emph{Fragments}.
+\item
+  \emph{Presenter}: enlaza las dos capas anteriores. Sincroniza los
+  datos mostrados en la vista con los almacenados en el modelo y actúa
+  ante los eventos de usuario propagados por la vista. En nuestra
+  aplicación se corresponde con los \emph{Presenters}.
+\end{itemize}
+
+\imagen{mvp}{Patrón MVP.}
+
+Existen varias variantes sobre cómo implementar MVP en Android. En
+nuestro caso, se ha seguido la expuesta Google en Android Architecture
+Blueprints \citep{pattern:android_architecture}. En ella se realizan
+las siguientes consideraciones:
+
+\begin{itemize}
+\tightlist
+\item
+  Se utilizan las \emph{Activity} como controladores globales que se
+  encargan de crear y conectar las vistas con los \emph{presenters}.
+\item
+  Se utilizan los \emph{Fragment} como vistas ya que proporcionan
+  numerosas ventajas cuando se trabaja con múltiples vistas.
+\end{itemize}
+
+\subsection{Patrón repositorio}\label{patron-repositorio}
+
+Para la capa del modelo, se ha utilizado el patrón repositorio que
+proporciona una abstracción de la implementación del acceso a datos con
+el objetivo de que este sea transparente a la lógica de negocio
+\citep{pattern:repository}.
+
+En nuestra aplicación existen dos fuentes de datos: por una parte, está
+la base de datos local implementada con Realm, y por otra, tenemos la
+API remota que nos da acceso a la información meteorológica. Ambas
+fuentes son transparentes para los \emph{presenters}.
+
+El repositorio media entre la capa de acceso a datos y la lógica de
+negocio de tal forma que no existe ninguna dependencia entre ellas.
+Consiguiendo desacoplar, mantener y testear más fácilmente el código y
+permitiendo la reutilización del acceso a datos desde cualquier cliente.
+
+\imagen{repository_pattern}{Patrón repositorio.}
+
+\subsection{Inyección de
+dependencias}\label{inyeccion-de-dependencias}
+
+A la hora de testear, es muy frecuente necesitar sustituir la
+implementación de una clase por otra ``falsa'' que se comporte de una
+manera predeterminada para conseguir probar la funcionalidad de manera
+aislada. En nuestro caso, para facilitar la labor de testeo nos vimos
+obligados a sustituir la base de datos Realm por una base de datos en
+memoria. Esta sustitución se realizó mediante la inyección de
+dependencias.
+
+La inyección de dependencias es un patrón mediante el cual se
+proporcionan todas las dependencias que una clase necesita para su
+funcionamiento, en lugar de ser la propia clase quien las cree. Al
+separar las dependencias de la propia clase, se posibilita la opción de
+sustituir estas por dobles con un comportamiento definido
+\citep{wiki:injection}.
+
+Para la implementación de la inyección de dependencias se han utilizado
+los \emph{build flavors} que proporciona Gradle. Se crearon dos
+\emph{flavors}:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{mock}: inyectaba una base de datos en memoria utilizada para el testeo
+  de la aplicación.
+\item
+  \texttt{prod}: inyectaba la base de datos Realm utilizada para producción.
+\end{itemize}
+
+\subsection{Arquitectura general}\label{arquitectura-general}
+
+El resultado de la arquitectura tras aplicar los patrones explicados es
+el siguiente:
+
+\imagen{architecture}{Arquitectura de la aplicación.}
+
+Para agilizar la navegación por la aplicación se implementó una capa de
+caché en el repositorio.
+
+\subsection{Diseño de paquetes}\label{diseno-de-paquetes}
+
+Para la organización de los diferentes archivos que componen la
+aplicación no se utilizó la estrategia convencional de paquete por capa
+(\emph{package by layer approach}), sino una estrategia de paquete por
+característica (\emph{package per feature approach}).
+
+Siguiendo esta estrategia se agruparon todos los archivos relacionados
+cada una de las distintas funcionalidades de la aplicación en un mismo
+paquete. De esta manera se mejora notablemente la legibilidad y la
+modularización de la aplicación, ya que se puede modificar cada
+funcionalidad de forma independiente.
+
+Existen dos paquetes excepcionales que no siguen esta convención:
+
+\begin{itemize}
+\tightlist
+\item
+  Paquete \texttt{data}: agrupa toda la capa de modelo.
+\item
+  Paquete \texttt{utils}: reúne un conjunto de clases de utilidad
+  generales que son utilizadas por varias características.
+\end{itemize}
+
+El diagrama de paquetes es el siguiente:
+
+\imagenAncho{packages-diagram}{Diagrama de paquetes simplificado.}{1}
+
+El paquete \texttt{feature X} se correspondería con cada paquete de cada
+funcionalidad. Se ha representado de esta manera para simplificar el
+diagrama.
+
+A continuación, se muestran por separado los paquetes de todas las
+funcionalidades:
+
+\imagenAncho{packages-features-diagram}{Paquetes de las diferentes características.}{1}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{about}: contiene la funcionalidad de ``Acerca de'' de la
+  aplicación. Donde se muestra el autor, licencia, versión de la
+  \emph{app}, sitio web, historial de cambio y todas las dependencias
+  junto con sus licencias.
+\item
+  \texttt{addeditapiary}: permite añadir o editar colmenares.
+\item
+  \texttt{addedithive}: permite añadir o editar colmenas.
+\item
+  \texttt{apiaries}: permite listar los colmenares y gestionarlos.
+\item
+  \texttt{apiary}: permite listar las colmenas de un colmenar,
+  gestionarlas y mostrar la información relativa al colmenar.
+\item
+  \texttt{help}: muestra la ayuda de la aplicación.
+\item
+  \texttt{hive}: permite listar las grabaciones de una colmena,
+  gestionarlas y mostrar la información relativa a la colmena.
+\item
+  \texttt{monitoring}: agrupa toda la funcionalidad de monitorización de
+  la actividad de vuelo de una colmena, desde la configuración hasta la
+  ejecución del algoritmo.
+\item
+  \texttt{recording}: permite visualizar los detalles de una determinada
+  grabación.
+\item
+  \texttt{settings}: permite configurar los distintos parámetros de la
+  aplicación.
+\item
+  \texttt{splash}: muestra una pantalla de inicio mientras la aplicación
+  carga en memoria los recursos necesarios.
+\end{itemize}
+
+\subsection{Diseño de clases}\label{diseno-de-clases}
+
+Aplicando MVP, cada característica clave de la aplicación posee los
+siguientes componentes:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{FeatureActivity}: funciona como un controlador global que crea la vista
+  y el \emph{presenter} y los enlaza.
+\item
+  \texttt{FeatureContract}: se trata de una interfaz que establece los siguientes
+  contratos:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{FeatureContract.View}: define la capa \emph{view} para esta
+    característica (las únicas funciones que expone a otras capas).
+  \item
+    \texttt{FeatureContract.Presenter}: define la interacción entre las capas
+    \emph{view} y \emph{presenter}. Describe las acciones que pueden ser
+    iniciadas desde la vista.
+  \end{itemize}
+\item
+  \texttt{FeatureFragment}: implementación concreta de la capa \emph{view}.
+\item
+  \texttt{FeaturePresenter}: implementación concreta de la capa \emph{presenter}.
+  Escucha las acciones de usuario y actualiza la vista cuando cambia el
+  modelo.
+\end{itemize}
+
+\imagenAncho{feature-package}{Paquete tipo de una característica.}{0.5}
+
+El diagrama de clases general que muestra cómo se relacionan todos los
+componentes de una determinada característica es el siguiente:
+
+\imagenAncho{general-class-diagram}{Diagrama de clases general.}{1}
+
+El único paquete que se diferencia de la estructura expuesta es el
+paquete \texttt{monitoring.} Este integra a su vez toda la lógica de
+acceso a la cámara y todas las clases relacionadas con el algoritmo de
+conteo.
+
+\imagen{monitoring-package}{Paquete \emph{monitoring}.}
+
+El diagrama de clases del paquete \texttt{camera} es el siguiente:
+
+\imagen{camera-class-diagram}{Diagrama de clases del paquete \emph{camera}.}
+\newpage
+El diagrama de las clases que implementan el algoritmo de conteo es el
+siguiente:
+
+\imagenAncho{algorithm-class-diagram}{Diagrama de clases del paquete \emph{algorithm}.}{1}
+\newpage
+En la parte del acceso a datos, se poseen dos paquetes como se ha visto
+en el apartado anterior.
+
+\imagenAncho{data-package}{Paquete \emph{data}.}{1}
+
+El paquete \emph{model} contiene todas las clases de modelo que se
+mapean con la base de datos.
+
+\imagenAncho{model-package}{Paquete \emph{model}.}{0.8}
+\newpage
+\textbf{Nota:} la clase \texttt{Recording} se utiliza para agrupar a un conjunto de \texttt{Records},
+pero no se almacena en la base de datos directamente (solo los Records).
+
+Por otro lado, el paquete \texttt{source} contiene todas las clases
+correspondientes a los accesos de las diferentes fuentes de datos. Su
+diagrama de clases es el siguiente:
+
+\imagenAncho{source-class-diagram}{Diagrama de clases del paquete \texttt{source}.}{1}
+
+Para conocer a mayor detalle las funciones de cada clase se puede
+consultar la documentación JavaDoc de la aplicación.
+
+\section{Diseño procedimental}\label{diseno-procedimental}
+
+En este apartado se recogen los detalles más relevantes respecto a la
+ejecución del algoritmo de monitorización de la actividad de vuelo de
+una colmena.
+
+En el siguiente diagrama de secuencia se ha representado como es la
+interacción entre los diferentes objetos que se encargan de la
+inicialización de la monitorización, la obtención de las imágenes y su
+posterior procesado por el algoritmo de conteo.
+
+\begin{landscape}
+\imagenAncho{algo-sequence-diagram}{Diagrama de secuencia del algoritmo.}{1.5}
+\end{landscape}
+
+\section{Diseño de interfaces}\label{diseno-de-interfaces}
+
+En el diseño de la interfaz se ha seguido la guía de estilos de
+\emph{Material Design} \citep{design:material} introducida en el Google
+I/O 2014 y que se adoptó en Android a partir de la versión 5.0
+(\emph{Lollipop}).
+
+En las primeras etapas de proyecto se realizaron una serie de prototipos
+en los que se plasmaron las principales funcionalidades de la
+aplicación.
+
+\imagenAncho{prototipos}{Prototipos iniciales.}{1}
+
+Tras una serie de iteraciones, estos se fueron mejorando hasta obtener
+las interfaces con las que cuenta hoy en día la \emph{app}.
+
+\imagenAncho{features}{Diseños finales de las interfaces.}{1}
+
+El siguiente diagrama muestra la navegabilidad por la aplicación. Esta
+ha sido distribuida de acuerdo al tipo de contenido y a las tareas a
+realizar sobre este.
+
+\imagenAncho{navegation-diagram}{Diagrama de navegabilidad.}{1}
+
+Se ha escogido la paleta de colores entre los recomendados por
+\emph{Material Design}. Utilizando como principal un color en la gama de
+los 500, lo que denominan un color \emph{material,} y definiendo otro
+color que contraste con este para acentuar.
+
+\imagen{palette}{Paleta de colores.}
