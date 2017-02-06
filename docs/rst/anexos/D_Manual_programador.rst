@@ -15,7 +15,7 @@ Estructura de directorios
 El repositorio del proyecto se distribuye de la siguiente manera:
 
 -  ``/``: contiene los ficheros de configuración de Gradle, de los servicios
-   de integración continua, el fichero ``README`` y la copia de la licencia.
+   de integración continua, el fichero README y la copia de la licencia.
 
 -  ``/app/``: módulo correspondiente a la aplicación.
 
@@ -36,7 +36,7 @@ El repositorio del proyecto se distribuye de la siguiente manera:
 -  ``/app/src/test/``: test unitarios.
 
 -  ``/app/src/testMock/``: test unitarios y de integración que necesitan
-   hacer uso de *mocks* de ciertos componentes.
+   inyectar componentes falsos.
 
 -  ``/app/src/androidTest/``: Android UI test.
 
@@ -145,15 +145,15 @@ Para el desarrollo de la aplicación se ha utilizado un repositorio Git
 hospedado en GitHub. Para obtener una copia de este hay que proceder de
 la siguiente manera:
 
-1. Abrir la terminar Git Bash.
+1. Abrir la terminal Git Bash.
 
 2. Desplazarse al directorio donde se desee copiar el repositorio
    (utilizando el comando ``cd``).
 
 3. Introducir el siguiente comando:  
-   ``git clone https://github.com/davidmigloz/go-bees.git``
+   ``git clone https://github.com/davidmigloz/go-bees.git``.
 
-4. Se iniciará la descarga del repositorio, cuando finalice ya se
+4. Se iniciará la descarga del repositorio, cuando finalice se
    dispondrá de una copia completa de este.
 
 |git-clone|
@@ -169,7 +169,7 @@ los siguientes pasos:
 
 1. Abrir Android Studio.
 
-2. Menú ``File > Open…``
+2. Menú ``File > Open…``.
 
 3. Buscamos el directorio donde hemos clonado el repositorio.
 
@@ -196,17 +196,17 @@ Para añadir una nueva característica siguiendo la arquitectura MVP, la
 convención de paquete por característica y las metodologías TDD y
 GitFlow, se deben seguir los siguientes pasos generales.
 
-1.  Crear una nueva rama (*feature branch*) desde la rama *develop*.  
-    ``git checkout -b export-data develop``
+1.  Crear una nueva rama (*feature branch*) desde la rama *develop*:
+    ``git checkout -b export-data develop``.
 
 2.  Crear un nuevo paquete con el nombre de la característica que se
     desea añadir (ej. ``exportdata``).
 
 3.  Crear una interfaz (ej. ``ExportDataContract.java``) que contenga a su
     vez dos interfaces. En una se deben definir las responsabilidades
-     del *presenter* y en la otra las de la vista. Hacer *commit*:  
+    del *presenter* y en la otra las de la vista. Hacer *commit*:  
     ``git add -A``
-    ``git commit -m “Add export data contract #x”``
+    ``git commit -m “Add export data contract #x”``.
 
 4.  Crear una clase para el *presenter* (ej. ``ExportDataPresenter.java``)
     que implemente su correspondiente interfaz anterior (no añadir
@@ -238,7 +238,7 @@ GitFlow, se deben seguir los siguientes pasos generales.
     ``git checkout develop``  
     ``git merge --no-ff export-data``  
     ``git branch -d myfeature``  
-    ``git push origin develop``
+    ``git push origin develop``.
 
 Actualizar dependencias
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -278,14 +278,14 @@ Files*).
 Compilar código fuente
 ~~~~~~~~~~~~~~~~~~~~~~
 
-La compilación del proyecto se realiza mediante la tarea *build* de
+La compilación del proyecto se realiza mediante la tarea ``build`` de
 Gradle. Podemos ejecutarla por línea de comandos (``./gradlew build``) o
 mediante la interfaz de Android Studio.
 
 |gradle-build|
 
 Todos los ficheros generados durante la compilación se guardan en la
-carpeta *build* del proyecto.
+carpeta ``build`` del proyecto.
 
 Para conocer el proceso detalladamente consultar [android:compilerun]_.
 
@@ -327,7 +327,7 @@ Para ejecutar la aplicación en un emulador:
 
 1. Presionar el botón de Run.
 
-2. Si ya se posee algún emulador instalado se mostrará en la lista de
+2. Si ya se posee algún emulador instalado, se mostrará en la lista de
    *Android Virtual Devices*.
 
 3. Si no, presionar el botón “\ *Create New Virtual Device*\ ”.
@@ -407,7 +407,7 @@ Las secciones más importantes de este fichero son:
 
 -  ``licenses``: permite aceptar las licencias de las dependencias.
 
--  ``before\_install``: en esta sección se pueden definir comandos a
+-  ``before_install``: en esta sección se pueden definir comandos a
    ejecutar antes de los comandos de la sección install (por ejemplo,
    actualizar la lista de paquetes).
 
@@ -415,7 +415,7 @@ Las secciones más importantes de este fichero son:
    instalen alguna dependencia (en nuestro caso ``python-numpy``, necesaria
    para compilar OpenCV).
 
--  ``before\_script``: en esta sección se pueden definir comandos a ejecutar
+-  ``before_script``: en esta sección se pueden definir comandos a ejecutar
    antes de la sección script. En nuestro caso, nos descargamos el
    código fuente de OpenCV y lo compilamos.
 
@@ -424,7 +424,7 @@ Las secciones más importantes de este fichero son:
    lanza un emulador y ejecuta los test de interfaz. También ejecuta el
    motor de chequeo de SonarQube.
 
--  ``after\_success``: esta sección se utiliza para recolectar datos
+-  ``after_success``: esta sección se utiliza para recolectar datos
    generados en las secciones anteriores. En nuestro caso, se envían los
    diferentes informes de ejecución de los test a el servicio Codecov.
 
@@ -448,14 +448,13 @@ Travis. Adicionalmente, hay que configurar el *script* que ejecuta
 Travis para que al finalizar su ejecución envíe los resultados a
 Codecov.
 
-``after_success:  
-    - bash <(curl -s https://codecov.io/bash)``
+``after_success:  bash <(curl -s https://codecov.io/bash)``
 
 La configuración de Codecov se define en el archivo ``codecov.yml``.
 
-Para saber más, acceder a su documentación [codecov:doc]_.
-
 |codecov|
+
+Para saber más, acceder a su documentación [codecov:doc]_.
 
 CodeClimate
 ^^^^^^^^^^^
@@ -475,9 +474,9 @@ corresponde con un 4.0.
 
 Los resultados de los chequeos se encuentran disponibles en [codeclimate:gobees]_.
 
-Para saber más, acceder a su documentación [codeclimate:doc]_.
-
 |codeclimate|
+
+Para saber más, acceder a su documentación [codeclimate:doc]_.
 
 SonarQube es una plataforma de código abierto para la revisión continua
 de la calidad de código. Permite detectar código duplicado, violaciones
@@ -515,7 +514,7 @@ El servicio se integra de forma similar a Travis. No necesita fichero de
 configuración.
 
 Cuando se libera una nueva versión de alguna dependencia o se publica
-alguna vulnerabilidad VersionEye manda una notificación. Se puede
+alguna vulnerabilidad, VersionEye manda una notificación. Se puede
 acceder a los informes desde [versioneye:gobees]_.
 
 |versioneye|
@@ -531,11 +530,11 @@ Markdown o reStructuredText de la documentación. Cada vez que se realiza
 un *commit* en el repositorio se actualiza la versión hospedada.
 
 Se integra en el repositorio de la misma manera que Travis. Y se
-configura mediante el archivo conf.py ubicado en go-bees/docs/rst.
+configura mediante el archivo ``conf.py`` ubicado en ``go-bees/docs/rst``.
 
 Actualmente, se encuentra configurado para generar una sección en la
 página web por cada archivo reStructuredText que encuentre dentro del
-directorio rst.
+directorio ``rst``.
 
 |readthedocs|
 
