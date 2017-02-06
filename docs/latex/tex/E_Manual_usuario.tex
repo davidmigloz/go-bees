@@ -1,11 +1,622 @@
 \apendice{Documentación de usuario}
 
-\section{Introducción}
+\section{Introducción}\label{introduccion-usuario}
 
-\section{Requisitos de usuarios}
+En este manual se detallan los requerimientos de la aplicación, cómo
+instalarla en un dispositivo Android e indicaciones sobre cómo
+utilizarla correctamente. Todos los procedimientos aquí descritos se
+encuentran también disponibles en formato video.
 
-\section{Instalación}
+\section{Requisitos de usuarios}\label{requisitos-de-usuarios}
 
-\section{Manual del usuario}
+Los requisitos mínimos para poder hacer uso de la aplicación son:
 
+\begin{itemize}
+\tightlist
+\item
+  Contar con un dispositivo que posea Android 4.4 (\emph{KitKat} -- API
+  19) o superior.
+\item
+  Para utilizar la característica de monitorización de la actividad, es
+  necesario tener instalada la aplicación
+  \href{https://play.google.com/store/apps/details?id=org.opencv.engine}{OpenCV
+  Manager}.
+\item
+  También se necesita contar con permiso para acceder a la cámara del
+  dispositivo.
+\item
+  Si se desea localizar los colmenares mediante GPS, es necesario contar
+  con un dispositivo que lo soporte y conceder el permiso de
+  localización a la aplicación.
+\item
+  Para acceder a la información meteorológica se requiere conexión a
+  internet.
+\end{itemize}
 
+\section{Instalación}\label{instalacion}
+
+La instalación se puede realizar de dos maneras: a través de Google Play
+o instalando directamente el ejecutable de la aplicación en nuestro
+dispositivo.
+
+\subsection{Desde Google Play}\label{desde-google-play}
+
+Google Play es una plataforma de distribución digital de aplicaciones
+móviles para los dispositivos Android. GoBees se distribuye por esta
+plataforma desde su versión 1.0.
+
+\imagen{gobees-google-play}{GoBees en Google Play.}
+
+Video-tutorial:
+\url{http://gobees.io/help/videos/instalacion-google-play}
+
+Para instalar la aplicación debemos realizar los siguientes pasos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Acceder a la aplicación Google Play.
+\item
+  Buscar el término ``GoBees''.
+\item
+  Entrar en la sección correspondiente a la aplicación.
+\item
+  Pulsar el botón instalar.
+\item
+  Cuando la instalación haya finalizado, pulsar sobre el botón abrir.
+\item
+  La instalación habrá finalizado y la aplicación estará lista para su
+  uso.
+\end{enumerate}
+
+\imagenAncho{gobees-google-play-install}{Instalación desde Google Play}{0.5}
+
+\subsection{Desde fichero ejecutable}\label{desde-fichero-ejecutable}
+
+La otra opción, es realizar la instalación directamente desde el fichero
+ejecutable de la aplicación. Estos ficheros poseen la extensión
+\texttt{.apk}. Podemos conseguir la última versión del \texttt{.apk} de
+GoBees desde \citep{github:gobees_apk}.
+
+Video-tutorial: \url{http://gobees.io/help/videos/instalacion-apk}
+
+Una vez descargado, tenemos que seguir los siguientes pasos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  En primer lugar, hay que permitir la instalación de ``aplicaciones con
+  orígenes desconocidos''. Para ello:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Ir a ajustes del dispositivo.
+  \item
+    Seguridad (o Privacidad).
+  \item
+    Activar ``Orígenes desconocidos''.
+  \end{enumerate}
+\item
+  Ejecutar el fichero descargado.
+\item
+  Pulsar el botón instalar.
+\item
+  Cuando la instalación haya finalizado, pulsar sobre el botón abrir.
+\item
+  La instalación habrá finalizado y la aplicación estará lista para su
+  uso.
+\end{enumerate}
+
+\section{Manual de usuario}\label{manual-de-usuario-1}
+
+En esta sección se describe el uso de las diferentes funcionalidades de
+la aplicación.
+
+\subsection{Generar datos de muestra}\label{generar-datos-de-muestra}
+
+Una de las mejores maneras de aprender a utilizar una aplicación es
+indagando en ella. GoBees permite generar un colmenar de prueba, de tal
+manera, que podemos explorar las diferentes secciones con datos reales.
+
+Video-tutorial:
+\url{http://gobees.io/help/videos/generar-colmenar-prueba}
+
+Para generar los datos de prueba:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Pulsar el botón menú.
+\item
+  Entrar en la sección ``Ajustes''.
+\item
+  Seleccionar la opción ``Generar datos de muestra''.
+\item
+  Se generará un colmenar con tres colmenas y tres grabaciones por
+  colmena.
+\end{enumerate}
+
+\imagenAncho{sample-apiary}{Colmenar de muestra.}{0.5}
+
+\subsection{Añadir un colmenar}\label{auxf1adir-un-colmenar}
+
+Un colmenar hace referencia al lugar o recinto donde se poseen un
+conjunto de colmenas. Un colmenar posee un nombre, una localización y
+unas notas.
+
+Video-tutorial: \url{http://gobees.io/help/videos/anadir-colmenar}
+
+Para añadir un nuevo colmenar:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Desde la pantalla principal.
+\item
+  Pulsar el botón ``+''.
+\item
+  Definir el nombre del colmenar (obligatorio).
+\item
+  Definir la localización del colmenar (opcional).
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Se pueden introducir manualmente las coordenadas, indicando la
+    latitud y la longitud en el sistema de coordenadas geográficas.
+  \item
+    Alternativamente, se puede obtener la localización actual
+    automáticamente pulsando el botón situado en la parte derecha (se
+    necesitan permisos de localización para utilizar esta
+    característica).
+  \end{enumerate}
+\item
+  Definir unas notas sobre el colmenar (opcional). En las notas se puede
+  apuntar cualquier cosa relacionada con el colmenar en general.
+\item
+  Pulsar el botón {$\checkmark$} para guardar el nuevo colmenar.
+\end{enumerate}
+
+\imagenAncho{add-apiary}{Añadir colmenar.}{0.5}
+
+\subsection{Editar un colmenar}\label{editar-un-colmenar}
+
+Los detalles de un colmenar se pueden editar en cualquier momento.
+
+Video-tutorial: \url{http://gobees.io/help/videos/editar-colmenar}
+
+Para editar un colmenar existente:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Desde la pantalla principal.
+\item
+  Pulsar el botón de menú asociado al colmenar a editar (tres puntos
+  verticales situados en la esquina superior derecha).
+\item
+  Seleccionar la opción de editar.
+\item
+  Se abrirá la pantalla de edición, donde se podrán modificar los datos
+  que se deseen.
+\item
+  Pulsar el botón {$\checkmark$} para actualizar los datos editados.
+\end{enumerate}
+
+\subsection{Eliminar un colmenar}\label{eliminar-un-colmenar}
+
+Al eliminar un colmenar, se eliminan también todos los datos asociados a
+este (información del colmenar, colmenas, grabaciones e información
+meteorológica).
+
+Video-tutorial: \url{http://gobees.io/help/videos/eliminar-colmenar}
+
+Para eliminar un colmenar existente:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Desde la pantalla principal.
+\item
+  Pulsar el botón de menú asociado al colmenar a eliminar (tres puntos
+  verticales situados en la esquina superior derecha).
+\item
+  Seleccionar la opción de eliminar.
+\item
+  El colmenar se eliminará junto con toda su información.
+\end{enumerate}
+
+\subsection{Consultar la información meteorológica de un
+colmenar}\label{consultar-la-informaciuxf3n-meteoroluxf3gica-de-un-colmenar}
+
+Para poder consultar la información meteorológica de un colmenar se
+necesita que este posea una localización y que el dispositivo esté
+conectado a internet. Si se cumplen estos dos requisitos, la información
+meteorológica del colmenar se actualizará automáticamente de forma
+periódica.
+
+Video-tutorial:
+\url{http://gobees.io/help/videos/consultar-info-meteo-colmenar}
+
+Para consultar la información meteorológica:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Asegurarse de que el colmenar tiene definida una localización y que se
+  posee conexión a internet.
+\item
+  En la lista de colmenares, se puede visualizar un resumen con la
+  temperatura y situación meteorológica en cada colmenar.
+\item
+  Si se desea consultar la información en detalle, entrar en el colmenar
+  a consultar.
+\item
+  Desplazarse a la pestaña ``info''.
+\item
+  En la parte inferior podremos visualizar todos los detalles de la
+  situación meteorológica actual en ese colmenar.
+\end{enumerate}
+
+Se pueden cambiar las unidades meteorológicas, para ello:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  En la pantalla principal.
+\item
+  Pulsar el botón menú.
+\item
+  Entrar en la sección ``Ajustes''.
+\item
+  Seleccionar ``Unidades meteorológicas''.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Sistema métrico: ºC y km/h.
+  \item
+    Sistema imperial: ºF y mph.
+  \end{enumerate}
+\end{enumerate}
+
+\imagenAncho{meteo-info}{Información meteorológica.}{0.5
+}
+
+\subsection{Visualizar un colmenar en el
+mapa}\label{visualizar-un-colmenar-en-el-mapa}
+
+GoBees nos permite visualizar fácilmente un determinado colmenar en un
+mapa utilizando nuestra aplicación de mapas favorita. De esta manera,
+podemos navegar hacia él o consultar cualquier detalle cartográfico.
+
+Video-tutorial: \url{http://gobees.io/help/videos/ver-colmenar-mapa}
+
+Para visualizar un colmenar en el mapa:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar a visualizar.
+\item
+  Desplazarse a la pestaña ``info''.
+\item
+  Pulsar el botón ``mapa'' situado a la derecha de la localización del
+  colmenar.
+\item
+  Seleccionar la aplicación con la que se desea visualizar el colmenar.
+\end{enumerate}
+
+\subsection{Añadir una colmena}\label{auxf1adir-una-colmena}
+
+Cada colmena pertenece a un colmenar y tiene un nombre y unas notas.
+Además, se puede monitorizar su actividad de vuelo, dando lugar a
+grabaciones.
+
+Video-tutorial: \url{http://gobees.io/help/videos/anadir-colmena}
+
+Para añadir una colmena en un determinado colmenar:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar al que pertenecerá.
+\item
+  Definir el nombre de la colmena (obligatorio).
+\item
+  Definir unas notas sobre la colmena (opcional). En las notas se puede
+  apuntar cualquier cosa relacionada con la colmena en concreto.
+\item
+  Pulsar el botón {$\checkmark$} para guardar la nueva colmena.
+\end{enumerate}
+
+\subsection{Editar una colmena}\label{editar-una-colmena}
+
+Los detalles de una colmena se pueden editar en cualquier momento.
+
+Video-tutorial: \url{http://gobees.io/help/videos/editar-colmena}
+
+Para editar una colmena existente:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar al que pertenece la colmena.
+\item
+  Pulsar el botón de menú asociado a la colmena a editar (tres puntos
+  verticales situados en la esquina superior derecha).
+\item
+  Seleccionar la opción de editar.
+\item
+  Se abrirá la pantalla de edición, donde se podrán modificar los datos
+  que se deseen.
+\item
+  Pulsar el botón {$\checkmark$} para actualizar los datos editados.
+\end{enumerate}
+
+\subsection{Eliminar una colmena}\label{eliminar-una-colmena}
+
+Al eliminar una colmena, se eliminan también todos los datos asociados a
+esta (información de la colmena y sus grabaciones).
+
+Video-tutorial: \url{http://gobees.io/help/videos/eliminar-colmena}
+
+Para eliminar una colmena existente:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar al que pertenece la colmena.
+\item
+  Pulsar el botón de menú asociado a la colmena a editar (tres puntos
+  verticales situados en la esquina superior derecha).
+\item
+  Seleccionar la opción de eliminar.
+\item
+  La colmena se eliminará junto con toda su información.
+\end{enumerate}
+
+\subsection{Monitorizar la actividad de vuelo de una
+colmena}\label{monitorizar-la-actividad-de-vuelo-de-una-colmena}
+
+La actividad de vuelo, junto con información previa de la colmena y
+conocimiento de las condiciones locales, permite conocer al apicultor el
+estado de la colmena con bastante seguridad, pudiendo determinar si esta
+necesita o no una intervención.
+
+GoBees permite monitorizar este parámetro utilizando la cámara del
+\emph{smartphone}.
+
+Video-tutorial:
+\url{http://gobees.io/help/videos/monitorizacion-act-vuelo}
+
+Para monitorizar la actividad de vuelo es necesario colocar el
+\emph{smartphone} de forma fija en posición cenital a la colmena. Para
+esto, se puede utilizar un trípode o un soporte similar. En la siguiente
+imagen se puede ver un ejemplo de colocación:
+
+\imagenAncho{cenital}{Colocación del \emph{smartphone} en la colmena.}{0.75}
+
+Para mejorar los resultados de la monitorización, es recomendable que el
+suelo sea de un color claro y uniforme. Si posee maleza, se puede
+colocar un cartón o similar, como se muestra en la imagen.
+
+Una vez realizado en montaje, hay que seguir los siguientes pasos dentro
+de la aplicación:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar al que pertenece la colmena a monitorizar.
+\item
+  Entrar en la colmena.
+\item
+  Pulsar en el botón de ``monitorización'' (situado en la parte inferior
+  derecha con un icono de una cámara).
+\item
+  Se abrirá una ventana que permite previsualizar la monitorización.
+\item
+  Para configurar los parámetros de la monitorización, pulsar el botón
+  ``ajustes'' (situado en la parte superior derecha). Se abrirá una
+  pantalla con los siguientes ajustes:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Mostrar salida del algoritmo}: si no se encuentra activado
+    se previsualiza la imagen proveniente de la cámara. Si se activa, se
+    muestran en verde las abejas detectadas y en rojo otros objetos en
+    movimiento que el algoritmo no considera abejas. Además, en la
+    esquina inferior derecha se puede visualizar el número total de
+    abejas contadas en cada fotograma.
+  \item
+    \textbf{Modificar el tamaño de las regiones}: dependiendo de la
+    distancia a la que esté situada la cámara, es posible que las abejas
+    se visualicen demasiado pequeñas o demasiado grandes. Con esta
+    opción, se puede agrandar o disminuir su silueta.
+  \item
+    \textbf{Min. área abeja}: la detección de una abeja se realiza por
+    área. Si el contorno en movimiento detectado posee un área dentro de
+    unos límites se considera una abeja. Este parámetro configura la
+    cota inferior del área. Bien ajustado, permite descartar moscas y
+    mosquitos.
+  \item
+    \textbf{Max. área abeja}: configura la cota superior del área.
+    Permite descartar la mayoría de animales que pueden habitar en el
+    colmenar (avispones, roedores, lagartos o cualquier animal de mayor
+    tamaño).
+  \item
+    \textbf{Zoom}: permite configurar el zoom de la cámara para
+    encuadrar la superficie deseada.
+  \item
+    \textbf{Frecuencia de muestreo}: determina el intervalo de tiempo
+    entre un fotograma analizado y el siguiente a analizar. Es decir, si
+    se establece en 1 segundo, la aplicación captará y analizará un
+    fotograma cada segundo. Cuanto mayor sea el intervalo menor será el
+    consumo de batería.
+  \end{itemize}
+\item
+  Una vez configurados los parámetros correctamente, se puede iniciar la
+  monitorización pulsado el botón blanco.
+\item
+  Se iniciará una cuenta atrás y comenzará la monitorización. Durante
+  esta, la pantalla puede estar apagada para ahorrar batería. Se puede
+  aprovechar la cuenta atrás para apagarla sin influir en la
+  monitorización (al manipular el móvil siempre se producen
+  trepidaciones).
+\item
+  Cuando se desee detener la monitorización, se debe pulsar el botón
+  cuadrado rojo. Una vez pulsado, se guardará la grabación y se podrá
+  acceder a los detalles de esta.
+\end{enumerate}
+
+\textbf{Nota:} Si se posee alguna aplicación de ahorro de batería es imprescindible
+añadir una excepción a la aplicación GoBees para que esta se pueda
+ejecutar en segundo plano sin restricciones. Si no, la aplicación puede
+ser cerrada durante la monitorización.
+
+\imagen{monitoring-settings}{Ajustes de monitorización.}
+
+\subsection{Ver los detalles de una
+grabación}\label{ver-los-detalles-de-una-grabacion}
+
+Al monitorizar una colmena se genera lo que denominamos una grabación.
+Una grabación contiene los datos de actividad de vuelo de la colmena.
+
+Video-tutorial: \url{http://gobees.io/help/videos/ver-grabacion}
+
+Para ver los detalles de una grabación:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar al que pertenece la colmena monitorizada.
+\item
+  Entrar en la colmena.
+\item
+  Pulsar en la grabación sobre la que se está interesado.
+\item
+  Se mostrará una pantalla con dos gráficos.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    El gráfico principal muestra la actividad de vuelo. En el eje de las
+    Y se representa el número de abejas en vuelo y en las X los
+    instantes de tiempo. Si se pulsa sobre un punto del gráfico, se
+    obtiene la medida exacta en ese punto.
+  \item
+    El gráfico inferior muestra la información meteorológica. Existe un
+    selector con tres botones: temperatura, precipitaciones y viento.
+    Según se presione en uno u otro, se muestra su gráfico
+    correspondiente.
+  \end{enumerate}
+\item
+  Con ambos gráficos se puede interpretar la actividad de vuelo de la
+  colmena y determinar si es una actividad normal o la colmena necesita
+  una intervención.
+\end{enumerate}
+
+\imagenAncho{recording-detail}{Detalle de la grabación.}{0.5}
+
+\subsection{Eliminar una grabación}\label{eliminar-una-grabaciuxf3n}
+
+Al eliminar una grabación, se eliminan también todos los datos asociados
+a esta.
+
+Video-tutorial: \url{http://gobees.io/help/videos/eliminar-grabacion}
+
+Para eliminar una grabación existente:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Entrar en el colmenar al que pertenece la colmena monitorizada.
+\item
+  Entrar en la colmena.
+\item
+  Localizar la grabación y pulsar el botón de menú asociado a esta (tres
+  puntos verticales situados en la esquina superior derecha).
+\item
+  Seleccionar la opción de eliminar.
+\item
+  La grabación se eliminará junto con toda su información.
+\end{enumerate}
+
+\subsection{Eliminar toda la información de la
+aplicación}\label{eliminar-toda-la-informaciuxf3n-de-la-aplicaciuxf3n}
+
+Si por algún motivo se desea resetear toda la información almacenada en
+la aplicación, esta cuenta una opción para ello.
+
+Video-tutorial: \url{http://gobees.io/help/videos/eliminar-datos}
+
+Para eliminar toda la información de la aplicación:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Pulsar el botón menú.
+\item
+  Entrar en la sección ``Ajustes''.
+\item
+  Seleccionar la opción ``Borrar todos los datos''.
+\item
+  Todos los datos de la aplicación serán borrados. La aplicación volverá
+  al mismo estado que cuando se instaló.
+\end{enumerate}
+
+\subsection{Consultar la información sobre la
+aplicación}\label{consultar-la-informaciuxf3n-sobre-la-aplicaciuxf3n}
+
+Para conocer la versión instalada de la aplicación, los cambios
+introducidos en las diferentes versiones, la licencia o el autor de esta
+hay que acceder a la sección ``Acerca de GoBees''.
+
+Video-tutorial: \url{http://gobees.io/help/videos/acerca-gobees}
+
+Para acceder a la sección ``Acerca de GoBees'':
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Pulsar el botón menú.
+\item
+  Entrar en la sección ``Acerca de GoBees''.
+\item
+  En ella se puede visualizar la versión de la aplicación, el autor y
+  las bibliotecas utilizadas para su desarrollo.
+\item
+  Si se presiona el botón ``Website'' se accede a la página web de
+  GoBees.
+\item
+  Si se presiona el botón ``Licencia'' se visualiza una copia de la
+  licencia de la aplicación.
+\item
+  Si se presiona el botón ``\emph{Changelog}'' se visualizan los cambios
+  introducidos en cada versión.
+\end{enumerate}
+
+\imagenAncho{about-gobees}{Sobre GoBees.}{0.5}

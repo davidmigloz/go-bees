@@ -345,7 +345,9 @@ aplicación.
 Tras una serie de iteraciones, estos se fueron mejorando hasta obtener
 las interfaces con las que cuenta hoy en día la *app*.
 
-TODO meter capturas de la app
+|features|
+
+.. |features| image:: ../../img/features.png
 
 El siguiente diagrama muestra la navegabilidad por la aplicación. Esta
 ha sido distribuida de acuerdo al tipo de contenido y a las tareas a
