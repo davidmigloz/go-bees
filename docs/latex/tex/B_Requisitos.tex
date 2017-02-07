@@ -1,11 +1,2355 @@
 \apendice{Especificación de Requisitos}
 
-\section{Introducción}
+\section{Introducción}\label{introduccion-requisitos}
 
-\section{Objetivos generales}
+Este anexo recoge la especificación de requisitos que define el
+comportamiento del sistema desarrollado. Posee un doble objetivo: servir
+como documento contractual entre el cliente y el equipo de desarrollo y
+como documentación correspondiente al análisis a la aplicación.
 
-\section{Catalogo de requisitos}
+Se han seguido las recomendaciones del estándar IEEE
+830-1998, que manifiesta que una buena especificación de requisitos
+\emph{software} debe ser: \citep{ieee_830_1998}
 
-\section{Especificación de requisitos}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Completa}: todos los requerimientos deben estar reflejados en
+  ella y todas las referencias deben estar definidas.
+\item
+  \textbf{Consistente}: debe ser coherente con los propios
+  requerimientos y también con otros documentos de especificación.
+\item
+  \textbf{Inequívoca}: la redacción debe ser clara de modo que no se
+  pueda mal interpretar.
+\item
+  \textbf{Correcta}: el software debe cumplir con los requisitos de la
+  especificación.
+\item
+  \textbf{Trazable}\emph{: s}e refiere a la posibilidad de verificar la
+  historia, ubicación o aplicación de un ítem a través de su
+  identificación almacenada y documentada.
+\item
+  \textbf{Priorizable}: los requisitos deben poder organizarse
+  jerárquicamente según su relevancia para el negocio y clasificándolos
+  en esenciales, condicionales y opcionales.
+\item
+  \textbf{Modificable}: aunque todo requerimiento es modificable, se
+  refiere a que debe ser fácilmente modificable.
+\item
+  \textbf{Verificable}: debe existir un método finito sin costo para
+  poder probarlo.
+\end{itemize}
 
+\section{Objetivos generales}\label{objetivos-generales}
 
+El proyecto persigue los siguientes objetivos generales:
+
+\begin{itemize}
+\tightlist
+\item
+  Desarrollar una aplicación para \emph{smartphones} que permita la
+  monitorización de la actividad de vuelo de una colmena a través de su
+  cámara.
+\item
+  Facilitar la interpretación de los datos recogidos mediante
+  representaciones gráficas.
+\item
+  Aportar información extra a los datos de actividad que ayude en la
+  toma de decisiones.
+\item
+  Almacenar todos los datos generados de forma estructurada y fácilmente
+  accesible.
+\end{itemize}
+
+\section{Catálogo de requisitos}\label{catalogo-de-requisitos}
+
+A continuación, se enumeran los requisitos específicos derivados de los
+objetivos generales del proyecto.
+
+\subsection{Requisitos funcionales}\label{requisitos-funcionales}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{RF-1 Gestión de colmenares:} la aplicación tiene que ser capaz
+  de gestionar colmenares.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RF-1.1 Añadir colmenar:} el usuario debe poder añadir un
+    nuevo colmenar con un nombre, una localización y unas notas
+    específicas.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.1.1: Obtener localización:} la aplicación tiene que
+      ser capaz de obtener la localización actual del usuario.
+    \end{itemize}
+  \item
+    \textbf{RF-1.2 Editar colmenar:} el usuario debe poder editar la
+    información de un colmenar ya existente.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.2.1: Obtener localización:} la aplicación tiene que
+      ser capaz de obtener la localización actual del usuario.
+    \end{itemize}
+  \item
+    \textbf{RF-1.3 Eliminar colmenar:} el usuario debe poder eliminar un
+    colmenar ya existente junto con toda su información asociada.
+  \item
+    \textbf{RF-1.4 Listar colmenares:} el usuario debe poder listar
+    todos los colmenares existentes.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.4.1 Obtención de información meteorológica:} la
+      aplicación tiene que ser capaz de obtener la información
+      meteorológica de cada uno de los colmenares.
+    \end{itemize}
+  \item
+    \textbf{RF-1.5 Ver colmenar:} el usuario debe poder visualizar toda
+    la información relativa a un determinado colmenar.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.5.1 Obtención de información meteorológica:} la
+      aplicación tiene que ser capaz de obtener la información
+      meteorológica relativa a un determinado colmenar.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{RF-2 Gestión de colmenas:} la aplicación tiene que ser capaz
+  de gestionar colmenas.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RF-2.1 Añadir colmena:} el usuario debe poder añadir una
+    nueva colmena con un nombre y unas notas específicas.
+  \item
+    \textbf{RF-2.2 Editar colmena:} el usuario debe poder editar la
+    información de una colmena ya existente.
+  \item
+    \textbf{RF-2.3 Eliminar colmena:} el usuario debe poder eliminar una
+    colmena ya existente junto con toda su información asociada.
+  \item
+    \textbf{RF-2.4 Listar colmenas:} el usuario debe poder listar todas
+    las colmenas existentes en un determinado colmenar.
+  \item
+    \textbf{RF-2.5 Ver colmena:} el usuario debe poder visualizar toda
+    la información relativa a una determinada colmena.
+  \end{itemize}
+\item
+  \textbf{RF-3 Gestión de grabaciones:} la aplicación tiene que ser
+  capaz de gestionar grabaciones.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RF-3.1 Añadir grabación:} la aplicación tiene que ser capaz
+    de crear una nueva grabación a partir de los datos de
+    monitorización.
+  \item
+    \textbf{RF-3.2 Eliminar grabación:} el usuario debe poder eliminar
+    una grabación ya existente junto con toda su información asociada.
+  \item
+    \textbf{RF-3.3 Listar grabaciones:} el usuario debe poder listar
+    todas las grabaciones existentes de una determinada colmena.
+  \item
+    \textbf{RF-3.4 Ver grabación:} el usuario debe poder visualizar toda
+    la información relativa a una determinada grabación.
+  \end{itemize}
+\item
+  \textbf{RF-4 Monitorización de la actividad de vuelo:} el usuario
+  tiene que ser capaz de monitorizar la actividad de vuelo de una
+  colmena a partir de una determinada parametrización de esta.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RF-4.1 Previsualización:} el usuario debe poder
+    previsualizar la salida del algoritmo de conteo de abejas.
+  \item
+    \textbf{RF-4.2 Configurar monitorización:} el usuario debe poder
+    configurar todos los parámetros relativos a la monitorización.
+  \item
+    \textbf{RF-4.3 Obtención de información meteorológica:} la
+    aplicación tiene que ser capaz de obtener la información
+    meteorológica relativa a un determinado colmenar.
+  \end{itemize}
+\item
+  \textbf{RF-5 Configuración de la aplicación:} el usuario debe poder
+  configurar todos los parámetros disponibles en la aplicación, como el
+  idioma o las unidades meteorológicas.
+\item
+  \textbf{RF-6 Ayuda de la aplicación:} el usuario debe poder obtener
+  ayuda sobre cada una de las funcionalidades de la aplicación.
+\item
+  \textbf{RF-7 Información de la aplicación:} el usuario debe poder
+  obtener información sobre la aplicación, compartirla o enviar
+  sugerencias.
+\end{itemize}
+
+\subsection{Requisitos no funcionales}\label{requisitos-no-funcionales}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{RNF-1 Usabilidad:} la aplicación debe ser intuitiva, con una
+  curva baja de aprendizaje, errores explicativos y adaptada al entorno
+  de trabajo.
+\item
+  \textbf{RNF-2 Rendimiento:} la aplicación tiene que tener unos tiempos
+  de carga y procesado aceptables en un dispositivo móvil de gama media.
+  La pantalla nunca deberá quedar congelada.
+\item
+  \textbf{RNF-3 Capacidad y Escalabilidad:} la aplicación tiene que
+  estar preparada para una recogida de datos continuada y debe permitir
+  la adición de nuevas funcionalidades de forma sencilla.
+\item
+  \textbf{RNF-4 Disponibilidad:} la aplicación debe estar siempre
+  disponible para su uso, independientemente de la localización, la no
+  disponibilidad de internet, o cualquier otro factor.
+\item
+  \textbf{RNF-5 Seguridad:} la aplicación debe gestionar de forma
+  adecuada todos los datos de carácter sensible, como claves,
+  \emph{tokens}, etc.
+\item
+  \textbf{RNF-6 Mantenibilidad}: la aplicación debe ser desarrollada de
+  acuerdo a algún patrón arquitectónico estándar que asegure
+  escalabilidad, portabilidad, testabilidad, etc. Además, tiene que
+  cumplir los estándares de código de Android.
+\item
+  \textbf{RNF-7 Soporte}: la aplicación debe dar soporte a versiones
+  mayores o iguales a Android 4.4 (\emph{KitKat}).
+\item
+  \textbf{RNF-8 Monitorización}: la aplicación debe monitorizar
+  correctamente la actividad de vuelo de una colmena cuando el
+  dispositivo se coloca en posición cenital a la colmena, sobre un
+  soporte estático y con un fondo claro y uniforme.
+\item
+  \textbf{RNF-9 Internacionalización}: la aplicación deberá estar
+  preparada para soportar varios idiomas, localizando textos, unidades
+  de medida, imágenes, etc.
+\end{itemize}
+
+\section{Especificación de
+requisitos}\label{especificacion-de-requisitos-1}
+
+En esta sección se mostrará el diagrama de casos de uso resultante y se
+desarrollará cada uno de ellos.
+
+\begin{landscape}
+\subsection{Diagrama de casos de uso}\label{diagrama-de-casos-de-uso}
+\imagenAncho{use_cases_diagram}{Diagrama de casos de uso.}{1.35}
+\end{landscape}
+
+\subsection{Actores}\label{actores}
+
+Solo interactuará con el sistema un actor, que se corresponderá con la
+figura del apicultor.
+
+\subsection{Casos de uso}\label{casos-de-uso}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
+\textbf{CU-01}\strut
+\end{minipage} & \begin{minipage}[b]{0.71\columnwidth}\raggedright\strut
+\textbf{Gestión de colmenares}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+RF-1, RF-1.1, RF-1.1.1, RF-1.2, RF-1.2.1, RF-1.3, RF-1.4, RF-1.5,
+RF-1.5.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+Permite al usuario gestionar sus colmenares.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario entra en la aplicación.
+\item
+  Se listan todos los colmenares.
+\item
+  Por cada colmenar se da la opción de ver detalle, editar o eliminar.
+\item
+  Se muestra un botón para añadir un colmenar.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+El número de colmenares listado es igual al número de colmenares en la
+base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar colmenares (mensaje).
+\item
+  No existe ningún colmenar (vista especial).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-01 Gestión de colmenares.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.24\columnwidth}\raggedright\strut
+\textbf{CU-02}\strut
+\end{minipage} & \begin{minipage}[b]{0.71\columnwidth}\raggedright\strut
+\textbf{Añadir colmenar}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+RF-1.1, RF-1.1.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+Permite al usuario añadir un nuevo colmenar.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario presiona en el botón de añadir colmenar.
+\item
+  Se muestra el formulario para introducir los datos del colmenar.
+\item
+  El usuario introduce el nombre.
+\item
+  El usuario pulsa obtener localización (opcional).
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Se obtiene la localización del usuario.
+  \end{enumerate}
+\item
+  El usuario introduce notas sobre el colmenar (opcional).
+\item
+  El usuario pulsa el botón de aceptar.
+\item
+  Si no hay ningún error, se guarda un nuevo colmenar con los datos
+  introducidos.
+\item
+  Volver a Gestión de colmenares.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+Existe un colmenar más en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al guardar colmenar (mensaje).
+\item
+  No se ha introducido nombre del colmenar (resaltar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.71\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-02 Añadir colmenar.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-03}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Editar colmenar}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-1.2, RF-1.2.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario editar un colmenar ya existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar a editar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona un colmenar para editar.
+\item
+  Se obtienen los datos del colmenar de la base de datos.
+\item
+  Se rellena el formulario de edición con los datos del colmenar.
+\item
+  El usuario edita alguno de los campos.
+\item
+  Si el usuario pulsa obtener localización.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Se obtiene la localización del usuario.
+  \end{enumerate}
+\item
+  El usuario pulsa el botón aceptar.
+\item
+  Si no hay ningún error, se actualiza el colmenar en la base de datos.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La información del colmenar en la base de datos ha sido
+actualizada.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al guardar colmenar (mensaje).
+\item
+  No se ha introducido nombre del colmenar (resaltar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-03 Editar colmenar.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.29\columnwidth}\raggedright\strut
+\textbf{CU-04}\strut
+\end{minipage} & \begin{minipage}[b]{0.65\columnwidth}\raggedright\strut
+\textbf{Eliminar colmenar}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+RF-1.3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+Permite al usuario eliminar un colmenar ya existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar a eliminar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona un colmenar para eliminar.
+\item
+  Se eliminan los datos de ese colmenar de la base de datos.
+\item
+  Se elimina el colmenar de la vista.
+\item
+  Se informa al usuario.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+Existe un colmenar menos en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al eliminar colmenar (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-04 Eliminar colmenar.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-05}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Listar colmenares}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-1.4, RF-1.4.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario listar todos sus colmenares. Por cada colmenar se
+muestra el nombre, el número de colmenas y la condición meteorológica y
+temperatura actuales.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario accede a Gestionar Colmenares.
+\item
+  Se obtienen todos los colmenares de la base de datos.
+\item
+  Se actualiza su información meteorológica si no se dispone de esta o
+  la que se dispone es de hace más de 15 minutos.
+\item
+  Se muestran la lista de colmenares. Cada elemento de la lista posee el
+  nombre del colmenar, el número de colmenas y la condición
+  meteorológica y temperatura de ese colmenar.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar colmenares (mensaje).
+\item
+  No existen colmenares (vista especial).
+\item
+  No existe conexión a internet (mensaje).
+\item
+  Error al recuperar la información meteorológica (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-05 Listar colmenares.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.268\columnwidth}\raggedright\strut
+\textbf{CU-06}\strut
+\end{minipage} & \begin{minipage}[b]{0.76\columnwidth}\raggedright\strut
+\textbf{Ver colmenar}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+RF-1.5, RF-1.5.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+Permite al usuario visualizar toda la información relativa a un
+determinado colmenar existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar a visualizar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona un colmenar para visualizar.
+\item
+  Se obtienen los datos del colmenar de la base de datos (incluidas sus
+  colmenas).
+\item
+  Se actualiza su información meteorológica si no se dispone de esta o
+  la que se dispone es de hace más de 15 minutos.
+\item
+  Se muestra una lista con sus colmenas.
+\item
+  Se muestra la información general del colmenar (localización, número
+  de colmenas, última revisión y notas).
+\item
+  Se muestra la información meteorológica en detalle.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar colmenar (mensaje).
+\item
+  No existe conexión a internet (mensaje).
+\item
+  Error al recuperar la información meteorológica (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.268\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-06 Ver colmenar.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-07}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Obtener localización}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-1.1.1, RF-1.2.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite obtener la localización actual del usuario.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Se poseen permisos de acceso a la localización.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona obtener localización actual.
+\item
+  La aplicación se conecta al servicio de localización.
+\item
+  El servicio de localización va devolviendo ubicaciones, cada vez más
+  precisas.
+\item
+  Cuando el usuario considera la localización suficientemente buena,
+  vuelve a presionar el botón de localización para detener la
+  localización. Si no lo hace, se detendrá automáticamente al cambiar de
+  actividad.
+\item
+  Se devuelve la localización obtenida.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Las coordenadas devueltas son válidas.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  No se poseen permisos de localización (solicitar).
+\item
+  Error de conexión con el GPS (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-07 Obtener localización.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\textbf{CU-08}\strut
+\end{minipage} & \begin{minipage}[b]{0.74\columnwidth}\raggedright\strut
+\textbf{Obtener información meteorológica}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+RF-1.4.1, RF-1.5.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Permite obtener la información meteorológica actual en un determinado
+colmenar.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Se poseen permisos de acceso a internet.
+
+El colmenar existe y posee localización.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El sistema ejecuta la orden de actualizar información meteorológica
+  para un determinado colmenar.
+\item
+  Se obtiene la ubicación del colmenar de la base de datos.
+\item
+  Se realiza una consulta a la API de \emph{OpenWeatherMap}.
+\item
+  Se procesan los datos recibidos.
+\item
+  Se devuelven los datos recibidos.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+La información meteorológica devuelta es válida.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  No se poseen permisos de internet (solicitar).
+\item
+  El colmenar no tiene localización (ignorar petición).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-08 Obtener información meteorológica.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.21\columnwidth}\raggedright\strut
+\textbf{CU-09}\strut
+\end{minipage} & \begin{minipage}[b]{0.73\columnwidth}\raggedright\strut
+\textbf{Gestión de colmenas}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+RF-2, RF-2.1, RF-2.2, RF-2.3, RF-2.4, RF-2.5\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+Permite al usuario gestionar las colmenas de un determinado
+colmenar.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario entra en la vista detalle de un colmenar.
+\item
+  Se listan todas las colmenas.
+\item
+  Por cada colmena se da la opción de ver detalle, editar o eliminar.
+\item
+  Se muestra un botón para añadir una colmena.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+El número de colmenas listado es igual al número de colmenas de ese
+colmenar en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar colmenas (mensaje).
+\item
+  No existe ninguna colmena (vista especial).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-09 Gestión de colmenas.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.269\columnwidth}\raggedright\strut
+\textbf{CU-10}\strut
+\end{minipage} & \begin{minipage}[b]{0.75\columnwidth}\raggedright\strut
+\textbf{Añadir colmena}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+RF-2.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+Permite al usuario añadir una nueva colmena.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario presiona en el botón de añadir colmena.
+\item
+  Se muestra el formulario para introducir los datos de la colmena.
+\item
+  El usuario introduce el nombre.
+\item
+  El usuario introduce notas sobre el colmenar (opcional).
+\item
+  El usuario pulsa el botón de aceptar.
+\item
+  Si no hay ningún error, se guarda una nueva colmena con los datos
+  introducidos y se asocia al colmenar.
+\item
+  Volver a Gestión de colmenas.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+Existe una colmena más para ese colmenar en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al guardar colmena (mensaje).
+\item
+  No se ha introducido nombre de la colmena (resaltar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-10 Añadir colmena.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-11}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Editar colmena}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-2.2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario editar una colmena ya existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona una colmena para editar.
+\item
+  Se obtienen los datos de la colmena de la base de datos.
+\item
+  Se rellena el formulario de edición con los datos del colmenar.
+\item
+  El usuario edita alguno de los campos.
+\item
+  El usuario pulsa el botón aceptar.
+\item
+  Si no hay ningún error, se actualiza la colmena en la base de datos.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La información de la colmena en la base de datos ha sido
+actualizada.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al guardar colmena (mensaje).
+\item
+  No se ha introducido nombre de la colmena (resaltar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-11 Editar colmena.}
+\end{longtable}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.29\columnwidth}\raggedright\strut
+\textbf{CU-12}\strut
+\end{minipage} & \begin{minipage}[b]{0.65\columnwidth}\raggedright\strut
+\textbf{Eliminar colmena}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+RF-2.3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+Permite al usuario eliminar una colmena ya existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar existe.
+
+La colmena a eliminar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona una colmena para eliminar.
+\item
+  Se eliminan los datos de esa colmena de la base de datos.
+\item
+  Se elimina la colmena de la vista.
+\item
+  Se informa al usuario.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+Existe una colmena menos en ese colmenar en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al eliminar colmena (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-12 Eliminar colmena.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-13}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Listar colmenas}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-2.4\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario listar todas las colmenas de un determinado colmenar.
+Por cada colmena se muestra el nombre y la fecha de la última
+revisión.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario accede a Gestionar Colmenas de un determinado colmenar.
+\item
+  Se obtienen todas las colmenas de ese colmenar de la base de datos.
+\item
+  Se muestran la lista de colmenas. Cada elemento de la lista posee el
+  nombre de la colmena y la fecha de la última revisión.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar colmenas (mensaje).
+\item
+  No existen colmenas (vista especial).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-13 Listar colmenas.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.21\columnwidth}\raggedright\strut
+\textbf{CU-14}\strut
+\end{minipage} & \begin{minipage}[b]{0.73\columnwidth}\raggedright\strut
+\textbf{Ver colmena}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+RF-2.5\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+Permite al usuario visualizar toda la información relativa a una
+determinada colmena existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar existe.
+
+La colmena a visualizar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona una colmena de un determinado colmenar para
+  visualizar.
+\item
+  Se obtienen los datos de la colmena de la base de datos (incluidas sus
+  grabaciones).
+\item
+  Se muestra una lista con sus grabaciones.
+\item
+  Se muestra la información general de la colmena (última revisión y
+  notas).
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar colmena (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.21\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.73\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-14 Ver colmena.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\textbf{CU-15}\strut
+\end{minipage} & \begin{minipage}[b]{0.74\columnwidth}\raggedright\strut
+\textbf{Gestión de grabaciones}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+RF-3, RF-3.1, RF-3.2, RF-3.3, RF-3.4\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Permite al usuario gestionar las grabaciones de una determinada
+colmena.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar y la colmena existen.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario entra en la vista detalle de una colmena.
+\item
+  Se listan todas las grabaciones.
+\item
+  Por cada grabación se da la opción de ver detalle o eliminar.
+\item
+  Se muestra un botón para iniciar una nueva monitorización.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+El número de grabaciones listado es igual al número de grabaciones de
+esa colmena en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar grabaciones (mensaje).
+\item
+  No existe ninguna grabación (vista especial).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-15 Gestión de grabaciones.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-16}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Añadir grabación}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-3.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite añadir una nueva grabación a partir de los datos recogidos
+durante la monitorización.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar y la colmena existen.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario presiona el botón de finalizar monitorización.
+\item
+  Si no hay ningún error, se guarda una nueva grabación con los datos
+  recogidos durante la monitorización (número de abejas e información
+  meteorológica) y se asocia a la colmena.
+\item
+  Volver a Gestión de grabaciones.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Existe una grabación más para esa colmena en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al guardar grabación (mensaje).
+\item
+  Grabación demasiado corta (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-16 Añadir grabación.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.28\columnwidth}\raggedright\strut
+\textbf{CU-17}\strut
+\end{minipage} & \begin{minipage}[b]{0.66\columnwidth}\raggedright\strut
+\textbf{Eliminar grabación}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+RF-3.2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+Permite al usuario eliminar una grabación ya existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar y la colmena existen.
+
+La grabación a eliminar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona una grabación para eliminar.
+\item
+  Se eliminan los datos de esa grabación de la base de datos.
+\item
+  Se elimina la grabación de la vista.
+\item
+  Se informa al usuario.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+Existe una grabación menos en esa colmena en la base de datos.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al eliminar grabación (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-17 Eliminar grabación.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-18}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Listar grabaciones}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-3.3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario listar todas las grabaciones de una determinada
+colmena. Por cada grabación se muestra la fecha y una previsualización
+de la actividad de vuelo.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar y la colmena existen.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario accede a Gestionar Grabaciones de una determinada colmena.
+\item
+  Se obtienen todas las grabaciones de esa colmena de la base de datos.
+\item
+  Se muestran la lista de grabaciones. Cada elemento de la lista posee
+  la fecha de la grabación y una previsualización de la actividad de
+  vuelo.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar grabaciones (mensaje).
+\item
+  No existen grabaciones (vista especial).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-18 Listar grabaciones.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-19}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Ver grabación}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-3.4\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario visualizar toda la información (actividad de vuelo,
+temperatura, precipitaciones y viento) relativa a una determinada
+grabación existente.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.
+
+El colmenar y la colmena existen.
+
+La grabación a visualizar existe.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario selecciona una grabación de una determinada colmena para
+  visualizar.
+\item
+  Se obtienen los datos de la grabación de la base de datos (actividad
+  de vuelo, temperatura, precipitaciones y viento).
+\item
+  Se muestra un gráfico con la actividad de vuelo.
+\item
+  Se muestra un gráfico con la evolución de la temperatura.
+\item
+  Se muestra un gráfico con la evolución de las precipitaciones.
+\item
+  Se muestra un gráfico con la evolución del viento.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al cargar grabación (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-19 Ver grabación.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.269\columnwidth}\raggedright\strut
+\textbf{CU-20}\strut
+\end{minipage} & \begin{minipage}[b]{0.75\columnwidth}\raggedright\strut
+\textbf{Monitorizar actividad de vuelo}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+RF-4, RF-4.1, RF-4.2, RF-4.3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+Permite al usuario monitorizar la actividad de vuelo de una colmena a
+partir de una determinada parametrización.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+Se poseen permisos de cámara.
+
+La cámara se encuentra disponible.
+
+El colmenar y la colmena existen.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario pulsa el botón de inicializar nueva monitorización.
+\item
+  Se muestra una previsualización de la salida del algoritmo.
+\item
+  Si el usuario presiona el botón de configurar:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Abrir ajustes.
+  \item
+    El usuario realiza los ajustes oportunos.
+  \item
+    Actualizar algoritmo y cámara con los ajustes.
+  \item
+    Volver a la previsualización.
+  \end{enumerate}
+\item
+  Si el usuario presiona el botón de iniciar monitorización.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Se lanza el servicio de monitorización.
+  \item
+    Se realiza una cuenta atrás de 5 segundos antes de empezar a
+    monitorizar.
+  \item
+    Se inicia la cámara.
+  \item
+    Se consumen los 10 primeros fotogramas para crear el modelo del
+    fondo.
+  \item
+    Se comienza a monitorizar.
+  \end{enumerate}
+\item
+  Por cada fotograma recibido:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Se convierte a escala de grises.
+  \item
+    Se aplica un desenfoque Gaussiano.
+  \item
+    Se aplica BackgroundSubtractorMOG2.
+  \item
+    Se aplican varias fases de erosión y dilatación.
+  \item
+    Se obtienen los contornos de las regiones en movimiento.
+  \item
+    Se contabilizan como abejas aquellos contornos que cumplen las
+    condiciones.
+  \item
+    Se almacena el resultado.
+  \end{enumerate}
+\item
+  Si el colmenar posee localización:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Cada 15 minutos, obtener información meteorológica.
+  \item
+    Guardarla en la base de datos asociada al colmenar.
+  \end{enumerate}
+\item
+  Cuando se recibe la orden de finalizar:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Cerrar la cámara.
+  \item
+    Dejar de consultar información meteorológica.
+  \item
+    Devolver datos recolectados.
+  \end{enumerate}
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+La grabación tiene más de 5 registros.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  No se tienen permisos de cámara (solicitar).
+\item
+  Error de cámara (cancelar).
+\item
+  No existe conexión a internet (no obtener información meteorológica).
+\item
+  Error al obtener información meteorológica (ignorar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.269\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.75\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-20 Monitorizar actividad de vuelo.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-21}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Previsualización del algoritmo}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-4.1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario previsualizar los resultados que está proporcionando
+el algoritmo de conteo en tiempo real (visualización de los fotogramas
+de entrada, la máscara de salida y el número de abejas contadas).\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Se poseen permisos de cámara.
+
+La cámara se encuentra disponible.
+
+El colmenar y la colmena existen.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario pulsa el botón de inicializar nueva monitorización.
+\item
+  Se muestra en tiempo real los fotogramas (bien los de entrada del
+  algoritmo o los de salida).
+\item
+  Se muestra el número de abejas que contabiliza en cada fotograma
+  analizado.
+\item
+  Si el usuario modifica algún ajuste, se actualiza en la
+  previsualización.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  No se tienen permisos de cámara (solicitar).
+\item
+  Error de cámara (cancelar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-21 Previsualización del algoritmo.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-22}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Configuración de la monitorización}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-4.2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario configurar todos los parámetros relativos a la
+monitorización (parámetros del algoritmo y parámetros de la
+cámara).\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Se poseen permisos de cámara.
+
+La cámara se encuentra disponible.
+
+El colmenar y la colmena existen.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario se encuentra en la pantalla de previsualización y pulsa el
+  botón de ajustes.
+\item
+  Se abre una ventana con los diferentes parámetros ajustables (mostrar
+  salida o entrada del algoritmo, modificar tamaño de las regiones,
+  ajustar áreas de una abeja, zoom y frecuencia de muestreo).
+\item
+  Cuando el usuario realiza alguna modificación, actualizar
+  instantáneamente ese parámetro en la cámara o en el algoritmo.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  No se tienen permisos de cámara (solicitar).
+\item
+  Error de cámara (cancelar).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-22 Configuración de la monitorización.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-23}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Configuración de la aplicación}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-5\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario configurar todos los parámetros disponibles en la
+aplicación, como el idioma o las unidades meteorológicas o realizar
+determinadas tareas de mantenimiento.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+La base de datos se encuentra disponible.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario presiona el botón de ajustes de aplicación.
+\item
+  Se abre una ventana con los diferentes parámetros ajustables.
+\item
+  Si el usuario modifica cualquier parámetro, se hace efectiva la nueva
+  configuración al instante.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Error al guardar configuración (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-23 Configuración de la aplicación.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\textbf{CU-24}\strut
+\end{minipage} & \begin{minipage}[b]{0.74\columnwidth}\raggedright\strut
+\textbf{Ayuda de la aplicación}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+RF-6\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Permite al usuario obtener ayuda sobre cada una de las funcionalidades
+de la aplicación.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Se dispone de permisos de internet.
+
+Se dispone de conexión a internet.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  El usuario presiona el botón de ayuda de aplicación.
+\item
+  Se abre una ventana que carga una página web con la ayuda de la
+  aplicación categorizada por acciones.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  No se disponen de permisos de internet (solicitar),
+\item
+  No hay conexión a internet (mensaje).
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.74\columnwidth}\raggedright\strut
+Alta\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-24 Ayuda de la aplicación.}
+\end{longtable}
+
+\begin{longtable}[H]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\textbf{CU-25}\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\textbf{Información de la aplicación}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Versión}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+1.0\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Autor}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+David Miguel Lozano\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Requisitos asociados}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+RF-7\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Descripción}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Permite al usuario obtener información sobre la aplicación, compartirla
+o enviar sugerencias.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Precondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Acciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Si el usuario presiona el botón de compartir aplicación, se le
+  muestran los diferentes medios soportados por el dispositivo para
+  compartirla.
+\item
+  Si el usuario presiona sobre el botón de enviar comentarios, se abre
+  la aplicación de email con la información del destinatario rellenada
+  para que el usuario pueda enviar sus sugerencias.
+\item
+  Si el usuario presiona sobre el botón acerca de GoBees, se abre una
+  ventana con información sobre la versión, autor, licencia, página web,
+  historial de cambios y librerías utilizadas junto con sus licencias.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Postcondición}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Excepciones}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\textbf{Importancia}\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+Media\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\caption{CU-25 Información de la aplicación.}
+\end{longtable}
