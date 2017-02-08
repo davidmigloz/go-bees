@@ -124,6 +124,7 @@ public class ApiaryInfoFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        presenter.start();
         // Reset map icon color
         map.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent));
     }
