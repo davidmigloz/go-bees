@@ -17,6 +17,9 @@
 
 package com.davidmiguel.gobees.apiary;
 
+import android.app.Activity;
+
+import com.davidmiguel.gobees.addedithive.AddEditHiveActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource;
@@ -33,7 +36,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -56,6 +61,9 @@ public class ApiaryPresenterTest {
     @Mock
     private ApiaryContract.ApiaryInfoView apiaryInfoView;
 
+    @Captor
+    private ArgumentCaptor<GoBeesDataSource.TaskCallback> taskCallbackArgumentCaptor;
+
     private ApiaryPresenter apiaryPresenter;
 
     @Captor
@@ -65,7 +73,7 @@ public class ApiaryPresenterTest {
     private ArgumentCaptor<GoBeesDataSource.GetApiaryCallback> getApiaryCallbackArgumentCaptor;
 
     @Before
-    public void setupHivesPresenter() {
+    public void setupMocksAndView() {
         // To inject the mocks in the test the initMocks method needs to be called
         MockitoAnnotations.initMocks(this);
 
@@ -78,6 +86,7 @@ public class ApiaryPresenterTest {
 
         // Create 3 hives
         APIARY = ApiaryMother.newDefaultApiary(NUM_BEES);
+        APIARY.setId(APIARY_ID);
     }
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
@@ -99,5 +108,72 @@ public class ApiaryPresenterTest {
         verify(apiaryHivesView).showHives(showHivesArgumentCaptor.capture());
         // Assert that the number of hives shown is the expected
         assertTrue(showHivesArgumentCaptor.getValue().size() == APIARY.getHives().size());
+    }
+
+    @Test
+    public void loadHivesError_showMsg() {
+        // Given an initialized ApiaryPresenter
+        // When loading of apiaries is requested
+        apiaryPresenter.start();
+        // Callback is captured and invoked with stubbed apiaries
+        verify(goBeesRepository).getApiary(anyLong(), getApiaryCallbackArgumentCaptor.capture());
+        getApiaryCallbackArgumentCaptor.getValue().onDataNotAvailable();
+        // Show error
+        verify(apiaryHivesView).showLoadingHivesError();
+    }
+
+    @Test
+    public void newApiaryCreated_showMsg() {
+        apiaryPresenter.result(AddEditHiveActivity.REQUEST_ADD_HIVE,
+                Activity.RESULT_OK);
+        // Show msg
+        verify(apiaryHivesView).showSuccessfullySavedMessage();
+    }
+
+    @Test
+    public void onAddEditHive_openAddEditAct() {
+        apiaryPresenter.addEditHive(1);
+        // Open act
+        verify(apiaryHivesView).showAddEditHive(eq(1L), eq(1L));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void onHiveClicked_openApiary() {
+        apiaryPresenter.openHiveDetail(APIARY.getHives().get(0));
+        // Open apiary
+        verify(apiaryHivesView).showHiveDetail(eq(APIARY.getId()),
+                eq(APIARY.getHives().get(0).getId()));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void deleteHive_showOkMsg() {
+        apiaryPresenter.deleteHive(APIARY.getHives().get(0));
+        // Delete hive
+        verify(goBeesRepository).deleteHive(eq(APIARY.getHives().get(0).getId()),
+                taskCallbackArgumentCaptor.capture());
+        taskCallbackArgumentCaptor.getValue().onSuccess();
+        // Show msg
+        verify(apiaryHivesView).showSuccessfullyDeletedMessage();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void deleteApiaryError_showError() {
+        apiaryPresenter.deleteHive(APIARY.getHives().get(0));
+        // Delete hive
+        verify(goBeesRepository).deleteHive(eq(APIARY.getHives().get(0).getId()),
+                taskCallbackArgumentCaptor.capture());
+        taskCallbackArgumentCaptor.getValue().onFailure();
+        // Show msg
+        verify(apiaryHivesView).showDeletedErrorMessage();
+    }
+
+    @Test
+    public void onMapPressed_openMap() {
+        apiaryPresenter.onOpenMapClicked();
+        // Open map
+        verify(apiaryInfoView).openMap(any(Apiary.class));
     }
 }

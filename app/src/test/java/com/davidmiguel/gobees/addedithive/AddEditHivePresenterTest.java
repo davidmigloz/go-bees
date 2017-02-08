@@ -119,13 +119,32 @@ public class AddEditHivePresenterTest {
     }
 
     @Test
-    public void populateApiary_callsRepoAndUpdatesView() {
+    public void saveHiveErrorSaving_showsErrorUi() {
+        // Get a reference to the class under test
+        addEditHivePresenter = new AddEditHivePresenter(
+                apiariesRepository, addEditHiveView, APIARY_ID, AddEditHiveActivity.NEW_HIVE);
+        // When the presenter is asked to save an empty apiary
+        addEditHivePresenter.save("Hive 1", "");
+        // Then a new id is requested
+        verify(apiariesRepository).getNextHiveId(getNextHiveIdCallbackArgumentCaptor.capture());
+        getNextHiveIdCallbackArgumentCaptor.getValue().onNextHiveIdLoaded(1);
+        // Then the apiaries repository is queried
+        verify(apiariesRepository)
+                .saveHive(anyLong(), any(Hive.class), taskCallbackArgumentCaptor.capture());
+        // Simulate callback
+        taskCallbackArgumentCaptor.getValue().onFailure();
+        // Then an empty apiary error is shown in the UI
+        verify(addEditHiveView).showSaveHiveError();
+    }
+
+    @Test
+    public void populateHive_callsRepoAndUpdatesView() {
         Hive testHive = HiveMother.newDefaultHive();
         // Get a reference to the class under test
         addEditHivePresenter = new AddEditHivePresenter(
                 apiariesRepository, addEditHiveView, APIARY_ID, testHive.getId());
         // When the presenter is asked to populate an existing hive
-        addEditHivePresenter.populateHive();
+        addEditHivePresenter.start();
         // Then the repository is queried and the view updated
         verify(apiariesRepository).getHive(eq(testHive.getId()),
                 getHiveCallbackArgumentCaptor.capture());
@@ -134,5 +153,22 @@ public class AddEditHivePresenterTest {
         // Verify UI has been updated
         verify(addEditHiveView).setName(testHive.getName());
         verify(addEditHiveView).setNotes(testHive.getNotes());
+    }
+
+    @Test
+    public void populateHive_errorLoadingData() {
+        Hive testHive = HiveMother.newDefaultHive();
+        // Get a reference to the class under test
+        addEditHivePresenter = new AddEditHivePresenter(
+                apiariesRepository, addEditHiveView, APIARY_ID, testHive.getId());
+        // When the presenter is asked to populate an existing apiary
+        addEditHivePresenter.start();
+        // Then the apiaries repository is queried and the view updated
+        verify(apiariesRepository).getHive(eq(testHive.getId()),
+                getHiveCallbackArgumentCaptor.capture());
+        // Simulate callback
+        getHiveCallbackArgumentCaptor.getValue().onDataNotAvailable();
+        // Verify UI has been updated
+        verify(addEditHiveView).showEmptyHiveError();
     }
 }

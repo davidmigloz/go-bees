@@ -67,7 +67,7 @@ class RecordingPresenter implements RecordingContract.Presenter {
 
     @Override
     public void start() {
-        loadRecording(start, end);
+        loadData(false);
     }
 
     @Override

@@ -38,7 +38,7 @@ public class GoBeesDbConfig {
         realmConfiguration = new RealmConfiguration.Builder()
                 .name(DATABASE_NAME)
                 .schemaVersion(DATABASE_VERSION)
-                .deleteRealmIfMigrationNeeded() // TODO delete this for production (use RealmMigration)
+                .migration(new GoBeesDbMigration())
                 .build();
         return realmConfiguration;
     }

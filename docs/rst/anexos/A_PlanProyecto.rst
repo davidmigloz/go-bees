@@ -427,6 +427,65 @@ horas, completando todas las tareas.
 |Sprint 16|
 
 .. |Sprint 16| image:: ../../img/burndowns/sprint16.png
+
+Sprint 17 (26/01/17 - 02/02/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: continuar anexos. Convertir la memoria a 
+formato LaTeX. Pulir los últimos detalles de la aplicación y publicarla en Google 
+Play.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 17 <https://github.com/davidmigloz/go-bees/milestone/18?closed=1>`__.
+
+Se estimaron 53,50 horas de trabajo y se invirtieron finalmente 56,50
+horas, completando todas las tareas.
+
+|Sprint 17|
+
+.. |Sprint 17| image:: ../../img/burndowns/sprint17.png
+
+Sprint 18 (02/02/17 - 07/02/17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los objetivos de este *sprint* fueron: imprimir memoria, terminar anexos 
+y corrección de errores.
+
+Las tareas en las que se descompusieron los objetivos se pueden ver en:
+`Sprint 18 <https://github.com/davidmigloz/go-bees/milestone/19?closed=1>`__.
+
+Se estimaron 41 horas de trabajo y se invirtieron finalmente 41
+horas, completando todas las tareas.
+
+|Sprint 18|
+
+.. |Sprint 18| image:: ../../img/burndowns/sprint18.png
+
+Resumen
+~~~~~~~
+
+En la siguiente tabla se muestra un resumen del tiempo dedicado a los 
+distintos tipos de tareas.
+
++----------------------------+--------------+------------+
+| Categoría                  | *Issues*     | Tiempo (h) | 
++============================+==============+============+
+| *Bug*                      | 26           | 40,75      |
++----------------------------+--------------+------------+
+| *Documentation*            | 41           | 106        |
++----------------------------+--------------+------------+
+| *Feature*                  | 63           | 410        |
++----------------------------+--------------+------------+
+| *Research*                 | 30           | 128        |
++----------------------------+--------------+------------+
+| *Testing*                  | 7            | 49         |
++----------------------------+--------------+------------+
+| TOTAL                      | 167          | 794        |
++----------------------------+--------------+------------+
+
+|project-sumary|
+
+.. |project-sumary| image:: ../../img/project-sumary.png
    
 Estudio de viabilidad
 ---------------------
@@ -509,13 +568,17 @@ En este apartado se revisan el resto de costes del proyecto.
 +====================================+=============+
 | Dominio gobees.io                  | 31,90€      |
 +------------------------------------+-------------+
+| Cuenta Google Play                 | 25€         |
++------------------------------------+-------------+
+| Memoria impresa y cartel           | 50€         |
++------------------------------------+-------------+
 | Alquiler de oficina                | 500€        |
 +------------------------------------+-------------+
 | Internet                           | 150€        |
 +------------------------------------+-------------+
 | Material de apicultura de prueba   | 150€        |
 +------------------------------------+-------------+
-| **Total**                          | 831,90€     |
+| **Total**                          | 906,90€     |
 +------------------------------------+-------------+
 
 **Costes totales:**
@@ -525,15 +588,15 @@ El sumatorio de todos los costes es el siguiente:
 +----------------+--------------+
 | **Concepto**   | **Coste**    |
 +================+==============+
-| Personal       | 9.074,40 €   |
+| Personal       | 9.074,40€    |
 +----------------+--------------+
 | *Hardware*     | 91,67€       |
 +----------------+--------------+
 | *Software*     | 59,17€       |
 +----------------+--------------+
-| Varios         | 831,90€      |
+| Varios         | 906,90€      |
 +----------------+--------------+
-| Total          | 10.057,14€   |
+| Total          | 10.132,14€   |
 +----------------+--------------+
 
 Beneficios

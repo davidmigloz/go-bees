@@ -28,19 +28,19 @@ import java.util.Comparator;
 @SuppressWarnings("deprecation")
 class PreviewSizeComparator implements Comparator<Camera.Size> {
     @Override
-    public int compare(Camera.Size arg0, Camera.Size arg1) {
+    public int compare(Camera.Size size1, Camera.Size size2) {
         // Check nulls
-        if (arg0 == null && arg1 == null) {
+        if (size1 == null && size2 == null) {
             return 0;
-        } else if (arg0 == null) {
+        } else if (size1 == null) {
             return 1;
-        } else if (arg1 == null) {
+        } else if (size2 == null) {
             return -1;
         }
         // Check size
-        if (arg0.width < arg1.width) {
+        if (size1.width < size2.width) {
             return -1;
-        } else if (arg0.width > arg1.width) {
+        } else if (size1.width > size2.width) {
             return 1;
         } else {
             return 0;

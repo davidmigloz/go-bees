@@ -1,20 +1,44 @@
 \documentclass[a4paper,11pt,oneside]{memoir}
 
 % Castellano
-\usepackage[spanish]{babel}
+\usepackage[spanish,es-tabla]{babel}
 \selectlanguage{spanish}
 \usepackage[utf8]{inputenc}
 \usepackage{placeins}
+\usepackage{float}
+\usepackage{eurosym}
 
-\RequirePackage{booktabs}
+\usepackage{longtable,booktabs}
 \RequirePackage[table]{xcolor}
 \RequirePackage{xtab}
 \RequirePackage{multirow}
 
+% Landscape
+\usepackage{pdflscape}
+
+% Multi-page tables using
+\usepackage{longtable}
+\usepackage{tabularx}
+
+% Cell with line break (e.g. \specialcell{Foo\\bar})
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+% Mathematic font
+\usepackage{amsfonts}
+
+% Color
+
+% Bibliography management
+\usepackage[numbers,sort]{natbib}
+
 % Links
 \usepackage[colorlinks]{hyperref}
 \hypersetup{
-	allcolors = {red}
+	colorlinks,
+	linkcolor={green!40!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
 }
 
 % Ecuaciones
@@ -26,6 +50,9 @@
 % Párrafos
 \nonzeroparskip
 
+% Listas estrechas
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % Imagenes
 \usepackage{graphicx}
@@ -33,6 +60,15 @@
 	\begin{figure}[!h]
 		\centering
 		\includegraphics[width=0.9\textwidth]{#1}
+		\caption{#2}\label{fig:#1}
+	\end{figure}
+	\FloatBarrier
+}
+
+\newcommand{\imagenAncho}[3]{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=#3\textwidth]{#1}
 		\caption{#2}\label{fig:#1}
 	\end{figure}
 	\FloatBarrier
@@ -91,7 +127,7 @@
 %
 % Nuevo comando para tablas pequeñas (menos de una página).
 \newcommand{\tablaSmall}[5]{%
- \begin{table}
+ \begin{table}[H]
   \begin{center}
    \rowcolors {2}{gray!35}{}
    \begin{tabular}{#2}
@@ -271,7 +307,21 @@
 
 
 
-\graphicspath{ {./img/} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\graphicspath{ {../img/} }
 
 % Capítulos
 \chapterstyle{bianchi}
@@ -327,8 +377,8 @@
   {%
     \noindent\LARGE
     Presentado por \@author{}\\ 
-    en Universidad de Burgos --- \@date{}\\
-    Tutor: \@tutor{}\\
+    en la Universidad de Burgos --- \@date{}\\
+    Tutores: \@tutor{}\\
   }%
   \end{center}%
   \null
@@ -338,9 +388,9 @@
 
 
 % Datos de portada
-\title{título del TFG \\Documentación Técnica}
-\author{nombre alumno}
-\tutor{nombre tutor}
+\title{{\Huge GoBees}\\[0.5cm]Monitorización del estado de una colmena mediante la cámara de un smartphone.}
+\author{David Miguel Lozano}
+\tutor{Dr. José Francisco Díez Pastor\\y Dr. Raúl Marticorena Sánchez}
 \date{\today}
 
 \begin{document}
@@ -385,8 +435,22 @@
 \include{./tex/D_Manual_programador}
 \include{./tex/E_Manual_usuario}
 
-
-\bibliographystyle{plain}
 \bibliography{bibliografiaAnexos}
+\bibliographystyle{plainnat}
+
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+\begin{bottompar}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2cm]{ccby}
+\end{figure}
+
+
+\begin{center}
+Este obra está bajo una licencia Creative Commons Reconocimiento 4.0 Internacional
+(\href{https://creativecommons.org/licenses/by/4.0/}{CC-BY-4.0}).
+\end{center}
+\end{bottompar}
 
 \end{document}

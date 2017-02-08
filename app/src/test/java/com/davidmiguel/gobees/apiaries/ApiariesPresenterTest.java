@@ -17,8 +17,13 @@
 
 package com.davidmiguel.gobees.apiaries;
 
+import android.app.Activity;
+
+import com.davidmiguel.gobees.addeditapiary.AddEditApiaryActivity;
 import com.davidmiguel.gobees.data.model.Apiary;
+import com.davidmiguel.gobees.data.model.MeteoRecord;
 import com.davidmiguel.gobees.data.model.mothers.ApiaryMother;
+import com.davidmiguel.gobees.data.source.GoBeesDataSource;
 import com.davidmiguel.gobees.data.source.GoBeesDataSource.GetApiariesCallback;
 import com.davidmiguel.gobees.data.source.repository.GoBeesRepository;
 import com.google.common.collect.Lists;
@@ -31,9 +36,11 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -56,8 +63,11 @@ public class ApiariesPresenterTest {
     @Captor
     private ArgumentCaptor<GetApiariesCallback> getApiariesCallbackCaptor;
 
+    @Captor
+    private ArgumentCaptor<GoBeesDataSource.TaskCallback> taskCallbackArgumentCaptor;
+
     @Before
-    public void setupApiariesPresenter() {
+    public void setupMocksAndView() {
         // To inject the mocks in the test the initMocks method needs to be called
         MockitoAnnotations.initMocks(this);
 
@@ -72,6 +82,14 @@ public class ApiariesPresenterTest {
                 ApiaryMother.newDefaultApiary(),
                 ApiaryMother.newDefaultApiary(),
                 ApiaryMother.newDefaultApiary());
+        // Add updated current weather to one
+        MeteoRecord meteoRecord = new MeteoRecord();
+        meteoRecord.setTimestamp(new Date());
+        APIARIES.get(0).setCurrentWeather(meteoRecord);
+        // Add old current weather to another
+        MeteoRecord meteoRecord1 = new MeteoRecord();
+        meteoRecord1.setTimestamp(new Date(1484866637));
+        APIARIES.get(1).setCurrentWeather(meteoRecord1);
     }
 
     @SuppressWarnings("unchecked")
@@ -79,7 +97,7 @@ public class ApiariesPresenterTest {
     public void loadAllApiariesFromRepositoryAndLoadIntoView() {
         // Given an initialized ApiariesPresenter with initialized apiaries
         // When loading of apiaries is requested
-        apiariesPresenter.loadData(true);
+        apiariesPresenter.start();
 
         // Callback is captured and invoked with stubbed apiaries
         verify(goBeesRepository).getApiaries(getApiariesCallbackCaptor.capture());
@@ -93,5 +111,70 @@ public class ApiariesPresenterTest {
         verify(apiariesView).showApiaries(showApiariesArgumentCaptor.capture());
         // Assert that the number of apairies shown is the expected
         assertTrue(showApiariesArgumentCaptor.getValue().size() == APIARIES.size());
+        // Check weather if one of them
+        ArgumentCaptor<List> updateWeatherListArgumentCaptor = ArgumentCaptor.forClass(List.class);
+        verify(goBeesRepository).updateApiariesCurrentWeather(
+                updateWeatherListArgumentCaptor.capture(),
+                taskCallbackArgumentCaptor.capture());
+        assertTrue(updateWeatherListArgumentCaptor.getValue().size() == 2);
+        // Update weather
+        taskCallbackArgumentCaptor.getValue().onSuccess();
+        verify(apiariesView).notifyApiariesUpdated();
+    }
+
+    @Test
+    public void loadApiariesError_showMsg() {
+        // Given an initialized ApiariesPresenter with initialized apiaries
+        // When loading of apiaries is requested
+        apiariesPresenter.start();
+        // Callback is captured and invoked with stubbed apiaries
+        verify(goBeesRepository).getApiaries(getApiariesCallbackCaptor.capture());
+        getApiariesCallbackCaptor.getValue().onDataNotAvailable();
+        // Show error
+        verify(apiariesView).showLoadingApiariesError();
+    }
+
+    @Test
+    public void newApiaryCreated_showMsg() {
+        apiariesPresenter.result(AddEditApiaryActivity.REQUEST_ADD_APIARY,
+                Activity.RESULT_OK);
+        // Show msg
+        verify(apiariesView).showSuccessfullySavedMessage();
+    }
+
+    @Test
+    public void onAddEditApiary_openAddEditAct() {
+        apiariesPresenter.addEditApiary(1);
+        // Open act
+        verify(apiariesView).showAddEditApiary(eq(1L));
+    }
+
+    @Test
+    public void onApiaryClicked_openApiary() {
+        apiariesPresenter.openApiaryDetail(APIARIES.get(0));
+        // Open apiary
+        verify(apiariesView).showApiaryDetail(eq(APIARIES.get(0).getId()));
+    }
+
+    @Test
+    public void deleteApiary_showOkMsg() {
+        apiariesPresenter.deleteApiary(APIARIES.get(0));
+        // Delete apiary
+        verify(goBeesRepository).deleteApiary(eq(APIARIES.get(0).getId()),
+                taskCallbackArgumentCaptor.capture());
+        taskCallbackArgumentCaptor.getValue().onSuccess();
+        // Show msg
+        verify(apiariesView).showSuccessfullyDeletedMessage();
+    }
+
+    @Test
+    public void deleteApiaryError_showError() {
+        apiariesPresenter.deleteApiary(APIARIES.get(0));
+        // Delete apiary error
+        verify(goBeesRepository).deleteApiary(eq(APIARIES.get(0).getId()),
+                taskCallbackArgumentCaptor.capture());
+        taskCallbackArgumentCaptor.getValue().onFailure();
+        // Show msg
+        verify(apiariesView).showDeletedErrorMessage();
     }
 }
