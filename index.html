@@ -1,13 +1,23 @@
+<!--
+  * GoBees 2017 - David Miguel Lozano
+  * Theme based on:
+  * Start Bootstrap - New Age v3.3.7 (http://startbootstrap.com/template-overviews/new-age)
+  * Copyright 2013-2016 Start Bootstrap
+  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description"
+          content="GoBees | Aplicación para la monitorización del estado de una colmena con la camara de un smartphone.">
+    <meta name="author" content="David Miguel Lozano">
+    <link rel="shortcut icon" href="favicon.ico"/>
 
     <title>GoBees | Monitorización del estado de una colmena</title>
 
@@ -25,7 +35,7 @@
     <link rel="stylesheet" href="lib/device-mockups/device-mockups.min.css">
 
     <!-- Theme CSS -->
-    <link href="css/new-age.min.css" rel="stylesheet">
+    <link href="css/gobees.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,12 +54,12 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                <span class="sr-only">Abrir menú</span> Menú <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">GoBees</a>
+            <a class="navbar-brand page-scroll" href="#page-top">Go<b>Bees</b></a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Menu -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -60,6 +70,9 @@
                 </li>
                 <li>
                     <a class="page-scroll" href="#contact">Contacto</a>
+                </li>
+                <li>
+                    <a href="/help">Ayuda</a>
                 </li>
             </ul>
         </div>
@@ -74,8 +87,9 @@
             <div class="col-sm-7">
                 <div class="header-content">
                     <div class="header-content-inner">
-                        <h1>Monitoriza la actividad de tus colmenas con la cámara de un smartphone.</h1>
-                        <a href="#download" class="btn btn-outline btn-xl page-scroll">Descargar!</a>
+                        <img src="img/gobees-logo.svg" width="300px" onerror="this.src='img/gobees-logo.png'">
+                        <h1>Monitoriza la actividad de tus colmenas con la cámara de un smartphone</h1>
+                        <a href="#download" class="btn btn-outline btn-xl page-scroll">Descargar</a>
                     </div>
                 </div>
             </div>
@@ -84,11 +98,7 @@
                     <div class="device-mockup iphone6_plus portrait white">
                         <div class="device">
                             <div class="screen">
-                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                <img src="img/main-screen.png" class="img-responsive" alt="">
-                            </div>
-                            <div class="button">
-                                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                                <img src="img/screenshots/apiaries.png" class="img-responsive" alt="">
                             </div>
                         </div>
                     </div>
@@ -102,125 +112,142 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h2 class="section-heading">Descubre todo lo que GoBees puede hacer por tus colmenas!</h2>
-                <p>Puedes descargar la aplicación desde:</p>
+                <h2 class="section-heading">Descubre todo lo que Go<b>Bees</b> puede hacer por tus colmenas!</h2>
                 <div class="badges">
                     <a class="badge-link" href="https://play.google.com/store/apps/details?id=com.davidmiguel.gobees">
                         <img src="img/google-play-badge.svg" alt="">
-                    </a>    
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!--<section id="features" class="features">-->
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-            <!--<div class="col-lg-12 text-center">-->
-                <!--<div class="section-heading">-->
-                    <!--<h2>Unlimited Features, Unlimited Fun</h2>-->
-                    <!--<p class="text-muted">Check out what you can do with this app theme!</p>-->
-                    <!--<hr>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-4">-->
-                <!--<div class="device-container">-->
-                    <!--<div class="device-mockup iphone6_plus portrait white">-->
-                        <!--<div class="device">-->
-                            <!--<div class="screen">-->
-                                <!--&lt;!&ndash; Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! &ndash;&gt;-->
-                                <!--<img src="img/demo-screen-1.jpg" class="img-responsive" alt=""></div>-->
-                            <!--<div class="button">-->
-                                <!--&lt;!&ndash; You can hook the "home button" to some JavaScript events or just remove it &ndash;&gt;-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-8">-->
-                <!--<div class="container-fluid">-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-6">-->
-                            <!--<div class="feature-item">-->
-                                <!--<i class="icon-screen-smartphone text-primary"></i>-->
-                                <!--<h3>Device Mockups</h3>-->
-                                <!--<p class="text-muted">Ready to use HTML/CSS device mockups, no Photoshop required!</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-6">-->
-                            <!--<div class="feature-item">-->
-                                <!--<i class="icon-camera text-primary"></i>-->
-                                <!--<h3>Flexible Use</h3>-->
-                                <!--<p class="text-muted">Put an image, video, animation, or anything else in the-->
-                                    <!--screen!</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-6">-->
-                            <!--<div class="feature-item">-->
-                                <!--<i class="icon-present text-primary"></i>-->
-                                <!--<h3>Free to Use</h3>-->
-                                <!--<p class="text-muted">As always, this theme is free to download and use for any-->
-                                    <!--purpose!</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-6">-->
-                            <!--<div class="feature-item">-->
-                                <!--<i class="icon-lock-open text-primary"></i>-->
-                                <!--<h3>Open Source</h3>-->
-                                <!--<p class="text-muted">Since this theme is MIT licensed, you can use it commercially!</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2>Todo sobre tus colmenas</h2>
+                    <p class="text-muted">...y mucho más por llegar!</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="device-container">
+                    <div class="device-mockup iphone6_plus portrait white">
+                        <div class="device">
+                            <div class="screen">
+                                <img id="screenshot" src="img/main-screen.png" class="img-responsive" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-settings text-primary"></i>
+                                <h3>Gestión de colmenares</h3>
+                                <p class="text-muted">Gestiona fácilmente tus colmenares y sus colmenas.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-eye text-primary"></i>
+                                <h3>Monitorización</h3>
+                                <p class="text-muted">Monitoriza la actividad de vuelo de una colmena.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-umbrella text-primary"></i>
+                                <h3>Meteorología</h3>
+                                <p class="text-muted">Conoce la información meteorológica actual
+                                    en tus colmenares. </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-map text-primary"></i>
+                                <h3>Localización</h3>
+                                <p class="text-muted">Localiza tus colmenares en un mapa y navega hacia ellos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-present text-primary"></i>
+                                <h3>Gratuita</h3>
+                                <p class="text-muted">GoBees se distribuye de forma totalmente gratuita y sin
+                                    publicidad.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-lock-open text-primary"></i>
+                                <h3>Open Source</h3>
+                                <p class="text-muted">Licenciada bajo GPLv3 para que
+                                    cualquiera pueda contribuir a mejorarla.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!--<section class="cta">-->
-    <!--<div class="cta-content">-->
-        <!--<div class="container">-->
-            <!--<h2>Stop waiting.<br>Start building.</h2>-->
-            <!--<a href="#contact" class="btn btn-outline btn-xl page-scroll">Let's Get Started!</a>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="overlay"></div>-->
-<!--</section>-->
+<section class="cta">
+    <div class="cta-content">
+        <div class="container">
+            <h2>KEEP<br>CALM<br><span>AND</span><br>LOVE<br>BEES</h2>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</section>
 
-<!--<section id="contact" class="contact bg-primary">-->
-    <!--<div class="container">-->
-        <!--<h2>We <i class="fa fa-heart"></i> new friends!</h2>-->
-        <!--<ul class="list-inline list-social">-->
-            <!--<li class="social-twitter">-->
-                <!--<a href="#"><i class="fa fa-twitter"></i></a>-->
-            <!--</li>-->
-            <!--<li class="social-facebook">-->
-                <!--<a href="#"><i class="fa fa-facebook"></i></a>-->
-            <!--</li>-->
-            <!--<li class="social-google-plus">-->
-                <!--<a href="#"><i class="fa fa-google-plus"></i></a>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-<!--</section>-->
+<section id="contact" class="contact bg-primary">
+    <div class="container">
+        <ul class="list-inline list-social">
+            <li class="social-mail">
+                <a href="mailto:info@gobees.io"><i class="fa fa-envelope"></i></a>
+            </li>
+            <li class="social-twitter">
+                <a href="https://twitter.com/GoBeesApp"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li class="social-facebook">
+                <a href="https://www.facebook.com/GoBeesApp"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li class="social-youtube">
+                <a href="https://www.youtube.com/channel/UCfHk_yYU4q2f09e9o7GM5TQ"><i class="fa fa-youtube"></i></a>
+            </li>
+            <li class="social-github">
+                <a href="https://github.com/davidmigloz/go-bees"><i class="fa fa-github"></i></a>
+            </li>
+        </ul>
+    </div>
+</section>
 
 <footer>
     <div class="container">
-        <p>&copy; 2017 GoBees. Basado en Start Bootstrap.</p>
+        <p>GoBees &copy; 2017. Desarrollado por David Miguel Lozano.</p>
         <ul class="list-inline">
             <li>
-                <a href="#">Privacidad</a>
+                <a href="/privacy.html">Privacidad</a>
             </li>
             <li>
-                <a href="#">Legal</a>
+                <a href="/legal.html">Aviso legal</a>
             </li>
             <li>
-                <a href="#">FAQ</a>
+                <a href="/help">Ayuda</a>
             </li>
         </ul>
     </div>
@@ -228,16 +255,29 @@
 
 <!-- jQuery -->
 <script src="lib/jquery/jquery.min.js"></script>
-
 <!-- Bootstrap Core JavaScript -->
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-
 <!-- Plugin JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
 <!-- Theme JavaScript -->
-<script src="js/new-age.min.js"></script>
+<script src="js/gobees.js"></script>
+<!-- Google Analytics -->
+<script>
+    (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+            function () {
+                (b[l].q = b[l].q || []).push(arguments)
+            });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = 'https://www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-91162316-1', 'auto');
+    ga('send', 'pageview');
+</script>
 
 </body>
-
 </html>
