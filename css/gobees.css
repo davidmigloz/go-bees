@@ -182,7 +182,7 @@ p {
     }
 
     .navbar-default.no-white {
-        background-color: #fdcc52;
+        background-color: #FFC107;
         border-color: rgba(34, 34, 34, 0.1);
     }
 
@@ -402,7 +402,6 @@ section.cta .cta-content {
 section.cta .cta-content h2 {
     margin-top: 0;
     font-weight: bold;
-    margin-bottom: 25px;
     color: white;
     font-size: 50px;
     line-height: 70px;
@@ -534,7 +533,7 @@ footer ul li a.active {
 }
 
 .text-primary {
-    color: #fdcc52;
+    color: #ffc107;
 }
 
 .no-gutter > [class*='col-'] {
