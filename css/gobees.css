@@ -72,7 +72,7 @@ p {
 }
 
 .navbar-default {
-    background-color: #fdcc52;
+    background-color: #FFC107;
     border-color: rgba(34, 34, 34, 0.05);
     -webkit-transition: all 0.35s;
     -moz-transition: all 0.35s;
@@ -168,7 +168,7 @@ p {
 
     .navbar-default.affix .navbar-header .navbar-brand:hover,
     .navbar-default.affix .navbar-header .navbar-brand:focus {
-        color: #fdcc52;
+        color: #607D8B;
     }
 
     .navbar-default.affix .nav > li > a,
