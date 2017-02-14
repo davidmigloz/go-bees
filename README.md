@@ -9,6 +9,7 @@
 [![Documentation Status](https://readthedocs.org/projects/go-bees/badge/?version=develop)](http://go-bees.readthedocs.io/es/develop/?badge=develop)
 
 GoBees allows beekepers to manage and monitor their apiaries.
+
 <a href="https://play.google.com/store/apps/details?id=com.davidmiguel.gobees">
   <img src="http://gobees.io/img/google-play-badge.svg" height="60">
 </a>
