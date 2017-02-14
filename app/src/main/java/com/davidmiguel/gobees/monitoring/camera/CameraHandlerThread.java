@@ -64,6 +64,6 @@ class CameraHandlerThread extends HandlerThread {
 
     private synchronized void notifyCameraOpened() {
         running = false;
-        notify();
+        notifyAll();
     }
 }
