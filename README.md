@@ -8,6 +8,26 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/57f7b19e823b88004e06ad33/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57f7b19e823b88004e06ad33)
 [![Documentation Status](https://readthedocs.org/projects/go-bees/badge/?version=develop)](http://go-bees.readthedocs.io/es/develop/?badge=develop)
 
+GoBees allows beekepers to manage and monitor their apiaries.
+<a href="https://play.google.com/store/apps/details?id=com.davidmiguel.gobees">
+  <img src="http://gobees.io/img/google-play-badge.svg" height="60">
+</a>
+
+### Key features
+
+- Manage apiaries (name, location, notes…).
+- Manage hives (id, notes, last revision date…).
+- Monitor flight activity of a hive with the camera of your smartphone.
+- Analize the gathered data easily together with weather information.
+- Localize your apiaries on a map (using your favourite maps app).
+- Get current weather conditions in your apiaries.
+
+**Supported languages:** English, Spanish, Catalan, Polish and Arabic.
+
+Find more information on our website: http://gobees.io.
+
+GoBees!
+
 ## License
 
 Copyright (c) 2016 - 2017 David Miguel Lozano
