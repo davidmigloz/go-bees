@@ -38,7 +38,8 @@ import com.davidmiguel.gobees.utils.BaseActivity;
 /**
  * Apiaries activity.
  */
-public class ApiariesActivity extends BaseActivity {
+public class ApiariesActivity extends BaseActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
 
@@ -50,12 +51,12 @@ public class ApiariesActivity extends BaseActivity {
         // Set up the toolbar
         AndroidUtils.setUpToolbar(this, true);
 
-        // Set up the navigation drawer.
+        // Set up the navigation drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
-            setupDrawerContent(navigationView);
+            navigationView.setNavigationItemSelectedListener(this);
         }
 
         // Add fragment to the activity
@@ -76,6 +77,16 @@ public class ApiariesActivity extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // Close Nav Drawer
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             // Open the navigation drawer when the home icon is selected from the toolbar
@@ -85,44 +96,36 @@ public class ApiariesActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Set the actions to be carried out from the drawerLayout.
-     */
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.settings_navigation_menu_item:
-                                // Settings
-                                openSettings();
-                                break;
-                            case R.id.help_navigation_menu_item:
-                                // Help
-                                openHelp();
-                                break;
-                            case R.id.feedback_navigation_menu_item:
-                                // Feedback
-                                openSendFeedback();
-                                break;
-                            case R.id.share_app_navigation_menu_item:
-                                // Share app
-                                openShareApp();
-                                break;
-                            case R.id.about_navigation_menu_item:
-                                // About
-                                openAbout();
-                                break;
-                            default:
-                                break;
-                        }
-                        // Close the navigation drawer when an item is selected.
-                        menuItem.setChecked(false);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.settings_navigation_menu_item:
+                // Settings
+                openSettings();
+                break;
+            case R.id.help_navigation_menu_item:
+                // Help
+                openHelp();
+                break;
+            case R.id.feedback_navigation_menu_item:
+                // Feedback
+                openSendFeedback();
+                break;
+            case R.id.share_app_navigation_menu_item:
+                // Share app
+                openShareApp();
+                break;
+            case R.id.about_navigation_menu_item:
+                // About
+                openAbout();
+                break;
+            default:
+                break;
+        }
+        // Close the navigation drawer when an item is selected
+        menuItem.setChecked(false);
+        drawerLayout.closeDrawers();
+        return true;
     }
 
     /**

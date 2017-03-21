@@ -166,7 +166,7 @@ public final class AndroidUtils {
                 ab.setDisplayShowHomeEnabled(true);
             }
             if (title != -1) {
-                ab.setTitle(R.string.about_title);
+                ab.setTitle(title);
             }
         }
         return ab;
