@@ -173,17 +173,17 @@ public class AddEditApiaryFragment extends Fragment implements AddEditApiaryCont
 
     @Override
     public void showEmptyApiaryError() {
-        showMessage(nameEditText, getString(R.string.empty_apiary_message));
+        showMessage(getView(), getString(R.string.empty_apiary_message));
     }
 
     @Override
     public void showInvalidLocationError() {
-        showMessage(nameEditText, getString(R.string.invalid_location_message));
+        showMessage(getView(), getString(R.string.invalid_location_message));
     }
 
     @Override
     public void showGpsConnectionError() {
-        showMessage(nameEditText, getString(R.string.gps_error_message));
+        showMessage(getView(), getString(R.string.gps_error_message));
     }
 
     @Override

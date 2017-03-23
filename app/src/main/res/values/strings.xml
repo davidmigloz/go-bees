@@ -529,8 +529,8 @@
     <string name="pref_weather_units_metric" translatable="false">metric</string>
     <!-- Value in SharedPreferences for imperial weather unit option [CHAR LIMIT=NONE] -->
     <string name="pref_weather_units_imperial" translatable="false">imperial</string>
-    <!-- Label for data category [CHAR LIMIT=30] -->
 
+    <!-- Label for data category [CHAR LIMIT=30] -->
     <string name="pref_data_cat_label">Data</string>
     <!-- Key name for data category in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_data_cat_key" translatable="false">data</string>
@@ -551,10 +551,38 @@
     <!-- Data deleted successfully message [CHAR LIMIT=100] -->
     <string name="all_data_deleted_msg">Data deleted!</string>
 
+    <!-- Label for backup category [CHAR LIMIT=30] -->
+    <string name="pref_backup_cat_label">Backup / Restore</string>
+    <!-- Key name for backup category in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_backup_cat_key" translatable="false">backup</string>
+    <!-- Label for Storage backup preference [CHAR LIMIT=25] -->
+    <string name="pref_storage_backup_label">Storage backup</string>
+    <!-- Key name for Storage backup preference [CHAR LIMIT=NONE] -->
+    <string name="pref_storage_backup_key" translatable="false">storageBackup</string>
+    <!-- Description for Storage backup preference [CHAR LIMIT=25] -->
+    <string name="pref_storage_backup_desc">Backup your data to internal storage or restore it.</string>
+
+    <!--++++++++++++++++++-->
+    <!-- Backup / Restore -->
+    <!--++++++++++++++++++-->
+
+    <!-- Backup tile [CHAR LIMIT=100] -->
+    <string name="backup_title">Backup</string>
+    <!-- Backup button [CHAR LIMIT=100] -->
+    <string name="backup_btn">Backup now</string>
+    <!-- Backup completed [CHAR LIMIT=100] -->
+    <string name="backup_completed_msg">Backup successfully completed!</string>
+    <!-- Backup error [CHAR LIMIT=100] -->
+    <string name="backup_error_msg">Error while making backup!</string>
+    <!-- Storage backup description [CHAR LIMIT=100] -->
+    <string name="storage_backup_desc">Backing up your data allows you to recover the information if anything bad happen or to migrate it to another device. </string>
+    <!-- Body when user doesn't grant read/write permission [CHAR LIMIT=500] -->
+    <string name="read_write_permissions_request_body">Without read and write permissions the app is unable to make a backup or restore it. Are you sure you want to deny these permissions?</string>
+
     <!--+++++++++++++++-->
     <!-- Notifications -->
     <!--+++++++++++++++-->
-
+    
     <!-- Monitoring channel [CHAR LIMIT=100] -->
     <string name="not_channel_monitoring">Monitoring</string>
     <!-- Monitoring channel description [CHAR LIMIT=300] -->

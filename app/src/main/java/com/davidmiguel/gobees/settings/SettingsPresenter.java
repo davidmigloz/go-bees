@@ -76,6 +76,9 @@ class SettingsPresenter implements SettingsContract.Presenter,
             case "deleteData":
                 deleteAllData();
                 break;
+            case "storageBackup":
+                view.openStorageBackup();
+                break;
             default:
                 return false;
         }

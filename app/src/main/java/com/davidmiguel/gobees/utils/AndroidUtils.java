@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -181,5 +182,15 @@ public final class AndroidUtils {
      */
     public static ActionBar setUpToolbar(AppCompatActivity act, boolean isHome) {
         return AndroidUtils.setUpToolbar(act, isHome, -1);
+    }
+
+    /**
+     * Shows a snackbar with the given message.
+     *
+     * @param view view.
+     * @param msg  message to show.
+     */
+    public static void showSnackMsg(View view, String msg) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
     }
 }

@@ -33,6 +33,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="@string/pref_backup_cat_key"
+        android:title="@string/pref_backup_cat_label">
+
+        <Preference
+            android:key="@string/pref_storage_backup_key"
+            android:summary="@string/pref_storage_backup_desc"
+            android:title="@string/pref_storage_backup_label"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="@string/pref_data_cat_key"
         android:title="@string/pref_data_cat_label">
 

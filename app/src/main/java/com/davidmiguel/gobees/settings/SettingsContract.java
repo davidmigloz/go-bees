@@ -52,6 +52,11 @@ interface SettingsContract {
          * Shows data deleted successfully message.
          */
         void showDataDeletedMsg();
+
+        /**
+         * Opens storage backup activity.
+         */
+        void openStorageBackup();
     }
 
 

@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.apiaries.ApiariesActivity;
+import com.davidmiguel.gobees.backupstorage.StorageBackupRestoreActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -60,6 +61,8 @@ public class SettingsFragment extends PreferenceFragment implements SettingsCont
                 findPreference(getString(R.string.pref_generate_sample_data_key)));
         presenter.bindPreferenceClickListener(
                 findPreference(getString(R.string.pref_delete_all_data_key)));
+        presenter.bindPreferenceClickListener(
+                findPreference(getString(R.string.pref_storage_backup_key)));
     }
 
     @Override
@@ -113,6 +116,12 @@ public class SettingsFragment extends PreferenceFragment implements SettingsCont
         // Go to main activity
         Intent intent = new Intent(getActivity(), ApiariesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void openStorageBackup() {
+        Intent intent = new Intent(getActivity(), StorageBackupRestoreActivity.class);
         getActivity().startActivity(intent);
     }
 

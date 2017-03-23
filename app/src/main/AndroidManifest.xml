@@ -3,9 +3,15 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.davidmiguel.gobees">
 
+    <!-- For Monitoring -->
     <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- For Apiary location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- For Weather API-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- For Backup/Restore-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature
@@ -70,6 +76,10 @@
         <activity
             android:name=".settings.SettingsActivity"
             android:parentActivityName=".apiaries.ApiariesActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".backupstorage.StorageBackupRestoreActivity"
+            android:parentActivityName=".settings.SettingsActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".about.AboutActivity"
