@@ -4,6 +4,7 @@ import com.davidmiguel.gobees.utils.BasePresenter;
 import com.davidmiguel.gobees.utils.BaseView;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -36,6 +37,13 @@ interface StorageBackupRestoreContract {
          * Shows successfully backup created message.
          */
         void showSuccessfullyBackupMessage();
+
+        /**
+         * Shows list with available backups.
+         *
+         * @param backups list of backups.
+         */
+        void showAvailableBackups(List<StorageBackup> backups);
     }
 
     interface Presenter extends BasePresenter {

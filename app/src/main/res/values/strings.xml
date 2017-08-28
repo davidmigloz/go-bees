@@ -578,6 +578,12 @@
     <string name="storage_backup_desc">Backing up your data allows you to recover the information if anything bad happen or to migrate it to another device. </string>
     <!-- Body when user doesn't grant read/write permission [CHAR LIMIT=500] -->
     <string name="read_write_permissions_request_body">Without read and write permissions the app is unable to make a backup or restore it. Are you sure you want to deny these permissions?</string>
+    <!-- Default backup date [CHAR LIMIT=100] -->
+    <string name="default_storage_backup_date" translatable="false">01/01/2017 00:00</string>
+    <!-- Default backup size [CHAR LIMIT=100] -->
+    <string name="default_storage_backup_size" translatable="false">8.00KB</string>
+    <!-- Restore btn [CHAR LIMIT=30] -->
+    <string name="restore_backup_btn">Restore</string>
 
     <!--+++++++++++++++-->
     <!-- Notifications -->

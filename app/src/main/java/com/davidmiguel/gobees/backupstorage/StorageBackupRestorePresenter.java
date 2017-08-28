@@ -2,9 +2,12 @@ package com.davidmiguel.gobees.backupstorage;
 
 import android.util.Log;
 
+import com.google.common.collect.Lists;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
@@ -20,7 +23,7 @@ class StorageBackupRestorePresenter implements StorageBackupRestoreContract.Pres
 
     private static final String APP_DIR = "GoBees";
     private static final String EXPORT_DIR = "backup";
-    private static final String EXPORT_FILE_NAME = "gobees.backup";
+    private static final String EXPORT_FILE_NAME = "gobees_data.backup";
     private static final String IMPORT_FILE_NAME = "gobees.realm";
 
     private StorageBackupRestoreContract.View view;
@@ -34,30 +37,40 @@ class StorageBackupRestorePresenter implements StorageBackupRestoreContract.Pres
 
     @Override
     public void start() {
-        // TODO load backups
+        view.showAvailableBackups(getAvailableBackups());
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void onBackupClicked() {
         if (view.checkReadWritePermission()) {
-            // Create app dir if not exists
+            // Get timestamp
+            String timestamp = new SimpleDateFormat("yyyyMMddHHmm",
+                    Locale.getDefault()).format(new Date());
+
+            // Create app dir (/GoBees/) if not exists
             File appDir = new File(view.getExternalStorageDirectory(), APP_DIR);
             if (!appDir.exists() && !appDir.mkdir()) {
                 view.showBackupError();
                 return;
             }
 
-            // Create backup dir if not exists
-            File exportDir = new File(appDir, EXPORT_DIR);
+            // Create backup dir (/GoBees/backup/) if not exists
+            File backupDir = new File(appDir, EXPORT_DIR);
+            if (!backupDir.exists() && !backupDir.mkdir()) {
+                view.showBackupError();
+                return;
+            }
+
+            // Create dir for the new backup (/GoBees/backup/timestamp/)
+            File exportDir = new File(backupDir, timestamp);
             if (!exportDir.exists() && !exportDir.mkdir()) {
                 view.showBackupError();
                 return;
             }
 
-            // Create export file (delete if it already exists)
-            String timestamp = new SimpleDateFormat("yyyyMMddHHmm",
-                    Locale.getDefault()).format(new Date());
+            // Create export file (/GoBees/backup/timestamp/timestamp_gobees_data.backup)
+            // Delete if it already exists
             File exportFile = new File(exportDir, timestamp + "_" + EXPORT_FILE_NAME);
             exportFile.delete();
 
@@ -78,5 +91,14 @@ class StorageBackupRestorePresenter implements StorageBackupRestoreContract.Pres
             // Show backup created msg
             view.showSuccessfullyBackupMessage();
         }
+    }
+
+    private List<StorageBackup> getAvailableBackups() {
+        return Lists.newArrayList(
+                new StorageBackup(new Date(), 10),
+                new StorageBackup(new Date(), 8),
+                new StorageBackup(new Date(), 1),
+                new StorageBackup(new Date(), 15)
+        );
     }
 }

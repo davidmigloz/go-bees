@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,11 @@ import com.davidmiguel.gobees.R;
 import com.davidmiguel.gobees.utils.AndroidUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import rebus.permissionutils.AskagainCallback;
+import rebus.permissionutils.AskAgainCallback;
 import rebus.permissionutils.PermissionEnum;
 import rebus.permissionutils.PermissionManager;
 import rebus.permissionutils.PermissionUtils;
@@ -32,11 +36,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Display storage backup and restore options.
  */
 public class StorageBackupRestoreFragment extends Fragment
-        implements StorageBackupRestoreContract.View {
+        implements StorageBackupRestoreContract.View,
+        StorageBackupAdapter.StorageBackupItemListener {
 
     private StorageBackupRestoreContract.Presenter presenter;
+    private StorageBackupAdapter storageBackupAdapter;
 
-    private Button backupBtn;
 
     public StorageBackupRestoreFragment() {
         // Requires empty public constructor
@@ -53,14 +58,28 @@ public class StorageBackupRestoreFragment extends Fragment
         View root = inflater.inflate(R.layout.storagebackup_frag, container, false);
 
         // Backup button
-        backupBtn = (Button) root.findViewById(R.id.backup_btn);
+        Button backupBtn = (Button) root.findViewById(R.id.backup_btn);
         backupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.onBackupClicked();
             }
         });
+
+        // Backups list
+        RecyclerView backupListRV = (RecyclerView) root.findViewById(R.id.backup_list);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        backupListRV.setLayoutManager(llm);
+        backupListRV.setAdapter(storageBackupAdapter);
+
         return root;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        storageBackupAdapter = new StorageBackupAdapter(getContext(),
+                new ArrayList<StorageBackup>(0), this);
     }
 
     @Override
@@ -82,7 +101,7 @@ public class StorageBackupRestoreFragment extends Fragment
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        PermissionManager.handleResult(requestCode, permissions, grantResults);
+        PermissionManager.handleResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
@@ -93,11 +112,11 @@ public class StorageBackupRestoreFragment extends Fragment
             return true;
         }
         // Ask for permission if they are not granted
-        PermissionManager.with(getActivity())
+        PermissionManager.Builder()
                 .permission(PermissionEnum.READ_EXTERNAL_STORAGE,
                         PermissionEnum.WRITE_EXTERNAL_STORAGE)
-                .askagain(true)
-                .askagainCallback(new AskagainCallback() {
+                .askAgain(true)
+                .askAgainCallback(new AskAgainCallback() {
                     @Override
                     public void showRequestPermission(final UserResponse response) {
                         new AlertDialog.Builder(getActivity())
@@ -136,7 +155,7 @@ public class StorageBackupRestoreFragment extends Fragment
                         }
                     }
                 })
-                .ask();
+                .ask(getActivity());
         return false;
     }
 
@@ -153,5 +172,15 @@ public class StorageBackupRestoreFragment extends Fragment
     @Override
     public void showSuccessfullyBackupMessage() {
         AndroidUtils.showSnackMsg(getView(), getString(R.string.backup_completed_msg));
+    }
+
+    @Override
+    public void showAvailableBackups(List<StorageBackup> backups) {
+        storageBackupAdapter.replaceData(backups);
+    }
+
+    @Override
+    public void onRestoreClicked(Date date) {
+
     }
 }
