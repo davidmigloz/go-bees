@@ -20,38 +20,61 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 apply plugin: 'realm-android'
 
+
+// Get signing config
+def keystorePropertiesFile = rootProject.file("app/keys/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.3'
+
     defaultConfig {
         applicationId "com.davidmiguel.gobees"
+
         minSdkVersion 19
         targetSdkVersion 25
+
         versionCode 11
         versionName "v1.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        relase {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         debug {
             testCoverageEnabled true
-            minifyEnabled true
-            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
-            useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
         release {
-            minifyEnabled true
-            useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true // Remove unused resources
+            minifyEnabled true // Enable proguard (shrinks, optimizes and obfuscates code)
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-guava.pro',
+                    'proguard-mpandroidchart.pro',
+                    'proguard-rounded-image-view.pro',
+                    'proguard-realm.pro',
+                    'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            signingConfig signingConfigs.relase
         }
     }
+
     buildTypes.each {
         // OpenWeatherMap key (stored in [USER_HOME]/.gradle/gradle.properties)
         it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', OpenWeatherMapApiKey
     }
+
     // Mock: stubs out the service layer completely and returns a fake dataset
     // Prod: production version
     productFlavors {
@@ -62,6 +85,7 @@ android {
 
         }
     }
+
     // Remove mockRelease as it's not needed.
     android.variantFilter { variant ->
         if (variant.buildType.name.equals('release')
@@ -69,16 +93,24 @@ android {
             variant.setIgnore(true);
         }
     }
+
     // android.jar methods return either null or zero, not throw exceptions
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
     // Always show the result of every unit test, even if it passes
     testOptions.unitTests.all {
         testLogging {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
+
+    // Explicitly tells Gradle which version shall be compiled (due to Espresso conflicts)
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.2'
+    }
+
     // Lint checks
     lintOptions {
         disable 'SetJavaScriptEnabled', 'MissingTranslation'
@@ -93,24 +125,42 @@ sourceSets {
 
 dependencies {
 
-    // App's dependencies, including test
-    compile 'com.android.support:recyclerview-v7:25.1.1'
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:design:25.1.1'
-    compile 'com.android.support:cardview-v7:25.1.1'
-    compile 'com.android.support:support-v4:25.1.1'
+    //----------------------------------------------------------------------------------------------
+    // App Dependencies
+    //----------------------------------------------------------------------------------------------
+
+    // Support libraries : https://developer.android.com/topic/libraries/support-library/packages.html
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    // Google Location and Activity Recognition : https://developers.google.com/android/guides/setup
+    compile 'com.google.android.gms:play-services-location:11.0.4'
+    // OpenCV (computer vision) : https://github.com/davidmigloz/opencv-android-gradle-repo/
     compile 'com.github.davidmigloz:opencv-android-gradle-repo:3.2.0'
-    compile 'com.google.android.gms:play-services-location:10.0.1'
-    compile 'com.google.guava:guava:20.0'
+    // Guava (Google Core Libraries) : https://github.com/google/guava
+    compile 'com.google.guava:guava:23.0-android'
+    // RoundedImageView (ImageView that supports rounded corners) : https://github.com/vinc3m1/RoundedImageView
     compile 'com.makeramen:roundedimageview:2.3.0'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    // MPAndroidChart (chart view / graph view) : https://github.com/PhilJay/MPAndroidChart
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    // VNTNumberPickerPreference (NumberPicker Preference) : https://github.com/vanniktech/VNTNumberPickerPreference
     compile 'com.vanniktech:vntnumberpickerpreference:1.0.0'
+    // Permission Utils (check runtime permissions) : https://github.com/rebus007/PermissionUtils
     compile 'rebus:permission-utils:1.0.6'
-    // Dependencies for local unit tests
+
+    //----------------------------------------------------------------------------------------------
+    // Testing Dependencies
+    //----------------------------------------------------------------------------------------------
+
+    // JUnit (unit testing framework) : http://junit.org/junit4/
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-all:2.0.2-beta'
-    testCompile 'org.powermock:powermock-module-junit4:1.6.6'
-    testCompile 'org.powermock:powermock-api-mockito:1.6.6'
+    // Mockito (mocking framework) : http://site.mockito.org/
+    testCompile 'org.mockito:mockito-core:2.10.0'
+    // PowerMock (mocking framework) : https://github.com/powermock/powermock
+    testCompile "org.powermock:powermock-module-junit4:1.7.1"
+    testCompile "org.powermock:powermock-api-mockito2:1.7.1"
     testCompile 'org.slf4j:slf4j-api:1.7.22'
     testCompile 'org.slf4j:slf4j-log4j12:1.7.22'
     testCompile 'log4j:log4j:1.2.17'
@@ -126,11 +176,8 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
     // Resolve conflicts between main and test APK:
-    androidTestCompile 'com.android.support:support-annotations:25.1.1'
-    androidTestCompile 'com.android.support:support-v4:25.1.1'
-    androidTestCompile 'com.android.support:recyclerview-v7:25.1.1'
-    androidTestCompile 'com.android.support:appcompat-v7:25.1.1'
-    androidTestCompile 'com.android.support:design:25.1.1'
+    androidTestCompile 'com.android.support:support-annotations:25.3.1'
+
 }
 
 /*
@@ -163,7 +210,6 @@ afterEvaluate {
 
 /*
 SonarQube configuration.
-
 */
 sonarqube {
     properties {
