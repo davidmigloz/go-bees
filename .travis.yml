@@ -11,19 +11,18 @@ addons:
 
 env:
   matrix:
-    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
 
 android:
   components:
     - tools
     - platform-tools
-    - build-tools-25.0.0
-    - android-25
+    - ${ANDROID_TARGET}
+    - build-tools-26.0.1
     - extra-android-support
     - extra-android-m2repository
     - extra-google-m2repository
     - extra-google-google_play_services
-    - ${ANDROID_TARGET}
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 
 licenses:
@@ -38,7 +37,7 @@ install:
 before_script:
     # Compile OpenCV and set it to path
     - wget https://github.com/opencv/opencv/archive/3.2.0.zip
-    - unzip 3.2.0.zip >/dev/null
+    - unzip opencv-3.2.0.zip >/dev/null
     - mv opencv-3.2.0 opencv
     - cd opencv
     - mkdir build
