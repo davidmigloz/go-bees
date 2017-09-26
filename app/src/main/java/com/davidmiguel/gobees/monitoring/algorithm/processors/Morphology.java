@@ -19,7 +19,8 @@
 package com.davidmiguel.gobees.monitoring.algorithm.processors;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
+
+import com.davidmiguel.gobees.logging.Log;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -30,7 +31,6 @@ import org.opencv.imgproc.Imgproc;
  */
 public class Morphology implements VideoProcessor {
 
-    private static final String TAG = "Morphology";
 
     private static final int ELEMENT_SHAPE = Imgproc.CV_SHAPE_ELLIPSE;
     private static final int REPETITIONS_DILATE = 3;
@@ -53,7 +53,7 @@ public class Morphology implements VideoProcessor {
     @Override
     public Mat process(@NonNull Mat frame) {
         if (frame.empty()) {
-            Log.e(TAG, "Invalid input frame.");
+            Log.e("Invalid input frame.");
             return null;
         }
         Mat tmp = frame.clone();

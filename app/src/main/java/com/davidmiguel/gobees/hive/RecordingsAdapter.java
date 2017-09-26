@@ -233,7 +233,7 @@ class RecordingsAdapter extends RecyclerView.Adapter<RecordingsAdapter.Recording
                 lineDataSet.setDrawFilled(true);
                 lineDataSet.setFillAlpha(255);
                 // Fix bug with vectors in API < 21
-                if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
                     Drawable drawable = ResourcesCompat.getDrawable(context.getResources(),
                             R.drawable.chart_fade, null);
                     lineDataSet.setFillDrawable(drawable);

@@ -18,6 +18,8 @@
 
 package com.davidmiguel.gobees.data.source.local;
 
+import android.support.annotation.NonNull;
+
 import io.realm.DynamicRealm;
 import io.realm.RealmMigration;
 
@@ -26,7 +28,7 @@ import io.realm.RealmMigration;
  */
 class GoBeesDbMigration implements RealmMigration {
     @Override
-    public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
+    public void migrate(@NonNull DynamicRealm realm, long oldVersion, long newVersion) {
         // No schema changes so far
     }
 }

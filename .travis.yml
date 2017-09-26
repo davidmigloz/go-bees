@@ -29,26 +29,26 @@ licenses:
     - '.+'
 
 before_install:
-    - sudo apt-get update
+#    - sudo apt-get update
 
 install:
-    - sudo apt-get install python-numpy
+#    - sudo apt-get install python-numpy
 
 before_script:
     # Compile OpenCV and set it to path
-    - wget https://github.com/opencv/opencv/archive/3.2.0.zip
-    - unzip opencv-3.2.0.zip >/dev/null
-    - mv opencv-3.2.0 opencv
-    - cd opencv
-    - mkdir build
-    - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF .. >/dev/null
-    - make -j8 >/dev/null
-    - sudo make -j8 install >/dev/null
-    - cd ../..
-    - mkdir opencv_lib
-    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
-    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
+#    - wget https://github.com/opencv/opencv/archive/3.2.0.zip
+#    - unzip 3.2.0.zip >/dev/null
+#    - mv opencv-3.2.0 opencv
+#    - cd opencv
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF .. >/dev/null
+#    - make -j8 >/dev/null
+#    - sudo make -j8 install >/dev/null
+#    - cd ../..
+#    - mkdir opencv_lib
+#    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
+#    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
     - chmod +x gradlew
     # Create gradle.properties with fake credentials
     - echo "OpenWeatherMapApiKey=\"c75f70c4717eb95847d378bba3bdb275\"" > ~/.gradle/gradle.properties
@@ -57,9 +57,9 @@ script:
     # Compile and run unit tests
     - ./gradlew assembleDebug lint
     # Run test coverage report
-    - ./gradlew jacocoTestMockDebugUnitTestReport
+#    - ./gradlew jacocoTestMockDebugUnitTestReport
     # Run SonarQube analysis
-    - ./gradlew sonarqube
+#    - ./gradlew sonarqube
     # Build test app
     # ./gradlew assembleAndroidTest
     # Create and lunch emulator
@@ -70,7 +70,7 @@ script:
     #- ./gradlew connectedMockDebugAndroidTest
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+#    - bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:

@@ -21,7 +21,9 @@ package com.davidmiguel.gobees.monitoring.camera;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
-import android.util.Log;
+import android.hardware.Camera.PreviewCallback;
+
+import com.davidmiguel.gobees.logging.Log;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -31,6 +33,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.makeramen.roundedimageview.RoundedImageView.TAG;
 
 /**
  * Implementation of the Android camera that retrieves the frames in OpenCV Mat format.
@@ -45,15 +49,14 @@ import java.util.TimerTask;
  * The camera is handled in a different thread.
  */
 @SuppressWarnings("deprecation")
-public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback {
+public class AndroidCameraImpl implements AndroidCamera, PreviewCallback {
 
-    private static final String TAG = "AndroidCameraImpl";
 
     private final AndroidCameraListener user;
     private final CameraHandlerThread cameraHandlerThread;
     private final int cameraIndex;
-    private android.hardware.Camera camera;
-    private int maxframewidth;
+    private Camera camera;
+    private int maxFrameWidth;
     private int maxFrameHeight;
     private int zoomRatio;
     private long initialDelay;
@@ -78,7 +81,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
                              long initialDelay, long frameRate) {
         this.user = user;
         this.cameraIndex = cameraIndex;
-        this.maxframewidth = maxFrameWidth;
+        this.maxFrameWidth = maxFrameWidth;
         this.maxFrameHeight = maxFrameHeight;
         this.zoomRatio = zoomRatio;
         this.initialDelay = initialDelay;
@@ -89,7 +92,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     }
 
     @Override
-    public void onPreviewFrame(byte[] frame, android.hardware.Camera camera) {
+    public void onPreviewFrame(byte[] frame, Camera camera) {
         cameraFrame.putFrameData(frame);
         user.onPreviewFrame(cameraFrame);
     }
@@ -121,7 +124,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
                 try {
                     camera.setPreviewTexture(null);
                 } catch (IOException e) {
-                    Log.e(TAG, "Could not release preview-texture from camera.", e);
+                    Log.e(e, "Could not release preview-texture from camera.");
                 }
                 camera.release();
                 camera = null;
@@ -158,7 +161,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
     @SuppressWarnings("ConstantConditions")
     void initCamera() {
         // Get camera instance
-        camera = getCameraInstance(cameraIndex, maxframewidth, maxFrameHeight, zoomRatio);
+        camera = getCameraInstance(cameraIndex, maxFrameWidth, maxFrameHeight, zoomRatio);
         if (camera == null) {
             return;
         }
@@ -197,7 +200,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
         // Get desired camera
         Camera cam = getCamera(facing);
         if (cam == null) {
-            Log.e(TAG, "Could not find any camera matching facing: " + facing);
+            Log.e("Could not find any camera matching facing: " + facing);
             return null;
         }
         // Set frame size
@@ -227,7 +230,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
                     cam = Camera.open(camIndex);
                     break;
                 } catch (RuntimeException e) {
-                    Log.e(TAG, "AndroidCamera is not available (in use or does not exist).", e);
+                    Log.e(e, "AndroidCamera is not available (in use or does not exist).");
                 }
             }
         }
@@ -253,7 +256,7 @@ public class AndroidCameraImpl implements AndroidCamera, Camera.PreviewCallback 
             previewSize = size;
         }
         if (previewSize == null) {
-            Log.e(TAG, "Could not find any camera matching sizes: "
+            Log.e("Could not find any camera matching sizes: "
                     + maxFrameWidth + "x" + maxFrameHeight);
             return;
         }
