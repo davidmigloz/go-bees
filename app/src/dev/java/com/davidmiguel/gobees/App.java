@@ -18,26 +18,6 @@
 
 package com.davidmiguel.gobees;
 
-import android.app.Application;
+public class App extends BaseApp {
 
-import com.davidmiguel.gobees.data.source.local.GoBeesDbConfig;
-
-import io.realm.Realm;
-
-/**
- * Main app.
- */
-public class GoBeesApp extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        // Initialize Realm. Should only be done once when the application starts.
-        Realm.init(this);
-        // Get Realm config
-        GoBeesDbConfig realmConfig = new GoBeesDbConfig();
-        // Delete all
-        Realm.deleteRealm(realmConfig.getRealmConfiguration());
-        // Set config
-        Realm.setDefaultConfiguration(realmConfig.getRealmConfiguration());
-    }
 }

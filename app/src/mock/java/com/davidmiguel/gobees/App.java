@@ -18,23 +18,23 @@
 
 package com.davidmiguel.gobees;
 
-import android.app.Application;
-
 import com.davidmiguel.gobees.data.source.local.GoBeesDbConfig;
 
 import io.realm.Realm;
 
 /**
- * Main app.
+ * Deletes all date whenever the app is restarted.
  */
-public class GoBeesApp extends Application {
+public class App extends BaseApp {
+
     @Override
-    public void onCreate() {
-        super.onCreate();
+    protected void initRealm() {
         // Initialize Realm. Should only be done once when the application starts.
         Realm.init(this);
-        // Get Realm config
         GoBeesDbConfig realmConfig = new GoBeesDbConfig();
+        // Delete all
+        Realm.deleteRealm(realmConfig.getRealmConfiguration());
+        // Set config
         Realm.setDefaultConfiguration(realmConfig.getRealmConfiguration());
     }
 }

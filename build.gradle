@@ -19,6 +19,7 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://maven.fabric.io/public' } // Crashlytics
     }
     dependencies {
         // Android Plugin for Gradle : https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
@@ -27,6 +28,8 @@ buildscript {
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
         // Realm db : https://github.com/realm/realm-java/blob/master/CHANGELOG.md
         classpath 'io.realm:realm-gradle-plugin:3.7.0'
+        // Fabric Gradle Plugin (For Crashlytics) : https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'io.fabric.tools:gradle:1.24.2'
     }
 }
 
@@ -42,6 +45,7 @@ allprojects {
         maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
         maven { url "http://dl.bintray.com/raphaelbussa/maven" }
+        maven { url 'https://maven.fabric.io/public' } // Crashlytics
     }
 }
 
