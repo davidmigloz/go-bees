@@ -147,11 +147,13 @@ dependencies {
     //----------------------------------------------------------------------------------------------
 
     // Support libraries : https://developer.android.com/topic/libraries/support-library/packages.html
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:support-fragment:26.1.0'
+    compile 'com.android.support:support-core-utils:26.1.0'
+    compile 'com.android.support:support-core-ui:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     // Google Location and Activity Recognition : https://developers.google.com/android/guides/setup
     compile 'com.google.android.gms:play-services-location:11.4.0'
     // Firebase Analytics : https://firebase.google.com/docs/android/setup#available_libraries
@@ -167,7 +169,7 @@ dependencies {
     // VNTNumberPickerPreference (NumberPicker Preference) : https://github.com/vanniktech/VNTNumberPickerPreference
     compile 'com.vanniktech:vntnumberpickerpreference:1.0.0'
     // Permission Utils (check runtime permissions) : https://github.com/rebus007/PermissionUtils
-    compile 'rebus:permission-utils:1.0.6'
+    compile 'rebus:permission-utils:2.0.1'
 
     //----------------------------------------------------------------------------------------------
     // Debugging / logging dependencies
@@ -206,6 +208,7 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
     // Resolve conflicts between main and test APK:
+    androidTestCompile 'com.android.support:support-v4:26.1.0'
     androidTestCompile 'com.android.support:support-annotations:26.1.0'
 
 }
