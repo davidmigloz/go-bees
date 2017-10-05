@@ -21,6 +21,12 @@ apply plugin: 'jacoco-android'
 apply plugin: 'realm-android'
 apply plugin: 'io.fabric'
 
+// App version
+ext.versionMajor = 1 // API Changes, adding big new feature, redesign the App
+ext.versionMinor = 2 // New features in a backwards-compatible manner
+ext.versionPatch = 0 // Backwards-compatible bug fixes
+ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
+
 // Get signing config
 def keystorePropertiesFile = rootProject.file("secrets/keystore.properties")
 def keystoreProperties = new Properties()
@@ -35,8 +41,8 @@ android {
         applicationId "com.davidmiguel.gobees"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 11
-        versionName "v1.1"
+        versionCode generateVersionCode()
+        versionName generateVersionName()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 crashlyticsKey: keystoreProperties['CrashlyticsKey']
@@ -257,6 +263,38 @@ sonarqube {
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.jacoco.reportMissing.force.zero", true
     }
+}
+
+/**
+ * Returns the number of the current build in Travis.
+ */
+private static Integer getBuildNumber() {
+    return System.getenv()["TRAVIS_BUILD_NUMBER"] as Integer ?: 0
+}
+
+/**
+ * Version code: MMMmmppbbb
+ */
+private Integer generateVersionCode() {
+    Integer versionCode = ext.versionMajor * 10000000 +
+            ext.versionMinor * 100000 +
+            ext.versionPatch * 1000 +
+            (getBuildNumber() % 1000)
+    println "Version code: " + versionCode
+    return versionCode
+}
+
+/**
+ * Version name: <major>.<minor>.<patch>
+ * For mock, dev, tst and acc <build> is attached at the end.
+ */
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    if (ext.versionClassifier != null) {
+        versionName += "-" + ext.versionClassifier
+    }
+    println "Version name: " + versionName
+    return versionName;
 }
 
 /**
