@@ -58,34 +58,37 @@ before_script:
 #    - mkdir opencv_lib
 #    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
 #    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
-    - chmod +x gradlew
+- chmod +x gradlew
 
 script:
-    # Compile and run lint
-    - ./gradlew clean assembleProdRelease lint --stacktrace
-    # Run test coverage report
-#    - ./gradlew jacocoTestMockDebugUnitTestReport
-    # Run SonarQube analysis
-#    - ./gradlew sonarqube
-    # Build test app
-    # ./gradlew assembleAndroidTest
-    # Create and lunch emulator
-    #- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-    #- emulator -avd test -no-audio -no-window &
-    #- android-wait-for-emulator
-    #- adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-    #- ./gradlew connectedMockDebugAndroidTest
+# Compile and run lint
+- ./gradlew clean assembleProdRelease lint --stacktrace
+# Deploy app to Google Play
+- if [ "$TRAVIS_BRANCH" == "develop" ]; then ./gradlew publishApkDevRelease; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then ./gradlew publishApkProdRelease; fi
+# Run test coverage report
+# - ./gradlew jacocoTestMockDebugUnitTestReport
+# Run SonarQube analysis
+# - ./gradlew sonarqube
+# Build test app
+# ./gradlew assembleAndroidTest
+# Create and lunch emulator
+# - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+# - emulator -avd test -no-audio -no-window &
+# - android-wait-for-emulator
+# - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+# - ./gradlew connectedMockDebugAndroidTest
 
 after_success:
-#    - bash <(curl -s https://codecov.io/bash)
+# - bash <(curl -s https://codecov.io/bash)
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
-    - $HOME/.sonar/cache
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+  - $HOME/.sonar/cache
