@@ -70,7 +70,7 @@ public class AreaBeesCounter implements BeesCounter {
         r0.release();
         r1.release();
         r2.release();
-        Log.d("countBees time: %f", (System.nanoTime() - t0) / 1000000);
+        Log.d("countBees time: %d", (System.nanoTime() - t0) / 1000000);
         return cf.getNumBees();
     }
 
