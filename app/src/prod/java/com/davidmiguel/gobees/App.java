@@ -16,19 +16,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.davidmiguel.gobees.data.source.local;
+package com.davidmiguel.gobees;
 
-import android.support.annotation.NonNull;
+public class App extends BaseApp {
 
-import io.realm.DynamicRealm;
-import io.realm.RealmMigration;
-
-/**
- * Defines schema changes between db versions.
- */
-class GoBeesDbMigration implements RealmMigration {
-    @Override
-    public void migrate(@NonNull DynamicRealm realm, long oldVersion, long newVersion) {
-        // No schema changes so far
-    }
 }

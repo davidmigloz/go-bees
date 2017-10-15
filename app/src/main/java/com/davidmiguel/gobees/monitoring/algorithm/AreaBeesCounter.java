@@ -19,8 +19,8 @@
 package com.davidmiguel.gobees.monitoring.algorithm;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
+import com.davidmiguel.gobees.logging.Log;
 import com.davidmiguel.gobees.monitoring.algorithm.processors.BackgroundSubtractor;
 import com.davidmiguel.gobees.monitoring.algorithm.processors.Blur;
 import com.davidmiguel.gobees.monitoring.algorithm.processors.ContoursFinder;
@@ -33,7 +33,6 @@ import org.opencv.core.Mat;
  */
 public class AreaBeesCounter implements BeesCounter {
 
-    private static final String TAG = "ContourBeesCounter";
     private static AreaBeesCounter instance;
 
     private Blur blur;
@@ -71,7 +70,7 @@ public class AreaBeesCounter implements BeesCounter {
         r0.release();
         r1.release();
         r2.release();
-        Log.d(TAG, "countBees time: " + (System.nanoTime() - t0) / 1000000);
+        Log.d("countBees time: %d", (System.nanoTime() - t0) / 1000000);
         return cf.getNumBees();
     }
 

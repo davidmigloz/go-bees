@@ -16,33 +16,40 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://maven.fabric.io/public' } // Crashlytics
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
-        classpath 'io.realm:realm-gradle-plugin:2.3.0'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // Android Plugin for Gradle : https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        // JaCoCo Android : https://github.com/arturdm/jacoco-android-gradle-plugin
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+        // Realm db : https://github.com/realm/realm-java/blob/master/CHANGELOG.md
+        classpath 'io.realm:realm-gradle-plugin:3.7.2'
+        // Fabric Gradle Plugin (For Crashlytics) : https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'io.fabric.tools:gradle:1.24.2'
+        // Google Services Gradle Plugin (for Firebase) : https://developers.google.com/android/guides/google-services-plugin
+        classpath 'com.google.gms:google-services:3.1.0'
+        // Gradle Play Publisher : https://github.com/Triple-T/gradle-play-publisher
+        classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
     }
 }
 
 plugins {
-    id "org.sonarqube" version "2.2"
+    // SonarQube : https://plugins.gradle.org/plugin/org.sonarqube
+    id "org.sonarqube" version "2.5"
 }
-apply plugin: 'org.sonarqube'
 
 allprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
         maven { url "http://dl.bintray.com/raphaelbussa/maven" }
+        maven { url 'https://maven.fabric.io/public' } // Crashlytics
     }
 }
 

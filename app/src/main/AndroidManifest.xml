@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.davidmiguel.gobees"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.davidmiguel.gobees">
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -15,12 +16,14 @@
         android:required="false"/>
 
     <application
-        android:name=".GoBeesApp"
+        android:name=".App"
         android:allowBackup="true"
+        android:appCategory="productivity"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:targetApi="o">
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -78,5 +81,10 @@
             android:screenOrientation="portrait"/>
 
         <service android:name=".monitoring.MonitoringService"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="${crashlyticsKey}"/>
+
     </application>
 </manifest>

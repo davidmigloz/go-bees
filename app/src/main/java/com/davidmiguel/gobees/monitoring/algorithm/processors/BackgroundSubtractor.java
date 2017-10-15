@@ -19,7 +19,8 @@
 package com.davidmiguel.gobees.monitoring.algorithm.processors;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
+
+import com.davidmiguel.gobees.logging.Log;
 
 import org.opencv.core.Mat;
 import org.opencv.video.BackgroundSubtractorMOG2;
@@ -30,7 +31,6 @@ import org.opencv.video.Video;
  */
 public class BackgroundSubtractor implements VideoProcessor {
 
-    private static final String TAG = "BackgroundSubtractor";
 
     // Number of frames to consider in the background model
     private static final int HISTORY = 10;
@@ -84,7 +84,7 @@ public class BackgroundSubtractor implements VideoProcessor {
     @Override
     public Mat process(@NonNull Mat frame) {
         if (frame.empty()) {
-            Log.e(TAG, "Invalid input frame.");
+            Log.e("Invalid input frame.");
             return null;
         }
         Mat foreground = new Mat();

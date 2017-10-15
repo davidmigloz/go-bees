@@ -1,81 +1,94 @@
-sudo: required
 language: android
+sudo: required
 jdk: oraclejdk8
-compiler: gcc
 
 addons:
   sonarqube:
     branches:
-      - master
-      - develop
+    - master
+    - develop
 
 env:
-  matrix:
-    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+  global:
+  - ANDROID_API=26
+  - EMULATOR_API=26
+  - ANDROID_BUILD_TOOLS=26.0.2
+  - ADB_INSTALL_TIMEOUT=5
 
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-25.0.0
-    - android-25
-    - extra-android-support
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - extra-google-google_play_services
-    - ${ANDROID_TARGET}
-    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - tools
+  - platform-tools
+  - build-tools-$ANDROID_BUILD_TOOLS
+  - android-$ANDROID_API
+  - android-$EMULATOR_API_LEVEL
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - extra-android-support
+  - extra-google-google_play_services
+  - addon-google_apis-google-19
+  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
-licenses:
-    - '.+'
+  licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
 
 before_install:
-    - sudo apt-get update
+- openssl aes-256-cbc -K $encrypted_1f39e1523faf_key -iv $encrypted_1f39e1523faf_iv -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
+#    - sudo apt-get update
 
 install:
-    - sudo apt-get install python-numpy
+#    - sudo apt-get install python-numpy
 
 before_script:
     # Compile OpenCV and set it to path
-    - wget https://github.com/opencv/opencv/archive/3.2.0.zip
-    - unzip 3.2.0.zip >/dev/null
-    - mv opencv-3.2.0 opencv
-    - cd opencv
-    - mkdir build
-    - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF .. >/dev/null
-    - make -j8 >/dev/null
-    - sudo make -j8 install >/dev/null
-    - cd ../..
-    - mkdir opencv_lib
-    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
-    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
-    - chmod +x gradlew
-    # Create gradle.properties with fake credentials
-    - echo "OpenWeatherMapApiKey=\"c75f70c4717eb95847d378bba3bdb275\"" > ~/.gradle/gradle.properties
+#    - wget https://github.com/opencv/opencv/archive/3.2.0.zip
+#    - unzip 3.2.0.zip >/dev/null
+#    - mv opencv-3.2.0 opencv
+#    - cd opencv
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF .. >/dev/null
+#    - make -j8 >/dev/null
+#    - sudo make -j8 install >/dev/null
+#    - cd ../..
+#    - mkdir opencv_lib
+#    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
+#    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/opencv_lib/
+- chmod +x gradlew
 
 script:
-    # Compile and run unit tests
-    - ./gradlew assembleDebug lint
-    # Run test coverage report
-    - ./gradlew jacocoTestMockDebugUnitTestReport
-    # Run SonarQube analysis
-    - ./gradlew sonarqube
-    # Build test app
-    # ./gradlew assembleAndroidTest
-    # Create and lunch emulator
-    #- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-    #- emulator -avd test -no-audio -no-window &
-    #- android-wait-for-emulator
-    #- adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-    #- ./gradlew connectedMockDebugAndroidTest
+# Compile and run lint
+- ./gradlew clean assembleProdRelease lint --stacktrace
+# Deploy app to Google Play
+- if [ "$TRAVIS_BRANCH" == "develop" ]; then ./gradlew publishApkDevRelease; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then ./gradlew publishApkProdRelease; fi
+# Run test coverage report
+# - ./gradlew jacocoTestMockDebugUnitTestReport
+# Run SonarQube analysis
+# - ./gradlew sonarqube
+# Build test app
+# ./gradlew assembleAndroidTest
+# Create and lunch emulator
+# - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+# - emulator -avd test -no-audio -no-window &
+# - android-wait-for-emulator
+# - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+# - ./gradlew connectedMockDebugAndroidTest
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+# - bash <(curl -s https://codecov.io/bash)
+
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
   directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
-    - '$HOME/.gradle'
-    - '.gradle'
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+  - $HOME/.sonar/cache

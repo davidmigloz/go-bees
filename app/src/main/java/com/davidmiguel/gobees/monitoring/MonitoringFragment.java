@@ -250,7 +250,7 @@ public class MonitoringFragment extends Fragment implements MonitoringContract.V
         Intent intent = new Intent(getActivity(), MonitoringService.class);
         intent.setAction(MonitoringService.START_ACTION);
         intent.putExtra(MonitoringService.ARGUMENT_MON_SETTINGS, ms);
-        getActivity().startService(intent);
+        ContextCompat.startForegroundService(getContext(), intent);
     }
 
     @Override

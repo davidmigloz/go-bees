@@ -19,7 +19,8 @@
 package com.davidmiguel.gobees.monitoring.algorithm.processors;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
+
+import com.davidmiguel.gobees.logging.Log;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -36,7 +37,6 @@ import java.util.List;
  */
 public class ContoursFinder implements VideoProcessor {
 
-    private static final String TAG = "ContoursFinder";
 
     private static final Scalar RED = new Scalar(255, 0, 0);
     private static final Scalar GREEN = new Scalar(0, 255, 0);
@@ -76,7 +76,7 @@ public class ContoursFinder implements VideoProcessor {
     @Override
     public Mat process(@NonNull Mat frame) {
         if (frame.empty()) {
-            Log.e(TAG, "Invalid input frame.");
+            Log.e("Invalid input frame.");
             return null;
         }
         Mat tmp = frame.clone();

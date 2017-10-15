@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "141439530142",
+    "firebase_url": "https://gobees-prod.firebaseio.com",
+    "project_id": "gobees-prod",
+    "storage_bucket": "gobees-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141439530142:android:443d41831b56ad31",
+        "android_client_info": {
+          "package_name": "com.davidmiguel.gobees"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141439530142-dccbf18dq73f83g09rbj31nqktrt7f3o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.davidmiguel.gobees",
+            "certificate_hash": "8be8d172d7b79efc57c69554be6316eb26813f65"
+          }
+        },
+        {
+          "client_id": "141439530142-bp4od1ea9die661nvghfd59d0mmcb52g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvF9i80nPidFtqfmA5gar7Y4vUBJ3baeY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141439530142-bp4od1ea9die661nvghfd59d0mmcb52g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -43,6 +43,7 @@ import com.davidmiguel.gobees.monitoring.camera.AndroidCameraImpl;
 import com.davidmiguel.gobees.monitoring.camera.AndroidCameraListener;
 import com.davidmiguel.gobees.monitoring.camera.CameraFrame;
 import com.davidmiguel.gobees.utils.DateTimeUtils;
+import com.davidmiguel.gobees.utils.NotificationsHelper;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -93,6 +94,9 @@ public class MonitoringService extends Service implements AndroidCameraListener 
     // Weather refresh rate
     private static final long WEATHER_REFRESH_RATE = DateTimeUtils.T_15_MINUTES;
 
+    // Notifications
+    private NotificationsHelper notificationsHelper;
+
     // Service stuff
     private static MonitoringService instance = null;
     private final IBinder binder = new MonitoringBinder();
@@ -132,6 +136,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
         instance = this;
         // Init record list
         records = new LinkedList<>();
+        // Notifications
+        notificationsHelper = new NotificationsHelper(this);
         // Init db
         goBeesRepository = Injection.provideApiariesRepository();
         goBeesRepository.openDb();
@@ -158,7 +164,8 @@ public class MonitoringService extends Service implements AndroidCameraListener 
             // Configurations
             configBeeCounter();
             configCamera();
-            Notification not = configNotification();
+            Notification not = notificationsHelper.getMonitoringNotification(
+                    monitoringSettings.getApiaryId(), monitoringSettings.getHiveId());
             configOpenCv();
             // Start service in foreground
             startForeground(NOTIFICATION_ID, not);
