@@ -180,7 +180,7 @@ dependencies {
     // OpenCV (computer vision) : https://github.com/davidmigloz/opencv-android-gradle-repo/
     compile 'com.github.davidmigloz:opencv-android-gradle-repo:3.2.0'
     // Guava (Google Core Libraries) : https://github.com/google/guava
-    compile 'com.google.guava:guava:23.0-android'
+    compile 'com.google.guava:guava:23.2-android'
     // RoundedImageView (ImageView that supports rounded corners) : https://github.com/vinc3m1/RoundedImageView
     compile 'com.makeramen:roundedimageview:2.3.0'
     // MPAndroidChart (chart view / graph view) : https://github.com/PhilJay/MPAndroidChart
@@ -208,12 +208,12 @@ dependencies {
     // JUnit (unit testing framework) : http://junit.org/junit4/
     testCompile 'junit:junit:4.12'
     // Mockito (mocking framework) : http://site.mockito.org/
-    testCompile 'org.mockito:mockito-core:2.10.0'
+    testCompile 'org.mockito:mockito-core:2.11.0'
     // PowerMock (mocking framework) : https://github.com/powermock/powermock
-    testCompile "org.powermock:powermock-module-junit4:1.7.1"
-    testCompile "org.powermock:powermock-api-mockito2:1.7.1"
-    testCompile 'org.slf4j:slf4j-api:1.7.22'
-    testCompile 'org.slf4j:slf4j-log4j12:1.7.22'
+    testCompile "org.powermock:powermock-module-junit4:1.7.3"
+    testCompile "org.powermock:powermock-api-mockito2:1.7.3"
+    testCompile 'org.slf4j:slf4j-api:1.7.25'
+    testCompile 'org.slf4j:slf4j-log4j12:1.7.25'
     testCompile 'log4j:log4j:1.2.17'
     testCompile 'org.json:json:20160810'
     // Android Testing Support Library's runner and rules
