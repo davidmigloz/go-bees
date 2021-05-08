@@ -7,7 +7,7 @@ Introducción
 En este anexo se describe la documentación técnica de programación,
 incluyendo la instalación del entorno de desarrollo, la estructura de la
 aplicación, su compilación, la configuración de los diferentes servicios
-de integración utilizados o las baterías de test realizadas.
+de integración utilizados o las baterías de test(Total o Unitarias) realizadas.
 
 Estructura de directorios
 -------------------------
