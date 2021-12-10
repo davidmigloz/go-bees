@@ -1,6 +1,6 @@
 # Proguard rules that are applied to your test apk/code.
 -ignorewarnings
-
+//10.12.21 
 -keepattributes *Annotation*
 
 -dontnote junit.framework.**
