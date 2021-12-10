@@ -53,7 +53,7 @@ before_script:
 #    - cd build
 #    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_opencv_python=OFF .. >/dev/null
 #    - make -j8 >/dev/null
-#    - sudo make -j8 install >/dev/null
+
 #    - cd ../..
 #    - mkdir opencv_lib
 #    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
@@ -73,8 +73,6 @@ script:
     #- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
     #- emulator -avd test -no-audio -no-window &
     #- android-wait-for-emulator
-    #- adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-    #- ./gradlew connectedMockDebugAndroidTest
 
 after_success:
 #    - bash <(curl -s https://codecov.io/bash)
@@ -82,6 +80,7 @@ after_success:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  #    - cp opencv/build/lib/libopencv_java320.so opencv_lib/libopencv_java320.so
 
 cache:
   directories:
