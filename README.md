@@ -11,7 +11,7 @@
 GoBees allows beekepers to manage and monitor their apiaries.
 
 <a href="https://play.google.com/store/apps/details?id=com.davidmiguel.gobees">
-  <img src="http://gobees.io/img/google-play-badge.svg" height="60">
+  <img src="https://davidmigloz.github.io/go-bees/img/google-play-badge.svg" height="60">
 </a>
 
 ### Key features
@@ -25,7 +25,7 @@ GoBees allows beekepers to manage and monitor their apiaries.
 
 **Supported languages:** English, Spanish, Catalan, Polish and Arabic.
 
-Find more information on our website: http://gobees.io.
+Find more information on our website: https://davidmigloz.github.io/go-bees/
 
 GoBees!
 
